@@ -1,0 +1,56 @@
+=====Sommer og vinter program=====
+====Boks 1====
+===Sommer program – Dag/nat kørsel===
+<WRAP group>
+<WRAP 2cm column>
+On:\\
+Off:
+</WRAP>
+
+<WRAP auto column>
+6:30\\
+22:00
+</WRAP>
+</WRAP>
+
+===Vinter program – Peak-hour kørsel===
+<WRAP group>
+<WRAP 2cm column>
+On:\\
+Off:\\
+On:\\
+Off:
+</WRAP>
+
+<WRAP auto column>
+6:30\\
+9:30\\
+17:30\\
+19:30
+</WRAP>
+</WRAP>
+
+====Boks 2====
+===Sommer program – Dag/nat kørsel===
+C1-Dag (venstre knap) C2-Nat (højre knap)
+
+6:30 C1 on
+22:00 C1 off
+
+22:00 C2 on
+6:00 C2 off
+
+===Vinter program – Peak-hour kørsel===
+C1(venstre knap) C2(højre knap)
+
+6:30 C1 on
+9:30 C1 off
+
+9:30 C2 on
+17:30 C2 off
+
+17:30 C1 on
+19:30 C1 off
+
+19:30 C2 on
+6:30 C2 off

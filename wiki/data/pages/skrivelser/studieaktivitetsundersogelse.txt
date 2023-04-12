@@ -1,0 +1,86 @@
+===== Studieaktivitetsundersøgelse =====
+<WRAP noprint><adm information>Siden her er lavet til at blive eksporteret til PDF, med knappen "Export to PDF", oppe til venstre</adm></WRAP>
+
+Bestyrelsen har ansvar for at sikre, at alle lever op til vores vedtægter og vi vil derfor med denne skrivelse bede dig angive om hvorvidt du er eller ikke er gyldigt optaget, immatrikuleret og/eller tilmeldt DTU eller en anden anerkendt lang eller mellemlang videregående uddannelse jf. lov nr. 481 af 31. maj 2000 eller Ph.D. studerende.
+
+Dette for at sikre, at du lever op til foreningens vedtægters §3.2.\\
+Vedtægterne kan findes på [[https://akdtu.dk/public_files/vedtaegter.pdf]].
+
+Hvis du ikke lever op til vedtægternes §3.2, skal du sætte din andel til salg senest 6 måneder efter endt studie.
+
+Fremgangsmåden for salg kan findes på intranettet hos Cobblestone under ”Foreningsdokumenter” → ”1.1143.101 Ejendomsdokumenter” → ”salgsprocedure AB ved DTU-pdf”.\\ \\
+
+Derfor bedes du udfylde skemaet på side 3 og indsende dette samt, hvis du er studerende, også indsende gyldig dokumentation i form af en studiebekræftelse fra uddannelsestedet.
+
+Dette skal indsendes og være i hænde senest den 22. juni 2018 til følgende email eller adresse:
+
+<WRAP group>
+<WRAP 2cm column>
+Email:\\
+eller\\
+Brev:
+</WRAP>
+
+<WRAP auto column>
+[[studieaktivitet@akdtu.dk]]\\
+\\
+Mads Friis\\
+Kollegiebakken 19, st, 14\\
+2800, Kgs. Lyngby
+</WRAP>
+</WRAP>\\
+
+Vi vil gøre opmærksom på, at studiekort ikke er gyldig dokumentation, det skal være en officiel studiebekræftelse.\\ \\
+
+Hvis du har spørgsmål er du velkommen til at kontakte bestyrelsen på [[bestyrelsen@akdtu.dk]].
+
+<WRAP centeralign>
+Med venlig hilsen\\
+Bestyrelsen\\
+Andelskollegiet ved DTU - Akademivej
+</WRAP>
+<pagebreak>
+
+====For DTU studerende====
+På DTU er fremgangsmåden:
+  - Log ind på [[https://studieselvbetjening.ait.dtu.dk/Student.aspx]].
+  - Vælg herefter "Studiebekræftelse" (eller "Study confirmation" for engelsk).\\
+
+Hvis der opleves problemer med ovenstående fremgangsmåde, så prøv følgende:
+  - Log ind på https://www.inside.dtu.dk.
+  - Tryk på ”Værktøjskasse”.
+  - Vælg ”Karakterer”.
+  - I bunden af siden under overskriften ”Officielle udskrifter” er der et link der hedder ”PDF-udskrifter fra det studieadministrative system STADS”. Tryk på dette.
+  - Du bliver så ledt til en ny side hvor du kan vælge "Studiebekræftelse" (eller "Study confirmation" for engelsk).
+
+Hvis du stadig skulle opleve problemer skal du kontakte DTU AUS – Studiekontoret.
+
+====For studerende ved anden institution end DTU====
+Da det er forskelligt fra sted til sted hvordan man får sin studiebekræftelse, må du kontakte studiestedets studiekontor eller studievejledning for at få vejledning til hvor man kan få den officielle studiebekræftelse.
+
+Alle godkendte uddannelsesinstitutioner i Danmark skal kunne udstede en studiebekræftelse til dig. 
+<pagebreak>
+
+<WRAP centeralign><html><h2 class="center">Studieaktivitet</h2></html></WRAP>
+\\ \\
+<WRAP group>
+<WRAP 5cm column>
+Lejlighed: \\ \\ \\
+Andelshavers navn: \\ \\ \\
+Beboers navn: \\ \\ \\
+Gyldigt studerende:
+</WRAP>
+<WRAP auto column>
+%%_____%%\\ \\ \\
+%%___________________________________________%% \\ \\ \\
+%%___________________________________________%% \\ \\
+<WRAP group>
+<WRAP 0.6cm column>
+Ja: \\
+Nej:
+</WRAP>
+<WRAP auto column>
+<html><i class="fa-thin fa-square" style="font-style: normal; font-size:1.2em; vertical-align:middle;"></i></html> \\
+<html><i class="fa-thin fa-square" style="font-style: normal; font-size:1.2em; vertical-align:middle;"></i></html>
+</WRAP>
+</WRAP>

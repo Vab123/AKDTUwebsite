@@ -1,0 +1,31 @@
+
+
+
+#Begin Really Simple Security
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteCond %{HTTPS} !=on [NC]
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+</IfModule>
+
+#End Really Simple Security
+# BEGIN WordPress
+# Direktiverne (linjer) mellem 'BEGIN WordPress' og 'END WordPress' er
+# dynamisk genereret og bør kun ændres via WordPress-filtre.
+# Eventuelle ændringer i direktiverne mellem disse markører vil blive overskrevet.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+# END WordPress
+php_value upload_max_filesize 1G
+php_value post_max_size 1G
+php_value memory_limit 1G
+php_value max_execution_time 300
+php_value max_input_time 300

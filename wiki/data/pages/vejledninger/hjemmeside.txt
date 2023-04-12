@@ -1,0 +1,147 @@
+====== Foreningens hjemmeside ======
+Foreningens hjemmeside findes på [[https://akdtu.dk|akdtu.dk]], og er bygget op på Wordpress. Denne side indeholder informationer til både beboere og ikke-beboere, og al indhold kan redigeres af bestyrelsen.
+
+===== Brugerkonti =====
+Der er oprettet en brugerkonto til alle lejligheder. Dette kan styres under fanen "WP medlemskab" i kontrolpanelet. Alle lejligheder er oprettet som "Beboer", hvilket begrænser deres muligheder på hjemmesiden, samt hindrer adgang til denne wiki.
+
+Bestyrelsesmedlemmer har en beboerprofil samt en bestyrelsesprofil, såfremt denne er oprettet af en administrator på hjemmesiden. Bestyrelsesmedlemmernes beboerprofiler sættes af netgruppen op til at være af typen "Beboerprofil til bestyrelsesmedlemmer", hvilket medfører at bestyrelsesmedlemmet ikke skal betale for leje af fælleshuset.
+
+Ved salg af andele skal beboerprofilen overflyttes til den nye beboer. Der er derfor indbygget et system til netop det på hjemmesiden. Dette er nærmere uddybet længere nede.
+
+Der er også oprettet profiler til midlertidige lejere, så disse kan tilmelde sig havedage og leje fælleshuset, på lige fod med andre beboere. Der er derfor også indbygget et system til at håndtere dette på hjemmesiden. Dette er nærmere uddybet længere nede.
+==== Login som bestyrelsesmedlem ====
+Bestyrelsen har, foruden eventuelle beboerkonti, også en bestyrelseskonto, som kan bruges til at redigere indholdet på hjemmesiden. Denne konto kan man logge ind som på [[https://akdtu.dk/wp-login.php|akdtu.dk/wp-login.php]], hvorefter man præsenteres for Wordpress-kontrolpanelet. Derefter vil man i venstre side se en menu over de forskellige ting der kan gøres på hjemmesiden.
+
+==== Brugeradgang til vicevært ====
+Der oprettes også brugerprofiler til viceværten, så de kan tilgå denne wiki samt reservere fælleshuset hvis nødvendigt. Disse oprettes i pluginnet "WP Medlemskab" som brugere af typen "Vicevært". Disse medregnes dermed ikke i e.g. betaling for leje af fælleshuset.
+===== Almindelige handlinger/widgets =====
+Der er oprettet widgets på Wordpress kontrolpanelet til langt de fleste ting der skal laves på hjemmesiden. Kontrolpanelet findes på [[https://akdtu.dk/wp-admin/]] når man er logget ind på sin bestyrelsesprofil. Som udgangspunkt ligger alle widgets automatisk på nye brugeres kontrolpanel. Disse kan dog skjules hvis man ikke synes at de er relevante. Dette gøres ved at trykke på knappen "Skærmindstillinger" helt oppe til højre af kontrolpanelet, hvorefter de forskellige widgets kan vælges til eller fra. Man kan desuden trække de forskellige widgets rundt og placere dem som man vil.
+
+==== Leje af fælleshuset ====
+For leje af fælleshuset findes følgende widgets:
+
+** Foreløbig opkrævning for leje af fælleshus **
+  * Denne widget viser hvilket beløb der indtil videre bliver opkrævet for leje af fælleshuset i den indeværende måned. Disse beløb sendes automatisk til administrator den første dag i den kommende måned.
+
+** Juster opkrævning for leje af fælleshus **
+  * Denne widget tillader rettelser i de beløb der den første dag i næste måned bliver sendt til administrator for leje af fælleshuset i den indeværende måned. Dette kan eksempelvis være relevant ved eftergivelse af prisen for leje, eller ekstra opkrævninger ved forlænget leje.
+
+** Samlet indtægt for opkrævning for leje af fælleshus, årsbasis **
+  * Denne widget viser hvilket beløb der samlet er indskrevet udlejninger af fælleshuset for, på årsbasis.
+
+** Samlet indtægt for opkrævning for leje af fælleshus, månedsbasis **
+  * Denne widget viser hvilket beløb der samlet er indskrevet udlejninger af fælleshuset for, på månedsbasis.
+
+** Reserver fælleshus til beboer **
+  * Denne widget tillader bestyrelsesmedlemmer at reservere fælleshuset for andre, på et vilkårligt tidspunkt. Begivenheden navngives automatisk.
+
+** Reserver fælleshus til bestyrelse **
+  * Denne widget tillader bestyrelsesmedlemmer at reservere fælleshuset for bestyrelsen, på et vilkårligt tidspunkt. Heri skal skrives en dansk og engelsk beskrivelse af lejen, som indsættes i kalenderen.
+
+** Næste reservationer af fælleshus **
+  * Denne widget viser en oversigt over de ti næste udlejninger af fælleshuset.
+
+** Tidligere reservationer af fælleshus **
+  * Denne widget viser en oversigt over de ti foregående udlejninger af fælleshuset.
+
+** Ansøgninger om leje af fælleshus **
+  * Denne widget viser en oversigt over ansøgninger om leje af fælleshus, som endnu ikke er besvaret. Det er også her at ansøgningerne kan bekræftes eller afvises. Der bliver her automatisk sendt en mail til både bestyrelsen og beboeren om beslutningen.
+
+==== Havedage ====
+** Tidligere havedage **
+  * Denne widget viser en oversigt over de seneste havedage, samt viser links til tilmeldingslisterne for hver havedag.
+
+** Næste havedage **
+  * Denne widget viser en oversigt over de næste havedage, samt viser links til tilmeldingslisterne for hver havedag.
+
+** Tilføj lejlighed til havedag **
+  * Denne widget tillader et bestyrelsesmedlem at tilmelde en lejlighed til en havedag, uanset om deltagerbegrænsningen tillader det.
+
+** Fjern lejlighed fra havedag **
+  * Denne widget tillader et bestyrelsesmedlem at fjerne en lejligheds tilmelding til en havedag
+
+** Opret havedage **
+  * Denne widget tillader nem oprettelse af de begivenheder der skal bruges til at afholde havedag. Disse begivenheder bliver lagt ind i kalenderen, både på dansk og engelsk, og der bliver oprettet en side så beboerne kan tilmelde sig. Disse sider bliver dog IKKE lagt ind i menuen på hjemmesiden, dette skal i stedet gøres manuelt. Når havedagene er oprettet på hjemmesiden skrives der en besked på skærmen, som indeholder det slug, den begivenhed der skal tilføjes til menuen har.
+
+==== Kontrol af brugerprofiler ====
+** Tilladte brugeroprettelser **
+  * Denne widget giver en oversigt over hvilke lejligheder hvor der er aftalt overdragelse, og hvor brugerprofilerne derfor skal overdrages til en ny beboer/andelshaver. Her kan en indskrevet brugeroprettelse også fjernes igen, eksempelvis hvis der er skrevet forkert.
+
+** Tillad ny brugeroprettelse **
+  * Denne widget tillader bestyrelsesmedlemmer at indskrive at der er aftalt overdragelse i en lejlighed, og at brugerprofilerne derfor skal overdrages til en ny beboer/andelshaver. Heri skrives telefonnummeret fra overdragelsesaftalen, som udelukkende bruges til bekræftelse af den nye beboer, samt tidspunktet for overtagelse. Dette kan gøres på et vilkårligt tidspunkt, også længe inden overtagelsen, da systemet selv sørger for at fjerne adgang til den sælgende andelshaver på det indskrevne tidspunkt, samt at åbne op for at den nye andelshaver kan oprette en profil.
+
+** Tilladte lejeroprettelser **
+  * Denne widget giver en oversigt over hvilke lejligheder hvor der er aftalt en midlertidig lejer i forbindelse med udveksling, og hvor den midlertidige lejer derfor skal have adgang til en profil på hjemmesiden. Her kan en indskrevet lejeroprettelse også fjernes igen, eksempelvis hvis der er skrevet forkert.
+
+** Tillad ny lejeroprettelse **
+  * Denne widget tillader bestyrelsesmedlemmer at indskrive at der er aftalt ind- og udflytning af en midlertidig lejer, og hvor den midlertidige lejer derfor skal have adgang til deres profil. Heri skrives telefonnummeret fra lejeaftalen, som udelukkende bruges til bekræftelse af den nye beboer, samt start- og slut-tidspunktet for lejen. Dette kan gøres på et vilkårligt tidspunkt, også længe inden overtagelsen, da systemet selv sørger for at give og fjerne adgang til den midlertidige lejer på de indskrevne tidspunkter.
+
+==== Andet administrativt ====
+** Upload bestyrelsesdokument **
+  * Denne widget tillader upload af bestyrelsesdokumenter til hjemmesiden, som herefter lægges det korrekte sted, og gøres tilgængelig på hjemmesiden. Der kan i øjeblikket uploades følgende dokumenter: Referat af ordinær generalforsamling, Referat af ekstraordinær generalforsamling, Referat af bestyrelsesmøde, Årsrapport, Vedtaget budget.
+
+** Tidligere overdragelser **
+  * Denne widget viser en liste over tidligere overdragelser i foreningen, samt om brugerprofilerne hørende til lejlighederne er blevet overtaget af den nye beboer.
+
+** Fremtidige overdragelser **
+  * Denne widget viser en liste over fremtidige overdragelser i foreningen, hvor overdragelsesaftalen er underskrevet.
+
+** Bestyrelsesmedlemmer **
+  * Denne widget er kun for administratorer på hjemmesiden
+  * Denne widget viser et overblik over hvilke medlemmer der i øjeblikket er i bestyrelsen, samt giver mulighed for at fjerne dem. Disse bestyrelsesmedlemmer er dem, der har en beboerprofil der ikke skal betale leje af fælleshuset, og har ikke noget at gøre med bestyrelsesprofiler på hjemmesiden. Disse oprettes gennem pluginnet "WP medlemskab".
+
+** Tilføj bestyrelsesmedlem **
+  * Denne widget er kun for administratorer på hjemmesiden
+  * Denne widget tillader administratorer at tilføje nye bestyrelsesmedlemmer til hjemmesiden. Denne widget ændrer kun typen af bestyrelsesmedlemmets beboerprofil, så de ikke skal betale for leje af fælleshuset, og har ikke noget at gøre med bestyrelsesprofiler på hjemmesiden. Disse oprettes gennem pluginnet "WP medlemskab".
+
+===== Sider/Pages =====
+Hjemmesiden er bygget op omkring en række sider, og her ses et overblik over disse. Hvis man holder musen over hver side på listen kan disse redigeres, lyn-redigeres, sendes til papirkurven eller vises.
+
+==== Rediger ====
+Når man redigerer en side tages man til blok-editoren. Det er herigennem at alle siderne kan ændres. Hvis der i forvejen står tekst på siden kan man klikke rundt og ændre teksten, som om det var et Word-dokument. Siden er bygget op af blokke (deraf navnet blok-editor), der blandt andet kan være brødtekst, overskrifter, billeder, og meget andet. Disse tilføjes ved at trykke på +'et helt oppe til venstre på siden, ved siden af Wordpress-logoet. Herefter kommer en lang liste med forskellige blokke frem, som fra menuen kan trækkes ind i dokumentet og placeres hvor det ønskes. En blok kan slettes ved at klikke inde i blokken og trykke på Shift+Alt+Z.
+
+Derudover kan man i højre side ændre forskellige ting ved både siden og blokken. Om siden kan man blandt andet ændre hvornår den skal offentliggøres, hvilket permanent link siden skal have, om den har en forældreside (bruges også i det permanente link), om man skal logge ind for at se indholdet på siden, og sidens sprog. Samme sted hvor man ændrer sidens sprog kan man desuden sammenkæde to sider på dansk og engelsk, så sprog-skifteren på hjemmesiden kan bruges til at skifte mellem dem.
+
+==== Lynrediger ====
+Lynrediger kan bruges til at redigere noget af stam-dataen for siderne, men ikke indholdet. Stamdataen kan eksempelvis være sidens titel, forfatter, udgivelsesdato, eller sprog.
+
+==== Papirkurv ====
+Sider der sendes til papirkurven slettes ikke permanent, og kan derfor genskabes. Når en side ligger i papirkurven kommer der på øverst af oversigten over sider på hjemmesiden en knap med "Papirkurv", som man kan klikke på. Herefter kan man se alle sider der ligger i papirkurven, og gendanne dem ved at holde musen over dem og trykke "Gendan".
+
+===== Arrangementer =====
+Lige som oversigten over sider findes også en oversigt over arrangementer. Dette indeholder havedage samt udlejninger af fælleshuset. 
+
+==== Havedage ====
+Havedage er oprettet som arrangementer, hvortil der kan tilkøbes billetter til 0 kroner. Havedage tilføjes ved at benytte den widget der ligger på kontrolpanelet.
+
+Da havedagene kun indskrives i kalenderen på den dato der skrives ind som begivenhedsdato, og ikke på de datoer der laves "billetter" til, bliver der oprettet "tomme" begivenheder på hver af de andre dage, så kalenderen fyldes op. Derudover bliver der til hver oprettet havedag også oprettet en engelsk version, som lægges ind på den engelske side.
+
+=== Oversigt over tilmeldinger ===
+Der kan ses en oversigt over tilmeldte til havedagene gennem widgetten "Næste havedage" på kontrolpanelet, eller ved at trykke på "Tilmeldingslister" i menuen under "Arrangementer" i venstre side af kontrolpanelet. Her kan desuden også ses en samlet liste over hvilke lejligheder der er tilmeldt havedage og hvilke der ikke er tilmeldt havedage.
+
+==== Udlejning af fælleshus ====
+Udlejning af fælleshuset sker også gennem hjemmesiden, og skal godkendes eller afvises af bestyrelsen. Her opretter en beboer en ansøgning om at få lov til at låne fælleshuset, hvilket på hjemmesiden står som en begivenhed, hvorefter en mail automatisk sendes til bestyrelsen. I mailen står også et link til hjemmesiden, hvor ansøgningen om leje enten skal godkendes eller afvises. Dette gøres ved gennem widgetten "Ansøgninger om leje af fælleshus" på kontrolpanelet. Hvis lejen godkendes bliver begivenheden automatisk skrevet ind i kalenderen. Der sendes derudover automatisk en mail til beboeren om beslutningen, uanset om lejen godkendes eller afvises, samt en bekræftelse til bestyrelsen om at der er taget en beslutning om ansøgningen. Opkrævningerne for leje af fælleshuset
+
+===== Automatiske handlinger =====
+Der er indbygget forskellige systemer på hjemmesiden, som automatisk jævnligt foretager forskellige handlinger.
+
+==== Automatisk mail om opkrævning af leje af fælleshus ====
+Den første dag i hver måned kan hjemmesiden automatisk sende en mail om hvilke beløb der skal opkræves for leje af fælleshuset i den foregående måned. Indstillingerne for denne mail findes under "AKDTU" i det sorte bånd til venstre på kontrolpanelet, i fanen "Mail om leje af fælleshus". Her kan der indskrives modtageradresse på mailen, eventuelle andre der skal sættes cc, hvilken svaradresse der eventuelt skal stå i mailen, emnet på mailen, samt formatet af indholdet i mailen. Der er måder at indsætte diverse info om betalingerne på, som står beskrevet på siden.
+
+==== Automatisk mail om fjernelse af brugeradgang, i forbindelse med salg af andel ====
+Hjemmesiden kan automatisk fjerne adgang til brugerprofiler for beboere der har solgt deres adgang, såfremt dette er skrevet ind i den tilegnede widget på kontrolpanelet (se beskrivelse længere oppe). Hjemmesiden kan i den forbindelse også automatisk sende en mail om at adgangen er fjernet, samt en uddybning af hvilke reservationer af fælleshuset, sælger måtte have haft, samt eventuelle tilmeldinger til havedage. Indstillingerne for denne mail findes under "AKDTU" i det sorte bånd til venstre på kontrolpanelet, i fanen "Mail om fjernelse af brugeradgang". Her kan der indskrives modtageradresse på mailen, eventuelle andre der skal sættes cc, hvilken svaradresse der eventuelt skal stå i mailen, emnet på mailen, samt formatet af indholdet i mailen. Der er måder at indsætte diverse info om betalingerne på, som står beskrevet på siden.
+
+==== Automatisk mail om overtagelse af brugerprofil, i forbindelse med salg af andel ====
+Hjemmesiden kan automatisk fjerne adgang til brugerprofiler for beboere der har solgt deres adgang, såfremt dette er skrevet ind i den tilegnede widget på kontrolpanelet (se beskrivelse længere oppe). Hjemmesiden kan i den forbindelse også automatisk sende en mail om at profilen er blevet overtaget af den nye beboer, samt en uddybning af kontaktoplysningerne på vedkommende. Der kan derudover også sendes en mail til den nye beboer, med en bekræftelse af at de har oprettet en profil, enten på dansk eller på engelsk, afhængigt af sproget der blev brugt under oprettelsen. Indstillingerne for denne mail findes under "AKDTU" i det sorte bånd til venstre på kontrolpanelet, i fanen "Mail om ny bruger". Her kan der indskrives modtageradresse på mailen, eventuelle andre der skal sættes cc, hvilken svaradresse der eventuelt skal stå i mailen, emnet på mailen, samt formatet af indholdet i mailen. Der er måder at indsætte diverse info om betalingerne på, som står beskrevet på siden.
+
+==== Automatisk mail om brugeradgang til midlertidig lejer i forbindelse med udlandsophold ====
+Hjemmesiden kan automatisk give og fjerne adgang til brugerprofiler for midlertidige lejere, der flytter ind i forbindelse med andelshavers udlandsophold, såfremt dette er skrevet ind i den tilegnede widget på kontrolpanelet (se beskrivelse længere oppe). Hjemmesiden kan i den forbindelse også automatisk sende en mail når adgangen er fjernet, samt en uddybning af hvilke reservationer af fælleshuset, lejeren måtte have haft, samt eventuelle tilmeldinger til havedage. Indstillingerne for denne mail findes under "AKDTU" i det sorte bånd til venstre på kontrolpanelet, i fanen "Mail om fjernelse af lejeradgang". Her kan der indskrives modtageradresse på mailen, eventuelle andre der skal sættes cc, hvilken svaradresse der eventuelt skal stå i mailen, emnet på mailen, samt formatet af indholdet i mailen. Der er måder at indsætte diverse info om betalingerne på, som står beskrevet på siden.
+
+===== Stier på hjemmesiden =====
+  * AKDTU plugin: ''/public_html/wp-content/plugins/AKDTU''
+  * Events manager: ''/public_html/wp-content/plugins/events-manager''
+  * Neve child theme: ''/public_html/wp-content/themes/neve-child''
+  * Simple membership: ''/public_html/wp-content/plugins/simple-membership''
+  * Wiki root: ''/public_html/wiki''
+  * Wiki "export as pdf"-template: ''/public_html/wiki/lib/plugins/dw2pdf/tpl/AKDTU''
+  * Wiki sidebar template: ''/public_html/wiki/lib/tpl/readthedokus/tpl_parts''

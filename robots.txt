@@ -1,0 +1,19 @@
+User-agent: *
+
+# Fjern tilladelse fra alt
+Disallow: *
+
+# Tillad root akdtu.dk
+Allow: /$
+
+# Tillad sider om kollegiet
+Allow: /om
+Allow: /en/about
+
+# Tillad side om køb og venteliste
+Allow: /koeb-venteliste
+Allow: /en/buy-waiting-list/
+
+# Tillad side med kontaktinfo
+Allow: /kontakt/
+Allow: /en/contact/

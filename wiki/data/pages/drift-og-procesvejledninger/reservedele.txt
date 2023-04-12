@@ -1,0 +1,134 @@
+=====Reservedele=====
+====Lejligheder====
+===Gulvvarme – Badeværelse===
+
+===Gulvvarme – Køkken===
+
+===Radiator – Stue===
+
+===Vinduespartier===
+<WRAP group>
+<WRAP 3cm column>
+Producent\\
+Prod time\\
+Order no
+</WRAP>
+
+<WRAP auto column>
+Velfac\\
+06-18\\
+164769/964966
+</WRAP>
+</WRAP>
+
+====Fælleshus====
+===Gulvvarme===
+Pettinaroli pakdåse til fordelerrør (7035TEM)\\
+Eksempelvis: [[https://www.elvvs.dk/p/pettinaroli-pakdaase-til-fordelerroer-241063/]]
+
+===Vinduespartier===
+<WRAP group>
+<WRAP 3cm column>
+Producent\\
+Ordre\\
+Prod nr
+</WRAP>
+
+<WRAP auto column>
+IdealCombi\\
+140710\\
+64030111
+</WRAP>
+</WRAP>
+
+===Klemmer til fastholdelse af vinduespartier===
+PVC snap-beslag Futura
+ 
+3004546\\
+3173\\
+Futura classic
+
+===Udendørs vandhane – Nøgle===
+Mora løs nøgle til postventil 8 mm firkant\\
+Eksempelvis: [[https://www.billigvvs.dk/VVS-Roer-Fittings-Udendoershaner-Mora--Mora-loes-noegle-til-posteventil-8-mm-firkant-197236.html]]
+
+====Internet og teknisk udstyr====
+===Rack skabe===
+<WRAP group>
+<WRAP 3cm column>
+Indre størrelse\\
+Skinner\\
+Skuffer\\
+
+</WRAP>
+<WRAP auto column>
+19 inch x 56,6 cm x 198 cm\\
+45 unit Adam Hall 61535BLK ([[https://www.disconetto.dk/shop/heavy-duty-rackliste-148952p.html|link]])\\
+TOTEN fixed shelf for G-series 566mm deep for 800mm deep cabinets ([[https://www.proshop.dk/Rack-skabe/TOTEN-fixed-shelf-for-G-series-566mm-deep-for-8/2871812|link]])\\
+DELTACO 19" fast hylde 2U 367mm dyb ma ([[https://www.proshop.dk/Rack-skabe/DELTACO-19-fast-hylde-2U-367mm-dyb-ma/2169523|link]])
+</WRAP>
+</WRAP>
+
+===UPS===
+<WRAP group>
+<WRAP 3cm column>
+Producent\\
+Model\\
+År\\
+Batteri\\
+Levetid\\
+Senest skiftet
+</WRAP>
+
+<WRAP auto column>
+APC\\
+Smart-UPS 1500\\
+2006\\
+APC Replacement Battery Cartridge #224 – RBC24\\
+3-5 år\\
+2016
+</WRAP>
+</WRAP>
+
+===Switche===
+<WRAP group>
+<WRAP 3cm column>
+Antal\\
+Producent\\
+Model\\
+År
+</WRAP>
+
+<WRAP auto column>
+2\\
+HP\\
+Aruba 2540 48G SFP+ (JL355A)\\
+2019
+</WRAP>
+</WRAP>
+
+===Patch paneler===
+Der findes to typer patch paneler i rackskabet. Den ene er umiddelbart udgået, og den anden er følgende:\\
+<WRAP group>
+<WRAP 3cm column>
+Antal\\
+Producent\\
+Model\\
+Købt
+</WRAP>
+
+<WRAP auto column>
+1\\
+DELTACO \\
+DELTACO STP patch panel 24xRJ45 Cat6 1U 19" m\\
+2023-01-28 ([[https://www.proshop.dk/Netvaerkstilbehoer/DELTACO-STP-patch-panel-24xRJ45-Cat6-1U-19-m/2728692|link]])
+</WRAP>
+</WRAP>
+
+
+
+===SFP+ modul===
+  * Vores ende:\\ HP modul 10 Gbit SFP+ LR (J9151D)
+  * Internt mellem vores switches:\\ HP Aruba Direct Attach Copper Cable (J9283D)
+  * K-Nets ende:\\ MicroOptics SFP+ transceiver modul (svarende til HP JD094B) – 10 GBASE-LR SMF 10 km 1310 nm (MO-PS311X2-3CDL10)
+

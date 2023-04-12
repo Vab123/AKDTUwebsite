@@ -1,0 +1,8 @@
+===== Trailer =====
+
+Foreningen har en STEMA trailer af mærket BASIC 750, der kan lånes af beboere uden beregning. Dette kræver dog at beboeren underskriver en kontrakt på lånet af traileren, som findes her: {{ :vejledninger:trailer_kontrakt.pdf |}}, {{ :vejledninger:trailer_kontrakt.docx |}}
+
+Traileren har stelnummer WSE01AKCAHG133843. Registreringsattesten findes her: {{ :vejledninger:trailer_registreringsattest.pdf |}}
+
+
+Generel vejledning til STEMA trailere: {{ :vejledninger:trailer_manual.pdf |}}

@@ -1,0 +1,94 @@
+=====Vand og varme aflæsning=====
+Techem
+
+====Aflæsningssystem – Kamstrup READy====
+
+====Målere====
+År for installation:	2016
+Skift målere:		2032
+
+Budget for skift - 2016 priser rundet op til nærmeste 5.000 kr.
+Målere: 		285.000 kr. inkl. moms.
+Montering:		55.000 kr. inkl. moms.
+
+Samlet:		340.000 kr. inkl. moms.
+
+**Koldtvandsmåler**
+<WRAP group>
+<WRAP 2cm column>
+Model:\\
+Antal:
+</WRAP>
+
+<WRAP auto column>
+Kamstrup Multical 21
+<WRAP group>
+<WRAP 6cm column>
+Lejligheder:\\
+Varmtvandsbeholder (VVB):\\
+Fælleshus:
+</WRAP>
+
+<WRAP auto column>
+72\\
+1\\
+1
+</WRAP>
+</WRAP>
+
+</WRAP>
+</WRAP>
+
+**Varmtvandsmåler**
+<WRAP group>
+<WRAP 2cm column>
+Model:\\
+Antal:
+</WRAP>
+
+<WRAP auto column>
+Kamstrup Multical 21
+<WRAP group>
+<WRAP 6cm column>
+Lejligheder:
+</WRAP>
+
+<WRAP auto column>
+72
+</WRAP>
+</WRAP>
+
+</WRAP>
+</WRAP>
+
+**Energimåler**
+<WRAP group>
+<WRAP 2cm column>
+Model:\\
+Antal:
+</WRAP>
+
+<WRAP auto column>
+Kamstrup Multical 402
+<WRAP group>
+<WRAP 6cm column>
+Lejligheder:
+</WRAP>
+
+<WRAP auto column>
+72
+</WRAP>
+</WRAP>
+
+</WRAP>
+</WRAP>
+
+**READy software - Fjernaflæsningssystem**\\
+URL til koncentratorcheck\\
+Koncentrator – Fejlfinding
+
+Optisk øje – Manuel + historisk aflæsning
+
+LogView til manuel aflæsning.
+
+MeterTool

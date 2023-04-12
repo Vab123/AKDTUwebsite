@@ -1,0 +1,136 @@
+<WRAP noprint><adm information>Siden her er lavet til at blive eksporteret til PDF, med knappen "Export to PDF", oppe til venstre</adm></WRAP>
+===== Kontrakt: Lån af påhængsvogn (trailer) =====
+Denne kontrakt beskriver betingelserne for lån af foreningens påhængsvogn, herefter benævnt som trailer.
+
+==== Udlevering ====
+Det påhviler lejeren at gennemgå traileren inden brug.
+
+Lejer skal ved gennemgangen sikre, at lygter, signal- og tegngivningslys er funktionsdygtige.
+
+Lejeren skal, overfor bestyrelsen, påpege eventuelle fejl, skader, mangler mv. ved det lejede straks efter udleveringen.
+
+Får du en parkeringsafgift, hæfter du selv for denne. Afgiften inklusiv eventuelle gebyrer bliver trukket gennem opkrævningen af boligafgift.
+
+==== Brug ====
+  * Kun Andelshavere eller Beboere kan låne traileren.
+  * Låneren skal være med i det trækkende køretøj.
+  * Traileren må kun bruges til eget formål.
+  * Traileren må kun benyttes indenfor Danmarks grænser.
+  * Låneren er ansvarlig for enhver anvendelse af traileren og udlejer (foreningen) er ikke ansvarlig for skader på personer, gods eller andet opstået i forbindelse med brugen af traileren.
+  * Efter brug skal låneren rengøre traileren
+
+==== Ansvar og forsikring ====
+Traileren er ikke forsikret af foreningen.
+
+Som låner er enten du personligt eller din egen forsikring ansvarlig for alle skader på personer, ejendom mm. – dette tæller uanset om skaden skyldes låner eller tredjepart.
+
+Punkteringer skal afhjælpes af låner og for låners regning.
+
+==== Ejerforhold ====
+**Navn:**\\
+Andelskollegiet ved DTU – Akademivej
+
+**CVR:**\\
+30025423
+
+**Stelnummer:**\\
+WSE01AKCAHG133843
+
+**Nummerplade:**\\
+CB1716
+
+==== Trailer specifikation ====
+**Model:**\\
+Stema trailer M750 med gitter
+
+**Totalvægt:**\\
+750 kg.
+
+**Nyttelast:**\\
+630 kg.
+
+**Egenvægt:**\\
+120 kg.
+
+**Dækstørrelse:**\\
+13"
+
+**Ladmål – Indvendigt (u. gitter):**\\
+H: 325 mm x B: 1080 mm. x L: 2010 mm.
+
+**Ladmål – Indvendigt (m. gitter):**\\
+H: 985 mm x B: 1080 mm. x L: 2010 mm.
+
+**Strømstik:**\\
+13-polet – Ved henvendelse til Bestyrelsen kan der lånes adapter til 7-polet.
+
+**Manual til trailer:**\\
+[[https://www.akdtu.dk/public_files/Trailer_manual.pdf]]
+<pagebreak>
+
+**Lejeperiode:**\\
+<WRAP group>
+<WRAP 4cm column>
+Fra:\\
+\\
+\\
+Til:\\
+\\
+
+</WRAP>
+<WRAP auto column>
+%%_______________________________________________________________%%\\
+\\
+\\
+%%_______________________________________________________________%%\\
+\\
+
+</WRAP>
+</WRAP>
+
+**Oplysninger på lejer:**\\
+<WRAP group>
+<WRAP 4cm column>
+Navn:\\
+\\
+\\
+Adresse:\\
+\\
+\\
+\\
+\\
+Email:\\
+\\
+\\
+Telefon:\\
+\\
+\\
+Kørekortnummer:\\
+\\
+\\
+Underskrift og dato:\\
+\\
+
+</WRAP>
+<WRAP auto column>
+%%_______________________________________________________________%%\\
+\\
+\\
+%%_______________________________________________________________%%\\
+\\
+%%_______________________________________________________________%%\\
+\\
+\\
+%%_______________________________________________________________%%\\
+\\
+\\
+%%_______________________________________________________________%%\\
+\\
+\\
+%%_______________________________________________________________%%\\
+\\
+\\
+%%_______________________________________________________________%%\\
+
+</WRAP>
+</WRAP>

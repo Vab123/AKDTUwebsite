@@ -1,0 +1,87 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Events-manager\n"
+"POT-Creation-Date: 2022-06-08 17:30+0200\n"
+"PO-Revision-Date: 2022-06-08 17:31+0200\n"
+"Last-Translator: Victor Brandsen <victor2@akdtu.dk>\n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+"X-Poedit-Basepath: ../templates/forms\n"
+"X-Poedit-KeywordsList: esc_html_e;__;_e\n"
+"X-Poedit-SearchPath-0: event-editor.php\n"
+
+#: event-editor.php:12
+msgid "Unauthorized Access"
+msgstr ""
+
+#: event-editor.php:12
+#, php-format
+msgid "You do not have the rights to manage this %s."
+msgstr ""
+
+#: event-editor.php:12 event-editor.php:120 event-editor.php:122
+msgid "Event"
+msgstr ""
+
+#: event-editor.php:30
+msgid "Your Details"
+msgstr ""
+
+#: event-editor.php:33
+msgid "Name"
+msgstr ""
+
+#: event-editor.php:37
+msgid "Email"
+msgstr ""
+
+#: event-editor.php:46
+msgid "Event Name"
+msgstr ""
+
+#: event-editor.php:50
+msgid "The event name. Example: Birthday party"
+msgstr ""
+
+#: event-editor.php:60
+msgid "When"
+msgstr "Hvornår"
+
+#: event-editor.php:74
+msgid "Where"
+msgstr ""
+
+#: event-editor.php:82
+msgid "Details"
+msgstr ""
+
+#: event-editor.php:90
+msgid "Details about the event."
+msgstr ""
+
+#: event-editor.php:90
+msgid "HTML allowed."
+msgstr ""
+
+#: event-editor.php:101
+msgid "Event Image"
+msgstr ""
+
+#: event-editor.php:109
+msgid "Bookings/Registration"
+msgstr ""
+
+#: event-editor.php:120
+#, php-format
+msgid "Submit %s"
+msgstr ""
+
+#: event-editor.php:122
+#, php-format
+msgid "Update %s"
+msgstr ""

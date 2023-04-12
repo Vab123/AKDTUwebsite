@@ -1,0 +1,16 @@
+====== Parkeringskontrol ======
+Foreningen har 19-06-2022 indgået aftale med Copark ApS ([[https://copark.dk|copark.dk]]) om kontrol på foreningens parkeringspladser pr. 01-08-2022. Denne information er sendt ud til beboere i Facebookgruppen og andelshavere på Cobblestone Cloud, i form af dette {{ :vejledninger:parkeringskontrol_-_beboerbrev.pdf | beboerbrev}}.
+
+Alle beboere skal registreres i Coparks system før de har mulighed for at registrere nummerplader til parkering. Dette gøres på [[https://copark.typeform.com/akdtu]], hvorefter Coparks kundeservice opretter beboeren. Dette forventes at tage højest 24 timer.
+
+Alle beboere har derefter som udgangspunkt 1 fast nummerplade og 10 gæsteparkeringer om måneden. Disse nummerplader skal registreres i Coparks app (fås til [[https://play.google.com/store/apps/details?id=no.giantleap.parko.copark|Android]] og [[https://apps.apple.com/dk/app/copark/id1503185040?l=da|iOS]]). Den faste nummerplade står som udgangspunkt til at udløbe 31-12 hvert år, men fornyes automatisk. Yderligere faste nummerplader kan oprettes af [[#kontakt|Coparks kundeservice]]
+
+===== Kontakt =====
+{{anchor:kontakt}}
+Coparks kundeservice står for al kommunikation med bestyrelsen, og kan nås på mail [[kontakt@copark.dk]]. 
+
+===== Døgntelefon =====
+{{anchor:kontakt}}
+Foreningen har i samarbejdsaftalen ret til at tilkalde en parkeringsvagt ved mistanke om uvedkommende parkering. Dette gøres ved at ringe til Coparks døgntelefon på [[tel>+42905010|42 90 50 10 ]] og taste 3.
+
+Læs mere i {{ :vejledninger:parkeringskontrol_samarbejdsaftale_andelskollegiet_dtu.pdf | Samarbejdsaftalen}}.

@@ -1,0 +1,7 @@
+===== Kælder =====
+
+==== Vand i kælder ====
+  * Tjek først (hvis muligt pga. vandstand) om der er nogle sikringer der er slået fra (sikrings skabet er i serverrummet).
+  * Undersøg om det er kloakvand eller kondensvand fra kælderbrønden - Gøres ved at åbne dækslet til pumpebrønden (uden for lejlighed 12) og kloak dækslet ved cykelskuret udenfor opgang 2.
+  * Hvis kloak: Kontakt slamsuger.
+  * Hvis kondensvand: Hiv blidt i ledning i brønd uden for lejlighed 12, det kan være flyderen der har sat sig fast eller pumpen er stoppet til.

@@ -1,0 +1,29 @@
+a:2:{s:7:"current";a:8:{s:4:"date";a:2:{s:7:"created";i:1672338169;s:8:"modified";i:1672338169;}s:7:"creator";s:15:"Victor Brandsen";s:4:"user";s:6:"victor";s:11:"last_change";a:8:{s:4:"date";i:1672338169;s:2:"ip";s:14:"82.211.219.109";s:4:"type";s:1:"C";s:2:"id";s:39:"drift-og-procesvejledninger:ventilation";s:4:"user";s:6:"victor";s:3:"sum";s:8:"oprettet";s:5:"extra";s:0:"";s:10:"sizechange";i:1378;}s:5:"title";s:11:"Ventilation";s:11:"description";a:2:{s:15:"tableofcontents";a:2:{i:0;a:4:{s:3:"hid";s:11:"ventilation";s:5:"title";s:11:"Ventilation";s:4:"type";s:2:"ul";s:5:"level";i:2;}i:1;a:4:{s:3:"hid";s:12:"hovedbygning";s:5:"title";s:12:"Hovedbygning";s:4:"type";s:2:"ul";s:5:"level";i:3;}}s:8:"abstract";s:363:"Ventilation
+
+Service: 	Lygas Ventilation
+
+Motor
+
+Antal:
+
+Producent:
+
+Model:
+
+El-forbrug:
+
+2
+
+Küenle Antriebssysteme
+
+DCS 90L 4-852
+
+1,5 kW/stk.
+
+
+
+Hovedbygning
+
+Ventilationen er delt to grene – én for hver motor.
+
+Hver gren har to styringsbokse; en til styring af udsugningsstyrke og en til styring af tidspunkter – Se ”Billede 1 - Ventilationsstyring”.";}s:8:"relation";a:2:{s:5:"media";a:4:{s:43:"drift-og-procesvejledninger:ventilation.jpg";b:1;s:58:"drift-og-procesvejledninger:boks_1_-_theben_tr_610_top.pdf";b:1;s:56:"drift-og-procesvejledninger:boks_2_-_theben_tr_612_s.pdf";b:1;s:51:"drift-og-procesvejledninger:ventilationsstyring.jpg";b:1;}s:10:"firstimage";s:43:"drift-og-procesvejledninger:ventilation.jpg";}s:8:"internal";a:2:{s:5:"cache";b:1;s:3:"toc";b:1;}}s:10:"persistent";a:4:{s:4:"date";a:1:{s:7:"created";i:1672338169;}s:7:"creator";s:15:"Victor Brandsen";s:4:"user";s:6:"victor";s:11:"last_change";a:8:{s:4:"date";i:1672338169;s:2:"ip";s:14:"82.211.219.109";s:4:"type";s:1:"C";s:2:"id";s:39:"drift-og-procesvejledninger:ventilation";s:4:"user";s:6:"victor";s:3:"sum";s:8:"oprettet";s:5:"extra";s:0:"";s:10:"sizechange";i:1378;}}}

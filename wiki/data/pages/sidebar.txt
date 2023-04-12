@@ -1,0 +1,70 @@
+** [[start|Hjem]] **
+
+** [[sidebar?do=edit|Ret menu]] **
+
+** [[to-do]] **
+
+** Administrativt **
+  * [[administrativt:Årsplan]]
+  * [[administrativt:standardinventar-i-lejligheder]]
+  * [[administrativt:Templates]]
+  * [[administrativt:kontaktpersoner]]
+  * [[administrativt:sikkerhedsdatablade]]
+  * [[administrativt:information-til-nye-bestyrelsesmedlemmer]]
+  * [[administrativt:nøglekontrakt|Nøglekontrakt]]
+
+** Driftsvejledninger **
+  * [[drift-og-procesvejledninger]]
+  * [[drift-og-procesvejledninger:fælleshus]]
+  * [[drift-og-procesvejledninger:havedag]]
+    * [[drift-og-procesvejledninger:havedag:opgaver-til-havedag]]
+    * [[drift-og-procesvejledninger:havedag:cykeloprydning]]
+  * [[drift-og-procesvejledninger:netgruppen]]
+  * [[drift-og-procesvejledninger:fjernvarme]]
+  * [[drift-og-procesvejledninger:vand-og-varme-aflæsning]]
+  * [[drift-og-procesvejledninger:ventilation]]
+    * [[drift-og-procesvejledninger:ventilation:sommer-og-vinter-program]]
+  * [[drift-og-procesvejledninger:faskiner-sandfang-og-vejriste]]
+  * [[drift-og-procesvejledninger:elevator]]
+  * [[drift-og-procesvejledninger:belysning]]
+  * [[drift-og-procesvejledninger:sikringer]]
+  * [[drift-og-procesvejledninger:tv]]
+  * [[drift-og-procesvejledninger:reservedele]]
+
+**Vejledninger**
+  * **Netgruppen**
+    * [[vejledninger:Hjemmeside]]
+      * [[vejledninger:Hjemmeside:aendringer]]
+      * [[vejledninger:Hjemmeside:planlagte-aendringer]]
+    * [[vejledninger:hjemmeside:wiki]]
+    * [[vejledninger:hjemmeside:FTP]]
+    * [[vejledninger:netgruppen:port-oversigt|Port oversigt]]
+    * [[vejledninger:netgruppen:switches]]
+    * [[vejledninger:netgruppen:internet-i-fælleshuset]]
+  * **Fælleshuset**
+    * [[vejledninger:Adgangskontrol]]
+    * [[vejledninger:varmesystem-i-fælleshus]]
+  * [[vejledninger:Parkeringskontrol]]
+  * [[vejledninger:Kælder]]
+  * [[vejledninger:Trailer]]
+  * [[vejledninger:Lån og brug af Excentersliber]]
+  * [[vejledninger:rengøring-af-gulvafløb]]
+  * [[vejledninger:Salgsprocedure]]
+
+** Skrivelser **
+  * [[skrivelser:fælleshus:adgangskontrol]]
+  * [[skrivelser:fælleshus:accesscontrol]]
+  * [[skrivelser:fælleshus:retningslinjer-dansk]]
+    * [[skrivelser:fælleshus:retningslinjer-engelsk]]
+  * [[skrivelser:affaldssortering-og-storskrald]]
+  * [[skrivelser:ren-og-vedligeholdelse-af-andel-dansk]]
+    * [[skrivelser:ren-og-vedligeholdelse-af-andel-engelsk]]
+  * [[skrivelser:studieaktivitetsundersøgelse]]
+    * [[skrivelser:studieaktivitetsundersøgelse:salg-grundet-studieinaktivitet|Salg grundet studieinaktivitet]]
+  * [[skrivelser:udleje-af-lejlighed]]
+  * [[skrivelser:trailer-kontrakt]]
+    * [[skrivelser:trailer-kontrakt-engelsk]]
+
+** Opslag **
+  * [[opslag:rygning-forbudt]]
+  * [[opslag:skrald]]

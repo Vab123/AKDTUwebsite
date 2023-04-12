@@ -1,0 +1,198 @@
+1658873658	82.211.219.109	C	vejledninger:hjemmeside:aendringer	victor	oprettet		10878
+1658874892	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	tilføjet simple membership ændringer		10617
+1658875948	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	tilføjet ændringer i event manager		16461
+1658876020	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	tilføjet syntax highlighting		284
+1658876042	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	tilføjet syntax highlighting		16
+1658876097	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	[Ændringer i plugins på hjemmesiden] 		72
+1658876106	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		-26
+1658876113	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	[Simple membership/AKDTU - Bruger styring] 		-30
+1658876119	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	[Neve] 		-16
+1658917671	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	tilføjet extra css til Neve tema		2516
+1658917721	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor			6
+1659170391	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	[Ændringer på hjemmesiden] 		205
+1659170510	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Ændret layout en smule		-15
+1659170550	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		5
+1659170559	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	[Simple membership/AKDTU - Bruger styring] 		5
+1659170568	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Neve] 		4
+1659170591	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		2
+1659170604	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		-6
+1659170613	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Simple membership/AKDTU - Bruger styring] 		-5
+1659170619	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Neve] 		-5
+1659185714	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		127
+1659185738	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		0
+1659185862	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		36
+1659185999	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	[Neve] 		66
+1659187459	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		-40
+1659187492	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	[Neve] 		-73
+1659187691	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor			5
+1659263286	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Tilføjet mails på flere sprog		6258
+1659264455	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Tilføjet email attachment root		267
+1659264584	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		-88
+1659264657	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		-174
+1659776070	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Tilføjet bookingform ændringer, så man kun kan tilmelde sig events én gang over alle sprog		578
+1659863234	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Tilføjet menu punkt for conditional menus		45
+1659863303	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Tilføjet Conditional menus		245
+1659865040	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Ændret login-system så man bliver logget ud når browseren lukkes, hvis ikke man har valgt "husk mig"		158
+1659876010	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Opdateringer		250
+1659876026	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Ændringer på hjemmesiden] 		10
+1659876051	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	[Ændringer på hjemmesiden] 		0
+1659876075	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	[Neve Child theme] 		42
+1659887843	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Tilføjet begrænsning så fælleshuset kun én beboer kan leje fælleshuset ad gangen		696
+1659887872	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Tilføjet så fælleshuset kun kan lejes af én beboer ad gangen		169
+1659889242	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Fikset problem med forkert tidszone ved check for overlappende begivenheder		326
+1660150266	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Fikset check for om fælleshuset allerede er udlejet, for ændring af udleje.		32
+1660379532	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Tilføjet internationalisering af beskeder vedr. tilmelding til havedag		23629
+1660386999	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Tilføjet admin "Add booking"		138
+1660387214	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Tilføjet flere oversættelser til admin		180
+1660388400	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Tilføjet mulighed for at tilføje tilmeldinger for enkelte brugere		2365
+1660389657	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Ændret styling på form til at admins kan tilmelde brugere individuelt		89
+1660390027	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		8
+1660390754	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Ændret tekst når der ikke er flere pladser tilbage på havedagstilmelding		354
+1660390836	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Ændret tekst når der ikke er flere pladser tilbage på havedagstilmelding		166
+1660395947	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Sammenkoblet tilmeldinger til oversættelser af samme begivenhed, så antallet af optagede pladser er ens på alle oversættelser af samme begivenhed. Ledige pladser er og bliver ikke koordineret		2170
+1660398214	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Tilføjet ændring af label til kommentarfelt ved havedag tilmelding		305
+1660398269	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Tilføjet oversættelse af label til kommentarfelt ved havedagstilmelding		161
+1660398406	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		19
+1660398714	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Ændring i layout til tilmelding til havedag		145
+1660398867	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		47
+1660403671	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Rettet problem hvor begivenheder der starter og slutter samtidig var muligt.		165
+1660403728	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Rettet problem hvor begivenheder der starter og slutter samtidig var muligt.		131
+1660404889	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		54
+1660432217	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Tilføjet så overblikstabel skriver antal bookinger på tværs af oversættelser		587
+1660434491	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		2050
+1660435462	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		706
+1660436900	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		13
+1660437705	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Sat eksporterings checkbox til at være hakket af som standard		323
+1660439011	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		115
+1660439218	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		33
+1660844691	94.147.37.53	E	vejledninger:hjemmeside:aendringer	victor	Tilføjet så log ind og log ud redirecter til startsiden med det korrekte sprog		487
+1661693235	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Tilføjet rediger-knap på oversigt over begivenheder		460
+1661693298	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Tilføjet rediger-knap på oversigt over begivenheder		83
+1661693598	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		53
+1661857300	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		300
+1661857413	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		147
+1661857466	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		17
+1661859948	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		165
+1662626168	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Extra CSS for Neve] 		22
+1662626430	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Extra CSS for Neve] 		64
+1663438544	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Tilføjet sted til at trække deltagerlister til havedage		14037
+1663439403	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Tilføjet begrænsning så man ikke kan printe tilmeldingsliste før tabellen er opdateret		239
+1663439441	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		-1
+1663439531	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		-211
+1663439628	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		0
+1663439768	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		-8
+1663442426	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Tilføjet felt for kommentarer til tilmeldingsliste		183
+1663442507	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		7
+1663465947	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Tilføjet oversættelser til oprettelse af ny bruger. Tilføjet at email change emails ikke bliver sendt.		1119
+1663466029	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Tilføjet at nytilflyttere kan oprette profiler selv		6081
+1663466421	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Simple membership/AKDTU - Bruger styring] 		260
+1663499609	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		25
+1663504102	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		-25
+1663504844	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Tilføjet nem måde at tillade brugeroprettelser		6957
+1663505202	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Simple membership/AKDTU - Bruger styring] 		110
+1663505284	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Neve Child theme] 		96
+1663524845	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Tilføjet widgets		3730
+1663528347	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Neve Child theme] 		4018
+1663535520	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Neve Child theme] 		3
+1663535886	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Neve Child theme] 		394
+1663536110	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Neve Child theme] 		-353
+1663609794	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Tilføjet widget til at force-tilmelde lejligheder til havedage		4918
+1663625274	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Tilføjet widget til at oprette havedage		9348
+1663692808	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Tilføjet widgets til at styre brugertilmelding		5086
+1663692892	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Opdateret til at bruge AKDTU_notice-klasse til at skrive notifikationer		-819
+1664065441	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Flyttet widgets til eget plugin		-26004
+1664112515	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Fjernet emails ved fatal errors		190
+1664112657	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Wordpress filer] 		-1
+1664201895	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Tilføjet sektion om cron jobs		90
+1664202054	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Tilføjet cron job 'Fjern brugeradgang'		1501
+1664202398	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Tilføjet has_been_reset kolonne til allowed_membercreation tabel		37
+1664203977	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Cron jobs] 		147
+1664203993	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor			-15
+1664213574	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Tilføjet condition om at bruger skal være nulstillet før overtagelse		23
+1664215786	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Opdateret version af fjern brugeradgang		4745
+1664220507	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Fjernet events menu fra folk der ikke er logget ind med bestyrelsesprofil		250
+1664220657	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		32
+1664221330	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		-93
+1664221701	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		145
+1664304054	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Tilføjet dark-mode styling af events-manager date-picker		1044
+1664304504	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Extra CSS for Neve] 		0
+1664304582	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Extra CSS for Neve] 		7
+1664305624	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		207
+1664305639	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Extra CSS for Neve] 		154
+1664445005	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Ændringer på hjemmesiden] 		35
+1664445083	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Tilføjet WP Dark Mode plugin		724
+1664486226	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Simple membership/AKDTU - Bruger styring] 		-52
+1664486878	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Brugt styling af notices fra events-manager		515
+1664487004	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Neve Child theme] 		174
+1664487256	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Simple membership/AKDTU - Bruger styring] 		488
+1664700947	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Tvungen redirect hvis ikke logget ind		701
+1664701471	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Tilføjet redirect efter login		611
+1664704630	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Ændringer på hjemmesiden] 		45
+1664704688	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Tilføjet robots.txt		369
+1664704732	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Andre filer] 		-1
+1664704760	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Tilføjet robots.txt		3
+1664812135	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Opdateret em-print-bookings.php og em-print-events.php, og tilføjet ny database over tilmeldinger til em-install.php		3158
+1664891018	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Tilføjet samlet tilmeldingsliste		2337
+1664894520	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	[Ændringer på hjemmesiden] 		-18
+1664894536	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Ændringer på hjemmesiden] 		0
+1664894580	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Tilføjet cron job for opkrævning for leje af fælleshus		2009
+1664898980	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Opdateret fjern brugeradgang og opkrævning fælleshus til at bruge globale variable for mailadresser		713
+1664899286	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Cron jobs] 		-69
+1664908921	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Opdateret cron jobs til at bruge indstillinger defineret i AKDTU plugin		2630
+1664909508	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Cron jobs] 		0
+1665436077	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Opdateret Fjern brugeradgang cronjob		-541
+1665485342	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Cron jobs] 		124
+1665487093	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Opdateret mail der sendes når ny bruger oprettes		902
+1665579442	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Cron jobs] 		321
+1665579520	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Cron jobs] 		1
+1665582113	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Opdateret calc_rental_cost		712
+1665939860	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Opdateret Fjern brugeradgang til kun at skrive tilmeldinger til fremtidige havedage, hvis tilmeldingen ikke er slettet af brugeren		1033
+1666644852	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Tilføjet pris til leje af fælleshus, når der vælges datoer og i emails		4455
+1666644888	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Tilføjet pris til leje af fælleshus, når der vælges datoer og i emails		1227
+1666645493	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		480
+1666647046	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Tilføjet international version af besked ved indsendt ansøgning om leje af fælleshus		1767
+1666647203	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		582
+1667259077	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Opdateret Opkrævning_fælleshus		-1328
+1667571105	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		540
+1667572849	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		-259
+1668548463	82.211.215.165	e	vejledninger:hjemmeside:aendringer	victor			72
+1668548515	82.211.215.165	e	vejledninger:hjemmeside:aendringer	victor			-22
+1668548724	82.211.215.165	e	vejledninger:hjemmeside:aendringer	victor			-16
+1668548778	82.211.215.165	e	vejledninger:hjemmeside:aendringer	victor			-4
+1668548840	82.211.215.165	e	vejledninger:hjemmeside:aendringer	victor			11
+1668548862	82.211.215.165	e	vejledninger:hjemmeside:aendringer	victor			0
+1668549038	82.211.215.165	e	vejledninger:hjemmeside:aendringer	victor			-41
+1669828894	46.246.106.39	E	vejledninger:hjemmeside:aendringer	victor	Opdateret definition af cronjobs. Tilføjet fjern_lejeradgang		-11408
+1669828948	46.246.106.39	E	vejledninger:hjemmeside:aendringer	victor	[Cron jobs] 		-42
+1669828970	46.246.106.39	e	vejledninger:hjemmeside:aendringer	victor	[Cron jobs] 		33
+1669829047	46.246.106.39	e	vejledninger:hjemmeside:aendringer	victor	[Cron jobs] 		24
+1669829327	46.246.106.39	E	vejledninger:hjemmeside:aendringer	victor	[Simple membership/AKDTU - Bruger styring] 		-4119
+1669829394	46.246.106.39	e	vejledninger:hjemmeside:aendringer	victor	[Simple membership/AKDTU - Bruger styring] 		-363
+1670175620	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Simple membership/AKDTU - Bruger styring] 		-81
+1670175652	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Tilføjet beskeder til login-skærm og loggedin-skærm		173
+1670175741	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Tilføjet beskeder til login-skærm og loggedin-skærm		331
+1670176375	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		2
+1670181132	82.211.219.109	E	vejledninger:hjemmeside:aendringer	victor	Ændringer til at leje af fælleshuset bliver oversat automatisk		1072
+1670181168	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Neve Child theme] 		0
+1670181190	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Neve Child theme] 		216
+1670183802	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		-24
+1670183823	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Neve Child theme] 		406
+1671105820	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		951
+1671106035	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		76
+1672448362	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor			1521
+1672850895	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		3507
+1672850971	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	Ændret så linjer i swpm_allowed_membercreation ikke længere slettes ved brugeroprettelse		76
+1672852091	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		-3
+1673315333	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		172
+1673567341	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	[Neve Child theme] 		131
+1675040062	82.211.219.109	e	vejledninger:hjemmeside:aendringer	victor	fikset at check om begivenheder findes samtidig med ny begivenhed også inkluderer all-day begivenheder		26
+1678973071	2.42.72.160	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		482
+1678977619	2.42.72.160	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		476
+1678978976	2.42.72.160	E	vejledninger:hjemmeside:aendringer	victor	Tilføjet afsendelse af mails ved tilmelding og afmelding, havedage		398
+1679077232	2.42.72.160	E	vejledninger:hjemmeside:aendringer	victor	Fikset #_BOOKEDSPACES, #_PENDINGSPACES, #_AVAILABLESPACES så de bruger alle oversættelser af begivenheder.		1107
+1679670112	2.42.72.160	e	vejledninger:hjemmeside:aendringer	victor	[Extra CSS for Neve] 		120
+1680040081	2.42.72.160	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		766
+1680040298	2.42.72.160	E	vejledninger:hjemmeside:aendringer	victor	Tilføjet #_EVENTINFO som mulig erstatning til bookings		174
+1680643410	2.42.72.160	E	vejledninger:hjemmeside:aendringer	victor	Tilføjet vicevært rolle		120
+1680648537	2.42.72.160	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		38
+1680648938	2.42.72.160	e	vejledninger:hjemmeside:aendringer	victor	Tilføjet speciel besked til viceværten ved reservation af fælleshus		1399

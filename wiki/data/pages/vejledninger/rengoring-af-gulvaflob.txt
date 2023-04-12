@@ -1,0 +1,38 @@
+=====Rensning af gulvafløb=====
+====Udstyr====
+  * Opvaskebørste eller svamp.
+  * Sæbe (f.eks. Universalrengøringsmiddel eller Grundrens).
+  * Evt. kalkfjerner.
+  * Evt. flad skruetrækker.
+
+====Vejledning====
+**1. Fjern rist**\\
+Risten kan sidde godt fast, så det kan være nødvendigt at lirke den op med en flad skruetrækker eller evt. rense langs med kanten med kalkfjerner.\\
+//Bemærk//: Hvis der bruges kalkfjerner skal man passe på ikke at få det i flisernes fuger da det opløser dem.
+
+**2. Tag vandlåsen op**\\
+Vandlåsen sidder, og skal sidde, stramt i hullet og lukke tæt sammen langs kanten.\\
+Det er sjældent at man kan få den op ved at trække i metalbøjlen. Man er derfor ofte nødt til at tage hånden ned til bunden, tage fat i kanten og lirke den løs hvorefter man kan trække den op.\\
+Vær opmærksom på, at der kan lugte meget kraftigt af kloak når vandlåsen er taget op. Dette skyldes dels at der så er fri adgang til kloakken og dels at der er undertryk i lejlighederne som følge af ventilationssystemet.\\
+//Bemærk//: Det anbefales ikke at benytte skruetrækker til at få vandlåsen op, da det kan skade tætningsringen.
+
+{{ :vejledninger:vandlas.jpg?nolink&600 | Figur 1 - Vandlås}}
+<WRAP centeralign>Figur 1 – Vandlås</WRAP>
+
+{{ :vejledninger:aflob.jpg?nolink&600 | Figur 2 - Afløb}}
+<WRAP centeralign>Figur 2 - Afløb</WRAP>
+
+**3. Rens alle dele**\\
+Med alt skilt ad kan man rense alle dele med en opvaskebørste/svamp og sæbe (evt. også kalkfjerner).\\
+Det er vigtigt at få renset alle overflader grundigt, da det så tager længere tid for biofilm mm. at udvikle sig igen. Husk også undersiden af risten.
+
+{{ :vejledninger:underside_af_vandlas.jpg?nolink&600 | Figur 3 - Underside af vandlås}}
+<WRAP centeralign>Figur 3 - Underside af vandlås</WRAP>
+
+**4. Isæt vandlås**\\
+Med alt renset kan man samle afløbet igen.\\
+Vandlåsen sættes på plads lodret og trykkes lige ned. Hvis man får trykket den skævt ned vil tætningsringen ikke slutte tæt og der vil komme lugtgener.\\
+
+**5. Skyl igennem med vand**\\
+Med alt på plads hældes noget vand igennem, så man er sikker på at vandlåsen er fyldt.\\
+Bemærk at der godt kan gå noget tid inden kloaklugten er helt væk. Hvis lugten forsætter, er vandlåsen sandsynligvis sat skævt i eller ikke presset godt nok ned.

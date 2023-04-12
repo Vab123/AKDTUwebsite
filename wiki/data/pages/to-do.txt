@@ -1,0 +1,13 @@
+=====Liste over sider, der skal opdateres=====
+  * [[administrativt:arsplan]]
+  * [[administrativt:kontaktpersoner]]
+  * [[administrativt:information-til-nye-bestyrelsesmedlemmer]]
+  * [[drift-og-procesvejledninger]]
+  * [[drift-og-procesvejledninger:faelleshus]]
+  * [[drift-og-procesvejledninger:havedag]]
+  * [[drift-og-procesvejledninger:havedag:opgaver-til-havedag]]
+  * [[drift-og-procesvejledninger:netgruppen]]
+  * [[drift-og-procesvejledninger:faskiner-sandfang-og-vejriste]]
+  * [[vejledninger:netgruppen:port-oversigt|Port oversigt]]
+  * [[vejledninger:netgruppen:internet-i-faelleshuset]]
+  * [[skrivelser:affaldssortering-og-storskrald]] - Oversættes også til engelsk

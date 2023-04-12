@@ -1,0 +1,243 @@
+=====Belysning=====
+Fischer Lighting
+
+Al ny belysning skal være LED.
+
+====Fælleshus – Loftslamper (”sølv” lamperne)====
+<WRAP group>
+<WRAP 4cm column>
+Antal lyskilder\\
+Fatning\\
+Effekt\\
+Lysstyrke\\
+Farvetemperatur\\
+Note
+</WRAP>
+
+<WRAP auto column>
+\\
+E27\\
+W.\\
+450 lumen\\
+2.700-3.000 K.\\
+
+</WRAP>
+</WRAP>
+
+====Fælleshus – Toiletter====
+<WRAP group>
+<WRAP 4cm column>
+Antal lyskilder\\
+Fatning\\
+Effekt\\
+Lysstyrke\\
+Farvetemperatur\\
+Note
+</WRAP>
+
+<WRAP auto column>
+6 stk.\\
+G9\\
+W.\\
+320 lumen\\
+3.100 K.\\
+
+</WRAP>
+</WRAP>
+
+====Lygtepæle====
+<WRAP group>
+<WRAP 4cm column>
+Antal lyskilder\\
+Fatning\\
+Effekt\\
+Lysstyrke\\
+Farvetemperatur\\
+Note
+</WRAP>
+
+<WRAP auto column>
+9 stk.\\
+E27\\
+W.\\
+lumen\\
+ K.\\
+De nuværende pærer er isat af PH-El.
+</WRAP>
+</WRAP>
+
+====Lejligheder - Dørlamper====
+<WRAP group>
+<WRAP 4cm column>
+Antal lyskilder\\
+Fatning\\
+Effekt\\
+Lysstyrke\\
+Farvetemperatur\\
+Note
+</WRAP>
+
+<WRAP auto column>
+54 + 1 (fælleshus) stk.\\
+Ikke-standard\\
+5,5 W.\\
+lumen\\
+3.000 K.\\
+Lamperne er produceret af Fischer Lighting.
+</WRAP>
+</WRAP>
+
+{{ :drift-og-procesvejledninger:dorlampe.jpg?nolink&600 |}}
+
+====Opgange - Væglamper====
+<WRAP group>
+<WRAP 4cm column>
+Antal lyskilder\\
+Fatning\\
+Effekt\\
+Lysstyrke\\
+Farvetemperatur\\
+Note
+</WRAP>
+
+<WRAP auto column>
+9 stk.\\
+Ikke-standard\\
+5,5 W.\\
+lumen\\
+3.000 K.\\
+Lamperne er produceret af Fischer Lighting.
+</WRAP>
+</WRAP>
+
+{{ :drift-og-procesvejledninger:vaeglampe.jpg?nolink&600 |}}
+
+====Opgange - Pendel====
+<WRAP group>
+<WRAP 4cm column>
+Antal lyskilder\\
+Fatning\\
+Effekt\\
+Lysstyrke\\
+Farvetemperatur\\
+Note
+</WRAP>
+
+<WRAP auto column>
+9 stk.\\
+E27\\
+20 W.\\
+lumen\\
+3.000 K.\\
+Corn LEDbulb160 830 E27 Non-dimable IP20.
+</WRAP>
+</WRAP>
+
+{{ :drift-og-procesvejledninger:pendel.jpg?nolink&600 |}}
+
+====Elevator – Udendørs====
+<WRAP group>
+<WRAP 4cm column>
+Antal lyskilder\\
+Fatning\\
+Effekt\\
+Lysstyrke\\
+Farvetemperatur\\
+Note
+</WRAP>
+
+<WRAP auto column>
+9 stk.\\
+Ikke-standard.\\
+5,5 W.\\
+lumen\\
+3.000 K.\\
+Lamperne er produceret af Fischer Lighting.
+</WRAP>
+</WRAP>
+
+{{ :drift-og-procesvejledninger:elevator_udendors.jpg?nolink&600 |}}
+
+====Elevator – Indendørs====
+<WRAP group>
+<WRAP 4cm column>
+Antal lyskilder\\
+Fatning\\
+Effekt\\
+Lysstyrke\\
+Farvetemperatur\\
+Note
+</WRAP>
+
+<WRAP auto column>
+12 stk. (4 stk. per elevator)\\
+\\
+10 W.\\
+lumen\\
+3.000 K.\\
+
+</WRAP>
+</WRAP>
+
+====Kælder – Serverrum + fyrrum====
+<WRAP group>
+<WRAP 4cm column>
+Antal lyskilder\\
+Fatning\\
+Effekt\\
+Lysstyrke\\
+Farvetemperatur\\
+Note
+</WRAP>
+
+<WRAP auto column>
+3 stk.\\
+\\
+12 W.\\
+lumen\\
+3.000 K.\\
+
+</WRAP>
+</WRAP>	
+
+====Kælder – Gang====
+<WRAP group>
+<WRAP 4cm column>
+Antal lyskilder\\
+Fatning\\
+Effekt\\
+Lysstyrke\\
+Farvetemperatur\\
+Note
+</WRAP>
+
+<WRAP auto column>
+1 stk.\\
+Indbygget lyskilde.\\
+15 W.\\
+lumen\\
+3.000 K.\\
+FL CA Ella Cirkelarmatur Ø170 med sensor IP20.
+</WRAP>
+</WRAP>
+
+====Cykelskure====
+<WRAP group>
+<WRAP 4cm column>
+Antal lyskilder\\
+Fatning\\
+Effekt\\
+Lysstyrke\\
+Farvetemperatur\\
+Note
+</WRAP>
+
+<WRAP auto column>
+6 stk.\\
+\\
+12 W.\\
+lumen\\
+3.000 K.\\
+
+</WRAP>
+</WRAP>

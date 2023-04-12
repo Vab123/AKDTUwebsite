@@ -1,0 +1,64 @@
+===== Wiki =====
+Der er oprettet denne wiki til brug i bestyrelsen. Den indeholder vejledninger og beskrivelser relateret til bestyrelsesarbejdet.
+
+==== Redigering af indhold ====
+Alle bestyrelsesmedlemmer kan redigere indholdet på wikien. Indholdet redigeres ved at gå til den side der skal ændres, og derefter trykke på "Edit this page" i øverste højre hjørne. Herefter får man et tekst-felt hvor indholdet af siden kan redigeres. Wiki-sider bruger et specielt format til at specificere ting som overskrifter, lister, fed skrift, billeder og lignende. Der findes ses en bar over der hvor man redigerer indholdet, som indeholder de mest almindelige ting. En fuld beskrivelse af syntax kan findes [[https://www.dokuwiki.org/wiki:syntax|her]]. Når man er færdig kan man enten forhåndsvise  den nye side, for at checke om man har skrevet alt rigtigt, eller bare gemme siden.
+
+Hvis der skal oprettes nye sider foregår det på følgende måde:
+  - Bestem hvilket namespace den nye side skal lægges i. Namespaces fungerer i princippet på samme måde som mapper, og kan bruges til at organisere filer. I URLen kan namespaces ses, da URLen er på formen ''namespace1:pagename'' eller ''namespace1:namespace2:pagename'' eller lignende, med kolon ('':'') mellem de forskellige dele. Namespaces kan altså også lægges inden i andre namespaces.
+  - Bestem det sidenavn, der skal bruges i URLen. Dette sidenavn er __ikke__ nødvendigvis det samme som overskriften på siden. Det skal være med udelukkende små bogstaver, og alle specialtegn erstattes med ''-''. >99% af gangene kan man bare bruge den overskrift man gerne vil have på siden og skrive den med små bogstaver og erstatte specialtegn.
+  - Tilføj den __endnu ikke oprettede__ side til menuen til venstre. Dette gøres ved at trykke på linket "Ret menu" øverst i menuen (eller gå til [[:sidebar|denne side]]). Denne side redigeres ved at trykke på "Edit this page" i øverste højre hjørne. Her kan strukturen af menuen redigeres, og et link til den __endnu ikke oprettede__ side tilføjes. Dette gøres ved at skrive ''%%[[namespace:pagename]]%%'' ind hvor man ønsker linket skal være. Vil man eksempelvis lægge siden ''parkering'' under namespacet ''vejledninger'' skal man altså skrive ''%%[[vejledninger:parkering]]%%''. Gen siden ved at trykke på knappen "Gem" under tekst-boksen. Du kan også forhåndsvise ændringen hvis du vil 
+  - Naviger derefter til det URL, siden skal ligge på, __på trods af at siden stadig ikke findes__, ved at trykke på det link du nu har tilføjet til menuen i siden. Derefter kan du redigere siden som  beskrevet ovenover. Når du gemmer siden bliver den oprettet, og kan læses som normalt.
+
+==== Udskrift af indhold ====
+Alt indhold på hjemmesiden kan downloades som PDF ved at trykke på "Export to PDF" under søgefeltet i menuen til venstre. Indholdet bliver automatisk indskrevet i et standard-format til foreningens dokumenter.
+
+=== Ændring af standard-format ===
+**//Dette kan kun gøres af folk med FTP-adgang til hjemmesiden, såsom Netgruppen.//**
+
+== Indhold ==
+Formatet der bliver brugt i udskrivningen af PDFen findes i ''wiki\lib\plugins\dw2pdf\tpl\AKDTU''. Heri kan følgende filer findes:
+  * ''header.html'' – Header på alle sider
+  * ''header_odd.html'' – Header på ulige sider
+  * ''header_even.html'' – Header på lige sider
+  * ''header_first.html'' – Header på første side
+  * ''footer.html'' – Footer på alle sider
+  * ''footer_odd.html'' – Footer på ulige sider
+  * ''footer_even.html'' – Footer på lige sider
+  * ''footer_first.html'' – Footer på første side
+  * ''citation.html'' – Citationbox i slutningen af hvert dokument
+  * ''cover.html'' – Hvis denne findes bruges den før første side
+  * ''back.html'' – Hvis denne findes bruges den efter sidste side
+Man kan bruge al HTML der forstås af mPDF (Se [[http://mpdf.github.io]])
+
+I html-filerne kan der skrives følgende koder, som automatisk bliver erstattet med det relevante indhold i PDF-en:
+  * ''@PAGE@'' – Nuværende sidenummer i PDFen
+  * ''@PAGES@'' – Samlet antal sider i PDFen (eksklusiv ToC)
+  * ''@TITLE@'' – Overskriften på indholdet
+  * ''@WIKI@'' – Navnet på wikien
+  * ''@WIKIURL@'' – Link til wikien
+  * ''@DATE@'' – Tidspunktet hvor PDFen blev oprettet. Dette kan være tidliger, hvis PDFen var cached.
+  * ''@BASE@'' – Mappen hvor wikien ligger
+  * ''@TPLBASE@'' – Grund-link til den mappe, PDF-formatet ligger. Kan eksempelvis bruges til at referere lokale filer (ex: ''/[wikiURLbase]/lib/plugins/dw2pdf/tpl/<yourtplfolder>/'')
+  * ''@TPLINC@'' – Absolut sti til den mappe, PDF-formatet ligger i (ex: ''/var/www/dokuwiki/lib/plugins/dw2pdf/tpl/<yourtplfolder>/'')
+  * ''@INC@'' – Absolut sti til wiki installationsmappen
+  * ''@DATE(<date>[, <format>])@'' – Formatterer den givne dato med dformat eller med det givne format, som eksempelvis ''%Y-%m-%e''. Eksempelvis vil det her give det nuværende år: ''@DATE(@DATE@,%Y)@''
+
+== Styling ==
+
+Derudover findes i mappen ''wiki\lib\plugins\dw2pdf\tpl\AKDTU'' også ''style.css'', som indeholder al CSS styling af PDFen. Her kan man bruge al CSS, der understøttes af mpdf. En komplet liste over hvad der kan bruges kan ses [[https://mpdf.github.io/css-stylesheets/supported-css.html|her]].
+
+Hvis man ønsker at bruge specifikke skrifttyper, der ikke automatisk er installeret, kan disse installeres. Det kræves her at skrifttype-filerne er i ''.ttf''-format. Disse filer lægges i mappen ''wiki\lib\plugins\dw2pdf\vendor\mpdf\mpdf\ttfonts''. Efterfølgende skal skrifttyperne inkluderes i filen ''wiki\lib\plugins\dw2pdf\DokuPDF.class.php''. Dette skal gøres under linje #95 (Søg efter "'fontdata' %%=>%% [") i følgende format:<code php>"dejavuserif" => [ // Font name. Must be lowercase
+	'R' => "DejaVuSerif.ttf", // Regular version, optional
+	'B' => "DejaVuSerif-Bold.ttf", // Bold version, optional
+	'I' => "DejaVuSerif-Italic.ttf", // Italic version, optional
+	'BI' => "DejaVuSerif-BoldItalic.ttf", // Bold italic version, optional
+]</code>
+Hvis man ønsker at tilføje endnu flere forskellige variationer af samme skrifttype (eksempelvis ''thin'', ''medium'' eller ''black'' versioner) kan man inkludere disse ved at tilføje flere nye skrifttyper, eksempelvis med navnene ''dejavuserifthin'', ''dejavuserifmedium'' eller ''dejavuserifblack''.
+
+Efterfølgende kan skrifttypen bruges enten inline i HTML som <code html><p style="font-family:dejavuserif">AKDTU</p></code> eller i CSS som <code css>p {
+	font-family:dejavuserif;
+}</code>
+
+==== Brugeradgang ====
+Wikien er sat op til at adgang automatisk er givet til alle brugere på Wordpress-hjemmesiden der er administrator eller redaktør. Hvis der skal gives adgang til en ny bruger, såsom et nyt bestyrelsesmedlem, gøres dette ved at oprette en brugerprofil på Wordpress-hjemmesiden, som enten er administartor eller redaktør. Herefter får brugeren automatisk adgang til Wikien også, med samme brugernavn og adgangskode som de bruger på Wordpress-hjemmesiden.

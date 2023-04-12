@@ -1,0 +1,84 @@
+[2022/12/04 18:07:48] - SUCCESS: Log file reset
+------------------------------------------------------------------
+
+[2023/01/07 15:04:27] - SUCCESS: Member password has been reset. Password reset email sent to: antonbacher0905@gmail.com
+[2023/01/09 23:01:37] - SUCCESS: swpm_membership_level_changed action triggered. Member ID: 8, Old Level: 9, New Level: 5
+[2023/01/09 23:01:37] - SUCCESS: Retrieving user record for member ID: 8
+[2023/01/09 23:01:37] - SUCCESS: Calling user role update function.
+[2023/01/09 23:01:37] - SUCCESS: User role updated.
+[2023/01/09 23:02:36] - SUCCESS: swpm_membership_level_changed action triggered. Member ID: 8, Old Level: 5, New Level: 9
+[2023/01/09 23:02:36] - SUCCESS: Retrieving user record for member ID: 8
+[2023/01/09 23:02:36] - SUCCESS: Calling user role update function.
+[2023/01/09 23:02:36] - SUCCESS: User role updated.
+[2023/01/13 00:15:50] - SUCCESS: swpm_membership_level_changed action triggered. Member ID: 8, Old Level: 9, New Level: 7
+[2023/01/13 00:15:50] - SUCCESS: Retrieving user record for member ID: 8
+[2023/01/13 00:15:50] - SUCCESS: Calling user role update function.
+[2023/01/13 00:15:50] - SUCCESS: User role updated.
+[2023/01/13 00:16:03] - SUCCESS: swpm_membership_level_changed action triggered. Member ID: 8, Old Level: 7, New Level: 9
+[2023/01/13 00:16:03] - SUCCESS: Retrieving user record for member ID: 8
+[2023/01/13 00:16:03] - SUCCESS: Calling user role update function.
+[2023/01/13 00:16:03] - SUCCESS: User role updated.
+[2023/01/13 00:16:38] - SUCCESS: swpm_membership_level_changed action triggered. Member ID: 16, Old Level: 9, New Level: 7
+[2023/01/13 00:16:38] - SUCCESS: Retrieving user record for member ID: 16
+[2023/01/13 00:16:38] - SUCCESS: Calling user role update function.
+[2023/01/13 00:16:38] - SUCCESS: User role updated.
+[2023/01/13 00:16:41] - SUCCESS: swpm_membership_level_changed action triggered. Member ID: 16, Old Level: 7, New Level: 9
+[2023/01/13 00:16:41] - SUCCESS: Retrieving user record for member ID: 16
+[2023/01/13 00:16:41] - SUCCESS: Calling user role update function.
+[2023/01/13 00:16:41] - SUCCESS: User role updated.
+[2023/01/13 00:16:54] - SUCCESS: swpm_membership_level_changed action triggered. Member ID: 20, Old Level: 9, New Level: 7
+[2023/01/13 00:16:54] - SUCCESS: Retrieving user record for member ID: 20
+[2023/01/13 00:16:54] - SUCCESS: Calling user role update function.
+[2023/01/13 00:16:54] - SUCCESS: User role updated.
+[2023/01/13 00:16:57] - SUCCESS: swpm_membership_level_changed action triggered. Member ID: 20, Old Level: 7, New Level: 9
+[2023/01/13 00:16:57] - SUCCESS: Retrieving user record for member ID: 20
+[2023/01/13 00:16:57] - SUCCESS: Calling user role update function.
+[2023/01/13 00:16:57] - SUCCESS: User role updated.
+[2023/01/13 00:17:19] - SUCCESS: swpm_membership_level_changed action triggered. Member ID: 30, Old Level: 9, New Level: 7
+[2023/01/13 00:17:19] - SUCCESS: Retrieving user record for member ID: 30
+[2023/01/13 00:17:19] - SUCCESS: Calling user role update function.
+[2023/01/13 00:17:19] - SUCCESS: User role updated.
+[2023/01/13 00:17:23] - SUCCESS: swpm_membership_level_changed action triggered. Member ID: 30, Old Level: 7, New Level: 9
+[2023/01/13 00:17:23] - SUCCESS: Retrieving user record for member ID: 30
+[2023/01/13 00:17:23] - SUCCESS: Calling user role update function.
+[2023/01/13 00:17:23] - SUCCESS: User role updated.
+[2023/01/13 00:17:28] - SUCCESS: swpm_membership_level_changed action triggered. Member ID: 61, Old Level: 9, New Level: 7
+[2023/01/13 00:17:28] - SUCCESS: Retrieving user record for member ID: 61
+[2023/01/13 00:17:28] - SUCCESS: Calling user role update function.
+[2023/01/13 00:17:28] - SUCCESS: User role updated.
+[2023/01/13 00:17:30] - SUCCESS: swpm_membership_level_changed action triggered. Member ID: 61, Old Level: 7, New Level: 9
+[2023/01/13 00:17:30] - SUCCESS: Retrieving user record for member ID: 61
+[2023/01/13 00:17:30] - SUCCESS: Calling user role update function.
+[2023/01/13 00:17:30] - SUCCESS: User role updated.
+[2023/01/13 00:17:35] - SUCCESS: swpm_membership_level_changed action triggered. Member ID: 78, Old Level: 9, New Level: 7
+[2023/01/13 00:17:35] - SUCCESS: Retrieving user record for member ID: 78
+[2023/01/13 00:17:35] - SUCCESS: Calling user role update function.
+[2023/01/13 00:17:35] - SUCCESS: User role updated.
+[2023/01/13 00:17:37] - SUCCESS: swpm_membership_level_changed action triggered. Member ID: 78, Old Level: 7, New Level: 9
+[2023/01/13 00:17:37] - SUCCESS: Retrieving user record for member ID: 78
+[2023/01/13 00:17:37] - SUCCESS: Calling user role update function.
+[2023/01/13 00:17:37] - SUCCESS: User role updated.
+[2023/01/30 01:39:00] - SUCCESS: swpm_membership_level_changed action triggered. Member ID: 8, Old Level: 9, New Level: 7
+[2023/01/30 01:39:00] - SUCCESS: Retrieving user record for member ID: 8
+[2023/01/30 01:39:00] - SUCCESS: Calling user role update function.
+[2023/01/30 01:39:00] - SUCCESS: User role updated.
+[2023/01/30 01:39:14] - SUCCESS: swpm_membership_level_changed action triggered. Member ID: 8, Old Level: 7, New Level: 9
+[2023/01/30 01:39:14] - SUCCESS: Retrieving user record for member ID: 8
+[2023/01/30 01:39:14] - SUCCESS: Calling user role update function.
+[2023/01/30 01:39:14] - SUCCESS: User role updated.
+[2023/03/08 15:39:21] - SUCCESS: Member password has been reset. Password reset email sent to: xsmeng.st@gmail.com
+[2023/03/16 12:03:52] - SUCCESS: Member password has been reset. Password reset email sent to: Marie@hesteguffer.dk
+[2023/03/16 12:03:56] - SUCCESS: Member password has been reset. Password reset email sent to: Marie@hesteguffer.dk
+[2023/03/18 17:57:45] - SUCCESS: Member password has been reset. Password reset email sent to: akholme@gmail.com
+[2023/03/22 11:36:18] - SUCCESS: Member password has been reset. Password reset email sent to: Frederik4248@gmail.com
+[2023/03/23 16:15:14] - SUCCESS: Member password has been reset. Password reset email sent to: steffenjensen02@gmail.com
+[2023/03/23 16:19:09] - SUCCESS: Member has updated the password from profile edit page. Logging the user out so he can re-login using the new password.
+[2023/03/30 16:03:57] - SUCCESS: Member password has been reset. Password reset email sent to: sebgvitting@gmail.com
+[2023/04/04 00:20:12] - SUCCESS: Member password has been reset. Password reset email sent to: mshi@kt.dtu.dk
+[2023/04/04 23:18:18] - SUCCESS: create_swpm_member_entry_from_array_data() - SWPM member entry created successfully. Member ID: 321
+[2023/04/05 01:10:05] - SUCCESS: swpm_membership_level_changed action triggered. Member ID: 321, Old Level: 7, New Level: 11
+[2023/04/05 01:10:05] - SUCCESS: Retrieving user record for member ID: 321
+[2023/04/05 01:10:05] - SUCCESS: Calling user role update function.
+[2023/04/05 01:10:05] - SUCCESS: User role updated.
+[2023/04/07 14:59:41] - SUCCESS: Member password has been reset. Password reset email sent to: Cau@live.dk
+[2023/04/12 12:04:37] - SUCCESS: Member has updated the password from profile edit page. Logging the user out so he can re-login using the new password.

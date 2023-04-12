@@ -1,0 +1,136 @@
+<WRAP noprint><adm information>Siden her er lavet til at blive eksporteret til PDF, med knappen "Export to PDF", oppe til venstre</adm></WRAP>
+===== Contract: Use of trailer =====
+This contract specifies the terms and conditions for use of the association trailer, hereafter noted as "trailer".
+
+==== Delivery ====
+It is the tenant's responsibility to inspect the trailer before use.
+
+During the inspection, the tenant must ensure that the lights, signal and signaling lights are functional.
+
+The tenant must, to the Board, point out any errors, damages, deficiencies, etc. by the tenant immediately after delivery.
+
+If you receive a parking fee, you are responsible for this yourself. The fee, including any additional fees, is deducted through the collection of the rent.
+
+==== Use ====
+  * Only apartment owners or tenants can use the trailer.
+  * The borrower must be in the vehicle moving the trailer.
+  * The trailer can only be used for personal matters.
+  * The trailer can only be used within the borders of Denmark.
+  * The borrower is responsible for any use of the trailer, and the renter (the association) is not responsible for damages to persons, goods, or other, due to the use of the trailer.
+  * After use, the borrower must clean the trailer.
+
+==== Responsibility and insurance ====
+The trailer is not insured by the association.
+
+As borrower, either you or your insurance is responsible for all damages to persons, property, etc., regardless of if the damage is caused by borrower or a third party.
+
+Punctured tires must be remedied by borrower, at borrowers expense.
+
+==== Ownership ====
+**Name:**\\
+Andelskollegiet ved DTU – Akademivej
+
+**CVR:**\\
+30025423
+
+**Frame number:**\\
+WSE01AKCAHG133843
+
+**License plate:**\\
+CB1716
+
+==== Trailer specification ====
+**Model:**\\
+Stema trailer M750 med gitter
+
+**Total weight:**\\
+750 kg.
+
+**Payload weight:**\\
+630 kg.
+
+**Trailer weight:**\\
+120 kg.
+
+**Tire size:**\\
+13"
+
+**Measurements – Inside (w/o. sideguards):**\\
+H: 325 mm x B: 1080 mm. x L: 2010 mm.
+
+**Measurements – Inside (w. sideguards):**\\
+H: 985 mm x B: 1080 mm. x L: 2010 mm.
+
+**Power connection:**\\
+13-poled – By contacting the Board, an adapter for 7-poled can be borrowed.
+
+**Manual for trailer (Danish):**\\
+[[https://www.akdtu.dk/public_files/Trailer_manual.pdf]]
+<pagebreak>
+
+**Rental period:**\\
+<WRAP group>
+<WRAP 4cm column>
+From:\\
+\\
+\\
+To:\\
+\\
+
+</WRAP>
+<WRAP auto column>
+%%_______________________________________________________________%%\\
+\\
+\\
+%%_______________________________________________________________%%\\
+\\
+
+</WRAP>
+</WRAP>
+
+**Information on renter:**\\
+<WRAP group>
+<WRAP 4cm column>
+Name:\\
+\\
+\\
+Address:\\
+\\
+\\
+\\
+\\
+Email:\\
+\\
+\\
+Phone number:\\
+\\
+\\
+Drivers license number:\\
+\\
+\\
+Signature and date:\\
+\\
+
+</WRAP>
+<WRAP auto column>
+%%_______________________________________________________________%%\\
+\\
+\\
+%%_______________________________________________________________%%\\
+\\
+%%_______________________________________________________________%%\\
+\\
+\\
+%%_______________________________________________________________%%\\
+\\
+\\
+%%_______________________________________________________________%%\\
+\\
+\\
+%%_______________________________________________________________%%\\
+\\
+\\
+%%_______________________________________________________________%%\\
+
+</WRAP>
+</WRAP>

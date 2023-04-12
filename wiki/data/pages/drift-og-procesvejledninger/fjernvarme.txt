@@ -1,0 +1,129 @@
+=====Fjernvarme=====
+**Leverandør**: Vestforbrænding
+**Service**:Vestforbrænding
+**Ved problemer**: Se vejledning på seddel i kælderen ved fjernvarmen.
+
+Foreningens varmesystem, til hovedbygningen, er indirekte fjernvarme leveret af Vestforbrænding.
+
+Fjernvarmesystemet er delt op i to dele; hhv. varmt brugsvand og opvarmning. Dette styres dog via en central og automatiseret styring.
+
+Det eneste der skal holdes øje med er:
+  * Trykket på opvarmningssystemet på vores side.
+  * Utætheder.\\ Både for fjernvarmerørene, men også for alle vores egne vand- og varmerør.
+
+====Tryk====
+På fremløbsrøret til varme (til lejligheder) sidder et manometer som viser trykket i vores varmesystem – Se ”Billede 1 - Manometer/Trykmåler på varmesystem (kælder)”. Trykket skal holdes mellem 1,5-2 bar.
+
+Det kan være nødvendigt, at efterfylde anlægget med vand undervejs i vinterhalvåret. Hvis der ofte skal fyldes vand på, eksempelvis oftere end hver fjerde uge, skal årsagen hertil undersøges!
+
+{{ :drift-og-procesvejledninger:manometer.jpg?nolink&600 |}}
+<WRAP centeralign>Billede 1 - Manometer/Trykmåler på varmesystem (kælder)</WRAP>
+
+====Påfyldning af vand på varmesystem====
+  - Hvis vandslangen ikke er koblet på.\\ Fyld den, så vidt muligt, med vand inden den tilkobles systemet for at minimere luft som kan give yderligere driftsproblemer.
+  - Kobl vandslangen på ventilen ved trykekspansionsbeholderen (den røde runde tank) – Se ”Billede 2 - Påfyldningsventil til varmesystem (kælder)”.
+  - Når vandslangen er koblet på, tændes der for vandet ved hanen.
+  - Dernæst åbnes halvt for ventilen.
+  - Hold godt øje med manometeret (trykmåler) for varmesystemet.\\ Trykket må ikke komme over 2 bar.
+  - Når trykket er på 2 bar lukkes for ventilen og dernæst vandhanen. 
+
+{{ :drift-og-procesvejledninger:pafyldningsventil.jpg?nolink&600 |}}
+<WRAP centeralign>Billede 2 - Påfyldningsventil til varmesystem (kælder)</WRAP>
+
+====Utætheder====
+Hvis der opdages utætheder i rørene på fjernvarme-siden, skal serviceleverandøren, Vestforbrænding, kontaktes hurtigst muligt!
+
+Vestforbrænding har eget nøgleskab i kælderen, så de kan selv komme ind når et problem er blevet fejlmeldt til dem.
+
+Hvis der opdages utætheder på foreningens side, gældende for både vand- og varmerør, samt autoudluftere mm., skal foreningen kontakte en VVS’er for at udbedre det hurtigst muligt for at forhindre vandskader.
+
+Ved akutte/større rørbrud kan det være nødvendigt, at tilkalde skadeservice.
+
+====Autoudluftere====
+Der er en række autoudluftere i varmesystemet befindende i.
+  * Kælder.
+  * Opgang 2 – Servicelem over trappe.
+  * Måske Opgang 1 og 3 over trappe?
+  * Lejlighed 201 og 224 i loftslem.
+  * Lejlighed 001 og 024 i teknikskab
+
+====Varme fejlfinding====
+Hvis nogen henvender sig omkring varmeproblemer skal følgende punkter undersøges.
+
+For hvert punkt er det angivet hvorvidt det er bestyrelsen eller beboeren som skal undersøge det.
+
+  * Beboer\\ Hvornår er problemet opstået?
+
+  * Beboer\\ Gælder det for:
+    * Radiator?
+    * Gulvvarme – Køkken?
+    * Gulvvarme – Badeværelse?
+    * Gulvvarme – Walk-in closet (kun for kategori B og C)?
+    * Hvis problemet kun er ved en af delene skyldes det sandsynligvis luft eller defekt ventil og er andelshavers eget ansvar.
+
+  * Beboer\\ Er radiatorer og gulvvarme alle blevet udluftet (mens termostaten har været skruet helt op i mindst én time)?
+
+  * Beboer\\ Er termostatventiler blevet motioneret?
+
+  * Beboer\\ Er der åbent på håndtagene i teknikskabet? Håndtagene skal vende så de peger i samme retning som røret.\\ Der sidder et lille sort håndtag på varme fremløb og et rødt håndtag med sort kant på varme returløbet – Se ”Billede 3 - Teknikskab i lejligheder”.
+
+  * Beboer\\ Hvilken værdi står returløbshåndtaget på? – Se ”Billede 3 - Teknikskab i lejligheder”.\\ Vær opmærksom på, at det aflæses rigtigt og ikke på hovedet (kig efter , på håndtaget).
+
+  * Beboer\\ Hvad er energimålerens (også kaldet varmemåler) serienummer? – Se ”Billede 3 - Teknikskab i lejligheder
+  * 
+{{ :drift-og-procesvejledninger:teknikskab_i_lejligheder.jpg?nolink&600 |}}
+<WRAP centeralign>Billede 3 - Teknikskab i lejligheder</WRAP>
+
+  * Bestyrelse\\ Slå energimålerens serienummer op i fjernaflæsningssystemet ”READy Manager (hosted)”.
+    * Se efter markante ændringer i hhv. Temperatur 1 og Temperatur 2 for perioden før og efter personen har meldt problemet er startet.
+      * Fremløbstemperaturen (Temperatur 1) vil, i de kolde perioder, typisk ligge mellem cirka 50-80 grader.
+    * Se efter temperaturforskel mellem Temperatur 1 og Temperatur 2.
+      * Denne bør være på >10 grader.
+    * Se efter markante ændringer i Flow for perioden før og efter personen har meldt problemet er startet.\\ Flowet kan variere en del fra lejlighed til lejlighed afhængig af fremløbstemperatur, lejlighedstørrelse, hvilken temperatur der ønskes i lejligheden mm.\\ Flowet kan derfor sagtens variere fra 10 L/h og helt op til 170 L/h. 
+      * 10 L/h holdes lejligheden typisk omkring 15-18 grader og passer med, at termostater er sat lavt hvis folk ikke er hjemme o.lign.
+      * 170 L/h er typisk hvis folk er kommet hjem til en kold lejlighed hvor varmen har været slukket/begrænset og derefter skruer godt op for termostaterne.
+      * Fælles for begge er, at de ikke bør være i disse yderpunkter generelt uden beboeren har en forklaring på det.\\ Såfremt der ikke umiddelbart er forklaring på det, kan det tyde på et problem.
+      * Vedvarende lavt Flow kan skyldes dårlige/defekte ventiler og/eller termostater.\\ For yderlejligheder (x01 og x24) kan det dog også skyldes for lavt tryk i systemet. Det lave tryk kan også skyldes at andre på strengen har justeret deres håndtag på returløbet.
+
+  * Bestyrelse\\ Sammenlign ovennævnte data med:
+    * Omkringliggende lejligheder med samme kategori.
+    * Primært for B og C:\\ Sammenlign med lejligheder af samme type og af den ”spejlede” lejlighed – eksempelvis har lejlighed 101 og 224 samme karakteristika ift. faktorer såsom varmestrenge, isolering og hvordan de støder op imod hhv. andre lejligheder og udendørs.
+
+  * Bestyrelse\\ Tjek trykket for vores varmesystem – Se vejledning i afsnittet ”Tryk”.
+
+====Flow indstilling for varme====
+I nedenstående skema kan ses værdierne som flowhåndtagene i lejlighederne SKAL stå på. Disse værdier er særligt beregnet til vores bygnings varmesystem.
+
+Ændringer af disse indstillinger kan ødelægge varmen for alle andre på samme varmestreng.
+
+Hvis en VVS’er uden bestyrelsens tilladelse justerer på denne, skal der rettes henvendelse til pågældende firma om, at dette ikke er tilladt. Såfremt de ikke anerkender dette, skal de blacklistes fra at udføre arbejde på foreningens ejendom.
+
+**Varmestreng 1**
+| Lejlighed | Ventil | Lejlighed | Ventil | Lejlighed | Ventil |
+| 212 | 0,2 | 112 | 0,4 | 12 | 0,6 |
+| 211 | 0,3 | 111 | 0,6 | 11 | 0,9 |
+| 210 | 1,2 | 110 | 1,5 | 10 | 1,8 |
+| 209 | 2,1 | 109 | 2,4 | 9 | 2,7 |
+| 208 | 3 | 108 | 3,3 | 8 | 3,6 |
+| 207 | 3,9 | 107 | 4,2 | 7 | 4,5 |
+| 206 | 4,8 | 106 | 5,1 | 6 | 5,4 |
+| 205 | 5,4 | 105 | 6 | 5 | 6,3 |
+| 204 | 6,6 | 104 | 6,9 | 4 | 7,2 |
+| 203 | 7,5 | 103 | 7,8 | 3 | 8,1 |
+| 202 | 8,4 | 102 | 8,7 | 2 | 9 |
+| 201 | 9,3 | 101 | 9,6 | 1 | 9,9 |
+
+**Varmestreng 2**
+| Lejlighed | Ventil | Lejlighed | Ventil | Lejlighed | Ventil |
+| 213 | 0,2 | 113 | 0,4 | 13 | 0,6 |
+| 214 | 0,3 | 114 | 0,6 | 14 | 0,9 |
+| 215 | 1,2 | 115 | 1,5 | 15 | 1,8 |
+| 216 | 2,1 | 116 | 2,4 | 16 | 2,7 |
+| 217 | 3 | 117 | 3,3 | 17 | 3,6 |
+| 218 | 3,9 | 118 | 4,2 | 18 | 4,5 |
+| 219 | 4,8 | 119 | 5,1 | 19 | 5,4 |
+| 220 | 5,4 | 120 | 6 | 20 | 6,3 |
+| 221 | 6,6 | 121 | 6,9 | 21 | 7,2 |
+| 222 | 7,5 | 122 | 7,8 | 22 | 8,1 |
+| 223 | 8,4 | 123 | 8,7 | 23 | 9 |
+| 224 | 9,3 | 124 | 9,6 | 24 | 9,9 |

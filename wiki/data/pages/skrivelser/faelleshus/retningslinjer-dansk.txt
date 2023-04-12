@@ -1,0 +1,83 @@
+===== Retningslinjer for brug af fælleshuset =====
+<WRAP noprint><adm information>Siden her er lavet til at blive eksporteret til PDF, med knappen "Export to PDF", oppe til venstre</adm></WRAP>
+Retningslinjerne for fælleshuset skal følges uanset om man har lejet fælleshuset eller ved almindelig brug. Punkterne under “Efter brug” skal være udført enten inden fælleshuset forlades eller inden lejeperioden ophører. Hvis dette ikke er tilfældet opkræves der et gebyr svarende til foreningens udgifter til professionel rengøring.
+
+//Jævnfør foreningens vedtægter kan der ved skader/mangler kan der rettes erstatningskrav til den/de pågældende brugere af fælleshuset. Ved skader/mangler er det op til bestyrelsen om dette skal udbedres af skadeforvolder, bestyrelsen eller en af bestyrelsen udpeget tredjepart afhængig af skaden/manglens art.//
+
+Man hæfter for fejl og mangler, manglende rengøring, støjgener eller lignende fra fælleshuset låses op med din personlige chip til det er korrekt aflåst. For vejledning i brug af adgangskontrollen, se [[akdtu.dk]].
+
+Ved tvivl eller spørgsmål til retningslinjerne kontakt da [[udlejning@akdtu.dk]].
+====Før brug====
+  * Eventuelle fejler eller mangler sendes hurtigst muligt disse til udlejning@akdtu.dk så man ikke hæfter for disse.
+  * Der må ikke hænges ting op med tape på vægge og loft
+
+====Under brug====
+  * Der må ikke ryges indenfor
+  * Vis hensyn til de andre beboere
+  * Hold døre og vinduer lukket ved støj
+  * Der må ikke stilles på termostaterne
+  * Fælleshusets inventar må ikke tages udenfor
+
+====Efter brug====
+  * Fælleslokale
+    * Støvsug/feje gulvet
+    * Støvsug sofa
+    * Bank puder
+    * Støvsug/bank gulvmåtte
+    * Fjern oppyntning
+      * Ved store mængder affald skal dette køres til genbrugspladsen og ikke i foreningens containere
+    * Vask gulvet
+    * Tørre bordfodboldbord af
+    * Sluk for musikanlægget
+    * Tørre foldevæggen af med fugtig klud og fold sammen når tør
+    * Stil inventar som standardopsætningen
+      * Overskydende stole stables ved indgangen
+    * Luk døre og vinduer
+    * Tørre borde og stole af
+    * Sluk lyset
+  * Badeværelse
+    * Gulvet fejes/støvsuges
+    * Gulve vaskes
+    * Toilettet rengøres
+    * Håndvask rengøres
+    * Spejl tørres af
+    * Skraldespand tømmes
+    * Vask håndklæder
+  * Køkken
+    * Gulvet støvsuges
+    * Overflader tørres af inklusive skuffer, skabe og greb
+    * Opvaskemaskinerne tømmes
+    * Køkkenvask rengøres
+    * Skraldespand tømmes
+    * Kogeplader rengøres
+    * Ovne + mikrobølgeovnen rengøres indvendigt
+    * Bradepander gøres rent og ligges i skufferne
+    * Tøm elkedel
+    * Tøm kaffegrums
+    * Tør kaffemaskine af med fugtig klud
+    * Stil service på plads efter anvisninger på lågerne
+    * Fjern madrester fra køleskab og fryser
+    * Tør køleskab og fryser af indvendig og udvendig med fugtig klud
+    * Vaske viskestykker og håndklæder
+    * Tøm skraldespande
+      * Ved store mængder affald skal dette køres til genbrugspladsen og ikke i foreningens containere
+  * Depotrum
+    * Vask vasketøj
+    * Hæng vasketøj til tørre
+    * Læg på plads
+    * Stil redskaber på plads efter anvisning
+  * Udendørs
+    * Stil borde og bænke på plads
+    * Rengør grill
+    * Samle affald
+
+**Når du er helt færdig så husk at aktivere alarmen med din chip.**
+
+====Standardopstilling af møbler====
+{{ :skrivelser:faelleshus:faelleshus-opstilling_1-768x576-1.jpg?nolink |}}
+
+{{ :skrivelser:faelleshus:faelleshus-opstilling_2-768x576-1.jpg?nolink |}}
+
+{{ :skrivelser:faelleshus:faelleshus-opstilling_3-768x576-1.jpg?nolink |}}
+
+{{ :skrivelser:faelleshus:faelleshus-opstilling_4-768x576-1.jpg?nolink |}}

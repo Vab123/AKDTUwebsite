@@ -1,0 +1,29 @@
+=====Sikringer=====
+====Sikringstavle – Hovedbygning====
+Befinder sig i Teknikrummet (Opgang 2 – kælder).
+
+Dækker:
+  * Belysning
+  * Ventilation
+  * Internet
+  * TV
+  * Varmesystem
+  * Elevatorer
+Der er mærkat for hver sikringsgruppe med beskrivelse for hvad den hører til.
+
+====Sikringstavle – Fælleshus====
+Dækker al el i fælleshuset.
+
+====Hovedsikringer til lejligheder====
+Per tre lejligheder er der hovedsikringer. Disse er fordelt vertikalt; dvs. at eksempelvis lejlighed 1, 101 og 201 deler hovedsikringer.
+
+Disse hovedsikringer er i aflåste skabe (kaldet gravstene blandt elektrikere). Skift af disse sikringer skal udføres af elektriker grundet livsfare. De åbnes med en trekantnøgle som alle elektrikere bør have.
+
+Skabene står i hækken ud for:
+  * Lejlighed 1
+  * Lejlighed 8/9
+  * Lejlighed 16/17
+  * Lejlighed 24
+
+{{ :drift-og-procesvejledninger:hovedsikringsskab.jpg?nolink&600 |}}
+<WRAP centeralign>Billede 1 - Lejligheds hovedsikringsskab/"gravsten"</WRAP>

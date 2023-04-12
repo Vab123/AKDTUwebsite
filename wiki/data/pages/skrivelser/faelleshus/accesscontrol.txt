@@ -1,0 +1,35 @@
+=====Common house: Access control=====
+<WRAP noprint><adm information>Siden her er lavet til at blive eksporteret til PDF, med knappen "Export to PDF", oppe til venstre</adm></WRAP>
+To secure the common house, access control and alarms have been installed.
+
+The access control is used to keep track of who uses the common house, and if they are following the rules. The rules are posted in the common house.
+
+Repeated or severe breaking of the rules can ultimately result in blocking your access to the common room.
+
+The access control keeps a log of who have been in the common room (and if you did not set the alarm after leaving, etc.). In case of theft, vandalism, etc., you can ultimately be held responsible. Therefore, if you lose your prox-tag, you must contact the Board as quickly as possible, so it can be blocked. A new prox-tag currently costs DKK 120, which will be charged together with the rent.
+
+For the sake of possible liability, it is very important that the Board is contacted as quickly as possible if damages are observed, problems are experienced, etc.
+
+
+====Guide====
+===To get in===
+To get in, hold your prox-tag to the keypad next to the entrance door. A beep is heard, and the door is briefly unlocked.
+
+===To get out===
+To get out, press the white button with the key-symbol above the handle on the inside of the entrance door, and the door is briefly unlocked.
+
+===To activate the alarm===
+If you are the last person to leave the common room, you must activate the alarm.
+This is done by pressing the # on the keypad outside, next to the entrance door, and afterwards holding your prox-tag to the keypad.
+The keypad will beep and a red light will turn on.
+If the red light does not turn on/the green light is still on, you must check if all doors and windows are closed.
+If there are still problems activating the alarm, you must immediately contact the Board, who will deal with the problems.
+
+
+If you have any questions, the Board can be contacted on [[bestyrelsen@akdtu.dk]].
+
+<WRAP centeralign>
+Kind regards,\\
+The Board\\
+Andelskollegiet ved DTU - Akademivej
+</WRAP>

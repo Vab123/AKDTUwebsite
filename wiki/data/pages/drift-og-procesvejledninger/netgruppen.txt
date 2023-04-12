@@ -1,0 +1,123 @@
+=====Netgruppen=====
+====Tjenester====
+<WRAP group>
+<WRAP 3cm column>
+Tjeneste:\\
+Beskrivelse:\\
+Udløbsdato:\\
+\\
+Tjeneste:\\
+Beskrivelse:\\
+Udløbsdato:\\
+\\
+Tjeneste:\\
+Beskrivelse:\\
+Udløbsdato:
+</WRAP>
+
+<WRAP auto column>
+DK-Hostmaster\\
+Domænenavn, hjemmeside\\
+31-01-2024\\
+\\
+Simply.com Standard Suite\\
+Database og hosting til hjemmeside\\
+18-07-2023\\
+\\
+Simply.com domæne\\
+\\
+10-10-2023
+</WRAP>
+</WRAP>
+
+====Hosting====
+**UnoEuro.com**
+| Kontonavn | UE311520 |
+| Kontonummer | UE311520 |
+| Kontrolpanel | [[https://unoeuro.com/controlpanel/]] |
+
+**Email**
+| Indgående mailserver | http://mail.unoeuro.com/ |
+| Udgående mailserver | http://asmtp.unoeuro.com/ - Port 587 |
+| Webmail | [[https://webmail.unoeuro.com/]] |
+
+====Hjemmeside====
+**Statistik**
+| URL | [[https://statistics.unoeuro.com/]] |
+| Brugernavn | akdtu.dk |
+| Password | te62n9pd |
+
+**FTP**
+| Host | linux212.unoeuro.com |
+| Port | 21 |
+| Brugernavn | akdtu.dk |
+| Password | te62n9pd |
+| Link | [[ftp://akdtu.dk@linux212.unoeuro.com/]] |
+
+**Database - MySQL**
+| Hostnavn | http://mysql78.unoeuro.com/ |
+| Brugernavn | akdtu_dk |
+| Adgangskode | te62n9pd |
+| Databasenavn | akdtu_dk_db |
+| Administration | [[https://mysql.unoeuro.com/]] |
+
+====Internet====
+**UPS**
+
+**Switches**
+  * 10.20.10.10
+  * 10.20.10.11
+
+**Seriel tilslutning guide**\\
+Man skal være på samme IP-range (10.20.10.xx) for at kunne konfigurere switchene. Dette skal sættes manuelt for netkortet på den computer man vil forbinde med.
+
+  * Opsætning
+  * VLAN
+
+**Internetudbyder:** K-Net
+
+Administrationsside for netværk: [[k-net.dk/admin]]\\
+Username: akd-netgrp\\
+Password: \\
+
+**Kollegiets ansvar:**
+  * Alt udstyr på kollegie.
+  * Fiberforbindelse mellem kollegie og K-net.
+
+===Patch paneler===
+Der findes patch paneler til switchene, som sider over og under de relevante switche. Derudover findes tre ubrugte patch paneler, hvor der bagtil er tilsluttet et kabel til hver lejlighed. Disse skulle oprindeligt bruges til fastnettelefoni til hver lejlighed, men dette bruges ikke. I stedet kan de bruges som en midlertidig erstatning hvis der er problemer med de eksisterende internetkabler.
+
+===VLAN oversigt===
+Særlige VLAN:
+  * 623: Fælleshus adgangskontrol
+  * 624: Fælleshus internetforbindelse (kommer snart)
+Management VLAN: 20\\
+Man skal være på dette VLAN for at kunne konfigurere switchene. Dette er en sikkerhedsforanstaltning for, at tilfældige på netværket kan forbinde til vores netværksudstyr og ændre i opsætningen.
+
+^  Lejlighed ^ VLAN ^ Port ^ Switch ^  Lejlighed ^ VLAN ^ Port ^ Switch ^  Lejlighed ^ VLAN ^ Port ^ Switch |
+| 1 | 550 | 1 | 2 | 101 | 574 | 2 | 2 | 201 | 598 | 1 | 1 |
+| 2 | 551 | 3 | 2 | 102 | 575 | 4 | 2 | 202 | 599 | 3 | 1 |
+| 3 | 552 | 5 | 2 | 103 | 576 | 6 | 2 | 203 | 600 | 5 | 1 |
+| 4 | 553 | 7 | 2 | 104 | 577 | 8 | 2 | 204 | 601 | 7 | 1 |
+| 5 | 554 | 9 | 2 | 105 | 578 | 10 | 2 | 205 | 602 | 9 | 1 |
+| 6 | 555 | 11 | 2 | 106 | 579 | 12 | 2 | 206 | 603 | 11 | 1 |
+| 7 | 556 | 13 | 2 | 107 | 580 | 14 | 2 | 207 | 604 | 13 | 1 |
+| 8 | 557 | 15 | 2 | 108 | 581 | 16 | 2 | 208 | 605 | 15 | 1 |
+| 9 | 558 | 17 | 2 | 109 | 582 | 18 | 2 | 209 | 606 | 17 | 1 |
+| 10 | 559 | 19 | 2 | 110 | 583 | 20 | 2 | 210 | 607 | 19 | 1 |
+| 11 | 560 | 21 | 2 | 111 | 584 | 22 | 2 | 211 | 608 | 21 | 1 |
+| 12 | 561 | 23 | 2 | 112 | 585 | 24 | 2 | 212 | 609 | 23 | 1 |
+| 13 | 562 | 25 | 2 | 113 | 586 | 26 | 2 | 213 | 610 | 25 | 1 |
+| 14 | 563 | 27 | 2 | 114 | 587 | 28 | 2 | 214 | 611 | 27 | 1 |
+| 15 | 564 | 29 | 2 | 115 | 588 | 30 | 2 | 215 | 612 | 29 | 1 |
+| 16 | 565 | 31 | 2 | 116 | 589 | 32 | 2 | 216 | 613 | 31 | 1 |
+| 17 | 566 | 33 | 2 | 117 | 590 | 34 | 2 | 217 | 614 | 33 | 1 |
+| 18 | 567 | 35 | 2 | 118 | 591 | 36 | 2 | 218 | 615 | 35 | 1 |
+| 19 | 568 | 37 | 2 | 119 | 592 | 38 | 2 | 219 | 616 | 37 | 1 |
+| 20 | 569 | 39 | 2 | 120 | 593 | 40 | 2 | 220 | 617 | 39 | 1 |
+| 21 | 570 | 41 | 2 | 121 | 594 | 42 | 2 | 221 | 618 | 41 | 1 |
+| 22 | 571 | 43 | 2 | 122 | 595 | 44 | 2 | 222 | 619 | 43 | 1 |
+| 23 | 572 | 45 | 2 | 123 | 596 | 46 | 2 | 223 | 620 | 45 | 1 |
+| 24 | 573 | 47 | 2 | 124 | 597 | 48 | 2 | 224 | 621 | 47 | 1 |
+====K-Net====
+Link til Google Drive: [[https://drive.google.com/drive/folders/1kJcl_S4SyvqjZ3eUEV0MZzdIWDXcD88O]]

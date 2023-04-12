@@ -1,0 +1,65 @@
+<WRAP noprint><adm information>Siden her er lavet til at blive eksporteret til PDF, med knappen "Export to PDF", oppe til venstre</adm></WRAP>
+<WRAP group>
+<WRAP 13.5cm column>
+===Udlevering af nøgle/r til serverrum og varmekælder på Andelskollegiet ved DTU - Akademivej===
+</WRAP>
+
+<WRAP 4.5cm column>
+
+</WRAP>
+</WRAP>
+
+\\ \\
+
+<WRAP group>
+<WRAP 13.5cm column>
+Jeg bekræfter hermed at have modtaget:
+
+1 stk. nøgle nr.: %%____________________________________________%%
+
+1 stk. nøgle nr.: %%____________________________________________%%
+
+1 stk. nøgle nr.: %%____________________________________________%%
+
+1 stk. nøgle nr.: %%____________________________________________%%
+
+1 stk. nøgle nr.: %%____________________________________________%%
+
+Modtagne nøgler er **strengt personlige**. De skal opbevares omhyggeligt og må ikke udlånes eller overleveres til andre.
+
+Bortkommer nøglerne skal dette meddeles til den nuværende bestyrelsesformand på email __formand@akdtu.dk__.
+
+Jeg forpligter mig til at aflevere nøglen/nøglerne ved min udtrædelse af bestyrelsen.
+
+Ved bortkomst eller manglende tilbagelevering opkræves for hver manglende nøgle et beløb svarende til dagsprisen på indkøb af en ny tilsvarende nøgle.
+
+\\
+
+%%_________________________________________________________%%
+<html><br><span style="font-size:.8rem">Email</span></html>
+
+\\
+
+%%_________________________________________________________%%
+<html><br><span style="font-size:.8rem">Navn</span></html>
+
+\\
+
+%%_________________________________________________________%%
+<html><br><span style="font-size:.8rem">Underskrift</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:.8rem">Dato</span></html>
+
+</WRAP>
+
+<WRAP 4.5cm column>
+<html><span style="font-size:.8rem"><b>Andelskollegiet ved DTU - <br>Akademivej</b></span><br>
+<span style="font-size:.8rem">Kollegiebakken 19,<br>2800 Kongens Lyngby</span></html>
+
+<html><span style="font-size:.8rem"><b>Mads Friis</b></span><br>
+<span style="font-size:.8rem">Bestyrelsesformand</span></html>
+
+<html><span style="font-size:.8rem">E-mail: <u>formand@akdtu.dk</u></span></html>
+
+\\
+<html><span style="font-size:.8rem">Dato: _________________________</span></html>
+</WRAP>
+</WRAP>

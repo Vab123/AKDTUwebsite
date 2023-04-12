@@ -1,0 +1,32 @@
+a:2:{s:7:"current";a:9:{s:4:"date";a:2:{s:7:"created";i:1658873658;s:8:"modified";i:1680643410;}s:7:"creator";s:15:"Victor Brandsen";s:4:"user";s:6:"victor";s:11:"last_change";a:8:{s:4:"date";i:1680648938;s:2:"ip";s:11:"2.42.72.160";s:4:"type";s:1:"e";s:2:"id";s:34:"vejledninger:hjemmeside:aendringer";s:4:"user";s:6:"victor";s:3:"sum";s:70:"Tilføjet speciel besked til viceværten ved reservation af fælleshus";s:5:"extra";s:0:"";s:10:"sizechange";i:1399;}s:11:"contributor";a:1:{s:6:"victor";s:15:"Victor Brandsen";}s:5:"title";s:26:"Ændringer på hjemmesiden";s:11:"description";a:2:{s:15:"tableofcontents";a:10:{i:0;a:4:{s:3:"hid";s:25:"aendringer_pa_hjemmesiden";s:5:"title";s:26:"Ændringer på hjemmesiden";s:4:"type";s:2:"ul";s:5:"level";i:1;}i:1;a:4:{s:3:"hid";s:15:"wordpress_filer";s:5:"title";s:15:"Wordpress filer";s:4:"type";s:2:"ul";s:5:"level";i:2;}i:2;a:4:{s:3:"hid";s:9:"cron_jobs";s:5:"title";s:9:"Cron jobs";s:4:"type";s:2:"ul";s:5:"level";i:2;}i:3;a:4:{s:3:"hid";s:62:"event_manager_akdtu_-_havedag_tilmelding_og_faelleshus_styring";s:5:"title";s:62:"Event manager/AKDTU - Havedag tilmelding og fælleshus styring";s:4:"type";s:2:"ul";s:5:"level";i:2;}i:4;a:4:{s:3:"hid";s:40:"simple_membership_akdtu_-_bruger_styring";s:5:"title";s:40:"Simple membership/AKDTU - Bruger styring";s:4:"type";s:2:"ul";s:5:"level";i:2;}i:5;a:4:{s:3:"hid";s:17:"conditional_menus";s:5:"title";s:17:"Conditional menus";s:4:"type";s:2:"ul";s:5:"level";i:2;}i:6;a:4:{s:3:"hid";s:12:"wp_dark_mode";s:5:"title";s:12:"WP Dark Mode";s:4:"type";s:2:"ul";s:5:"level";i:2;}i:7;a:4:{s:3:"hid";s:16:"neve_child_theme";s:5:"title";s:16:"Neve Child theme";s:4:"type";s:2:"ul";s:5:"level";i:2;}i:8;a:4:{s:3:"hid";s:18:"extra_css_for_neve";s:5:"title";s:18:"Extra CSS for Neve";s:4:"type";s:2:"ul";s:5:"level";i:2;}i:9;a:4:{s:3:"hid";s:9:"robotstxt";s:5:"title";s:10:"robots.txt";s:4:"type";s:2:"ul";s:5:"level";i:2;}}s:8:"abstract";s:517:"Ændringer på hjemmesiden
+
+Der er lavet ændringer i følgende:
+
+ Wordpress filer 
+
+	*  
+
+ Cron jobs, gennem plugin WP Crontrol 
+
+	*  
+
+ Plugins 
+
+	*  
+	*  
+	*  
+	*  
+
+ Temaer 
+
+	*  
+
+ Extra CSS 
+
+	*  
+
+ Andre filer 
+
+	*  
+
+De foretagede ændringer er herunder beskrevet. Ændringerne er skrevet ind i den rækkefølge de er foretaget. Da mange af ændringerne indebærer linjer der tilføjes eller fjernes passer linjetallene ikke nødvendigvis længere. Derfor er der de fleste steder noteret både hvad der sto…";}s:8:"internal";a:2:{s:5:"cache";b:1;s:3:"toc";b:1;}s:8:"relation";a:1:{s:10:"firstimage";s:0:"";}}s:10:"persistent";a:5:{s:4:"date";a:2:{s:7:"created";i:1658873658;s:8:"modified";i:1680643410;}s:7:"creator";s:15:"Victor Brandsen";s:4:"user";s:6:"victor";s:11:"last_change";a:8:{s:4:"date";i:1680648938;s:2:"ip";s:11:"2.42.72.160";s:4:"type";s:1:"e";s:2:"id";s:34:"vejledninger:hjemmeside:aendringer";s:4:"user";s:6:"victor";s:3:"sum";s:70:"Tilføjet speciel besked til viceværten ved reservation af fælleshus";s:5:"extra";s:0:"";s:10:"sizechange";i:1399;}s:11:"contributor";a:1:{s:6:"victor";s:15:"Victor Brandsen";}}}

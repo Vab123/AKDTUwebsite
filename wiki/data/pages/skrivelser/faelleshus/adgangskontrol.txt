@@ -1,0 +1,35 @@
+=====Fælleshus: Adgangskontrol=====
+<WRAP noprint><adm information>Siden her er lavet til at blive eksporteret til PDF, med knappen "Export to PDF", oppe til venstre</adm></WRAP>
+For at sikre fælleshuset er der både adgangskontrol og alarm installeret.
+
+Adgangskontrollen bliver brugt til at holde styr på hvem der benytter fælleshuset og hvorvidt de følger reglerne. Reglerne for brug af fælleshuset står på opslag i fælleshuset.
+
+Gentagne eller grove brud på reglerne kan i yderste konsekvens medføre blokering af din adgang til fælleshuset.
+
+Adgangskontrollen holder log over hvem der har været i fælleshuset (og om man ikke har tilsluttet alarmen mm.), i tilfælde af tyveri/hærværk o.lign. kan du i yderste konsekvens blive gjort erstatningspligtig. Derfor skal du, hvis du mister din prox-brik, kontakte bestyrelsen hurtigst muligt, så dens adgang kan blive spærret. En ny prox-brik koster pt. 120 kr. og vil blive opkrævet over huslejen.
+
+Af hensyn til eventuelt erstatningsansvar mm. er det vigtigt at kontakte bestyrelsen hurtigst muligt hvis der observeres skader, problemer mm.
+
+
+====Vejledning====
+===For at låse op===
+For at komme ind skal du holde prox brikken hen foran tastaturet og der lyder et bip og døren låses op kortvarigt.
+
+===For at komme ud===
+For at komme ud skal du bare trykke på den hvide knap med nøglesymbol over dørhåndtaget og døren låses kortvarigt op.
+
+===For at aktivere alarmen===
+Hvis du er den sidste der forlader fælleshuset skal du aktivere alarmen.
+Dette gøres ved at trykke på # på det udvendige tastatur og derefter holde prox-brikken hen foran tastatur.
+Den vil så bippe og tænde en rød diode.
+Hvis den fortsætter med at lyse grønt, skal du tjekke, at alle døre og vinduer er lukkede.
+Hvis der stadig er problemer skal du straks skrive til bestyrelsen som vil tage sig af det.
+
+
+Hvis du har nogen spørgsmål er du velkommen at kontakte bestyrelse på [[bestyrelsen@akdtu.dk]].
+
+<WRAP centeralign>
+Med venlig hilsen,\\
+Bestyrelsen\\
+Andelskollegiet ved DTU - Akademivej
+</WRAP>

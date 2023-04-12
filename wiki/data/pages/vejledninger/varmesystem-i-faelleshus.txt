@@ -1,0 +1,12 @@
+===== Varmesystem =====
+====Tænd/Sluk for opvarmning af fælleshus====
+===Tænd===
+Når varmen i fælleshuset skal tændes, drejes den venstre af de store drejeknapper til 2 (se billede).
+
+{{:vejledninger:varmesystem-faelleshus.jpg?nolink&600|}}
+
+===Sluk===
+Når varmen i fælleshuset skal slukkes, drejes den venstre af de store drejeknapper helt ned (mod venstre/sol og parasol-symbolet).
+
+====Dokumenter====
+{{ :vejledninger:manual_til_kedel_i_faelleshus_bosch_europur_zsb_3-16_a_-_3-16_kw_.pdf | Manual til kedel}}

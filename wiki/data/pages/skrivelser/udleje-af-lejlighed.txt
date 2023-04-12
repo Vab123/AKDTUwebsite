@@ -1,0 +1,82 @@
+=====Udlejning af lejlighed ved studieophold i udlandet=====
+<WRAP noprint><adm information>Siden her er lavet til at blive eksporteret til PDF, med knappen "Export to PDF", oppe til venstre</adm></WRAP>
+Jævnfør foreningens vedtægters §12.1 skal bestyrelsen godkende udleje inden der underskrives lejekontrakt og lejen påbegyndes.\\ \\
+
+Ved udleje gælder de samme forpligtelser stadig over for andelshaver som normalt.
+
+Dette indebærer overholdelse af foreningens vedtægter, enhver henstilling fra bestyrelsen eller generalforsamling, samt den til enhver tid gældende lovgivning.
+
+Dette betyder eksempelvis også, at andelen stadig skal deltage i havedage (eller betale det fastsatte gebyr for manglende tilmelding/fremmøde), samt at grove/gentagne brud på vedtægterne kan medføre sanktioner mod andelshaveren – eksempelvis eksklusion.\\ \\
+
+Inden der indgås lejeaftale skal side 2 udfyldes og indsendes til bestyrelsen (bestyrelsen@akdtu.dk) til godkendelse sammen med følgende bilag:
+  * Dokumentation for studieophold i udlandet.
+  * Gyldig studiebekræftelse på lejer.
+
+Såfremt bestyrelsen godkender udlejen, skal kopi af lejekontrakten sendes til bestyrelsen så snart den er underskrevet af andelshaver og lejer, så det herved kan sikres, at det der er godkendt svarer til lejekontrakten.
+<pagebreak>
+
+<WRAP group>
+<WRAP 6cm column>
+**Lejlighedsnummer**\\
+\\
+\\
+**Udlejer (andelshaver)**\\
+\\
+Navn:\\
+\\
+Email:\\
+\\
+Telefon:\\
+\\
+\\
+Startdato for studieophold:\\
+\\
+Slutdato for studieophold:\\
+\\
+\\
+**Lejer**\\
+\\
+Navn:\\
+\\
+Email:\\
+\\
+Telefon:\\
+\\
+\\
+Startdato for leje:\\
+\\
+Slutdato for leje:
+</WRAP>
+
+<WRAP auto column>
+%%_______________%%\\
+\\
+\\
+\\
+\\
+%%_____________________________________________%%\\
+\\
+%%_____________________________________________%%\\
+\\
+%%_____________________________________________%%\\
+\\
+\\
+%%_____________________________________________%%\\
+\\
+%%_____________________________________________%%\\
+\\
+\\
+\\
+\\
+%%_____________________________________________%%\\
+\\
+%%_____________________________________________%%\\
+\\
+%%_____________________________________________%%\\
+\\
+\\
+%%_____________________________________________%%\\
+\\
+%%_____________________________________________%%
+</WRAP>
+</WRAP>

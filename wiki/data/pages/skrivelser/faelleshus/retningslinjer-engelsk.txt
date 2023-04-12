@@ -1,0 +1,75 @@
+=====Rules for use of the common house=====
+<WRAP noprint><adm information>Siden her er lavet til at blive eksporteret til PDF, med knappen "Export to PDF", oppe til venstre</adm></WRAP>
+The rules for the common house are to be followed whether it has been rented or by common use. The bullet points under “After use” have to be performed either before the departure from the common house or before the renting period expires. If this is not the case, a fee corresponding with the association’s cost for professional cleaning will be charged.
+
+//Please refer to the association’s regulations: “ved skader/mangler kan der rettes erstatningskrav til den/de pågældende brugere af fælleshuset. Ved skader/mangler er det op til bestyrelsen om dette skal udbedres af skadeforvolder, bestyrelsen eller en af bestyrelsen udpeget tredjepart afhængig af skaden/manglens art.”//
+
+You are liable for any defects, missing cleaning, noise complaints and so forth in the period where you unlock the common house with your personal chip until it is securely locked. The instructions can be found on the door.
+
+In case of doubts or questions to the rules, contact [[udlejning@akdtu.dk]].
+====Before use====
+  * The board ([[udlejning@akdtu.dk]]) should be notified about defects and missing components so you are not liable for these.
+  * You are not allowed to hang things up using tape 
+
+====During use====
+  * No smoking indoors
+  * Show consideration to other residents 
+  * Keep doors and windows closed if being loud
+  * You are not allowed to adjust the thermostats 
+  * The common house furniture and equipment should stay inside
+
+====After use====
+  * Main area
+    * Vacuum/sweep the floor
+    * Vacuum couches
+    * Plump the pillows
+    * Vacuum doormats 
+    * Remove decoration, and if excessive amounts be sure to drive it to the recycle station
+    * Clean the floor
+    * Wipe off the foosball table 
+    * Turn off the sound system
+    * Wipe off the accordion wall with a damp cloth and collapse it when it is dry
+    * Place all furniture according to the standard layout
+      * Excess chairs should be stacked by the entrance
+    * Close all doors and windows
+    * Turn off the lights
+  * Bathroom
+    * Sweep the floor and vacuum
+    * Clean the floor
+    * Clean the toilet, the sink and the mirror
+    * Empty the trash bin
+    * Wash hand towels 
+  * Kitchen
+    * Vacuum the floor
+    * All surfaces should be wiped, including cabinets, handles and drawers 
+    * Empty the dishwashers
+    * Clean the kitchen sink
+    * Empty the trash bin 
+      * With excessive amounts of trash, you need to drive it to the recycling station yourself 
+    * Clean the hotplates, inside the oven, and the microwave 
+    * Clean the roasting trays and put them back
+    * Empty the kettle 
+    * Empty the coffee machine, including throwing out used coffee filters
+    * Put service and tableware back according to guidelines on cabinet doors
+    * Remove leftover food from fridge and freezer
+    * Wipe off the fridge and freezer inside and outside with a damp cloth 
+    * Wash tea towels and hand towels
+  * Boiler room
+    * Wash laundry and let it dry 
+    * Put clean laundry where you found it
+    * Put tools in their designated place
+  * Outdoors
+    * Put the picnic tables on the tiles
+    * Clean the grill
+    * Collect trash and throw it out 
+
+**When you are done, remember to activate the lock using your personal chip**
+
+====Standard layout of furniture====
+{{ :skrivelser:faelleshus:faelleshus-opstilling_1-768x576-1.jpg?nolink |}}
+
+{{ :skrivelser:faelleshus:faelleshus-opstilling_2-768x576-1.jpg?nolink |}}
+
+{{ :skrivelser:faelleshus:faelleshus-opstilling_3-768x576-1.jpg?nolink |}}
+
+{{ :skrivelser:faelleshus:faelleshus-opstilling_4-768x576-1.jpg?nolink |}}

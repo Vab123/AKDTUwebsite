@@ -1,0 +1,13 @@
+=====FTP til akdtu.dk=====
+Denne vejledning tager udgangspunkt i filezilla ([[https://filezilla-project.org/]].
+  - Tryk på “Åbn websted manager” (øverste venstre hjørne). 
+  - Tryk på “Nyt websted” og navngiv det til hvad du har lyst til. 
+  - Udfyld med følgende oplysninger: 
+    * Vært: ftp.akdtu.dk 
+    * Protokol: FTP - File Transfer Protocol 
+    * Kryptering: Brug enkel FTP 
+    * Logintype: Normal 
+    * Bruger: akdtu.dk 
+    * Kodeord: Kan ses i word dokumentet ”Passwords”.
+
+{{ :vejledninger:hjemmeside:ftp-filezilla.png?nolink&600 |}}

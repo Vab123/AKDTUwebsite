@@ -1,0 +1,2138 @@
+====== Ændringer på hjemmesiden ======
+Der er lavet ændringer i følgende:
+
+** Wordpress filer **
+  * [[#wordpress_filer|Wordpress filer]]
+** Cron jobs, gennem plugin WP Crontrol **
+  * [[#cron_jobs|Cron jobs]]
+
+** Plugins **
+  * [[#event_manager_akdtu_-_havedag_tilmelding_og_faelleshus_styring|Event manager/AKDTU - Havedag tilmelding og fælleshus styring]]
+  * [[#simple_membership_akdtu_-_bruger_styring|Simple membership/AKDTU - Bruger styring]]
+  * [[#conditional_menus|Conditional menus]]
+  * [[#wp_dark_mode|WP Dark Mode]]
+** Temaer **
+  * [[#neve_child_theme|Neve Child theme]]
+** Extra CSS **
+  * [[#extra_css_for_neve|Neve CSS]]
+** Andre filer **
+  * [[#robotstxt|robots.txt]]
+
+De foretagede ændringer er herunder beskrevet. Ændringerne er skrevet ind i den rækkefølge de er foretaget. Da mange af ændringerne indebærer linjer der tilføjes eller fjernes passer linjetallene ikke nødvendigvis længere. Derfor er der de fleste steder noteret både hvad der stod før og efter ændringen.
+
+
+===== Wordpress filer =====
+** wp-config.php **
+  * Added after #96 <code php>define('WP_DISABLE_FATAL_ERROR_HANDLER', true);</code>
+
+===== Cron jobs =====
+** Fjern brugeradgang **
+  * Køres med PHP-hook ''%%runcronjob_fjern_brugeradgang%%''.
+  * Funktionen er defineret i ''%%wp-content\plugins\AKDTU\cronjobs\Fjern_brugeradgang.php%%''.
+
+** Fjern lejeradgang **
+  * Køres med PHP-hook ''%%runcronjob_fjern_lejeradgang%%''.
+  * Funktionen er defineret i ''%%wp-content\plugins\AKDTU\cronjobs\Fjern_lejeradgang.php%%''.
+
+** Opkrævning fra fælleshus **
+  * Køres med PHP-hook ''%%runcronjob_opkrævning_fælleshus%%''.
+  * Funktionen er defineret i ''%%wp-content\plugins\AKDTU\cronjobs\Opkrævning_fælleshus.php%%''.
+===== Event manager/AKDTU - Havedag tilmelding og fælleshus styring =====
+** wp-content\plugins\events-manager\admin\settings\tabs\general.php **
+  * Changed #192 from <code php>em_options_textarea ( __( 'Success Message', 'events-manager'), 'dbem_events_form_result_success', __( 'Customize the message your user sees when they submitted their event.', 'events-manager').$events_placeholder_tip );</code> to <code php>em_options_textarea ( __( 'Success Message (Danish)', 'events-manager'), 'dbem_events_form_result_success_da', __( 'Customize the message your Danish user sees when they submitted their event.', 'events-manager').$events_placeholder_tip );</code>
+  * Added after #192 <code php>em_options_textarea ( __( 'Success Message (English)', 'events-manager'), 'dbem_events_form_result_success_en', __( 'Customize the message your English user sees when they submitted their event.', 'events-manager').$events_placeholder_tip );</code>
+  * Changed #194 from <code php>em_options_textarea ( __( 'Successfully Updated Message', 'events-manager'), 'dbem_events_form_result_success_updated', __( 'Customize the message your user sees when they resubmit/update their event.', 'events-manager').$events_placeholder_tip );</code> to <code php>em_options_textarea ( __( 'Successfully Updated Message (Danish)', 'events-manager'), 'dbem_events_form_result_success_updated_da', __( 'Customize the message your Danish user sees when they resubmit/update their event.', 'events-manager').$events_placeholder_tip );</code>
+  * Added after #194 <code php>em_options_textarea ( __( 'Successfully Updated Message (English)', 'events-manager'), 'dbem_events_form_result_success_updated_en', __( 'Customize the message your English user sees when they resubmit/update their event.', 'events-manager').$events_placeholder_tip );</code>
+  * Added after #195 <code php>em_options_textarea ( __( 'Success Message vicevært (Danish)', 'events-manager'), 'dbem_events_form_result_success_vicevært_da', __( 'Customize the message your Danish vicevært sees when they submitted their event.', 'events-manager').$events_placeholder_tip );
+em_options_textarea ( __( 'Success Message vicevært (English)', 'events-manager'), 'dbem_events_form_result_success_vicevært_en', __( 'Customize the message your English vicevært sees when they submitted their event.', 'events-manager').$events_placeholder_tip );
+em_options_textarea ( __( 'Successfully Updated Message vicevært (Danish)', 'events-manager'), 'dbem_events_form_result_success_updated_vicevært_da', __( 'Customize the message your Danish vicevært sees when they resubmit/update their event.', 'events-manager').$events_placeholder_tip );
+em_options_textarea ( __( 'Successfully Updated Message vicevært (English)', 'events-manager'), 'dbem_events_form_result_success_updated_vicevært_en', __( 'Customize the message your English vicevært when they resubmit/update their event.', 'events-manager').$events_placeholder_tip );</code>
+
+
+** wp-content\plugins\events-manager\admin\settings\tabs\pages.php **
+  * Changed #694 from <code php><th><?php echo sprintf(__( '%s page', 'events-manager'),__('Edit events','events-manager')); ?></th></code> to <code php><th><?php echo sprintf(__( '%s page (Danish)', 'events-manager'),__('Edit events','events-manager')); ?></th></code>
+  * Changed #698 from <code php><em><?php echo sprintf(__('Users can view, add and edit their %s on this page.','events-manager'),__('events','events-manager')); ?></em></code> to <code php><em><?php echo sprintf(__('Danish users can view, add and edit their %s on this page.','events-manager'),__('events','events-manager')); ?></em></code>
+  * Inserted after #700:<code php><tr>
+	<th><?php echo sprintf(__( '%s page (English)', 'events-manager'),__('Edit events','events-manager')); ?></th>
+	<td>
+		<?php wp_dropdown_pages(array('name'=>'dbem_edit_events_page_english', 'selected'=>get_option('dbem_edit_events_page_english'), 'show_option_none'=>'['.__('None', 'events-manager').']' )); ?>
+		<br />
+		<em><?php echo sprintf(__('English users can view, add and edit their %s on this page.','events-manager'),__('events','events-manager')); ?></em>
+	</td>
+</tr></code>
+  * Changed #645 from <code php><th><?php echo sprintf(__( '%s page', 'events-manager'),__('My bookings','events-manager')); ?></code> to <code php><th><?php echo sprintf(__( '%s page (Danish)', 'events-manager'),__('My bookings','events-manager')); ?></code>
+  * Changed #650 from <code php><em><?php echo sprintf(__('Users can view their bookings for other events on this page.','events-manager'),'\<code\>[my_bookings]\</code\>',__('bookings','events-manager')); ?></em></code> to <code php><em><?php echo sprintf(__('Danish users can view their bookings for other events on this page.','events-manager'),'\<code\>[my_bookings]\</code\>',__('bookings','events-manager')); ?></em></code>
+  * Inserted after #652:<code php><tr>
+	<th><?php echo sprintf(__( '%s page (English)', 'events-manager'),__('My bookings','events-manager')); ?>
+	</th>
+	<td>
+		<?php wp_dropdown_pages(array('name'=>'dbem_my_bookings_page_english', 'selected'=>get_option('dbem_my_bookings_page_english'), 'show_option_none'=>'['.__('None', 'events-manager').']' )); ?>
+		<br />
+		<em><?php echo sprintf(__('English users can view their bookings for other events on this page.','events-manager'),'\<code\>[my_bookings]\</code\>',__('bookings','events-manager')); ?></em>
+	</td>
+</tr></code>
+
+** wp-content\plugins\events-manager\em-events.php **
+  * Inserted after #18: <code php>$edit_events_page_id_english = get_option( 'dbem_edit_events_page_english' );</code>
+  * Inserted after #22: <code php>$my_bookings_page_id_english = get_option( 'dbem_my_bookings_page_english' );</code>
+  * Changed #30 from <code php>if( !post_password_required() && in_array($post->ID, array($events_page_id, $locations_page_id, $categories_page_id, $edit_bookings_page_id, $edit_events_page_id, $edit_locations_page_id, $my_bookings_page_id, $tags_page_id)) ){</code> to <code php>if( !post_password_required() && in_array($post->ID, array($events_page_id, $locations_page_id, $categories_page_id, $edit_bookings_page_id, $edit_events_page_id, $edit_events_page_id_english, $edit_locations_page_id, $my_bookings_page_id, $my_bookings_page_id_english, $tags_page_id)) ){</code>
+  * Changed #106 from <code php>}elseif( $post->ID == $edit_events_page_id && $edit_events_page_id != 0 ){</code> to <code php>}elseif( ($post->ID == $edit_events_page_id || $post->ID == $edit_events_page_id_english) && $edit_events_page_id != 0 && $edit_events_page_id_english != 0 ){</code>
+  * Changed #110 from <code php>}elseif( $post->ID == $my_bookings_page_id && $my_bookings_page_id != 0 ){</code> to <code php>}elseif( ($post->ID == $my_bookings_page_id || $post->ID == $my_bookings_page_id_english) && $my_bookings_page_id != 0 && $my_bookings_page_id_english != 0 ){</code>
+  * Inserted after #151: <code php>$edit_events_page_id_english = get_option( 'dbem_edit_events_page_english' );</code>
+  * Changed #154 from <code php>if( !empty($post->ID) && in_array($post->ID, array($events_page_id, $locations_page_id, $edit_events_page_id, $edit_locations_page_id, $edit_bookings_page_id))){</code> to <code php>if( !empty($post->ID) && in_array($post->ID, array($events_page_id, $locations_page_id, $edit_events_page_id, $edit_events_page_id_english, $edit_locations_page_id, $edit_bookings_page_id))){</code>
+  * Changed #116 from <code php><?php esc_html_e("Booked Spaces",'events-manager') ?>: <?php echo $EM_Event->get_bookings()->get_booked_spaces()."/".$EM_Event->get_spaces() ?></code> to <code php><?php $translations = pll_get_post_translations($EM_Event->post_id);
+$booked_spaces = 0;
+foreach ($translations as $lang => $post_id) {
+	$booked_spaces += em_get_event($post_id, 'post_id')->get_bookings()->get_booked_spaces();
+}
+esc_html_e("Booked Spaces",'events-manager'); ?>: <?php echo $booked_spaces."/".$EM_Event->get_spaces(); ?></code>
+
+** wp-content\plugins\events-manager\templates\templates\my-bookings.php **
+  * replace __(), _e(), _e (), esc_html_e(), esc_html_e () with pll__() and pll_e()
+  * Changed #40 to <code php><th class='manage-column' scope='col'><?php pll_e('Date', 'events-manager'); ?></th></code>
+  * #41 commented out
+  * Changed #59 to <code php><td><?php print_r($EM_Booking->get_tickets()->get_first()->ticket_name); ?></td></code>
+  * #60 commented out
+  * Changed #58 from <code php><td><?php echo $EM_Event->output("#_EVENTLINK"); ?></td></code> to <code php><td><?php echo $EM_Event->output("#_EVENTNAME"); ?></td></code>
+
+** wp-content\plugins\events-manager\classes\em-tickets.php **
+  * Changed #254 to <code php>$collumns = array( 'type' => __('Date','events-manager'), 'price' => __('Price','events-manager'), 'spaces' => __('Spaces','events-manager'));</code>
+  * replace __(), _e(), _e (), esc_html_e(), esc_html_e () with pll__() and pll_e()
+  * Changed #498-509 from <code php>function get_booked_spaces( $force_refresh = false ){
+	global $wpdb;
+	if( !array_key_exists($this->event_id, $this->pending_spaces) || $force_refresh ){
+		$status_cond = !get_option('dbem_bookings_approval') ? 'booking_status IN (0,1)' : 'booking_status = 1';
+		$sub_sql = 'SELECT booking_id FROM '.EM_BOOKINGS_TABLE." WHERE event_id=%d AND $status_cond";
+		$sql = 'SELECT SUM(ticket_booking_spaces) FROM '.EM_TICKETS_BOOKINGS_TABLE. " WHERE booking_id IN ($sub_sql) AND ticket_id=%d";
+		$booked_spaces = $wpdb->get_var($wpdb->prepare($sql, $this->event_id, $this->ticket_id));
+		$this->booked_spaces[$this->event_id] = $booked_spaces > 0 ? $booked_spaces : 0;
+		$this->booked_spaces[$this->event_id] = apply_filters('em_ticket_get_booked_spaces', $this->booked_spaces[$this->event_id], $this, $force_refresh);
+	}
+	return $this->booked_spaces[$this->event_id];
+}</code> to <code php>	function get_booked_spaces( $force_refresh = false ){
+	global $wpdb;
+	if( !array_key_exists($this->event_id, $this->pending_spaces) || $force_refresh ){
+		$status_cond = !get_option('dbem_bookings_approval') ? 'booking_status IN (0,1)' : 'booking_status = 1';
+		$translations = pll_get_post_translations($this->get_event()->post_id);
+		$event_ids = array();
+		foreach ($translations as $key => $post_id) {
+			array_push($event_ids,em_get_event($post_id,'post_id')->event_id);
+		}
+		$sub_sql = 'SELECT booking_id FROM '.EM_BOOKINGS_TABLE." WHERE event_id IN (" . implode($event_ids,',') . ") AND $status_cond";
+		$sql = 'SELECT SUM(ticket_booking_spaces) FROM '.EM_TICKETS_BOOKINGS_TABLE. " WHERE booking_id IN ($sub_sql) AND ticket_id IN (SELECT ticket_id FROM " . EM_TICKETS_TABLE . " WHERE ticket_name IN (SELECT ticket_name FROM " . EM_TICKETS_TABLE . " WHERE ticket_id='%d'))";
+		$booked_spaces = $wpdb->get_var($wpdb->prepare($sql, $this->ticket_id));
+		$this->booked_spaces[$this->event_id] = $booked_spaces > 0 ? $booked_spaces : 0;
+		$this->booked_spaces[$this->event_id] = apply_filters('em_ticket_get_booked_spaces', $this->booked_spaces[$this->event_id], $this, $force_refresh);
+	}
+	return $this->booked_spaces[$this->event_id];
+}</code>
+
+** \wp-content\plugins\events-manager\templates\forms\event-editor.php **
+  * replace __(), _e(), _e (), esc_html_e(), esc_html_e () with pll__() and pll_e()
+  * Hidden name-block from non-admin users using <code php><?php if ($EM_Event->can_manage('edit_recurring_events','edit_others_recurring_events')): ?></code>
+  * Removed details from non-admin users using <code php><?php if ($EM_Event->can_manage('edit_recurring_events','edit_others_recurring_events')): ?></code>
+  * Added after #27<code php><?php if (!$EM_Event->can_manage('edit_recurring_events','edit_others_recurring_events')) {
+	$notice = pll__('Common room rental notice', 'events-manager');
+	if (strlen($notice) > 0) {
+		echo '<p>' . $notice . '</p>';
+	}
+} ?></code>
+  * Changed #61 to <code php><input type="hidden" name="event_name" id="event-name" value="<?php echo sprintf(pll__('Rental of common house format with %s', 'events-manager'),substr(wp_get_current_user()->user_login,4,3)); ?>" readonly hidden /></code>
+  * Added after #77 <code php>
+<?php if (!$EM_Event->can_manage('edit_recurring_events','edit_others_recurring_events')): ?>
+	<div class="inside event-form-price">
+		<h3 class="event-form-price"><?php pll_e( 'Price', 'events-manager'); ?></h3>
+	<?php if (in_array(SwpmMembershipLevelUtils::get_membership_level_name_of_a_member(SwpmMemberUtils::get_user_by_user_name( wp_get_current_user()->user_login )->member_id), array('Beboer','Midlertidig lejer'))): ?>
+		<span><?php pll_e('Price calculation steps', 'events-manager'); ?></span>
+		<p><?php pll_e('The expected price for the rental is:', 'events-manager'); ?> <span id="event-form-price"><?php
+		if ($EM_Event->event_start_date == "" || $EM_Event->event_end_date == ""){
+			pll_e('Default common house rental price', 'events-manager');
+		} else {
+			require_once WP_PLUGIN_DIR . '/AKDTU/functions/fælleshus.php';
+			echo pll__('Common house rental price, pre', 'events-manager') . " " . calc_rental_cost(new DateTime(trim($EM_Event->event_start_date.' '.$EM_Event->event_start_time)),new DateTime(trim($EM_Event->event_end_date.' '.$EM_Event->event_end_time))) . " " . pll__('Common house rental price, post', 'events-manager');
+		}
+		?></span> <?php pll_e('which will be paid with the rent at the end of', 'events-manager'); ?> <span id="event-form-price-month"><?php pll_e('Default common house rental month', 'events-manager'); ?></span>.</p>
+	<?php else: ?>
+		<p><?php pll_e('Rental is free for members of the board.', 'events-manager'); ?></p>
+	<?php endif; ?>
+	</div>
+	<script>
+		var AKDTU_price_mark_pre = "<?php pll_e('Common house rental price, pre', 'events-manager'); ?>";
+		var AKDTU_price_mark_post = "<?php pll_e('Common house rental price, post', 'events-manager'); ?>";
+		var AKDTU_price_mark_invalid = "<?php pll_e('Common house rental price, invalid', 'events-manager'); ?>";
+		var AKDTU_months = [<?php pll_e('Month_array','events-manager'); ?>];
+		var AKDTU_price_mark_invalid_month = "<?php pll_e('Common house rental price month, invalid', 'events-manager'); ?>";
+	</script>
+<?php endif; ?>
+
+<?php if ($EM_Event->can_manage('edit_recurring_events','edit_others_recurring_events')): ?>
+	<?php if( get_option('dbem_locations_enabled') ): ?>
+	<h3 class="event-form-where"><?php pll_e( 'Where', 'events-manager'); ?></h3>
+	<div class="inside event-form-where">
+	<?php em_locate_template('forms/event/location.php',true); ?>
+	</div>
+	<?php endif; ?>
+<?php endif; ?></code>
+
+** \wp-content\plugins\events-manager\templates\tables\events.php **
+  * replace __(), _e(), _e (), esc_html_e(), esc_html_e () with pll__() and pll_e()
+  * Removed search box from non-admin users using <code php><?php if (current_user_can('edit_others_events')): ?></code>
+  * Changed #108 from <code php><?php if( current_user_can('delete_events')) : ?></code> to <code php><?php if( current_user_can('delete_events') && $EM_Event->start()->getTimestamp() > $delete_before_event_time && $EM_Event->end()->getTimestamp() > $delete_before_event_time ) : ?></code>
+  * Inserted after #85<code php>$delete_before_event_time = time() + get_option('dbem_bookings_delete_time') * 86400;</code>
+  * #132-134 commented out
+  * Changed #109 from <code php><a class="row-title" href="<?php echo esc_url($EM_Event->get_edit_url()); ?>"><?php echo esc_html($EM_Event->event_name); ?></a></code> to <code php><?php
+$replacements = array(
+	'#_RENTAL_BEFORE_APARTMENTNUM' => pll__('RENTAL_BEFORE_APARTMENTNUM','events-manager'),
+	'#_RENTAL_AFTER_APARTMENTNUM' => pll__('RENTAL_AFTER_APARTMENTNUM','events-manager'),
+);
+$event_name = str_replace(array_keys($replacements),$replacements,esc_html($EM_Event->event_name));
+echo $event_name;
+?></code>
+  * #108 commented out
+  * #117-119 commented out
+  * Added after #133: <code php><span class="edit"><a href="<?php echo esc_url($EM_Event->get_edit_url()); ?>" class="em-event-edit"><?php pll_e('Edit','events-manager'); ?></a></span></code>
+
+** wp-content\plugins\events-manager\templates\forms\event\when.php **
+  * replace __(), _e(), _e (), esc_html_e(), esc_html_e () with pll__() and pll_e()
+  * removed some blocks from non-admin users using <code php>if ($EM_Event->can_manage('edit_recurring_events','edit_others_recurring_events')) {</code>
+
+
+** wp-content\plugins\events-manager\admin\settings\tabs\bookings.php **
+  * Changed #36 from <code php><?php echo get_option('dbem_bookings_form_msg_attending'); ?></code> to <code php><?php pll_e( 'You are already signed up for this event', 'events-manager' ); ?></code>
+  * Changed #37 from <code php><a href="<?php echo em_get_my_bookings_url(); ?>"><?php echo get_option('dbem_bookings_form_msg_bookings_link'); ?></a></code> to <code php><a href="<?php echo em_get_my_bookings_url(); ?>"><?php pll_e( 'Manage my signups', 'events-manager' ); ?></a></code>
+  * Added after #149<code php>
+
+<div  class="postbox " id="em-opt-pricing-options" >
+<div class="handlediv" title="<?php __('Click to toggle', 'events-manager'); ?>"><br /></div><h3><span><?php echo sprintf(__( '%s Options', 'events-manager'),__('AKDTU','events-manager')); ?> </span></h3>
+<div class="inside">
+	<table class='form-table'>
+		<?php
+		em_options_input_text ( __( 'Limit users deleting events before start', 'events-manager'), 'dbem_bookings_delete_time', '<em>Users cannot delete events after this amount of days before the event starts. This ensures a log of past events.</em>' );
+		echo $save_button; 
+		?>
+	</table>
+</div> <!-- . inside -->
+</div> <!-- .postbox --> </code>
+  * Changed #75-85 from <code php>em_options_input_text ( __( 'User can book', 'events-manager'), 'dbem_booking_button_msg_book', '');
+em_options_input_text ( __( 'Booking in progress', 'events-manager'), 'dbem_booking_button_msg_booking', '');
+em_options_input_text ( __( 'Booking complete', 'events-manager'), 'dbem_booking_button_msg_booked', '');
+em_options_input_text ( __( 'Booking already made', 'events-manager'), 'dbem_booking_button_msg_already_booked', '');
+em_options_input_text ( __( 'Booking error', 'events-manager'), 'dbem_booking_button_msg_error', '');
+em_options_input_text ( __( 'Event fully booked', 'events-manager'), 'dbem_booking_button_msg_full', '');
+em_options_input_text ( __( 'Bookings closed', 'events-manager'), 'dbem_booking_button_msg_closed', '');
+em_options_input_text ( __( 'Cancel', 'events-manager'), 'dbem_booking_button_msg_cancel', '');
+em_options_input_text ( __( 'Cancelation in progress', 'events-manager'), 'dbem_booking_button_msg_canceling', '');
+em_options_input_text ( __( 'Cancelation complete', 'events-manager'), 'dbem_booking_button_msg_cancelled', '');
+em_options_input_text ( __( 'Cancelation error', 'events-manager'), 'dbem_booking_button_msg_cancel_error', '');</code> to <code php>em_options_input_text ( __( 'User can book (Danish)', 'events-manager'), 'dbem_booking_button_msg_book_da', '');
+em_options_input_text ( __( 'User can book (English)', 'events-manager'), 'dbem_booking_button_msg_book_en', '');
+em_options_input_text ( __( 'Booking in progress (Danish)', 'events-manager'), 'dbem_booking_button_msg_booking_da', '');
+em_options_input_text ( __( 'Booking in progress (English)', 'events-manager'), 'dbem_booking_button_msg_booking_en', '');
+em_options_input_text ( __( 'Booking complete (Danish)', 'events-manager'), 'dbem_booking_button_msg_booked_da', '');
+em_options_input_text ( __( 'Booking complete (English)', 'events-manager'), 'dbem_booking_button_msg_booked_en', '');
+em_options_input_text ( __( 'Booking already made (Danish)', 'events-manager'), 'dbem_booking_button_msg_already_booked_da', '');
+em_options_input_text ( __( 'Booking already made (English)', 'events-manager'), 'dbem_booking_button_msg_already_booked_en', '');
+em_options_input_text ( __( 'Booking error (Danish)', 'events-manager'), 'dbem_booking_button_msg_error_da', '');
+em_options_input_text ( __( 'Booking error (English)', 'events-manager'), 'dbem_booking_button_msg_error_en', '');
+em_options_input_text ( __( 'Event fully booked (Danish)', 'events-manager'), 'dbem_booking_button_msg_full_da', '');
+em_options_input_text ( __( 'Event fully booked (English)', 'events-manager'), 'dbem_booking_button_msg_full_en', '');
+em_options_input_text ( __( 'Bookings closed (Danish)', 'events-manager'), 'dbem_booking_button_msg_closed_da', '');
+em_options_input_text ( __( 'Bookings closed (English)', 'events-manager'), 'dbem_booking_button_msg_closed_en', '');
+em_options_input_text ( __( 'Cancel (Danish)', 'events-manager'), 'dbem_booking_button_msg_cancel_da', '');
+em_options_input_text ( __( 'Cancel (English)', 'events-manager'), 'dbem_booking_button_msg_cancel_en', '');
+em_options_input_text ( __( 'Cancelation in progress (Danish)', 'events-manager'), 'dbem_booking_button_msg_canceling_da', '');
+em_options_input_text ( __( 'Cancelation in progress (English)', 'events-manager'), 'dbem_booking_button_msg_canceling_en', '');
+em_options_input_text ( __( 'Cancelation complete (Danish)', 'events-manager'), 'dbem_booking_button_msg_cancelled_da', '');
+em_options_input_text ( __( 'Cancelation complete (English)', 'events-manager'), 'dbem_booking_button_msg_cancelled_en', '');
+em_options_input_text ( __( 'Cancelation error (Danish)', 'events-manager'), 'dbem_booking_button_msg_cancel_error_da', '');
+em_options_input_text ( __( 'Cancelation error (English)', 'events-manager'), 'dbem_booking_button_msg_cancel_error_en', '');</code>
+  * Changed #61-70 from <code php>em_options_input_text ( __( 'Successful booking', 'events-manager'), 'dbem_booking_feedback', __( 'When a booking is registered and confirmed.', 'events-manager') );
+em_options_input_text ( __( 'Successful pending booking', 'events-manager'), 'dbem_booking_feedback_pending', __( 'When a booking is registered but pending.', 'events-manager') );
+em_options_input_text ( __( 'Not enough spaces', 'events-manager'), 'dbem_booking_feedback_full', __( 'When a booking cannot be made due to lack of spaces.', 'events-manager') );
+em_options_input_text ( __( 'Errors', 'events-manager'), 'dbem_booking_feedback_error', __( 'When a booking cannot be made due to an error when filling the form. Below this, there will be a dynamic list of errors.', 'events-manager') );
+em_options_input_text ( __( 'Email Exists', 'events-manager'), 'dbem_booking_feedback_email_exists', __( 'When a guest tries to book using an email registered with a user account.', 'events-manager') );
+em_options_input_text ( __( 'User must log in', 'events-manager'), 'dbem_booking_feedback_log_in', __( 'When a user must log in before making a booking.', 'events-manager') );
+em_options_input_text ( __( 'Error mailing user', 'events-manager'), 'dbem_booking_feedback_nomail', __( 'If a booking is made and an email cannot be sent, this is added to the success message.', 'events-manager') );
+em_options_input_text ( __( 'Already booked', 'events-manager'), 'dbem_booking_feedback_already_booked', __( 'If the user made a previous booking and cannot double-book.', 'events-manager') );
+em_options_input_text ( __( 'No spaces booked', 'events-manager'), 'dbem_booking_feedback_min_space', __( 'If the user tries to make a booking without requesting any spaces.', 'events-manager') );$notice_full = __('Sold Out', 'events-manager');
+em_options_input_text ( __( 'Maximum spaces per booking', 'events-manager'), 'dbem_booking_feedback_spaces_limit', __( 'If the user tries to make a booking with spaces that exceeds the maximum number of spaces per booking.', 'events-manager').' '. __('%d will be replaced by a number.','events-manager') );</code> to <code php>em_options_input_text ( __( 'Successful booking (Danish)', 'events-manager'), 'dbem_booking_feedback_da', __( 'When a booking is registered and confirmed.', 'events-manager') );
+em_options_input_text ( __( 'Successful booking (English)', 'events-manager'), 'dbem_booking_feedback_en', __( 'When a booking is registered and confirmed.', 'events-manager') );
+em_options_input_text ( __( 'Successful pending booking (Danish)', 'events-manager'), 'dbem_booking_feedback_pending_da', __( 'When a booking is registered but pending.', 'events-manager') );
+em_options_input_text ( __( 'Successful pending booking (English)', 'events-manager'), 'dbem_booking_feedback_pending_en', __( 'When a booking is registered but pending.', 'events-manager') );
+em_options_input_text ( __( 'Not enough spaces (Danish)', 'events-manager'), 'dbem_booking_feedback_full_da', __( 'When a booking cannot be made due to lack of spaces.', 'events-manager') );
+em_options_input_text ( __( 'Not enough spaces (English)', 'events-manager'), 'dbem_booking_feedback_full_en', __( 'When a booking cannot be made due to lack of spaces.', 'events-manager') );
+em_options_input_text ( __( 'Errors (Danish)', 'events-manager'), 'dbem_booking_feedback_error_da', __( 'When a booking cannot be made due to an error when filling the form. Below this, there will be a dynamic list of errors.', 'events-manager') );
+em_options_input_text ( __( 'Errors (English)', 'events-manager'), 'dbem_booking_feedback_error_en', __( 'When a booking cannot be made due to an error when filling the form. Below this, there will be a dynamic list of errors.', 'events-manager') );
+em_options_input_text ( __( 'Email Exists (Danish)', 'events-manager'), 'dbem_booking_feedback_email_exists_da', __( 'When a guest tries to book using an email registered with a user account.', 'events-manager') );
+em_options_input_text ( __( 'Email Exists (English)', 'events-manager'), 'dbem_booking_feedback_email_exists_en', __( 'When a guest tries to book using an email registered with a user account.', 'events-manager') );
+em_options_input_text ( __( 'User must log in (Danish)', 'events-manager'), 'dbem_booking_feedback_log_in_da', __( 'When a user must log in before making a booking.', 'events-manager') );
+em_options_input_text ( __( 'User must log in (English)', 'events-manager'), 'dbem_booking_feedback_log_in_en', __( 'When a user must log in before making a booking.', 'events-manager') );
+em_options_input_text ( __( 'Error mailing user (Danish)', 'events-manager'), 'dbem_booking_feedback_nomail_da', __( 'If a booking is made and an email cannot be sent, this is added to the success message.', 'events-manager') );
+em_options_input_text ( __( 'Error mailing user (English)', 'events-manager'), 'dbem_booking_feedback_nomail_en', __( 'If a booking is made and an email cannot be sent, this is added to the success message.', 'events-manager') );
+em_options_input_text ( __( 'Already booked (Danish)', 'events-manager'), 'dbem_booking_feedback_already_booked_da', __( 'If the user made a previous booking and cannot double-book.', 'events-manager') );
+em_options_input_text ( __( 'Already booked (English)', 'events-manager'), 'dbem_booking_feedback_already_booked_en', __( 'If the user made a previous booking and cannot double-book.', 'events-manager') );
+em_options_input_text ( __( 'No spaces booked (Danish)', 'events-manager'), 'dbem_booking_feedback_min_space_da', __( 'If the user tries to make a booking without requesting any spaces.', 'events-manager') );$notice_full = __('Sold Out', 'events-manager');
+em_options_input_text ( __( 'No spaces booked (English)', 'events-manager'), 'dbem_booking_feedback_min_space_en', __( 'If the user tries to make a booking without requesting any spaces.', 'events-manager') );$notice_full = __('Sold Out', 'events-manager');
+em_options_input_text ( __( 'Maximum spaces per booking (Danish)', 'events-manager'), 'dbem_booking_feedback_spaces_limit_da', __( 'If the user tries to make a booking with spaces that exceeds the maximum number of spaces per booking.', 'events-manager').' '. __('%d will be replaced by a number.','events-manager') );
+em_options_input_text ( __( 'Maximum spaces per booking (English)', 'events-manager'), 'dbem_booking_feedback_spaces_limit_en', __( 'If the user tries to make a booking with spaces that exceeds the maximum number of spaces per booking.', 'events-manager').' '. __('%d will be replaced by a number.','events-manager') );</code>
+  * Changed #52-56 from <code php>em_options_input_text ( __( 'Bookings disabled', 'events-manager'), 'dbem_bookings_form_msg_disabled', __( 'An event with no bookings.', 'events-manager') );
+em_options_input_text ( __( 'Bookings closed', 'events-manager'), 'dbem_bookings_form_msg_closed', __( 'Bookings have closed (e.g. event has started).', 'events-manager') );
+em_options_input_text ( __( 'Fully booked', 'events-manager'), 'dbem_bookings_form_msg_full', __( 'Event is fully booked.', 'events-manager') );
+em_options_input_text ( __( 'Already attending', 'events-manager'), 'dbem_bookings_form_msg_attending', __( 'If already attending and double bookings are disabled, this message will be displayed, followed by a link to the users booking page.', 'events-manager') );
+em_options_input_text ( __( 'Manage bookings link text', 'events-manager'), 'dbem_bookings_form_msg_bookings_link', __( 'Link text used for link to user bookings.', 'events-manager') );</code> to <code php>em_options_input_text ( __( 'Bookings disabled (Danish)', 'events-manager'), 'dbem_bookings_form_msg_disabled_da', __( 'An event with no bookings.', 'events-manager') );
+em_options_input_text ( __( 'Bookings disabled (English)', 'events-manager'), 'dbem_bookings_form_msg_disabled_en', __( 'An event with no bookings.', 'events-manager') );
+em_options_input_text ( __( 'Bookings closed (Danish)', 'events-manager'), 'dbem_bookings_form_msg_closed_da', __( 'Bookings have closed (e.g. event has started).', 'events-manager') );
+em_options_input_text ( __( 'Bookings closed (English)', 'events-manager'), 'dbem_bookings_form_msg_closed_en', __( 'Bookings have closed (e.g. event has started).', 'events-manager') );
+em_options_input_text ( __( 'Fully booked (Danish)', 'events-manager'), 'dbem_bookings_form_msg_full_da', __( 'Event is fully booked.', 'events-manager') );
+em_options_input_text ( __( 'Fully booked (English)', 'events-manager'), 'dbem_bookings_form_msg_full_en', __( 'Event is fully booked.', 'events-manager') );
+em_options_input_text ( __( 'Already attending (Danish)', 'events-manager'), 'dbem_bookings_form_msg_attending_da', __( 'If already attending and double bookings are disabled, this message will be displayed, followed by a link to the users booking page.', 'events-manager') );
+em_options_input_text ( __( 'Already attending (English)', 'events-manager'), 'dbem_bookings_form_msg_attending_en', __( 'If already attending and double bookings are disabled, this message will be displayed, followed by a link to the users booking page.', 'events-manager') );
+em_options_input_text ( __( 'Manage bookings link text (Danish)', 'events-manager'), 'dbem_bookings_form_msg_bookings_link_da', __( 'Link text used for link to user bookings.', 'events-manager') );
+em_options_input_text ( __( 'Manage bookings link text (English)', 'events-manager'), 'dbem_bookings_form_msg_bookings_link_en', __( 'Link text used for link to user bookings.', 'events-manager') );</code>
+  * Changed #47-48 from <code php>em_options_input_text ( __( 'Booking Cancelled', 'events-manager'), 'dbem_booking_feedback_cancelled', __( 'When a user cancels their booking, this message will be displayed confirming the cancellation.', 'events-manager') );
+em_options_input_text ( __( 'Booking Cancellation Warning', 'events-manager'), 'dbem_booking_warning_cancel', __( 'When a user chooses to cancel a booking, this warning is displayed for them to confirm.', 'events-manager') );</code> to <code php>em_options_input_text ( __( 'Booking Cancelled (Danish)', 'events-manager'), 'dbem_booking_feedback_cancelled_da', __( 'When a user cancels their booking, this message will be displayed confirming the cancellation.', 'events-manager') );
+em_options_input_text ( __( 'Booking Cancelled (English)', 'events-manager'), 'dbem_booking_feedback_cancelled_en', __( 'When a user cancels their booking, this message will be displayed confirming the cancellation.', 'events-manager') );
+em_options_input_text ( __( 'Booking Cancellation Warning (Danish)', 'events-manager'), 'dbem_booking_warning_cancel_da', __( 'When a user chooses to cancel a booking, this warning is displayed for them to confirm.', 'events-manager') );
+em_options_input_text ( __( 'Booking Cancellation Warning (English)', 'events-manager'), 'dbem_booking_warning_cancel_en', __( 'When a user chooses to cancel a booking, this warning is displayed for them to confirm.', 'events-manager') );</code>
+
+** wp-content\plugins\events-manager\events-manager.php **
+  * Changed #380-388 from <code php>'bb_full' =>  get_option('dbem_booking_button_msg_full'),
+'bb_book' => get_option('dbem_booking_button_msg_book'),
+'bb_booking' => get_option('dbem_booking_button_msg_booking'),
+'bb_booked' => get_option('dbem_booking_button_msg_booked'),
+'bb_error' => get_option('dbem_booking_button_msg_error'),
+'bb_cancel' => get_option('dbem_booking_button_msg_cancel'),
+'bb_canceling' => get_option('dbem_booking_button_msg_canceling'),
+'bb_cancelled' => get_option('dbem_booking_button_msg_cancelled'),
+'bb_cancel_error' => get_option('dbem_booking_button_msg_cancel_error')</code> to <code php>'bb_full_da' =>  get_option('dbem_booking_button_msg_full_da'),
+'bb_full_en' =>  get_option('dbem_booking_button_msg_full_en'),
+'bb_book_da' => get_option('dbem_booking_button_msg_book_da'),
+'bb_book_en' => get_option('dbem_booking_button_msg_book_en'),
+'bb_booking_da' => get_option('dbem_booking_button_msg_booking_da'),
+'bb_booking_en' => get_option('dbem_booking_button_msg_booking_en'),
+'bb_booked_da' => get_option('dbem_booking_button_msg_booked_da'),
+'bb_booked_en' => get_option('dbem_booking_button_msg_booked_en'),
+'bb_error_da' => get_option('dbem_booking_button_msg_error_da'),
+'bb_error_en' => get_option('dbem_booking_button_msg_error_en'),
+'bb_cancel_da' => get_option('dbem_booking_button_msg_cancel_da'),
+'bb_cancel_en' => get_option('dbem_booking_button_msg_cancel_en'),
+'bb_canceling_da' => get_option('dbem_booking_button_msg_canceling_da'),
+'bb_cancelled_en' => get_option('dbem_booking_button_msg_cancelled_en'),
+'bb_cancel_error_da' => get_option('dbem_booking_button_msg_cancel_error_da'),
+'bb_cancel_error_en' => get_option('dbem_booking_button_msg_cancel_error_en')</code>
+  * Changed #420 from <code php>$em_localized_js['booking_warning_cancel'] = get_option('dbem_booking_warning_cancel');</code> to <code php>$em_localized_js['booking_warning_cancel'] = get_option('dbem_booking_warning_cancel_' . pll_current_language());</code>
+  * Added after #125 <code php>include('admin/em-print-bookings.php');</code>
+  * Added after #145 <code php>include('admin/bookings/em-print-events.php');</code>
+  * Changed #355 from <code php>'ui_css' => plugins_url('includes/css/jquery-ui.min.css?test', __FILE__),</code> to <code php>'ui_css' => plugins_url('includes/css/jquery-ui.min.css?vs=1', __FILE__),</code>
+
+** wp-content\plugins\events-manager\templates\placeholders\bookingbutton.php **
+  * Changed #8-12 from <code php>$notice_full = get_option('dbem_booking_button_msg_full');
+$button_text = get_option('dbem_booking_button_msg_book');
+$button_already_booked = get_option('dbem_booking_button_msg_already_booked');
+$button_closed = get_option('dbem_booking_button_msg_closed');
+$button_cancel = get_option('dbem_booking_button_msg_cancel');</code> to <code php>$notice_full = get_option('dbem_booking_button_msg_full_' . pll_current_language());
+$button_text = get_option('dbem_booking_button_msg_book_' . pll_current_language());
+$button_already_booked = get_option('dbem_booking_button_msg_already_booked_' . pll_current_language());
+$button_closed = get_option('dbem_booking_button_msg_closed_' . pll_current_language());
+$button_cancel = get_option('dbem_booking_button_msg_cancel_' . pll_current_language());</code>
+
+** wp-content\plugins\events-manager\admin\settings\tabs\emails.php **
+  * Added under #149<code php><tr class="em-subheader"><td colspan='2'>
+	<h5><?php _e('Event Deleted','events-manager') ?></h5>
+	<?php echo __('An email will be sent to an administrator of your choice when an event is sent deleted by users who are not administrators.','events-manager').$bookings_placeholder_tip ?>
+</td></tr>
+<?php
+em_options_input_text ( __( 'Event deleted subject (Danish)', 'events-manager'), 'dbem_event_deleted_email_subject_da', __('If left blank, this email will not be sent.','events-manager') );
+em_options_textarea ( __( 'Event deleted email (Danish)', 'events-manager'), 'dbem_event_deleted_email_body_da', '' );
+em_options_input_text ( __( 'Event deleted subject (English)', 'events-manager'), 'dbem_event_deleted_email_subject_en', __('If left blank, this email will not be sent.','events-manager') );
+em_options_textarea ( __( 'Event deleted email (English)', 'events-manager'), 'dbem_event_deleted_email_body_en', '' );
+?></code>
+  * Added under #176<code php><tr class="em-subheader"><td colspan='2'>
+	<h5><?php _e('Event Rejected','events-manager') ?></h5>
+	<?php echo __('An email will be sent to the user when their event is sent to the trash by an administrator','events-manager').$bookings_placeholder_tip ?>
+</td></tr>
+<?php
+em_options_input_text ( __( 'Event deleted subject (Danish)', 'events-manager'), 'dbem_event_rejected_email_subject_da', __('If left blank, this email will not be sent.','events-manager') );
+em_options_textarea ( __( 'Event deleted email (Danish)', 'events-manager'), 'dbem_event_rejected_email_body_da', '' );
+em_options_input_text ( __( 'Event deleted attachments (Danish)', 'events-manager'), 'dbem_event_rejected_email_attachments_da', __('If left blank, no attachments are used. Must be relative to the root folder set above. Split multiple attachments by \<code\>,\</code\> without any spaces.','events-manager') );
+em_options_input_text ( __( 'Event deleted subject (English)', 'events-manager'), 'dbem_event_rejected_email_subject_en', __('If left blank, this email will not be sent.','events-manager') );
+em_options_textarea ( __( 'Event deleted email (English)', 'events-manager'), 'dbem_event_rejected_email_body_en', '' );
+em_options_input_text ( __( 'Event deleted attachments (English)', 'events-manager'), 'dbem_event_rejected_email_attachments_en', __('If left blank, no attachments are used. Must be relative to the root folder set above. Split multiple attachments by \<code\>,\</code\> without any spaces.','events-manager') );
+?></code>
+  * Changed #166 from <code php>em_options_input_text ( __( 'Event approved subject', 'events-manager'), 'dbem_event_approved_email_subject', __('If left blank, this email will not be sent.','events-manager') );</code> to <code php>em_options_input_text ( __( 'Event approved subject (Danish)', 'events-manager'), 'dbem_event_approved_email_subject_da', __('If left blank, this email will not be sent.','events-manager') );</code>
+  * Changed #167 from <code php>em_options_textarea ( __( 'Event approved email', 'events-manager'), 'dbem_event_approved_email_body', '' );</code> to <code php>em_options_textarea ( __( 'Event approved email (Danish)', 'events-manager'), 'dbem_event_approved_email_body_da', '' );</code>
+  * Added under #167<code php>em_options_input_text ( __( 'Event approved attachments (Danish)', 'events-manager'), 'dbem_event_approved_email_attachments_da', __('If left blank, no attachments are used. Must be relative to the  root folder set above. Split multiple attachments by \<code\>,\</code\> without any spaces.','events-manager') );
+em_options_input_text ( __( 'Event approved subject (English)', 'events-manager'), 'dbem_event_approved_email_subject_en', __('If left blank, this email will not be sent.','events-manager') );
+em_options_textarea ( __( 'Event approved email (English)', 'events-manager'), 'dbem_event_approved_email_body_en', '' );
+em_options_input_text ( __( 'Event approved attachments (English)', 'events-manager'), 'dbem_event_approved_email_attachments_en', __('If left blank, no attachments are used. Must be relative to the root folder set above. Split multiple attachments by \<code\>,\</code\> without any spaces.','events-manager') );</code>
+  * Changed #178 from <code php>em_options_input_text ( __( 'Event reapproved subject', 'events-manager'), 'dbem_event_reapproved_email_subject', __('If left blank, this email will not be sent.','events-manager') );</code> to <code php>em_options_input_text ( __( 'Event reapproved subject (Danish)', 'events-manager'), 'dbem_event_reapproved_email_subject_da', __('If left blank, this email will not be sent.','events-manager') );</code>
+  * Changed #179 from <code php>em_options_textarea ( __( 'Event reapproved email', 'events-manager'), 'dbem_event_reapproved_email_body', '' );</code> to <code php>em_options_textarea ( __( 'Event reapproved email (Danish)', 'events-manager'), 'dbem_event_reapproved_email_body_da', '' );</code>
+  * Added under #179<code php>em_options_input_text ( __( 'Event reapproved attachments (Danish)', 'events-manager'), 'dbem_event_reapproved_email_attachments_da', __('If left blank, no attachments are used. Must be relative to the  root folder set above. Split multiple attachments by \<code\>,\</code\> without any spaces.','events-manager') );
+em_options_input_text ( __( 'Event reapproved subject (English)', 'events-manager'), 'dbem_event_reapproved_email_subject_en', __('If left blank, this email will not be sent.','events-manager') );
+em_options_textarea ( __( 'Event reapproved email (English)', 'events-manager'), 'dbem_event_reapproved_email_body_en', '' );
+em_options_input_text ( __( 'Event reapproved attachments (English)', 'events-manager'), 'dbem_event_reapproved_email_attachments_en', __('If left blank, no attachments are used. Must be relative to the root folder set above. Split multiple attachments by \<code\>,\</code\> without any spaces.','events-manager') );</code>
+  * Added under #157<code php><tr class="em-subheader"><td colspan='2'>
+	<h5><?php _e('Event Approved Confirmation','events-manager') ?></h5>
+	<em><?php echo __('An email will be sent to the administrator as confirmation when an event is approved. Users requiring event approval do not have the \<code\>publish_events\</code\> capability.','events-manager').$bookings_placeholder_tip ?>
+</td></tr>
+<?php
+em_options_input_text ( __( 'Event approved confirmation subject (Danish)', 'events-manager'), 'dbem_event_approved_confirmation_email_subject_da', __('If left blank, this email will not be sent.','events-manager') );
+em_options_textarea ( __( 'Event approved confirmation email (Danish)', 'events-manager'), 'dbem_event_approved_confirmation_email_body_da', '' );
+em_options_input_text ( __( 'Event approved confirmation subject (English)', 'events-manager'), 'dbem_event_approved_confirmation_email_subject_en', __('If left blank, this email will not be sent.','events-manager') );
+em_options_textarea ( __( 'Event approved confirmation email (English)', 'events-manager'), 'dbem_event_approved_confirmation_email_body_en', '' );
+?>
+<tr class="em-subheader"><td colspan='2'>
+	<h5><?php _e('Event Reapproved Confirmation ','events-manager') ?></h5>
+    <?php echo __('When a user modifies a previously published event, it will be put back into pending review status and will not be published until you re-approve it.','events-manager').$bookings_placeholder_tip ?>
+</td></tr>
+<?php
+em_options_input_text ( __( 'Event reapproved confirmation subject (Danish)', 'events-manager'), 'dbem_event_reapproved_confirmation_email_subject_da', __('If left blank, this email will not be sent.','events-manager') );
+em_options_textarea ( __( 'Event reapproved confirmation email (Danish)', 'events-manager'), 'dbem_event_reapproved_confirmation_email_body_da', '' );
+em_options_input_text ( __( 'Event reapproved confirmation subject (English)', 'events-manager'), 'dbem_event_reapproved_confirmation_email_subject_en', __('If left blank, this email will not be sent.','events-manager') );
+em_options_textarea ( __( 'Event reapproved confirmation email (English)', 'events-manager'), 'dbem_event_reapproved_confirmation_email_body_en', '' );
+?>
+<tr class="em-subheader"><td colspan='2'>
+	<h5><?php _e('Event Rejected confirmation','events-manager') ?></h5>
+    <?php echo __('An email will be sent to the administrator as confirmation when an event is sent to the trash by an administrator','events-manager').$bookings_placeholder_tip ?>
+</td></tr>
+<?php
+em_options_input_text ( __( 'Event deleted confirmation subject (Danish)', 'events-manager'), 'dbem_event_rejected_confirmation_email_subject_da', __('If left blank, this email will not be sent.','events-manager') );
+em_options_textarea ( __( 'Event deleted confirmation email (Danish)', 'events-manager'), 'dbem_event_rejected_confirmation_email_body_da', '' );
+em_options_input_text ( __( 'Event deleted confirmation subject (English)', 'events-manager'), 'dbem_event_rejected_confirmation_email_subject_en', __('If left blank, this email will not be sent.','events-manager') );
+em_options_textarea ( __( 'Event deleted confirmation email (English)', 'events-manager'), 'dbem_event_rejected_confirmation_email_body_en', '' );
+			?></code>
+  * Added after #123<code php>em_options_input_text ( __( 'Attachment root', 'events-manager'), 'dbem_event_attachment_root', __('The folder which all attachment options below are relative to. Must NOT end in \<code\>/\</code\>','events-manager') );</code>
+  * Added after #190<code php><?php
+em_options_radio_binary ( __( 'Send mails til begivenhedsarrangører?', 'events-manager'), 'dbem_event_send_mail_to_owner', __( 'Vælg ja hvis der skal sendes mails til ejerne af begivenheder når deres begivenheder bliver godkendt eller afvist.', 'events-manager') );
+?></code>
+
+** wp-content\plugins\events-manager\classes\em-event-post-admin.php **
+  * Added after #241<code php>$lang = pll_get_post_language($post_id);
+if (!user_can($EM_Event->get_contact()->ID, 'publish_events')) {
+	if ( is_admin() ) {
+		//Send email to user
+		$output_type = get_option('dbem_smtp_html') ? 'html':'email';
+		$subject = $EM_Event->output(get_option('dbem_event_rejected_email_subject_' . $lang), 'raw');
+		$body = $EM_Event->output(get_option('dbem_event_rejected_email_body_' . $lang), $output_type);
+		$attachments = get_option('dbem_event_rejected_email_attachments_' . $lang);
+		if (strlen($attachments) > 0) {
+			$attachments = explode(",",$attachments);
+			$root = get_option('dbem_event_attachment_root');
+			array_walk( $attachments , function(&$value, $key) { $value = (strlen($value) > 0 && $value[0] != "/" ? $root . "/" : $root) . $value; } );
+		}
+		else {
+			$attachments = array();
+		}
+		if(get_option('dbem_event_send_mail_to_owner')) $EM_Event->email_send( $subject , $body , $EM_Event->get_contact()->user_email, $attachments );
+
+		$admin_emails = explode(',', get_option('dbem_event_submitted_email_admin')); //admin emails are in an array, single or multiple
+		$subject = $EM_Event->output(get_option('dbem_event_rejected_confirmation_email_subject_' . $lang), 'raw');
+		$body = $EM_Event->output(get_option('dbem_event_rejected_confirmation_email_body_' . $lang), $output_type);
+		$EM_Event->email_send( $subject , $body , $admin_emails );
+	} else {
+		//Send email to admin
+		$admin_emails = explode(',', get_option('dbem_event_submitted_email_admin')); //admin emails are in an array, single or multiple
+		$output_type = get_option('dbem_smtp_html') ? 'html':'email';
+		$subject = $EM_Event->output(get_option('dbem_event_deleted_email_subject'), 'raw');
+		$body = $EM_Event->output(get_option('dbem_event_deleted_email_body'), $output_type);
+		$EM_Event->email_send( $subject , $body, $admin_emails);
+	}
+}</code>
+
+** wp-content\plugins\events-manager\classes\em-event-posts-admin.php **
+  * Changed #244 from <code php><?php _e("Booked",'events-manager'); ?>: <?php echo $EM_Event->get_bookings()->get_booked_spaces()."/".$EM_Event->get_spaces(); ?></code> to <code php><?php _e("Booked",'events-manager'); ?>: <?php 
+$translations = pll_get_post_translations($EM_Event->post_id);
+$booked_spaces = 0;
+foreach ($translations as $lang => $post_id) {
+	$booked_spaces += em_get_event($post_id, 'post_id')->get_bookings()->get_booked_spaces();
+}
+echo $booked_spaces."/".$EM_Event->get_spaces(); ?></code>
+
+** wp-content\plugins\events-manager\em-actions.php **
+  * Changed #127 from <code php>$plural = (count($selectedEvents) > 1) ? __('Events','events-manager'):__('Event','events-manager');</code> to <code php>$plural = __('Event','events-manager');</code>
+  * Changed #517 from <code php>$EM_Notices->add_error( get_option('dbem_booking_feedback_log_in') );</code> to <code php>$EM_Notices->add_error( get_option('dbem_booking_feedback_log_in_' . pll_current_language()) );</code>
+  * Changed #318 from <code php>$feedback = get_option('dbem_booking_feedback_already_booked');</code> to <code php>$feedback = get_option('dbem_booking_feedback_already_booked_' . pll_current_language());</code>
+  * Changed #354 from <code php>$feedback = get_option('dbem_booking_feedback_already_booked');</code> to <code php>$feedback = get_option('dbem_booking_feedback_already_booked_' . pll_current_language());</code>
+  * Changed #365 from <code php>$EM_Notices->add_confirm(get_option('dbem_booking_feedback_cancelled'), true );	</code> to <code php>$EM_Notices->add_confirm(get_option('dbem_booking_feedback_cancelled_' . pll_current_language()), true );</code>
+  * Added after #621 <code php>if( !empty($_REQUEST['em_obj']) && $_REQUEST['em_obj'] == 'em_bookings_events_print_table' ){
+	include_once('admin/bookings/em-print-events.php');
+	em_bookings_events_print_table();
+	exit();
+}</code>
+  * Changed #90 from <code php>$EM_Notices->add_confirm( $EM_Event->output(get_option('dbem_events_form_result_success')), true);</code> to <code php>$EM_Notices->add_confirm( $EM_Event->output(get_option('dbem_events_form_result_success_' . (count(array_filter(wp_get_current_user()->roles,function($role){return $role == 'vicevaert';})) > 0 ? 'vicevært_' : '') . pll_get_post_language($EM_Event->post_id,'slug'))), true);</code>
+  * Changed #92 from <code php>$EM_Notices->add_confirm( $EM_Event->output(get_option('dbem_events_form_result_success_updated')), true);</code> to <code php>$EM_Notices->add_confirm( $EM_Event->output(get_option('dbem_events_form_result_success_updated_' . (count(array_filter(wp_get_current_user()->roles,function($role){return $role == 'vicevaert';})) > 0 ? 'vicevært_' : '') . pll_get_post_language($EM_Event->post_id,'slug'))), true);</code>
+
+** wp-content\plugins\events-manager\em-emails.php **
+  * Added after #12<code php>$lang = pll_get_post_language($EM_Event->post_id);</code>
+  * Changed #20 from <code php>$subject = $EM_Event->output(get_option('dbem_event_approved_email_subject'), 'raw');</code> to <code php>$subject = $EM_Event->output(get_option('dbem_event_approved_email_subject_' . $lang), 'raw');</code>
+  * Changed #21 from <code php>$body = $EM_Event->output(get_option('dbem_event_approved_email_body'), $output_type);</code> to <code php>$body = $EM_Event->output(get_option('dbem_event_approved_email_body_' . $lang), $output_type);</code>
+  * Added after #21<code php>$attachments = get_option('dbem_event_approved_email_attachments_' . $lang);
+
+$subject2 = $EM_Event->output(get_option('dbem_event_approved_confirmation_email_subject_' . $lang), 'raw');
+$body2 = $EM_Event->output(get_option('dbem_event_approved_confirmation_email_body_' . $lang), $output_type);</code>
+  * Changed #27 from <code php>$subject = $EM_Event->output(get_option('dbem_event_reapproved_email_subject'), 'raw');</code> to <code php>$subject = $EM_Event->output(get_option('dbem_event_reapproved_email_subject_' . $lang), 'raw');</code>
+  * Changed #28 from <code php>$body = $EM_Event->output(get_option('dbem_event_reapproved_email_body'), $output_type);</code> to <code php>$body = $EM_Event->output(get_option('dbem_event_reapproved_email_body_' . $lang), $output_type);</code>
+  * Added after #28<code php>$attachments = get_option('dbem_event_reapproved_email_attachments_' . $lang);
+
+$subject2 = $EM_Event->output(get_option('dbem_event_reapproved_confirmation_email_subject_' . $lang), 'raw');
+$body2 = $EM_Event->output(get_option('dbem_event_reapproved_confirmation_email_body_' . $lang), $output_type);</code>
+  * Added after #33<code php>if (strlen($attachments) > 0) {
+	$attachments = explode(",",$attachments);
+	$root = get_option('dbem_event_attachment_root');
+	array_walk( $attachments , function(&$value, $key) { $value = (strlen($value) > 0 && $value[0] != "/" ? $root . "/" : $root) . $value; } );
+}
+else {
+	$attachments = array();
+}</code>
+  * Changed #43 from <code php>$EM_Event->email_send( $subject , $body, $EM_Event->get_contact()->user_email);</code> to <code php>if(get_option('dbem_event_send_mail_to_owner')) $EM_Event->email_send( $subject , $body, $EM_Event->get_contact()->user_email, $attachments);</code>
+  * Added after #43<code php>
+$admin_emails = explode(',', str_replace(' ', '', get_option('dbem_event_submitted_email_admin'))); //admin emails are in an array, single or multiple
+$EM_Event->email_send( $subject2 , $body2, $admin_emails);</code>
+
+** wp-content\plugins\events-manager\templates\placeholders\bookingform.php **
+  * Added after #32<code php>$has_booking = false;
+foreach (pll_get_post_translations($EM_Event->post_id) as $value) {
+	$has_booking = $has_booking || is_object(em_get_event($value, 'post_id')->get_bookings()->has_booking());
+}</code>
+  * Changed #38 from <code php><?php if( is_object($EM_Booking) && !get_option('dbem_bookings_double') ): //Double bookings not allowed ?></code> to <code php><?php if( $has_booking && !get_option('dbem_bookings_double') ): //Double bookings not allowed ?></code>
+  * Changed #93 from <code php><?php if( preg_match('/https?:\/\//',get_option('dbem_bookings_submit_button')) ): //Settings have an image url (we assume). Use it here as the button.?></code> to <code php><?php if( preg_match('/https?:\/\//',get_option('dbem_bookings_submit_button_' . pll_current_language())) ): //Settings have an image url (we assume). Use it here as the button.?></code>
+  * Changed #94 from <code php><input type="image" src="<?php echo get_option('dbem_bookings_submit_button'); ?>" class="em-booking-submit" id="em-booking-submit" /></code> to <code php><input type="image" src="<?php echo get_option('dbem_bookings_submit_button_' . pll_current_language()); ?>" class="em-booking-submit" id="em-booking-submit" /></code>
+  * Changed #96 from <code php><input type="submit" class="<?php if(is_admin()) echo 'button-primary '; ?>em-booking-submit" id="em-booking-submit" value="<?php echo esc_attr(get_option('dbem_bookings_submit_button')); ?>" /></code> to <code php><input type="submit" class="<?php if(is_admin()) echo 'button-primary '; ?>em-booking-submit" id="em-booking-submit" value="<?php echo esc_attr(get_option('dbem_bookings_submit_button_' . pll_current_language())); ?>" /></code>
+  * Changed #102 from <code php><p class="em-booking-form-details"><?php echo get_option('dbem_booking_feedback_log_in'); ?></p></code> to <code php><p class="em-booking-form-details"><?php echo get_option('dbem_booking_feedback_log_in_' . pll_current_language()); ?></p></code>
+  * Changed #44 from <code php><p><?php echo get_option('dbem_bookings_form_msg_disabled'); ?></p></code> to <code php><p><?php echo get_option('dbem_bookings_form_msg_disabled_' . pll_current_language()); ?></p></code>
+  * Changed #46 from <code php><p><?php echo get_option('dbem_bookings_form_msg_full'); ?></p></code> to <code php><p><?php echo get_option('dbem_bookings_form_msg_full_' . pll_current_language()); ?></p></code>
+  * Changed #48 from <code php><p><?php echo get_option('dbem_bookings_form_msg_closed');  ?></p></code> to <code php><p><?php echo get_option('dbem_bookings_form_msg_closed_' . pll_current_language());  ?></p></code>
+  * Changed #70 from <code php><div class='em-booking-form-details'></code> to <code php><div class='em-booking-form-details' style="width:100%"></code>
+
+** wp-content\plugins\events-manager\classes\em-bookings.php **
+  * Changed #133 from <code php>$this->feedback_message = get_option('dbem_booking_feedback_pending');</code> to <code php>$this->feedback_message = get_option('dbem_booking_feedback_pending_' . pll_current_language());</code>
+  * Changed #135 from <code php>$this->feedback_message = get_option('dbem_booking_feedback');</code> to <code php>$this->feedback_message = get_option('dbem_booking_feedback_' . pll_current_language());</code>
+  * Changed #151 from <code php>$this->errors[] = "<strong>".get_option('dbem_booking_feedback_error')."</strong><br />". implode('<br />', $EM_Booking->errors);</code> to <code php>$this->errors[] = "<strong>".get_option('dbem_booking_feedback_error_' . pll_current_language())."</strong><br />". implode('<br />', $EM_Booking->errors);</code>
+  * Changed #139 from <code php>$this->feedback_message .= ' '.get_option('dbem_booking_feedback_nomail');</code> to <code php>$this->feedback_message .= ' '.get_option('dbem_booking_feedback_nomail_' . pll_current_language());</code>
+
+** wp-content\plugins\events-manager\admin\em-bookings.php **
+  * Added after #123: <code php><h2><?php pll_e('Add booking','events-manager'); ?></h2>
+<form method='POST' action=''>
+	<input type="hidden" name="post_type" value="event" />
+	<input type="hidden" name="page" value="events-manager-bookings" />
+	<input type='hidden' name='event_id' value='<?php echo $EM_Event->event_id; ?>'/>
+	<input type='hidden' name='_wpnonce' value='<?php echo wp_create_nonce('add_user_ticket_'.$EM_Event->event_id); ?>'/>
+	<input type="hidden" name="action" value="add_user_ticket" />
+	<p><label for="user">User:</label>
+	<?php wp_dropdown_users( array( 'show_option_none' => "----", 'role__in' => array('subscriber' )) ); ?></p>
+	<p><label for="ticket">Date:</label>
+	<select name="ticket" id="ticket">
+		<?php 
+		$res = $EM_Event->get_bookings()->get_tickets();
+		foreach ($res as $key => $value) :?>
+			<option value="<?php echo $key; ?>"><?php echo $value->__get('ticket_name'); ?></option>
+		<?php endforeach; ?>
+	</select></p>
+	<p><input id="post-query-submit" class="button-secondary" type="submit" value="Tilmeld"></p>
+<form></code>
+  * Added after #17: <code php>add_action('em_bookings_add_user_ticket','add_user_signup');</code>
+  * Added after #148: <code php>function add_user_signup() {
+	global $wpdb;
+	if (isset($_REQUEST['user']) && $_REQUEST['user'] > 0 && isset($_REQUEST['event_id']) && wp_verify_nonce($_REQUEST['_wpnonce'],'add_user_ticket_' . $_REQUEST['event_id'])) {
+		if ($wpdb->get_var("SELECT COUNT(*) FROM " . EM_BOOKINGS_TABLE . " WHERE event_id=" . $_REQUEST['event_id'] . " AND person_id=" . $_REQUEST['user']) == 0) {
+			$result = $wpdb->insert(EM_BOOKINGS_TABLE, array('event_id' => $_REQUEST['event_id'], 'person_id' => $_REQUEST['user'], 'booking_spaces' => 1, 'booking_comment' => '', 'booking_date' => gmdate('Y-m-d H:i:s'), 'booking_status' => 1, 'booking_price' => 0, 'booking_tax_rate' => 0, 'booking_meta' => 'a:0:{}' )); // Add booking to user
+			$result2 = $wpdb->insert(EM_TICKETS_BOOKINGS_TABLE, array( 'booking_id' => $wpdb->insert_id, 'ticket_id' => $_REQUEST['ticket'], 'ticket_booking_spaces' => 1, 'ticket_booking_price' => 0 ) ); // Add tickets to booking
+			if ($result === 1 && $result2 === 1) :
+			?>
+			<div class="notice notice-success is-dismissible">
+				<p><?php pll_e('User signed up successfully', 'events-manager'); ?></p>
+			</div>
+			<?php
+			else: ?>
+			<div class="notice notice-error is-dismissible">
+				<p><?php pll_e('User sign up failed', 'events-manager'); ?></p>
+			</div>
+			<?php endif;
+		}
+		else { ?>
+			<div class="notice notice-warning is-dismissible">
+				<p><?php pll_e('User already signed up', 'events-manager'); ?></p>
+			</div>
+		<?php }
+	}
+	em_bookings_event(); // Print standard layout
+}
+
+</code>
+  * Changed #101 from <code php><?php echo $EM_Event->get_bookings()->get_booked_spaces() . 'a/'. $EM_Event->get_spaces() ." ". __('Spaces confirmed','events-manager'); ?></code> to <code php><?php 
+$translations = pll_get_post_translations($EM_Event->post_id);
+$booked_spaces = 0;
+foreach ($translations as $lang => $post_id) {
+	$booked_spaces += em_get_event($post_id, 'post_id')->get_bookings()->get_booked_spaces();
+}
+echo $booked_spaces."/".$EM_Event->get_spaces() ." ". __('Spaces confirmed','events-manager'); ?></code>
+  * Changed #109 from <code php>, <?php echo $EM_Event->get_bookings()->get_available_spaces() . 'a/'. $EM_Event->get_spaces() ." ". __('Available spaces','events-manager'); ?></code> to <code php>, <?php echo $EM_Event->get_spaces() - $booked_spaces . '/'. $EM_Event->get_spaces() ." ". __('Available spaces','events-manager'); ?></code>
+  * Changed #128 from <code php>$EM_Bookings_Table->status = 'all';</code> to <code php>$EM_Bookings_Table->status = 'confirmed';
+$EM_Bookings_Table->show_tickets = true;
+$EM_Bookings_Table->limit = 100;
+$EM_Bookings_Table->cols = array('user_login','user_name','ticket_name','booking_spaces','booking_comment','event_name','booking_status','actions');
+$EM_Bookings_Table->cols_template['ticket_name'] = __('Date', 'events-manager');</code>
+  * Changed #57 from <code php>$EM_Bookings_Table->status = get_option('dbem_bookings_approval') ? 'needs-attention':'confirmed';</code> to <code php>$EM_Bookings_Table->status = 'confirmed';</code>
+  * Added after #57 <code php>$EM_Bookings_Table->show_tickets = true;
+$EM_Bookings_Table->limit = 100;
+$EM_Bookings_Table->cols = array('user_login','user_name','ticket_name','booking_spaces','booking_comment','event_name','booking_status','actions');
+$EM_Bookings_Table->cols_template['ticket_name'] = __('Date', 'events-manager');</code>
+
+** wp-content\plugins\events-manager\classes\em-tickets-bookings.php **
+  * Changed #120 from <code php>$this->add_error(get_option('dbem_booking_feedback_full'));</code> to <code php>$this->add_error(get_option('dbem_booking_feedback_full_' . pll_current_language()));</code>
+
+** wp-content\plugins\events-manager\classes\em-booking.php **
+  * Changed #425 from <code php>$this->add_error(get_option('dbem_booking_feedback_full'));</code> to <code php>$this->add_error(get_option('dbem_booking_feedback_full_' . pll_current_language()));</code>
+  * Changed #862 from <code php>$this->add_error( get_option('dbem_booking_feedback_email_exists') );</code> to <code php>$this->add_error( get_option('dbem_booking_feedback_email_exists_' . pll_current_language()) );</code>
+  * Changed #393 from <code php>$this->add_error(get_option('dbem_booking_feedback_min_space'));</code> to <code php>$this->add_error(get_option('dbem_booking_feedback_min_space_' . pll_current_language()));</code>
+  * Changed #431 from <code php>$this->add_error( sprintf(get_option('dbem_booking_feedback_spaces_limit'), $this->get_event()->event_rsvp_spaces));</code> to <code php>$this->add_error( sprintf(get_option('dbem_booking_feedback_spaces_limit_' . pll_current_language()), $this->get_event()->event_rsvp_spaces));</code>
+  * Added after #1118: <code php>case '#_EVENTINFO':
+	$spaces = array();
+	foreach ($this->get_event()->get_tickets()->tickets as $ticket) {
+		if (isset($spaces[$ticket->ticket_name])) {
+			$spaces[$ticket->ticket_name]['booked'] += $ticket->get_booked_spaces();
+			$spaces[$ticket->ticket_name]['available'] += $ticket->get_available_spaces();
+			$spaces[$ticket->ticket_name]['total'] += $ticket->get_spaces();
+		} else {
+			$spaces[$ticket->ticket_name] = array('booked' => $ticket->get_booked_spaces(),'available' => $ticket->get_available_spaces(),'total' => $ticket->get_spaces()) . "\n" . 'Total: ' . array_sum(array_map(function($info){return $info['booked'];}, $spaces)) . ' / ' . array_sum(array_map(function($info){return $info['total'];}, $spaces));
+		}
+	}
+
+	$replace = implode("\n",array_map(function($info,$date){return $date . ' : ' . $info['booked'] . ' / ' . $info['total'];}, $spaces, array_keys($spaces)));
+	break;</code>
+
+** wp-content\plugins\events-manager\classes\em-event.php **
+  * Added after #1006<code php>
+// Check if an event already exists that day
+$table_name = EM_EVENTS_TABLE;
+$end_datetime = new DateTime($this->end_date . " " . $this->end_time, new DateTimeZone('Europe/Copenhagen'));
+$end_datetime->setTimezone(new DateTimeZone('UTC'));
+$end_datetime = $end_datetime->format("Y-m-d H:i:s");
+$start_datetime = new DateTime($this->start_date . " " . $this->start_time, new DateTimeZone('Europe/Copenhagen'));
+$start_datetime->setTimezone(new DateTimeZone('UTC'));
+$start_datetime = $start_datetime->format("Y-m-d H:i:s");
+$sql = "SELECT COUNT(*) FROM  $table_name WHERE (event_start <= '$end_datetime' AND event_end >= '$start_datetime' AND (event_status >= 0 OR event_status IS NULL) AND post_id != '$this->post_id');";
+$count = apply_filters('em_events_count_date', $wpdb->get_var($sql));
+if ($start_datetime === $end_datetime) {
+	$this->add_error(pll__('Event start and end at the same time. This is not possible.', 'events-manager'));
+	$EM_SAVING_EVENT = false;
+	return false;
+}
+if ($count > 0 && !current_user_can('edit_others_events')) {
+	$this->add_error(pll__('Event already exists during that time.', 'events-manager'));
+	$EM_SAVING_EVENT = false;
+	return false;
+}</code>
+  * #2758 commented out
+  * #2764-2770 commented out
+  * Added after #2176 <code php>case '#_EVENTPRICE':
+	require_once WP_PLUGIN_DIR . '/AKDTU/functions/fælleshus.php';
+	$replace = calc_rental_cost(new DateTime(trim($this->event_start_date.' '.$this->event_start_time)),new DateTime(trim($this->event_end_date.' '.$this->event_end_time)));
+	break;</code>
+  * Changed #2189 from <code php>$replace = $this->event_name;</code> to <code php>$replacements = array(
+	'#_RENTAL_BEFORE_APARTMENTNUM' => pll__('RENTAL_BEFORE_APARTMENTNUM','events-manager'),
+	'#_RENTAL_AFTER_APARTMENTNUM' => pll__('RENTAL_AFTER_APARTMENTNUM','events-manager'),
+);
+$replace = str_replace(array_keys($replacements), $replacements , $this->event_name );</code>
+  * Added after #2180 <code php>case '#_EVENTPAYMENTMONTH':
+	$payment_month = new DateTime($this->end()->format('d-m-Y H:i:s'), new DateTimeZone('Europe/Copenhagen'));
+	$payment_month->setDate($payment_month->format('Y'), $payment_month->format('m'), 1)->modify('+2 months');
+	$month_formatter = new IntlDateFormatter(pll_get_post_language($this->post_id,'locale'), IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen');
+	$month_formatter->setPattern('MMMM');
+	$replace = $month_formatter->format($payment_month);
+	break;
+case '#_EVENTPAYMENTYEAR':
+	$payment_year = new DateTime($this->end()->format('d-m-Y H:i:s'), new DateTimeZone('Europe/Copenhagen'));
+	$payment_year->setDate($payment_year->format('Y'), $payment_year->format('m'), 1)->modify('+2 months');
+	$year_formatter = new IntlDateFormatter(pll_get_post_language($this->post_id,'locale'), IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen');
+	$year_formatter->setPattern('YYYY');
+	$replace = $year_formatter->format($payment_year);
+	break;
+case '#_EVENTPAYMENTMONTH_DA':
+	$payment_month = new DateTime($this->end()->format('d-m-Y H:i:s'), new DateTimeZone('Europe/Copenhagen'));
+	$payment_month->setDate($payment_month->format('Y'), $payment_month->format('m'), 1)->modify('+2 months');
+	$month_formatter = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen');
+	$month_formatter->setPattern('MMMM');
+	$replace = $month_formatter->format($payment_month);
+	break;</code>
+  * Changed #1305 from <code php>$msg['user']['subject'] = get_option('dbem_bookings_email_confirmed_subject');</code> to <code php>$msg['user']['subject'] = get_option('dbem_bookings_email_confirmed_subject_' . pll_current_language());</code>
+  * Changed #1306 from <code php>$msg['user']['subject'] = get_option('dbem_bookings_email_confirmed_body');</code> to <code php>$msg['user']['subject'] = get_option('dbem_bookings_email_confirmed_body_' . pll_current_language());</code>
+  * Changed #1319 from <code php>$msg['user']['subject'] = get_option('dbem_bookings_email_cancelled_subject');</code> to <code php>$msg['user']['subject'] = get_option('dbem_bookings_email_cancelled_subject_' . pll_current_language());</code>
+  * Changed #1320 from <code php>$msg['user']['body'] = get_option('dbem_bookings_email_cancelled_body');</code> to <code php>$msg['user']['body'] = get_option('dbem_bookings_email_cancelled_body_' . pll_current_language());</code>
+  * Changed #1242 from <code php>$msg['user']['body'] = $this->output($msg['user']['body'], 'email');</code> to <code php>$msg['user']['body'] = $this->output($msg['user']['body'], 'html');</code>
+  * Changed #1271 from <code php>$msg['admin']['body'] = $this->output($msg['admin']['body'], 'email');</code> to <code php>$msg['admin']['body'] = $this->output($msg['admin']['body'], 'html');</code>
+  * Changed #2528 from <code php>$replace = $this->get_bookings()->get_available_spaces();</code> to <code php>$translations = pll_get_post_translations($this->post_id);
+$replace = $this->get_spaces();
+foreach ($translations as $lang => $post_id) {
+	$replace -= em_get_event($post_id, 'post_id')->get_bookings()->get_booked_spaces();
+}</code>
+  * Changed #2541-2544 from <code php>$replace = $this->get_bookings()->get_booked_spaces();
+if (get_option('dbem_bookings_approval_reserved')) {
+	$replace += $this->get_bookings()->get_pending_spaces();
+}</code> to <code php>$translations = pll_get_post_translations($this->post_id);
+$replace = 0;
+foreach ($translations as $lang => $post_id) {
+	$replace += em_get_event($post_id, 'post_id')->get_bookings()->get_booked_spaces();
+}</code>
+  * Changed #2552 from <code php>$replace = $this->get_bookings()->get_pending_spaces();</code> to <code php>$translations = pll_get_post_translations($this->post_id);
+$replace = 0;
+foreach ($translations as $lang => $post_id) {
+	$replace += em_get_event($post_id, 'post_id')->get_bookings()->get_pending_spaces();
+}</code>
+
+** wp-content\plugins\events-manager\em-functions.php **
+  * Changed #405 from <code php>$EM_Notices->add_error( get_option('dbem_booking_feedback_log_in') );</code> to <code php>$EM_Notices->add_error( get_option('dbem_booking_feedback_log_in_' . pll_current_language()) );</code>
+
+** wp-content\plugins\events-manager\templates\forms\bookingform\tickets-list.php **
+  * Changed #45 from <code php>echo ( $spaces_options ) ? $spaces_options:"<strong>".__('N/A','events-manager')."</strong>";</code> to <code php>echo ( $spaces_options ) ? $spaces_options:"<strong>".pll__('No spaces left','events-manager')."</strong>";</code>
+
+** wp-content\plugins\events-manager\templates\forms\bookingform\booking-fields.php **
+  * Changed #26 from <code php><label for='booking_comment'><?php _e('Comment', 'events-manager') ?></label></code> to <code php><label for='booking_comment' style="width:auto"><?php pll_e('Comment', 'events-manager') ?></label></code>
+  * Added after #26: <code php></p>
+<p></code>
+
+** D:\xampp\apps\wordpress\htdocs\wp-content\plugins\events-manager\classes\em-bookings-table.php **
+  * Changed #217 from <code php>$args = array('event'=>$EM_Event->event_id,'scope'=>false,'status'=>$this->get_status_search(),'order'=>$this->order,'orderby'=>$this->orderby);</code> to <code php>$translations = pll_get_post_translations($EM_Event->post_id);
+$event_ids = array();
+foreach ($translations as $lang => $post_id) {
+	array_push($event_ids,em_get_event($post_id,'post_id')->event_id);
+}
+$args = array('event'=>$event_ids,'scope'=>false,'status'=>$this->get_status_search(),'order'=>$this->order,'orderby'=>$this->orderby);</code>
+  * Changed #91 from <code php>'booking_comment'=>__('Booking Comment','events-manager')</code> to <code php>'booking_comment'=>__('Booking Comment','events-manager'),
+'ticket_name'=>__('Ticket Name','events-manager'),
+'ticket_description'=>__('Ticket Description','events-manager'),
+'ticket_price'=>__('Ticket Price','events-manager'),
+'ticket_total'=>__('Ticket Total','events-manager'),
+'ticket_id'=>__('Ticket ID','events-manager')</code>
+  * Changed #298 from <code php><p><?php esc_html_e('Split bookings by ticket type','events-manager')?> <input type="checkbox" name="show_tickets" value="1" /></code> to <code php><p><?php esc_html_e('Split bookings by ticket type','events-manager')?> <input type="checkbox" name="show_tickets" value="1" checked /></code>
+  * Changed #92 from <code php>'ticket_name'=>__('Ticket Name','events-manager'),</code> to <code php>'ticket_name'=>__('Date','events-manager'),</code>
+  * Changed #99 from <code php>'ticket_name'=>__('Ticket Name','events-manager'),</code> to <code php>'ticket_name'=>__('Date','events-manager'),</code>
+  * Changed #52 from <code php>function __construct($show_tickets = false){</code> to <code php>function __construct($show_tickets = true){</code>
+  * Changed #625 from <code php>$row[$k] = html_entity_decode($v);</code> to <code php>$row[$k] = str_replace(array("\r", "\n"), '', html_entity_decode($v));</code>
+
+** wp-content\plugins\events-manager\admin\em-admin.php **
+  * Added after #36 <code php>$plugin_pages['signuplists'] = add_submenu_page('edit.php?post_type='.EM_POST_TYPE_EVENT, pll__('Tilmeldingslister', 'events-manager'), pll__('Tilmeldingslister', 'events-manager'), 'manage_bookings', 'events-manager-print-bookings', "em_bookings_print_page");</code>
+
+** wp-content\plugins\events-manager\em-template-tags.php **
+  * Added after #454 <code php>include_once(EM_DIR.'/admin/bookings/em-print-events.php');</code>
+
+
+** wp-content\plugins\events-manager\admin\em-print-bookings.php **
+  * Added file with contents <code php><?php
+
+/**
+ * Decide what content to show in the bookings section. 
+ */
+
+ add_action('wp_ajax_update_arrivalstatus','update_arrivalstatus');
+
+function update_arrivalstatus() {
+	global $wpdb;
+	if (isset($_REQUEST['userid']) && isset($_REQUEST['status'])){
+		$res = $wpdb->get_results('SELECT ticket_id,showed_up FROM wp_em_tilmeldinger WHERE event_id = ' . $_REQUEST['event_id'] . ' AND ticket_id = ' . $_REQUEST['event_ticket_id'] );
+		if ($_REQUEST['status'] == 'true') {
+			## User showed up
+			if (count($res) == 0) {
+				$wpdb->insert('wp_em_tilmeldinger', array('showed_up' => json_encode(array($_REQUEST['userid'] => true)), 'event_id' => $_REQUEST['event_id'], 'ticket_id' => $_REQUEST['event_ticket_id']));
+			} else {
+				$id = $_REQUEST['userid'];
+				$showed_up = json_decode($res[0]->showed_up);
+				$showed_up->$id = true;
+				$wpdb->update('wp_em_tilmeldinger', array('showed_up' => json_encode($showed_up)), array('event_id' => $_REQUEST['event_id'], 'ticket_id' => $_REQUEST['event_ticket_id']));
+			}
+		} else {
+			## User removed again
+			if (count($res) == 0) {
+				## Do nothing, since there is nothing to remove
+			} else {
+				$id = $_REQUEST['userid'];
+				$showed_up = json_decode($res[0]->showed_up);
+				$showed_up->$id = false;
+				$wpdb->update('wp_em_tilmeldinger', array('showed_up' => json_encode($showed_up)), array('event_id' => $_REQUEST['event_id'], 'ticket_id' => $_REQUEST['event_ticket_id']));
+			}
+		}
+	}
+	wp_die('','',['response'=>200]);
+}
+
+function em_bookings_print_page(){
+	//First any actions take priority
+	do_action('em_bookings_admin_page');
+	if( !empty($_REQUEST['_wpnonce']) ){ $_REQUEST['_wpnonce'] = $_GET['_wpnonce'] = $_POST['_wpnonce'] = esc_attr($_REQUEST['_wpnonce']); } //XSS fix just in case here too
+	if( !empty($_REQUEST['action']) && substr($_REQUEST['action'],0,7) != 'booking' ){ //actions not starting with booking_
+		do_action('em_bookings_'.$_REQUEST['action']);
+	}elseif( !empty($_REQUEST['event_id']) ){
+		em_bookings_print_event();
+	}else{
+		em_bookings_print_dashboard();
+	}
+}
+
+/**
+ * Generates the bookings dashboard, showing information on all events 
+ */
+function em_bookings_print_dashboard(){
+	global $EM_Notices;
+	?>
+	<div class='wrap em-bookings-dashboard'>
+		<?php if( is_admin() ): ?>
+  		<h1>Tilmeldingslister til havedage</h1>
+  		<?php else: echo $EM_Notices; ?>
+  		<?php endif; ?>
+  		<div class="em-bookings-events">
+			<h2><?php esc_html_e('Events With Bookings Enabled','events-manager'); ?></h2>		
+			<?php em_bookings_events_print_table(); ?>
+			<?php do_action('em_bookings_dashboard'); ?>
+		</div>
+	</div>
+	<?php		
+}
+?></code>
+
+** wp-content\plugins\events-manager\admin\bookings\em-print-events.php **
+  * Added file with contents <code php><?php
+
+/**
+ * Shows all booking data for a single event 
+ */
+function em_bookings_print_event(){
+	global $EM_Event,$EM_Person,$EM_Notices,$wpdb;
+
+	//check that user can access this page
+	if( is_object($EM_Event) && !$EM_Event->can_manage('manage_bookings','manage_others_bookings') ){
+		?>
+		<div class="wrap"><h2><?php esc_html_e('Unauthorized Access','events-manager'); ?></h2><p><?php esc_html_e('You do not have the rights to manage this event.','events-manager'); ?></p></div>
+		<?php
+		return false;
+	}
+	$header_button_classes = is_admin() ? 'page-title-action':'button add-new-h2';
+	if(empty($_REQUEST['event_ticket_id'])){
+		$_REQUEST['event_ticket_id'] = array_keys(em_get_event($_REQUEST['event_id'], 'event_id')->get_tickets()->tickets)[0];
+	}
+	$translations = pll_get_post_translations($EM_Event->post_id);
+	$target_ticket_name = em_get_event($_REQUEST['event_id'], 'event_id')->get_bookings();
+	$tickets = array();
+	foreach ($translations as $translation) {
+		foreach (em_get_event($translation, 'post_id')->get_bookings()->get_tickets()->tickets as $translated_ticket) {
+			$tickets[$translated_ticket->ticket_id] = $translated_ticket;
+		}
+	}
+	if (!array_key_exists($_REQUEST['event_ticket_id'],$tickets) && strtolower($_REQUEST['event_ticket_id']) != 'total'){
+		echo "<div class='statusnotice'><div class='em-warning em-warning-errors notice notice-error'>This ticket was not found on this event!</div></div>";
+	}
+	else {
+		if (array_key_exists($_REQUEST['event_ticket_id'],$tickets)){
+			$ticket = $tickets[$_REQUEST['event_ticket_id']];
+			$bookings = array();
+			foreach ($tickets as $translated_ticket) {
+				if ($translated_ticket->ticket_name == $ticket->ticket_name){
+					foreach ($translated_ticket->get_bookings()->bookings as $booking) {
+						if ($booking->booking_status == 1){
+							array_push($bookings,$booking);
+						}
+					}
+				}
+			}
+		} else {
+			$bookings = array();
+			foreach ($tickets as $translated_ticket) {
+				foreach ($translated_ticket->get_bookings()->bookings as $booking) {
+					if ($booking->booking_status == 1){
+						array_push($bookings,$booking);
+					}
+				}
+			}
+		}
+		usort($bookings,function($a,$b){return (get_userdata($a->person_id)->get("user_login") < get_userdata($b->person_id)->get("user_login")) ? -1 : 1;});
+		//columns to show in table
+		$cols = array('checkbox' => "Deltager", 'user_login' => "Lejlighed", 'user_name' => "Navn", 'booking_comment' => "Kommentar", 'booking_spaces' => "Pladser");
+		$widths = array("checkbox"=>"5%","user_login"=>"10%","user_name"=>"30%","booking_comment"=>"50%","booking_spaces"=>"5%");
+	}
+
+	$res = $wpdb->get_results('SELECT ticket_id,showed_up FROM wp_em_tilmeldinger WHERE event_id = ' . $_REQUEST['event_id'] . ' AND ticket_id = ' . $_REQUEST['event_ticket_id'] );
+	$showed_up = (count($res) == 0 ? array() : json_decode($res[0]->showed_up));
+	for ($floor = 0; $floor <= 2; $floor++) {
+		for ($apartment = 1; $apartment <= 24; $apartment++) {
+			if (array_key_exists(get_user_by('login', 'lejl' . str_pad($apartment_num,3,"0",STR_PAD_LEFT) . '_archive')->ID, $showed_up)) {
+				$showed_up[get_user_by('login', 'lejl' . str_pad($apartment_num,3,"0",STR_PAD_LEFT))->ID] = $showed_up[get_user_by('login', 'lejl' . str_pad($apartment_num,3,"0",STR_PAD_LEFT) . '_archive')->ID];
+			}
+			if (array_key_exists(get_user_by('login', 'lejl' . str_pad($apartment_num,3,"0",STR_PAD_LEFT))->ID, $showed_up)) {
+				$showed_up[get_user_by('login', 'lejl' . str_pad($apartment_num,3,"0",STR_PAD_LEFT) . '_archive')->ID] = $showed_up[get_user_by('login', 'lejl' . str_pad($apartment_num,3,"0",STR_PAD_LEFT))->ID];
+			}
+		}
+	}
+	?>
+	<div class='wrap'>
+		<?php if( is_admin() ): ?><h1 class="wp-heading-inline"><?php else: ?><h2><?php endif; ?>		
+  			<?php echo sprintf(__('Tilmeldingsliste til %s', 'events-manager'), "'{$EM_Event->event_name}'"); ?>
+		<?php if( !is_admin() ): ?></h2><?php else: ?></h1><hr class="wp-header-end" /><?php endif; ?>
+  		<?php if( !is_admin() ) echo $EM_Notices; ?>
+		<h2><?php esc_html_e('Date','events-manager'); ?></h2>
+		<input type='hidden' name='selected_id' id='selected_id' value='<?php echo $_REQUEST['event_ticket_id']; ?>'/>
+		<form method='GET' action=''>
+			<input type="hidden" name="post_type" value="event" />
+			<input type="hidden" name="page" value="events-manager-print-bookings" />
+			<input type='hidden' name='event_id' value='<?php echo $EM_Event->event_id; ?>'/>
+			<select name="event_ticket_id" id="event_ticket_id" onchange="document.getElementById('post-query-print').disabled = this.value != document.getElementById('selected_id').value">
+				<?php 
+				$res = $EM_Event->get_bookings()->get_tickets();
+				foreach ($res as $key => $value) :?>
+					<option value="<?php echo $key; ?>"<?php if(!empty($_REQUEST['event_ticket_id']) && $_REQUEST['event_ticket_id'] == $key){echo " selected";}?>><?php echo $value->__get('ticket_name'); ?></option>
+				<?php endforeach; ?>
+				<option value="total"<?php if(!empty($_REQUEST['event_ticket_id']) && strtolower($_REQUEST['event_ticket_id']) == 'total'){echo " selected";}?>>Samlet</option>
+			</select>
+			<input id="post-query-submit" class="button-secondary" type="submit" value="Vis">
+	<?php if (!empty($_REQUEST['event_ticket_id']) && (array_key_exists($_REQUEST['event_ticket_id'],$tickets) || strtolower($_REQUEST['event_ticket_id']) == 'total')) : ?>
+		<input id="post-query-print" class="button-secondary print-button" type="button" onclick="window.print()" value="Print">
+	<?php endif; ?>
+	</p></form>
+	<?php
+		if (!empty($_REQUEST['event_ticket_id'])):
+			if (array_key_exists($_REQUEST['event_ticket_id'],$tickets)):
+	?>
+		<div class='em-bookings-table em_obj' id="em-bookings-table">
+			<div class='table-wrap'>
+				<table id='dbem-bookings-table' class='widefat post ' style="max-width: 75em">
+					<colgroup>
+					<?php foreach ($cols as $action => $header):?>
+						<col span="1" style="width: <?php echo $widths[$action];?>" />
+					<?php endforeach; ?>
+					</colgroup>
+					<thead>
+						<tr>
+							<?php foreach ($cols as $action => $header) {
+								echo "<th class='manage-column' scope='col'>" . $header . "</th>";
+							} ?>
+						</tr>
+					</thead>
+					<?php if( count($bookings) > 0 ): ?>
+					<tbody id="tilmeldingsliste">
+						<?php 
+						$rowno = 0;
+						$event_count = (!empty($event_count)) ? $event_count:0;
+						foreach ($bookings as $booking) {
+							$user = get_userdata($booking->person_id);
+							?>
+							<tr>
+								<?php 
+								foreach ($cols as $action => $header) {
+									if ($action == "checkbox") {
+										$id = $user->ID;
+										echo "<td width='".$widths[$action]."'><input data-userid='" . $id . "' onclick='update_arrivalstatus(this)' type='checkbox'" . (isset($showed_up->$id) && $showed_up->$id ? ' checked' : '') . " /></td>";
+									}elseif($action == "booking_spaces"){
+										echo "<td width='".$widths[$action]."'>".$booking->get_spaces()."</td>";
+									}elseif($action == "booking_comment"){
+										echo "<td width='".$widths[$action]."'>".$booking->booking_comment."</td>";
+									}elseif($action == "user_name"){
+										echo "<td width='".$widths[$action]."'>".$booking->get_person()->get_name()."</td>";
+									}
+									elseif($action == "user_login"){
+										$user_login = $user->get($action);
+										if (substr($user_login,0,4) == "lejl"){
+											echo "<td width='".$widths[$action]."'>".substr($user_login,4,3)."</td>";
+										}
+									}
+									else {
+										echo "<td width='".$widths[$action]."'>".$user->get($action)."</td>";
+									}
+								} ?>
+							</tr>
+							<?php
+							}
+						?>
+					</tbody>
+					<?php else: ?>
+						<tbody>
+							<tr><td scope="row" colspan="<?php echo count($cols); ?>"><?php esc_html_e('No bookings.', 'events-manager'); ?></td></tr>
+						</tbody>
+					<?php endif; ?>
+				</table>
+			</div>
+		</div>
+	</div>
+	<script>
+		function update_arrivalstatus(checkbox) {
+			const xhttp = new XMLHttpRequest();
+			xhttp.open("post", ajaxurl, true);
+			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			// xhttp.onreadystatechange = function(){
+			// 	if(xhttp.readyState == 4 && xhttp.status == 200)
+			// 	{
+			// 		console.log(xhttp.responseText);
+			// 	}
+			// }
+			xhttp.send('action=update_arrivalstatus&userid=' + checkbox.dataset.userid + '&status=' + checkbox.checked + '&event_id=<?php echo $_REQUEST['event_id']; ?>&event_ticket_id=<?php echo $_REQUEST['event_ticket_id']; ?>');
+		}
+	</script>
+	<style>
+		@media print {
+			#adminmenumain,
+			#wpadminbar,
+			#wpfooter{
+				display:none !important;
+			}
+			#wpcontent{
+				margin-left:0;
+			}
+			.update-nag,
+			.notice,
+			.notice-warning {
+				display:none;
+			}
+			html.wp-toolbar{
+				padding-top: 0;
+			}
+		}
+	</style>
+	<?php elseif (strtolower($_REQUEST['event_ticket_id']) == 'total'):
+		$all_users = array();
+		$status = array();
+		for ($floor = 0; $floor < 3; $floor++){
+			for ($apartment = 1; $apartment < 25; $apartment++){
+				array_push($all_users,$floor*100+$apartment);
+				$status[$floor*100+$apartment] = false;
+			}
+		}
+		$res = $wpdb->get_col('SELECT showed_up FROM wp_em_tilmeldinger WHERE event_id = ' . $_REQUEST['event_id']);
+		$res = array_map(function ($a) {return json_decode($a);},$res);
+		foreach ($res as $arr) {
+			foreach ($arr as $user_id => $stat) {
+				$user_login = get_user_by('id',$user_id)->user_login;
+				if (substr($user_login,0,4) == "lejl"){ 
+					$status[ltrim(substr($user_login,4,3),"0")] = (isset($status[ltrim(substr($user_login,4,3),"0")]) ? ($stat || $status[ltrim(substr($user_login,4,3),"0")]) : $stat);
+				}
+			}
+		}
+		$users = array_map(function($booking) {$user_login = get_userdata($booking->person_id)->get('user_login'); if (substr($user_login,0,4) == "lejl"){ return ltrim(substr($user_login,4,3),"0"); }} , $bookings);
+		$users_archive = array_map(function($booking) {$user_login = get_userdata($booking->person_id)->get('user_login'); return substr($user_login,7,8) == '_archive';} , $bookings);
+
+		$latest_signup_date = em_get_event($bookings[0]->event_id,'event_id')->rsvp_date;
+
+		$query = $wpdb->prepare('SELECT apartment_number FROM ' . $wpdb->prefix . 'swpm_allowed_membercreation WHERE allow_creation_date >= "' . $latest_signup_date . '" AND has_been_reset = 1 ORDER BY allow_creation_date ASC, apartment_number ASC');
+		$moved_users = $wpdb->get_col($query);
+	
+		$not_showed_up_users = array();
+		$not_showed_up_users_archive = array();
+		$showed_up_users = array();
+		$showed_up_users_archive = array();
+		$not_signed_up_users = array();
+		$not_signed_up_users_archive = array();
+
+		foreach ($all_users as $apartment) {
+			if ($status[$apartment] == 1) {
+				array_push($showed_up_users, $apartment);
+				array_push($showed_up_users_archive, (in_array($apartment,$users) ? $users_archive[array_search($apartment,$users)] : false));
+			} elseif(in_array($apartment, $users)) {
+				array_push($not_showed_up_users, $apartment);
+				array_push($not_showed_up_users_archive, (in_array($apartment,$users) ? $users_archive[array_search($apartment,$users)] : false));
+			} else {
+				array_push($not_signed_up_users, $apartment);
+				array_push($not_signed_up_users_archive, (in_array($apartment,$moved_users) ? true : false));
+			}
+		}
+		?>
+		<h2>Lejligheder tilmeldt havedage, men IKKE mødt op ifølge online tilmeldingslister:</h2>
+		<!-- <?php echo (count($not_showed_up_users) > 0 ? implode(", ", $not_showed_up_users) : '(Ingen)'); ?> -->
+		<?php 
+			$total_not_showed_up = count($not_showed_up_users);
+			if ($total_not_showed_up > 0) {
+				$i = 1;
+				foreach ($not_showed_up_users as $key => $apartment){
+					echo $apartment . ($not_showed_up_users_archive[$key] ? ' (Tidligere beboer)' : '') . ($i<$total_not_showed_up ? ', ' : '');
+					$i++;
+				}
+			} else {
+				echo '(Ingen)';
+			} ?>
+
+		<h2>Lejligheder IKKE tilmeldt havedage: (Check selv om det er tidligere beboere)</h2>
+		<!-- <?php echo (count($not_signed_up_users) > 0 ? implode(", ", $not_signed_up_users) : '(Ingen)'); ?> -->
+		<?php 
+			$total_not_signed_up = count($not_signed_up_users);
+			if ($total_not_signed_up > 0) {
+				$i = 1;
+				foreach ($not_signed_up_users as $key => $apartment){
+					echo $apartment . ($not_signed_up_users_archive[$key] ? ' (Tidligere beboer)' : '') . ($i<$total_not_signed_up ? ', ' : '');
+					$i++;
+				}
+			} else {
+				echo '(Ingen)';
+			}
+		?>
+
+		<h2>Lejligheder tilmeldt havedage og mødt op ifølge online tilmeldingslister:</h2>
+		<!-- <?php echo (count($showed_up_users) > 0 ? implode(", ", $showed_up_users) : '(Ingen)'); ?> -->
+		<?php 
+			$total_showed = count($showed_up_users);
+			if ($total_showed > 0) {
+				$i = 1;
+				foreach ($showed_up_users as $key => $apartment){
+					echo $apartment . ($showed_up_users_archive[$key] ? ' (Tidligere beboer)' : '') . ($i<$total_showed ? ', ' : '');
+					$i++;
+				}
+			} else {
+				echo '(Ingen)';
+			}
+		?>
+
+		<br><br><hr>
+		<h2>Opkrævning:</h2>
+		<?php 
+		$price = 750;
+		foreach ($all_users as $apartment) {
+			if ($status[$apartment] == 1) {
+				# Apartment showed up as they were supposed to. No charge
+			} elseif(in_array($apartment, $users)) {
+				# Apartment was signed up, but did not show. Charge
+				echo 'Lejlighed ' . str_pad($apartment,3,"0",STR_PAD_LEFT) . ($not_showed_up_users_archive[array_search($apartment,$not_showed_up_users)] ? ' (Tidligere beboer)' : '') . ': ' . $price . ',00 kr<br>';
+			} else {
+				echo 'Lejlighed ' . str_pad($apartment,3,"0",STR_PAD_LEFT) . ($not_signed_up_users_archive[array_search($apartment,$not_signed_up_users)] ? ' (Tidligere beboer)' : '') . ': ' . $price . ',00 kr<br>';
+			}
+		}
+		?>
+	<?php endif; endif;
+}
+
+/**
+ * Determines whether to show event page or events page, and saves any updates to the event or events
+ * @return null
+ */
+function em_bookings_events_print_table() {
+	//TODO Simplify panel for events, use form flags to detect certain actions (e.g. submitted, etc)
+	global $wpdb;
+
+	$scope_names = array (
+		'past' => __ ( 'Past events', 'events-manager'),
+		'all' => __ ( 'All events', 'events-manager'),
+		'future' => __ ( 'Future events', 'events-manager')
+	);
+	
+	$action_scope = ( !empty($_REQUEST['em_obj']) && $_REQUEST['em_obj'] == 'em_bookings_events_print_table' );
+	$action = ( $action_scope && !empty($_GET ['action']) ) ? $_GET ['action']:'';
+	$order = ( $action_scope && !empty($_GET ['order']) ) ? $_GET ['order']:'ASC';
+	$limit = ( $action_scope && !empty($_GET['limit']) ) ? $_GET['limit'] : 20;//Default limit
+	$page = ( $action_scope && !empty($_GET['pno']) ) ? $_GET['pno']:1;
+	$offset = ( $action_scope && $page > 1 ) ? ($page-1)*$limit : 0;
+	$scope = ( $action_scope && !empty($_GET ['scope']) && array_key_exists($_GET ['scope'], $scope_names) ) ? $_GET ['scope']:'all';
+
+	// No action, only showing the events list
+	switch ($scope) {
+		case "past" :
+			$title = __ ( 'Past Events', 'events-manager');
+			break;
+		case "all" :
+			$title = __ ( 'All Events', 'events-manager');
+			break;
+		default :
+			$title = __ ( 'Future Events', 'events-manager');
+			$scope = "future";
+	}
+	$owner = !current_user_can('manage_others_bookings') ? get_current_user_id() : false;
+	$events = array_filter(EM_Events::get( array('scope'=>$scope, 'limit'=>$limit, 'offset' => $offset, 'order'=>$order, 'orderby'=>'event_start', 'bookings'=>true, 'owner' => $owner, 'pagination' => 1 ) ),function($event){return pll_get_post_language( $event->post_id, "slug" ) == "da";});
+	$events_count = EM_Events::$num_rows_found;
+
+	$use_events_end = get_option ( 'dbem_use_event_end' );
+	?>
+	<div class="wrap em_bookings_events_table em_obj">
+		<form id="posts-filter" action="" method="post">
+			<input type="hidden" name="em_obj" value="em_bookings_events_print_table" />
+			<?php if(!empty($_GET['page'])): ?>
+			<input type='hidden' name='page' value='events-manager-print-bookings' />
+			<input type="hidden" name="action" value="events-manager-print-bookings" />
+			<?php endif; ?>		
+			<div class="tablenav">			
+				<div class="alignleft actions">
+					<select name="scope">
+						<?php
+						foreach ( $scope_names as $key => $value ) {
+							$selected = "";
+							if ($key == $scope)
+								$selected = "selected='selected'";
+							echo "<option value='$key' $selected>$value</option>  ";
+						}
+						?>
+					</select>
+					<input id="post-query-submit" class="button-secondary" type="submit" value="<?php esc_html_e( 'Filter' )?>" />
+				</div>
+				<?php 
+				if ( $events_count >= $limit ) {
+					$events_nav = em_admin_paginate( $events_count, $limit, $page, array('em_ajax'=>0, 'em_obj'=>'em_bookings_events_print_table'));
+					echo $events_nav;
+				}
+				?>
+			</div>
+			<div class="clear"></div>
+			<?php
+			if (empty ( $events )) {
+				// TODO localize
+				_e ( 'no events','events-manager');
+			} else {
+			?>
+			<div class='table-wrap'>
+			<table class="widefat">
+				<thead>
+					<tr>
+						<th><?php esc_html_e( 'Event', 'events-manager'); ?></th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php 
+					$rowno = 0;
+					foreach ( $events as $EM_Event ) {
+						/* @var $event EM_Event */
+						$rowno++;
+						$class = ($rowno % 2) ? ' class="alternate"' : '';
+						$style = "";
+						
+						if ($EM_Event->start()->getTimestamp() < time() && $EM_Event->end()->getTimestamp() < time()){
+							$style = "style ='background-color: #FADDB7;'";
+						}							
+						?>
+						<tr <?php echo "$class $style"; ?>>
+							<td>
+								<strong>
+									<?php echo str_replace("events-manager-bookings","events-manager-print-bookings",$EM_Event->output('#_BOOKINGSLINK')); ?>
+								</strong>
+								&ndash; 
+								<?php $translations = pll_get_post_translations($EM_Event->post_id);
+								$booked_spaces = 0;
+								foreach ($translations as $lang => $post_id) {
+									$booked_spaces += em_get_event($post_id, 'post_id')->get_bookings()->get_booked_spaces();
+								}
+								esc_html_e("Booked Spaces",'events-manager'); ?>: <?php echo $booked_spaces."/".$EM_Event->get_spaces(); ?>
+								<?php if( get_option('dbem_bookings_approval') == 1 ) : ?>
+									| <?php esc_html_e("Pending",'events-manager') ?>: <?php echo $EM_Event->get_bookings()->get_pending_spaces(); ?>
+								<?php endif; ?>
+							</td>
+						</tr>
+						<?php
+					}
+					?>
+				</tbody>
+			</table>
+			</div>
+			<?php
+			} // end of table
+			?>
+			<div class='tablenav'>
+				<div class="alignleft actions">
+				<br class='clear' />
+				</div>
+				<?php if (!empty($events_nav) &&  $events_count >= $limit ) : ?>
+				<div class="tablenav-pages">
+					<?php
+					echo $events_nav;
+					?>
+				</div>
+				<?php endif; ?>
+				<br class='clear' />
+			</div>
+		</form>
+	</div>
+	<?php
+}
+?></code>
+
+** wp-content\plugins\events-manager\em-posts.php **
+  * Changed #123 from <code php>'show_in_menu' => true,</code> to <code php>'show_in_menu' => current_user_can('publish_events'),</code>
+  * Changed #124 from <code php>'show_in_nav_menu' => true,</code> to <code php>'show_in_nav_menu' => current_user_can('publish_events'),</code>
+
+** wp-content\plugins\events-manager\includes\css\jquery-ui.min.css **
+  * Added after #7 <code css>.wp-dark-mode-active .ui-datepicker .ui-datepicker-header {background: var(--nv-dark-bg);border-color: var(--nv-text-color);}.wp-dark-mode-active .ui-datepicker .ui-state-hover,.wp-dark-mode-active .ui-datepicker .ui-datepicker-next-hover {border-color: var(--nv-text-color);background-color: var(--nv-dark-bg);color: var(--nv-text-color);}.wp-dark-mode-active #ui-datepicker-div,.wp-dark-mode-active a.ui-state-default,.wp-dark-mode-active .ui-state-hover,.wp-dark-mode-active .ui-widget-content .ui-state-hover,.wp-dark-mode-active .ui-widget-header .ui-state-hover,.wp-dark-mode-active .ui-state-focus,.wp-dark-mode-active .ui-widget-content .ui-state-focus,.wp-dark-mode-active .ui-widget-header .ui-state-focus,.wp-dark-mode-active .ui-button:hover,.wp-dark-mode-active .ui-button:focus{background:var(--nv-dark-bg);}.ui-datepicker-prev.ui-state-hover {top: 2px;left: 2px;}.ui-datepicker-next.ui-state-hover {top: 2px;right: 2px;}</code>
+
+** wp-content\plugins\events-manager\em-install.php **
+  * Added after #26 <code php>em_create_signup_table();</code>
+  * Added after #353 <code php>
+
+//Add the signups table
+function em_create_signups_table() {
+	global  $wpdb, $user_level;
+	$table_name = $wpdb->prefix.'wp_em_tilmeldinger';
+
+	// Creating the events table
+	$sql = "CREATE TABLE {$table_name} (
+		  event_id int(6) unsigned NOT NULL,
+		  ticket_id int(6) unsigned NOT NULL,
+		  showed_up text,
+		  PRIMARY KEY  (event_id)
+		) DEFAULT CHARSET=utf8 ;";
+
+	require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+	dbDelta($sql);
+}</code>
+
+** wp-content\plugins\events-manager\includes\js\events-manager.js **
+  * Added after #883 <code js>
+	end_date_val = document.querySelector('input.em-date-input[name="event_end_date"]').value;
+	if (end_date_val != "") {
+		update_price(selectedDate, end_date_val.substring(8,10)+"-"+end_date_val.substring(5,7)+"-"+end_date_val.substring(0,4));
+	}</code>
+  * Added after #894 <code js>dateInput.datepicker('option','onSelect', function( selectedDate ) {
+	start_date_val = document.querySelector('input.em-date-input[name="event_start_date"]').value;
+	if (start_date_val != ""){
+		update_price(start_date_val.substring(8,10)+"-"+start_date_val.substring(5,7)+"-"+start_date_val.substring(0,4), selectedDate);
+	}
+})</code>
+  * Added after #904 <code js>function update_price(start_date,end_date){
+	// Give dates in DD/MM/YYYY. Function converts
+	if (start_date != "" && end_date != "") {
+		var enddate = new Date(end_date.substring(3,5) + "/"  + end_date.substring(0,2) + "/" + end_date.substring(6,10));
+		var startdate = new Date(start_date.substring(3,5) + "/"  + start_date.substring(0,2) + "/" + start_date.substring(6,10));
+
+		var diff = enddate - startdate;
+		var daysDiff = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+		var price_element = document.getElementById('event-form-price');
+		var month_element = document.getElementById('event-form-price-month');
+
+		if (price_element != null && month_element != null){
+			if (AKDTU_months === undefined) {
+				AKDTU_months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+			}
+			if (daysDiff > 0) {
+				var price = 100 + daysDiff*100;
+				price_element.innerHTML = (AKDTU_price_mark_pre === undefined ? "" : AKDTU_price_mark_pre + " ") + price + (AKDTU_price_mark_post === undefined ? " DKK" : " " + AKDTU_price_mark_post);
+
+				month_element.innerHTML = AKDTU_months[enddate.getMonth()];
+			} else {
+				price_element.innerHTML = (AKDTU_price_mark_invalid === undefined ? "INVALID DATES" : AKDTU_price_mark_invalid);
+				month_element.innerHTML = (AKDTU_price_mark_invalid_month === undefined ? "INVALID DATES" : AKDTU_price_mark_invalid_month);
+			}
+		}
+	}
+}</code>
+
+** wp-content\plugins\events-manager\templates\templates\calendar-full.php **
+   * Added after #31 <code php>$cell_data['events'] = array_filter($cell_data['events'],function($EM_Event){return count(pll_get_post_translations($EM_Event->post_id)) == 1 || pll_get_post_language($EM_Event->post_id) == pll_current_language('slug');}); // Remove events with translations if they are not in the desired language.</code>
+   * Changed  #46 from <code php><?php if( $args['limit'] && $cell_data['events_count'] > $args['limit'] && get_option('dbem_display_calendar_events_limit_msg') != '' ): ?></code> to <code php><?php if( $args['limit'] && count($cell_data['events']) > $args['limit'] && get_option('dbem_display_calendar_events_limit_msg') != '' ): ?></code>
+   * Changed #47 from <code php><li><a href="<?php echo esc_url($cell_data['link']); ?>"><?php echo get_option('dbem_display_calendar_events_limit_msg'); ?></a></li></code> to <code php><li><?php echo get_option('dbem_display_calendar_events_limit_msg'); ?></li></code>
+===== Simple membership/AKDTU - Bruger styring =====
+** wp-content\plugins\simple-membership\classes\class.swpm-utils-misc.php **
+  * #363-364 commented out
+
+** \wp-content\plugins\simple-membership\views\login.php **
+  * #38-40 commented out
+  * Changed #33 from <code php><input type="submit" class="swpm-login-form-submit" name="swpm-login" value="<?php echo SwpmUtils::_('Login') ?>"/></code> to <code php><input type="submit" class="swpm-login-form-submit" name="swpm-login" value="<?php pll_e('Login', 'simple-membership') ?>"/></code>
+  * Changed #36 from <code php><a id="forgot_pass" class="swpm-login-form-pw-reset-link"  href="<?php echo $password_reset_url; ?>"><?php echo SwpmUtils::_('Forgot Password?') ?></a></code> to <code php><a id="forgot_pass" class="swpm-login-form-pw-reset-link"  href="<?php echo $password_reset_url; ?>"><?php pll_e('Forgot Password?', 'simple-membership') ?></a></code>
+  * Changed #27 from <code php><span class="swpm-rember-label"> <?php echo SwpmUtils::_('Remember Me') ?></span></code> to <code php><span class="swpm-rember-label"> <?php pll_e('Remember Me', 'simple-membership') ?></span></code>
+  * Changed #20 from <code php><label for="swpm_password" class="swpm-label"><?php echo SwpmUtils::_('Password') ?></label></code> to <code php><label for="swpm_password" class="swpm-label"><?php pll_e('Password', 'simple-membership') ?></label></code>
+  * Changed #14 from <code php><label for="swpm_user_name" class="swpm-label"><?php echo SwpmUtils::_($swpm_username_label) ?></label></code> to <code php><label for="swpm_user_name" class="swpm-label"><?php pll_e('Username or Email', 'simple-membership') ?></label></code>
+  * Added under #4:
+<code php>if (pll_current_language() == "en") {
+    $password_reset_url = $setting->get_value('reset-page-url-english');
+}</code>
+  * Added below #12
+<code php><p><?php pll_e('If you have recently moved in and have no account yet, contact the network group.', 'simple-membership') ?></p></code>
+  * Added below #11
+<code php>$login_notice = pll_e('Login notice', 'simple-membership');
+if ($login_notice != "") {
+	echo '<p>' . $login_notice . '</p>';
+}</code>
+
+** wp-content\plugins\simple-membership\classes\class.swpm-auth.php **
+  * Changed #103 from <code php>$this->lastStatusMsg = SwpmUtils::_( 'Password Empty or Invalid.' );</code> to <code php>$this->lastStatusMsg = pll__( 'Password Empty or Invalid.' , 'simple-membership' );</code>
+  * Changed #96 from <code php>$this->lastStatusMsg = SwpmUtils::_( 'User Not Found.' );</code> to <code php>$this->lastStatusMsg = pll__( 'User Not Found.' , 'simple-membership' );</code>
+  * Commented out #300-304
+  * Changed #257 from <code php>$expiration = time() + 259200; //3 days.</code> to <code php>$expiration = 0; // immediate.</code>
+
+** wp-content\plugins\simple-membership\views\loggedin.php **
+  * #9-12 commented out
+  * #17-20 commented out
+  * Changed #26 from <code php>echo '<a href="' . $edit_profile_page_url . '">' . SwpmUtils::_("Edit Profile") . '</a>';</code> to <code php>echo '<a href="' . $edit_profile_page_url . '">';</code>
+  * Inserted after #26:
+<code php>pll_e("Edit Profile", 'simple-membership');
+echo '</a>';</code>
+  * Changed #33 from <code php><a href="?swpm-logout=true"><?php echo SwpmUtils::_('Logout') ?></a></code> to <code php><a href="?swpm-logout=true"><?php pll_e('Logout', 'simple-membership') ?></a></code>
+  * Changed #14 from <code php><div class="swpm-logged-membership-label swpm-logged-label"><?php echo SwpmUtils::_('Membership') ?></div></code> to <code php><div class="swpm-logged-membership-label swpm-logged-label"><?php pll_e('Membership', 'simple-membership') ?></div></code>
+  * Changed #6 from <code php><div class="swpm-logged-username-label swpm-logged-label"><?php echo SwpmUtils::_('Logged in as') ?></div></code> to <code php><div class="swpm-logged-username-label swpm-logged-label"><?php echo pll_e('Logged in as','simple-membership') ?></div></code>
+  * Added under #22:
+<code php>if (pll_current_language() == "en") {
+    $edit_profile_page_url = SwpmSettings::get_instance()->get_value('profile-page-url-english');
+}</code>
+  * Added after #2:
+<code php>$login_notice = pll_e('Loggedin notice', 'simple-membership');
+if ($login_notice != "") {
+	echo '<p>' . $login_notice . '</p>';
+}</code>
+
+** wp-content\plugins\simple-membership\views\edit.php **
+  * Changed #23 from <code php><td><label for="user_name"><?php echo SwpmUtils::_('Username'); ?></label></td></code> to <code php><td><label for="user_name"><?php pll_e('Username','simple-membership'); ?></label></td></code>
+  * Changed #27 from <code php><td><label for="email"><?php echo SwpmUtils::_('Email'); ?></label></td></code> to <code php><td><label for="password"><?php pll_e('Email','simple-membership'); ?></label></td></code>
+  * Changed #31 from <code php><td><label for="password"><?php echo SwpmUtils::_('Password'); ?></label></td></code> to <code php><td><label for="password"><?php pll_e('Password','simple-membership'); ?></label></td></code>
+  * Changed #32 from <code php><td><input type="password" id="password" value="" size="50" name="password" class="<?php echo $pass_class;?>" autocomplete="off" placeholder="<?php echo SwpmUtils::_('Leave empty to keep the current password'); ?>" /></td></code> to <code php><td><input type="password" id="password" value="" size="50" name="password" class="<?php echo $pass_class;?>" autocomplete="off" placeholder="<?php pll_e('Leave empty to keep the current password','simple-membership'); ?>" /></td></code>
+  * Changed #35 from <code php><td><label for="password_re"><?php echo SwpmUtils::_('Repeat Password','simple-membership'); ?></label></td></code> to <code php><td><label for="password_re"><?php pll_e('Repeat Password','simple-membership'); ?></label></td></code>
+  * Changed #36 from <code php><td><input type="password" id="password_re" value="" size="50" name="password_re" autocomplete="off" placeholder="<?php echo SwpmUtils::_('Leave empty to keep the current password'); ?>" /></td></code> to <code php><td><input type="password" id="password_re" value="" size="50" name="password_re" autocomplete="off" placeholder="<?php pll_e('Leave empty to keep the current password','simple-membership'); ?>" /></td></code>
+  * Changed #39 from <code php><td><label for="first_name"><?php echo SwpmUtils::_('First Name'); ?></label></td></code> to <code php><td><label for="first_name"><?php echo pll_e('First Name','simple-membership'); ?></label></td></code>
+  * Changed #43 from <code php><td><label for="last_name"><?php echo SwpmUtils::_('Last Name'); ?></label></td></code> to <code php><td><label for="last_name"><?php pll_e('Last Name','simple-membership'); ?></label></td></code>
+  * #46-79 commented out
+
+** wp-content\plugins\simple-membership\classes\class.swpm-access-control.php **
+  * Changed #47 from <code php>$text = SwpmUtils::_('You need to login to view this content. ') . SwpmMiscUtils::get_login_link();</code> to <code php>$text = pll__('You need to login to view this content. ','simple-membership') . SwpmMiscUtils::get_login_link();</code>
+  * Changed #120 from <code php>$error_msg = '<div class="swpm-comment-not-logged-in">' . SwpmUtils::_("You need to login to view this content. ") . '</div>';</code> to <code php>$error_msg = '<div class="swpm-comment-not-logged-in">' . pll__('You need to login to view this content. ','simple-membership') . '</div>';</code>
+  * Added after #2 <code php>add_action( 'wp', 'check_auth' );
+function check_auth(){
+	global $post;
+	$auth = SwpmAuth::get_instance();
+	
+	//Check if this is a protected post.
+	$protected = SwpmProtection::get_instance();
+	if ($protected->is_protected($post->id)){ 
+		//Check if the user is logged in.
+		if(!$auth->is_logged_in()){
+			$swpm_settings_obj = SwpmSettings::get_instance();
+			$login_page = $swpm_settings_obj->get_value((pll_current_language( ) == 'en_US' ? 'login-page-url-english' : 'login-page-url'));
+			wp_redirect($login_page . '?visit=' . get_page_uri(), 302);
+			exit();            
+		}
+	}
+}</code>
+
+** wp-content\plugins\simple-membership\classes\class.swpm-settings.php **
+  * Changed #207 from <code php>SwpmUtils::_( 'Edit Profile Page URL' ),</code> to <code php>SwpmUtils::_( 'Edit Profile Page URL (Danish)' ),</code>
+  * Added under #215
+<code php>add_settings_field(
+	'profile-page-url-english',
+	SwpmUtils::_( 'Edit Profile Page URL (English)' ),
+	array( &$this, 'textfield_long_callback' ),
+	'simple_wp_membership_settings',
+	'pages-settings',
+	array(
+		'item'    => 'profile-page-url-english',
+		'message' => '',
+	)
+);</code>
+  * Added below #1129
+<code php>$output['profile-page-url-english'] = esc_url( $input['profile-page-url-english'] );</code>
+  * Changed #229 from <code php>SwpmUtils::_( 'Password Reset Page URL' ),</code> to <code php>SwpmUtils::_( 'Password Reset Page (Danish)' ),</code>
+  * Added under #237
+<code php>add_settings_field(
+	'reset-page-url-english',
+	SwpmUtils::_( 'Password Reset Page URL (English)' ),
+	array( &$this, 'textfield_long_callback' ),
+	'simple_wp_membership_settings',
+	'pages-settings',
+	array(
+		'item'    => 'reset-page-url-english',
+		'message' => '',
+	)
+);</code>
+  * Added below #1141
+<code php>$output['reset-page-url-english']   = esc_url( $input['reset-page-url-english'] );</code>
+  * Changed #174 from <code php>SwpmUtils::_( 'Login Page URL' ),</code> to <code php>SwpmUtils::_( 'Login Page URL (Danish)' ),</code>
+  * Added under #182
+<code php>add_settings_field(
+	'login-page-url-english',
+	SwpmUtils::_( 'Login Page URL (English)' ),
+	array( &$this, 'textfield_long_callback' ),
+	'simple_wp_membership_settings',
+	'pages-settings',
+	array(
+		'item'    => 'login-page-url-english',
+		'message' => '',
+	)
+);</code>
+
+** wp-content\plugins\simple-membership\classes\class.simple-wp-membership.php ** 
+  * Added after #276: <code php>$lang = pll_current_language();
+if ($lang !== "da") {
+	$redirect_url = trailingslashit($redirect_url) . $lang . "/";
+}</code>
+  * Changed #447 from <code php>echo "<div id='swpm_message' class='swpm_success'>";</code> to <code php>echo "<div class='statusnotice'><div class='em-warning em-warning-confirms notice notice-success'>";</code>
+  * Changed #450 from <code php>echo "<div id='swpm_message' class='swpm_error'>";</code> to <code php>echo "<div class='statusnotice'><div class='em-warning em-warning-errors notice notice-error'>";</code>
+  * Changed #463 from <code php>echo "</div>";</code> to <code php>echo "</div></div>";</code>
+  * Changed #276-270 from <code php>$redirect_url = apply_filters('swpm_after_login_redirect_url', SIMPLE_WP_MEMBERSHIP_SITE_HOME_URL);
+$lang = pll_current_language();
+if ($lang !== "da") {
+	$redirect_url = trailingslashit($redirect_url) . $lang . "/";
+}</code> to <code php>if (!isset($_REQUEST['visit'])) {
+	$redirect_url = apply_filters('swpm_after_login_redirect_url', SIMPLE_WP_MEMBERSHIP_SITE_HOME_URL);
+	$lang = pll_current_language();
+	if ($lang !== "da") {
+		$redirect_url = trailingslashit($redirect_url) . $lang . "/";
+	}
+} else {
+	$redirect_url = get_site_url() . '/' . $_REQUEST['visit'];
+}</code>
+
+** wp-content\plugins\simple-membership\classes\class.swpm-init-time-tasks.php **
+  * Added after #38: <code php>$lang = pll_current_language();
+if ($lang !== "da") {
+	$redirect_url = trailingslashit($redirect_url) . $lang . "/";
+}</code>
+
+** wp-content\plugins\simple-membership\views\add.php **
+  * Deleted #18-19
+  * Added after #17 <code php><td><label for="user_name"><?php pll_e('Apartment number','simple-membership'); ?></label></td>
+	<td><select id="apartment_number" class="validate[required]" name="apartment_number">
+	<?php 
+		for ($floor = 0; $floor < 3; $floor++){
+			for ($apartment = 1; $apartment < 25; $apartment++){
+				echo '<option value="'.(100*$floor + $apartment).'">'.(100*$floor + $apartment).'</option>';
+			}
+		}
+	?>
+	</select></td>
+</tr>
+<tr class="swpm-registration-confirmation-row">
+	<td><label for="email"><?php echo SwpmUtils::_('Phone') ?></label> <small><?php pll_e(' - Only used for confirmation','simple-membership'); ?></small></td>
+	<td><input type="text" autocomplete="off" id="phone" class="" value="<?php echo esc_attr($phone); ?>" size="50" name="phone" /></td></code>
+  * Commented out #53-55
+  * Commented out #57
+  * Commented out #69-70
+  * Added after #12 <code php><p><?php pll_e('Registration form message', 'simple-membership'); ?></p></code>
+
+
+** wp-content\plugins\simple-membership\classes\class.swpm-front-registration.php **
+  * Changed #306 from <code php>$msg_str = '<div class="swpm-profile-update-success">' . SwpmUtils::_( 'Profile updated successfully.' ) . '</div>';</code> to <code php>$msg_str = '<div class="swpm-profile-update-success">' . pll__( 'Profile updated successfully.', 'simple-membership' ) . '</div>';</code>
+  * Changed #319 from <code php>$msg_str = '<div class="swpm-profile-update-success">' . SwpmUtils::_( 'Profile updated successfully. You will need to re-login since you changed your password.' ) . '</div>';</code> to <code php>$msg_str = '<div class="swpm-profile-update-success">' . pll__( 'Profile updated successfully. You will need to re-login since you changed your password.', 'simple-membership' ) . '</div>';</code>
+  * Changed #374 from <code php>$message = '<div class="swpm-reset-pw-error">' . SwpmUtils::_( 'Email address not valid.' ) . '</div>';</code> to <code php>$message = '<div class="swpm-reset-pw-error">' . pll__( 'Email address not valid.','simple-membership' ) . '</div>';</code>
+  * Changed #388 from <code php>$message  = '<div class="swpm-reset-pw-error">' . SwpmUtils::_( 'No user found with that email address.' ) . '</div>';</code> to <code php>$message  = '<div class="swpm-reset-pw-error">' . pll__( 'No user found with that email address.','simple-membership' ) . '</div>';</code>
+  * Changed #389 from <code php>$message .= '<div class="swpm-reset-pw-error-email">' . SwpmUtils::_( 'Email Address: ' ) . $email . '</div>';</code> to <code php>$message .= '<div class="swpm-reset-pw-error-email">' . pll__( 'Email Address: ','simple-membership' ) . $email . '</div>';</code>
+  * Changed #420 from <code php>$message .= '<div class="swpm-reset-pw-success">' . SwpmUtils::_( 'New password has been sent to your email address.' ) . '</div>';</code> to <code php>$message .= '<div class="swpm-reset-pw-success">' . pll__( 'New password has been sent to your email address.','simple-membership' ) . '</div>';</code>
+  * Changed #421 from <code php>$message .= '<div class="swpm-reset-pw-success-email">' . SwpmUtils::_( 'Email Address: ' ) . $email . '</div>';</code> to <code php>$message .= '<div class="swpm-reset-pw-success-email">' . pll__( 'Email Address: ','simple-membership' ) . $email . '</div>';</code>
+  * Changed #26 from <code php>$rego_hidden_to_logged_users_msg .= '<div class="hide-rego-form-msg">' . SwpmUtils::_( "You are already logged in. You don't need to create another account. So the registration form is hidden." ) . '</div>';</code> to <code php>$rego_hidden_to_logged_users_msg .= '<div class="hide-rego-form-msg">' . pll__( "You are already logged in. You dont need to create another account. So the registration form is hidden." , 'simple-membership' ) . '</div>';</code>
+  * Added after #89 <code php>require_once WP_PLUGIN_DIR . '/AKDTU/definitions.php';
+	global $wpdb;
+
+	$apartment = sanitize_text_field( $_POST['apartment_number'] );
+	$temporary_renter = $_POST['temporary_renter'] == 'is_renter';
+	$phone = sanitize_text_field( $_POST['phone'] );
+	$current_time = new DateTime("now", new DateTimeZone('Europe/Copenhagen'));
+	$current_time->setTimezone(new DateTimeZone('UTC'));
+	$current_time = $current_time->format("Y-m-d H:i:s");
+
+	if ($temporary_renter) {
+		$query = $wpdb->prepare( 'SELECT COUNT(*) FROM ' . $wpdb->prefix . 'swpm_allowed_rentercreation WHERE apartment_number = %d AND phone_number = %d AND start_time >= %d AND has_been_reset = 1 AND has_been_taken = 0', $apartment , $phone , $current_time );
+	} else {
+		$query = $wpdb->prepare( 'SELECT COUNT(*) FROM ' . $wpdb->prefix . 'swpm_allowed_membercreation WHERE apartment_number = %d AND phone_number = %d AND allow_creation_date >= %d AND has_been_reset = 1 AND has_been_taken = 0', $apartment , $phone , $current_time );
+	}
+	if ( $wpdb->get_var( $query ) == 0 ) {
+		$message = array(
+			'succeeded' => false,
+			'message'   => pll__( 'Creating a user for this apartment is currently not permitted.', 'simple-membership' ),
+		);
+		SwpmTransfer::get_instance()->set( 'status', $message );
+		return;
+	}
+
+	//If captcha is present and validation failed, it returns an error string. If validation succeeds, it returns an empty string.
+	$captcha_validation_output = apply_filters( 'swpm_validate_registration_form_submission', '' );
+	if ( ! empty( $captcha_validation_output ) ) {
+		$message = array(
+			'succeeded' => false,
+			'message'   => SwpmUtils::_( 'Security check: captcha validation failed.' ),
+		);
+		SwpmTransfer::get_instance()->set( 'status', $message );
+		return;
+	}
+
+	//Check if Terms and Conditions enabled
+	$terms_enabled = SwpmSettings::get_instance()->get_value( 'enable-terms-and-conditions' );
+	if ( ! empty( $terms_enabled ) ) {
+		//check if user checked "I accept terms" checkbox
+		if ( empty( $_POST['accept_terms'] ) ) {
+			$message = array(
+				'succeeded' => false,
+				'message'   => SwpmUtils::_( 'You must accept the terms and conditions.' ),
+			);
+			SwpmTransfer::get_instance()->set( 'status', $message );
+			return;
+		}
+	}
+
+	//Check if Privacy Policy enabled
+	$pp_enabled = SwpmSettings::get_instance()->get_value( 'enable-privacy-policy' );
+	if ( ! empty( $pp_enabled ) ) {
+		//check if user checked "I agree with Privacy Policy" checkbox
+		if ( empty( $_POST['accept_pp'] ) ) {
+			$message = array(
+				'succeeded' => false,
+				'message'   => SwpmUtils::_( 'You must agree to the privacy policy.' ),
+			);
+			SwpmTransfer::get_instance()->set( 'status', $message );
+			return;
+		}
+	}
+
+	//Validate swpm level hash data.
+	$hash_val_posted = sanitize_text_field( $_POST['swpm_level_hash'] );
+	$level_value     = sanitize_text_field( $_POST['membership_level'] );
+	$swpm_p_key      = get_option( 'swpm_private_key_one' );
+	$hash_val        = md5( $swpm_p_key . '|' . $level_value );
+	if ( $hash_val != $hash_val_posted ) {//Level hash validation failed.
+		$msg  = '<p>Error! Security check failed for membership level validation.</p>';
+		$msg .= '<p>The submitted membership level data does not seem to be authentic.</p>';
+		$msg .= '<p>If you are using caching please empty the cache data and try again.</p>';
+		wp_die( $msg );
+	}
+
+	## Check if email already exists
+	if (email_exists( $_POST['email'] )){
+		$message = array(
+			'succeeded' => false,
+			'message'   => pll__( 'Email already exists.', 'simple-membership' ),
+		);
+		SwpmTransfer::get_instance()->set( 'status', $message );
+		return;
+	}
+
+	## Verify that apartment number is valid
+	$user_login = 'lejl'.str_pad($_POST['apartment_number'],3,"0",STR_PAD_LEFT) . ($temporary_renter ? '_lejer' : '');
+	$user = get_user_by('login',$user_login);
+	if (!$user){
+		$message = array(
+			'succeeded' => false,
+			'message'   => pll__( 'Wrong apartment number recieved.', 'simple-membership' ),
+		);
+		SwpmTransfer::get_instance()->set( 'status', $message );
+		return;
+	}
+	$user_id = $user->ID;
+
+	// Update password
+	wp_set_password($_POST['password'], $user_id);
+	$args = array(
+		'ID'         => $user_id,
+		'user_email' => $_POST['email'],
+		'first_name' => $_POST['first_name'],
+		'last_name' => $_POST['last_name']
+	);
+	wp_update_user( $args );
+
+	$wpdb->update($wpdb->prefix . 'swpm_allowed_membercreation' , array('has_been_taken' => 1), array('apartment_number' => $apartment, 'phone_number' => $phone ));
+
+	$login_page_url = SwpmSettings::get_instance()->get_value( 'login-page-url' );
+
+	// Allow hooks to change the value of login_page_url
+	$login_page_url = apply_filters('swpm_register_front_end_login_page_url', $login_page_url);
+
+	$after_rego_msg = '<div class="swpm-registration-success-msg">' . sprintf(pll__('Registration completed message','simple-membership'), $user_login, $login_page_url) . (NYBRUGER_TOGGLE_BRUGER ? " " . pll__('Confirmation email sent','simple-membership') : '') . '</div>';
+	$after_rego_msg = apply_filters( 'swpm_registration_success_msg', $after_rego_msg );
+	$message        = array(
+		'succeeded' => true,
+		'message'   => $after_rego_msg,
+	);
+
+	########################
+	## Mail to new user
+	########################
+	if (NYBRUGER_TOGGLE_BRUGER) {
+		$replaces = array(
+			'#APT' => $_POST['apartment_number'],
+			'#NEWLOGIN' => $user_login,
+			'#NEWEMAIL' => $_POST['email'],
+			'#NEWFIRSTNAME' => $_POST['first_name'],
+			'#NEWLASTNAME' => $_POST['last_name']
+		);
+
+		$mailcontent = str_replace( array_keys($replaces), $replaces, nl2br( ( pll_current_language() == "da" ? NYBRUGER_MAILCONTENT_BRUGER_DA : NYBRUGER_MAILCONTENT_BRUGER_EN ) ) );
+
+		$subject_replaces = array(
+			'#APT' => $_POST['apartment_number'],
+			'#NEWLOGIN' => $user_login,
+			'#NEWEMAIL' => $_POST['email'],
+			'#NEWFIRSTNAME' => $_POST['first_name'],
+			'#NEWLASTNAME' => $_POST['last_name']
+		);
+
+		$mailsubject = str_replace( array_keys($subject_replaces), $subject_replaces, nl2br( ( pll_current_language() == "da" ? NYBRUGER_SUBJECT_BRUGER_DA : NYBRUGER_SUBJECT_BRUGER_EN ) ) );
+
+		add_filter('wp_mail_content_type', function( $content_type ) { return 'text/html'; });
+		$headers = array();
+		if (NYBRUGER_REPLYTO_BRUGER != '') {
+			$headers[] = 'Reply-to: ' . NYBRUGER_REPLYTO_BRUGER;
+		}
+		if (NYBRUGER_CC_BRUGER != '') {
+			$headers[] = 'Cc: ' . NYBRUGER_CC_BRUGER;
+		}
+		wp_mail($_POST['email'], $mailsubject , $mailcontent, $headers);
+	}
+
+	########################
+	## Mail to admins
+	########################
+	$replaces = array(
+		'#APT' => $_POST['apartment_number'],
+		'#NEWLOGIN' => $user_login,
+		'#NEWEMAIL' => $_POST['email'],
+		'#NEWFIRSTNAME' => $_POST['first_name'],
+		'#NEWLASTNAME' => $_POST['last_name']
+	);
+
+	$mailcontent = str_replace( array_keys($replaces), $replaces, nl2br( NYBRUGER_MAILCONTENT ) );
+
+	$subject_replaces = array(
+		'#APT' => $_POST['apartment_number'],
+		'#NEWLOGIN' => $user_login,
+		'#NEWEMAIL' => $_POST['email'],
+		'#NEWFIRSTNAME' => $_POST['first_name'],
+		'#NEWLASTNAME' => $_POST['last_name']
+	);
+
+	$mailsubject = str_replace( array_keys($subject_replaces), $subject_replaces, nl2br( NYBRUGER_SUBJECT ) );
+
+	add_filter('wp_mail_content_type', function( $content_type ) { return 'text/html'; });
+	$headers = array();
+	if (NYBRUGER_REPLYTO != '') {
+		$headers[] = 'Reply-to: ' . NYBRUGER_REPLYTO;
+	}
+	if (NYBRUGER_CC != '') {
+		$headers[] = 'Cc: ' . NYBRUGER_CC;
+	}
+	wp_mail(NYBRUGER_TO, $mailsubject , $mailcontent, $headers);
+
+	SwpmTransfer::get_instance()->set( 'status', $message );
+	return;
+}
+
+public function register_front_end_original() {</code>
+
+** wp-content\plugins\simple-membership\classes\class.swpm-installation.php **
+  * Added after #171 <code php>$sql = "CREATE TABLE " . $wpdb->prefix . "swpm_allowed_membercreation (
+	apartment_number int(3) NOT NULL PRIMARY KEY default 0,
+	phone_number text NOT NULL default '',
+	allow_creation_date datetime NOT NULL default CURRENT_TIMESTAMP,
+	has_been_reset tinyint(1) NOT NULL
+)" . $charset_collate . ";";
+dbDelta($sql);</code>
+===== Conditional menus =====
+** wp-content\plugins\conditional-menus\init.php **
+  * Changed #268 from <code php>if( ! is_user_logged_in() ) {</code> to <code php>if( ! is_user_logged_in() && !SwpmMemberUtils::is_member_logged_in() ) {</code>
+
+
+===== WP Dark Mode =====
+** wp-content\plugins\wp-dark-mode\includes\class-enqueue.php **
+  * Changed #135 from <code css>echo "body{--wp-dark-mode-scale: " . wp_dark_mode_get_settings( 'wp_dark_mode_switch', 'switcher_scale', 100)/ 100 . "}";</code> to <code css>echo "body{--wp-dark-mode-scale: " . wp_dark_mode_get_settings( 'wp_dark_mode_switch', 'switcher_scale', 100)/ 100 . ";height:auto;}";</code>
+  * Changed #236 from <code css>echo "body{--wp-dark-mode-scale: " . wp_dark_mode_get_settings( 'wp_dark_mode_switch', 'switcher_scale', 100)/ 100 . "}";</code> to <code css>echo "body{--wp-dark-mode-scale: " . wp_dark_mode_get_settings( 'wp_dark_mode_switch', 'switcher_scale', 100)/ 100 . ";height:auto;}";</code>
+===== Neve Child theme =====
+** functions.php **
+  * Added at bottom:<code php><?php
+
+/**
+ 	 * Removes Wordpress Admin bar for some user roles.
+ *
+ * @param array $allowed_roles allowed roles.
+ *
+ * @return boolean
+ */
+function tf_check_user_role( $allowed_roles ) {
+    /*@ Check user logged-in */
+    if ( is_user_logged_in() ) :
+        /*@ Check if user role is allowed */
+        return empty( array_intersect( wp_get_current_user()->roles , $allowed_roles ) );
+    endif;
+}
+	
+$allowed_roles = [ 'administrator', 'editor' ];
+if ( tf_check_user_role( $allowed_roles ) ) :
+    add_filter( 'show_admin_bar' , '__return_false');
+endif;
+
+add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_styles' );
+function my_theme_enqueue_styles() {
+    wp_enqueue_style( 'child-style', get_stylesheet_uri(),
+        array( 'parenthandle' ), 
+        wp_get_theme()->get('Version') // this only works if you have Version in the style header
+    );
+}
+
+## \wp-content\plugins\events-manager\templates\forms\event-editor.php
+pll_register_string('events-manager', 'Unauthorized Access', 'events-manager-fælleshus');
+pll_register_string('events-manager', 'Common room rental notice', 'event-manager-fælleshus');
+pll_register_string('events-manager', 'Your Details', 'events-manager-fælleshus');
+pll_register_string('events-manager', 'Name', 'events-manager-fælleshus');
+pll_register_string('events-manager', 'Email', 'events-manager-fælleshus');
+pll_register_string('events-manager', 'Event Name', 'events-manager-fælleshus');
+pll_register_string('events-manager', 'The event name. Example: Birthday party', 'events-manager-fælleshus');
+pll_register_string('events-manager', 'When', 'events-manager-fælleshus');
+pll_register_string('events-manager', 'Where', 'events-manager-fælleshus');
+pll_register_string('events-manager', 'Details', 'events-manager-fælleshus');
+pll_register_string('events-manager', 'Details about the event.', 'events-manager-fælleshus');
+pll_register_string('events-manager', 'HTML allowed.', 'events-manager-fælleshus');
+pll_register_string('events-manager', 'Event Image', 'events-manager-fælleshus');
+pll_register_string('events-manager', 'Bookings/Registration', 'events-manager-fælleshus');
+
+## \wp-content\plugins\events-manager\classes\em-tickets.php
+pll_register_string('events-manager', 'You cannot delete tickets if there are any bookings associated with them. Please delete these bookings first.', 'events-manager-havedag');
+pll_register_string('events-manager', 'Standard', 'events-manager-havedag');
+pll_register_string('events-manager', 'Date', 'events-manager-havedag');
+pll_register_string('events-manager', 'Price', 'events-manager-havedag');
+pll_register_string('events-manager', 'Spaces', 'events-manager-havedag');
+
+## \wp-content\plugins\events-manager\templates\tables\events.php
+## used styles: __(), _e(), _e (), esc_html_e(), esc_html_e ()
+pll_register_string('events-manager', 'Search Events', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'Pending', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'Edit', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'Delete', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'Draft', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'Add New', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'None', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'WARNING! You will delete ALL recurrences of this event, including booking history associated with any event in this recurrence. To keep booking information, go to the relevant single event and save it to detach it from this recurrence series.', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'Edit Recurring Events', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'Upcoming', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'Past Events', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'Location', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'Date and time', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'Duplicate this event', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'All Events', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'My Events', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'Bookings', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'Booked', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'No events', 'events-manager-mine-begivenheder');
+
+## \wp-content\plugins\events-manager\templates\tables\events.php
+## used styles: _e(), _e (), esc_html_e()
+pll_register_string('events-manager', 'Rental of common house format with %s', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'From ', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'to', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'Event starts at', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'All day', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'Timezone', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'This event spans every day between the beginning and end date, with start/end times applying to each day.', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'The expected price for the rental is:', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'Default common house rental price', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'Common house rental price, pre', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'Common house rental price, post', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'Common house rental price, invalid', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'Common house rental price month, invalid', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'Price calculation steps', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'which will be paid with the rent at the end of', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'Default common house rental month', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'Month_array', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'Rental is free for members of the board.', 'events-manager-mine-begivenheder');
+
+## wp-content\plugins\events-manager\templates\templates\my-bookings.php
+## used styles: _e(), _e (), esc_html_e()
+pll_register_string('events-manager', 'Garden day', 'events-manager-mine-tilmeldinger');
+pll_register_string('events-manager', 'Status', 'events-manager-mine-tilmeldinger');
+pll_register_string('events-manager', 'You do not have any bookings.', 'events-manager-mine-tilmeldinger');
+pll_register_string('events-manager', 'Please <a href="%s">Log In</a> to view your bookings.', 'events-manager-mine-tilmeldinger');
+pll_register_string('events-manager', 'You do not have any bookings.', 'events-manager-mine-tilmeldinger');
+pll_register_string('events-manager', 'Cancel', 'events-manager-mine-tilmeldinger');
+
+## D:\xampp\apps\wordpress\htdocs\wp-content\plugins\events-manager\classes\em-booking.php
+## used styles: __()
+pll_register_string('events-manager', 'Pending', 'events-manager-mine-tilmeldinger');
+pll_register_string('events-manager', 'Approved', 'events-manager-mine-tilmeldinger');
+pll_register_string('events-manager', 'Rejected', 'events-manager-mine-tilmeldinger');
+pll_register_string('events-manager', 'Cancelled', 'events-manager-mine-tilmeldinger');
+pll_register_string('events-manager', 'Awaiting Online Payment', 'events-manager-mine-tilmeldinger');
+pll_register_string('events-manager', 'Awaiting Payment', 'events-manager-mine-tilmeldinger');
+
+## wp-content\plugins\events-manager\templates\placeholders\bookingform.php
+## used styles: 
+pll_register_string('events-manager', 'You are already signed up for this event.', 'events-manager-havedag');
+pll_register_string('events-manager', 'Manage my signups', 'events-manager-havedag');
+
+## wp-content\plugins\events-manager\classes\em-event.php
+pll_register_string('events-manager', 'Event already exists during that time.', 'events-manager-fælleshus');
+pll_register_string('events-manager', 'Event start and end at the same time. This is not possible.', 'events-manager-fælleshus');
+
+## wp-content\plugins\events-manager\templates\forms\bookingform\tickets-list.php
+pll_register_string('events-manager', 'No spaces left', 'events-manager-havedag');
+
+## wp-content\plugins\events-manager\templates\forms\bookingform\booking-fields.php
+pll_register_string('events-manager', 'Comment', 'events-manager-havedag');
+
+## \wp-content\plugins\simple-membership\views\login.php
+## used styles: echo SwpmUtils::_()
+pll_register_string('simple-membership', 'Forgot Password?', 'simple-membership-login');
+pll_register_string('simple-membership', 'Login', 'simple-membership-login');
+pll_register_string('simple-membership', 'Remember Me', 'simple-membership-login');
+pll_register_string('simple-membership', 'Password', 'simple-membership-login');
+pll_register_string('simple-membership', 'Username or Email', 'simple-membership-login');
+pll_register_string('simple-membership', 'If you have recently moved in and have no account yet, contact the network group.', 'simple-membership-login');
+pll_register_string('simple-membership', 'Login notice', 'simple-membership-login');
+
+## wp-content\plugins\simple-membership\classes\class.swpm-auth.php
+pll_register_string('simple-membership', 'Password Empty or Invalid.', 'simple-membership-login');
+pll_register_string('simple-membership', 'User Not Found.', 'simple-membership-login');
+
+## wp-content\plugins\simple-membership\views\loggedin.php
+pll_register_string('simple-membership', 'Edit Profile', 'simple-membership-login');
+pll_register_string('simple-membership', 'Logout', 'simple-membership-login');
+pll_register_string('simple-membership', 'Membership', 'simple-membership-login');
+pll_register_string('simple-membership', 'Logged in as', 'simple-membership-login');
+pll_register_string('simple-membership', 'Loggedin notice', 'simple-membership-login');
+
+## wp-content\plugins\simple-membership\views\add.php
+pll_register_string('simple-membership', 'Apartment number', 'simple-membership-add');
+pll_register_string('simple-membership', ' - Only used for confirmation', 'simple-membership-add');
+pll_register_string('simple-membership', 'Wrong apartment number recieved.', 'simple-membership-add');
+pll_register_string('simple-membership', 'Creating a user for this apartment is currently not permitted.', 'simple-membership-add');
+pll_register_string('simple-membership', 'Email already exists.', 'simple-membership-add');
+pll_register_string('simple-membership', 'Registration completed message', 'simple-membership-add');
+pll_register_string('simple-membership', 'Registration form message', 'simple-membership-add');
+pll_register_string('simple-membership', 'You are already logged in. You dont need to create another account. So the registration form is hidden.', 'simple-membership-add');
+
+## wp-content\plugins\simple-membership\views\edit.php
+pll_register_string('simple-membership', 'Username', 'simple-membership-edit');
+pll_register_string('simple-membership', 'Email', 'simple-membership-edit');
+pll_register_string('simple-membership', 'Password', 'simple-membership-edit');
+pll_register_string('simple-membership', 'Repeat Password', 'simple-membership-edit');
+pll_register_string('simple-membership', 'First Name', 'simple-membership-edit');
+pll_register_string('simple-membership', 'Last Name', 'simple-membership-edit');
+pll_register_string('simple-membership', 'Leave empty to keep the current password', 'simple-membership-edit');
+
+## wp-content\plugins\simple-membership\classes\class.swpm-front-registration.php
+pll_register_string('simple-membership', 'Profile updated successfully.', 'simple-membership-edit');
+pll_register_string('simple-membership', 'Profile updated successfully. You will need to re-login since you changed your password.', 'simple-membership-edit');
+pll_register_string('simple-membership', 'Email address not valid.', 'simple-membership-edit');
+pll_register_string('simple-membership', 'No user found with that email address.', 'simple-membership-edit');
+pll_register_string('simple-membership', 'Email Address: ', 'simple-membership-edit');
+pll_register_string('simple-membership', 'New password has been sent to your email address.', 'simple-membership-edit');
+
+## wp-content\plugins\simple-membership\classes\class.swpm-access-control.php
+pll_register_string('simple-membership', 'You need to login to view this content. ', 'simple-membership-access-control');
+
+## REPLACES
+pll_register_string('simple-membership', 'RENTAL_BEFORE_APARTMENTNUM', 'simple-membership-replaces');
+pll_register_string('simple-membership', 'RENTAL_AFTER_APARTMENTNUM', 'simple-membership-replaces');
+
+## Class to write admin notices
+class AKDTU_notice {
+	/**
+	 * Message to be displayed in a warning.
+	 *
+	 * @var string
+	 */
+	private string $message;
+
+	/**
+	 * Type of message: error, warning, success, info.
+	 *
+	 * @var string
+	 */
+	private string $type;
+
+	/**
+	 * Flag, whether message should be dismissable.
+	 *
+	 * @var bool
+	 */
+	private bool $is_dismissible;
+
+	/**
+	 * Initialize class.
+	 *
+	 * @param string $type Type of message: error, warning, success, info.
+	 * @param string $message Message to be displayed in a warning.
+	 * @param bool $is_dismissible Flag, whether message should be dismissable.
+	 */
+	public function __construct( string $type, string $message, bool $is_dismissible = true ) {
+		$this->message = $message;
+		$this->type = $type;
+		$this->is_dismissible = $is_dismissible;
+
+		add_action( 'admin_notices', array( $this, 'render' ) );
+	}
+
+	/**
+	 * Displays notice on the admin screen.
+	 *
+	 * @return void
+	 */
+	public function render() {
+		printf( '<div class="notice notice-%s %s"><p>%s</p></div>', esc_html( $this->type ), ( $this->is_dismissible ? 'is-dismissible' : '' ), esc_html( $this->message ) );
+	}
+}
+
+## Dont send email change notifications when changing to or from @akdtu.dk
+if ( !function_exists( 'send_email_change_email' ) ) {
+    function send_email_change_email($return,$user,$userdata) {return $return && strtolower(explode("@",$userdata['user_email'])[1]) != '@akdtu.dk' && strtolower(explode("@",$user['user_email'])[1]) != '@akdtu.dk';}
+	add_filter('send_email_change_email','send_email_change_email',10,3);
+}
+## Dont send password change notifications when changing to or from @akdtu.dk
+if ( !function_exists( 'send_password_change_email' ) ) {
+    function send_password_change_email($return,$user,$userdata) {return $return && strtolower(explode("@",$userdata['user_email'])[1]) != '@akdtu.dk' && strtolower(explode("@",$user['user_email'])[1]) != '@akdtu.dk';}
+	add_filter('send_password_change_email','send_password_change_email',10,3);
+}
+
+
+
+## Custom user role for board-member user profiles
+add_role(
+	'board_member',
+	'Bestyrelsesmedlem',
+	array(
+		'read'=>true
+	)
+);
+
+
+
+## Custom user role for vicevært user profiles
+add_role(
+	'vicevaert',
+	'Vicevært',
+	array(
+		'read' => true
+	)
+);</code>
+
+** inc\views\cover_header.php **
+  * Copied from Neve
+  * Inserted after #34
+<code php>if ($context === 'event') {
+	$context = 'page'; // Allows for cover images on events
+}</code>
+
+** inc\core\styles\frontend.php **
+  * Copied from Neve
+  * Added after #1238
+<code php>if ($context === 'event') {
+	$context = 'page'; // Allows for cover images on events
+}</code>
+
+===== Extra CSS for Neve =====
+<code css>/* Set header height to fit with theme and content */
+:root{
+	--wp-header-height: 32px;
+	--header-height: 78px;
+}
+@media (min-width: 960px) {
+	:root{
+		--header-height: 88px;
+	}
+}
+@media screen and (max-width: 782px){
+	:root{
+		--wp-header-height: 46px;
+	}
+}
+
+/* Fixes header in place */
+.header {
+	margin-top: 0px !important;
+	position: fixed;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	padding: 0px;
+	z-index: 2;
+}
+
+/* Sets height of header correctly */
+.header-main,
+.header {
+	height: var(--header-height)1;
+	border-bottom: 1px solid lightgray;
+}
+
+/* Positions header correctly if Wordpress admin bar is present */
+#wpadminbar ~ .wrapper > header.header {
+	margin-top: var(--wp-header-height) !important;
+}
+
+/* Sets Wordpress admin bar to have position: fixed on phones as well */
+@media screen and (max-width: 600px){
+	#wpadminbar {
+		position: fixed;
+	}
+}
+
+/* Places featured images the correct place when header has position: fixed */
+/* header.header + main#content, */
+header.header ~ div.nv-post-cover,
+header.header ~ style + div.nv-post-cover {
+	margin-top: var(--header-height)
+}
+
+/* Fixes issue with not being able to use menu on phones */
+.nav-clickaway-overlay {
+    z-index: 2;
+}
+
+/* Temperary measure. Can be removed if you don't know what it does */
+.disclaimer {
+	display: none;
+}
+
+/* Allow horizontal scrolling for table containing signups for garden-day. Otherwise it cannot fit on mobile screens */
+div.table-wrap:has(> table#dbem-bookings-table) {
+	overflow-x: auto;
+}
+
+/* Set calendar items to be at the top of their cell */
+table.fullcalendar td {
+	vertical-align: top;
+	width: calc(100%/7);
+}
+
+/* Set days without any events to be as small as possible */
+td.eventless {
+    width: 0%;
+}
+
+/* Set height of calendar rows */
+.em-calendar.fullcalendar tbody tr.days-names{
+	height: auto;
+}
+.em-calendar.fullcalendar tbody tr{
+	height: 100px;
+}
+
+/* Styling for header */
+.builder-item {
+	display: none;
+}
+.builder-item.desktop-left,
+.builder-item.desktop-right,
+.builder-item.tablet-left,
+.builder-item.tablet-right,
+.builder-item.mobile-left,
+.builder-item.mobile-right,
+.builder-item.has-nav {
+	display: block;
+}
+
+/* Allow for unclickable links in menus */
+.hide-on-mobile.hide-on-tablet .unclickable > a {
+	pointer-events: none;
+}
+
+/* Set padding on dropdowns in menus */
+.nav-ul .sub-menu li>a {
+	padding: 5px 20px;
+}
+
+/* Keep long dropdowns in header in front of footer */
+header.header {
+	z-index: 100;
+}
+
+/* Allow for scrolling sideways in calendar, if too wide for screen */
+.em-calendar-wrapper {
+	overflow-x: auto;
+}
+
+.wp-dark-mode-active div#em-loading {
+	background:rgb(45,46,46) url(/wp-content/plugins/events-manager/includes/images/loading.gif) 50% 50% no-repeat;
+}
+
+#nv-primary-navigation-main ul.sub-menu ul.sub-menu{
+    max-height: 249.2px; /* x * 35.6px */
+    overflow-y: auto;
+}</code>
+
+===== robots.txt =====
+** robots.txt **
+  * Added <code>User-agent: *
+
+# Fjern tilladelse fra alt
+Disallow: *
+
+# Tillad root akdtu.dk
+Allow: /$
+
+# Tillad sider om kollegiet
+Allow: /om
+Allow: /en/about
+
+# Tillad side om køb og venteliste
+Allow: /koeb-venteliste
+Allow: /en/buy-waiting-list/
+
+# Tillad side med kontaktinfo
+Allow: /kontakt/
+Allow: /en/contact/</code> 

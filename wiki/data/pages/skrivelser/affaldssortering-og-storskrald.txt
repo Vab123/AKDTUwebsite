@@ -1,0 +1,103 @@
+=====Affaldssortering og storskrald=====
+<WRAP noprint><adm information>Siden her er lavet til at blive eksporteret til PDF, med knappen "Export to PDF", oppe til venstre</adm></WRAP>
+Senest opdateret: November 2018
+
+Foreningen har kildesortering af affald i form af følgende containere:
+^ Type          ^ Størrelse ^ Antal ^ Tømmes                 |
+| Dagrenovation | 660 L     | 4     | Hver mandag og torsdag |
+| Glas          | 370 L     | 1     | Mandag, ulige uger     |
+| Papir         | 660 L     | 1     | Tirsdag, ulige uger    |
+| Plast         | 660 L     | 1     | Ondag, lige uger       |
+| Pap           | 660 L     | 2     | Torsdag, lige uger     |
+| Metal         | 370 L     | 1     | Fredag, lige uger      |
+
+**Rimelig** størrelse husholdningsaffald smides i containerne ved affaldsskuret.
+
+Derudover er det et krav fra renovationsselskabet at containerne er lukket helt; dvs. de må altså **ikke** stå på klem – benyt i stedet en af containerne ved siden af.
+
+Hvis containerne ikke kan lukkes bliver de ikke tømt, og derved forværres problemet. Desuden vil brud på dette medføre ekstraregning fra renovationsselskabet, hvilket i sidste ende kan betyde en huslejestigning.
+
+Undlad også at smide skraldet ved siden af containerne; da dette tiltrækker rotter mm. og generelt er til gene for alle beboere.
+
+Ligeledes må der heller ikke stilles affald udenfor lejligheden/hoveddøren, da dette også tiltrækker rotter, samt kan give misfarvninger i betonen. Hvis der opstår misfarvninger i betonen pga. brud på disse regler, så påhviler det dig at rense det (evt. med professionel hjælp).
+
+==== Skraldesortering ====
+^ Plast ^^
+^ Tilladt ^ Ikke tilladt ^
+| Plastflasker | Flamingo |
+| Frugt- og grøntbakker | Gummistøvler og regntøj |
+| Kødbakker (skyllet) | Baderinge |
+| Bobleplast | Badebassiner |
+| Plast urtepotter | Gummi |
+| Plastposer | Magretheskåle og andet melanin |
+| Husholdningsfilm |  |
+
+^ Metal ^^
+^ Tilladt ^ Ikke tilladt ^
+| Konservesdåser | Frost- og chips poser |
+| Øl- og sodavandsdåser | Spraydåser fra f.eks. hårspray og maling |
+| Metallåg | Tuber fra f.eks. remoulade |
+| Fyrfadslysholdere | Elektronik |
+| Stanniol og sølvpapir | Metal fra motorer o.lign. |
+| Foliebakker | Kabler |
+| Bestik og sakse |  |
+
+^ Papir ^^
+^ Tilladt ^ Ikke tilladt ^
+| Aviser | Mælke- og juicekartoner |
+| Ugeblade | Pap og karton |
+| Reklamer | Pizzabakker |
+| Printerpapir | Gavepapir |
+| Skrive- og tegnepapir | Æggebakker |
+| Konvolutter | Bøger |
+| Fotokopier | Reklamer indpakket i plastfolie |
+| | **Husk**: Mælke- og juicekartoner samt pizzabakker skal i dagsrenovationscontainerne. |
+
+^ Pap ^^
+^ Tilladt ^ Ikke tilladt ^
+| Papkasser | Pizzabakker |
+| Bølgepap | Emballage med madrester |
+| Karton | Snasket/beskidt pap |
+| Paprøret fra køkken- og  toiletruller | Flamingo |
+| Morgenmadsæsker |  |
+| Æggebakker |  |
+| **Husk**: At skære, folde eller trampe pappet inden det smides i containeren. | **Husk**: Papkasser skal tømmes for f.eks. flamingo, plastik, papir mm. |
+
+^ Glas ^^
+^ Tilladt ^ Ikke tilladt ^
+| Vinflasker | Ildfaste  fade |
+| Ølflasker | Keramik |
+| Spiritusflasker | Porcelæn |
+| Glasflasker | Vinduesglas |
+| Syltetøjsglas | Spejle |
+| Konservesglas | El-pærer |
+| Store glasskår |  |
+| Drikkeglas |  |
+|  | **Bemærk**: Disse ting skal afleveres på genbrugspladsen |
+
+===Storskrald===
+Storskrald, samt affald der ikke hører til i dagrenovation eller i de nævnte containere (f.eks. elektronik), skal man selv sørge for at bortskaffe.
+
+Dette kan gøres på nærmeste genbrugsplads:\\
+Firskovvej 9, 2800 Kgs. Lyngby.\\
+Åbent alle dage 8-17.
+
+===Reklamer===
+Hvis der er klistermærke fra tidligere andelshaver/beboer på din postkasse vedr. reklamer/gratis aviser, så skal dette gamle mærke fjernes, uanset om du ønsker at være tilmeldt ordningen eller ej. Du er ikke automatisk tilmeldt ordningen selvom der sidder et klistermærke. Ordningen bliver automatisk annulleret ifm. den tidligere andelshavers/beboers flytning er registreret i CPR-registeret.
+
+Hvis man ikke ønsker reklamer og/eller gratisaviser, så kan man afmelde sig dette hos PostNord på [[www.postnord.dk/da/nej-tak-til-reklamer/Sider/tilmeld-afmeld-aendre.aspx]].
+
+Hvis man derimod ønsker nogle reklamer kan man tilmelde sig NejTak+ på [[www.minetilbud.dk/Nej_Tak_Plus]].
+
+===Brud på reglerne===
+Ved brud på disse regler kan bestyrelsen pålægge andelshaver påbud om udbedring eller få det udført på andelshavers regning.
+
+I grove og/eller gentagne tilfælde kan det medføre eksklusion af foreningen.
+
+Hvis du har nogen spørgsmål er du velkommen at kontakte bestyrelsen på [[bestyrelsen@akdtu.dk]].
+
+<WRAP centeralign>
+Med venlig hilsen,\\
+Bestyrelsen\\
+Andelskollegiet ved DTU - Akademivej
+</WRAP>

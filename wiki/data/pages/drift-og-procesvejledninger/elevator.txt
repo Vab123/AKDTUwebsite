@@ -1,0 +1,58 @@
+=====Elevator=====
+<WRAP group>
+<WRAP 4cm column>
+Service:\\
+Vagt telefon:
+</WRAP>
+
+<WRAP auto column>
+Kone\\
+35 87 81 50
+</WRAP>
+</WRAP>
+				
+<WRAP group>
+<WRAP 4cm column>
+**Opgang 1**\\
+Serienummer\\
+Navn\\ \\
+**Opgang 2**\\
+Serienummer\\
+Navn\\ \\
+**Opgang 3**\\
+Serienummer\\
+Navn
+</WRAP>
+
+<WRAP auto column>
+\\
+18 53 58\\
+Kollegiebakken 23\\ \\ \\
+18 53 57\\
+Kollegiebakken 21\\ \\ \\
+18 53 47\\
+Kollegiebakken 19
+</WRAP>
+</WRAP>
+
+Service/reparationer, samt døgnvagt foretages af Kone, som vi har kontrakt med.
+
+====Vejledning hvis elevator ikke virker====
+===Sikkerhed===
+  * Hvis der er nogen i elevatoren/fastsiddende må der ikke røres ved noget!\\ Her skal den/de fastsiddende kontakte servicecentralen vha. nødkaldet i elevatoren.
+  * Hold afstand til døren!\\ Når strømmen til elevatoren slukkes eller elevatoren resettes smækker dørene i med stor kraft.
+
+===Fremgangsmåde===
+  - Nøgle til elevatorer hænger i nøgleskabet i serverrummet.
+  - Åben elevatorens nederste skab (stueetage).
+  - Tryk på knappen ”Reset”.
+  - Hvis dette ikke virker; sluk sikringen øverst til venstre (FF).
+  - Vent ét minut.
+  - Tænd sikringen igen.
+  - Test elevatoren ved at sende den til 2. sal.
+  - Hvis det ikke virker, tryk på knappen ”Reset” igen.
+  - Test elevatoren ved at sende den til 2. sal.
+  - Hvis elevatoren stadig ikke virker skal serviceleverandør tilkaldes til reparation (indenfor normal arbejdstid) – Nævn ikke at ovenstående er afprøvet.
+
+{{ :drift-og-procesvejledninger:elevator_teknikskab.jpg?nolink&600 |}}
+<WRAP centeralign>Billede 1 - Elevator teknikskab</WRAP>

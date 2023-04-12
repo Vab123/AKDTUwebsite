@@ -1,0 +1,77 @@
+=====Ventilation=====
+Service: 	Lygas Ventilation
+
+**Motor**
+<WRAP group>
+<WRAP 2cm column>
+Antal:\\
+Producent:\\
+Model:\\
+El-forbrug:
+</WRAP>
+
+<WRAP auto column>
+2\\
+Küenle Antriebssysteme\\
+DCS 90L 4-852\\
+1,5 kW/stk.
+</WRAP>
+</WRAP>
+
+{{ :drift-og-procesvejledninger:ventilation.jpg?nolink&600 |}}
+
+====Hovedbygning====
+Ventilationen er delt to grene – én for hver motor.
+
+Hver gren har to styringsbokse; en til styring af udsugningsstyrke og en til styring af tidspunkter – Se ”Billede 1 - Ventilationsstyring”.
+
+De er indstillet med nedsat udsugning om natten.
+<WRAP group>
+<WRAP 2cm column>
+Dag-drift\\
+Nat-drift
+</WRAP>
+<WRAP 4cm column>
+06:00 – 23:00\\
+23:00 – 06:00
+</WRAP>
+<WRAP auto column>
+3\\
+2
+</WRAP>
+</WRAP>
+
+===Gren 1===
+<WRAP group>
+<WRAP 3cm column>
+Lejligheder:\\ \\ \\
+Styring:\\
+Vejledning:
+</WRAP>
+<WRAP auto column>
+1-12\\
+101-112\\
+201-212\\
+Boks 1 - Theben TR 610 top\\
+Se {{ :drift-og-procesvejledninger:boks_1_-_theben_tr_610_top.pdf |}}
+</WRAP>
+</WRAP>
+
+===Gren 2===
+<WRAP group>
+<WRAP 3cm column>
+Lejligheder:\\ \\ \\
+Styring:\\
+Vejledning:
+</WRAP>
+<WRAP auto column>
+13-24\\
+113-124\\
+213-224\\
+Boks 2 - Theben TR 612 S\\
+Se {{ :drift-og-procesvejledninger:boks_2_-_theben_tr_612_s.pdf |}}
+</WRAP>
+</WRAP>
+
+{{ :drift-og-procesvejledninger:ventilationsstyring.jpg?nolink&600 |}}
+<WRAP centeralign>Billede 1 - Ventilationsstyring</WRAP>

@@ -1,0 +1,278 @@
+======Kontaktpersoner======
+=====Håndværkere=====
+====Bygningsingeniør====
+**Plan 1**
+<WRAP group>
+<WRAP 4cm column>
+CVR\\
+Hjemmeside\\
+Telefon\\
+Email
+</WRAP>
+
+<WRAP auto column>
+29212422\\
+\\
+\\
+
+</WRAP>
+</WRAP>
+
+====Elektriker====
+**PH El og sikring**
+<WRAP group>
+<WRAP 4cm column>
+Kontaktperson\\
+Hjemmeside\\
+Telefon\\
+Email\\
+Note
+</WRAP>
+
+<WRAP auto column>
+Kenneth Anderson\\
+\\
+[[tel>27222821]]\\
+[[ka@ph-el.dk]]\\
+For fiber opgaver og generelt el arbejde (indenfor normal arbejdstid)
+</WRAP>
+</WRAP>
+
+====Adgangskontrol og alarm - Fælleshus====
+**PH El og sikring**
+<WRAP group>
+<WRAP 4cm column>
+Kontaktperson\\
+Hjemmeside\\
+Telefon\\
+Email\\
+Note
+</WRAP>
+
+<WRAP auto column>
+Michael Rasmussen\\
+[[tel>27222835]]\\
+[[mr@ph-el.dk]]\\
+Ansvarlig for fælleshus ADK.
+</WRAP>
+</WRAP>
+
+====Gaskedel - Fælleshus====
+**Lygas**
+<WRAP group>
+<WRAP 4cm column>
+CVR\\
+Hjemmeside\\
+Telefon\\
+Email
+</WRAP>
+
+<WRAP auto column>
+12935986\\
+[[http://www.lygas.dk/]]\\
+[[tel>50131415]]\\
+[[lygas@lygas.dk]]
+</WRAP>
+</WRAP>
+
+====Glarmester====
+**Frese & Søn**
+<WRAP group>
+<WRAP 4cm column>
+CVR\\
+Hjemmeside\\
+Telefon\\
+Email
+</WRAP>
+
+<WRAP auto column>
+14373802\\
+[[https://frese.as/]]\\
+[[tel>33144139]]\\
+[[mail@frese.as]]
+</WRAP>
+</WRAP>
+
+====Kloak og faskiner====
+**DBE Kloakservice**
+<WRAP group>
+<WRAP 4cm column>
+CVR\\
+Hjemmeside\\
+Telefon\\
+Email
+</WRAP>
+
+<WRAP auto column>
+31365236\\
+[[http://www.dbe-kloakservice.dk/]]\\
+[[tel>72100125]]\\
+[[info@dbe-kloak.dk]]
+</WRAP>
+</WRAP>
+
+====Skadeservice====
+**Skadeservice Danmark**
+<WRAP group>
+<WRAP 4cm column>
+CVR\\
+Hjemmeside\\
+Telefon\\
+Email
+</WRAP>
+
+<WRAP auto column>
+36017309\\
+[[https://skadeservice-danmark.dk/]]\\
+[[tel>70112112]]\\
+[[kundeservice@skadeservice-danmark.dk]]
+</WRAP>
+</WRAP>
+
+====Tømrer====
+**Tømrerfirmaet Sten Jensen**
+<WRAP group>
+<WRAP 4cm column>
+CVR\\
+Hjemmeside\\
+Email\\
+\\
+Kontaktperson\\
+Email\\
+Telefon\\
+Mobil\\
+\\
+Fast tømrer\\
+Email\\
+Telefon
+</WRAP>
+
+<WRAP auto column>
+12205074\\
+[[https://tfsj.dk/]]\\
+[[firma@tfsj.dk]]\\
+\\
+Rene Eichorst\\
+[[rene@tfsj.dk]]\\
+[[tel>46152851]]\\
+[[tel>26281763]]\\
+\\
+Christian Steenhof\\
+[[christian@tfsj.dk]]\\
+[[tel>26279891]]
+</WRAP>
+</WRAP>
+
+====Maler====
+**Torups Malerfirma Stig Torup Kristensen**
+<WRAP group>
+<WRAP 4cm column>
+CVR\\
+Kontaktperson\\
+Hjemmeside\\
+Telefon\\
+Email
+</WRAP>
+
+<WRAP auto column>
+34033617\\
+Stig Torup Kristensen\\
+Ingen\\
+[[tel>28570225]]\\
+[[torup.maler@gmail.com]]
+</WRAP>
+</WRAP>
+
+====Ventilation====
+**Lygas**
+<WRAP group>
+<WRAP 4cm column>
+CVR\\
+Hjemmeside\\
+Telefon\\
+Email
+</WRAP>
+
+<WRAP auto column>
+12935986\\
+[[http://www.lygas.dk/]]\\
+[[tel>50131415]]\\
+[[lygas@lygas.dk]]
+</WRAP>
+</WRAP>
+
+====VVS====
+**Knud Olsen VVS – Mindre VVS-entrepriser**
+<WRAP group>
+<WRAP 4cm column>
+CVR\\
+Hjemmeside\\
+Telefon\\
+Email
+</WRAP>
+
+<WRAP auto column>
+17916432\\
+[[https://www.knudolsenvvs.dk/]]\\
+[[tel>44940186]]\\
+[[claus@knudolsenvvs.dk]]
+</WRAP>
+</WRAP>
+
+**Lindpro – Større VVS-entrepriser**
+<WRAP group>
+<WRAP 4cm column>
+CVR\\
+Hjemmeside\\
+Telefon\\
+Email
+</WRAP>
+
+<WRAP auto column>
+82675418\\
+[[https://lindpro.dk/]]\\
+[[tel>70101617]]\\
+
+</WRAP>
+</WRAP>
+
+====TV - Fællesantenne anlæg====
+**Dansk Digital Center**
+<WRAP group>
+<WRAP 4cm column>
+CVR\\
+Hjemmeside\\
+Telefon\\
+Email
+</WRAP>
+
+<WRAP auto column>
+10138922\\
+[[https://www.ddctv.dk/]]\\
+[[tel>45935444]]\\
+[[kontakt@ddctv.dk]]
+</WRAP>
+</WRAP>
+
+
+=====Blacklistede håndværkere=====
+** Falsing VVS/Complet VVS **
+
+Samme ejer bag de to firmaer.
+
+Foreningen har brugt dem tidligere, de er fravalgt grundet en række forhold:
+  * Dyr timepris.
+  * Dyre reservedele – op til tre gange dyrere end identiske dele hos andre VVS’ere.
+  * Manglende kompetencer.\\ Eksempelvis fik de engang en større opgave om gennemgang/reparation af vores varmesystem. Samme dag de havde udført arbejdet kunne konstateres flere autoudluftere var defekte og burde have været skiftet.
+  * De indstillede på flowhåndtaget til varme i lejligheder uden aftale eller orientering af bestyrelsen, samt anerkendte ikke, at det kan give problemer for andre på varmestrengen.
+
+** Veltec **
+  * Tidligere havde vi servicekontrakt på vores gaskedler med dem. Det var oftere reglen end undtagelsen, at de ikke virkede efter de havde haft service på dem.
+
+** Niels Bigum (VVS og gasteknik) **
+  * Tekniker hos Veltec som oftest havde ansvaret for vores kedler – og deraf også ansvaret for de problemer som opstod efter deres service.
+  * Har selvstændigt firma ved siden af som tog sig af de reparationer som ikke var dækket af vores serviceaftale med Veltec.\\ Der var store problemer med overholdelse af aftaler/tidsfrister hvor man hele tiden skulle rykke for det.
+
+** Niels Erboe (Tømrer) **
+  * Overholder ikke aftaler/tidsfrister.
+  * Er svær at komme i kontakt med når aftalerne ikke overholdes.

@@ -1,0 +1,34 @@
+a:2:{s:7:"current";a:8:{s:4:"date";a:2:{s:7:"created";i:1672338118;s:8:"modified";i:1672338118;}s:7:"creator";s:15:"Victor Brandsen";s:4:"user";s:6:"victor";s:11:"last_change";a:8:{s:4:"date";i:1672338118;s:2:"ip";s:14:"82.211.219.109";s:4:"type";s:1:"C";s:2:"id";s:37:"drift-og-procesvejledninger:belysning";s:4:"user";s:6:"victor";s:3:"sum";s:8:"oprettet";s:5:"extra";s:0:"";s:10:"sizechange";i:3096;}s:5:"title";s:9:"Belysning";s:11:"description";a:2:{s:15:"tableofcontents";a:12:{i:0;a:4:{s:3:"hid";s:9:"belysning";s:5:"title";s:9:"Belysning";s:4:"type";s:2:"ul";s:5:"level";i:2;}i:1;a:4:{s:3:"hid";s:36:"faelleshus_loftslamper_solv_lamperne";s:5:"title";s:49:"Fælleshus – Loftslamper (”sølv” lamperne)";s:4:"type";s:2:"ul";s:5:"level";i:3;}i:2;a:4:{s:3:"hid";s:20:"faelleshus_toiletter";s:5:"title";s:24:"Fælleshus – Toiletter";s:4:"type";s:2:"ul";s:5:"level";i:3;}i:3;a:4:{s:3:"hid";s:10:"lygtepaele";s:5:"title";s:10:"Lygtepæle";s:4:"type";s:2:"ul";s:5:"level";i:3;}i:4;a:4:{s:3:"hid";s:23:"lejligheder_-_dorlamper";s:5:"title";s:24:"Lejligheder - Dørlamper";s:4:"type";s:2:"ul";s:5:"level";i:3;}i:5;a:4:{s:3:"hid";s:20:"opgange_-_vaeglamper";s:5:"title";s:20:"Opgange - Væglamper";s:4:"type";s:2:"ul";s:5:"level";i:3;}i:6;a:4:{s:3:"hid";s:16:"opgange_-_pendel";s:5:"title";s:16:"Opgange - Pendel";s:4:"type";s:2:"ul";s:5:"level";i:3;}i:7;a:4:{s:3:"hid";s:17:"elevator_udendors";s:5:"title";s:22:"Elevator – Udendørs";s:4:"type";s:2:"ul";s:5:"level";i:3;}i:8;a:4:{s:3:"hid";s:18:"elevator_indendors";s:5:"title";s:23:"Elevator – Indendørs";s:4:"type";s:2:"ul";s:5:"level";i:3;}i:9;a:4:{s:3:"hid";s:24:"kaelder_serverrum_fyrrum";s:5:"title";s:30:"Kælder – Serverrum + fyrrum";s:4:"type";s:2:"ul";s:5:"level";i:3;}i:10;a:4:{s:3:"hid";s:12:"kaelder_gang";s:5:"title";s:16:"Kælder – Gang";s:4:"type";s:2:"ul";s:5:"level";i:3;}i:11;a:4:{s:3:"hid";s:10:"cykelskure";s:5:"title";s:10:"Cykelskure";s:4:"type";s:2:"ul";s:5:"level";i:3;}}s:8:"abstract";s:261:"Belysning
+
+Fischer Lighting
+
+Al ny belysning skal være LED.
+
+Fælleshus – Loftslamper (”sølv” lamperne)
+
+Antal lyskilder
+
+Fatning
+
+Effekt
+
+Lysstyrke
+
+Farvetemperatur
+
+Note
+
+
+
+E27
+
+W.
+
+450 lumen
+
+2.700-3.000 K.
+
+
+Fælleshus – Toiletter
+
+Antal lyskilder";}s:8:"relation";a:2:{s:5:"media";a:4:{s:40:"drift-og-procesvejledninger:dorlampe.jpg";b:1;s:41:"drift-og-procesvejledninger:vaeglampe.jpg";b:1;s:38:"drift-og-procesvejledninger:pendel.jpg";b:1;s:49:"drift-og-procesvejledninger:elevator_udendors.jpg";b:1;}s:10:"firstimage";s:40:"drift-og-procesvejledninger:dorlampe.jpg";}s:8:"internal";a:2:{s:5:"cache";b:1;s:3:"toc";b:1;}}s:10:"persistent";a:4:{s:4:"date";a:1:{s:7:"created";i:1672338118;}s:7:"creator";s:15:"Victor Brandsen";s:4:"user";s:6:"victor";s:11:"last_change";a:8:{s:4:"date";i:1672338118;s:2:"ip";s:14:"82.211.219.109";s:4:"type";s:1:"C";s:2:"id";s:37:"drift-og-procesvejledninger:belysning";s:4:"user";s:6:"victor";s:3:"sum";s:8:"oprettet";s:5:"extra";s:0:"";s:10:"sizechange";i:3096;}}}

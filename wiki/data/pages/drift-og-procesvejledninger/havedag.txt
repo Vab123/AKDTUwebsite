@@ -1,0 +1,54 @@
+=====Havedage=====
+====Udsendelse af skrivelse vedrørende tilmelding til havedage====
+  - Udsend infoskrivelsen ”Infoskrivelse - Cykeloprydning” mindst én måned inden deadline for tilmelding.
+    * Skrivelsen kan findes på Cobblestone Intranet: Best. Dokumenter -> Infoskrivelser.
+    * Husk at tilrette dato for tilmelding/deadline.
+    * Skal varsles gennem:
+      * Email til andelshavere gennem Administrator.
+      * Skriv i Facebook gruppe.
+      * Valgfrit: Opslag på tavler i opgange.
+
+====Oprettelse af havedage====
+  - Log ind på: [[https://akdtu.dk/wp-login.php]]
+  - I menuen til venstre; vælg ”Administration” -> ”Havedag”.
+  - Under overskriften ”Opret havedage” udfyld felterne:
+    * Periode:
+      * Forår
+      * Efterår
+    * Startdato for tilmelding.
+    * Deadline for tilmelding.
+    * Deltagerbegrænsning.
+  - Der kan tilføjes flere havedage til samme havedagsperiode ved at trykke på ”Tilføj Ekstra havedag”.
+  - Når data for de ønskede havedage er angivet, trykkes der på ”Opret havedage”.
+
+====Se deltagerliste====
+  - Log ind på: [[https://akdtu.dk/wp-login.php]]
+  - I menuen til venstre; vælg ”Administration” -> ”Havedag”.
+  - Under overskriften ”Vis havedage”, vælg hvilken havedagsperiode du ønsker at se deltagerliste fra – Eksempelvis vil Efterår 2018 hedder E2018.
+  - Hernæst vises deltagerlister for alle havedagene for den pågældende periode.
+
+**NOTE TIL IMPLEMENTERING:**\\
+Lav liste over lejligheder som ikke er tilmeldt.\\
+Lav tabel med deltageroplysninger + dag lejligheder ikke er fremmødt.
+Implementer en registreringsfunktion af deltagere.
+
+====Indberetning af manglende tilmeldte====
+**LISTE OVER MANGLENDE TILMELDTE LEJLIGHEDER ER IKKE IMPLEMENTERET ENDNU**
+  - Log ind på: [[https://akdtu.dk/wp-login.php]]
+  - I menuen til venstre; vælg ”Administration” -> ”Havedag”.
+  - Under overskriften ”Vis havedage”, vælg hvilken havedagsperiode du ønsker at se deltagerliste fra – Eksempelvis vil Efterår 2018 hedder E2018.
+  - Øverst på siden vil være en liste visende de lejligheder som ikke har tilmeldt sig en havedag.
+  - Disse lejlighedsnumre skal indsendes til vores administrator hurtigst muligt efter tilmeldingsdeadline med besked om, at der skal trækkes et gebyr (pt. 750 kr.) i forbindelse med næstkommende boligafgiftsopkrævning.
+
+====Registrering og indberetning af manglende fremmødte====
+**REGISTRERING ER IKKE IMPLEMENTERET ENDNU**
+Registrering af fremmødte og indberetning af manglende fremmødte skal ske hurtigst muligt efter havedagen har været afholdt.
+  - Log ind på: [[https://akdtu.dk/wp-login.php]]
+  - I menuen til venstre; vælg ”Administration” -> ”Havedag”.
+  - Under overskriften ”Vis havedage”, vælg hvilken havedagsperiode du ønsker at se deltagerliste fra – Eksempelvis vil Efterår 2018 hedder E2018.
+  - Find tabellen gældende for den pågældende havedag.
+  - For de lejligheder som har deltaget i havedag, skal der være flueben i feltet ”Deltaget”.
+  - Når alle deltagende lejligheder er blevet registreret trykkes der på knappen ”Registrer deltagere”.
+  - Siden opdaterer derefter automatisk.
+  - Hvis der var lejligheder som ikke deltog, vil der nu være oprettet en ny tabel til den pågældende havedag med oplysninger på disse.
+  - Kopier denne tabel ind i en e-mail og send til vores administrator, samt bestyrelsen på cc, med besked om, at der skal trækkes et gebyr (pt. 750 kr.) i forbindelse med næstkommende boligafgiftsopkrævning.

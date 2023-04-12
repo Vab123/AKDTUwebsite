@@ -1,0 +1,16 @@
+===== Årsplan =====
+
+^ Opgave / Emne             ^ Januar ^ Februar ^ Marts ^ April ^ Maj ^ Juni ^ Juli ^ August ^ September ^ Oktober ^ November ^ December ^ Beskrivelse ^ Form ^ Resultat ^ Deltagere ^ Ansvarlig ^
+| Generalforsamling         |        |         | (X)   | (X)   |     |      |      |        |           |         |          |          | Bestyrelsen afholder ordinær generalforsamling i løbet af marts eller april i fælleshuset. |     | Bestyrelse, Andelshavere | Bestyrelse / Administrator |
+| Fastsæt dato              |        |         |       |       |     |      |      |        |           |         |          | X        | Bestyrelsen fastsætter dato sammen med Administrationen. |  | Dato for afholdelse af ordinær GF. |  | Bestyrelsen |
+| Budget og regnskabsmæde   |        |         | (X)   | (X)   |     |      |      |        |           |         |          |          | Bestyrelsen/Administrationen gennemgår regnskab og kommende års budget. |  |  | Bestyrelse/Administration | Bestyrelse/Administration |
+| Udsendelse af indkaldelse |        |         | (X)   | (X)   |     |      |      |        |           |         |          |          | Mindst 14 dage inden GF. |  |  | Administration |
+| Bestyrelsens beretning    |        |         | X     |       |     |      |      |        |           |         |          |          | Bestyrelsens beretning beskriver året der er gået, samt fremtidsplaner. |  | Beretningen sendes ud sammen med indkaldelsen. |  | Formand |
+|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| Havedag                   |        | X       | X     | X     | X   | (X)  |      | (X)    | X         | X       | X        | (X)      |  |  |  |  | Bestyrelse |
+| Tilmelding til havedag    | X      |         |       |       |     |      | (X)  | (X)    |           |         |          |          | Havedage oprettes på hjemmeside og der laves infoskrivelse på hjemmeside, facebook og email. |  |  |  | Formand / Netgruppen |
+| Opkrævning for  havedag   |        |         |       |       |     |      | X    |        |           |         |          | X        | Sendes til Cobblestone |  |  |  | Formand / Netgruppen |
+| Cykeloprydning            |        |         |       |       |     |      |      |        |           | X       | X        |          |  |  |  |  |  |
+| Skrivelse angående cykeloprydning | |        |       |       |     |      |      |        | X         |         |          |          |  |  |  |  |  |
+| Kontakt politi omkring stjålne cykler | |    |       |       |     |      |      |        |           | X       |          |          |  |  |  |  |  |
+| Kontakt politi om afhentning af cykler | X | |       |       |     |      |      |        |           |         | X        |          |  |  |  |  |  |

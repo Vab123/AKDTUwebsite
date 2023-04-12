@@ -1,0 +1,8 @@
+=====Internet i fælleshuset=====
+<adm warning>Dette er endnu ikke operationelt, men er Work-In-Progress. Det afventer i øjeblikket at der trækkes internetkabel til fælleshuset, samt at kollegiet får en kontrakt om ansvarsfraskrivelse fra K-net. Siden her opdateres løbende.</adm>
+Der er internet i fælleshuset, som kan benyttes når fælleshuset er udlejet. Denne forbindelse bruger VLAN ''624''.
+
+====Tænd og sluk for internetforbindelsen====
+Forbindelsen tænder og slukker automatisk i forbindelse med almindelige udlejninger af fælleshuset klokken 12:00. Da dette kan tage et øjeblik forventes det at forbindelsen er tændt ca. 15 minutter inde i udlejningsperioden, men som udgangspunkt bør det ske allerede efter 1 minut.
+
+I forbindelse med unormale udlejningstidspunkter (bestyrelsesmøder, generalforsamlinger, etc.) kan internetforbindelsen startes af en administrator på hjemmesiden, gennem widgeten "Fælleshus internetforbindelse".

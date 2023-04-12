@@ -1,0 +1,36 @@
+====== Adgangskontrol ======
+
+===== Praktisk om systemet =====
+==== Bestilling af nye chips ====
+Såfremt en chip ikke længere duer kan der laves en ny, hvis der er flere på lager.
+Hvis ikke der er flere på lager kan der bestilles en ny. Foreningen har indtil videre bestilt fra PH-el, hvor vi normalt har kontaktet Michael Rasmussen på <mr@ph-el.dk>. Prisen lå i 2022 på ca 35 kroner pr. chip.
+
+Foreningen bruger EM-chips til adgangskontrollen.
+
+==== Udskiftning af batterier i alarmer ====
+** Bevægelsessensorer **
+  * Antal: 3.
+  * Batteritype: Lithium batteri 3,0V, 1600mAh, 2 CR 123A Ø17mm, højde 34,5mm
+ 
+** Magnetsensor (døre og vinduer): **
+  * Antal: 7
+  * Batteritype: Lithium batteri, 3,6v/1,2Ah, størrelse 1/2AA, Tadiran  
+
+Batterierne forventes at skulle skiftes 1 gang om året, og er sidst skiftet 30/11/2022.
+
+==== Opdatering af firmware i alarmsystemet ====
+Dette gøres af ph-el, som udgangspunkt på anmodning fra bestyrelsen. Dette kan eventuelt gøres i forbindelse med et generelt check af systemet.
+
+===== Brugerstyring =====
+==== Adgang til alarmsystemets web-interface ====
+Hvis en chip er forsvundet eller stopper med at virke skal denne fjernes fra systemet og eventuelt erstattes med en ny. Dette kan gøres ved at forbinde til alarmens web-interface, ved først at gå til [[https://www.spcconnect.com/WebPage/Panels]] og logge ind. Derefter kan der forbindes til vores alarm ved at klikke på den orange globus ("Connect to the SPC Panel") under menupunktet "System summary". Her skal logges ind med brugernavn "Formand" og en fire-cifret kode.
+
+==== Oprettelse/fjernelse af chips ====
+Når der er logget ind på web-interfacet ses i venstre side menuen "Brugere". Herunder ses en liste over alle aktuelle brugere på alarmsystemet. Man finder derefter den aktuelle bruger og klikker på "rediger" (en blå blyant) ud for denne. Under "Kort nummer" står den chip der aktuelt er koblet til brugeren, som kan slettes. Hvis der skal tilføjes en ny chip skannes denne først i læseren ved fælleshuset. Dette gøres da systemet derefter gemmer den nye chip på en liste over ukendte kort (chips). Der ses derefter en knap på brugerens konto, ved "Kort nummer", med titlen "Ukendte kort". Når man trykker på denne ses listen over tidligere læste, ukendte kort. Man finder derefter den man lige har scannet, og trykker derefter "Tilføj" ud for denne. Derefter gemmes brugerens profil, og chippen er nu aktiveret.
+
+Herefter opkræves prisen for den nye chip, ved at få Administrator til at opkræve beløbet sammen med huslejen.
+===== Dokumenter =====
+{{ :vejledninger:150464-00_alarm_andelskollegiet_ved_dtu_akademivej_ver._1.pdf | Tilbud}}\\
+{{ :vejledninger:siemens-spc-dk-web-brochure.pdf | Web brochure}}\\
+{{ :vejledninger:siemens_spc_alarm_og_adgangskontrol.pdf | Infodokument fra PH-EL & Sikring}}\\
+{{ :vejledninger:siemens-spc-spck420-421-brugervejledning-dk.pdf | Brugervejledning}}

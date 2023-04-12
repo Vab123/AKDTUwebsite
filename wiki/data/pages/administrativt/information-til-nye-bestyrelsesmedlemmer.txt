@@ -1,0 +1,10 @@
+=====Orientering til nye bestyrelsesmedlemmer=====
+====AKDTU.dk====
+Man kan logge ind på kollegiets hjemmeside via [[http://www.akdtu.dk/wp-login.php]], med det brugernavn og kode man har fået tilsendt sin email.
+
+Når man logger ind kommer man ind på hjemmesidens kontrolpanel.
+
+**VIGTIGT**: Du må under ingen omstændigheder bede hjemmesiden om at opdatere; dette står netgruppen for.
+
+På kontrolpanelet ([[https://akdtu.dk/wp-admin/]]) ligger widgets til alle de ting, man kan gøre på hjemmesiden. En nærmere beskrivelse af disse kan læses under [[vejledninger:hjemmeside]]
+

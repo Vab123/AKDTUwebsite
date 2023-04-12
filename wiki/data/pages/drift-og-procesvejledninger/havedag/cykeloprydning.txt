@@ -1,0 +1,18 @@
+=====Cykeloprydning=====
+  - Udsend infoskrivelsen ”Infoskrivelse - Cykeloprydning” mindst én måned inden oprydningens start.
+    * Skrivelsen kan findes på Cobblestone Intranet: Best. Dokumenter -> Infoskrivelser.
+    * Skal varsles gennem:
+      * Email til andelshavere gennem Administrator.
+      * Skriv i Facebook gruppe.
+      * Eventuelt: Opslag på tavler i opgange.
+  - Kasse med manilla mærker, elastikker og kraftig tusch sættes tilgængeligt for alle – eksempelvis i opgang 2 ovenpå postkasser.
+  - Efter tidsfristen flyttes alle cykler uden seddel til opgang 3 (som beskrevet i skrivelsen) i yderligere en måned.
+  - Efter denne måned noteres de informationer som er påkrævet (se billede længere nede) på cykler
+  - Stelnumre på cyklerne sendes til Nordsjællands politi (nsj@politi.dk) for at bede dem om tjek for om nogen af dem er stjålne.
+    * Oplys ligeledes et navn og telefonnummer på en kontaktperson.
+  - Hvis der er cykler der er meldt stjålne henvender politiet sig og der laves aftale om videre forløb.
+  - For cykler der ikke er meldt stjålne, skal man gå ind på: [[hjaelppolitiet.dk/efterladte-cykler-og-knallerter/]].
+
+**Politiet afhenter cyklerne; ingen cykler må køres til genbrugsplads uden skriftlig tilladelse fra politiet.**
+
+{{ :drift-og-procesvejledninger:havedag:kontaktformular-hittegods.png?nolink |}}

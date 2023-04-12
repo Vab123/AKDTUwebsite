@@ -1,0 +1,67 @@
+====Switch 1 – 10.20.10.10====
+<WRAP noprint><adm information>Siden her er lavet til at blive eksporteret til PDF, med knappen "Export to PDF", oppe til venstre</adm></WRAP>
+<WRAP centeralign>
+^ Port ^ VLAN ^ Beskrivelse       ^  ^ Port ^ VLAN ^ Beskrivelse       |
+| 1    | 598  | Lejlighed 201     |  | 25   | 610  | Lejlighed 213     |
+| 2    |      |                   |  | 26   |      |                   |
+| 3    | 599  | Lejlighed 202     |  | 27   | 611  | Lejlighed 214     |
+| 4    |      |                   |  | 28   |      |                   |
+| 5    | 600  | Lejlighed 203     |  | 29   | 612  | Lejlighed 215     |
+| 6    |      |                   |  | 30   |      |                   |
+| 7    | 601  | Lejlighed 204     |  | 31   | 613  | Lejlighed 216     |
+| 8    |      |                   |  | 32   |      |                   |
+| 9    | 602  | Lejlighed 205     |  | 33   | 614  | Lejlighed 217     |
+| 10   |      |                   |  | 34   |      |                   |
+| 11   | 603  | Lejlighed 206     |  | 35   | 615  | Lejlighed 218     |
+| 12   |      |                   |  | 36   |      |                   |
+| 13   | 604  | Lejlighed 207     |  | 37   | 616  | Lejlighed 219     |
+| 14   |      |                   |  | 38   |      |                   |
+| 15   | 605  | Lejlighed 208     |  | 39   | 617  | Lejlighed 220     |
+| 16   |      |                   |  | 40   |      |                   |
+| 17   | 606  | Lejlighed 209     |  | 41   | 618  | Lejlighed 221     |
+| 18   |      |                   |  | 42   | 623  | Fælleshus         |
+| 19   | 607  | Lejlighed 210     |  | 43   | 619  | Lejlighed 222     |
+| 20   |      |                   |  | 44   | 623  | Fælleshus ADK     |
+| 21   | 608  | Lejlighed 211     |  | 45   | 620  | Lejlighed 223     |
+| 22   |      |                   |  | 46   | 623  | Kamstrup          |
+| 23   | 609  | Lejlighed 212     |  | 47   | 621  | Lejlighed 224     |
+| 24   |      |                   |  | 48   | 20   | ADM-VLAN          |
+|      |      |                   |  | 49   |      | Uplink: Switch 2  |
+|      |      |                   |  | 50   |      | Uplink: K-net     |
+|      |      |                   |  | 51   |      |                   |
+|      |      |                   |  | 52   |      |                   |
+</WRAP>
+<pagebreak>
+
+====Switch 2 – 10.20.10.11====
+<WRAP centeralign>
+^ Port ^ VLAN ^ Beskrivelse       ^  ^ Port ^ VLAN ^ Beskrivelse       |
+| 1    | 550  | Lejlighed 001     |  | 25   | 562  | Lejlighed 013     |
+| 2    | 574  | Lejlighed 101     |  | 26   | 586  | Lejlighed 113     |
+| 3    | 551  | Lejlighed 002     |  | 27   | 563  | Lejlighed 014     |
+| 4    | 575  | Lejlighed 102     |  | 28   | 587  | Lejlighed 114     |
+| 5    | 552  | Lejlighed 003     |  | 29   | 564  | Lejlighed 015     |
+| 6    | 576  | Lejlighed 103     |  | 30   | 588  | Lejlighed 115     |
+| 7    | 553  | Lejlighed 004     |  | 31   | 565  | Lejlighed 016     |
+| 8    | 577  | Lejlighed 104     |  | 32   | 589  | Lejlighed 116     |
+| 9    | 554  | Lejlighed 005     |  | 33   | 566  | Lejlighed 017     |
+| 10   | 578  | Lejlighed 105     |  | 34   | 590  | Lejlighed 117     |
+| 11   | 555  | Lejlighed 006     |  | 35   | 567  | Lejlighed 018     |
+| 12   | 579  | Lejlighed 106     |  | 36   | 591  | Lejlighed 118     |
+| 13   | 556  | Lejlighed 007     |  | 37   | 568  | Lejlighed 019     |
+| 14   | 580  | Lejlighed 107     |  | 38   | 592  | Lejlighed 119     |
+| 15   | 557  | Lejlighed 008     |  | 39   | 569  | Lejlighed 020     |
+| 16   | 581  | Lejlighed 108     |  | 40   | 593  | Lejlighed 120     |
+| 17   | 558  | Lejlighed 009     |  | 41   | 570  | Lejlighed 021     |
+| 18   | 582  | Lejlighed 109     |  | 42   | 594  | Lejlighed 121     |
+| 19   | 559  | Lejlighed 010     |  | 43   | 571  | Lejlighed 022     |
+| 20   | 583  | Lejlighed 110     |  | 44   | 595  | Lejlighed 122     |
+| 21   | 560  | Lejlighed 011     |  | 45   | 572  | Lejlighed 023     |
+| 22   | 584  | Lejlighed 111     |  | 46   | 596  | Lejlighed 123     |
+| 23   | 561  | Lejlighed 012     |  | 47   | 573  | Lejlighed 024     |
+| 24   | 585  | Lejlighed 112     |  | 48   | 597  | Lejlighed 124     |
+|      |      |                   |  | 49   |      | Uplink: Switch 1  |
+|      |      |                   |  | 50   |      | Uplink: Switch 3  |
+|      |      |                   |  | 51   |      |                   |
+|      |      |                   |  | 52   |      |                   |
+</WRAP>

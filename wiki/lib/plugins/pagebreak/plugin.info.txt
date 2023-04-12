@@ -1,0 +1,7 @@
+base    pagebreak
+author  Jonathan McBride and Chris Sturm
+email   j.mcbride@mail.utexas.edu
+date    2016-02-16
+name    Pagebreak plugin
+desc    Inserts " <br style="page-break-after:always;"> " into the html of the document for every <pagebreak> it encounters
+url     https://www.dokuwiki.org/plugin:pagebreak

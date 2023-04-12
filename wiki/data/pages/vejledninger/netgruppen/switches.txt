@@ -1,0 +1,47 @@
+=====Switches=====
+Foreningen har to Aruba 2540 Switches fra Hewlett Packard Enterprise der er aktive. Disse blev skiftet i 2019. Disse er forbundet til fiberforbindelsen med transceiver: HP Modul 10GBit SFP+ LR (J9151D). Switchene er forsynet fra en UPS model: "??" der er udskiftet i ????.
+
+Udskiftning af alt udstyret må forventes at koste ca 75.000 kr.
+
+Derudover har foreningen to Aruba 2530 der tidligere har været i brug og fungere som reserve. Tilstanden af reserverne er tvivlsomme hvor af den ene vides at være ustabil. De kan derfor ikke sættes i drift uden et hvis arbejde.
+
+Den ene af de to switches i brug serverer stuen og første sal, mens den anden serverer anden sal og fælleshuset. Hver lejlighed har deres eget VLAN, som er konfigureret hos K-net ([[https://admin.k-net.dk]]). Dette VLAN udsendes på en specifik port som ses i [[vejledninger:netgruppen:port-oversigt|port oversigten]].
+====Forbindelse til switches====
+Der kan forbindes til switchene på to måder: Et online interface og en kommandolinje. Det online interface kan bruges til at se status, men kan ikke bruges til at ændre mange af indstillingerne på switchen. Hvis man skal ændre noget er det nemmere at bruge kommandolinjen.
+
+===Online interface===
+For at forbinde til det online interface på switchene skal man være på samme lokale internet som switchene. Dette kan opnås ved at sætte et kabel fra en port på switchene tilsluttet Management-VLANet til en routers lokale port (Ikke den man sætter internetforbindelsen i, men en anden). Herefter kan man forbinde til routeren og nå switchene på http://10.20.10.10/ og http://10.20.10.11/.
+
+===Kommandolinje===
+Man kan forbinde til kommandolinjen på switchene på to måder: ved at være på samme lokale internet som switchene, eller ved at isætte et USB-kabel mellem switchenes Management-USB-port og computeren. 
+  * At være på samme lokale internet som switchene kan opnås ved at sætte et kabel fra en port på switchene tilsluttet Management-VLANet til en routers lokale port (Ikke den man sætter internetforbindelsen i, men en anden). (Se [[vejledninger:netgruppen:port-oversigt|Port oversigt]] og [[drift-og-procesvejledninger:netgruppen]])
+  * switchenes Management-USB-port  findes på højre side af switchenes forside, ved siden af port 48. Her skal eventuelt bruges en seriel-USB driver, som findes {{ :vejledninger:netgruppen:seriel-usb_driver.zip | her}}.
+Herefter kan man forbinde til routerne med et kommando-linje program, så som [[https://ttssh2.osdn.jp/index.html.en|Tera Term]].
+
+En beskrivelse af hvilke kommandoer man kan bruge fra kommando-linjen kan ses i dokumentet CLI guide i afsnittet "Dokumenter" nedenfor.
+
+====Anvendte kommandoer====
+  * ''configure'': Sætter switchen i konfigurations-mode, så indstillinger kan ændres. Er som regel første kommando man skriver ind.
+  * ''sh int status'': Viser status på alle porte, såsom indstillet hastighed og VLAN.
+  * ''interface XX'': Vælger at ændringer skal foretages på interface/port ''XX''. Skrives før ændringerne foretages.
+  * ''speed-duplex auto'': Sætter hastigheden på den aktuelt valgte port til ''auto''. Andre muligheder for hastigheden kan ses ved at skrive ''speed-duplex ?''.
+  * ''switchport mode access'': Sætter den aktuelt valgte port til at være en ''access''-port. En anden mulighed er ''trunk'', men denne benyttes ikke i foreningen.
+  * ''switchport access vlan XX'': Sætter den aktuelt valgte port til at udsende vlan ''XX''.
+  * ''?'': Giver en liste over hvilke kommandoer der kan bruges. Kan også skrives efter en anden kommando for at se en liste over argumenter.
+  * ''save'': Gemmer ændringer.
+
+====Dokumenter====
+{{ :vejledninger:netgruppen:access_security_guide.pdf | Access security guide }}
+
+{{ :vejledninger:netgruppen:advanced_traffic_management_guide.pdf | Advanced traffic management guide }}
+
+{{ :vejledninger:netgruppen:aruba_2540_-_installation_and_getting_started_guide.pdf | Installation and getting started }}
+
+{{ :vejledninger:netgruppen:cli_guide.pdf | CLI guide }}
+
+{{ :vejledninger:netgruppen:hpe_aruba_2540_quick_setup_guide_en.pdf | Quick setup guide}}
+
+====Konfigurations backup====
+Konfigurations backup, som kan genindstilles gennem switchenes Online Interface:
+
+{{ :vejledninger:netgruppen:konfiguration_backup_20190413.zip | Konfiguration backup 20190413 }}
