@@ -7,14 +7,14 @@ if (isset($_REQUEST['action'])) {
 }
 
 function AKDTU_save_fælleshus_mail_settings() {
-	update_option('AKDTU_FÆLLESHUS_TO', $_REQUEST['AKDTU_FÆLLESHUS_TO']);
-	update_option('AKDTU_FÆLLESHUS_FROM', $_REQUEST['AKDTU_FÆLLESHUS_FROM']);
-	update_option('AKDTU_FÆLLESHUS_CC', $_REQUEST['AKDTU_FÆLLESHUS_CC']);
-	update_option('AKDTU_FÆLLESHUS_REPLYTO', $_REQUEST['AKDTU_FÆLLESHUS_REPLYTO']);
-	update_option('AKDTU_FÆLLESHUS_SUBJECT', $_REQUEST['AKDTU_FÆLLESHUS_SUBJECT']);
-	update_option('AKDTU_FÆLLESHUS_MAILCONTENT', $_REQUEST['AKDTU_FÆLLESHUS_MAILCONTENT']);
-	update_option('AKDTU_FÆLLESHUS_FORMAT', $_REQUEST['AKDTU_FÆLLESHUS_FORMAT']);
-	update_option('AKDTU_FÆLLESHUS_ATTACHMENTS', $_REQUEST['AKDTU_FÆLLESHUS_ATTACHMENTS']);
+	update_option('AKDTU_FÆLLESHUS_TO', stripcslashes($_REQUEST['AKDTU_FÆLLESHUS_TO']));
+	update_option('AKDTU_FÆLLESHUS_FROM', stripcslashes($_REQUEST['AKDTU_FÆLLESHUS_FROM']));
+	update_option('AKDTU_FÆLLESHUS_CC', stripcslashes($_REQUEST['AKDTU_FÆLLESHUS_CC']));
+	update_option('AKDTU_FÆLLESHUS_REPLYTO', stripcslashes($_REQUEST['AKDTU_FÆLLESHUS_REPLYTO']));
+	update_option('AKDTU_FÆLLESHUS_SUBJECT', stripcslashes($_REQUEST['AKDTU_FÆLLESHUS_SUBJECT']));
+	update_option('AKDTU_FÆLLESHUS_MAILCONTENT', stripcslashes($_REQUEST['AKDTU_FÆLLESHUS_MAILCONTENT']));
+	update_option('AKDTU_FÆLLESHUS_FORMAT', stripcslashes($_REQUEST['AKDTU_FÆLLESHUS_FORMAT']));
+	update_option('AKDTU_FÆLLESHUS_ATTACHMENTS', stripcslashes($_REQUEST['AKDTU_FÆLLESHUS_ATTACHMENTS']));
 
 	new AKDTU_notice('success', 'Indstillingerne blev gemt');
 }

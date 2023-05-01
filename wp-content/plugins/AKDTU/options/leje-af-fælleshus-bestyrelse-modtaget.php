@@ -7,17 +7,17 @@ if (isset($_REQUEST['action'])) {
 }
 
 function AKDTU_save_leje_af_fælleshus_bestyrelse_modtaget_mail_settings() {
-	update_option('dbem_event_submitted_email_subject', $_REQUEST['dbem_event_submitted_email_subject']);
-	update_option('dbem_event_submitted_email_body', $_REQUEST['dbem_event_submitted_email_body']);
-	update_option('dbem_event_submitted_email_attachments', $_REQUEST['dbem_event_submitted_email_attachments']);
+	update_option('dbem_event_submitted_email_subject', stripcslashes($_REQUEST['dbem_event_submitted_email_subject']));
+	update_option('dbem_event_submitted_email_body', stripcslashes($_REQUEST['dbem_event_submitted_email_body']));
+	update_option('dbem_event_submitted_email_attachments', stripcslashes($_REQUEST['dbem_event_submitted_email_attachments']));
 
-	update_option('dbem_event_resubmitted_email_subject', $_REQUEST['dbem_event_resubmitted_email_subject']);
-	update_option('dbem_event_resubmitted_email_body', $_REQUEST['dbem_event_resubmitted_email_body']);
-	update_option('dbem_event_resubmitted_email_attachments', $_REQUEST['dbem_event_resubmitted_email_attachments']);
+	update_option('dbem_event_resubmitted_email_subject', stripcslashes($_REQUEST['dbem_event_resubmitted_email_subject']));
+	update_option('dbem_event_resubmitted_email_body', stripcslashes($_REQUEST['dbem_event_resubmitted_email_body']));
+	update_option('dbem_event_resubmitted_email_attachments', stripcslashes($_REQUEST['dbem_event_resubmitted_email_attachments']));
 
-	update_option('dbem_event_deleted_email_subject', $_REQUEST['dbem_event_deleted_email_subject']);
-	update_option('dbem_event_deleted_email_body', $_REQUEST['dbem_event_deleted_email_body']);
-	update_option('dbem_event_deleted_email_attachments', $_REQUEST['dbem_event_deleted_email_attachments']);
+	update_option('dbem_event_deleted_email_subject', stripcslashes($_REQUEST['dbem_event_deleted_email_subject']));
+	update_option('dbem_event_deleted_email_body', stripcslashes($_REQUEST['dbem_event_deleted_email_body']));
+	update_option('dbem_event_deleted_email_attachments', stripcslashes($_REQUEST['dbem_event_deleted_email_attachments']));
 
 	new AKDTU_notice('success', 'Indstillingerne blev gemt');
 }

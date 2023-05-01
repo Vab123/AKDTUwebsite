@@ -57,7 +57,7 @@ function send_opkrævning_fælleshus($debug = false) {
 					}
 				}
 			} else {
-				$payment_info = "Ingen udlejninger i " . $month_year;
+				$payment_info = "Ingen udlejninger i " . $month_year . ", så intet skal opkræves.";
 			}
 
 			$subject_replaces = array(

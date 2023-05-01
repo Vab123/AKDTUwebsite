@@ -7,13 +7,13 @@ if (isset($_REQUEST['action'])) {
 }
 
 function AKDTU_save_fælleshus_vlan_mail_settings() {
-	update_option('AKDTU_FÆLLESHUS_VLAN_TO', $_REQUEST['AKDTU_FÆLLESHUS_VLAN_TO']);
-	update_option('AKDTU_FÆLLESHUS_VLAN_FROM', $_REQUEST['AKDTU_FÆLLESHUS_VLAN_FROM']);
-	update_option('AKDTU_FÆLLESHUS_VLAN_CC', $_REQUEST['AKDTU_FÆLLESHUS_VLAN_CC']);
-	update_option('AKDTU_FÆLLESHUS_VLAN_REPLYTO', $_REQUEST['AKDTU_FÆLLESHUS_VLAN_REPLYTO']);
-	update_option('AKDTU_FÆLLESHUS_VLAN_SUBJECT', $_REQUEST['AKDTU_FÆLLESHUS_VLAN_SUBJECT']);
-	update_option('AKDTU_FÆLLESHUS_VLAN_MAILCONTENT', $_REQUEST['AKDTU_FÆLLESHUS_VLAN_MAILCONTENT']);
-	update_option('AKDTU_FÆLLESHUS_VLAN_ATTACHMENTS', $_REQUEST['AKDTU_FÆLLESHUS_VLAN_ATTACHMENTS']);
+	update_option('AKDTU_FÆLLESHUS_VLAN_TO', stripcslashes($_REQUEST['AKDTU_FÆLLESHUS_VLAN_TO']));
+	update_option('AKDTU_FÆLLESHUS_VLAN_FROM', stripcslashes($_REQUEST['AKDTU_FÆLLESHUS_VLAN_FROM']));
+	update_option('AKDTU_FÆLLESHUS_VLAN_CC', stripcslashes($_REQUEST['AKDTU_FÆLLESHUS_VLAN_CC']));
+	update_option('AKDTU_FÆLLESHUS_VLAN_REPLYTO', stripcslashes($_REQUEST['AKDTU_FÆLLESHUS_VLAN_REPLYTO']));
+	update_option('AKDTU_FÆLLESHUS_VLAN_SUBJECT', stripcslashes($_REQUEST['AKDTU_FÆLLESHUS_VLAN_SUBJECT']));
+	update_option('AKDTU_FÆLLESHUS_VLAN_MAILCONTENT', stripcslashes($_REQUEST['AKDTU_FÆLLESHUS_VLAN_MAILCONTENT']));
+	update_option('AKDTU_FÆLLESHUS_VLAN_ATTACHMENTS', stripcslashes($_REQUEST['AKDTU_FÆLLESHUS_VLAN_ATTACHMENTS']));
 
 	new AKDTU_notice('success', 'Indstillingerne blev gemt');
 }

@@ -62,7 +62,7 @@ function em_event_submission_emails($result, $EM_Event) {
 				$attachments = prepend_attachments_string($attachments);
 				$EM_Event->email_send($subject, $message, $admin_emails, $attachments);
 			}
-		} elseif (!current_user_can('manage_options')) {
+		} elseif (!current_user_can('edit_pages')) { // Not editor or administrator
 			if ($EM_Event->is_published() && !$EM_Event->get_previous_status()) {
 				$admin_emails = explode(',', str_replace(' ', '', get_option('dbem_event_submitted_email_admin'))); //admin emails are in an array, single or multiple
 				if (empty($admin_emails)) return true;

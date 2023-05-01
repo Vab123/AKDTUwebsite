@@ -62,9 +62,4 @@ function AKDTU_menu() {
 
 	add_submenu_page('akdtu-plugin-fælleshus-opkrævning', 'Mail: Tilmelding til havedag, beboer', 'Mail: Tilmelding til havedag, beboer', 'add_users', 'akdtu-plugin-mail-havedag-tilmelding-beboer', 'AKDTU_havedag_tilmelding_beboer_mail_settings', 'dashicons-admin-tools', 65);
 
-
-
-	include_once "options/test.php";
-
-	add_submenu_page('akdtu-plugin-fælleshus-opkrævning', 'Test', 'Test', 'add_users', 'akdtu-plugin-test', 'AKDTU_test', 'dashicons-admin-tools', 65);
 }

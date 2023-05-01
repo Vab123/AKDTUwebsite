@@ -7,26 +7,26 @@ if (isset($_REQUEST['action'])) {
 }
 
 function AKDTU_save_leje_af_fælleshus_bestyrelse_besluttet_mail_settings() {
-	update_option('dbem_event_approved_confirmation_email_subject_da', $_REQUEST['dbem_event_approved_confirmation_email_subject_da']);
-	update_option('dbem_event_approved_confirmation_email_subject_en', $_REQUEST['dbem_event_approved_confirmation_email_subject_en']);
-	update_option('dbem_event_approved_confirmation_email_body_da', $_REQUEST['dbem_event_approved_confirmation_email_body_da']);
-	update_option('dbem_event_approved_confirmation_email_body_en', $_REQUEST['dbem_event_approved_confirmation_email_body_en']);
-	update_option('dbem_event_approved_confirmation_email_attachments_da', $_REQUEST['dbem_event_approved_confirmation_email_attachments_da']);
-	update_option('dbem_event_approved_confirmation_email_attachments_en', $_REQUEST['dbem_event_approved_confirmation_email_attachments_en']);
+	update_option('dbem_event_approved_confirmation_email_subject_da', stripcslashes($_REQUEST['dbem_event_approved_confirmation_email_subject_da']));
+	update_option('dbem_event_approved_confirmation_email_subject_en', stripcslashes($_REQUEST['dbem_event_approved_confirmation_email_subject_en']));
+	update_option('dbem_event_approved_confirmation_email_body_da', stripcslashes($_REQUEST['dbem_event_approved_confirmation_email_body_da']));
+	update_option('dbem_event_approved_confirmation_email_body_en', stripcslashes($_REQUEST['dbem_event_approved_confirmation_email_body_en']));
+	update_option('dbem_event_approved_confirmation_email_attachments_da', stripcslashes($_REQUEST['dbem_event_approved_confirmation_email_attachments_da']));
+	update_option('dbem_event_approved_confirmation_email_attachments_en', stripcslashes($_REQUEST['dbem_event_approved_confirmation_email_attachments_en']));
 
-	update_option('dbem_event_reapproved_confirmation_email_subject_da', $_REQUEST['dbem_event_reapproved_confirmation_email_subject_da']);
-	update_option('dbem_event_reapproved_confirmation_email_subject_en', $_REQUEST['dbem_event_reapproved_confirmation_email_subject_en']);
-	update_option('dbem_event_reapproved_confirmation_email_body_da', $_REQUEST['dbem_event_reapproved_confirmation_email_body_da']);
-	update_option('dbem_event_reapproved_confirmation_email_body_en', $_REQUEST['dbem_event_reapproved_confirmation_email_body_en']);
-	update_option('dbem_event_reapproved_confirmation_email_attachments_da', $_REQUEST['dbem_event_reapproved_confirmation_email_attachments_da']);
-	update_option('dbem_event_reapproved_confirmation_email_attachments_en', $_REQUEST['dbem_event_reapproved_confirmation_email_attachments_en']);
+	update_option('dbem_event_reapproved_confirmation_email_subject_da', stripcslashes($_REQUEST['dbem_event_reapproved_confirmation_email_subject_da']));
+	update_option('dbem_event_reapproved_confirmation_email_subject_en', stripcslashes($_REQUEST['dbem_event_reapproved_confirmation_email_subject_en']));
+	update_option('dbem_event_reapproved_confirmation_email_body_da', stripcslashes($_REQUEST['dbem_event_reapproved_confirmation_email_body_da']));
+	update_option('dbem_event_reapproved_confirmation_email_body_en', stripcslashes($_REQUEST['dbem_event_reapproved_confirmation_email_body_en']));
+	update_option('dbem_event_reapproved_confirmation_email_attachments_da', stripcslashes($_REQUEST['dbem_event_reapproved_confirmation_email_attachments_da']));
+	update_option('dbem_event_reapproved_confirmation_email_attachments_en', stripcslashes($_REQUEST['dbem_event_reapproved_confirmation_email_attachments_en']));
 
-	update_option('dbem_event_rejected_confirmation_email_subject_da', $_REQUEST['dbem_event_rejected_confirmation_email_subject_da']);
-	update_option('dbem_event_rejected_confirmation_email_subject_en', $_REQUEST['dbem_event_rejected_confirmation_email_subject_en']);
-	update_option('dbem_event_rejected_confirmation_email_body_da', $_REQUEST['dbem_event_rejected_confirmation_email_body_da']);
-	update_option('dbem_event_rejected_confirmation_email_body_en', $_REQUEST['dbem_event_rejected_confirmation_email_body_en']);
-	update_option('dbem_event_rejected_confirmation_email_attachments_da', $_REQUEST['dbem_event_rejected_confirmation_email_attachments_da']);
-	update_option('dbem_event_rejected_confirmation_email_attachments_en', $_REQUEST['dbem_event_rejected_confirmation_email_attachments_en']);
+	update_option('dbem_event_rejected_confirmation_email_subject_da', stripcslashes($_REQUEST['dbem_event_rejected_confirmation_email_subject_da']));
+	update_option('dbem_event_rejected_confirmation_email_subject_en', stripcslashes($_REQUEST['dbem_event_rejected_confirmation_email_subject_en']));
+	update_option('dbem_event_rejected_confirmation_email_body_da', stripcslashes($_REQUEST['dbem_event_rejected_confirmation_email_body_da']));
+	update_option('dbem_event_rejected_confirmation_email_body_en', stripcslashes($_REQUEST['dbem_event_rejected_confirmation_email_body_en']));
+	update_option('dbem_event_rejected_confirmation_email_attachments_da', stripcslashes($_REQUEST['dbem_event_rejected_confirmation_email_attachments_da']));
+	update_option('dbem_event_rejected_confirmation_email_attachments_en', stripcslashes($_REQUEST['dbem_event_rejected_confirmation_email_attachments_en']));
 
 	new AKDTU_notice('success', 'Indstillingerne blev gemt');
 }

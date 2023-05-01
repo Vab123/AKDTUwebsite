@@ -7,13 +7,13 @@ if (isset($_REQUEST['action'])) {
 }
 
 function AKDTU_save_havedag_tilmelding_bestyrelse_mail_settings() {
-	update_option('dbem_bookings_notify_admin', $_REQUEST['dbem_bookings_notify_admin']);
+	update_option('dbem_bookings_notify_admin', stripcslashes($_REQUEST['dbem_bookings_notify_admin']));
 
-	update_option('dbem_bookings_contact_email_confirmed_subject', $_REQUEST['dbem_bookings_contact_email_confirmed_subject']);
-	update_option('dbem_bookings_contact_email_confirmed_body', $_REQUEST['dbem_bookings_contact_email_confirmed_body']);
+	update_option('dbem_bookings_contact_email_confirmed_subject', stripcslashes($_REQUEST['dbem_bookings_contact_email_confirmed_subject']));
+	update_option('dbem_bookings_contact_email_confirmed_body', stripcslashes($_REQUEST['dbem_bookings_contact_email_confirmed_body']));
 
-	update_option('dbem_bookings_contact_email_cancelled_subject', $_REQUEST['dbem_bookings_contact_email_cancelled_subject']);
-	update_option('dbem_bookings_contact_email_cancelled_body', $_REQUEST['dbem_bookings_contact_email_cancelled_body']);
+	update_option('dbem_bookings_contact_email_cancelled_subject', stripcslashes($_REQUEST['dbem_bookings_contact_email_cancelled_subject']));
+	update_option('dbem_bookings_contact_email_cancelled_body', stripcslashes($_REQUEST['dbem_bookings_contact_email_cancelled_body']));
 
 	new AKDTU_notice('success', 'Indstillingerne blev gemt');
 }
