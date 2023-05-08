@@ -7,7 +7,7 @@ function tilføj_til_havedag_dashboard_widget() {
 	$search_limit = 4;
 	$offset = 0;
 	$order = 'ASC';
-	$owner = !current_user_can('manage_others_bookings') ? get_current_user_id() : false;
+	$owner = false;
 
 	$events = EM_Events::get(array('scope' => $scope, 'limit' => $search_limit, 'offset' => $offset, 'order' => $order, 'orderby' => 'event_start', 'bookings' => true, 'owner' => $owner, 'pagination' => 0));
 

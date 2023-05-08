@@ -5,7 +5,7 @@ function fælleshus_tidligere_reservationer_dashboard_widget() {
 	$search_limit = 20;
 	$offset = 0;
 	$order = 'DESC';
-	$owner = !current_user_can('manage_others_bookings') ? get_current_user_id() : false;
+	$owner = false;
 
 	$events = array_filter(EM_Events::get(array('scope' => $scope, 'limit' => $search_limit, 'offset' => $offset, 'order' => $order, 'orderby' => 'event_start', 'bookings' => false, 'owner' => $owner, 'pagination' => 0, 'event_status' => 1)), function ($event) {
 		return count(pll_get_post_translations($event->post_id)) == 1 || pll_get_post_language($event->post_id) == 'da';

@@ -5,9 +5,9 @@ function fælleshus_afventer_dashboard_widget() {
 	$search_limit = 20;
 	$offset = 0;
 	$order = 'ASC';
-	$owner = !current_user_can('manage_others_bookings') ? get_current_user_id() : false;
+	$owner = false;
 
-	$events = EM_Events::get(array('scope' => $scope, 'limit' => $search_limit, 'offset' => $offset, 'order' => $order, 'orderby' => 'event_start', 'status' => 0));
+	$events = EM_Events::get(array('scope' => $scope, 'limit' => $search_limit, 'offset' => $offset, 'order' => $order, 'orderby' => 'event_start', 'status' => 0, 'owner' => $owner));
 
 	$actual_limit = 10;
 
