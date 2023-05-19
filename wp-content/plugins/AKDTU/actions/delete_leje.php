@@ -12,6 +12,7 @@ function delete_leje() {
 	$event_post_admin = new EM_Event_Post_Admin();
 	$event_post_admin->before_delete_post($event->post_id);
 	$event_post_admin->trashed_post($event->post_id);
+	$result = wp_trash_post($event->post_id);
 
 	new AKDTU_notice('success','Lejen er nu afvist.');
 }
