@@ -12,34 +12,15 @@ function upload_dokument(){
 		return;
 	}
 
-	$types = array(
-		'board' => array(
-			'folder' => WORKING_DIR . BESTYRELSE_FOLDER,
-			'date-format' => "Y-m-d",
-			'after-date-text' => ' Referat.pdf'
-		),
-		'GF_REF' => array(
-			'folder' => WORKING_DIR . GF_FOLDER,
-			'date-format' => "Y-m-d",
-			'after-date-text' => ' %1$s Referat.pdf'
-		),
-		'aar' => array(
-			'folder' => WORKING_DIR . ÅRSRAPPORT_FOLDER,
-			'date-format' => "Y",
-			'after-date-text' => ' Årsrapport.pdf'
-		),
-		'budget' => array(
-			'folder' => WORKING_DIR . BUDGET_FOLDER,
-			'date-format' => "Y",
-			'after-date-text' => ' Budget.pdf'
-		)
-	);
+	include WP_PLUGIN_DIR . '/AKDTU/functions/bestyrelsesdokumenter.php';
 
 	$document_date = new DateTime($_REQUEST['document_date']);
 
-	if (isset($types[$_REQUEST['document_type']])) {
-		$target_dir = $types[$_REQUEST['document_type']]['folder'];
-		$target_file = $target_dir . $document_date->format($types[$_REQUEST['document_type']]['date-format']) . sprintf($types[$_REQUEST['document_type']]['after-date-text'],(isset($_REQUEST['document_typetype']) ? $_REQUEST['document_typetype'] : ''));
+	if (isset($bestyrelsesdocuments_document_types[$_REQUEST['document_type']])) {
+		$typedef = $bestyrelsesdocuments_document_types[$_REQUEST['document_type']];
+
+		$target_dir = $typedef['folder'];
+		$target_file = $target_dir . $document_date->format($typedef['date-format']) . sprintf($typedef['after-date-text'],(isset($_REQUEST['document_typetype']) ? $_REQUEST['document_typetype'] : ''));
 
 		if (!file_exists($target_file)) {
 			if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {

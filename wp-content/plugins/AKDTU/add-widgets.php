@@ -36,6 +36,9 @@ function add_widgets() {
 		# tilføj_dokumenter widget
 		include_once "actions/upload_document.php";
 
+		# fjern_dokumenter widget
+		include_once "actions/remove_document.php";
+
 		## Widgets
 		include_once "widgets/allowed_renter_signups.php";
 		include_once "widgets/allowed_user_signups.php";
@@ -58,6 +61,7 @@ function add_widgets() {
 		include_once "widgets/moves_future.php";
 		include_once "widgets/moves_past.php";
 		include_once "widgets/tilføj_dokumenter.php";
+		include_once "widgets/fjern_dokumenter.php";
 
 		if (current_user_can('add_users')) { // Only admins
 			# show_board widget
@@ -109,6 +113,7 @@ function AKDTU_widgets() {
 	wp_add_dashboard_widget('moves_past_dashboard_widget', 'Tidligere overdragelser', 'moves_past_dashboard_widget');
 
 	wp_add_dashboard_widget('tilføj_dokument_dashboard_widget', 'Upload bestyrelsesdokument', 'tilføj_dokument_dashboard_widget');
+	wp_add_dashboard_widget('fjern_dokument_dashboard_widget', 'Fjern bestyrelsesdokument', 'fjern_dokument_dashboard_widget');
 
 	if (current_user_can('add_users')) { // Only admins
 		wp_add_dashboard_widget('show_board_widget', 'Bestyrelsesmedlemmer', 'show_board_widget');
