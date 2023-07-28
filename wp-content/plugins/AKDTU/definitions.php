@@ -1,10 +1,10 @@
 <?php
 
 define('WORKING_DIR', ABSPATH); # Working directory på serveren
-define('BESTYRELSE_FOLDER', '/public_files/bestyrelsesmøder/'); # Hvor referater af bestyrelsesmøder skal gemmes
-define('GF_FOLDER', '/public_files/generalforsamlinger/'); # Hvor referater fra generalforsamlinger skal gemmes
-define('ÅRSRAPPORT_FOLDER', '/public_files/årsrapporter/'); # Hvor årsrapporter skal gemmes
-define('BUDGET_FOLDER', '/public_files/budgetter/'); # Hvor budgetter skal gemmes
+define('BESTYRELSE_FOLDER', 'public_files/bestyrelsesmøder/'); # Hvor referater af bestyrelsesmøder skal gemmes
+define('GF_FOLDER', 'public_files/generalforsamlinger/'); # Hvor referater fra generalforsamlinger skal gemmes
+define('ÅRSRAPPORT_FOLDER', 'public_files/årsrapporter/'); # Hvor årsrapporter skal gemmes
+define('BUDGET_FOLDER', 'public_files/budgetter/'); # Hvor budgetter skal gemmes
 
 ### Funktion der definerer alle variable der skal bruges i forbindelse med afsendelse af mails
 function AKDTU_DEFINE($CONSTANT_ROOT, $additionals = array()) {
