@@ -34,7 +34,7 @@ function fjern_dokument_dashboard_widget() {
 						<input type="hidden" name="document_type" value="<?php echo $typearray['short']; ?>" />
 						<input type="hidden" name="document_name" value="<?php echo $file; ?>" />
 					
-						<td style="vertical-align:middle;"><?php echo $file; ?></td>
+						<td style="vertical-align:middle;"><a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', $typearray['folder']) . $file; ?>" style="vertical-align:middle;"><?php echo $file; ?></a></td>
 						<td><input type="submit" style="vertical-align:middle;" class="button-secondary" value="Slet"></td>
 					</form>
 				</tr>
