@@ -1028,7 +1028,7 @@ class EM_Event extends EM_Object {
 		$start_datetime = new DateTime($this->start_date . " " . $this->start_time, new DateTimeZone('Europe/Copenhagen'));
 		$start_datetime->setTimezone(new DateTimeZone('UTC'));
 		$start_datetime = $start_datetime->format("Y-m-d H:i:s");
-		$sql = "SELECT COUNT(*) FROM  $table_name WHERE (event_start < '$end_datetime' AND event_end > '$start_datetime' AND (event_status >= 0 OR event_status IS NULL) AND post_id != '$this->post_id');";
+		$sql = "SELECT COUNT(*) FROM  $table_name WHERE (event_start < '$end_datetime' AND event_end > '$start_datetime' AND (event_status >= 0) AND post_id != '$this->post_id');";
 		$count = apply_filters('em_events_count_date', $wpdb->get_var($sql));
 		if ($start_datetime === $end_datetime) {
 			$this->add_error(pll__('Event start and end at the same time. This is not possible.', 'events-manager'));
