@@ -31,7 +31,7 @@ function rsssl_general_security_notices( $notices ) {
 				'msg' => __("Disable application passwords.", "really-simple-ssl"),
 				'icon' => 'premium',
 				'url' => 'https://really-simple-ssl.com/definition/what-are-application-passwords/',
-				'dismissible' => false,
+				'dismissible' => true,
 				'highlight_field_id' => 'disable_application_passwords',
 			),
 		),
@@ -208,6 +208,22 @@ function rsssl_general_security_notices( $notices ) {
 				'icon' => 'premium',
 				'dismissible' => true,
 				'url' => 'https://really-simple-ssl.com/instructions/about-hardening-features/'
+			),
+		),
+	);
+
+	$notices['vulnerabilities'] = array(
+		'condition' => ['NOT option_enable_vulnerability_scanner'],
+		'callback' => '_true_',
+		'score' => 5,
+		'output' => array(
+			'true' => array(
+				'msg' => __("Really Simple SSL has a new feature! Introducing Vulnerability Detection, enable it now.", "really-simple-ssl"),
+				'icon' => 'open',
+				'dismissible' => true,
+				'url' => 'https://really-simple-ssl.com/vulnerability-detection/',
+				'highlight_field_id' => 'enable_vulnerability_scanner',
+				'plusone' => true,
 			),
 		),
 	);

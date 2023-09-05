@@ -190,7 +190,7 @@ if ( ! class_exists( 'WP_Dark_Mode_Admin' ) ) {
 							<h2><?php esc_html_e( 'View Dark Mode usages inside WordPress Dashboard', 'wp-dark-mode' ); ?></h2>
 							<p><?php esc_html_e( 'Upgrade to Pro and get access to the reports.', 'wp-dark-mode' ); ?></p>
 							<p>
-								<a href="https://wppool.dev/wp-dark-mode/" class="button-primary button-hero" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Upgrade to Pro', 'wp-dark-mode' ); ?></a>
+								<a href="https://go.wppool.dev/pdOs" class="button-primary button-hero" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Upgrade to Pro', 'wp-dark-mode' ); ?></a>
 							</p>
 						</div>
 					</div>
@@ -420,19 +420,20 @@ if ( ! class_exists( 'WP_Dark_Mode_Admin' ) ) {
 				wp_dark_mode()->get_template( 'admin/review-notice' );
 				$notice_html = ob_get_clean();
 				wp_dark_mode()->add_notice( 'info wp-dark-mode-review-notice', $notice_html );
-			}
-
-			// Affiliate notice.
-			if ( 'off' !== get_option( 'wp_dark_mode_affiliate_notice_interval', 'on' )
+			} else {
+				// Affiliate notice.
+				if ( 'off' !== get_option( 'wp_dark_mode_affiliate_notice_interval', 'on' )
 				&& 'off' !== get_transient( 'wp_dark_mode_affiliate_notice_interval' )
-			) {
+				) {
 
-				ob_start();
-				wp_dark_mode()->get_template( 'admin/affiliate-notice' );
-				$notice_html = ob_get_clean();
+					ob_start();
+					wp_dark_mode()->get_template( 'admin/affiliate-notice' );
+					$notice_html = ob_get_clean();
 
-				wp_dark_mode()->add_notice( 'info wp-dark-mode-affiliate-notice', $notice_html );
+					wp_dark_mode()->add_notice( 'info wp-dark-mode-affiliate-notice', $notice_html );
+				}
 			}
+
 		}
 
 		/**

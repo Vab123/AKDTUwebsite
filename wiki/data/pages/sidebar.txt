@@ -5,6 +5,7 @@
 ** [[to-do]] **
 
 ** Administrativt **
+  * [[administrativt:Kalender]]
   * [[administrativt:Årsplan]]
   * [[administrativt:standardinventar-i-lejligheder]]
   * [[administrativt:Templates]]
@@ -41,6 +42,7 @@
     * [[vejledninger:netgruppen:port-oversigt|Port oversigt]]
     * [[vejledninger:netgruppen:switches]]
     * [[vejledninger:netgruppen:internet-i-fælleshuset]]
+    * [[vejledninger:netgruppen:nye-bestyrelsesmedlemmer]]
   * **Fælleshuset**
     * [[vejledninger:Adgangskontrol]]
     * [[vejledninger:varmesystem-i-fælleshus]]
@@ -64,7 +66,10 @@
   * [[skrivelser:udleje-af-lejlighed]]
   * [[skrivelser:trailer-kontrakt]]
     * [[skrivelser:trailer-kontrakt-engelsk]]
+  * [[skrivelser:indkaldelse-til-generalforsamling | Indkaldelse til ordinær generalforsamling]]
+    * [[skrivelser:indkaldelse-til-ekstraordinær-generalforsamling | Indkaldelse til ekstraordinær generalforsamling]]
 
 ** Opslag **
   * [[opslag:rygning-forbudt]]
   * [[opslag:skrald]]
+  * [[opslag:parkering-midlertidigt-forbudt]]

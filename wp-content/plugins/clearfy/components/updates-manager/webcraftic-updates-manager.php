@@ -4,11 +4,11 @@
  * Plugin URI: https://wordpress.org/plugins/webcraftic-updates-manager/
  * Description: Manage all your WordPress updates, automatic updates, logs, and loads more.
  * Author: Webcraftic <wordpress.webraftic@gmail.com>
- * Version: 1.1.5
+ * Version: 1.1.6
  * Text Domain: webcraftic-updates-manager
  * Domain Path: /languages/
  * Author URI: https://webcraftic.com
- * Framework Version: FACTORY_465_VERSION
+ * Framework Version: FACTORY_469_VERSION
  */
 
 // Exit if accessed directly
@@ -68,15 +68,15 @@ $wupm_plugin_info = [
 
 	// FRAMEWORK MODULES
 	'load_factory_modules' => [
-		['libs/factory/bootstrap', 'factory_bootstrap_466', 'admin'],
-		['libs/factory/forms', 'factory_forms_462', 'admin'],
-		['libs/factory/pages', 'factory_pages_465', 'admin'],
-		['libs/factory/templates', 'factory_templates_115', 'all'],
-		['libs/factory/adverts', 'factory_adverts_142', 'admin']
+		['libs/factory/bootstrap', 'factory_bootstrap_470', 'admin'],
+		['libs/factory/forms', 'factory_forms_466', 'admin'],
+		['libs/factory/pages', 'factory_pages_467', 'admin'],
+		['libs/factory/templates', 'factory_templates_118', 'all'],
+		['libs/factory/adverts', 'factory_adverts_146', 'admin']
 	]
 ];
 
-$wupm_compatibility = new Wbcr_Factory465_Requirements(__FILE__, array_merge($wupm_plugin_info, [
+$wupm_compatibility = new Wbcr_Factory469_Requirements(__FILE__, array_merge($wupm_plugin_info, [
 	'plugin_already_activate' => defined('WUPM_PLUGIN_ACTIVE'),
 	'required_php_version' => '5.4',
 	'required_wp_version' => '4.2.0',
@@ -104,7 +104,7 @@ define('WUPM_PLUGIN_ACTIVE', true);
 define('WUPM_PLUGIN_VERSION', $wupm_compatibility->get_plugin_version());
 define('WUPM_PLUGIN_DIR', dirname(__FILE__));
 define('WUPM_PLUGIN_BASE', plugin_basename(__FILE__));
-define('WUPM_PLUGIN_URL', plugins_url(null, __FILE__));
+define('WUPM_PLUGIN_URL', plugins_url('', __FILE__));
 
 
 

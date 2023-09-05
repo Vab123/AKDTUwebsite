@@ -3,8 +3,8 @@ Contributors: mostafa.s1990, kashani, veronalabs, GregRoss
 Donate link: https://wp-statistics.com/donate/
 Tags: analytics, wordpress analytics, stats, statistics, visit, visitors, hits, chart, browser, today, yesterday, week, month, year, total, post, page, sidebar, google, live visit, search word, agent, google analytics, webmasters, google webmasters, geoip, location
 Requires at least: 4.4
-Tested up to: 6.1
-Stable tag: 14.0.2
+Tested up to: 6.3
+Stable tag: 14.1.6
 Requires PHP: 5.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -123,6 +123,7 @@ Referrer spam blacklist is provided by Matomo, available from https://github.com
 8. Last Search Words
 9. Dashboard widgets
 10. Theme widget
+11. Page Statistics Overview
 
 == Upgrade Notice ==
 = 14.0 =
@@ -133,6 +134,56 @@ Thank you for being part of our community. We’ve been working hard for one yea
 If you encounter any bug, please create an issue on [GitHub](https://github.com/wp-statistics/wp-statistics/issues/new) where we can act upon them more efficiently. Since [GitHub](https://github.com/wp-statistics/wp-statistics) is not a support forum, just bugs are welcomed, and any other request will be closed.
 
 == Changelog ==
+= v14.1.6 - 30.08.2023 =
+* Bugfix: The missing record logged users in visitor.
+* Update: ChartJs to v4.4.0
+
+= v14.1.5 - 15.08.2023 =
+* Update: Compatibility with WordPress v6.3
+* Bugfix: Resolved compatibility issue between custom post types and WP Statistics MiniChart plugin.
+* Bugfix: Included sub-page ID parameter within the pages-chart component for enhanced functionality.
+* Development: Introduced a new filter, `wp_statistics_report_email_receivers`, to facilitate customization of report email recipients.
+* Development: Implemented an exclusion to the hit response for improved debugging capabilities.
+
+= v14.1.4 - 26.07.2023 =
+* Bugfix: Fixed an issue with deprecated WhichBrowser Useragent in PHP v8.2.
+* Bugfix: Resolved a bug preventing storage of long URIs in the Pages Table.
+* Bugfix: Addressed the home page counting stats issue.
+* Development: Added a new filter `wp_statistics_mail_attachments` for enhanced customization.
+* Improvement: Refined Plugin Header for better clarity and consistency.
+
+= v14.1.3.1 - 08.07.2023 =
+* Improvement: Backward compatibility
+
+= v14.1.3 - 04.07.2023 =
+* Feature: Add possibility to load geoip from other sources
+* Feature: Integrated a Feedback button powered by [FeedbackBird!](https://feedbackbird.io/) in the admin area to gather user feedback.
+* Bugfix: Showing private default post types
+* Bugfix: Fix js error on summary once the visits/visitors are not enabled
+* Bugfix: Fix calendar issue on top visitors page
+* Update: ChartJs to v4.3.0 and add source map
+* Improvement: Mirror and backward compatibility
+
+= v14.1.2 - 23.05.2023 =
+* Improvement: Fix showing actual page name in post types hit meta boxes
+* Improvement: Fix a bug when date filter doesn't affect referring widget data
+* Improvement: Fix showing actual page name in post types hit meta boxes header
+* Improvement: Add filter `wp_statistics_geo_ip_download_url`
+
+= v14.1.1 - 20.05.2023 =
+* Feature: Add `/wp-json/wp-statistics/v2/online` endpoint to maintain real-time user presence on the page.
+* Improvement: Enhance `tracker.js` and implement minor optimizations.
+* Improvement: Upgrade email template and enhance email functionalities.
+* Improvement: Ensure compatibility with PHP v5.6, although we highly recommend upgrading your PHP version for better performance and security.
+
+= v14.1 - 02.05.2023 =
+* Improvement: Compatibility with WordPress v6.2
+* Improvement: Update ChartJs to the latest version, v4.2.1
+* Improvement: Avoid to return cache status before filter statement
+* Improvement: Implement post types section
+* Improvement: Categorize page hits by query strings in single view statistics for improved tracking
+* Bugfix: Fix a bug related to displaying rest API error messages in the meta box AJAX.
+
 = v14.0.2 - 09.03.2023 =
 * Bugfix: Compatibility with PHP v7.0
 * Bugfix: Fix some Javascript errors that caused to not showing-up the charts.

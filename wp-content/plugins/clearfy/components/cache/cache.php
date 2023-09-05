@@ -8,7 +8,7 @@
  * Text Domain: clearfy_cache
  * Domain Path: /languages/
  * Author URI: https://webcraftic.com
- * Framework Version: FACTORY_463_VERSION
+ * Framework Version: FACTORY_469_VERSION
  */
 
 // Exit if accessed directly

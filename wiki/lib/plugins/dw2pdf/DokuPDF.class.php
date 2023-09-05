@@ -50,12 +50,6 @@ class DokuPDF extends \Mpdf\Mpdf
 
         }
 
-		$defaultConfig = (new Mpdf\Config\ConfigVariables())->getDefaults();
-		$fontDirs = $defaultConfig['fontDir'];
-
-		$defaultFontConfig = (new Mpdf\Config\FontVariables())->getDefaults();
-		$fontData = $defaultFontConfig['fontdata'];
-
         // we're always UTF-8
         parent::__construct(
             array(
@@ -63,43 +57,6 @@ class DokuPDF extends \Mpdf\Mpdf
                 'format' => $format,
                 'default_font_size' => $fontsize,
                 'ImageProcessorClass' => DokuImageProcessorDecorator::class,
-				'fontDir' => array_merge($fontDirs, [
-					__DIR__ . '/tpl/AKDTU/fonts',
-				]),
-				'fontdata' => $fontData + [
-					"roboto" => [
-						'R' => 'Roboto-Regular.ttf',
-						'I' => 'Roboto-Italic.ttf',
-					],
-					"robotomedium" => [
-						'R' => 'Roboto-Medium.ttf',
-						'I' => 'Roboto-MediumItalic.ttf',
-					],
-					"robotothin" => [
-						'R' => 'Roboto-Thin.ttf',
-						'I' => 'Roboto-ThinItalic.ttf',
-					],
-					"robotolight" => [
-						'R' => 'Roboto-Light.ttf',
-						'I' => 'Roboto-LightItalic.ttf',
-					],
-					"robotocondensed" => [
-						'R' => 'Roboto-Condensed.ttf',
-						'I' => 'Roboto-CondensedItalic.ttf',
-					],
-					"robotobold" => [
-						'R' => 'Roboto-Bold.ttf',
-						'I' => 'Roboto-BoldItalic.ttf',
-					],
-					"robotoboldcondensed" => [
-						'R' => 'Roboto-BoldCondensed.ttf',
-						'I' => 'Roboto-BoldCondensedItalic.ttf',
-					],
-					"robotoblack" => [
-						'R' => 'Roboto-Black.ttf',
-						'I' => 'Roboto-BlackItalic.ttf',
-					]
-				],
                 'tempDir' => _MPDF_TEMP_PATH //$conf['tmpdir'] . '/tmp/dwpdf'
             )
         );

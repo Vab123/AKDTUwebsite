@@ -11,11 +11,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @copyright (c) 19.02.2018, Webcraftic
  * @version       1.0
  */
-class WGZ_Plugin extends Wbcr_Factory463_Plugin {
+class WGZ_Plugin extends Wbcr_Factory469_Plugin {
 
 	/**
 	 * @see self::app()
-	 * @var Wbcr_Factory463_Plugin
+	 * @var Wbcr_Factory469_Plugin
 	 */
 	private static $app;
 
@@ -53,7 +53,7 @@ class WGZ_Plugin extends Wbcr_Factory463_Plugin {
 	 * Используется для получения настроек плагина, информации о плагине, для доступа к вспомогательным
 	 * классам.
 	 *
-	 * @return \Wbcr_Factory463_Plugin|\WGZ_Plugin
+	 * @return \Wbcr_Factory469_Plugin|\WGZ_Plugin
 	 */
 	public static function app() {
 		return self::$app;

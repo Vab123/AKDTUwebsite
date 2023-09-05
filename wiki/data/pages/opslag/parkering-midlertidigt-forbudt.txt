@@ -1,0 +1,9 @@
+<WRAP noprint><adm information>Siden her er lavet til at blive eksporteret til PDF, med knappen "Export to PDF", oppe til venstre</adm></WRAP>
+
+{{ :opslag:standsning_og_parkering_forbudt.png?500 |}}
+
+\\ \\
+
+<WRAP centeralign><html><span style="font-size:100px">19/06 - 30/09</span></html></WRAP>
+
+{{ :opslag:pil.png?300 |}}

@@ -1,4 +1,5 @@
 <?php
+require_once WP_PLUGIN_DIR . '/AKDTU/functions/notice.php';
 
 if (isset($_REQUEST['action'])) {
 	if ($_REQUEST['action'] == 'delete_user_signup' && isset($_REQUEST['user']) && isset($_REQUEST['phone']) && isset($_REQUEST['takeover_time'])) {

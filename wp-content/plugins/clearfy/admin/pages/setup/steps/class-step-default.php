@@ -8,7 +8,7 @@ namespace WBCR\Clearfy\Pages;
  * @copyright (c) 23.07.2020, Webcraftic
  * @version 1.0
  */
-class Step_Default extends \WBCR\Factory_Templates_113\Pages\Step_Custom {
+class Step_Default extends \WBCR\Factory_Templates_118\Pages\Step_Custom {
 
 	protected $id = 'step0';
 	protected $next_id = 'step1';
@@ -21,10 +21,10 @@ class Step_Default extends \WBCR\Factory_Templates_113\Pages\Step_Custom {
 	public function html()
 	{
 		?>
-		<div class="w-factory-templates-113-setup__inner-wrap">
-			<div class="w-factory-templates-113-setup-step__new_onboarding-wrapper">
-				<p class="w-factory-templates-113-setup-step__new_onboarding-welcome">Welcome to</p>
-				<h1 class="w-factory-templates-113-logo">
+		<div class="w-factory-templates-118-setup__inner-wrap">
+			<div class="w-factory-templates-118-setup-step__new_onboarding-wrapper">
+				<p class="w-factory-templates-118-setup-step__new_onboarding-welcome">Welcome to</p>
+				<h1 class="w-factory-templates-118-logo">
 					<img src="<?php echo WCL_PLUGIN_URL ?>/admin/assets/img/clearfylogo-768x300.png" alt="Clearfy">
 				</h1>
 				<p><?php _e('Optimize your site even faster using the setup wizard!', 'clearfy') ?></p>

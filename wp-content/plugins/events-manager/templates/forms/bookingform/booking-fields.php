@@ -23,7 +23,7 @@
 	<?php do_action('em_register_form'); //careful if making an add-on, this will only be used if you're not using custom booking forms ?>					
 <?php endif; ?>		
 <p>
-	<label for='booking_comment' style="width:auto"><?php pll_e('Comment', 'events-manager') ?></label>
+	<label for='booking_comment' style="width:auto"><?php pll_e('Comment for allergies', 'events-manager') ?></label>
 </p>
 <p>
 	<textarea name='booking_comment' rows="2" cols="20"><?php echo !empty($_REQUEST['booking_comment']) ? esc_attr($_REQUEST['booking_comment']):'' ?></textarea>

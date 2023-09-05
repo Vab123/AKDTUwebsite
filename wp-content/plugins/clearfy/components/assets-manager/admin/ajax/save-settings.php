@@ -96,7 +96,7 @@ function wam_save_settings_action()
 		wbcr_gnz_deploy_mu_plugin();
 
 		// Flush cache for all cache plugins
-		WBCR\Factory_Templates_113\Helpers::flushPageCache();
+		WBCR\Factory_Templates_118\Helpers::flushPageCache();
 	}
 
 	wp_send_json_success([

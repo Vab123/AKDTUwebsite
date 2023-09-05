@@ -1,6 +1,6 @@
 <?php
 
-namespace WBCR\Factory_Logger_129;
+namespace WBCR\Factory_Logger_133;
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
@@ -48,7 +48,7 @@ class Logger {
 	const LEVEL_DEBUG = 'debug';
 
 	/**
-	 * @var \Wbcr_Factory465_Plugin Plugin class.
+	 * @var \Wbcr_Factory469_Plugin Plugin class.
 	 */
 	public $plugin;
 
@@ -92,7 +92,7 @@ class Logger {
 	/**
 	 * Logger constructor.
 	 *
-	 * @param \Wbcr_Factory465_Plugin $plugin
+	 * @param \Wbcr_Factory469_Plugin $plugin
 	 * @param array $settings
 	 */
 	public function __construct( $plugin, $settings = [] ) {

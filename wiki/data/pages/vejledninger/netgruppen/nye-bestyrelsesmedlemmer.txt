@@ -1,0 +1,4 @@
+===== Nye bestyrelsesmedlemmer =====
+Nye bestyrelsesmedlemmer skal have oprettet en @akdtu.dk mail-adresse i [[https://www.simply.com/dk/controlpanel/akdtu.dk/mail/|simply's kontrolpanel]], hvorefter der opsættes videresendelser fra bestyrelsen@akdtu.dk.
+
+Derudover skal de have ændret deres profil på hjemmesiden, så de kan redigere indholdet på hjemmesiden. Dette gøres af en administrator på hjemmesiden, ved brug af widgetten "Tilføj bestyrelsesmedlem". Efterfølgende har det nye bestyrelsesmedlem adgang gennem deres almindelige profil (lejlxxx).

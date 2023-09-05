@@ -3,8 +3,8 @@ Contributors: room34
 Donate link: http://room34.com/donation
 Tags: menus, drafts, unpublished, pages
 Requires at least: 4.0
-Tested up to: 6.0
-Stable tag: 1.4.0
+Tested up to: 6.3
+Stable tag: 1.4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,6 +29,11 @@ _NOTE: We are aware of a limitation in the plugin, that a page/post must be publ
 == Screenshots ==
 
 == Changelog ==
+
+= 1.4.1 - 2023.07.23 =
+
+* Fixed bug that prevented draft page CSS from being applied for menus that are not assigned to a theme menu location.
+* Updated "tested up to" to 6.3.
 
 = 1.4.0 =
 

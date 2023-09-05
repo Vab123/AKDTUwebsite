@@ -19,7 +19,7 @@ class WCL_ClearfySettingsPage extends WCL_Page {
 	 * Mainly used to navigate between pages.
 	 *
 	 * @since 1.0.0
-	 * @see   FactoryPages463_AdminPage
+	 * @see   FactoryPages467_AdminPage
 	 *
 	 * @var string
 	 */

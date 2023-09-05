@@ -1,0 +1,12 @@
+2023-07-28 15:08:25		dbglog() is deprecated. It was called from auth_plugin_authwordpress::getUserData() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/authwordpress/auth.php:202 \dokuwiki\Logger should be used instead!
+2023-07-28 15:08:25		dbglog() is deprecated. It was called from auth_plugin_authwordpress::checkPass() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/authwordpress/auth.php:125 \dokuwiki\Logger should be used instead!
+2023-07-28 15:08:25		dbglog() is deprecated. It was called from auth_plugin_authwordpress::getUserData() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/authwordpress/auth.php:202 \dokuwiki\Logger should be used instead!
+2023-07-28 15:08:26		dbglog() is deprecated. It was called from auth_plugin_authwordpress::getUserData() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/authwordpress/auth.php:202 \dokuwiki\Logger should be used instead!
+2023-07-28 15:08:31		require(syntax.php) is deprecated. It was called from require() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/anchor/syntax.php:4 Autoloading should be used instead!
+2023-07-28 15:08:31		dbglog() is deprecated. It was called from auth_plugin_authwordpress::getUserData() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/authwordpress/auth.php:202 \dokuwiki\Logger should be used instead!
+2023-07-28 15:08:38		dbglog() is deprecated. It was called from auth_plugin_authwordpress::getUserData() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/authwordpress/auth.php:202 \dokuwiki\Logger should be used instead!
+2023-07-28 15:09:03		require(syntax.php) is deprecated. It was called from require() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/anchor/syntax.php:4 Autoloading should be used instead!
+2023-07-28 15:09:03		dbglog() is deprecated. It was called from auth_plugin_authwordpress::getUserData() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/authwordpress/auth.php:202 \dokuwiki\Logger should be used instead!
+2023-07-28 15:09:11		require(syntax.php) is deprecated. It was called from require() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/anchor/syntax.php:4 Autoloading should be used instead!
+2023-07-28 15:09:11		dbglog() is deprecated. It was called from auth_plugin_authwordpress::getUserData() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/authwordpress/auth.php:202 \dokuwiki\Logger should be used instead!
+2023-07-28 15:09:11		require(syntax.php) is deprecated. It was called from require() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/anchor/syntax.php:4 Autoloading should be used instead!

@@ -1,20 +1,20 @@
-1675927429	192.38.81.6	E	administrativt:information-til-nye-bestyrelsesmedlemmer	admin			-863
-1676407889	82.211.215.210	E	vejledninger:netgruppen:switches	lejl014			395
-1678973071	2.42.72.160	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		482
-1678977619	2.42.72.160	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		476
-1678978976	2.42.72.160	E	vejledninger:hjemmeside:aendringer	victor	Tilføjet afsendelse af mails ved tilmelding og afmelding, havedage		398
-1679077232	2.42.72.160	E	vejledninger:hjemmeside:aendringer	victor	Fikset #_BOOKEDSPACES, #_PENDINGSPACES, #_AVAILABLESPACES så de bruger alle oversættelser af begivenheder.		1107
-1679484106	2.42.72.160	e	sidebar	victor			86
-1679484635	2.42.72.160	C	skrivelser:trailer-kontrakt	victor	oprettet		2914
-1679484661	2.42.72.160	e	skrivelser:trailer-kontrakt	victor			143
-1679484715	2.42.72.160	e	skrivelser:trailer-kontrakt	victor			171
-1679484793	2.42.72.160	e	skrivelser:trailer-kontrakt	victor			30
-1679485380	2.42.72.160	e	skrivelser:trailer-kontrakt	victor	[Trailer specifikation] 		2
-1679485550	2.42.72.160	C	skrivelser:trailer-kontrakt-engelsk	victor	oprettet		3350
-1679670112	2.42.72.160	e	vejledninger:hjemmeside:aendringer	victor	[Extra CSS for Neve] 		120
-1680040081	2.42.72.160	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		766
-1680040298	2.42.72.160	E	vejledninger:hjemmeside:aendringer	victor	Tilføjet #_EVENTINFO som mulig erstatning til bookings		174
-1680643410	2.42.72.160	E	vejledninger:hjemmeside:aendringer	victor	Tilføjet vicevært rolle		120
-1680648537	2.42.72.160	e	vejledninger:hjemmeside:aendringer	victor	[Event manager/AKDTU - Havedag tilmelding og fælleshus styring] 		38
-1680648938	2.42.72.160	e	vejledninger:hjemmeside:aendringer	victor	Tilføjet speciel besked til viceværten ved reservation af fælleshus		1399
-1680650222	2.42.72.160	e	vejledninger:hjemmeside	victor	Tilføjet beskrivelse af profiler til vicevært		310
+1686239135	109.117.48.76	e	opslag:parkering-midlertidigt-forbudt	Victor			-1
+1686239172	109.117.48.76	E	opslag:parkering-midlertidigt-forbudt	Victor			1
+1686239325	109.117.48.76	E	opslag:parkering-midlertidigt-forbudt	Victor			93
+1686239485	109.117.48.76	e	opslag:parkering-midlertidigt-forbudt	Victor			-65
+1686239507	109.117.48.76	e	opslag:parkering-midlertidigt-forbudt	Victor			-7
+1686741001	93.147.72.236	e	sidebar	victor	tilføjet generalforsamlings-indkaldelser		123
+1686742469	93.147.72.236	C	skrivelser:indkaldelse-til-ekstraordinaer-generalforsamling	victor	oprettet		4948
+1686743420	93.147.72.236	e	sidebar	victor			96
+1686743781	93.147.72.236	E	skrivelser:indkaldelse-til-ekstraordinaer-generalforsamling	victor			357
+1686743833	93.147.72.236	e	skrivelser:indkaldelse-til-ekstraordinaer-generalforsamling	victor			-820
+1686743993	93.147.72.236	E	skrivelser:indkaldelse-til-ekstraordinaer-generalforsamling	victor			21
+1686744159	93.147.72.236	E	skrivelser:indkaldelse-til-ekstraordinaer-generalforsamling	victor			4
+1690556951	109.115.22.217	e	vejledninger:hjemmeside	victor			93
+1692043878	31.27.146.70	e	sidebar	victor			32
+1692043980	31.27.146.70	C	administrativt:kalender	victor	oprettet		90
+1692044160	31.27.146.70	E	administrativt:kalender	victor			18
+1692972873	82.211.210.168	e	vejledninger:hjemmeside:planlagte-aendringer	victor			-113
+1692973035	82.211.210.168	e	vejledninger:hjemmeside:ftp	victor			1
+1692973116	82.211.210.168	e	to-do	victor			39
+1692973310	82.211.210.168	e	vejledninger:netgruppen:nye-bestyrelsesmedlemmer	victor			112

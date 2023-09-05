@@ -4,11 +4,11 @@
  * Plugin URI: https://clearfy.pro
  * Description: Disables unused Wordpress features, improves performance and increases SEO rankings, using Clearfy, which makes WordPress very easy.
  * Author: Creative Motion <info@cm-wp.com>
- * Version: 2.1.4
+ * Version: 2.1.9
  * Text Domain: clearfy
  * Domain Path: /languages/
  * Author URI: https://cm-wp.com
- * Framework Version: FACTORY_463_VERSION
+ * Framework Version: FACTORY_469_VERSION
  */
 
 // Exit if accessed directly
@@ -89,13 +89,13 @@ $plugin_info = [
 	],
 	// FRAMEWORK MODULES
 	'load_factory_modules' => [
-		['libs/factory/bootstrap', 'factory_bootstrap_464', 'admin'],
-		['libs/factory/forms', 'factory_forms_460', 'admin'],
-		['libs/factory/pages', 'factory_pages_463', 'admin'],
-		['libs/factory/templates', 'factory_templates_113', 'all'],
-		['libs/factory/freemius', 'factory_freemius_150', 'all'],
-		['libs/factory/adverts', 'factory_adverts_140', 'admin'],
-		['libs/factory/logger', 'factory_logger_127', 'all'],
+		['libs/factory/bootstrap', 'factory_bootstrap_470', 'admin'],
+		['libs/factory/forms', 'factory_forms_466', 'admin'],
+		['libs/factory/pages', 'factory_pages_467', 'admin'],
+		['libs/factory/templates', 'factory_templates_118', 'all'],
+		['libs/factory/freemius', 'factory_freemius_157', 'all'],
+		['libs/factory/adverts', 'factory_adverts_146', 'admin'],
+		['libs/factory/logger', 'factory_logger_133', 'all'],
 
 	],
 	'load_plugin_components' => [
@@ -140,7 +140,7 @@ $plugin_info = [
 
 
 
-$clearfy_compatibility = new Wbcr_Factory463_Requirements(__FILE__, array_merge($plugin_info, [
+$clearfy_compatibility = new Wbcr_Factory469_Requirements(__FILE__, array_merge($plugin_info, [
 	'plugin_already_activate' => defined('WCL_PLUGIN_ACTIVE'),
 	'required_php_version' => '7.0',
 	'required_wp_version' => '5.2.0',
@@ -171,11 +171,11 @@ define('WBCR_CLEARFY_PLUGIN_ACTIVE', true);
 
 // Plugin version
 define('WCL_PLUGIN_VERSION', $clearfy_compatibility->get_plugin_version());
-define('WCL_FRAMEWORK_VER', 'FACTORY_463_VERSION');
+define('WCL_FRAMEWORK_VER', 'FACTORY_469_VERSION');
 
 define('WCL_PLUGIN_DIR', dirname(__FILE__));
 define('WCL_PLUGIN_BASE', plugin_basename(__FILE__));
-define('WCL_PLUGIN_URL', plugins_url(null, __FILE__));
+define('WCL_PLUGIN_URL', plugins_url('', __FILE__));
 
 
 

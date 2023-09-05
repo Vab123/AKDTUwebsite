@@ -31,7 +31,7 @@ if ( ! defined( 'WCM_PLUGIN_ACTIVE' ) ) {
 	}
 
 	if ( ! defined( 'WCM_PLUGIN_URL' ) ) {
-		define( 'WCM_PLUGIN_URL', plugins_url( null, __FILE__ ) );
+		define( 'WCM_PLUGIN_URL', plugins_url( '', __FILE__ ) );
 	}
 
 	try {

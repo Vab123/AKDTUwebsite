@@ -17,7 +17,7 @@ class WCL_QuickStartPage extends WCL_Page {
 	 * The id of the page in the admin menu.
 	 *
 	 * Mainly used to navigate between pages.
-	 * @see FactoryPages463_AdminPage
+	 * @see FactoryPages467_AdminPage
 	 *
 	 * @since 1.0.0
 	 * @var string
@@ -89,7 +89,7 @@ class WCL_QuickStartPage extends WCL_Page {
 	 *
 	 * @return void
 	 * @since 1.0.0
-	 * @see FactoryPages463_AdminPage
+	 * @see FactoryPages467_AdminPage
 	 *
 	 */
 	public function assets($scripts, $styles)

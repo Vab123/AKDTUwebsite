@@ -1,0 +1,23 @@
+2023-08-14 20:13:01	/var/www/akdtu.dk/public_html/wiki/lib/plugins/davcal/action/ajax.php(106)	E_WARNING: array_merge() [<a href='http://php.net/manual/en/function.array-merge'>function.array-merge</a>]: Expected parameter 2 to be an array, bool given
+  #0 [internal function]: dokuwiki\ErrorHandler::errorHandler(2, 'array_merge() [...', '/var/www/akdtu....', 106, Array)
+  #1 /var/www/akdtu.dk/public_html/wiki/lib/plugins/davcal/action/ajax.php(106): array_merge(Array, false)
+  #2 /var/www/akdtu.dk/public_html/wiki/inc/Extension/EventHandler.php(80): action_plugin_davcal_ajax->handle_ajax_call_unknown(Object(dokuwiki\Extension\Event), NULL)
+  #3 /var/www/akdtu.dk/public_html/wiki/inc/Extension/Event.php(74): dokuwiki\Extension\EventHandler->process_event(Object(dokuwiki\Extension\Event), 'BEFORE')
+  #4 /var/www/akdtu.dk/public_html/wiki/inc/Ajax.php(27): dokuwiki\Extension\Event->advise_before()
+  #5 /var/www/akdtu.dk/public_html/wiki/lib/exe/ajax.php(22): dokuwiki\Ajax->__construct('plugin_davcal')
+  #6 {main}
+2023-08-14 20:13:01	/var/www/akdtu.dk/public_html/wiki/lib/plugins/davcal/action/ajax.php(189)	E_WARNING: Cannot modify header information - headers already sent by (output started at /var/www/akdtu.dk/public_html/wiki/lib/plugins/davcal/action/ajax.php:106)
+  #0 [internal function]: dokuwiki\ErrorHandler::errorHandler(2, 'Cannot modify h...', '/var/www/akdtu....', 189, Array)
+  #1 /var/www/akdtu.dk/public_html/wiki/lib/plugins/davcal/action/ajax.php(189): header('Content-Type: a...')
+  #2 /var/www/akdtu.dk/public_html/wiki/inc/Extension/EventHandler.php(80): action_plugin_davcal_ajax->handle_ajax_call_unknown(Object(dokuwiki\Extension\Event), NULL)
+  #3 /var/www/akdtu.dk/public_html/wiki/inc/Extension/Event.php(74): dokuwiki\Extension\EventHandler->process_event(Object(dokuwiki\Extension\Event), 'BEFORE')
+  #4 /var/www/akdtu.dk/public_html/wiki/inc/Ajax.php(27): dokuwiki\Extension\Event->advise_before()
+  #5 /var/www/akdtu.dk/public_html/wiki/lib/exe/ajax.php(22): dokuwiki\Ajax->__construct('plugin_davcal')
+  #6 {main}
+2023-08-14 20:13:41	/var/www/akdtu.dk/public_html/wiki/lib/plugins/sqlite/SQLiteDB.php(473)	SQLite: Could not read dbversion from opt table. Should only happen on new plugin install
+  {
+      "dbname": "davcal",
+      "exception": "PDOException",
+      "message": "SQLSTATE[HY000]: General error: 1 no such table: opts",
+      "code": 0
+  }

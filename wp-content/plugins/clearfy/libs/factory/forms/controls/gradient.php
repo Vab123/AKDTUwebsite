@@ -25,8 +25,8 @@
 		exit;
 	}
 
-	if( !class_exists('Wbcr_FactoryForms462_GradientControl') ) {
-		class Wbcr_FactoryForms462_GradientControl extends Wbcr_FactoryForms462_Control {
+	if( !class_exists('Wbcr_FactoryForms466_GradientControl') ) {
+		class Wbcr_FactoryForms466_GradientControl extends Wbcr_FactoryForms466_Control {
 
 			public $type = 'gradient';
 
@@ -66,8 +66,8 @@
 					if( !window.factory.res ) {
 						window.factory.res = {};
 					}
-					factory.res.resVertical = '<?php _e( 'vertical', 'wbcr_factory_forms_462' ) ?>';
-					factory.res.resHorizontal = '<?php _e( 'horizontal', 'wbcr_factory_forms_462' ) ?>';
+					factory.res.resVertical = '<?php _e( 'vertical', 'wbcr_factory_forms_466' ) ?>';
+					factory.res.resHorizontal = '<?php _e( 'horizontal', 'wbcr_factory_forms_466' ) ?>';
 				</script>
 				<div <?php $this->attrs() ?>>
 					<div class="factory-gradient-picker">

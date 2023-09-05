@@ -31,14 +31,12 @@ class action_plugin_captcha extends DokuWiki_Action_Plugin
         $controller->register_hook('HTML_RESENDPWDFORM_OUTPUT', 'BEFORE', $this, 'handle_form_output', []); //old
         $controller->register_hook('FORM_RESENDPWD_OUTPUT', 'BEFORE', $this, 'handle_form_output', []); //new
 
-        if ($this->protectLogin()) {
-            // inject in login form
-            $controller->register_hook('HTML_LOGINFORM_OUTPUT', 'BEFORE', $this, 'handle_form_output', []); // old
-            $controller->register_hook('FORM_LOGIN_OUTPUT', 'BEFORE', $this, 'handle_form_output', []); // new
+        // inject in login form
+        $controller->register_hook('HTML_LOGINFORM_OUTPUT', 'BEFORE', $this, 'handle_form_output', []); // old
+        $controller->register_hook('FORM_LOGIN_OUTPUT', 'BEFORE', $this, 'handle_form_output', []); // new
 
-            // check on login
-            $controller->register_hook('AUTH_LOGIN_CHECK', 'BEFORE', $this, 'handle_login', []);
-        }
+        // check on login
+        $controller->register_hook('AUTH_LOGIN_CHECK', 'BEFORE', $this, 'handle_login', []);
 
         // clean up captcha cookies
         $controller->register_hook('INDEXER_TASKS_RUN', 'AFTER', $this, 'handle_indexer', []);
@@ -154,11 +152,13 @@ class action_plugin_captcha extends DokuWiki_Action_Plugin
      */
     public function handle_captcha_input(Doku_Event $event, $param)
     {
+        global $INPUT;
+
         $act = act_clean($event->data);
         if (!$this->needs_checking($act)) return;
 
         // do nothing if logged in user and no CAPTCHA required
-        if (!$this->getConf('forusers') && $_SERVER['REMOTE_USER']) {
+        if (!$this->getConf('forusers') && $INPUT->server->str('REMOTE_USER')) {
             return;
         }
 
@@ -175,6 +175,17 @@ class action_plugin_captcha extends DokuWiki_Action_Plugin
      */
     public function handle_form_output(Doku_Event $event, $param)
     {
+        global $INPUT;
+
+        if (
+            ($event->name === 'FORM_LOGIN_OUTPUT' || $event->name === 'HTML_LOGINFORM_OUTPUT')
+            &&
+            !$this->protectLogin()
+        ) {
+            // no login protection wanted
+            return;
+        }
+
         /** @var \dokuwiki\Form\Form|\Doku_Form $form */
         $form = $event->data;
 
@@ -187,7 +198,7 @@ class action_plugin_captcha extends DokuWiki_Action_Plugin
         if (!$pos) return; // no button -> source view mode
 
         // do nothing if logged in user and no CAPTCHA required
-        if (!$this->getConf('forusers') && $_SERVER['REMOTE_USER']) {
+        if (!$this->getConf('forusers') && $INPUT->server->str('REMOTE_USER')) {
             return;
         }
 
@@ -231,7 +242,7 @@ class action_plugin_captcha extends DokuWiki_Action_Plugin
         $act = act_clean($event->data);
         if (
             $act != 'logout' &&
-            $INPUT->has('u') &&
+            $INPUT->str('u') !== '' &&
             empty($INPUT->server->str('http_credentials')) &&
             empty($INPUT->server->str('REMOTE_USER'))
         ) {

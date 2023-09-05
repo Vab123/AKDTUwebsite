@@ -9,7 +9,7 @@ if( !defined('ABSPATH') ) {
  *
  * @since 1.0.0
  */
-class WMAC_MinifyAndCombineSettingsPage extends WBCR\Factory_Templates_113\Pages\PageBase {
+class WMAC_MinifyAndCombineSettingsPage extends WBCR\Factory_Templates_118\Pages\PageBase {
 
 	/**
 	 * {@inheritDoc}
@@ -50,12 +50,12 @@ class WMAC_MinifyAndCombineSettingsPage extends WBCR\Factory_Templates_113\Pages
 	/**
 	 * WMAC_MinifyAndCombineSettingsPage constructor.
 	 *
-	 * @param \Wbcr_Factory463_Plugin $plugin
+	 * @param \Wbcr_Factory469_Plugin $plugin
 	 *
 	 * @author Alexander Kovalev <alex.kovalevv@gmail.com>
 	 *
 	 */
-	public function __construct(Wbcr_Factory463_Plugin $plugin)
+	public function __construct(Wbcr_Factory469_Plugin $plugin)
 	{
 		$this->menu_title = __('Optimize CSS & JS', 'minify-and-combine');
 		$this->page_menu_short_description = __('Optimize CSS & JS', 'minify-and-combine');
@@ -85,11 +85,11 @@ class WMAC_MinifyAndCombineSettingsPage extends WBCR\Factory_Templates_113\Pages
 	/**
 	 * Requests assets (js and css) for the page.
 	 *
-	 * @param Wbcr_Factory463_ScriptList $scripts
-	 * @param Wbcr_Factory463_StyleList $styles
+	 * @param Wbcr_Factory469_ScriptList $scripts
+	 * @param Wbcr_Factory469_StyleList $styles
 	 *
 	 * @return void
-	 * @see Wbcr_FactoryPages463_AdminPage
+	 * @see Wbcr_FactoryPages467_AdminPage
 	 *
 	 */
 	public function assets($scripts, $styles)
@@ -195,12 +195,12 @@ class WMAC_MinifyAndCombineSettingsPage extends WBCR\Factory_Templates_113\Pages
 			'hint' => __('To make it more difficult for others to hack your website you can remove the WordPress version number from your site, your css and js. Without that number it\'s not possible to see if you run not the current version to exploit bugs from the older versions. <br><br>
 					Additionally it can improve the loading speed of your site, because without query strings in the URL the css and js files can be cached.', 'clearfy') . '<br><br><b>Clearfy: </b>' . __('Removes the wordpress version number from stylesheets (not logged in user only).', 'clearfy'),
 			'default' => false,
-			'eventsOn' => array(
+			/*'eventsOn' => array(
 				'show' => '.factory-control-disable_remove_style_version_for_auth_users'
 			),
 			'eventsOff' => array(
 				'hide' => '.factory-control-disable_remove_style_version_for_auth_users'
-			)
+			)*/
 		];
 
 		$options[] = [
@@ -483,7 +483,7 @@ This can be fully automated for different types of pages with the Мinify And Co
 		/**
 		 * @since 1.1.1 - является устаревшим
 		 */
-		return wbcr_factory_463_apply_filters_deprecated('wbcr_mac_settings_form_options', [$formOptions], '1.1.1', 'wmac/pages/settings_form_options');
+		return wbcr_factory_469_apply_filters_deprecated('wbcr_mac_settings_form_options', [$formOptions], '1.1.1', 'wmac/pages/settings_form_options');
 	}
 
 	public function cacheInfo()

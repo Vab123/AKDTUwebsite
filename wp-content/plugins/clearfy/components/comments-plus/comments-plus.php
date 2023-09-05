@@ -4,11 +4,11 @@
  * Plugin URI: https://webcraftic.com
  * Description: Allows administrators to globally disable comments on their site. Comments can be disabled for individual record types.
  * Author: Webcraftic <wordpress.webraftic@gmail.com>
- * Version: 1.1.6
+ * Version: 1.1.7
  * Text Domain: comments-plus
  * Domain Path: /languages/
  * Author URI: https://webcraftic.com
- * Framework Version: FACTORY_463_VERSION
+ * Framework Version: FACTORY_469_VERSION
  */
 
 // Exit if accessed directly
@@ -68,15 +68,15 @@ $wcm_plugin_info = array(
 
 	// FRAMEWORK MODULES
 	'load_factory_modules' => array(
-		array('libs/factory/bootstrap', 'factory_bootstrap_464', 'admin'),
-		array('libs/factory/forms', 'factory_forms_460', 'admin'),
-		array('libs/factory/pages', 'factory_pages_463', 'admin'),
-		array('libs/factory/templates', 'factory_templates_113', 'all'),
-		array('libs/factory/adverts', 'factory_adverts_140', 'admin')
+		array('libs/factory/bootstrap', 'factory_bootstrap_470', 'admin'),
+		array('libs/factory/forms', 'factory_forms_466', 'admin'),
+		array('libs/factory/pages', 'factory_pages_467', 'admin'),
+		array('libs/factory/templates', 'factory_templates_118', 'all'),
+		array('libs/factory/adverts', 'factory_adverts_146', 'admin')
 	)
 );
 
-$wcm_compatibility = new Wbcr_Factory463_Requirements(__FILE__, array_merge($wcm_plugin_info, array(
+$wcm_compatibility = new Wbcr_Factory469_Requirements(__FILE__, array_merge($wcm_plugin_info, array(
 	'plugin_already_activate' => defined('WCM_PLUGIN_ACTIVE'),
 	'required_php_version' => '5.4',
 	'required_wp_version' => '4.2.0',
@@ -104,7 +104,7 @@ define('WCM_PLUGIN_ACTIVE', true);
 define('WCM_PLUGIN_VERSION', $wcm_compatibility->get_plugin_version());
 define('WCM_PLUGIN_DIR', dirname(__FILE__));
 define('WCM_PLUGIN_BASE', plugin_basename(__FILE__));
-define('WCM_PLUGIN_URL', plugins_url(null, __FILE__));
+define('WCM_PLUGIN_URL', plugins_url('', __FILE__));
 
 
 

@@ -50,7 +50,8 @@ if ( ! class_exists( 'WP_Dark_Mode_Enqueue' ) ) {
 			$is_ultimate_plan = $wp_dark_mode_license->is_valid_by( 'title', 'WP Dark Mode Ultimate Lifetime' )
 			|| $wp_dark_mode_license->is_valid_by( 'title', 'WP Dark Mode Ultimate Yearly' )
 			|| $wp_dark_mode_license->is_valid_by( 'title', 'Lifetime Ultimate 1 Site' )
-			|| $wp_dark_mode_license->is_valid_by( 'title', 'Lifetime Ultimate 50 Sites' );
+			|| $wp_dark_mode_license->is_valid_by( 'title', 'Lifetime Ultimate 50 Sites' )
+			|| $wp_dark_mode_license->is_valid_by( 'title', 'Ultimate Yearly - 1Site' );
 
 			return $wp_dark_mode_license->is_valid() && $is_ultimate_plan;
 		}
@@ -264,7 +265,8 @@ if ( ! class_exists( 'WP_Dark_Mode_Enqueue' ) ) {
 			$is_ultimate_plan = $wp_dark_mode_license->is_valid_by( 'title', 'WP Dark Mode Ultimate Lifetime' )
 							|| $wp_dark_mode_license->is_valid_by( 'title', 'WP Dark Mode Ultimate Yearly' )
 							|| $wp_dark_mode_license->is_valid_by( 'title', 'Lifetime Ultimate 1 Site' )
-							|| $wp_dark_mode_license->is_valid_by( 'title', 'Lifetime Ultimate 50 Sites' );
+							|| $wp_dark_mode_license->is_valid_by( 'title', 'Lifetime Ultimate 50 Sites' )
+							|| $wp_dark_mode_license->is_valid_by( 'title', 'Ultimate Yearly - 1Site' );
 
 			return $wp_dark_mode_license->is_valid() && $is_ultimate_plan;
 		}

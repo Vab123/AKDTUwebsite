@@ -13,7 +13,7 @@ if( !defined('ABSPATH') ) {
 	exit;
 }
 
-class WCL_ComponentsPage extends \WBCR\Factory_Templates_113\Pages\Components {
+class WCL_ComponentsPage extends \WBCR\Factory_Templates_118\Pages\Components {
 
 	public function get_components()
 	{

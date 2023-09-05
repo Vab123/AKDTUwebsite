@@ -4,11 +4,11 @@
  * Plugin URI: https://webcraftic.com
  * Description: The plugin converts Cyrillic, Georgian links, filenames into Latin. It is necessary for correct work of WordPress plugins and improve links readability.
  * Author: Webcraftic <wordpress.webraftic@gmail.com>
- * Version: 1.1.6
+ * Version: 1.1.7
  * Text Domain: cyrlitera
  * Domain Path: /languages/
  * Author URI: https://webcraftic.com
- * Framework Version: FACTORY_463_VERSION
+ * Framework Version: FACTORY_469_VERSION
  */
 
 // Exit if accessed directly
@@ -68,15 +68,15 @@ $wctr_plugin_info = array(
 
 	// FRAMEWORK MODULES
 	'load_factory_modules' => array(
-		array('libs/factory/bootstrap', 'factory_bootstrap_464', 'admin'),
-		array('libs/factory/forms', 'factory_forms_460', 'admin'),
-		array('libs/factory/pages', 'factory_pages_463', 'admin'),
-		array('libs/factory/templates', 'factory_templates_113', 'all'),
-		array('libs/factory/adverts', 'factory_adverts_140', 'admin')
+		array('libs/factory/bootstrap', 'factory_bootstrap_470', 'admin'),
+		array('libs/factory/forms', 'factory_forms_466', 'admin'),
+		array('libs/factory/pages', 'factory_pages_467', 'admin'),
+		array('libs/factory/templates', 'factory_templates_118', 'all'),
+		array('libs/factory/adverts', 'factory_adverts_146', 'admin')
 	)
 );
 
-$wctr_compatibility = new Wbcr_Factory463_Requirements(__FILE__, array_merge($wctr_plugin_info, array(
+$wctr_compatibility = new Wbcr_Factory469_Requirements(__FILE__, array_merge($wctr_plugin_info, array(
 	'plugin_already_activate' => defined('WCTR_PLUGIN_ACTIVE'),
 	'required_php_version' => '5.4',
 	'required_wp_version' => '4.2.0',
@@ -104,7 +104,7 @@ define('WCTR_PLUGIN_ACTIVE', true);
 define('WCTR_PLUGIN_VERSION', $wctr_compatibility->get_plugin_version());
 define('WCTR_PLUGIN_DIR', dirname(__FILE__));
 define('WCTR_PLUGIN_BASE', plugin_basename(__FILE__));
-define('WCTR_PLUGIN_URL', plugins_url(null, __FILE__));
+define('WCTR_PLUGIN_URL', plugins_url('', __FILE__));
 
 
 

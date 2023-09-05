@@ -1,4 +1,5 @@
 <?php
+require_once WP_PLUGIN_DIR . '/AKDTU/functions/notice.php';
 
 if (isset($_REQUEST['action'])) {
 	if ($_REQUEST['action'] == 'remove_dokument' && isset($_REQUEST['document_type']) && isset($_REQUEST['document_name'])){

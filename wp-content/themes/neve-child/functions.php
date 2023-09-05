@@ -45,9 +45,6 @@ pll_register_string('events-manager', 'Details about the event.', 'events-manage
 pll_register_string('events-manager', 'HTML allowed.', 'events-manager-fælleshus');
 pll_register_string('events-manager', 'Event Image', 'events-manager-fælleshus');
 pll_register_string('events-manager', 'Bookings/Registration', 'events-manager-fælleshus');
-pll_register_string('events-manager', 'Vicevært common room rental notice', 'events-manager-vicevært');
-pll_register_string('events-manager', 'Vicevært rental of common house format', 'events-manager-vicevært');
-pll_register_string('events-manager', 'VICEVÆRT_RESERVATION', 'events-manager-vicevært');
 
 ## \wp-content\plugins\events-manager\classes\em-tickets.php
 pll_register_string('events-manager', 'You cannot delete tickets if there are any bookings associated with them. Please delete these bookings first.', 'events-manager-havedag');
@@ -121,6 +118,7 @@ pll_register_string('events-manager', 'Awaiting Payment', 'events-manager-mine-t
 ## used styles: 
 pll_register_string('events-manager', 'You are already signed up for this event.', 'events-manager-havedag');
 pll_register_string('events-manager', 'Manage my signups', 'events-manager-havedag');
+pll_register_string('events-manager', 'Comment for allergies', 'events-manager-havedag');
 
 ## wp-content\plugins\events-manager\classes\em-event.php
 pll_register_string('events-manager', 'Event already exists during that time.', 'events-manager-fælleshus');
@@ -186,70 +184,20 @@ pll_register_string('simple-membership', 'You need to login to view this content
 pll_register_string('simple-membership', 'RENTAL_BEFORE_APARTMENTNUM', 'simple-membership-calendar');
 pll_register_string('simple-membership', 'RENTAL_AFTER_APARTMENTNUM', 'simple-membership-calendar');
 
-## Class to write admin notices
-class AKDTU_notice {
-	/**
-	 * Message to be displayed in a warning.
-	 *
-	 * @var string\wp-admin\users.php
-	 */
-	private string $message;
-
-	/**
-	 * Type of message: error, warning, success, info.
-	 *
-	 * @var string
-	 */
-	private string $type;
-
-	/**
-	 * Flag, whether message should be dismissable.
-	 *
-	 * @var bool
-	 */
-	private bool $is_dismissible;
-
-	/**
-	 * Initialize class.
-	 *
-	 * @param string $type Type of message: error, warning, success, info.
-	 * @param string $message Message to be displayed in a warning.
-	 * @param bool $is_dismissible Flag, whether message should be dismissable.
-	 */
-	public function __construct(string $type, string $message, bool $is_dismissible = true) {
-		$this->message = $message;
-		$this->type = $type;
-		$this->is_dismissible = $is_dismissible;
-
-		add_action('admin_notices', array($this, 'render'));
-	}
-
-	/**
-	 * Displays notice on the admin screen.
-	 *
-	 * @return void
-	 */
-	public function render() {
-		printf('<div class="notice notice-%s %s"><p>%s</p></div>', esc_html($this->type), ($this->is_dismissible ? 'is-dismissible' : ''), esc_html($this->message));
-	}
-}
-
 ## Dont send email change notifications when changing to or from @akdtu.dk
-if (!function_exists('AKDTU_send_email_change_email')) {
-	function AKDTU_send_email_change_email($return, $user, $userdata) {
-		return $return && strtolower(substr($userdata['user_email'], -8)) != 'akdtu.dk' && strtolower(substr($user['user_email'], -8)) != 'akdtu.dk';
+if (!function_exists('send_email_change_email')) {
+	function send_email_change_email($return, $user, $userdata) {
+		return $return && strtolower(explode("@", $userdata['user_email'])[1]) != '@akdtu.dk' && strtolower(explode("@", $user['user_email'])[1]) != '@akdtu.dk';
 	}
-	add_filter('send_email_change_email', 'AKDTU_send_email_change_email', 10, 3);
+	add_filter('send_email_change_email', 'send_email_change_email', 10, 3);
 }
 ## Dont send password change notifications when changing to or from @akdtu.dk
-if (!function_exists('AKDTU_send_password_change_email')) {
-	function AKDTU_send_password_change_email($return, $user, $userdata) {
-		return $return && strtolower(substr($userdata['user_email'], -8)) != 'akdtu.dk' && strtolower(substr($user['user_email'], -8)) != 'akdtu.dk';
+if (!function_exists('send_password_change_email')) {
+	function send_password_change_email($return, $user, $userdata) {
+		return $return && strtolower(explode("@", $userdata['user_email'])[1]) != '@akdtu.dk' && strtolower(explode("@", $user['user_email'])[1]) != '@akdtu.dk';
 	}
-	add_filter('send_password_change_email', 'AKDTU_send_password_change_email', 10, 3);
+	add_filter('send_password_change_email', 'send_password_change_email', 10, 3);
 }
-
-
 
 ## Custom user role for board-member user profiles
 add_role(
@@ -259,68 +207,3 @@ add_role(
 		'read' => true
 	)
 );
-
-$desired_capabilities_for_board_member = array(
-	'moderate_comments' => true,
-	'manage_categories' => true,
-	'manage_links' => true,
-	'upload_files' => true,
-	'unfiltered_html' => true,
-	'edit_posts' => true,
-	'edit_others_posts' => true,
-	'edit_published_posts' => true,
-	'publish_posts' => true,
-	'edit_pages' => true,
-	'read' => true,
-	'level_7' => true,
-	'level_6' => true,
-	'level_5' => true,
-	'level_4' => true,
-	'level_3' => true,
-	'level_2' => true,
-	'level_1' => true,
-	'level_0' => true,
-	'edit_others_pages' => true,
-	'edit_published_pages' => true,
-	'publish_pages' => true,
-	'delete_pages' => true,
-	'delete_others_pages' => true,
-	'delete_published_pages' => true,
-	'delete_posts' => true,
-	'delete_others_posts' => true,
-	'delete_published_posts' => true,
-	'delete_private_posts' => true,
-	'edit_private_posts' => true,
-	'read_private_posts' => true,
-	'delete_private_pages' => true,
-	'edit_private_pages' => true,
-	'read_private_pages' => true,
-);
-
-$role = get_role('board_member');
-
-foreach($desired_capabilities_for_board_member as $capability => $value) {
-	$role->add_cap($capability);
-}
-
-
-
-## Custom user role for vicevært user profiles
-add_role(
-	'vicevaert',
-	'Vicevært',
-	array(
-		'read' => true
-	)
-);
-
-
-$desired_capabilities_for_vicevaert = array(
-	'read' => true,
-);
-
-$role = get_role('vicevaert');
-
-foreach($desired_capabilities_for_vicevaert as $capability => $value) {
-	$role->add_cap($capability);
-}

@@ -10,7 +10,7 @@ if( !defined('ABSPATH') ) {
 	exit;
 }
 
-class WCACHE_CachePage extends WBCR\Factory_Templates_113\Pages\PageBase {
+class WCACHE_CachePage extends WBCR\Factory_Templates_118\Pages\PageBase {
 
 	/**
 	 * @see {@inheritDoc}
@@ -87,10 +87,10 @@ class WCACHE_CachePage extends WBCR\Factory_Templates_113\Pages\PageBase {
 	 * We register notifications for some actions
 	 *
 	 * @param                         $notices
-	 * @param \Wbcr_Factory463_Plugin $plugin
+	 * @param \Wbcr_Factory469_Plugin $plugin
 	 *
 	 * @return array
-	 * @see libs\factory\pages\themplates\FactoryPages463_ImpressiveThemplate
+	 * @see libs\factory\pages\themplates\FactoryPages467_ImpressiveThemplate
 	 */
 	public function getActionNotices($notices)
 	{

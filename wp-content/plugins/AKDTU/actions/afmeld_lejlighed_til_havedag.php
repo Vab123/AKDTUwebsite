@@ -1,4 +1,5 @@
 <?php
+require_once WP_PLUGIN_DIR . '/AKDTU/functions/notice.php';
 
 if (isset($_REQUEST['action'])) {
 	if ($_REQUEST['action'] == 'afmeld_havedag' && isset($_REQUEST['havedag_event_id']) && isset($_REQUEST['havedag_dato'])){

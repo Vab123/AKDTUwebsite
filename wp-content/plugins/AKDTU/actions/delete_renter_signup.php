@@ -1,4 +1,5 @@
 <?php
+require_once WP_PLUGIN_DIR . '/AKDTU/functions/notice.php';
 
 if (isset($_REQUEST['action'])) {
 	if ($_REQUEST['action'] == 'delete_renter_signup' && isset($_REQUEST['user']) && isset($_REQUEST['phone']) && isset($_REQUEST['start_time']) && isset($_REQUEST['end_time'])) {

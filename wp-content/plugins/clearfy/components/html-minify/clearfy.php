@@ -31,7 +31,7 @@ if( !defined('WHTM_PLUGIN_ACTIVE') ) {
 	}
 
 	if( !defined('WHTM_PLUGIN_URL') ) {
-		define('WHTM_PLUGIN_URL', plugins_url(null, __FILE__));
+		define('WHTM_PLUGIN_URL', plugins_url('', __FILE__));
 	}
 
 	try {

@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @copyright (c) 2018 Webraftic Ltd
  */
-class WbcrCmp_DeleteCommentsPage extends WBCR\Factory_Templates_113\Pages\PageBase {
+class WbcrCmp_DeleteCommentsPage extends WBCR\Factory_Templates_118\Pages\PageBase {
 
 	/**
 	 * {@inheritDoc}
@@ -66,9 +66,9 @@ class WbcrCmp_DeleteCommentsPage extends WBCR\Factory_Templates_113\Pages\PageBa
 	 *
 	 * @author Alexander Kovalev <alex.kovalevv@gmail.com>
 	 *
-	 * @param \Wbcr_Factory463_Plugin $plugin
+	 * @param \Wbcr_Factory469_Plugin $plugin
 	 */
-	public function __construct( Wbcr_Factory463_Plugin $plugin ) {
+	public function __construct( Wbcr_Factory469_Plugin $plugin ) {
 		$this->menu_title = __( 'Comments cleaner', 'comments-plus' );
 
 		parent::__construct( $plugin );
@@ -78,10 +78,10 @@ class WbcrCmp_DeleteCommentsPage extends WBCR\Factory_Templates_113\Pages\PageBa
 	 * {@inheritDoc}
 	 *
 	 * @param                        $notices
-	 * @param Wbcr_Factory463_Plugin $plugin
+	 * @param Wbcr_Factory469_Plugin $plugin
 	 *
 	 * @return array
-	 * @see libs\factory\pages\themplates\FactoryPages463_ImpressiveThemplate
+	 * @see libs\factory\pages\themplates\FactoryPages467_ImpressiveThemplate
 	 */
 	public function getActionNotices( $notices ) {
 
@@ -200,7 +200,7 @@ class WbcrCmp_DeleteCommentsPage extends WBCR\Factory_Templates_113\Pages\PageBa
 	/**
 	 * Prints the content of the page
 	 *
-	 * @see libs\factory\pages\themplates\FactoryPages463_ImpressiveThemplate
+	 * @see libs\factory\pages\themplates\FactoryPages467_ImpressiveThemplate
 	 */
 	public function showPageContent() {
 		$stats      = $this->getStats();

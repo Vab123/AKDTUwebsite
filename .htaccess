@@ -4,7 +4,7 @@
 #Begin Really Simple Security
 <IfModule mod_rewrite.c>
 RewriteEngine on
-RewriteCond %{HTTPS} !=on [NC]
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
 RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 </IfModule>
 

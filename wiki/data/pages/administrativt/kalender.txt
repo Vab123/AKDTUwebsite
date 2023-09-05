@@ -1,0 +1,1 @@
+{{davcal>name=Bestyrelseskalender,description=Bestyrelseskalender,color=red,view=month,forcetimeformat=24h}}

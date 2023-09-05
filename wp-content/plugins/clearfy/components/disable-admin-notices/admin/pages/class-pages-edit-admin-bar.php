@@ -63,11 +63,11 @@ class WDAN_Edit_Admin_Bar extends WDN_Page {
 	/**
 	 * Requests assets (js and css) for the page.
 	 *
-	 * @param Wbcr_Factory463_ScriptList $scripts
-	 * @param Wbcr_Factory463_StyleList $styles
+	 * @param Wbcr_Factory469_ScriptList $scripts
+	 * @param Wbcr_Factory469_StyleList $styles
 	 *
 	 * @return void
-	 * @see Wbcr_FactoryPages463_AdminPage
+	 * @see Wbcr_FactoryPages467_AdminPage
 	 *
 	 */
 	public function assets( $scripts, $styles ) {

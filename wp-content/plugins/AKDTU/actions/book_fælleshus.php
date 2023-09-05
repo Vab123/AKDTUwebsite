@@ -1,4 +1,5 @@
 <?php
+require_once WP_PLUGIN_DIR . '/AKDTU/functions/notice.php';
 
 if (isset($_REQUEST['action'])) {
 	if ($_REQUEST['action'] == 'book_fælleshus' && isset($_REQUEST['start_date']) && isset($_REQUEST['end_date']) && isset($_REQUEST['type'])) {

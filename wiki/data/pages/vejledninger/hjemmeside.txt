@@ -1,6 +1,8 @@
 ====== Foreningens hjemmeside ======
 Foreningens hjemmeside findes på [[https://akdtu.dk|akdtu.dk]], og er bygget op på Wordpress. Denne side indeholder informationer til både beboere og ikke-beboere, og al indhold kan redigeres af bestyrelsen.
 
+Source-code til hjemmesiden findes på [[https://github.com/Vab123/AKDTUwebsite | GitHub]].
+
 ===== Brugerkonti =====
 Der er oprettet en brugerkonto til alle lejligheder. Dette kan styres under fanen "WP medlemskab" i kontrolpanelet. Alle lejligheder er oprettet som "Beboer", hvilket begrænser deres muligheder på hjemmesiden, samt hindrer adgang til denne wiki.
 

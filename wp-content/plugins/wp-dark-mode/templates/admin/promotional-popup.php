@@ -19,7 +19,7 @@ if ( empty( $countdown_timer ) || $countdown_timer < time() ) {
 // Formatted data.
 $data = [
 	'counter_time' => $countdown_timer,
-	'discount'     => '75',
+	'discount'     => '35',
 ];
 
 $countdown_time = [
@@ -70,7 +70,7 @@ $modal_title = $is_pro ? __( 'Unlock the PRO features', 'wp-dark-mode' ) : __( '
 			</div>
 		</div>
 
-		<a href="https://go.wppool.dev/LaSV" target="_blank"><?php echo esc_html__('Claim 75% Discount', 'wp-dark-mode'); ?></a>
+		<a href="https://go.wppool.dev/LaSV" target="_blank"><?php echo wp_sprintf( 'Claim %s%s Discount', esc_html( $data['discount'] ), '%' ); ?></a>
 	</div>
 
 	<style>

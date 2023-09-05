@@ -1,6 +1,6 @@
 <?php
 
-use WBCR\Factory_Logger_129\Logger;
+use WBCR\Factory_Logger_133\Logger;
 
 /**
  * Factory Logger
@@ -19,31 +19,31 @@ if( !defined('ABSPATH') ) {
 	exit;
 }
 
-if( defined('FACTORY_LOGGER_129_LOADED') || (defined('FACTORY_LOGGER_STOP') && FACTORY_LOGGER_STOP) ) {
+if( defined('FACTORY_LOGGER_133_LOADED') || (defined('FACTORY_LOGGER_STOP') && FACTORY_LOGGER_STOP) ) {
 	return;
 }
 
-define('FACTORY_LOGGER_129_LOADED', true);
-define('FACTORY_LOGGER_129_VERSION', '1.2.9');
-define('FACTORY_LOGGER_129_DIR', dirname(__FILE__));
-define('FACTORY_LOGGER_129_URL', plugins_url(null, __FILE__));
+define('FACTORY_LOGGER_133_LOADED', true);
+define('FACTORY_LOGGER_133_VERSION', '1.3.3');
+define('FACTORY_LOGGER_133_DIR', dirname(__FILE__));
+define('FACTORY_LOGGER_133_URL', plugins_url('', __FILE__));
 
-load_plugin_textdomain('wbcr_factory_logger_129', false, dirname(plugin_basename(__FILE__)) . '/langs');
+load_plugin_textdomain('wbcr_factory_logger_133', false, dirname(plugin_basename(__FILE__)) . '/langs');
 
-require_once(FACTORY_LOGGER_129_DIR . '/includes/class-logger.php');
+require_once(FACTORY_LOGGER_133_DIR . '/includes/class-logger.php');
 
 if( is_admin() ) {
-	require_once(FACTORY_LOGGER_129_DIR . '/includes/class-log-export.php');
-	require_once(FACTORY_LOGGER_129_DIR . '/pages/class-logger-impressive-page.php');
-	require_once(FACTORY_LOGGER_129_DIR . '/pages/class-logger-impressive-lite.php');
-	require_once(FACTORY_LOGGER_129_DIR . '/pages/class-logger-admin-page.php');
+	require_once(FACTORY_LOGGER_133_DIR . '/includes/class-log-export.php');
+	require_once(FACTORY_LOGGER_133_DIR . '/pages/class-logger-impressive-page.php');
+	require_once(FACTORY_LOGGER_133_DIR . '/pages/class-logger-impressive-lite.php');
+	require_once(FACTORY_LOGGER_133_DIR . '/pages/class-logger-admin-page.php');
 }
 
 /**
- * @param Wbcr_Factory465_Plugin $plugin
+ * @param Wbcr_Factory469_Plugin $plugin
  */
-add_action('wbcr_factory_logger_129_plugin_created', function ($plugin) {
-	/* @var Wbcr_Factory465_Plugin $plugin */
+add_action('wbcr_factory_logger_133_plugin_created', function ($plugin) {
+	/* @var Wbcr_Factory469_Plugin $plugin */
 
 	/* Settings of Logger
 	 	$settings = [
@@ -54,7 +54,7 @@ add_action('wbcr_factory_logger_129_plugin_created', function ($plugin) {
 			'rotate_limit' => 3,
 		];
 
-		$plugin->set_logger( "WBCR\Factory_Logger_129\Logger", $settings );
+		$plugin->set_logger( "WBCR\Factory_Logger_133\Logger", $settings );
 	*/
-	$plugin->set_logger("WBCR\Factory_Logger_129\Logger");
+	$plugin->set_logger("WBCR\Factory_Logger_133\Logger");
 });

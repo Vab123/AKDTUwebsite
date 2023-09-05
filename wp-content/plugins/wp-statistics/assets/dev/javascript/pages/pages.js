@@ -19,6 +19,17 @@ if (wps_js.isset(wps_js.global, 'request_params', 'page') && wps_js.global.reque
             'type': wps_js.global.request_params.type
         });
 
+        // Check page_id parameter
+        let page_id = null;
+        if (wps_js.isset(wps_js.global, 'request_params', 'page_id')) {
+            page_id = wps_js.global.request_params.page_id;
+        }
+
+        // Add page_id to Params
+        if (page_id !== null) {
+            params = Object.assign(params, {'page_id': page_id});
+        }
+
         // Run MetaBox
         wps_js.run_meta_box('pages-chart', params, false);
 
@@ -161,6 +172,11 @@ if (wps_js.isset(wps_js.global, 'request_params', 'page') && wps_js.global.reque
             params['to'] = wps_js.global.request_params.to;
         } else {
             params['ago'] = 30;
+        }
+
+        // Check Post Type
+        if (wps_js.isset(wps_js.global, 'request_params', 'type')) {
+            params['type'] = wps_js.global.request_params['type'];
         }
 
         // Run Pages list MetaBox

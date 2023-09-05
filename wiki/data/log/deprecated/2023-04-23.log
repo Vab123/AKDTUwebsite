@@ -1,0 +1,2 @@
+2023-04-23 13:15:29		dbglog() is deprecated. It was called from auth_plugin_authwordpress::getUserData() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/authwordpress/auth.php:202 \dokuwiki\Logger should be used instead!
+2023-04-23 13:15:29		dbglog() is deprecated. It was called from auth_plugin_authwordpress::checkPass() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/authwordpress/auth.php:125 \dokuwiki\Logger should be used instead!

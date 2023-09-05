@@ -3,7 +3,7 @@
 Plugin Name: Hide Drafts in Menus
 Plugin URI: http://room34.com
 Description: Hide unpublished pages in your custom menus.
-Version: 1.4.0
+Version: 1.4.1
 Author: Room 34 Creative Services, LLC
 Author URI: http://room34.com
 License: GPL2
@@ -95,13 +95,12 @@ function r34hdm_flag_drafts_in_menu_admin() {
 	
 	if (function_exists('get_current_screen') && $current_screen = get_current_screen()) {
 		if ($current_screen->id == 'nav-menus') {
-			if ($menus = get_registered_nav_menus()) {
+			if ($menus = get_terms('nav_menu')) {
 				echo	'<!-- CSS for unpublished menu items added by Hide Drafts in Menus plugin. -->' . "\n" .
 						'<style type="text/css">' . "\n" ;
-				foreach (array_keys((array)$menus) as $menu_name) {
+				foreach ((array)$menus as $menu_obj) {
 					// Get menu items
-					$locations = get_nav_menu_locations();
-					if (isset($locations[$menu_name]) && $menu = wp_get_nav_menu_object($locations[$menu_name])) {
+					if ($menu = wp_get_nav_menu_object($menu_obj->slug)) {
 						$items = wp_get_nav_menu_items($menu->term_id, array('order' => 'DESC'));
 					
 						// Get IDs from item list

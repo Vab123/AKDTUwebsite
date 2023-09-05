@@ -17,7 +17,7 @@ class WCL_AdvancedPage extends WCL_Page {
 	 * The id of the page in the admin menu.
 	 *
 	 * Mainly used to navigate between pages.
-	 * @see FactoryPages463_AdminPage
+	 * @see FactoryPages467_AdminPage
 	 *
 	 * @since 1.0.0
 	 * @var string
