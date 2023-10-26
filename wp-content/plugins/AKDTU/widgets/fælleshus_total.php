@@ -38,7 +38,7 @@ function fælleshus_total_widget() {
 					<td><?php echo $year; ?></td>
 					<td><?php echo (!is_null($price_to_pay) && !empty($price_to_pay) ? array_sum($price_to_pay) : 0); ?> kr.</td>
 					<td><?php echo (!is_null($price_adjustments) && !empty($price_adjustments) ? array_sum($price_adjustments) : 0); ?> kr.</td>
-					<td><?php echo (!is_null($final_price) && !empty($final_price) ? array_sum($final_price) : 0); ?> kr.</td>
+					<td><?php echo (!is_null($final_price) && !empty($final_price) ? array_sum($price_to_pay) + array_sum($price_adjustments) : 0); ?> kr.</td>
 				</tr>
 			<?php endfor; ?>
 		</tbody>
