@@ -313,13 +313,30 @@ function em_bookings_print_event() {
 	<?php
 				$price = 750;
 				foreach ($all_users as $apartment) {
+					$user = SwpmMemberUtils::get_user_by_user_name( 'lejl' . str_pad($apartment, 3, "0", STR_PAD_LEFT) );
+					$level = SwpmMembershipLevelUtils::get_membership_level_name_by_level_id($user->membership_level);
 					if ($status[$apartment] == 1) {
 						# Apartment showed up as they were supposed to. No charge
 					} elseif (in_array($apartment, $users)) {
 						# Apartment was signed up, but did not show. Charge
-						echo 'Lejlighed ' . str_pad($apartment, 3, "0", STR_PAD_LEFT) . ($not_showed_up_users_archive[array_search($apartment, $not_showed_up_users)] ? ' (Tidligere beboer)' : '') . ': ' . $price . ',00 kr<br>';
+						echo 'Lejlighed ' . str_pad($apartment, 3, "0", STR_PAD_LEFT) . ($not_showed_up_users_archive[array_search($apartment, $not_showed_up_users)] ? ' (Tidligere beboer)' : '') . ': ' . $price . ',00 kr';
+
+						if ($level == "Beboerprofil til bestyrelsesmedlem") {
+							# Make board members clearer to see
+							echo ' - <b><u><i>Bestyrelsesmedlem</i></u></b>';
+						}
+
+						echo '<br>';
 					} else {
-						echo 'Lejlighed ' . str_pad($apartment, 3, "0", STR_PAD_LEFT) . ($not_signed_up_users_archive[array_search($apartment, $not_signed_up_users)] ? ' (Tidligere beboer)' : '') . ': ' . $price . ',00 kr<br>';
+						# Apartment was not signed up. Charge
+						echo 'Lejlighed ' . str_pad($apartment, 3, "0", STR_PAD_LEFT) . ($not_signed_up_users_archive[array_search($apartment, $not_signed_up_users)] ? ' (Tidligere beboer)' : '') . ': ' . $price . ',00 kr';
+
+						if ($level == "Beboerprofil til bestyrelsesmedlem") {
+							# Make board members clearer to see
+							echo ' - <b><u><i>Bestyrelsesmedlem</i></u></b>';
+						}
+
+						echo '<br>';
 					}
 				}
 	?>
