@@ -51,7 +51,7 @@ function AKDTU_havedag_opkrævning_mail_settings() {
 				<table class="form-table" role="presentation">
 					<tbody>
 						<tr>
-							<th scope="row">Opkrævningsmail - Afsendelsestidspunkt (dage efter sidste havedag)</th>
+							<th scope="row">Opkrævningsmail - Afsendelsestidspunkt</th>
 							<td>
 								<input type="text" name="AKDTU_HAVEDAG_DAYS" value="<?php echo stripcslashes(get_option('AKDTU_HAVEDAG_DAYS')); ?>" style="width: 300px" />
 								<p>Antallet af dage efter sidste havedag, hvor der skal sendes en opkrævningsmail. Minimum er <code>1</code>. Skriv <code>-1</code> for ikke at sende nogen mail</p>
@@ -133,7 +133,7 @@ function AKDTU_havedag_opkrævning_mail_settings() {
 				<table class="form-table" role="presentation">
 					<tbody>
 						<tr>
-							<th scope="row">Varselsmail - Afsendelsestidspunkt (dage før opkrævningsmail)</th>
+							<th scope="row">Varselsmail - Afsendelsestidspunkt</th>
 							<td>
 								<input type="text" name="AKDTU_HAVEDAG_WARNING_DAYS" value="<?php echo stripcslashes(get_option('AKDTU_HAVEDAG_WARNING_DAYS')); ?>" style="width: 300px" />
 								<p>Antallet af dage før opkrævningsmailen (ovenfor), der skal sendes en varselsmail. Minimum er <code>0</code>. Skriv <code>-1</code> for ikke at sende nogen mail</p>
