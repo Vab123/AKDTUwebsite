@@ -1,4 +1,12 @@
 =====Opgaver til havedag=====
+Note: Nedenstående tabel er ikke fuldt opdateret - ABP 2023-10-25
+^ Område ^ Opgave ^ Antal Personer ^ Forventet tid ^ Frekvens ^ Beskrivelse ^
+| Udendørs | Vask tage på cykelskure | 1 | 120 min | | Benyt opløsning af IDZ |
+| Udendørs | Vask skralde containere |   |         | | |
+| Udendørs | Fjerne ukrudt i hække mod p-plads | 2 | | | |
+| Udendørs | Fjern blade rundt om fælleshus/græsplæne | |  || Bladene opsamles og køres til genbrugspladsen |
+| Udendørs | Fjern ukrudt i hække mod gangsti |
+
 ====Fælleshus====
 **4 personer**
   * Skrub gulve:

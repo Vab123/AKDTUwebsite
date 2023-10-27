@@ -1,5 +1,11 @@
 ===== Varmesystem =====
-====Tænd/Sluk for opvarmning af fælleshus====
+
+Fælleshuset er opvarmet ved egen gaskedel i modsætning til hovedbygningen. Der er seks separate gulvarmestrenge der er styret af trådløse termostater placeret langs ydervæggen. Temperaturen skal være indstillet ens da en varmestreng ellers forsøger at varme hele fælleshuset op. Gaskedlen skal serviceres en gang om året. Der er tegnet en service aftale [[drift-og-procesvejledninger:serviceaftaler]]. I sommerhalvåret kan der skrues ned på varmen til frostsikring som der ses neden for. Brugsvandet skal forblive indstillet som set på den højre skrueknap på billedet nede for.
+Regulatorerne til de individuelle varmestrenge har en tendens til at hoppe af men kan sættes på igen.
+
+====Tænd/Sluk (frostsikring) for opvarmning af fælleshus====
+
+
 ===Tænd===
 Når varmen i fælleshuset skal tændes, drejes den venstre af de store drejeknapper til 2 (se billede).
 

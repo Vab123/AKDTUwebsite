@@ -5,24 +5,31 @@
 ** [[to-do]] **
 
 ** Administrativt **
-  * [[administrativt:Kalender]]
   * [[administrativt:Årsplan]]
-  * [[administrativt:standardinventar-i-lejligheder]]
   * [[administrativt:Templates]]
   * [[administrativt:kontaktpersoner]]
   * [[administrativt:sikkerhedsdatablade]]
   * [[administrativt:information-til-nye-bestyrelsesmedlemmer]]
   * [[administrativt:nøglekontrakt|Nøglekontrakt]]
 
-** Driftsvejledninger **
-  * [[drift-og-procesvejledninger]]
-  * [[drift-og-procesvejledninger:fælleshus]]
+** Vejledninger **
   * [[drift-og-procesvejledninger:havedag]]
     * [[drift-og-procesvejledninger:havedag:opgaver-til-havedag]]
-    * [[drift-og-procesvejledninger:havedag:cykeloprydning]]
-  * [[drift-og-procesvejledninger:netgruppen]]
-  * [[drift-og-procesvejledninger:fjernvarme]]
-  * [[drift-og-procesvejledninger:vand-og-varme-aflæsning]]
+    * [[drift-og-procesvejledninger:havedag:cykeloprydning]] 
+  * [[vejledninger:Parkeringskontrol]]
+  * [[vejledninger:Kælder]]
+  * [[vejledninger:Trailer]]
+  * [[vejledninger:Lån og brug af Excentersliber]]
+  * [[vejledninger:Salgsprocedure]]
+  * [[vejledninger:rengøring-af-gulvafløb]]
+  * [[vejledninger:generalforsamling]]
+  * [[vejledninger:budget og regnskab]]
+
+**Hovedbygningen**  
+  * [[drift-og-procesvejledninger:serviceaftaler]]
+  * [[administrativt:standardinventar-i-lejligheder]]
+  * [[drift-og-procesvejledninger]]
+  * [[drift-og-procesvejledninger:fjernvarme]]  
   * [[drift-og-procesvejledninger:ventilation]]
     * [[drift-og-procesvejledninger:ventilation:sommer-og-vinter-program]]
   * [[drift-og-procesvejledninger:faskiner-sandfang-og-vejriste]]
@@ -31,27 +38,31 @@
   * [[drift-og-procesvejledninger:sikringer]]
   * [[drift-og-procesvejledninger:tv]]
   * [[drift-og-procesvejledninger:reservedele]]
+  * [[drift-og-procesvejledninger:oversvømmelse]]
+  * [[drift-og-procesvejledninger:vand-og-varme-aflæsning]] 
+  * [[drift-og-procesvejledninger:afkalkningsanlæg]] 
 
-**Vejledninger**
-  * **Netgruppen**
-    * [[vejledninger:Hjemmeside]]
-      * [[vejledninger:Hjemmeside:aendringer]]
-      * [[vejledninger:Hjemmeside:planlagte-aendringer]]
-    * [[vejledninger:hjemmeside:wiki]]
-    * [[vejledninger:hjemmeside:FTP]]
-    * [[vejledninger:netgruppen:port-oversigt|Port oversigt]]
-    * [[vejledninger:netgruppen:switches]]
-    * [[vejledninger:netgruppen:internet-i-fælleshuset]]
-    * [[vejledninger:netgruppen:nye-bestyrelsesmedlemmer]]
-  * **Fælleshuset**
-    * [[vejledninger:Adgangskontrol]]
-    * [[vejledninger:varmesystem-i-fælleshus]]
-  * [[vejledninger:Parkeringskontrol]]
-  * [[vejledninger:Kælder]]
-  * [[vejledninger:Trailer]]
-  * [[vejledninger:Lån og brug af Excentersliber]]
-  * [[vejledninger:rengøring-af-gulvafløb]]
-  * [[vejledninger:Salgsprocedure]]
+
+**Fælleshuset**
+  * [[drift-og-procesvejledninger:fælleshus]]
+  * [[vejledninger:Adgangskontrol]]
+  * [[vejledninger:varmesystem-i-fælleshus]]
+
+
+
+
+**Netgruppen**
+  * [[drift-og-procesvejledninger:netgruppen]]
+  * [[vejledninger:Hjemmeside]]
+    * [[vejledninger:Hjemmeside:aendringer]]
+    * [[vejledninger:Hjemmeside:planlagte-aendringer]]
+  * [[vejledninger:hjemmeside:wiki]]
+  * [[vejledninger:hjemmeside:FTP]]
+  * [[vejledninger:netgruppen:port-oversigt|Port oversigt]]
+  * [[vejledninger:netgruppen:switches]]
+  * [[vejledninger:netgruppen:internet-i-fælleshuset]]
+  * [[vejledninger:netgruppen:nye-bestyrelsesmedlemmer]]
+
 
 ** Skrivelser **
   * [[skrivelser:fælleshus:adgangskontrol]]
@@ -64,6 +75,7 @@
   * [[skrivelser:studieaktivitetsundersøgelse]]
     * [[skrivelser:studieaktivitetsundersøgelse:salg-grundet-studieinaktivitet|Salg grundet studieinaktivitet]]
   * [[skrivelser:udleje-af-lejlighed]]
+  * [[skrivelser:velkomstbrev|Velkomstbrev]]
   * [[skrivelser:trailer-kontrakt]]
     * [[skrivelser:trailer-kontrakt-engelsk]]
   * [[skrivelser:indkaldelse-til-generalforsamling | Indkaldelse til ordinær generalforsamling]]

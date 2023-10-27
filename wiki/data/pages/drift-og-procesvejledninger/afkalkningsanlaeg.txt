@@ -1,0 +1,3 @@
+====Afkalkningslæg====
+
+Der er installeret et BWT afkalkningsanlæg på både brugsvand og varme. Der skal fyldes salttabletter på ca en gang om ugen. Vicevært sørger for at fylde salt på anlægget og bestille nyt salt hjem. Der er tegnet serviceaftale på anlægget. Se [[drift-og-procesvejledninger:serviceaftaler]]

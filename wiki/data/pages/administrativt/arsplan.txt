@@ -1,16 +1,38 @@
-===== Årsplan =====
+===Årshjul===
 
-^ Opgave / Emne             ^ Januar ^ Februar ^ Marts ^ April ^ Maj ^ Juni ^ Juli ^ August ^ September ^ Oktober ^ November ^ December ^ Beskrivelse ^ Form ^ Resultat ^ Deltagere ^ Ansvarlig ^
-| Generalforsamling         |        |         | (X)   | (X)   |     |      |      |        |           |         |          |          | Bestyrelsen afholder ordinær generalforsamling i løbet af marts eller april i fælleshuset. |     | Bestyrelse, Andelshavere | Bestyrelse / Administrator |
-| Fastsæt dato              |        |         |       |       |     |      |      |        |           |         |          | X        | Bestyrelsen fastsætter dato sammen med Administrationen. |  | Dato for afholdelse af ordinær GF. |  | Bestyrelsen |
-| Budget og regnskabsmæde   |        |         | (X)   | (X)   |     |      |      |        |           |         |          |          | Bestyrelsen/Administrationen gennemgår regnskab og kommende års budget. |  |  | Bestyrelse/Administration | Bestyrelse/Administration |
-| Udsendelse af indkaldelse |        |         | (X)   | (X)   |     |      |      |        |           |         |          |          | Mindst 14 dage inden GF. |  |  | Administration |
-| Bestyrelsens beretning    |        |         | X     |       |     |      |      |        |           |         |          |          | Bestyrelsens beretning beskriver året der er gået, samt fremtidsplaner. |  | Beretningen sendes ud sammen med indkaldelsen. |  | Formand |
-|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| Havedag                   |        | X       | X     | X     | X   | (X)  |      | (X)    | X         | X       | X        | (X)      |  |  |  |  | Bestyrelse |
-| Tilmelding til havedag    | X      |         |       |       |     |      | (X)  | (X)    |           |         |          |          | Havedage oprettes på hjemmeside og der laves infoskrivelse på hjemmeside, facebook og email. |  |  |  | Formand / Netgruppen |
-| Opkrævning for  havedag   |        |         |       |       |     |      | X    |        |           |         |          | X        | Sendes til Cobblestone |  |  |  | Formand / Netgruppen |
-| Cykeloprydning            |        |         |       |       |     |      |      |        |           | X       | X        |          |  |  |  |  |  |
-| Skrivelse angående cykeloprydning | |        |       |       |     |      |      |        | X         |         |          |          |  |  |  |  |  |
-| Kontakt politi omkring stjålne cykler | |    |       |       |     |      |      |        |           | X       |          |          |  |  |  |  |  |
-| Kontakt politi om afhentning af cykler | X | |       |       |     |      |      |        |           |         | X        |          |  |  |  |  |  |
+  * Januar
+    * Planlæg kommende års løbende vedligehold
+  * Februar
+    * Udarbejde evt. vedtægtsændringer til generalforsamlingen
+    * Have afklaret større projektor der måtte påvirke budgettet. Hav gerne indhentet tilbud. 
+    * Afklar prisændringer i faste ydelser. Undersøg ændringer i markedsindexer. Forbered forslag til andelskrone
+    * Fastsæt dato for forårets havedag og udsend invitation.
+    * Udsend skriv om oprydning af cykler og mærk cykler op
+  * Marts 
+    * Skrive formandens beretning
+    * Regnskab og budgetmøde med administrator.
+    * Indkalde til generalforsamling udsendes senest 14 dage før generalforsamlingen. 
+    * Promover evt. ledige bestyrelse og netgruppe pladser samt generalforsamlingen.
+  * April
+    * Afholdelse generalforsamling
+    * Planlægning af bestyrelsesteambuilding 
+    * Afhold havedage
+  * Maj
+    * Udsendes godkendt referat og regnskab fra generalforsamlingen 
+    * Opdater hjemmeside med nyeste nøgletal
+    * Opdater Waitly med nøgledokumenter
+    * Afhold havedage
+  * Juni
+    * Opkræv for manglende havedag
+  * Juli
+    * Sommerferie
+  * August
+    * Fastsæt dato for efterårets havedag og udsend invitation
+  * September
+    * Afhold havedage
+  * Oktober
+    * Afhold havedage
+  * November
+    * Opkræv for manglende havedag 
+  * December
+    * Ferie/eksamen

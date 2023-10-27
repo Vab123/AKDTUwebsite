@@ -1,0 +1,13 @@
+<WRAP noprint><adm information>Siden her er lavet til at blive eksporteret til PDF, med knappen "Export to PDF", oppe til venstre</adm></WRAP>\\ \\ \\ \\ \\ \\
+{{ :skrivelser:logo.png?nolink&500 |}}
+\\
+<html><div style="border-bottom: 2px solid grey;">&nbsp;</div></html>\\
+<html><div style="text-align:center;"><h2>VELKOMMEN TIL</h2></div></html>\\
+<html><div style="text-align:center;"><h2>ANDELSKOLLEGIET VED DTU - AKADEMIVEJ</h2></div></html>
+<html><div style="border-bottom: 2px solid grey;font-size:1.4em;">&nbsp;</div></html> \\
+
+\\
+<html><div style="text-align:center;"><i>Sidst revideret: 25-10-2023</i></div></html>
+
+<pagebreak>
+asd
