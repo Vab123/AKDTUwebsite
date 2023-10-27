@@ -32,7 +32,7 @@ function echo_AKDTU_email_as_table($TO, $FROM, $REPLYTO, $CC, $attachments, $mai
 				echo ($row % 2 == 0 ? 'class="alternate"' : '');
 				?>>
 				<td><b>Til:</b></td>
-				<td><?php echo htmlentities($TO); ?></td>
+				<td><?php echo ($TO == "" ? "(Ingen)" : htmlentities($TO)); ?></td>
 			</tr>
 			<tr <?php $row++;
 				echo ($row % 2 == 0 ? 'class="alternate"' : ''); ?>>
