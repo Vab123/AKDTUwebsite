@@ -21,15 +21,25 @@ function send_opkrævning_havedag($debug = false) {
 		$year = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen');
 		$year->setPattern('YYYY');
 
-		$scope = 'past';
+		$scope = ($debug ? 'future' : 'past');
 		$search_limit = 20;
 		$offset = 0;
-		$order = 'DESC';
+		$order = ($debug ? 'ASC' : 'DESC');
 		$owner = false;
 	
 		$events = array_filter(EM_Events::get(array('scope' => $scope, 'limit' => $search_limit, 'offset' => $offset, 'order' => $order, 'orderby' => 'event_start', 'bookings' => true, 'owner' => $owner, 'pagination' => 0)), function ($event) {
 			return pll_get_post_language($event->post_id, "slug") == "da";
 		});
+		
+		if ($debug && count($events) == 0) {
+			// Debug is on, but no future events was found. Go back to past events
+			$scope = 'past';
+			$order = 'DESC';
+	
+			$events = array_filter(EM_Events::get(array('scope' => $scope, 'limit' => $search_limit, 'offset' => $offset, 'order' => $order, 'orderby' => 'event_start', 'bookings' => true, 'owner' => $owner, 'pagination' => 0)), function ($event) {
+				return pll_get_post_language($event->post_id, "slug") == "da";
+			});
+		}
 	
 		$actual_limit = 1;
 
