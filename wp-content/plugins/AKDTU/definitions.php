@@ -67,3 +67,19 @@ AKDTU_DEFINE(
 AKDTU_DEFINE(
 	'NYBRUGER_BESTYRELSE'
 );
+
+# Mail med opkrævning for havedage
+define('HAVEDAG_DAYS', get_option('AKDTU_HAVEDAG_DAYS'));
+AKDTU_DEFINE(
+	'HAVEDAG',
+	array(
+		'_FORMAT' # Format af opkrævning
+	)
+);
+define('HAVEDAG_WARNING_DAYS', get_option('AKDTU_HAVEDAG_WARNING_DAYS'));
+AKDTU_DEFINE(
+	'HAVEDAG_WARNING',
+	array(
+		'_FORMAT' # Format af opkrævning
+	)
+);
