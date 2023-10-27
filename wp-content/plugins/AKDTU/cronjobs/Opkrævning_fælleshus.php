@@ -3,13 +3,13 @@
 function send_opkrævning_fælleshus($debug = false) {
 	require_once WP_PLUGIN_DIR . '/AKDTU/definitions.php';
 
-	if (FÆLLESHUS_TO != '') {
+	if (FÆLLESHUS_TO != '' || $debug) {
 		require_once WP_PLUGIN_DIR . '/AKDTU/functions/fælleshus.php';
 		require_once WP_PLUGIN_DIR . '/AKDTU/functions/send_mail.php';
 		global $wpdb;
 
 		if ((new DateTime('now', new DateTimeZone('Europe/Copenhagen')))->format('j') == '1' || $debug) {
-			$mention_moved_users_months_before = 2; # If tenant has moved in/out within this amount of months, a note is set on the name to specify if new or old tenant should pay
+			$mention_moved_users_months_before = 1; # If tenant has moved in/out within this amount of months, a note is set on the name to specify if new or old tenant should pay
 			$mention_moved_users_date = new DateTime("first day of this month", new DateTimeZone('Europe/Copenhagen'));
 			$mention_moved_users_date->setTime(0, 0, 0);
 			$mention_moved_users_date->modify('-' . $mention_moved_users_months_before . ' month');
