@@ -1,5 +1,7 @@
 <?php
 
+require_once WP_PLUGIN_DIR . '/AKDTU/functions/users.php';
+
 function calc_rental_cost($startdatetime, $enddatetime, $owner_id) {
 	global $wpdb;
 	## Returns how much it costs in DKK to rent the common house from $startdatetime to $enddatetime.
@@ -67,7 +69,7 @@ function get_price_to_pay($month_ini, $month_end) {
 	$price_to_pay = array();
 
 	foreach ($events as $event) {
-		$owner = ltrim(substr(get_user_by('id',$event->owner)->user_login,4),"0");
+		$owner = apartment_number_from_id($event->owner);
 		
 		$event_start = new DateTime($event->event_start_date . " " . $event->event_start_time);
 		$event_end = new DateTime($event->event_end_date . " " . $event->event_end_time);

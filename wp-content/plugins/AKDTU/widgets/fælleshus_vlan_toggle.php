@@ -2,6 +2,7 @@
 
 function fælleshus_vlan_dashboard_widget() {
 	require_once WP_PLUGIN_DIR . '/AKDTU/functions/vlan.php';
+	require_once WP_PLUGIN_DIR . '/AKDTU/functions/users.php';
 	global $wpdb;
 
 	try {
@@ -14,7 +15,7 @@ function fælleshus_vlan_dashboard_widget() {
 				return get_user_by('id', em_get_event($event_id, 'event_id')->owner);
 			}, $event_ids);
 			$event_owners = array_map(function ($event_owner) {
-				return (substr($event_owner->user_login, 0, 4) == "lejl" ? 'lejlighed ' . ltrim(substr($event_owner->user_login, 4, 3), "0") : 'Bestyrelsen');
+				return (is_apartment_from_username($event_owner->user_login) ? 'lejlighed ' . apartment_number_from_username($event_owner->user_login) : 'Bestyrelsen');
 			}, $event_owners);
 
 			$rented = true;

@@ -1,6 +1,7 @@
 <?php
 
 function show_board_widget() {
+	require_once WP_PLUGIN_DIR . '/AKDTU/functions/users.php';
 	$board_members = array();
 
 	for ($floor = 0; $floor <= 2; $floor++) {
@@ -36,7 +37,7 @@ function show_board_widget() {
 							echo 'class="alternate"';
 						};
 						$row++; ?>>
-						<td style="vertical-align:middle"><?php echo ltrim(substr($board_member->user_name, 4, 3), "0"); ?></td>
+						<td style="vertical-align:middle"><?php echo apartment_number_from_username($board_member->user_name); ?></td>
 						<td style="vertical-align:middle"><?php echo $board_member->first_name . ' '  . $board_member->last_name; ?></td>
 						<?php if (is_admin()) : ?><td>
 								<form action="" method="post" style="text-align:center">

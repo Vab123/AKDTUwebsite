@@ -1,6 +1,8 @@
 <?php
 
 function fælleshus_næste_reservationer_dashboard_widget() {
+	require_once WP_PLUGIN_DIR . '/AKDTU/functions/users.php';
+
 	$scope = 'future';
 	$search_limit = 20;
 	$offset = 0;
@@ -36,9 +38,9 @@ function fælleshus_næste_reservationer_dashboard_widget() {
 						};
 						$row++; ?>>
 						<td style="vertical-align:middle"><?php $event_owner = get_user_by('id', $event->event_owner)->user_login;
-															if (substr($event_owner, 0, 4) == "lejl") {
-																echo "Lejl. " . ltrim(substr($event_owner, 4, 3), "0") . (substr($event_owner, 7, 8) == '_archive' ? ' (TB)' : '');
-															} elseif (count(array_filter(get_user_by('id', $event->event_owner)->roles,function($role){return $role == 'vicevaert';})) > 0) {
+															if (is_apartment_from_username($event_owner)) {
+																echo "Lejl. " . apartment_number_from_username($event_owner) . (is_archive_user_from_username($event_owner) ? ' (TB)' : '');
+															} elseif (is_vicevært_from_username($event_owner)) {
 																echo "Vicevært";
 															} else {
 																echo "Bestyrelsen";
