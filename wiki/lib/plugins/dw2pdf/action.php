@@ -657,7 +657,7 @@ class action_plugin_dw2pdf extends DokuWiki_Action_Plugin {
             $output['cover'] = file_get_contents($coverfile);
             $output['cover'] = str_replace(array_keys($replace), array_values($replace), $output['cover']);
             $output['cover'] = $this->page_depend_replacements($output['cover'], $ID);
-            $output['cover'] .= '<pagebreak />';
+            $output['cover'] .= '<pagebreak resetpagenum="1" />';
         }
 
         // cover page
