@@ -1,0 +1,133 @@
+/* Extra custom fonts: roboto, robotomedium, robotothin, robotolight, robotocondensed, robotobold, robotoboldcondensed, robotoblack */
+/* Supported stylings: https: //mpdf.github.io/css-stylesheets/supported-css.html */
+
+/* START OF AKDTU STYLE */
+/* Adding !important at the end, just in case */
+
+li, td, p, span, blockquote, center, nav, footer, header, a, pre {
+	font-family: robotolight!important;
+}
+
+b, strong {
+	font-family: robotolight!important;
+	font-style: bold!important;
+	letter-spacing: .066em!important;
+}
+
+h1, h2, h3 {
+	font-family: roboto!important;
+	font-style: bold!important;
+}
+
+h1,h2,h3,h4,h5,h6{
+	letter-spacing: .033em!important;
+	margin-top: .5rem!important;
+	padding-top: 0!important;
+	margin-bottom: 0rem!important;
+}
+
+h1 {
+	font-size: 1.75em!important;
+}
+
+h2 {
+	font-size: 1.5em !important;
+}
+
+h3 {
+	font-size: 1.2em !important;
+}
+
+tr:nth-child(even) {
+    background-color: #f1f4f5!important;
+}
+
+tr {
+	max-width: 100%!important;
+	line-break: auto!important;
+}
+
+td, th {
+	padding: .2rem .5rem!important;
+}
+
+a {
+	color: #000000!important;
+	text-decoration: underline!important;
+	background-image:none!important;
+	background: none!important;
+	padding: 0!important;
+}
+
+/* END OF AKDTU STYLE */
+
+table.pdfheader {
+    font-size: 8pt;
+    border-collapse: collapse;
+    border-bottom: 1px solid #000000;
+    clear: both;
+}
+
+table.pdffooter {
+    font-size: 8pt;
+    border-collapse: collapse;
+    border-top: 1px solid #000000;
+    clear: both;
+}
+
+/* Table of Content -- see http://mpdf1.com/manual/index.php?tid=243 */
+div.mpdf_toc {
+}
+a.mpdf_toc_a {
+    color: black; /* links black as well */
+}
+/* Whole line level 0 */
+div.mpdf_toc_level_0 {
+    line-height: 1.5;
+    margin-left: 0;
+    padding-right: 1em; /* padding-right should match e.g <dottab outdent="2em" /> 0 is default */
+}
+/* Title level 0 - may be inside <a> */
+span.mpdf_toc_t_level_0 {
+}
+/* Page no. level 0 - may be inside <a> */
+span.mpdf_toc_p_level_0 {
+}
+/* Whole line level 1 */
+div.mpdf_toc_level_1 {
+    margin-left: 1em;
+    text-indent: -1em;
+    padding-right: 1em; /* padding-right should match <dottab outdent="2em" /> 2em is default */
+}
+/* Title level 1 */
+span.mpdf_toc_t_level_1 {
+}
+/* Page no. level 1 - may be inside <a> */
+span.mpdf_toc_p_level_1 {
+}
+/* level 2 */
+div.mpdf_toc_level_2 {
+    margin-left: 2em;
+    text-indent: -1em;
+    padding-right: 1em; /* padding-right should match <dottab outdent="2em" /> 2em is default */
+}
+span.mpdf_toc_t_level_2 {}
+span.mpdf_toc_p_level_2 {}
+
+/* level 3 */
+div.mpdf_toc_level_3 {
+    margin-left: 3em;
+    text-indent: -1em;
+    padding-right: 1em; /* padding-right should match <dottab outdent="2em" /> 2em is default */
+}
+span.mpdf_toc_t_level_3 {}
+span.mpdf_toc_p_level_3 {}
+
+/* level 4 */
+div.mpdf_toc_level_4 {
+    margin-left: 4em;
+    text-indent: -1em;
+    padding-right: 1em; /* padding-right should match <dottab outdent="2em" /> 2em is default */
+}
+span.mpdf_toc_t_level_4 {}
+span.mpdf_toc_p_level_4 {}
