@@ -71,21 +71,27 @@ class syntax_plugin_akdtu extends DokuWiki_Syntax_Plugin {
 					$meta = p_get_metadata($ID); // Get page meta, so title can be extracted
 
 					// First part of string
-                    $renderer->doc .= "<div class=\"wrap_noprint plugin_wrap\"><div class=\"admonition information\"><p class=\"admonition-title\">Info</p><p>Siden her er lavet til at blive eksporteret til PDF, og ser derfor ikke nødvendigvis korrekt ud på computeren. <a href=\"?do=export_pdf&book_title=" . htmlentities($meta['title']); 
+                    $renderer->doc .= "<div class=\"wrap_noprint plugin_wrap\"><div class=\"admonition information\"><p class=\"admonition-title\">Info</p><p>Siden her er lavet til at blive eksporteret til PDF, og ser derfor ikke nødvendigvis korrekt ud på computeren. <a href=\"?do=export_pdf"; 
                     break;
  
                 case DOKU_LEXER_UNMATCHED :
-                    $template = $match; // Unpack matched values
+					$meta = p_get_metadata($ID); // Get page meta, so title can be extracted
 
-					if (strlen($template) == 0) { $template = "AKDTU_nofrontpage"; } // Set default value for template
+                    $settings = explode(",", $match, 2); // Unpack matched values
 
-                    $renderer->doc .= $renderer->_xmlEntities("&tpl=" . $template); // Output template
+					$template = $settings[0];
+
+					if (count($settings) > 1) { $title = $settings[1]; } else { $title = $meta['title']; }
+
+					if (strlen($template) == 0) { $template = "AKDTU"; } // Set default value for template
+
+                    $renderer->doc .= "&book_title=" . htmlentities($title) . "&tpl=" . htmlentities($template); // Output template
                     break;
                 case DOKU_LEXER_EXIT :
 					// End-value found. Output final part of string
 
 					// Final part of string
-					$renderer->doc .= "\"><input style=\"float:right; padding: 5px; border: 3px solid #333; background: transparent; color: #333; font-weight: bold; text-transform: uppercase; font-family: sans-serif; cursor: pointer;\" type=\"button\" value=\"Export to PDF\"></a></p></div></div>";
+					$renderer->doc .= "\"><input style=\"padding: 5px; border: 3px solid #333; background: transparent; color: #333; font-weight: bold; text-transform: uppercase; font-family: sans-serif; cursor: pointer;\" type=\"button\" value=\"Export to PDF\"></a></p></div></div>";
                     break;
             }
 
