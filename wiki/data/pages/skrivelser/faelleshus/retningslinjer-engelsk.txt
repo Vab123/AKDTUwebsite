@@ -1,5 +1,6 @@
+<printable></printable>
+
 =====Rules for use of the common house=====
-<WRAP noprint><adm information>Siden her er lavet til at blive eksporteret til PDF, med knappen "Export to PDF", oppe til venstre</adm></WRAP>
 The rules for the common house are to be followed whether it has been rented or by common use. The bullet points under “After use” have to be performed either before the departure from the common house or before the renting period expires. If this is not the case, a fee corresponding with the association’s cost for professional cleaning will be charged.
 
 //Please refer to the association’s regulations: “ved skader/mangler kan der rettes erstatningskrav til den/de pågældende brugere af fælleshuset. Ved skader/mangler er det op til bestyrelsen om dette skal udbedres af skadeforvolder, bestyrelsen eller en af bestyrelsen udpeget tredjepart afhængig af skaden/manglens art.”//

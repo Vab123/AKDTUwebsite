@@ -1,6 +1,6 @@
-=====Cleaning and maintenance of own apartment and terrace/balcony=====
-<WRAP noprint><adm information>Siden her er lavet til at blive eksporteret til PDF, med knappen "Export to PDF", oppe til venstre</adm></WRAP>
+<printable></printable>
 
+=====Cleaning and maintenance of own apartment and terrace/balcony=====
 Dear owner and/or resident,
 
 According to our statutes §10, it is the duty of the owner to ensure prober cleaning and maintenance of his/her apartment including the terrace/balcony.

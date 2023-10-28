@@ -1,5 +1,6 @@
+<printable></printable>
+
 =====Fælleshus: Adgangskontrol=====
-<WRAP noprint><adm information>Siden her er lavet til at blive eksporteret til PDF, med knappen "Export to PDF", oppe til venstre</adm></WRAP>
 For at sikre fælleshuset er der både adgangskontrol og alarm installeret.
 
 Adgangskontrollen bliver brugt til at holde styr på hvem der benytter fælleshuset og hvorvidt de følger reglerne. Reglerne for brug af fælleshuset står på opslag i fælleshuset.

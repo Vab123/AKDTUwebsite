@@ -11,13 +11,19 @@ Hvis der skal oprettes nye sider foregår det på følgende måde:
   - Naviger derefter til det URL, siden skal ligge på, __på trods af at siden stadig ikke findes__, ved at trykke på det link du nu har tilføjet til menuen i siden. Derefter kan du redigere siden som  beskrevet ovenover. Når du gemmer siden bliver den oprettet, og kan læses som normalt.
 
 ==== Udskrift af indhold ====
-Alt indhold på hjemmesiden kan downloades som PDF ved at trykke på "Export to PDF" under søgefeltet i menuen til venstre. Indholdet bliver automatisk indskrevet i et standard-format til foreningens dokumenter.
+Alt indhold på wikien kan downloades som PDF. Dette gøres ved at skrive ''%%<printable>[template]</printable>%%'' i starten af de sider som skal kunne udskrives, hvor ''[template]'' enten efterlades blankt eller erstattes med en af følgende implementerede templates:
+  * ''AKDTU'': Standard tema til foreningens dokumenter
+  * ''frontpage'': Samme som ''AKDTU'', men med en forside med titel på siden samt dato for seneste revision.
+  * ''velkomstbrev_da'': Template specifikt til det danske velkomstbrev.
+  * ''velkomstbrev_en'': Template specifikt til det engelske velkomstbrev.
+
+Sider kan altså eksempelvis printes ved at skrive ''%%<printable>frontpage</printable>%%'' øverst på den side man ønsker printet. Herefter kommer en info-boks på siden, med en "EKSPORT TO PDF"-knap.
 
 === Ændring af standard-format ===
 **//Dette kan kun gøres af folk med FTP-adgang til hjemmesiden, såsom Netgruppen.//**
 
 == Indhold ==
-Formatet der bliver brugt i udskrivningen af PDFen findes i ''wiki\lib\plugins\dw2pdf\tpl\AKDTU''. Heri kan følgende filer findes:
+Formaterne der bliver brugt i udskrivningen af PDFen findes i ''wiki\lib\plugins\dw2pdf\tpl\''. I mapperne heri kan følgende filer findes:
   * ''header.html'' – Header på alle sider
   * ''header_odd.html'' – Header på ulige sider
   * ''header_even.html'' – Header på lige sider
@@ -46,7 +52,7 @@ I html-filerne kan der skrives følgende koder, som automatisk bliver erstattet 
 
 == Styling ==
 
-Derudover findes i mappen ''wiki\lib\plugins\dw2pdf\tpl\AKDTU'' også ''style.css'', som indeholder al CSS styling af PDFen. Her kan man bruge al CSS, der understøttes af mpdf. En komplet liste over hvad der kan bruges kan ses [[https://mpdf.github.io/css-stylesheets/supported-css.html|her]].
+Derudover findes i mapperne ''wiki\lib\plugins\dw2pdf\tpl\'' også ''style.css'', som indeholder al CSS styling af PDFen. Her kan man bruge al CSS, der understøttes af mpdf. En komplet liste over hvad der kan bruges kan ses [[https://mpdf.github.io/css-stylesheets/supported-css.html|her]].
 
 Hvis man ønsker at bruge specifikke skrifttyper, der ikke automatisk er installeret, kan disse installeres. Det kræves her at skrifttype-filerne er i ''.ttf''-format. Disse filer lægges i mappen ''wiki\lib\plugins\dw2pdf\vendor\mpdf\mpdf\ttfonts''. Efterfølgende skal skrifttyperne inkluderes i filen ''wiki\lib\plugins\dw2pdf\DokuPDF.class.php''. Dette skal gøres under linje #95 (Søg efter "'fontdata' %%=>%% [") i følgende format:<code php>"dejavuserif" => [ // Font name. Must be lowercase
 	'R' => "DejaVuSerif.ttf", // Regular version, optional

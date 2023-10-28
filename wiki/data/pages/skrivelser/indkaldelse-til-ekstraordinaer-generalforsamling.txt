@@ -1,3 +1,5 @@
+<printable></printable>
+
 \\ <WRAP rightalign>Dato: 14-06-2023</WRAP> \\
 
 <WRAP centeralign><html><h1>Indkaldelse til ekstraordinær generalforsamling i Andelskollegiet ved DTU</h1></html></WRAP>

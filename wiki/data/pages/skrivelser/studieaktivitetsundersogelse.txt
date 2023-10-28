@@ -1,6 +1,6 @@
-===== Studieaktivitetsundersøgelse =====
-<WRAP noprint><adm information>Siden her er lavet til at blive eksporteret til PDF, med knappen "Export to PDF", oppe til venstre</adm></WRAP>
+<printable></printable>
 
+===== Studieaktivitetsundersøgelse =====
 Bestyrelsen har ansvar for at sikre, at alle lever op til vores vedtægter og vi vil derfor med denne skrivelse bede dig angive om hvorvidt du er eller ikke er gyldigt optaget, immatrikuleret og/eller tilmeldt DTU eller en anden anerkendt lang eller mellemlang videregående uddannelse jf. lov nr. 481 af 31. maj 2000 eller Ph.D. studerende.
 
 Dette for at sikre, at du lever op til foreningens vedtægters §3.2.\\

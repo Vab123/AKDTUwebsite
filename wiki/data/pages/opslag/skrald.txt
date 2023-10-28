@@ -1,4 +1,5 @@
-<WRAP noprint><adm information>Siden her er lavet til at blive eksporteret til PDF, med knappen "Export to PDF", oppe til venstre</adm></WRAP>
+<printable></printable>
+
 <WRAP centeralign>
 {{:skrivelser:skrald_1.png?nolink&0x300}}
 {{:skrivelser:skrald_2.png?nolink&0x300}}

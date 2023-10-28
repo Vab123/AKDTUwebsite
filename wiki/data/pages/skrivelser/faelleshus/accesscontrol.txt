@@ -1,5 +1,6 @@
+<printable></printable>
+
 =====Common house: Access control=====
-<WRAP noprint><adm information>Siden her er lavet til at blive eksporteret til PDF, med knappen "Export to PDF", oppe til venstre</adm></WRAP>
 To secure the common house, access control and alarms have been installed.
 
 The access control is used to keep track of who uses the common house, and if they are following the rules. The rules are posted in the common house.

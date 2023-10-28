@@ -1,5 +1,6 @@
+<printable></printable>
+
 =====Udlejning af lejlighed ved studieophold i udlandet=====
-<WRAP noprint><adm information>Siden her er lavet til at blive eksporteret til PDF, med knappen "Export to PDF", oppe til venstre</adm></WRAP>
 Jævnfør foreningens vedtægters §12.1 skal bestyrelsen godkende udleje inden der underskrives lejekontrakt og lejen påbegyndes.\\ \\
 
 Ved udleje gælder de samme forpligtelser stadig over for andelshaver som normalt.

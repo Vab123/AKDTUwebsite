@@ -1,0 +1,11 @@
+<printable>velkomstbrev_en</printable>
+
+Hej Marike (eller andre =))
+
+Jeg har ændret lidt på hvordan der laves pdf'er på wikien, så det ser lidt anderledes ud.
+
+Når du redigerer siden her, kan du se at der i toppen af dokumentet står ''%%<printable>velkomstbrev_en</printable>%%''. ''%%<printable></printable>%%'' indsætter info-boksen ovenover, med link til hvor man kan downloade pdf'en, og ''velkomstbrev_en'' inde mellem de to er navnet på en template jeg har lavet specifikt til velkomstbrevet, så det får en fin forside med på engelsk også, og så der ikke er det lille logo oppe til venstre. Der er også lavet en template til det danske velkomstbrev, som i stedet hedder ''velkomstbrev_da'' (så du skal skrive ''%%<printable>velkomstbrev_da</printable>%%'' i toppen af siden til det danske velkomstbrev).
+
+Sig endelig til hvis der er noget ved den template jeg har lavet, som ikke er helt som det skal være, eller hvis der er andet som ikke lige er helt klart.
+
+%%//%%Victor

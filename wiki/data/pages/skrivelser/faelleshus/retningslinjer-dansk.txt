@@ -1,5 +1,6 @@
+<printable></printable>
+
 ===== Retningslinjer for brug af fælleshuset =====
-<WRAP noprint><adm information>Siden her er lavet til at blive eksporteret til PDF, med knappen "Export to PDF", oppe til venstre</adm></WRAP>
 Retningslinjerne for fælleshuset skal følges uanset om man har lejet fælleshuset eller ved almindelig brug. Punkterne under “Efter brug” skal være udført enten inden fælleshuset forlades eller inden lejeperioden ophører. Hvis dette ikke er tilfældet opkræves der et gebyr svarende til foreningens udgifter til professionel rengøring.
 
 //Jævnfør foreningens vedtægter kan der ved skader/mangler kan der rettes erstatningskrav til den/de pågældende brugere af fælleshuset. Ved skader/mangler er det op til bestyrelsen om dette skal udbedres af skadeforvolder, bestyrelsen eller en af bestyrelsen udpeget tredjepart afhængig af skaden/manglens art.//

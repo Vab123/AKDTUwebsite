@@ -1,4 +1,4 @@
-<WRAP noprint><adm information>Siden her er lavet til at blive eksporteret til PDF, med knappen "Export to PDF", oppe til venstre</adm></WRAP>
+<printable></printable>
 
 {{ :skrivelser:skilt-rygning-forbudt.png?nolink |}}
 ===== Rygning forbudt i opgangene =====

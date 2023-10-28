@@ -1,5 +1,6 @@
+<printable></printable>
+
 =====Ren- og vedligeholdelse af egne arealer=====
-<WRAP noprint><adm information>Siden her er lavet til at blive eksporteret til PDF, med knappen "Export to PDF", oppe til venstre</adm></WRAP>
 
 Kære andelshaver,
 

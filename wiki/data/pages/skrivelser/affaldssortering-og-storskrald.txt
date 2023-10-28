@@ -1,5 +1,6 @@
+<printable></printable>
+
 =====Affaldssortering og storskrald=====
-<WRAP noprint><adm information>Siden her er lavet til at blive eksporteret til PDF, med knappen "Export to PDF", oppe til venstre</adm></WRAP>
 Senest opdateret: November 2018
 
 Foreningen har kildesortering af affald i form af følgende containere:
