@@ -5,8 +5,5 @@
 		</a>
 	</div>
 	<?php tpl_searchform() ?>
-	<div style="margin-top:10px;">
-		<a href="?do=export_pdf&book_title=<?php global $INFO; echo rawurlencode($INFO['meta']['title']); ?>"><input style="padding: 5px; border: 3px solid white; background: transparent; color: white; font-weight: bold; text-transform: uppercase; font-family: sans-serif; cursor: pointer;" type="button" value="Export to PDF"></a>
-	</div>
 	<?php tpl_includeFile('sidebarheader.html') ?>
 </div>
