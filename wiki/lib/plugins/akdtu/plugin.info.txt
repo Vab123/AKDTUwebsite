@@ -1,0 +1,7 @@
+base    akdtu
+author  Victor Brandsen
+email   vic.bra@hotmail.com
+date    2023-10-28
+name    AKDTU plugin
+desc    Inserts an infobox describing that the page can be printed into the html of the document for every <printable> it encounters
+url     https://www.dokuwiki.org/devel:syntax_plugins
