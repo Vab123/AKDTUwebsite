@@ -34,8 +34,8 @@ function AKDTU_leje_af_fælleshus_beboer_mail_settings() {
 		<h2>Mail der sendes til beboeren når ansøgninger om leje af fælleshus besvares.</h2>
 		<hr>
 		<nav class="nav-tab-wrapper">
-			<a href="?page=akdtu-plugin-mail-leje-af-fælleshus-beboer&tab=settings" class="nav-tab <?php if ($tab === 'settings') : ?>nav-tab-active<?php endif; ?>">Indstillinger</a>
-			<a href="?page=akdtu-plugin-mail-leje-af-fælleshus-beboer&tab=test" class="nav-tab <?php if ($tab === 'test') : ?>nav-tab-active<?php endif; ?>">Afprøv</a>
+			<a href="?page=akdtu-plugin-leje-af-fælleshus-beboer-mail-settings&tab=settings" class="nav-tab <?php if ($tab === 'settings') : ?>nav-tab-active<?php endif; ?>">Indstillinger</a>
+			<a href="?page=akdtu-plugin-leje-af-fælleshus-beboer-mail-settings&tab=test" class="nav-tab <?php if ($tab === 'test') : ?>nav-tab-active<?php endif; ?>">Afprøv</a>
 		</nav>
 		<?php if ($tab == 'settings') : ?>
 			<hr>

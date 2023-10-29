@@ -28,8 +28,8 @@ function AKDTU_havedag_tilmelding_bestyrelse_mail_settings() {
 		<h2>Mail der sendes til bestyrelsen når en beboer tilmelder eller afmelder sig en havedag.</h2>
 		<hr>
 		<nav class="nav-tab-wrapper">
-			<a href="?page=akdtu-plugin-mail-havedag-tilmelding-bestyrelse&tab=settings" class="nav-tab <?php if ($tab === 'settings') : ?>nav-tab-active<?php endif; ?>">Indstillinger</a>
-			<a href="?page=akdtu-plugin-mail-havedag-tilmelding-bestyrelse&tab=test" class="nav-tab <?php if ($tab === 'test') : ?>nav-tab-active<?php endif; ?>">Afprøv</a>
+			<a href="?page=akdtu-plugin-havedag-tilmelding-bestyrelse-mail-settings&tab=settings" class="nav-tab <?php if ($tab === 'settings') : ?>nav-tab-active<?php endif; ?>">Indstillinger</a>
+			<a href="?page=akdtu-plugin-havedag-tilmelding-bestyrelse-mail-settings&tab=test" class="nav-tab <?php if ($tab === 'test') : ?>nav-tab-active<?php endif; ?>">Afprøv</a>
 		</nav>
 		<?php if ($tab == 'settings') : ?>
 			<hr>
