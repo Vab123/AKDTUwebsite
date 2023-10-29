@@ -9,14 +9,12 @@ li, td, p, span, blockquote, center, nav, footer, header, a, pre {
 }
 
 b, strong {
-	font-family: robotolight!important;
-	font-style: bold!important;
+	font-family: robotocondensed!important;
 	letter-spacing: .066em!important;
 }
 
 h1, h2, h3 {
-	font-family: roboto!important;
-	font-style: bold!important;
+	font-family: robotomedium!important;
 }
 
 h1,h2,h3,h4,h5,h6{

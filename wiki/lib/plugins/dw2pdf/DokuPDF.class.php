@@ -57,9 +57,46 @@ class DokuPDF extends \Mpdf\Mpdf
                 'format' => $format,
                 'default_font_size' => $fontsize,
                 'ImageProcessorClass' => DokuImageProcessorDecorator::class,
-                'tempDir' => _MPDF_TEMP_PATH //$conf['tmpdir'] . '/tmp/dwpdf'
+                'tempDir' => _MPDF_TEMP_PATH, //$conf['tmpdir'] . '/tmp/dwpdf'
+				'fontdata' => ((new Mpdf\Config\FontVariables())->getDefaults())['fontdata'] + [ // lowercase letters only in font key
+					'roboto' => [
+						'R' => 'Roboto-Regular.ttf',
+						'I' => 'Roboto-Italic.ttf',
+					],
+					'robotolight' => [
+						'R' => 'Roboto-Light.ttf',
+						'I' => 'Roboto-LightItalic.ttf',
+					],
+					'robotoblack' => [
+						'R' => 'Roboto-Black.ttf',
+						'I' => 'Roboto-BlackItalic.ttf',
+					],
+					'robotobold' => [
+						'R' => 'Roboto-Bold.ttf',
+						'I' => 'Roboto-BoldItalic.ttf',
+					],
+					'robotoboldcondensed' => [
+						'R' => 'Roboto-BoldCondensed.ttf',
+						'I' => 'Roboto-BoldCondensedItalic.ttf',
+					],
+					'robotomedium' => [
+						'R' => 'Roboto-Medium.ttf',
+						'I' => 'Roboto-MediumItalic.ttf',
+					],
+					'robotothin' => [
+						'R' => 'Roboto-Thin.ttf',
+						'I' => 'Roboto-ThinItalic.ttf',
+					],
+					'robotocondensed' => [
+						'R' => 'Roboto-Condensed.ttf',
+						'I' => 'Roboto-CondensedItalic.ttf',
+					]
+				],
+				'default_font' => 'roboto',
             )
         );
+
+		$this->AddFontDirectory(__DIR__ . '/tpl/fonts/');;
 
         $this->autoScriptToLang = true;
         $this->baseScript = 1;

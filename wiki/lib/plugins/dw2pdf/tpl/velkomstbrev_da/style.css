@@ -4,19 +4,22 @@
 /* START OF AKDTU STYLE */
 /* Adding !important at the end, just in case */
 
+@page{
+	margin: 3cm 3cm 3cm 3cm!important;
+	line-height: 1.2em;
+}
+
 li, td, p, span, blockquote, center, nav, footer, header, a, pre {
 	font-family: robotolight!important;
 }
 
 b, strong {
-	font-family: robotolight!important;
-	font-style: bold!important;
+	font-family: robotocondensed!important;
 	letter-spacing: .066em!important;
 }
 
 h1, h2, h3 {
-	font-family: roboto!important;
-	font-style: bold!important;
+	font-family: robotomedium!important;
 }
 
 h1,h2,h3,h4,h5,h6{
