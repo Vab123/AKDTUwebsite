@@ -1,7 +1,5 @@
 <?php
 
-require_once WP_PLUGIN_DIR . '/AKDTU/functions/display_apartments.php';
-
 function fjern_tilmelding_til_havedag_dashboard_widget() {
 	$scope = 'future';
 	$search_limit = 4;

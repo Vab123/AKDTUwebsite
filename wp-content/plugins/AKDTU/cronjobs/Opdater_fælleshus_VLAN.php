@@ -2,13 +2,8 @@
 
 function send_opdater_fælleshus_vlan($debug = false) {
 	global $wpdb;
-	require_once WP_PLUGIN_DIR . '/AKDTU/definitions.php';
 
 	if (FÆLLESHUS_VLAN_TO != '' || $debug) {
-		require_once WP_PLUGIN_DIR . '/AKDTU/functions/vlan.php';
-		require_once WP_PLUGIN_DIR . '/AKDTU/functions/send_mail.php';
-		require_once WP_PLUGIN_DIR . '/AKDTU/functions/users.php';
-
 
 		try {
 			$current_state = get_fælleshus_vlan();
@@ -29,10 +24,7 @@ function send_opdater_fælleshus_vlan($debug = false) {
 
 		if (count($event_ids) > 0) {
 			$event_owners = array_map(function ($event_id) {
-				return get_user_by('id', em_get_event($event_id, 'event_id')->owner);
-			}, $event_ids);
-			$event_owners = array_map(function ($event_owner) {
-				return (is_apartment_from_username($event_owner->user_login) ? 'lejlighed ' . apartment_number_from_username($event_owner->user_login) : 'Bestyrelsen');
+				return (is_apartment_from_id(em_get_event($event_id, 'event_id')->owner) ? 'lejlighed ' . apartment_number_from_id(em_get_event($event_id, 'event_id')->owner) : 'Bestyrelsen');
 			}, $event_owners);
 		} else {
 			$event_owners = array('Ingen');

@@ -1,5 +1,4 @@
 <?php
-require_once WP_PLUGIN_DIR . '/AKDTU/functions/notice.php';
 
 if (isset($_REQUEST['action'])) {
 	if ($_REQUEST['action'] == 'book_fælleshus' && isset($_REQUEST['start_date']) && isset($_REQUEST['end_date']) && isset($_REQUEST['type'])) {
@@ -173,7 +172,7 @@ function book_fælleshus() {
 
 		return book_fælleshus_bestyrelse($event_owner, $title_da, $title_en);
 	} elseif ($_REQUEST['type'] == 'beboer') {
-		$event_owner = get_user_by('login', 'lejl' . str_pad($_REQUEST['user'],3,"0",STR_PAD_LEFT));
+		$event_owner = get_user_by('login', username_from_apartment_number($_REQUEST['user']));
 		$title = '#_RENTAL_BEFORE_APARTMENTNUM ' . str_pad($_REQUEST['user'],3,"0",STR_PAD_LEFT) . ' #_RENTAL_AFTER_APARTMENTNUM';
 
 		return book_fælleshus_beboer($event_owner, $title);

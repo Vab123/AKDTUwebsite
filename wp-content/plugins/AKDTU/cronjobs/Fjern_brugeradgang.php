@@ -1,12 +1,9 @@
 <?php
 
 function send_fjern_brugeradgang($debug = false) {
-	require_once WP_PLUGIN_DIR . '/AKDTU/definitions.php';
 	global $wpdb;
 
 	if (FJERNBRUGERADGANG_TO != '' || $debug) {
-		require_once WP_PLUGIN_DIR . '/AKDTU/functions/delete_users.php';
-		require_once WP_PLUGIN_DIR . '/AKDTU/functions/send_mail.php';
 
 		// Get current time
 		$current_time = new DateTime("now", new DateTimeZone('Europe/Copenhagen'));
@@ -19,7 +16,7 @@ function send_fjern_brugeradgang($debug = false) {
 		}
 
 		foreach ($res as $apartment_num) {
-			$user_login = 'lejl' . str_pad($apartment_num, 3, "0", STR_PAD_LEFT);
+			$user_login = username_from_apartment_number($apartment_num);
 			$user = get_user_by('login', $user_login);
 			$user_id = $user->ID;
 

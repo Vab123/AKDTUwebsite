@@ -1,7 +1,5 @@
 <?php
 
-require_once WP_PLUGIN_DIR . '/AKDTU/functions/display_apartments.php';
-
 function add_boardmember_widget() { ?>
 	<form action="" method="post">
 		<input type="hidden" name="action" value="add_boardmember" />

@@ -45,13 +45,6 @@ function set_vlan($vlan_id, $state) {
 }
 
 /**
- * @param int|bool $state Desired state of vlan
- */
-function set_fælleshus_vlan($state) {
-	return set_vlan(624, $state);
-}
-
-/**
  * @param int $vlan_id ID of the VLAN to retrieve info
  */
 function get_vlan($vlan_id) {
@@ -73,6 +66,16 @@ function get_vlan($vlan_id) {
 	return $data;
 }
 
+/**
+ * @param int|bool $state Desired state of vlan
+ */
+function set_fælleshus_vlan($state) {
+	return set_vlan(624, $state);
+}
+
+/**
+ * @param
+ */
 function get_fælleshus_vlan() {
 	return get_vlan(624);
 }

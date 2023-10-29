@@ -1,9 +1,7 @@
 <?php
-require_once WP_PLUGIN_DIR . '/AKDTU/functions/notice.php';
 
 if (isset($_REQUEST['action'])) {
 	if ($_REQUEST['action'] == 'fælleshus_vlan_tænd') {
-		require_once WP_PLUGIN_DIR . '/AKDTU/functions/vlan.php';
 		try {
 			$result = set_fælleshus_vlan(1);
 		} catch (Exception $e) {

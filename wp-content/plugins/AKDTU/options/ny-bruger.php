@@ -228,8 +228,6 @@ function AKDTU_ny_bruger_mail_settings() {
 				</table>
 			</form>
 		<?php elseif ($tab == 'test') :
-			require_once WP_PLUGIN_DIR . '/AKDTU/functions/send_mail.php';
-			require_once WP_PLUGIN_DIR . '/AKDTU/definitions.php';
 
 			$_POST['apartment_number'] = 2;
 			$user_login = 'lejl002';

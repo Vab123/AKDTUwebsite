@@ -1,7 +1,5 @@
 <?php
 
-require_once WP_PLUGIN_DIR . '/AKDTU/functions/display_apartments.php';
-
 function fælleshus_juster_pris_widget() { ?>
 	<form action="" method="post">
 		<input type="hidden" name="action" value="fælleshus_juster_pris" />

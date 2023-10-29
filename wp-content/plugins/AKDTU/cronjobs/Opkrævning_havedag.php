@@ -1,10 +1,8 @@
 <?php
 
 function send_opkrævning_havedag($debug = false) {
-	require_once WP_PLUGIN_DIR . '/AKDTU/definitions.php';
 
 	if (HAVEDAG_TO != '' || HAVEDAG_WARNING_TO != '' || $debug) {
-		require_once WP_PLUGIN_DIR . '/AKDTU/functions/send_mail.php';
 		global $wpdb;
 
 		$send_mail_days_before = HAVEDAG_DAYS;
@@ -67,13 +65,10 @@ function send_opkrævning_havedag($debug = false) {
 				}
 			}
 
-			$all_users = array();
+			$all_users = all_apartments();
 			$status = array();
-			for ($floor = 0; $floor < 3; $floor++) {
-				for ($apartment = 1; $apartment < 25; $apartment++) {
-					array_push($all_users, $floor * 100 + $apartment);
-					$status[$floor * 100 + $apartment] = false;
-				}
+			foreach ($all_users as $apartment) {
+				$status[$apartment] = false;
 			}
 			$res = $wpdb->get_col('SELECT showed_up FROM wp_em_tilmeldinger WHERE event_id = ' . $events[0]->event_id);
 			$res = array_map(function ($a) {
@@ -82,8 +77,10 @@ function send_opkrævning_havedag($debug = false) {
 			foreach ($res as $arr) {
 				foreach ($arr as $user_id => $stat) {
 					$user_login = get_user_by('id', $user_id)->user_login;
-					if (substr($user_login, 0, 4) == "lejl") {
-						$status[ltrim(substr($user_login, 4, 3), "0")] = (isset($status[ltrim(substr($user_login, 4, 3), "0")]) ? ($stat || $status[ltrim(substr($user_login, 4, 3), "0")]) : $stat);
+
+
+					if (is_apartment_from_username($user_login)) {
+						$status[apartment_number_from_username($user_login)] = (isset($status[apartment_number_from_username($user_login)]) ? ($stat || $status[apartment_number_from_username($user_login)]) : $stat);
 					}
 				}
 			}
@@ -108,8 +105,9 @@ function send_opkrævning_havedag($debug = false) {
 			$it = 1;
 			foreach ($users_that_should_pay as $index => $apartment) {
 				$replaces = array(
-					'#APT' => ($users_that_should_pay_archive[$index] ? $apartment . ' (Tidligere beboer)' : $apartment ),
-					'#PRICE' => $price
+					'#APT' => $apartment . ($users_that_should_pay_archive[$index] ? ' (Tidligere beboer)' : '' ),
+					'#PRICE' => $price,
+					'#BOARDMEMBER' => (is_boardmember_from_apartment_number($apartment) ? ' - <u>Bestyrelsesmedlem</u>' : '')
 				);
 
 				$payment_info .= str_replace(array_keys($replaces), $replaces, nl2br(HAVEDAG_FORMAT));
@@ -140,7 +138,7 @@ function send_opkrævning_havedag($debug = false) {
 			if (($send_mail_days_before >= 0 && $diff->days == $send_mail_days_before) || $debug) {
 				if ($debug) {
 					if ($send_mail_days_before >= 0) {
-						echo '<h3>Varselsmail - Sendes automatisk ' . $ago->modify($send_mail_days_before . " days")->format("Y-m-d") . '</h3>';
+						echo '<h3>Opkrævningsmail - Sendes automatisk ' . $ago->modify($send_mail_days_before . " days")->format("Y-m-d") . '</h3>';
 					} else {
 						echo '<h3>Opkrævningsmail - Sendes IKKE automatisk, grundet afsendelsestidspunkt</h3>';
 					}

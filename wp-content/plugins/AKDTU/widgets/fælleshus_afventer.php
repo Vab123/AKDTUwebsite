@@ -1,7 +1,6 @@
 <?php
 
 function fælleshus_afventer_dashboard_widget() {
-	require_once WP_PLUGIN_DIR . '/AKDTU/functions/users.php';
 
 	$scope = 'all';
 	$search_limit = 20;
@@ -38,9 +37,8 @@ function fælleshus_afventer_dashboard_widget() {
 							echo 'class="alternate"';
 						};
 						$row++; ?>>
-						<td style="vertical-align:middle"><?php $event_owner = get_user_by('id', $event->event_owner)->user_login;
-															if (is_apartment_from_username($event_owner)) {
-																echo "Lejl. " . apartment_number_from_username($event_owner);
+						<td style="vertical-align:middle"><?php if (is_apartment_from_id($event->event_owner)) {
+																echo "Lejl. " . apartment_number_from_id($event->event_owner);
 															} else {
 																echo "Bestyrelsen";
 															}; ?></td>

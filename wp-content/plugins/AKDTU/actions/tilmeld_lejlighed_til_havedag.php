@@ -1,5 +1,4 @@
 <?php
-require_once WP_PLUGIN_DIR . '/AKDTU/functions/notice.php';
 
 if (isset($_REQUEST['action'])) {
 	if ($_REQUEST['action'] == 'tilmeld_havedag' && isset($_REQUEST['havedag_event_id']) && isset($_REQUEST['havedag_dato'])){
@@ -11,8 +10,7 @@ function tilmeld_lejlighed_til_havedag(){
 	global $wpdb;
 	if ($_REQUEST['user'] > 0) {
 		$apartment_num = $_REQUEST['user'];
-		$user = get_user_by('login', 'lejl' . str_pad($_REQUEST['user'],3,"0",STR_PAD_LEFT));
-		$user_id = $user->ID;
+		$user_id = id_from_apartment_number($apartment_num);
 
 		if ($wpdb->get_var("SELECT COUNT(*) FROM " . EM_BOOKINGS_TABLE . " WHERE event_id=" . $_REQUEST['havedag_event_id'] . " AND person_id=" . $user_id) > 0 . " AND status=1") {
 			new AKDTU_notice('warning','Lejlighed ' . $apartment_num . ' var allerede tilmeldt havedagen. Tilmelder igen.');

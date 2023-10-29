@@ -1,7 +1,5 @@
 <?php
 
-require_once WP_PLUGIN_DIR . '/AKDTU/functions/fælleshus.php';
-
 function fælleshus_total_widget() {
 	$start_year = 2022;
 	$years_ahead_to_show = ((new DateTime)->format('m') > 6 ? 1 : 0);

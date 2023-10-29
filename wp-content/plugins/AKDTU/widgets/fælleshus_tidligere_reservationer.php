@@ -1,7 +1,6 @@
 <?php
 
 function fælleshus_tidligere_reservationer_dashboard_widget() {
-	require_once WP_PLUGIN_DIR . '/AKDTU/functions/users.php';
 
 	$scope = 'past';
 	$search_limit = 20;
@@ -20,12 +19,14 @@ function fælleshus_tidligere_reservationer_dashboard_widget() {
 		<table class="widefat">
 			<colgroup>
 				<col span="1" style="width: 20%">
-				<col span="1" style="width: 80%">
+				<col span="1" style="width: 60%">
+				<col span="1" style="width: 20%">
 			</colgroup>
 			<thead>
 				<tr>
 					<th>Lejer</th>
 					<th>Tidspunkt</th>
+					<th>Pris</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -35,20 +36,20 @@ function fælleshus_tidligere_reservationer_dashboard_widget() {
 												echo 'class="alternate"';
 											};
 											$row++; ?>>
-						<td style="vertical-align:middle"><?php $event_owner = get_user_by('id', $event->event_owner)->user_login;
-															if (is_apartment_from_username($event_owner)) {
-																echo "Lejl. " . apartment_number_from_username($event_owner) . (is_archive_user_from_username($event_owner) ? ' (TB)' : '');
-															} elseif (is_vicevært_from_username($event_owner)) {
+						<td style="vertical-align:middle"><?php if (is_apartment_from_id($event->event_owner)) {
+																echo "Lejl. " . apartment_number_from_id($event->event_owner) . (is_archive_user_from_id($event->event_owner) ? ' (TB)' : '');
+															} elseif (is_vicevært_from_id($event->event_owner)) {
 																echo "Vicevært";
 															} else {
 																echo "Bestyrelsen";
 															}; ?></td>
 						<td style="vertical-align:middle"><?php
 															$start_date = new DateTime($event->event_start_date . " " . $event->event_start_time, new DateTimeZone('UTC'));
-															$start_date = $start_date->format("d-m-y H:i");
 															$end_date = new DateTime($event->event_end_date . " " . $event->event_end_time, new DateTimeZone('UTC'));
-															$end_date = $end_date->format("d-m-y H:i");
-															echo $start_date . " - " . $end_date; ?></td>
+
+															echo $start_date->format("d-m-y H:i") . " - " . $end_date->format("d-m-y H:i"); ?></td>
+						<td style="vertical-align:middle"><?php
+															echo calc_rental_cost($start_date,$end_date,$event->owner); ?>,00 kr.</td>
 					</tr>
 				<?php endforeach; ?>
 			</tbody>

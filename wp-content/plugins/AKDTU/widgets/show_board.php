@@ -1,19 +1,7 @@
 <?php
 
 function show_board_widget() {
-	require_once WP_PLUGIN_DIR . '/AKDTU/functions/users.php';
-	$board_members = array();
-
-	for ($floor = 0; $floor <= 2; $floor++) {
-		for ($apartment = 1; $apartment <= 24; $apartment++) {
-
-			$user = SwpmMemberUtils::get_user_by_user_name('lejl' . str_pad(($floor * 100 + $apartment), 3, "0", STR_PAD_LEFT));
-			$level = SwpmMembershipLevelUtils::get_membership_level_name_by_level_id($user->membership_level);
-			if ($level == "Beboerprofil til bestyrelsesmedlem") {
-				$board_members[] = $user;
-			}
-		}
-	}
+	$board_members = array_map(function($username) { return SwpmMemberUtils::get_user_by_user_name($username);}, all_boardmember_usernames());
 
 	if (count($board_members) > 0) : ?>
 		<table class="widefat">

@@ -1,9 +1,20 @@
 <?php function apartments_dropdown() { ?>
 	<select name="user">
-		<?php for ($floor = 0; $floor < 3; $floor++) {
-			for ($apartment = 1; $apartment < 25; $apartment++) {
-				echo '<option value="' . ($apartment + 100 * $floor) . '">' . ($apartment + 100 * $floor) . '</option>';
-			}
+		<?php foreach (all_apartments() as $apartment) {
+			echo '<option value="' . ($apartment) . '">' . ($apartment) . '</option>';
 		} ?>
 	</select>
-<?php } ?>
+<?php }
+
+function all_apartments() {
+	$apartments = array();
+
+	for ($floor = 0; $floor < 3; $floor++) {
+		for ($apartment = 100 * $floor + 1; $apartment < 100 * $floor + 25; $apartment++) {
+			$apartments[] = $apartment;
+		}
+	}
+
+	return $apartments;
+}
+?>

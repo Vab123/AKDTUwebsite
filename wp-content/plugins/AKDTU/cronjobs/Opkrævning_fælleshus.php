@@ -1,11 +1,8 @@
 <?php
 
 function send_opkrævning_fælleshus($debug = false) {
-	require_once WP_PLUGIN_DIR . '/AKDTU/definitions.php';
 
 	if (FÆLLESHUS_TO != '' || $debug) {
-		require_once WP_PLUGIN_DIR . '/AKDTU/functions/fælleshus.php';
-		require_once WP_PLUGIN_DIR . '/AKDTU/functions/send_mail.php';
 		global $wpdb;
 
 		if ((new DateTime('now', new DateTimeZone('Europe/Copenhagen')))->format('j') == '1' || $debug) {
@@ -41,10 +38,10 @@ function send_opkrævning_fælleshus($debug = false) {
 			if ($amnt_rentals > 0) {
 				$it = 1;
 
-				foreach ($final_price as $apartment => $price) {
+				foreach ($final_price as $username => $price) {
 					if ($price > 0) {
 						$replaces = array(
-							'#APT' => (substr($apartment, -8) == '_archive' ? substr($apartment, 0, strpos($apartment, '_'))  . ' (Tidligere beboer)' : $apartment . (in_array($apartment, $moved_users) ? ' (Ny beboer)' : '')),
+							'#APT' => apartment_number_from_username($username) . (is_archive_user_from_username($username) ? ' (Tidligere beboer)' : (in_array(apartment_number_from_username($username), $moved_users) ? ' (Ny beboer)' : '')),
 							'#PRICE' => $price
 						);
 

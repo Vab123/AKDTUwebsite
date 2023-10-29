@@ -1,7 +1,5 @@
 <?php
 
-require_once WP_PLUGIN_DIR . '/AKDTU/functions/fælleshus.php';
-
 function fælleshus_vis_foreløbig_pris_widget() {
 	$month_start = new DateTime("first day of this month", new DateTimeZone('Europe/Copenhagen'));
 	$month_end = new DateTime("last day of this month", new DateTimeZone('Europe/Copenhagen'));
@@ -33,14 +31,14 @@ function fælleshus_vis_foreløbig_pris_widget() {
 			</thead>
 			<tbody>
 				<?php $row = 0;
-				foreach ($final_price as $apartment => $price) : ?>
+				foreach ($final_price as $username => $price) : ?>
 					<tr <?php if ($row % 2 == 0) {
 							echo 'class="alternate"';
 						};
 						$row++; ?>>
-						<td><?php echo (substr($apartment, -8) == '_archive' ? substr($apartment, 0, strpos($apartment, '_'))  . ' (TB)' : $apartment); ?></td>
-						<td><?php echo $price_to_pay[$apartment]; ?> kr.</td>
-						<td><?php echo (isset($price_adjustments[$apartment]) ? $price_adjustments[$apartment] : 0); ?> kr.</td>
+						<td><?php echo apartment_number_from_username($username) . (is_archive_user_from_username($username) ? ' (TB)' : ''); ?></td>
+						<td><?php echo $price_to_pay[$username]; ?> kr.</td>
+						<td><?php echo (isset($price_adjustments[apartment_number_from_username($username)]) ? $price_adjustments[apartment_number_from_username($username)] : 0); ?> kr.</td>
 						<td><?php echo $price; ?> kr.</td>
 					</tr>
 				<?php endforeach; ?>

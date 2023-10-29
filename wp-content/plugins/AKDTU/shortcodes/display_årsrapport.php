@@ -1,9 +1,5 @@
 <?php
 
-if (!function_exists('AKDTU_display_list')){
-	require_once 'shortcodes/AKDTU_display_list.php';
-}
-
 add_shortcode("AKDTU-display-årsrapporter", "AKDTU_display_årsrapport");
 
 function AKDTU_display_årsrapport( $atts ){

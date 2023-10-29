@@ -1,5 +1,4 @@
 <?php
-require_once WP_PLUGIN_DIR . '/AKDTU/functions/notice.php';
 
 if (isset($_REQUEST['action'])) {
 	if ($_REQUEST['action'] == 'afmeld_havedag' && isset($_REQUEST['havedag_event_id']) && isset($_REQUEST['havedag_dato'])){
@@ -11,8 +10,7 @@ function afmeld_havedag(){
 	global $wpdb;
 	if ($_REQUEST['user'] > 0) {
 		$apartment_num = $_REQUEST['user'];
-		$user = get_user_by('login', 'lejl' . str_pad($_REQUEST['user'],3,"0",STR_PAD_LEFT));
-		$user_id = $user->ID;
+		$user_id = id_from_apartment_number($_REQUEST['user']);
 
 		$event = em_get_event($_REQUEST['havedag_event_id'],'event_id');
 		$bookings = $event->get_bookings();

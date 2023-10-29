@@ -1,11 +1,8 @@
 <?php
 
 function send_fjern_lejeradgang($debug = false) {
-	require_once WP_PLUGIN_DIR . '/AKDTU/definitions.php';
 
 	if (FJERNLEJERADGANG_TO != '' || $debug) {
-		require_once WP_PLUGIN_DIR . '/AKDTU/functions/delete_users.php';
-		require_once WP_PLUGIN_DIR . '/AKDTU/functions/send_mail.php';
 
 		global $wpdb;
 
@@ -21,7 +18,7 @@ function send_fjern_lejeradgang($debug = false) {
 		}
 
 		foreach ($res as $apartment_num) {
-			$realuser_login = 'lejl' . str_pad($apartment_num, 3, "0", STR_PAD_LEFT);
+			$realuser_login = username_from_apartment_number($apartment_num);
 			$user_login = $realuser_login . '_lejer';
 			$user = get_user_by('login', $user_login);
 			$user_id = $user->ID;

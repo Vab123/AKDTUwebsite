@@ -1,5 +1,4 @@
 <?php
-require_once WP_PLUGIN_DIR . '/AKDTU/functions/notice.php';
 
 if (isset($_REQUEST['action'])) {
 	if ($_REQUEST['action'] == 'add_havedag' && isset($_REQUEST['danish_name']) && isset($_REQUEST['danish_post_content']) && isset($_REQUEST['english_name']) && isset($_REQUEST['english_post_content']) && isset($_REQUEST['gardenday_dates']) && isset($_REQUEST['latest_signup']) && isset($_REQUEST['spaces']) && isset($_REQUEST['max_spaces']) && isset($_REQUEST['publish_date'])) {
