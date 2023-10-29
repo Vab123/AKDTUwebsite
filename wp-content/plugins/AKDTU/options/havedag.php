@@ -37,7 +37,7 @@ function AKDTU_havedag_opkrævning_mail_settings() {
 	<div class="wrap">
 		<!-- Print the page title -->
 		<h1>Mailindstillinger</h1>
-		<h2>Mail der sendes med opkrævninger for leje af havedaget</h2>
+		<h2>Mail der sendes med opkrævninger for manglende deltagelse på havedage</h2>
 		<hr>
 		<nav class="nav-tab-wrapper">
 			<a href="?page=akdtu-plugin-havedag-opkrævning-settings&tab=settings" class="nav-tab <?php if ($tab === 'settings') : ?>nav-tab-active<?php endif; ?>">Indstillinger</a>
@@ -118,9 +118,10 @@ function AKDTU_havedag_opkrævning_mail_settings() {
 							<th scope="row">Opkrævningsmail - Format for info om betaling</th>
 							<td>
 								<textarea type="text" name="AKDTU_HAVEDAG_FORMAT" rows="5" , cols="50"><?php echo stripcslashes(get_option('AKDTU_HAVEDAG_FORMAT')); ?></textarea>
-								<p>Dette gentages for hver lejlighed, der har lejet havedaget den foregående måned, med linjeskift mellem.</p>
+								<p>Dette gentages for hver lejlighed, der skal opkræves for manglende deltagelse i den seneste havedag, med linjeskift mellem.</p>
 								<p><code>#APT</code> erstattes med lejlighedsnummer. Hvis der efterfølgende er flyttet en ny beboer ind står dette også herefter som <code>(Tidligere beboer)</code>, hvis relevant.</p>
 								<p><code>#PRICE</code> erstattes med pris.</p>
+								<p><code>#BOARDMEMBER</code> erstattes med <code> - Bestyrelsesmedlem</code>, hvis lejligheden tilhører et bestyrelsesmedlem.</p>
 							</td>
 						</tr>
 						<tr>
@@ -202,9 +203,10 @@ function AKDTU_havedag_opkrævning_mail_settings() {
 							<th scope="row">Varselsmail - Format for info om betaling</th>
 							<td>
 								<textarea type="text" name="AKDTU_HAVEDAG_WARNING_FORMAT" rows="5" , cols="50"><?php echo stripcslashes(get_option('AKDTU_HAVEDAG_WARNING_FORMAT')); ?></textarea>
-								<p>Dette gentages for hver lejlighed, der har lejet havedaget den foregående måned, med linjeskift mellem.</p>
+								<p>Dette gentages for hver lejlighed, der skal opkræves for manglende deltagelse i den seneste havedag, med linjeskift mellem.</p>
 								<p><code>#APT</code> erstattes med lejlighedsnummer. Hvis der efterfølgende er flyttet en ny beboer ind står dette også herefter som <code>(Tidligere beboer)</code>, hvis relevant.</p>
 								<p><code>#PRICE</code> erstattes med pris.</p>
+								<p><code>#BOARDMEMBER</code> erstattes med <code> - Bestyrelsesmedlem</code>, hvis lejligheden tilhører et bestyrelsesmedlem.</p>
 							</td>
 						</tr>
 						<tr>
