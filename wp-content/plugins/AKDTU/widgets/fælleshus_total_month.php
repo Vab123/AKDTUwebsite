@@ -28,9 +28,9 @@ function fælleshus_total_month_widget() {
 				$actual_month = (12 * max(ceil($show_months_ahead / 12), ceil($show_months_ago / 12)) + $current_month + $month - 1) % 12 + 1;
 				$actual_year = $current_year + floor(($current_month + $month - 1) / 12);
 
-				$month_start = new DateTime("01-" . str_pad($actual_month, 2, "0", STR_PAD_LEFT) . "-" . $actual_year . " 00:00:00", new DateTimeZone('Europe/Copenhagen'));
-				$month_end = new DateTime("01-" . str_pad($actual_month, 2, "0", STR_PAD_LEFT) . "-" . $actual_year . " 00:00:00", new DateTimeZone('Europe/Copenhagen'));
-				$month_end->modify('last day of this month');
+				$month_start = new DateTime("05-" . str_pad($actual_month, 2, "0", STR_PAD_LEFT) . "-" . $actual_year . " 12:00:00", new DateTimeZone('Europe/Copenhagen')); ## Date set to 05-xx-xxxx for a reason
+				$month_end = new DateTime("05-" . str_pad($actual_month, 2, "0", STR_PAD_LEFT) . "-" . $actual_year . " 12:00:00", new DateTimeZone('Europe/Copenhagen'));
+				$month_end->modify('last day of this month'); ## Date set to 05-xx-xxxx for a reason
 
 				$price_to_pay = get_price_to_pay($month_start, $month_end);
 				$price_adjustments = get_price_adjustments($month_start, $month_end);
