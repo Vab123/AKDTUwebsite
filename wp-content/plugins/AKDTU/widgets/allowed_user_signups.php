@@ -11,8 +11,8 @@ function allowed_user_signups_widget() {
 			<colgroup>
 				<col span="1" style="width: 10%" />
 				<col span="1" style="width: 15%" />
-				<col span="1" style="width: 30%" />
-				<col span="1" style="width: 30%" />
+				<col span="1" style="width: 40%" />
+				<col span="1" style="width: 20%" />
 				<col span="1" style="width: 15%" />
 			</colgroup>
 			<thead>
