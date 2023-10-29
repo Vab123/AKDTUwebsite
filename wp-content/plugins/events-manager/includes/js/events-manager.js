@@ -922,7 +922,10 @@ function update_price(start_date,end_date){
 				var price = 100 + daysDiff*100;
 				price_element.innerHTML = (AKDTU_price_mark_pre === undefined ? "" : AKDTU_price_mark_pre + " ") + price + (AKDTU_price_mark_post === undefined ? " DKK" : " " + AKDTU_price_mark_post);
 
-				month_element.innerHTML = AKDTU_months[enddate.getMonth()];
+				month_after_enddate = (new Date(enddate.getTime()));
+				month_after_enddate.setDate(1);
+				month_after_enddate.setMonth(enddate.getMonth()+1);
+				month_element.innerHTML = AKDTU_months[month_after_enddate.getMonth()];
 			} else {
 				price_element.innerHTML = (AKDTU_price_mark_invalid === undefined ? "INVALID DATES" : AKDTU_price_mark_invalid);
 				month_element.innerHTML = (AKDTU_price_mark_invalid_month === undefined ? "INVALID DATES" : AKDTU_price_mark_invalid_month);
