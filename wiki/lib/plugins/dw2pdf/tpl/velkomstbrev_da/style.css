@@ -14,8 +14,7 @@ li, td, p, span, blockquote, center, nav, footer, header, a, pre {
 }
 
 b, strong {
-	font-family: robotocondensed!important;
-	letter-spacing: .066em!important;
+	font-family: robotolight!important;
 }
 
 h1, h2, h3 {
