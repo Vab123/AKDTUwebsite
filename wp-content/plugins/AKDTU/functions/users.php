@@ -1,6 +1,15 @@
 <?php
 
-
+############################################################
+#
+# Apartment number, padded with zeros
+#
+###
+function padded_apartment_number_from_apartment_number($apartment) {
+	## Finds the apartment number from a username for an apartment-, archive-, or renter user
+	return str_pad($apartment,3,"0",STR_PAD_LEFT);
+}
+############################################################
 
 ############################################################
 #
@@ -15,6 +24,11 @@ function apartment_number_from_username($username) {
 function apartment_number_and_type_from_username($username) {
 	## Finds the apartment number from a username for an apartment-, archive-, or renter user, including the suffix if it is an archive-, or renter user
 	return ltrim(substr($username,4),"0");
+}
+#
+function padded_apartment_number_from_username($username) {
+	## Finds the apartment number from a username for an apartment-, archive-, or renter user
+	return padded_apartment_number_from_apartment_number(apartment_number_from_username($username));
 }
 ############################################################
 
@@ -33,6 +47,11 @@ function apartment_number_from_id($id) {
 function apartment_number_and_type_from_id($id) {
 	## Finds the apartment number from an id for an apartment-, archive-, or renter user, including the suffix if it is an archive-, or renter user
 	return apartment_number_and_type_from_username(username_from_id($id));
+}
+#
+function padded_apartment_number_from_id($id) {
+	## Finds the apartment number from an id for an apartment-, archive-, or renter user
+	return padded_apartment_number_from_apartment_number(apartment_number_from_id($id));
 }
 ############################################################
 
@@ -224,6 +243,39 @@ function all_boardmember_usernames() {
 function all_boardmember_ids() {
 	## Lists the usernames of all board members
 	return array_map(function($apartment_number) {return id_from_apartment_number($apartment_number);}, all_boardmember_apartments());
+}
+############################################################
+
+
+
+############################################################
+#
+# Get all apartments where a resident has moved out since a given date
+#
+###
+function all_moved_after_apartment_numbers($moved_after_date) {
+	global $wpdb;
+
+	$query = $wpdb->prepare('SELECT apartment_number FROM ' . $wpdb->prefix . 'swpm_allowed_membercreation WHERE allow_creation_date >= "' . $moved_after_date . '" AND initial_reset = 1 ORDER BY allow_creation_date ASC, apartment_number ASC');
+	$moved_users = $wpdb->get_col($query);
+
+	return $moved_users;
+}
+#
+function all_moved_after_usernames($moved_after_date) {
+	$moved_users_apartments = all_moved_after_apartment_numbers($moved_after_date);
+
+	$moved_users_usernames = array_map(function ($apartment) {return username_from_apartment_number($apartment);}, $moved_users_apartments);
+
+	return $moved_users_usernames;
+}
+#
+function all_moved_after_ids($moved_after_date) {
+	$moved_users_apartments = all_moved_after_apartment_numbers($moved_after_date);
+
+	$moved_users_ids = array_map(function ($apartment) {return id_from_apartment_number($apartment);}, $moved_users_apartments);
+
+	return $moved_users_ids;
 }
 ############################################################
 
