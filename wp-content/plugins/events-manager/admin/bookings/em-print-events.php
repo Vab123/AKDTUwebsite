@@ -207,138 +207,91 @@ function em_bookings_print_event() {
 		}
 	</style>
 <?php elseif (strtolower($_REQUEST['event_ticket_id']) == 'total') :
-				$all_users = array();
+				require_once WP_PLUGIN_DIR . "/AKDTU/functions/users.php";
+				require_once WP_PLUGIN_DIR . "/AKDTU/functions/display_apartments.php";
+
 				$status = array();
-				for ($floor = 0; $floor < 3; $floor++) {
-					for ($apartment = 1; $apartment < 25; $apartment++) {
-						array_push($all_users, $floor * 100 + $apartment);
-						$status[$floor * 100 + $apartment] = false;
-					}
+				foreach (all_apartments() as $apartment) {
+					$status[$apartment] = false;
 				}
+
 				$res = $wpdb->get_col('SELECT showed_up FROM wp_em_tilmeldinger WHERE event_id = ' . $_REQUEST['event_id']);
 				$res = array_map(function ($a) {
 					return json_decode($a);
 				}, $res);
 				foreach ($res as $arr) {
 					foreach ($arr as $user_id => $stat) {
-						$user_login = get_user_by('id', $user_id)->user_login;
-						if (substr($user_login, 0, 4) == "lejl") {
-							$status[ltrim(substr($user_login, 4, 3), "0")] = (isset($status[ltrim(substr($user_login, 4, 3), "0")]) ? ($stat || $status[ltrim(substr($user_login, 4, 3), "0")]) : $stat);
+						if (is_apartment_from_id($user_id)) {
+							$status[apartment_number_from_id($user_id)] = $stat || $status[apartment_number_from_id($user_id)];
 						}
 					}
 				}
-				$users = array_map(function ($booking) {
+
+				$booked_users = array_map(function ($booking) {
 					$user_login = get_userdata($booking->person_id)->get('user_login');
-					if (substr($user_login, 0, 4) == "lejl") {
-						return ltrim(substr($user_login, 4, 3), "0");
+					if (is_apartment_from_username($user_login)) {
+						return apartment_number_from_username($user_login);
 					}
-				}, $bookings);
-				$users_archive = array_map(function ($booking) {
-					$user_login = get_userdata($booking->person_id)->get('user_login');
-					return substr($user_login, 7, 8) == '_archive';
 				}, $bookings);
 
 				$latest_signup_date = em_get_event($bookings[0]->event_id, 'event_id')->rsvp_date;
 
-				$query = $wpdb->prepare('SELECT apartment_number FROM ' . $wpdb->prefix . 'swpm_allowed_membercreation WHERE allow_creation_date >= "' . $latest_signup_date . '" AND initial_reset = 1 ORDER BY allow_creation_date ASC, apartment_number ASC');
-				$moved_users = $wpdb->get_col($query);
+				$moved_users = all_moved_after_apartment_numbers($latest_signup_date);
 
-				$not_showed_up_users = array();
-				$not_showed_up_users_archive = array();
-				$showed_up_users = array();
-				$showed_up_users_archive = array();
-				$not_signed_up_users = array();
-				$not_signed_up_users_archive = array();
-
-				foreach ($all_users as $apartment) {
-					if ($status[$apartment] == 1) {
-						array_push($showed_up_users, $apartment);
-						array_push($showed_up_users_archive, (in_array($apartment, $users) ? $users_archive[array_search($apartment, $users)] : false));
-					} elseif (in_array($apartment, $users)) {
-						array_push($not_showed_up_users, $apartment);
-						array_push($not_showed_up_users_archive, (in_array($apartment, $users) ? $users_archive[array_search($apartment, $users)] : false));
-					} else {
-						array_push($not_signed_up_users, $apartment);
-						array_push($not_signed_up_users_archive, (in_array($apartment, $moved_users) ? true : false));
-					}
-				}
+				$not_showed_up_users = array_filter($booked_users, function($apartment) use($status) { return $status[$apartment] != 1; });
+				$not_showed_up_users_fullnames = array_map(function($apartment) use($moved_users) {return padded_apartment_number_from_apartment_number($apartment) . (in_array($apartment, $moved_users) ? ' (Tidligere beboer)' : '');}, $not_showed_up_users);
+				
+				$showed_up_users = array_filter($booked_users, function($apartment) use($status) { return $status[$apartment] == 1; });
+				$showed_up_users_fullnames = array_map(function($apartment) use($moved_users) {return padded_apartment_number_from_apartment_number($apartment) . (in_array($apartment, $moved_users) ? ' (Tidligere beboer)' : '');}, $showed_up_users);
+	
+				$not_signed_up_users = array_filter(all_apartments(), function($apartment) use($booked_users) { return !in_array($apartment, $booked_users); });
+				$not_signed_up_users_fullnames = array_map(function($apartment) use($moved_users) {return padded_apartment_number_from_apartment_number($apartment) . (in_array($apartment, $moved_users) ? ' (Tidligere beboer)' : '');}, $not_signed_up_users);
 ?>
 	<h2>Lejligheder tilmeldt havedage, men IKKE mødt op ifølge online tilmeldingslister:</h2>
-	<!-- <?php echo (count($not_showed_up_users) > 0 ? implode(", ", $not_showed_up_users) : '(Ingen)'); ?> -->
 	<?php
-				$total_not_showed_up = count($not_showed_up_users);
-				if ($total_not_showed_up > 0) {
-					$i = 1;
-					foreach ($not_showed_up_users as $key => $apartment) {
-						echo $apartment . ($not_showed_up_users_archive[$key] ? ' (Tidligere beboer)' : '') . ($i < $total_not_showed_up ? ', ' : '');
-						$i++;
-					}
-				} else {
-					echo '(Ingen)';
-				} ?>
+		echo (count($not_showed_up_users_fullnames) > 0 ? implode(", ", $not_showed_up_users_fullnames) : '(Ingen)');
+	?>
 
 	<h2>Lejligheder IKKE tilmeldt havedage: (Check selv om det er tidligere beboere)</h2>
-	<!-- <?php echo (count($not_signed_up_users) > 0 ? implode(", ", $not_signed_up_users) : '(Ingen)'); ?> -->
 	<?php
-				$total_not_signed_up = count($not_signed_up_users);
-				if ($total_not_signed_up > 0) {
-					$i = 1;
-					foreach ($not_signed_up_users as $key => $apartment) {
-						echo $apartment . ($not_signed_up_users_archive[$key] ? ' (Tidligere beboer)' : '') . ($i < $total_not_signed_up ? ', ' : '');
-						$i++;
-					}
-				} else {
-					echo '(Ingen)';
-				}
+		echo (count($not_signed_up_users_fullnames) > 0 ? implode(", ", $not_signed_up_users_fullnames) : '(Ingen)');
 	?>
 
 	<h2>Lejligheder tilmeldt havedage og mødt op ifølge online tilmeldingslister:</h2>
-	<!-- <?php echo (count($showed_up_users) > 0 ? implode(", ", $showed_up_users) : '(Ingen)'); ?> -->
 	<?php
-				$total_showed = count($showed_up_users);
-				if ($total_showed > 0) {
-					$i = 1;
-					foreach ($showed_up_users as $key => $apartment) {
-						echo $apartment . ($showed_up_users_archive[$key] ? ' (Tidligere beboer)' : '') . ($i < $total_showed ? ', ' : '');
-						$i++;
-					}
-				} else {
-					echo '(Ingen)';
-				}
+		echo (count($showed_up_users_fullnames) > 0 ? implode(", ", $showed_up_users_fullnames) : '(Ingen)');
 	?>
 
 	<br><br>
 	<hr>
 	<h2>Opkrævning:</h2>
 	<?php
-				$price = 750;
-				foreach ($all_users as $apartment) {
-					$user = SwpmMemberUtils::get_user_by_user_name( 'lejl' . str_pad($apartment, 3, "0", STR_PAD_LEFT) );
-					$level = SwpmMembershipLevelUtils::get_membership_level_name_by_level_id($user->membership_level);
-					if ($status[$apartment] == 1) {
-						# Apartment showed up as they were supposed to. No charge
-					} elseif (in_array($apartment, $users)) {
-						# Apartment was signed up, but did not show. Charge
-						echo 'Lejlighed ' . str_pad($apartment, 3, "0", STR_PAD_LEFT) . ($not_showed_up_users_archive[array_search($apartment, $not_showed_up_users)] ? ' (Tidligere beboer)' : '') . ': ' . $price . ',00 kr';
+		$price = 750;
+		foreach (all_apartments() as $apartment) {
+			if (in_array($apartment, $showed_up_users)) {
+				# Apartment showed up as they were supposed to. No charge
+			} elseif(in_array($apartment, $not_showed_up_users)) {
+				# Apartment was signed up, but did not show. Charge
+				echo '<b>Lejlighed ' . padded_apartment_number_from_apartment_number($apartment) . (in_array($apartment, $moved_users) ? ' (Tidligere beboer)' : '') . '</b>: ' . $price . ',00 kr';
 
-						if ($level == "Beboerprofil til bestyrelsesmedlem") {
-							# Make board members clearer to see
-							echo ' - <b><u><i>Bestyrelsesmedlem</i></u></b>';
-						}
-
-						echo '<br>';
-					} else {
-						# Apartment was not signed up. Charge
-						echo 'Lejlighed ' . str_pad($apartment, 3, "0", STR_PAD_LEFT) . ($not_signed_up_users_archive[array_search($apartment, $not_signed_up_users)] ? ' (Tidligere beboer)' : '') . ': ' . $price . ',00 kr';
-
-						if ($level == "Beboerprofil til bestyrelsesmedlem") {
-							# Make board members clearer to see
-							echo ' - <b><u><i>Bestyrelsesmedlem</i></u></b>';
-						}
-
-						echo '<br>';
-					}
+				if (is_boardmember_from_apartment_number($apartment)) {
+					# Make board members clearer to see
+					echo ' - <b><u><i>Bestyrelsesmedlem</i></u></b>';
 				}
+
+				echo '<br>';
+			} else {
+				# Apartment was not signed up. Charge
+				echo '<b>Lejlighed ' . padded_apartment_number_from_apartment_number($apartment) . (in_array($apartment, $moved_users) ? ' (Tidligere beboer)' : '') . '</b>: ' . $price . ',00 kr';
+
+				if (is_boardmember_from_apartment_number($apartment)) {
+					# Make board members clearer to see
+					echo ' - <b><u><i>Bestyrelsesmedlem</i></u></b>';
+				}
+
+				echo '<br>';
+			}
+		}
 	?>
 <?php endif;
 		endif;

@@ -65,53 +65,46 @@ function send_opkrævning_havedag($debug = false) {
 				}
 			}
 
-			$all_users = all_apartments();
 			$status = array();
-			foreach ($all_users as $apartment) {
+			foreach (all_apartments() as $apartment) {
 				$status[$apartment] = false;
 			}
+
 			$res = $wpdb->get_col('SELECT showed_up FROM wp_em_tilmeldinger WHERE event_id = ' . $events[0]->event_id);
 			$res = array_map(function ($a) {
 				return json_decode($a);
 			}, $res);
 			foreach ($res as $arr) {
 				foreach ($arr as $user_id => $stat) {
-					$user_login = get_user_by('id', $user_id)->user_login;
-
-
-					if (is_apartment_from_username($user_login)) {
-						$status[apartment_number_from_username($user_login)] = (isset($status[apartment_number_from_username($user_login)]) ? ($stat || $status[apartment_number_from_username($user_login)]) : $stat);
+					if (is_apartment_from_id($user_id)) {
+						$status[apartment_number_from_id($user_id)] = $stat || $status[apartment_number_from_id($user_id)];
 					}
 				}
 			}
 
 			$latest_signup_date = em_get_event($bookings[0]->event_id, 'event_id')->rsvp_date;
 
-			$query = $wpdb->prepare('SELECT apartment_number FROM ' . $wpdb->prefix . 'swpm_allowed_membercreation WHERE allow_creation_date >= "' . $latest_signup_date . '" AND initial_reset = 1 ORDER BY allow_creation_date ASC, apartment_number ASC');
-			$moved_users = $wpdb->get_col($query);
+			$moved_users = all_moved_after_apartment_numbers($latest_signup_date);
 
-			$users_that_should_pay = array();
-			$users_that_should_pay_archive = array();
-
-			foreach ($all_users as $apartment) {
-				if ($status[$apartment] == 1) {
-					// Apartment showed up. Do nothing
-				} else {
-					array_push($users_that_should_pay, $apartment);
-					array_push($users_that_should_pay_archive, (in_array($apartment, $moved_users) ? true : false));
-				}
-			}
+			$users_that_should_pay = array_filter(all_apartments(), function($apartment) use($status) { return !$status[$apartment]; });
 
 			$it = 1;
-			foreach ($users_that_should_pay as $index => $apartment) {
+			foreach ($users_that_should_pay as $apartment) {
 				$replaces = array(
-					'#APT' => $apartment . ($users_that_should_pay_archive[$index] ? ' (Tidligere beboer)' : '' ),
+					'#APT' => padded_apartment_number_from_apartment_number($apartment) . (in_array($apartment, $moved_users) ? ' (Tidligere beboer)' : '' ),
 					'#PRICE' => $price,
-					'#BOARDMEMBER' => (is_boardmember_from_apartment_number($apartment) ? ' - <u>Bestyrelsesmedlem</u>' : '')
+					'#BOARDMEMBER' => (is_boardmember_from_apartment_number($apartment) ? HAVEDAG_BOARDMEMBER : '')
 				);
 
 				$payment_info .= str_replace(array_keys($replaces), $replaces, nl2br(HAVEDAG_FORMAT));
-				$payment_info_warning .= str_replace(array_keys($replaces), $replaces, nl2br(HAVEDAG_WARNING_FORMAT));
+				
+				$replaces_warning = array(
+					'#APT' => padded_apartment_number_from_apartment_number($apartment) . (in_array($apartment, $moved_users) ? ' (Tidligere beboer)' : '' ),
+					'#PRICE' => $price,
+					'#BOARDMEMBER' => (is_boardmember_from_apartment_number($apartment) ? HAVEDAG_WARNING_BOARDMEMBER : '')
+				);
+
+				$payment_info_warning .= str_replace(array_keys($replaces_warning), $replaces_warning, nl2br(HAVEDAG_WARNING_FORMAT));
 
 				if ($it < count($users_that_should_pay)) {
 					$payment_info .= '<br>';
