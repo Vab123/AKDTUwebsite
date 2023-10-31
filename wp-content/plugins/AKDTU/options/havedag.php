@@ -16,6 +16,7 @@ function AKDTU_save_havedag_mail_settings() {
 	update_option('AKDTU_HAVEDAG_MAILCONTENT', stripcslashes($_REQUEST['AKDTU_HAVEDAG_MAILCONTENT']));
 	update_option('AKDTU_HAVEDAG_FORMAT', stripcslashes($_REQUEST['AKDTU_HAVEDAG_FORMAT']));
 	update_option('AKDTU_HAVEDAG_ATTACHMENTS', stripcslashes($_REQUEST['AKDTU_HAVEDAG_ATTACHMENTS']));
+	update_option('AKDTU_HAVEDAG_BOARDMEMBER', stripcslashes($_REQUEST['AKDTU_HAVEDAG_BOARDMEMBER']));
 
 	update_option('AKDTU_HAVEDAG_WARNING_DAYS', stripcslashes($_REQUEST['AKDTU_HAVEDAG_WARNING_DAYS']));
 	update_option('AKDTU_HAVEDAG_WARNING_TO', stripcslashes($_REQUEST['AKDTU_HAVEDAG_WARNING_TO']));
@@ -26,6 +27,7 @@ function AKDTU_save_havedag_mail_settings() {
 	update_option('AKDTU_HAVEDAG_WARNING_MAILCONTENT', stripcslashes($_REQUEST['AKDTU_HAVEDAG_WARNING_MAILCONTENT']));
 	update_option('AKDTU_HAVEDAG_WARNING_FORMAT', stripcslashes($_REQUEST['AKDTU_HAVEDAG_WARNING_FORMAT']));
 	update_option('AKDTU_HAVEDAG_WARNING_ATTACHMENTS', stripcslashes($_REQUEST['AKDTU_HAVEDAG_WARNING_ATTACHMENTS']));
+	update_option('AKDTU_HAVEDAG_WARNING_BOARDMEMBER', stripcslashes($_REQUEST['AKDTU_HAVEDAG_WARNING_BOARDMEMBER']));
 
 	new AKDTU_notice('success', 'Indstillingerne blev gemt');
 }
@@ -109,7 +111,7 @@ function AKDTU_havedag_opkrævning_mail_settings() {
 							<th scope="row">Opkrævningsmail - Mail indhold</th>
 							<td>
 								<textarea name="AKDTU_HAVEDAG_MAILCONTENT" rows="5" , cols="50"><?php echo stripcslashes(get_option('AKDTU_HAVEDAG_MAILCONTENT')); ?></textarea>
-								<p><code>#PAYMENT_INFO</code> erstattes med info omkring hvem der skal betale for ikke at have mødt op til havedagene.</p>
+								<p><code>#PAYMENT_INFO</code> erstattes med info omkring hvem der skal betale for ikke at have mødt op til havedagene. Formatet for dette kan rettes nedenunder.</p>
 								<p><code>#SEASON</code> erstattes med <code>"forår"</code> eller <code>"efterår"</code>.</p>
 								<p><code>#YEAR</code> erstattes med år.</p>
 							</td>
@@ -119,9 +121,16 @@ function AKDTU_havedag_opkrævning_mail_settings() {
 							<td>
 								<textarea type="text" name="AKDTU_HAVEDAG_FORMAT" rows="5" , cols="50"><?php echo stripcslashes(get_option('AKDTU_HAVEDAG_FORMAT')); ?></textarea>
 								<p>Dette gentages for hver lejlighed, der skal opkræves for manglende deltagelse i den seneste havedag, med linjeskift mellem.</p>
-								<p><code>#APT</code> erstattes med lejlighedsnummer. Hvis der efterfølgende er flyttet en ny beboer ind står dette også herefter som <code>(Tidligere beboer)</code>, hvis relevant.</p>
+								<p><code>#APT</code> erstattes med lejlighedsnummer. Hvis der efter deadline for tilmelding til havedagen er flyttet en ny beboer ind står dette også herefter som <code>(Tidligere beboer)</code>.</p>
 								<p><code>#PRICE</code> erstattes med pris.</p>
 								<p><code>#BOARDMEMBER</code> erstattes med <code> - Bestyrelsesmedlem</code>, hvis lejligheden tilhører et bestyrelsesmedlem.</p>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">Opkrævningsmail - Format for bestyrelsesmedlemmer</th>
+							<td>
+								<textarea type="text" name="AKDTU_HAVEDAG_BOARDMEMBER" rows="5" , cols="50"><?php echo stripcslashes(get_option('AKDTU_HAVEDAG_BOARDMEMBER')); ?></textarea>
+								<p>Dette er hvad <code>#BOARDMEMBER</code> erstattes med i ovenstående format for info om betaling.</p>
 							</td>
 						</tr>
 						<tr>
@@ -193,7 +202,7 @@ function AKDTU_havedag_opkrævning_mail_settings() {
 							<th scope="row">Varselsmail - Mail indhold</th>
 							<td>
 								<textarea name="AKDTU_HAVEDAG_WARNING_MAILCONTENT" rows="5" , cols="50"><?php echo stripcslashes(get_option('AKDTU_HAVEDAG_WARNING_MAILCONTENT')); ?></textarea>
-								<p><code>#PAYMENT_INFO</code> erstattes med info omkring hvem der skal betale for ikke at have mødt op til havedagene.</p>
+								<p><code>#PAYMENT_INFO</code> erstattes med info omkring hvem der skal betale for ikke at have mødt op til havedagene. Formatet for dette kan rettes nedenunder.</p>
 								<p><code>#SEASON</code> erstattes med <code>"forår"</code> eller <code>"efterår"</code>.</p>
 								<p><code>#YEAR</code> erstattes med år.</p>
 								<p><code>#DAYS</code> erstattes med antal dage der går mellem afsendelse af varselsmail og opkrævningsmail.</p>
@@ -204,9 +213,16 @@ function AKDTU_havedag_opkrævning_mail_settings() {
 							<td>
 								<textarea type="text" name="AKDTU_HAVEDAG_WARNING_FORMAT" rows="5" , cols="50"><?php echo stripcslashes(get_option('AKDTU_HAVEDAG_WARNING_FORMAT')); ?></textarea>
 								<p>Dette gentages for hver lejlighed, der skal opkræves for manglende deltagelse i den seneste havedag, med linjeskift mellem.</p>
-								<p><code>#APT</code> erstattes med lejlighedsnummer. Hvis der efterfølgende er flyttet en ny beboer ind står dette også herefter som <code>(Tidligere beboer)</code>, hvis relevant.</p>
+								<p><code>#APT</code> erstattes med lejlighedsnummer. Hvis der efter deadline for tilmelding til havedagen er flyttet en ny beboer ind står dette også herefter som <code>(Tidligere beboer)</code>.</p>
 								<p><code>#PRICE</code> erstattes med pris.</p>
 								<p><code>#BOARDMEMBER</code> erstattes med <code> - Bestyrelsesmedlem</code>, hvis lejligheden tilhører et bestyrelsesmedlem.</p>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">Varselsmail - Format for bestyrelsesmedlemmer</th>
+							<td>
+								<textarea type="text" name="AKDTU_HAVEDAG_WARNING_BOARDMEMBER" rows="5" , cols="50"><?php echo stripcslashes(get_option('AKDTU_HAVEDAG_WARNING_BOARDMEMBER')); ?></textarea>
+								<p>Dette er hvad <code>#BOARDMEMBER</code> erstattes med i ovenstående format for info om betaling.</p>
 							</td>
 						</tr>
 						<tr>
