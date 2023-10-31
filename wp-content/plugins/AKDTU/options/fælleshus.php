@@ -92,7 +92,7 @@ function AKDTU_fælleshus_mail_settings() {
 							<th scope="row">Mail indhold</th>
 							<td>
 								<textarea name="AKDTU_FÆLLESHUS_MAILCONTENT" rows="5" , cols="50"><?php echo stripcslashes(get_option('AKDTU_FÆLLESHUS_MAILCONTENT')); ?></textarea>
-								<p><code>#PAYMENT_INFO</code> erstattes med info omkring hvem der skal betale for leje.</p>
+								<p><code>#PAYMENT_INFO</code> erstattes med info omkring hvem der skal betale for leje. Formatet for dette kan rettes nedenunder.</p>
 								<p><code>#MONTH</code> erstattes med måned.</p>
 								<p><code>#YEAR</code> erstattes med år.</p>
 							</td>
