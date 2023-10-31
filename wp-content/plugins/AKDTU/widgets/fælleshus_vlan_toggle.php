@@ -11,7 +11,7 @@ function fælleshus_vlan_dashboard_widget() {
 		if (count($event_ids) > 0) {
 			$event_owners = array_map(function ($event_id) {
 				return (is_apartment_from_id(em_get_event($event_id, 'event_id')->owner) ? 'lejlighed ' . apartment_number_from_id(em_get_event($event_id, 'event_id')->owner) : 'Bestyrelsen');
-			}, $event_owners);
+			}, $event_ids);
 
 			$rented = true;
 		} else {
