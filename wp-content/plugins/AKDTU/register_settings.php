@@ -26,7 +26,19 @@ AKDTU_REGISTER(
 
 # Mail om ændring af VLAN status i fælleshuset
 AKDTU_REGISTER(
-	'FÆLLESHUS_VLAN'
+	'FÆLLESHUS_INTERNET'
+);
+AKDTU_REGISTER(
+	'FÆLLESHUS_INTERNET_BRUGER_DA',
+	array(
+		'_TOGGLE'
+	)
+);
+AKDTU_REGISTER(
+	'FÆLLESHUS_INTERNET_BRUGER_EN',
+	array(
+		'_TOGGLE'
+	)
 );
 
 # Mail med info om fjernet brugeradgang
@@ -50,7 +62,7 @@ AKDTU_REGISTER(
 );
 
 # Mail med info om ny bruger
-register_setting('options', 'AKDTU_NYBRUGER_BRUGER_TOGGLE', array('type' => 'string', 'default' => '')); # Indhold i mail
+register_setting('options', 'NYBRUGER_BRUGER_TOGGLE', array('type' => 'string', 'default' => '')); # Indhold i mail
 AKDTU_REGISTER(
 	'NYBRUGER_BRUGER_DA'
 );

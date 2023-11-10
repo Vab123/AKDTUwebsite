@@ -39,6 +39,9 @@ function add_widgets() {
 		# fjern_dokumenter widget
 		include_once "actions/remove_document.php";
 
+		# fælleshus_internet widget
+		include_once "actions/fælleshus_internet_force_update.php";
+
 		## Widgets
 		include_once "widgets/allowed_renter_signups.php";
 		include_once "widgets/allowed_user_signups.php";
@@ -47,6 +50,7 @@ function add_widgets() {
 		include_once "widgets/book_fælleshus_beboer.php";
 		include_once "widgets/book_fælleshus_bestyrelse.php";
 		include_once "widgets/fælleshus_afventer.php";
+		include_once "widgets/fælleshus_internet_toggle.php";
 		include_once "widgets/fælleshus_næste_reservationer.php";
 		include_once "widgets/fælleshus_tidligere_reservationer.php";
 		include_once "widgets/fælleshus_vis_foreløbig_pris.php";
@@ -115,10 +119,12 @@ function AKDTU_widgets() {
 	wp_add_dashboard_widget('tilføj_dokument_dashboard_widget', 'Upload bestyrelsesdokument', 'tilføj_dokument_dashboard_widget');
 	wp_add_dashboard_widget('fjern_dokument_dashboard_widget', 'Fjern bestyrelsesdokument', 'fjern_dokument_dashboard_widget');
 
+	wp_add_dashboard_widget('fælleshus_internet_dashboard_widget', 'Fælleshus internetforbindelse', 'fælleshus_internet_dashboard_widget');
+
 	if (current_user_can('add_users')) { // Only admins
 		wp_add_dashboard_widget('show_board_widget', 'Bestyrelsesmedlemmer', 'show_board_widget');
 		wp_add_dashboard_widget('add_boardmember_widget', 'Tilføj bestyrelsesmedlem', 'add_boardmember_widget');
 
-		wp_add_dashboard_widget('fælleshus_vlan_dashboard_widget', 'Fælleshus internetforbindelse', 'fælleshus_vlan_dashboard_widget');
+		wp_add_dashboard_widget('fælleshus_vlan_dashboard_widget', 'Fælleshus VLAN', 'fælleshus_vlan_dashboard_widget');
 	}
 }

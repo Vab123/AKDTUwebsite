@@ -1,7 +1,7 @@
 <?php
 
 include_once "options/fælleshus.php";
-include_once "options/fælleshus-vlan.php";
+include_once "options/fælleshus-internet.php";
 include_once "options/brugeradgang.php";
 include_once "options/lejeradgang.php";
 include_once "options/ny-bruger.php";
@@ -27,7 +27,7 @@ function AKDTU_menu() {
 	add_submenu_page('akdtu-plugin-fælleshus-opkrævning', 'Mail: Havedag opkrævning', 'Mail: Havedag opkrævning', 'add_users', 'akdtu-plugin-havedag-opkrævning-settings', 'AKDTU_havedag_opkrævning_mail_settings', 'dashicons-admin-tools', 65);
 
 	// options/fælleshus-vlan.php
-	add_submenu_page('akdtu-plugin-fælleshus-opkrævning', 'Mail: Fælleshus VLAN', 'Mail: Fælleshus VLAN', 'add_users', 'akdtu-plugin-mail-fælleshus-vlan', 'AKDTU_fælleshus_vlan_mail_settings', 'dashicons-admin-tools', 65);
+	add_submenu_page('akdtu-plugin-fælleshus-opkrævning', 'Mail: Fælleshus internet', 'Mail: Fælleshus internet', 'add_users', 'akdtu-plugin-mail-fælleshus-internet', 'AKDTU_fælleshus_internet_mail_settings', 'dashicons-admin-tools', 65);
 
 	// options/brugeradgang.php
 	add_submenu_page('akdtu-plugin-fælleshus-opkrævning', 'Mail: Bruger adgang', 'Mail: Bruger adgang', 'add_users', 'akdtu-plugin-mail-bruger-adgang', 'AKDTU_brugeradgang_mail_settings', 'dashicons-admin-tools', 65);

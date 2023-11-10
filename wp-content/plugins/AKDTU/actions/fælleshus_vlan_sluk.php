@@ -8,7 +8,6 @@ if (isset($_REQUEST['action'])) {
 			new AKDTU_notice('error', "Det lykkedes ikke at slukke for netværket. Fejlinfo: " . $e->getMessage());
 		}
 
-		new AKDTU_notice('warning', 'Bemærk: Dette er stadig en test, og afventer at internettet i fælleshuset bliver sat ordentligt op.');
 		if (!$result->state) {
 			new AKDTU_notice('success', 'Internet-forbindelsen i fælleshuset er nu slukket.');
 		} else {

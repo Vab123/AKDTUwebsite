@@ -27,8 +27,8 @@ function fælleshus_vlan_dashboard_widget() {
 			</colgroup>
 			<thead>
 				<tr>
-					<th colspan="3" style="font-weight:bold;text-align:center;">
-						Bemærk: Dette er en test, og styrer i øjeblikket et ubrugt VLAN. Denne widget afventer at internettet i fælleshuset bliver sat ordentligt op, og bliver efterfølgende ændret.
+					<th colspan="3" style="font-weight:bold;">
+						Bemærk: Dette tænder og slukker for internetforbindelsen i fælleshuset. Denne bliver ikke indstillet automatisk, så indstillingerne her er permanente.
 					</th>
 				</tr>
 			</thead>

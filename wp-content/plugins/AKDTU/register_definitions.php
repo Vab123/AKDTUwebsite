@@ -31,9 +31,21 @@ AKDTU_DEFINE(
 	)
 );
 
-# Mail om ændring af VLAN status i fælleshuset
+# Mails om ændring af VLAN status i fælleshuset
 AKDTU_DEFINE(
-	'FÆLLESHUS_VLAN'
+	'FÆLLESHUS_INTERNET'
+);
+AKDTU_DEFINE(
+	'FÆLLESHUS_INTERNET_BRUGER_DA',
+	array(
+		'_TOGGLE'
+	)
+);
+AKDTU_DEFINE(
+	'FÆLLESHUS_INTERNET_BRUGER_EN',
+	array(
+		'_TOGGLE'
+	)
 );
 
 # Mail med info om fjernet brugeradgang
