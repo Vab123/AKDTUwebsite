@@ -1,5 +1,11 @@
 <?php 
 
-	function test() {
-		
-	}
+/**
+ * @file Test cron-job, currently unused
+ */
+
+function test() {
+	
+}
+
+?>

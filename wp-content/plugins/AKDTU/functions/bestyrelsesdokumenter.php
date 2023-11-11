@@ -5,7 +5,7 @@
  */
 
 /**
- * Information about the types of documents published on the website by the Board
+ * @var $bestyrelsesdocuments_document_types Information about the types of documents published on the website by the Board
  * 
  * Keys:
  * 		short: Internal reference to the type of document. Same as the key to the array

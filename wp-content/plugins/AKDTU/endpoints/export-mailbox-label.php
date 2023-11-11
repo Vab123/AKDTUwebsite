@@ -3,16 +3,12 @@
 add_action('plugins_loaded', 'AKDTU_export_mailbox_label');
 
 /**
- * 
  * Exports the AKDTU calendar to ICS format, allowing users to subscribe to the calendar with Google Calendar, Outlook, etc. Ends further code execution.
- * 
- * @return void
- * 
  */
 function AKDTU_export_mailbox_label() {
 	global $wpdb;
 
-	## Check if we are on the correct page
+	# Check if we are on the correct page
 	if (strpos($_SERVER["REQUEST_URI"], 'export-mailbox-label.php') == 1) {
 
 		if (is_user_logged_in() && isset($_GET['user_name'])) {
