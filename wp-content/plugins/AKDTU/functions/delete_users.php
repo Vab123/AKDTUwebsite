@@ -1,6 +1,10 @@
 <?php
 
 /**
+ * @file Functionality related to the deletion of users when residents move out
+ */
+
+/**
  * Deletes signups to previous garden days, used when a user is reset because the resident moves out.
  * 
  * Info about the deleted signups is formatted and returned

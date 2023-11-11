@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file Functionality related to the manipulation of user-info, such as apartment numbers, ids, usernames, as well as getting info about the types of users
+ */
+
 ############################################################
 #
 # Apartment number, padded with zeros

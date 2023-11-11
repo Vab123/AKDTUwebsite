@@ -1,5 +1,10 @@
 <?php
-## Class to write admin notices
+
+/**
+ * @file Functionality related to the display of notices on the admin controlpanel on the website
+ */
+
+# Class to write admin notices
 class AKDTU_notice {
 	/**
 	 * Message to be displayed in a warning.

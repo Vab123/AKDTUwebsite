@@ -1,6 +1,10 @@
 <?php
 
 /**
+ * @file Functionality related to the manipulation of VLANS using the K-Net API (https://wiki.k-net.dk/api-instructions)
+ */
+
+/**
  * Set the state of a VLAN
  * 
  * @param int $vlan_id ID of the VLAN to change

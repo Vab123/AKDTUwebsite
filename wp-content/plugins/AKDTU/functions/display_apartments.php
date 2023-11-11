@@ -1,6 +1,10 @@
 <?php
 
 /**
+ * @file Functionality related to the display of all apartment numbers
+ */
+
+/**
  * Echos a html-dropdown element containing an element for each apartment
  */
 function apartments_dropdown() { ?>

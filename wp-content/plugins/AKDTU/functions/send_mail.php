@@ -1,6 +1,10 @@
 <?php
 
 /**
+ * @file Functionality related to the sending of emails from the website to the board, residents, etc.
+ */
+
+/**
  * Creates a string of file-paths from a comma-seperated string of attachments.
  * 
  * Prepends global file-path

@@ -1,6 +1,10 @@
 <?php 
 
 /**
+ * @file Functionality related to the storage and display of Association documents on the website
+ */
+
+/**
  * Information about the types of documents published on the website by the Board
  * 
  * Keys:

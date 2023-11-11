@@ -1,6 +1,10 @@
 <?php
 
 /**
+ * @file Functionality related to the control of the router in the common house, such as setting the password
+ */
+
+/**
  * Returns a key-value array with information used to connect to the common house router, used for e.g. updating the password before rentals
  * 
  * @return array[string,string] key-value array with information used to connect to the common house router

@@ -1,6 +1,10 @@
 <?php
 
 /**
+ * @file Functionality related to the billing of residents for booking the common house
+ */
+
+/**
  * Calculates the rental cost for renting the common house for a period.
  * 
  * Can handle starting- and ending-times not being exactly 12:00
