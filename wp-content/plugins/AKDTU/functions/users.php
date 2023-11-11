@@ -449,7 +449,7 @@ function all_moved_after_apartment_numbers($moved_after_date) {
 	global $wpdb;
 
 	# Find apartment numbers of all apartments where the resident has moved out since the given date
-	return $wpdb->get_col('SELECT apartment_number FROM ' . $wpdb->prefix . 'swpm_allowed_membercreation WHERE allow_creation_date >= "' . $moved_after_date . '" AND initial_reset = 1 ORDER BY allow_creation_date ASC, apartment_number ASC');
+	return $wpdb->get_col('SELECT apartment_number FROM ' . $wpdb->prefix . 'swpm_allowed_membercreation WHERE allow_creation_date >= "' . $moved_after_date . '" ORDER BY allow_creation_date ASC, apartment_number ASC');
 }
 #
 /**
