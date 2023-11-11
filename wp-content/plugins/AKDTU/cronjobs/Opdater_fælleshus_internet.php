@@ -76,7 +76,6 @@ function send_opdater_fælleshus_internet($debug = false) {
 					);
 
 					send_AKDTU_email($debug, $subject_replaces_da, $content_replaces_da, 'FÆLLESHUS_INTERNET_BRUGER_DA', $event_owner->user_email);
-					send_AKDTU_email(false, $subject_replaces_da, $content_replaces_da, 'FÆLLESHUS_INTERNET_BRUGER_DA', "victor2@akdtu.dk");
 				}
 
 				if ($debug || ($lang == "en" && FÆLLESHUS_INTERNET_BRUGER_EN_TOGGLE)) {
@@ -100,7 +99,6 @@ function send_opdater_fælleshus_internet($debug = false) {
 					);
 
 					send_AKDTU_email($debug, $subject_replaces_en, $content_replaces_en, 'FÆLLESHUS_INTERNET_BRUGER_EN', $event_owner->user_email);
-					send_AKDTU_email(false, $subject_replaces_en, $content_replaces_en, 'FÆLLESHUS_INTERNET_BRUGER_EN', "victor2@akdtu.dk");
 				}
 			}
 		}

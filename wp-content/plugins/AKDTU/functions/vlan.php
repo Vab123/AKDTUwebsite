@@ -1,8 +1,12 @@
 <?php
 
 /**
+ * Set the state of a VLAN
+ * 
  * @param int $vlan_id ID of the VLAN to change
  * @param int|bool $state Desired state of vlan
+ * 
+ * @return array[Any] json-decoded response from K-Net API
  */
 function set_vlan($vlan_id, $state) {
 	if (!is_int($vlan_id)) {
@@ -41,11 +45,16 @@ function set_vlan($vlan_id, $state) {
 	}
 
 	$data = json_decode($r);
+
 	return $data;
 }
 
 /**
+ * Get info about a VLAN
+ * 
  * @param int $vlan_id ID of the VLAN to retrieve info
+ * 
+ * @return array[Any] json-decoded response from K-Net API
  */
 function get_vlan($vlan_id) {
 	if (!is_int($vlan_id)) {
@@ -63,19 +72,32 @@ function get_vlan($vlan_id) {
 	}
 
 	$data = json_decode($r);
+
 	return $data;
 }
 
 /**
+ * Set the state of the VLAN corresponding to the common house internet
+ * 
  * @param int|bool $state Desired state of vlan
+ * 
+ * @return array[Any] json-decoded response from K-Net API
  */
 function set_fælleshus_vlan($state) {
+	# Fælleshus VLAN is number 624
+	
+	# Set desired state and return
 	return set_vlan(624, $state);
 }
 
 /**
- * @param
+ * Get info about the VLAN corresponding to the common house internet
+ * 
+ * @return array[Any] json-decoded response from K-Net API
  */
 function get_fælleshus_vlan() {
+	# Fælleshus VLAN is number 624
+	
+	# Get info and return
 	return get_vlan(624);
 }
