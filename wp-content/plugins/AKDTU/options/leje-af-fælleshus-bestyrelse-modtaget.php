@@ -1,5 +1,6 @@
 <?php
 
+# Add action to save changed settings
 if (isset($_REQUEST['action'])) {
 	if ($_REQUEST['action'] == 'AKDTU_save_leje_af_fælleshus_bestyrelse_modtaget_mail_settings') {
 		add_action('admin_menu', 'AKDTU_save_leje_af_fælleshus_bestyrelse_modtaget_mail_settings');
@@ -7,6 +8,7 @@ if (isset($_REQUEST['action'])) {
 }
 
 function AKDTU_save_leje_af_fælleshus_bestyrelse_modtaget_mail_settings() {
+	# Save form info
 	update_option('dbem_event_submitted_email_subject', stripcslashes($_REQUEST['dbem_event_submitted_email_subject']));
 	update_option('dbem_event_submitted_email_body', stripcslashes($_REQUEST['dbem_event_submitted_email_body']));
 	update_option('dbem_event_submitted_email_attachments', stripcslashes($_REQUEST['dbem_event_submitted_email_attachments']));
@@ -19,9 +21,11 @@ function AKDTU_save_leje_af_fælleshus_bestyrelse_modtaget_mail_settings() {
 	update_option('dbem_event_deleted_email_body', stripcslashes($_REQUEST['dbem_event_deleted_email_body']));
 	update_option('dbem_event_deleted_email_attachments', stripcslashes($_REQUEST['dbem_event_deleted_email_attachments']));
 
+	# Form info saved. Write success message to admin interface
 	new AKDTU_notice('success', 'Indstillingerne blev gemt');
 }
 
+# Write settings interface
 function AKDTU_leje_af_fælleshus_bestyrelse_modtaget_mail_settings() {
 	$default_tab = 'settings';
 	$tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;

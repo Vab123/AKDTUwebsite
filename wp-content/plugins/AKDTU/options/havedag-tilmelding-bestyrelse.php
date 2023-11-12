@@ -1,5 +1,6 @@
 <?php
 
+# Add action to save changed settings
 if (isset($_REQUEST['action'])) {
 	if ($_REQUEST['action'] == 'AKDTU_save_havedag_tilmelding_bestyrelse_mail_settings') {
 		add_action('admin_menu', 'AKDTU_save_havedag_tilmelding_bestyrelse_mail_settings');
@@ -7,6 +8,7 @@ if (isset($_REQUEST['action'])) {
 }
 
 function AKDTU_save_havedag_tilmelding_bestyrelse_mail_settings() {
+	# Save form info
 	update_option('dbem_bookings_notify_admin', stripcslashes($_REQUEST['dbem_bookings_notify_admin']));
 
 	update_option('dbem_bookings_contact_email_confirmed_subject', stripcslashes($_REQUEST['dbem_bookings_contact_email_confirmed_subject']));
@@ -15,9 +17,11 @@ function AKDTU_save_havedag_tilmelding_bestyrelse_mail_settings() {
 	update_option('dbem_bookings_contact_email_cancelled_subject', stripcslashes($_REQUEST['dbem_bookings_contact_email_cancelled_subject']));
 	update_option('dbem_bookings_contact_email_cancelled_body', stripcslashes($_REQUEST['dbem_bookings_contact_email_cancelled_body']));
 
+	# Form info saved. Write success message to admin interface
 	new AKDTU_notice('success', 'Indstillingerne blev gemt');
 }
 
+# Write settings interface
 function AKDTU_havedag_tilmelding_bestyrelse_mail_settings() {
 	$default_tab = 'settings';
 	$tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;

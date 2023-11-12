@@ -1,5 +1,6 @@
 <?php
 
+# Add action to save changed settings
 if (isset($_REQUEST['action'])) {
 	if ($_REQUEST['action'] == 'AKDTU_save_fælleshus_internet_mail_settings') {
 		add_action('admin_menu', 'AKDTU_save_fælleshus_internet_mail_settings');
@@ -7,6 +8,7 @@ if (isset($_REQUEST['action'])) {
 }
 
 function AKDTU_save_fælleshus_internet_mail_settings() {
+	# Save form info
 	update_option('AKDTU_FÆLLESHUS_INTERNET_TO', stripcslashes($_REQUEST['AKDTU_FÆLLESHUS_INTERNET_TO']));
 	update_option('AKDTU_FÆLLESHUS_INTERNET_FROM', stripcslashes($_REQUEST['AKDTU_FÆLLESHUS_INTERNET_FROM']));
 	update_option('AKDTU_FÆLLESHUS_INTERNET_CC', stripcslashes($_REQUEST['AKDTU_FÆLLESHUS_INTERNET_CC']));
@@ -31,9 +33,11 @@ function AKDTU_save_fælleshus_internet_mail_settings() {
 	update_option('AKDTU_FÆLLESHUS_INTERNET_BRUGER_EN_MAILCONTENT', stripcslashes($_REQUEST['AKDTU_FÆLLESHUS_INTERNET_BRUGER_EN_MAILCONTENT']));
 	update_option('AKDTU_FÆLLESHUS_INTERNET_BRUGER_EN_ATTACHMENTS', stripcslashes($_REQUEST['AKDTU_FÆLLESHUS_INTERNET_BRUGER_EN_ATTACHMENTS']));
 
+	# Form info saved. Write success message to admin interface
 	new AKDTU_notice('success', 'Indstillingerne blev gemt');
 }
 
+# Write settings interface
 function AKDTU_fælleshus_internet_mail_settings() {
 	$default_tab = 'settings';
 	$tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;

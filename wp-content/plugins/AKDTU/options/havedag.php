@@ -1,5 +1,6 @@
 <?php
 
+# Add action to save changed settings
 if (isset($_REQUEST['action'])) {
 	if ($_REQUEST['action'] == 'AKDTU_save_havedag_mail_settings') {
 		add_action('admin_menu', 'AKDTU_save_havedag_mail_settings');
@@ -7,6 +8,7 @@ if (isset($_REQUEST['action'])) {
 }
 
 function AKDTU_save_havedag_mail_settings() {
+	# Save form info
 	update_option('AKDTU_HAVEDAG_DAYS', stripcslashes($_REQUEST['AKDTU_HAVEDAG_DAYS']));
 	update_option('AKDTU_HAVEDAG_TO', stripcslashes($_REQUEST['AKDTU_HAVEDAG_TO']));
 	update_option('AKDTU_HAVEDAG_FROM', stripcslashes($_REQUEST['AKDTU_HAVEDAG_FROM']));
@@ -29,9 +31,11 @@ function AKDTU_save_havedag_mail_settings() {
 	update_option('AKDTU_HAVEDAG_WARNING_ATTACHMENTS', stripcslashes($_REQUEST['AKDTU_HAVEDAG_WARNING_ATTACHMENTS']));
 	update_option('AKDTU_HAVEDAG_WARNING_BOARDMEMBER', stripcslashes($_REQUEST['AKDTU_HAVEDAG_WARNING_BOARDMEMBER']));
 
+	# Form info saved. Write success message to admin interface
 	new AKDTU_notice('success', 'Indstillingerne blev gemt');
 }
 
+# Write settings interface
 function AKDTU_havedag_opkrævning_mail_settings() {
 	$default_tab = 'settings';
 	$tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;

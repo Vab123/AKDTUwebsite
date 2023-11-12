@@ -1,5 +1,6 @@
 <?php
 
+# Add action to save changed settings
 if (isset($_REQUEST['action'])) {
 	if ($_REQUEST['action'] == 'AKDTU_save_lejeradgang_mail_settings') {
 		add_action('admin_menu', 'AKDTU_save_lejeradgang_mail_settings');
@@ -7,6 +8,7 @@ if (isset($_REQUEST['action'])) {
 }
 
 function AKDTU_save_lejeradgang_mail_settings() {
+	# Save form info
 	update_option('AKDTU_FJERNLEJERADGANG_TO', stripcslashes($_REQUEST['AKDTU_FJERNLEJERADGANG_TO']));
 	update_option('AKDTU_FJERNLEJERADGANG_FROM', stripcslashes($_REQUEST['AKDTU_FJERNLEJERADGANG_FROM']));
 	update_option('AKDTU_FJERNLEJERADGANG_CC', stripcslashes($_REQUEST['AKDTU_FJERNLEJERADGANG_CC']));
@@ -18,9 +20,11 @@ function AKDTU_save_lejeradgang_mail_settings() {
 	update_option('AKDTU_FJERNLEJERADGANG_FORMAT_FUTURE_GARDENDAYS', stripcslashes($_REQUEST['AKDTU_FJERNLEJERADGANG_FORMAT_FUTURE_GARDENDAYS']));
 	update_option('AKDTU_FJERNLEJERADGANG_ATTACHMENTS', stripcslashes($_REQUEST['AKDTU_FJERNLEJERADGANG_ATTACHMENTS']));
 
+	# Form info saved. Write success message to admin interface
 	new AKDTU_notice('success', 'Indstillingerne blev gemt');
 }
 
+# Write settings interface
 function AKDTU_lejeradgang_mail_settings() {
 	$default_tab = 'settings';
 	$tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;
