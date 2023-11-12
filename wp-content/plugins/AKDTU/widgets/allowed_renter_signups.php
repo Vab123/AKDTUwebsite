@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file Widget to list all currently allowed sign ups from temporary renters
+ */
+
 function allowed_renter_signups_widget() {
 	global $wpdb;
 

@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file Widget to adjust the price for renting the common house for a resident
+ */
+
 function fælleshus_juster_pris_widget() { ?>
 	<form action="" method="post">
 		<input type="hidden" name="action" value="fælleshus_juster_pris" />

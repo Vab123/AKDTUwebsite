@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file Widget to book the common house for a resident
+ */
+
 function book_fælleshus_beboer_dashboard_widget() { ?>
 	<form action="" method="post">
 		<input type="hidden" name="action" value="book_fælleshus" />

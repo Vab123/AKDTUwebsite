@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file Widget to add a signup to a garden day for a resident
+ */
+
 function tilføj_til_havedag_dashboard_widget() {
 	$scope = 'future';
 	$search_limit = 4;

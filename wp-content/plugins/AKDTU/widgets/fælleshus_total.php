@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file Widget to display the expected and realized revenue from renting the common house, by year
+ */
+
 function fælleshus_total_widget() {
 	$start_year = 2022;
 	$years_ahead_to_show = ((new DateTime)->format('m') > 6 ? 1 : 0);

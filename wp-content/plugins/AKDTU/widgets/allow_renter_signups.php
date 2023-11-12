@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file Widget to allow a temporary renter to sign up to the website
+ */
+
 function allow_renter_signup_widget() { ?>
 	<form action="" method="post">
 		<input type="hidden" name="action" value="allow_renter_signup" />

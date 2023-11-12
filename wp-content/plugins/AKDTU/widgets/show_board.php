@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file Widget to display all current board members
+ */
+
 function show_board_widget() {
 	$board_members = array_map(function($username) { return SwpmMemberUtils::get_user_by_user_name($username);}, all_boardmember_usernames());
 

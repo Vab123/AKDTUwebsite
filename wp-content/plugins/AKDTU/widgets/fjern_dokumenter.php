@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file Widget to remove board documents from the website
+ */
+
 function fjern_dokument_dashboard_widget() {
 	include WP_PLUGIN_DIR . '/AKDTU/functions/bestyrelsesdokumenter.php';
 ?>

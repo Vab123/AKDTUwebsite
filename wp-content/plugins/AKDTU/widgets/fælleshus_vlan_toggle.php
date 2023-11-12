@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file Widget to toggle the status of the VLAN corresponding to the internet connection in the common house
+ */
+
 function fælleshus_vlan_dashboard_widget() {
 	global $wpdb;
 

@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file Widget to list all currently allowed sign ups from new residents
+ */
+
 function allowed_user_signups_widget() {
 	global $wpdb;
 

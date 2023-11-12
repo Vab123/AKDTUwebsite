@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file Widget to display the expected price for all rentals this month, which will be automatically sent to Cobblestone
+ */
+
 function fælleshus_vis_foreløbig_pris_widget() {
 	$month_start = new DateTime("first day of this month", new DateTimeZone('Europe/Copenhagen'));
 	$month_end = new DateTime("last day of this month", new DateTimeZone('Europe/Copenhagen'));

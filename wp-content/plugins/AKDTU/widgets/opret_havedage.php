@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file Widget to create all events and signup structure for all garden days for a season
+ */
+
 function opret_havedag_dashboard_widget() { ?>
 	<form action="" method="post">
 		<input type="hidden" name="action" value="add_havedag" />

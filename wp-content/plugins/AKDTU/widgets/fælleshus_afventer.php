@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file Widget to list all pending requests to book the common house
+ */
+
 function fælleshus_afventer_dashboard_widget() {
 
 	$scope = 'all';

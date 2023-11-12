@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file Widget to add new board members to the system
+ */
+
 function add_boardmember_widget() { ?>
 	<form action="" method="post">
 		<input type="hidden" name="action" value="add_boardmember" />

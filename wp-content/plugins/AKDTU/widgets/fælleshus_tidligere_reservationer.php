@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file Widget to display the previous reservations of the common house
+ */
+
 function fælleshus_tidligere_reservationer_dashboard_widget() {
 
 	$scope = 'past';

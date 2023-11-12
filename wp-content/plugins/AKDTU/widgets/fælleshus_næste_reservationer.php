@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file Widget to display the next reservations of the common house
+ */
+
 function fælleshus_næste_reservationer_dashboard_widget() {
 
 	$scope = 'future';

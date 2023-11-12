@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file Widget to display the previous set of garden days, if these exist
+ */
+
 function havedag_past_dashboard_widget() {
 	$scope = 'past';
 	$search_limit = 20;

@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file Widget to display the expected and realized revenue from renting the common house, by month
+ */
+
 function fælleshus_total_month_widget() {
 	$show_months_ahead = 4; // How many months in the future from now to include in table
 	$show_months_ago = 5; // How many months ago from now to include in table

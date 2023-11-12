@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file Widget to display past residents moving in and out
+ */
+
 function moves_past_dashboard_widget() {
 	global $wpdb;
 

@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file Widget to display the next set of garden days, if these exist
+ */
+
 function havedag_future_dashboard_widget() {
 	$scope = 'future';
 	$search_limit = 20;

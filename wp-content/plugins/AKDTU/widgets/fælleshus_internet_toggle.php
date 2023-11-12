@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file Widget to display the current settings to the router in the common house, and forcefully update these
+ */
+
 function fælleshus_internet_dashboard_widget() {
 	$router_settings = get_router_settings();
 	$password_struct = generate_password_info(); ?>

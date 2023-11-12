@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file Widget to add board documents to the website
+ */
+
 function tilføj_dokument_dashboard_widget() {
 	include WP_PLUGIN_DIR . '/AKDTU/functions/bestyrelsesdokumenter.php';
 ?>
