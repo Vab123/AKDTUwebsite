@@ -1,8 +1,24 @@
 <?php
 
+# Add custom shortcode
 add_shortcode("AKDTU-display-budgetter", "AKDTU_display_budget");
 
+/**
+ * Outputs a formatted list of all annual budgets
+ * 
+ * @param array $atts Array of settings to be displayed
+ * 
+ * Default values:
+ *   'date-format' => 'd. MMMM YYYY': Format for output for date of document
+ *   'entry-text' => '%s': What to write in element text
+ *   'before-link-text' => '': Text written before element link
+ *   'after-link-text' => '': Text written after element link
+ *   'download-name'  => '': Name of downloaded file: %1$s is year, %2$s is month, %3$s is day, %4$s is type
+ * 
+ * @return string Formatted list of all found documents
+ */
 function AKDTU_display_budget( $atts ){
+	# Default values
 	$default = array(
 		'date-format' => 'YYYY', # Format for output for date of document
 		'entry-text' => '%s', # What to write in element text
@@ -10,8 +26,11 @@ function AKDTU_display_budget( $atts ){
 		'after-link-text' => '', # Text written after element link
 		'download-name'  => '', # Name of downloaded file: %1$s is year, %2$s is month, %3$s is day, %4$s is type
     );
+	
+	# Combine default values and provided settings
     $values = shortcode_atts($default, $atts);
 
+	# Other default settings, the user are not allowed to set
 	$values['skip'] = 0; # How many of first found elements to skip
 	$values['limit'] = 100; # How many elements to maximum write
 	$values['file-dir-root'] = WORKING_DIR; # Root file directory
@@ -23,5 +42,6 @@ function AKDTU_display_budget( $atts ){
 	$values['filename-match-date-day'] = false; # If 'filename-match-date' contains date, which match group is it
 	$values['filename-match-type'] = false; # If 'filename-match' contains type, which match group is it
 
+	# Return formatted list of documents
 	return AKDTU_display_list( $values );
 }
