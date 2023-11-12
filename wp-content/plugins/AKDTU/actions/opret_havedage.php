@@ -1,81 +1,126 @@
 <?php
 
+/**
+ * @file Action to programmatically create the events for all of the garden days for a season
+ */
+
+# Register custom action
 if (isset($_REQUEST['action'])) {
 	if ($_REQUEST['action'] == 'add_havedag' && isset($_REQUEST['danish_name']) && isset($_REQUEST['danish_post_content']) && isset($_REQUEST['english_name']) && isset($_REQUEST['english_post_content']) && isset($_REQUEST['gardenday_dates']) && isset($_REQUEST['latest_signup']) && isset($_REQUEST['spaces']) && isset($_REQUEST['max_spaces']) && isset($_REQUEST['publish_date'])) {
-		opret_havedage();
+		opret_havedage(
+			$_REQUEST['danish_name'],
+			$_REQUEST['danish_post_content'],
+			$_REQUEST['english_name'],
+			$_REQUEST['english_post_content'],
+			explode(",",$_REQUEST['gardenday_dates']),
+			new DateTime($_REQUEST['latest_signup']),
+			$_REQUEST['spaces'],
+			$_REQUEST['max_spaces'],
+			$_REQUEST['publish_date']
+		);
 	}
 }
 
-function opret_havedage(){
-	if ( $_REQUEST['danish_name'] != NULL && $_REQUEST['danish_post_content'] != NULL && $_REQUEST['english_name'] != NULL && $_REQUEST['english_post_content'] != NULL && $_REQUEST['gardenday_dates'] != NULL && $_REQUEST['latest_signup'] != NULL && $_REQUEST['spaces'] != NULL && $_REQUEST['max_spaces'] != NULL && $_REQUEST['publish_date'] != NULL) {
+/**
+ * Collect info for, and generate all events for all garden days in a season
+ * 
+ * Stores translation info
+ * 
+ * @param string $danish_name Name for the garden days in Danish
+ * @param string $danish_post_content Info to write during signup for the garden days in Danish
+ * @param string $english_name Name for the garden days in English
+ * @param string $english_post_content Info to write during signup for the garden days in English
+ * @param array[string] $gardendays Array of strings of dates for the garden days
+ * @param DateTime $latest_signup Date for the latest signup to the garden days
+ * @param int $spaces Amount of spaces for signups for each individual garden day (18/24)
+ * @param int $max_spaces Amount of spaces for signups for all garden days combined (72)
+ * @param string $publish_date Date for the publication of the events. Also the first day where signups are allowed
+ */
+function opret_havedage($danish_name, $danish_post_content, $english_name, $english_post_content, $gardendays, $latest_signup, $spaces, $max_spaces, $publish_date){
+	# Sort gardenday dates
+	rsort($gardendays);
 
-		$latest_signup = new DateTime($_REQUEST['latest_signup']);
+	# Prepare object for gardenday structures
+	$danish_args = array();
+	$english_args = array();
 
-		$gardendays = explode(",",$_REQUEST['gardenday_dates']);
-		rsort($gardendays);
+	# Go through all planned gardendays
+	foreach($gardendays as $date){
+		# Add a structure to list of Danish garden days
+		array_push($danish_args,array(
+			'title' => $danish_name, # Title of the event
+			'post_content' => $danish_post_content, # Content of the event
+			'lang' => 'da', # Language of the post
+			'date' => $date, # Day of the garden day
+			'rsvp' => array(
+				'rsvp' => $date == max($gardendays), # If signups are enabled. Only on the last gardenday
+				'date' => $latest_signup->format('Y-m-d'), # Date of last day to sign up
+				'time' => $latest_signup->format('H:i:s'), # Time of last day to sign up
+				'spaces' => $spaces, # Amount of spaces on this specific garden day
+				'max_spaces' => $max_spaces # Maximum amount of spaces on all of the garden days
+			),
+			'event_lang' => 'da_DK', # Language of the event
+			'publish_date' => $publish_date # Date from where signup is allowed
+		));
 
-		$danish_args = array();
-		$english_args = array();
-
-		foreach($gardendays as $date){
-			array_push($danish_args,array(
-				'title' => $_REQUEST['danish_name'],
-				'post_content' => $_REQUEST['danish_post_content'],
-				'lang' => 'da',
-				'date' => $date,
-				'rsvp' => array(
-					'rsvp' => $date == max($gardendays),
-					'date' => $latest_signup->format('Y-m-d'),
-					'time' => $latest_signup->format('H:i:s'),
-					'spaces' => $_REQUEST['spaces'],
-					'max_spaces' => $_REQUEST['max_spaces']
-				),
-				'event_lang' => 'da_DK',
-				'publish_date' => $_REQUEST['publish_date']
-			));
-
-			array_push($english_args,array(
-				'title' => $_REQUEST['english_name'],
-				'post_content' => $_REQUEST['english_post_content'],
-				'lang' => 'en',
-				'date' => $date,
-				'rsvp' => array(
-					'rsvp' => $date == max($gardendays),
-					'date' => $latest_signup->format('Y-m-d'),
-					'time' => $latest_signup->format('H:i:s'),
-					'spaces' => $_REQUEST['spaces'],
-					'max_spaces' => $_REQUEST['max_spaces']
-				),
-				'event_lang' => 'en_US',
-				'publish_date' => $_REQUEST['publish_date']
-			));
-		}
-
-		$danish_events = opret_havedag($danish_args);
-		$english_events = opret_havedag($english_args);
-
-		for ($i = 0; $i < count($danish_events); $i++){
-			pll_save_post_translations(array(
-				'da' => $danish_events[$i]['id'],
-				'en' => $english_events[$i]['id']
-			));
-		}
-
-		$notice = new AKDTU_notice('success','Danske havedage oprettet. Tilføj begivenhed med slug ' . $danish_events[0]['slug'] . ' til menu og ændr eventuelt offentliggørelsesdato.');
-		$notice->render();
-
-		$notice = new AKDTU_notice('success','Engelske havedage oprettet. Tilføj begivenhed med slug ' . $english_events[0]['slug'] . ' til menu og ændr eventuelt offentliggørelsesdato.');
-		$notice->render();
-	} else {
-		$notice = new AKDTU_notice('error','Noget data var ikke korrekt. Havedagene blev ikke oprettet.');
-		$notice->render();
+		# Add a structure to list of English garden days
+		array_push($english_args,array(
+			'title' => $english_name, # Title of the event
+			'post_content' => $english_post_content, # Content of the event
+			'lang' => 'en', # Language of the post
+			'date' => $date, # Day of the garden day
+			'rsvp' => array(
+				'rsvp' => $date == max($gardendays), # If signups are enabled. Only on the last gardenday
+				'date' => $latest_signup->format('Y-m-d'), # Date of last day to sign up
+				'time' => $latest_signup->format('H:i:s'), # Time of last day to sign up
+				'spaces' => $spaces, # Amount of spaces on this specific garden day
+				'max_spaces' => $max_spaces # Maximum amount of spaces on all of the garden days
+			),
+			'event_lang' => 'en_US', # Language of the event
+			'publish_date' => $publish_date # Date from where signup is allowed
+		));
 	}
+
+	# Create garden days
+	$danish_events = opret_havedag($danish_args);
+	$english_events = opret_havedag($english_args);
+
+	# Save the fact that corresponding events are translations of eachother
+	for ($i = 0; $i < count($danish_events); $i++){
+		pll_save_post_translations(array(
+			'da' => $danish_events[$i]['id'],
+			'en' => $english_events[$i]['id']
+		));
+	}
+
+	/**
+	 * @todo Find a way to automate this
+	 */
+	# Success. Write success message to admin interface, with info about what to add to the website menu.
+	$notice = new AKDTU_notice('success','Danske havedage oprettet. Tilføj begivenhed med slug ' . $danish_events[0]['slug'] . ' til menu og ændr eventuelt offentliggørelsesdato.');
+	$notice->render();
+
+	# Success. Write success message to admin interface, with info about what to add to the website menu.
+	$notice = new AKDTU_notice('success','Engelske havedage oprettet. Tilføj begivenhed med slug ' . $english_events[0]['slug'] . ' til menu og ændr eventuelt offentliggørelsesdato.');
+	$notice->render();
 }
 
+/**
+ * Create events for a series of garden days
+ * 
+ * @param array[string,string] $args Arguments for the created garden days. Keys must include 'title', 'post_content', 'lang', 'date', 'rsvp->rsvp', 'rsvp->date', 'rsvp->time', 'rsvp->spaces', 'rsvp->max_spaces', 'event_lang', and 'publish_date'. Can be prepared using a call to opret_havedage()
+ * 
+ * @return array[array[string,int|string]] Array of arrays with the id and slug for the created events
+ */
 function opret_havedag($args){
 	global $wpdb;
+
+	# Prepare array for info about created events
 	$events_info = array();
+
+	# Go through all garden days
 	foreach ($args as $havedag) {
+		# Extract garden day information
 		$title = $havedag['title'];
 		$post_content = $havedag['post_content'];
 		$lang = $havedag['lang'];
@@ -84,12 +129,14 @@ function opret_havedag($args){
 		$event_lang = $havedag['event_lang'];
 		$publish_date = $havedag['publish_date'];
 
-		$is_pending_status = ($rsvp['rsvp'] ? 1 : (strtotime($publish_date) > strtotime('now') ? 0 : 1)); // Always publish the event with signups enabled, so it can be added to menu and hidden after. Other events are published when they are set to be published.
+		# Check if the event should be published or set to pending
+		# The event with signups enabled are always published, so it can be added to menu and hidden after. Other events are published when they are set to be published.
+		$is_pending_status = ($rsvp['rsvp'] ? 1 : (strtotime($publish_date) > strtotime('now') ? 0 : 1));
 
-		// Create Wordpress post
+		# Create Wordpress post
 		$id = wp_insert_post(array('post_status' => ($is_pending_status ? 'publish' : 'pending'), 'post_type' => 'event', 'post_title' => $title,'post_content' => $post_content, 'post_date' => ($rsvp['rsvp'] ? current_time("Y-m-d H:i:s") : $publish_date)));
 
-		// Protect event
+		# Protect event
         SwpmProtection::get_instance()->apply(array($id), 'custom_post')->save();
 		$query = "SELECT id FROM " . $wpdb->prefix . "swpm_membership_tbl WHERE id !=1 ";
 		$level_ids = $wpdb->get_col($query);
@@ -97,63 +144,77 @@ function opret_havedag($args){
 			SwpmPermission::get_instance($level)->apply(array($id), 'custom_post')->save();
 		}
 
-		// Set post language
+		# Set post language
 		pll_set_post_language($id,$lang);
 
-		// Set event details
+		# Set event details
 		$event = new EM_Event($id,'post_id');
 
+		# Create bookings object for the event
 		$bookings = new EM_Bookings($event);
 	
+		# Set event information
+		# Check if there should be signups enabled for this garden day
 		if ($rsvp['rsvp']) {
-			$event->__set('event_rsvp', $rsvp['rsvp']); // Boolean, if tickets are enabled
-			$event->__set('event_rsvp_date', $rsvp['date']); // Latest date to sign up
-			$event->__set('event_rsvp_time', $rsvp['time']); // Latest time to sign up
-			$event->__set('event_rsvp_spaces', $rsvp['max_spaces']); // Max amount of spaces per signup
+			$event->__set('event_rsvp', $rsvp['rsvp']); # Boolean, if tickets are enabled
+			$event->__set('event_rsvp_date', $rsvp['date']); # Latest date to sign up
+			$event->__set('event_rsvp_time', $rsvp['time']); # Latest time to sign up
+			$event->__set('event_rsvp_spaces', $rsvp['max_spaces']); # Max amount of spaces per signup
 		}
-		$event->__set('event_start_date', $date); // Start date of event
-		$event->__set('event_end_date', $date); // End date of event
-		$event->__set('event_start_time', '10:00:00'); // Start time of event
-		$event->__set('event_end_time', '15:00:00'); // End time of event
-		// $event->__set('event_all_day', 0); // Boolean, is event all day
+		$event->__set('event_start_date', $date); # Start date of event
+		$event->__set('event_end_date', $date); # End date of event
+		$event->__set('event_start_time', '10:00:00'); # Start time of event
+		$event->__set('event_end_time', '15:00:00'); # End time of event
+		# $event->__set('event_all_day', 0); # Boolean, is event all day
 
-		$event->__set('location_id', 0); // Location ID
-		$event->__set('event_spaces', NULL); // Total amount of spaces on event
-		$event->__set('event_private', 0); // Boolean, is event private
-		$event->__set('event_language', $event_lang); // Language of event
-		$event->__set('blog_id',get_current_blog_id()); // ID of blog, for multi-site installations
-		$event->set_status($is_pending_status, true); // Publish event
+		$event->__set('location_id', 0); # Location ID
+		$event->__set('event_spaces', NULL); # Total amount of spaces on event
+		$event->__set('event_private', 0); # Boolean, is event private
+		$event->__set('event_language', $event_lang); # Language of event
+		$event->__set('blog_id',get_current_blog_id()); # ID of blog, for multi-site installations
+		$event->set_status($is_pending_status, true); # Publish event
 
-		$event->save_meta(); // Save event metadata
-		$event->save(); // Save event
+		# Save event
+		$event->save_meta(); # Save event metadata
+		$event->save(); # Save event
 		
-		// Add tickets if wanted
+		# Add tickets if wanted
 		if ($rsvp['rsvp']){
+			# Counter for amount of tickets  used for ordering them
 			$ticket_num = 1;
+
+			# Go through all tickets
 			foreach ($args as $gardenday_date) {
-				$ticket = new EM_Ticket(array('event_id'=>$event->event_id)); // Create ticket object
-				$ticket->get_post(array('event_id'=>$event->event_id)); // Update ticket object
+				# Create new ticket
+				$ticket = new EM_Ticket(array('event_id'=>$event->event_id)); # Create ticket object
 
-				$ticket->__set('event_id',$event->event_id); // Link ticket with event
-				$ticket->__set('ticket_name',$gardenday_date['date']); // Name of ticket
+				# Add ticket to the correct garden day
+				$ticket->get_post(array('event_id'=>$event->event_id)); # Update ticket object
 
-				$ticket->__set('ticket_spaces',$rsvp['spaces']); // Amount of spaces on ticket
-				$ticket->__set('ticket_members',0); // Boolean, only for members
-				$ticket->__set('ticket_guests',0); // Boolean, allow guests
-				$ticket->__set('ticket_required',0); // Boolean, required
-				$ticket->__set('ticket_meta',array('recurrences'=>NULL)); // Set ticket meta
+				# Set info about the ticket
+				$ticket->__set('event_id',$event->event_id); # Link ticket with event
+				$ticket->__set('ticket_name',$gardenday_date['date']); # Name of ticket
 
-				$ticket->__set('ticket_price',0); // Ticket price
+				$ticket->__set('ticket_spaces',$rsvp['spaces']); # Amount of spaces on ticket
+				$ticket->__set('ticket_members',0); # Boolean, only for members
+				$ticket->__set('ticket_guests',0); # Boolean, allow guests
+				$ticket->__set('ticket_required',0); # Boolean, required
+				$ticket->__set('ticket_meta',array('recurrences'=>NULL)); # Set ticket meta
 
-				$ticket->__set('ticket_order',$ticket_num); // Ticket order
+				$ticket->__set('ticket_price',0); # Ticket price
+
+				$ticket->__set('ticket_order',$ticket_num); # Ticket order
 				$ticket_num++;
 
-				$ticket->save(); // Save ticket
+				# Save ticket
+				$ticket->save();
 			}
 		}
 
+		# Add array with info to return object
 		$events_info[] = array('id'=>$id,'slug'=>$event->event_slug);
 	}
 
+	# Return info about all created garden days
 	return $events_info;
 }

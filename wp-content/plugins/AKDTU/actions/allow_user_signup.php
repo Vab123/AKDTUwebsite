@@ -1,26 +1,46 @@
 <?php
 
+/**
+ * @file Action to allow a resident to create a user on the website
+ */
+
+# Register custom action
 if (isset($_REQUEST['action'])) {
 	if ($_REQUEST['action'] == 'allow_user_signup' && isset($_REQUEST['user']) && isset($_REQUEST['phone']) && isset($_REQUEST['takeover_time'])) {
-		allow_user_signup();
+		allow_user_signup($_REQUEST['user'], $_REQUEST['phone'], $_REQUEST['takeover_time']);
 	}
 }
 
-function allow_user_signup() {
+/**
+ * Add a permit for a resident to create a user on the website
+ * 
+ * @param int $apartment_number Apartment number for the permit
+ * @param string $phone_number Phone number for the permit
+ * @param string $takeover_time Date and time for takeover of the user for the permit
+ */
+function allow_user_signup($apartment_number, $phone_number, $takeover_time) {
 	global $wpdb;
-	$data = array(
-		'apartment_number' => $_REQUEST['user'],
-		'phone_number' => $_REQUEST['phone'],
-		'allow_creation_date' => $_REQUEST['takeover_time'],
-		'initial_reset' => false,
-		'initial_takeover' => false
-	);
 
-	if ($wpdb->query($wpdb->prepare("SELECT apartment_number FROM " . $wpdb->prefix . "swpm_allowed_membercreation WHERE apartment_number=%d", $data['apartment_number'])) > 0) {
+	# Check if there already exists a permit for user creation already exists
+	if ($wpdb->query("SELECT apartment_number FROM " . $wpdb->prefix . "swpm_allowed_membercreation WHERE apartment_number=". $apartment_number) > 0) {
+		# A permit already exists. Output error message and return
 		new AKDTU_notice('error', 'Tilladelsen til brugeroprettelse kunne ikke oprettes. Check om der allerede findes en tilladelse til brugeren.');
 	} else {
+		# A permit does not exist. Create new permit
+		
+		# Data for new user
+		$data = array(
+			'apartment_number' => $apartment_number,
+			'phone_number' => $phone_number,
+			'allow_creation_date' => $takeover_time,
+			'initial_reset' => false,
+			'initial_takeover' => false
+		);
+
+		# Insert permit into database
 		$inserted = $wpdb->insert($wpdb->prefix . 'swpm_allowed_membercreation', $data);
 
+		# Write success message to admin interface
 		new AKDTU_notice('success', 'Tilladelsen til brugeroprettelse blev oprettet.');
 	}
 }
