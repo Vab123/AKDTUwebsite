@@ -136,6 +136,6 @@ function AKDTU_widgets() {
 		wp_add_dashboard_widget('fælleshus_vlan_dashboard_widget', 'Fælleshus VLAN', 'fælleshus_vlan_dashboard_widget');
 		
 		wp_add_dashboard_widget('show_vicevært_widget', 'Viceværter', 'show_vicevært_widget');
-		wp_add_dashboard_widget('add_vicevært_widget', 'Opret vicevært', 'add_vicevært_widget');
+		wp_add_dashboard_widget('add_vicevært_widget', 'Tilføj vicevært', 'add_vicevært_widget');
 	}
 }
