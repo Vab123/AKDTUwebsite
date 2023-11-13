@@ -12,14 +12,14 @@ function show_vicevært_widget() {
 	if (count($vicevært_users) > 0) : ?>
 		<table class="widefat">
 			<colgroup>
-				<col span="1" style="width: 20%" />
-				<col span="1" style="width: <?php if (!is_admin()) : ?>60%<?php else : ?>80%<?php endif; ?>" />
+				<col span="1" style="width: 40%" />
+				<col span="1" style="width: 40%" />
 				<col span="1" style="width: 20%" />
 			</colgroup>
 			<thead>
 				<tr>
-					<th>Brugernavn</th>
 					<th>Navn</th>
+					<th>Email</th>
 					<th>Handlinger</th>
 				</tr>
 			</thead>
@@ -30,8 +30,8 @@ function show_vicevært_widget() {
 							echo 'class="alternate"';
 						};
 						$row++; ?>>
-						<td style="vertical-align:middle"><?php echo $vicevært->display_name; ?></td>
 						<td style="vertical-align:middle"><?php echo $vicevært->first_name . ' '  . $vicevært->last_name; ?></td>
+						<td style="vertical-align:middle"><?php echo $vicevært->user_email; ?></td>
 						<td>
 							<form action="" method="post" style="text-align:center">
 								<input type="hidden" name="user" value="<?php echo $vicevært->ID; ?>" />
