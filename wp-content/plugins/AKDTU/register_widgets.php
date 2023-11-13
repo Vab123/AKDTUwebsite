@@ -80,6 +80,14 @@ function add_widgets() {
 			include_once "widgets/fælleshus_vlan_toggle.php";
 			include_once "actions/fælleshus_vlan_tænd.php";
 			include_once "actions/fælleshus_vlan_sluk.php";
+
+			# show_vicevært widget
+			include_once "widgets/show_vicevært.php";
+			include_once "actions/remove_vicevært.php";
+
+			# add_vicevært widget
+			include_once "widgets/add_vicevært.php";
+			include_once "actions/add_vicevært.php";
 		}
 
 		add_action('wp_dashboard_setup', 'AKDTU_widgets');
@@ -126,5 +134,8 @@ function AKDTU_widgets() {
 		wp_add_dashboard_widget('add_boardmember_widget', 'Tilføj bestyrelsesmedlem', 'add_boardmember_widget');
 
 		wp_add_dashboard_widget('fælleshus_vlan_dashboard_widget', 'Fælleshus VLAN', 'fælleshus_vlan_dashboard_widget');
+		
+		wp_add_dashboard_widget('show_vicevært_widget', 'Viceværter', 'show_vicevært_widget');
+		wp_add_dashboard_widget('add_vicevært_widget', 'Opret vicevært', 'add_vicevært_widget');
 	}
 }
