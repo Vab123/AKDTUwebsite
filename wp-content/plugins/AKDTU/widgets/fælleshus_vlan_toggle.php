@@ -29,20 +29,13 @@ function fælleshus_vlan_dashboard_widget() {
 				<col span="1" style="width: 40%">
 				<col span="1" style="width: 60%">
 			</colgroup>
-			<thead>
-				<tr>
-					<th colspan="3" style="font-weight:bold;">
-						Bemærk: Dette tænder og slukker for internetforbindelsen i fælleshuset. Denne bliver ikke indstillet automatisk, så indstillingerne her er permanente.
-					</th>
-				</tr>
-			</thead>
 			<tbody>
 				<tr class="alternate">
 					<td style="vertical-align:middle">
 						Internet forbindelse:
 					</td>
 					<td style="vertical-align:middle">
-						<?php echo ($state ? "Tændt" : "Slukket"); ?>
+						<b><?php echo ($state ? "Tændt" : "Slukket"); ?></b>
 					</td>
 				</tr>
 				<tr>
@@ -50,7 +43,7 @@ function fælleshus_vlan_dashboard_widget() {
 						Fælleshus status:
 					</td>
 					<td style="vertical-align:middle">
-						<?php echo ($rented ? "Lejet af " . implode(", ", $event_owners) : "Ledigt"); ?>
+						<b><?php echo ($rented ? "Lejet af " . implode(", ", $event_owners) : "Ledigt"); ?></b>
 					</td>
 				</tr>
 				<tr class="alternate">
