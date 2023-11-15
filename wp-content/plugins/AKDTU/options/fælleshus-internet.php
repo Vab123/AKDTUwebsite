@@ -56,7 +56,7 @@ function AKDTU_fælleshus_internet_mail_settings() {
 			<form method="post" action="">
 				<input type="hidden" name="page" value="<?php echo $_GET['page']; ?>" />
 				<input type="hidden" name="action" value="AKDTU_save_fælleshus_internet_mail_settings" />
-				<h3>Mail til netgruppen</h3>
+				<h3>Mail til bestyrelsen</h3>
 				<table class="form-table" role="presentation">
 					<tbody>
 						<tr>
