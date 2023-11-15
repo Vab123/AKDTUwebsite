@@ -114,7 +114,8 @@ function generate_password_info($run_every_hours_amount = 24) {
 	$event_start_date = new DateTime($event->event_start_date . " " . $event->event_start_time, new DateTimeZone('Europe/Copenhagen'));
 
 	# Check if the event started less than $run_every_hours_amount hours ago
-	$password_should_be_changed = $now->diff($event_start_date) < $run_every_hours_amount;
+	$diff = $now->diff($event_start_date);
+	$password_should_be_changed = ($diff->m == 0 && $diff->y == 0 && ($diff->d * 24 + $diff->h < $run_every_hours_amount));
 
 	# Return information about new password
 	return array(
