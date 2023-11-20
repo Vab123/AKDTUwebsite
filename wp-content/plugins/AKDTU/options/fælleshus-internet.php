@@ -112,6 +112,7 @@ function AKDTU_fælleshus_internet_mail_settings() {
 								<p><code>#RENTER</code> erstattes med info om hvem fælleshuset er lejet af.</p>
 								<p><code>#SSID</code> erstattes med navnet på internetforbindelsen.</p>
 								<p><code>#NEWPASS</code> erstattes med adgangskoden til internetforbindelsen.</p>
+								<p><code>#UPDATETIME</code> erstattes med tidspunktet, hvor opdateringen fandt sted.</p>
 							</td>
 						</tr>
 						<tr>
