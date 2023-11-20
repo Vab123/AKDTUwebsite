@@ -38,6 +38,14 @@ function fælleshus_internet_dashboard_widget() {
 					</td>
 				</tr>
 				<tr class="alternate">
+					<td style="vertical-align:middle">
+						Mail sendes i dag:
+					</td>
+					<td style="vertical-align:middle">
+						<b><?php echo ($password_struct["should_be_changed"] ? "Ja" : "Nej"); ?></b>
+					</td>
+				</tr>
+				<tr>
 					<td style="vertical-align:middle"></td>
 					<form action="" method="post">
 						<input type="hidden" name="action" value="fælleshus_internet_force_update" />
