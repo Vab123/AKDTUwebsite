@@ -20,6 +20,8 @@ if (isset($_REQUEST['action'])) {
  * @param string $filename Filename of the document to be deleted
  */
 function fjern_dokument($document_type, $filename){
+	global $bestyrelsesdocuments_document_types;
+
 	# Check if a valid type of document was requested deleted
 	if (!isset($bestyrelsesdocuments_document_types[$document_type])) {
 		# No valid type of document matched. Write error message to admin interface

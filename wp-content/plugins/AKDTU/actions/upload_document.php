@@ -27,6 +27,8 @@ if (isset($_REQUEST['action'])) {
  * @param string $document_typetype Additional type info for the uploaded document, or empty string if such is not relevant
  */
 function upload_dokument($document_type, $file, $document_date, $document_typetype = ''){
+	global $bestyrelsesdocuments_document_types;
+
 	# Check if the uploaded file is a pdf
 	if( strtolower(pathinfo($file["name"], PATHINFO_EXTENSION)) != "pdf" ) {
 		# Uploaded file is not a pdf. Write error message to admin interface
@@ -58,6 +60,6 @@ function upload_dokument($document_type, $file, $document_date, $document_typety
 		}
 	} else {
 		# No valid type of document matched. Write error message to admin interface
-		new AKDTU_notice('error','Forkert information modtaget. Dokumentet er ikke gemt.');
+		new AKDTU_notice('error','Forkert information modtaget. Dokumentet er ikke gemt.' . json_encode($bestyrelsesdocuments_document_types));
 	}
 }
