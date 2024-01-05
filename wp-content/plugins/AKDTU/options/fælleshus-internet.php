@@ -133,7 +133,6 @@ function AKDTU_fælleshus_internet_mail_settings() {
 																								echo " checked";
 																							}; ?> />
 								<p>Efterlad tom for ikke at sende nogen mail</p>
-								<p>Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code></p>
 							</td>
 						</tr>
 						<tr>
@@ -206,7 +205,6 @@ function AKDTU_fælleshus_internet_mail_settings() {
 																								echo " checked";
 																							}; ?> />
 								<p>Efterlad tom for ikke at sende nogen mail</p>
-								<p>Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code></p>
 							</td>
 						</tr>
 						<tr>
