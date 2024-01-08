@@ -18,13 +18,13 @@ function send_opdater_fælleshus_internet($debug = false, $force_send = false) {
 	$date_da = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen');
 	$date_da->setPattern('dd. MMMM YYYY');
 	$time_da = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen');
-	$time_da->setPattern('hh:mm');
+	$time_da->setPattern('HH:mm');
 	
 	# Date formats, English
 	$date_en = new IntlDateFormatter('en_US', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen');
 	$date_en->setPattern('dd. MMMM YYYY');
 	$time_en = new IntlDateFormatter('en_US', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen');
-	$time_en->setPattern('hh:mm');
+	$time_en->setPattern('HH:mm');
 
 	# Get struct containing info about the password to the router
 	$password_struct = generate_password_info($run_every_hours_amount);
