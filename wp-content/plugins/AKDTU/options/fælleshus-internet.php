@@ -127,7 +127,7 @@ function AKDTU_fælleshus_internet_mail_settings() {
 				<table class="form-table" role="presentation">
 					<tbody>
 						<tr>
-							<th scope="row">Modtager adresse</th>
+							<th scope="row">Send mail</th>
 							<td>
 								<input type="checkbox" name="AKDTU_FÆLLESHUS_INTERNET_BRUGER_DA_TOGGLE" <?php if (get_option('AKDTU_FÆLLESHUS_INTERNET_BRUGER_DA_TOGGLE')) {
 																								echo " checked";
@@ -199,7 +199,7 @@ function AKDTU_fælleshus_internet_mail_settings() {
 				<table class="form-table" role="presentation">
 					<tbody>
 						<tr>
-							<th scope="row">Modtager adresse</th>
+							<th scope="row">Send mail</th>
 							<td>
 								<input type="checkbox" name="AKDTU_FÆLLESHUS_INTERNET_BRUGER_EN_TOGGLE" <?php if (get_option('AKDTU_FÆLLESHUS_INTERNET_BRUGER_EN_TOGGLE')) {
 																								echo " checked";
