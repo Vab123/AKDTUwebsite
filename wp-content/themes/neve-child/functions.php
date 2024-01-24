@@ -181,8 +181,10 @@ pll_register_string('simple-membership', 'New password has been sent to your ema
 pll_register_string('simple-membership', 'You need to login to view this content. ', 'simple-membership-access-control');
 
 ## replaces for calendar
-pll_register_string('simple-membership', 'RENTAL_BEFORE_APARTMENTNUM', 'simple-membership-calendar');
-pll_register_string('simple-membership', 'RENTAL_AFTER_APARTMENTNUM', 'simple-membership-calendar');
+pll_register_string('simple-membership', 'RENTAL_BEFORE_APARTMENTNUM_NOTAPPROVED', 'simple-membership-calendar');
+pll_register_string('simple-membership', 'RENTAL_BEFORE_APARTMENTNUM_APPROVED', 'simple-membership-calendar');
+pll_register_string('simple-membership', 'RENTAL_AFTER_APARTMENTNUM_NOTAPPROVED', 'simple-membership-calendar');
+pll_register_string('simple-membership', 'RENTAL_AFTER_APARTMENTNUM_APPROVED', 'simple-membership-calendar');
 
 ## Dont send email change notifications when changing to or from @akdtu.dk
 if (!function_exists('send_email_change_email')) {

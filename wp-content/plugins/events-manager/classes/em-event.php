@@ -2225,8 +2225,8 @@ class EM_Event extends EM_Object {
 				case '#_NAME': //deprecated
 				case '#_EVENTNAME':
 					$replacements = array(
-						'#_RENTAL_BEFORE_APARTMENTNUM' => pll__('RENTAL_BEFORE_APARTMENTNUM', 'events-manager'),
-						'#_RENTAL_AFTER_APARTMENTNUM' => pll__('RENTAL_AFTER_APARTMENTNUM', 'events-manager'),
+						'#_RENTAL_BEFORE_APARTMENTNUM' => pll__(($this->event_status == 0 ? 'RENTAL_BEFORE_APARTMENTNUM_NOTAPPROVED' : 'RENTAL_BEFORE_APARTMENTNUM_APPROVED'), 'events-manager'),
+						'#_RENTAL_AFTER_APARTMENTNUM' => pll__(($this->event_status == 0 ? 'RENTAL_AFTER_APARTMENTNUM_NOTAPPROVED' : 'RENTAL_AFTER_APARTMENTNUM_APPROVED'), 'events-manager'),
 						'#_VICEVÆRT_RESERVATION' => pll__('VICEVÆRT_RESERVATION', 'events-manager'),
 					);
 					$replace = str_replace(array_keys($replacements), $replacements, $this->event_name);

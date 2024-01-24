@@ -259,7 +259,7 @@ function delete_rentals($user_id, $archive_user_id, $debug = false) {
 			# Save information about the rental
 			$replaces = array(
 				# '#NAME'  => $EM_Event->event_name,
-				'#NAME' => str_replace(array("#_RENTAL_BEFORE_APARTMENTNUM", "#_RENTAL_AFTER_APARTMENTNUM"), array(pll_translate_string('RENTAL_BEFORE_APARTMENTNUM', 'da_DK'), pll_translate_string('RENTAL_AFTER_APARTMENTNUM', 'da_DK')), $EM_Event->event_name),
+				'#NAME' => str_replace(array("#_RENTAL_BEFORE_APARTMENTNUM", "#_RENTAL_AFTER_APARTMENTNUM"), array(pll_translate_string('RENTAL_BEFORE_APARTMENTNUM_APPROVED', 'da_DK'), pll_translate_string('RENTAL_AFTER_APARTMENTNUM_APPROVED', 'da_DK')), $EM_Event->event_name),
 
 				'#START_DATE_YEAR' => $start_date->format('Y'),
 				'#START_DATE_MONTH' => $start_date->format('m'),

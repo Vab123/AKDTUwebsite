@@ -108,8 +108,8 @@
 									<?php // if( current_user_can('delete_events') && $EM_Event->start()->getTimestamp() > $delete_before_event_time && $EM_Event->end()->getTimestamp() > $delete_before_event_time ) : ?>
 									<?php
 										$replacements = array(
-											'#_RENTAL_BEFORE_APARTMENTNUM' => pll__('RENTAL_BEFORE_APARTMENTNUM','events-manager'),
-											'#_RENTAL_AFTER_APARTMENTNUM' => pll__('RENTAL_AFTER_APARTMENTNUM','events-manager'),
+											'#_RENTAL_BEFORE_APARTMENTNUM' => pll__(($EM_Event->event_status == 0 ? 'RENTAL_BEFORE_APARTMENTNUM_NOTAPPROVED' : 'RENTAL_BEFORE_APARTMENTNUM_APPROVED'),'events-manager'),
+											'#_RENTAL_AFTER_APARTMENTNUM' => pll__(($EM_Event->event_status == 0 ? 'RENTAL_AFTER_APARTMENTNUM_NOTAPPROVED' : 'RENTAL_AFTER_APARTMENTNUM_APPROVED'),'events-manager'),
 											'#_VICEVÆRT_RESERVATION' => pll__('VICEVÆRT_RESERVATION', 'events-manager'),
 										);
 										$event_name = str_replace(array_keys($replacements),$replacements,esc_html($EM_Event->event_name));

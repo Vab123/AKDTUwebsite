@@ -64,8 +64,8 @@ function AKDTU_export_calendar() {
 
 				# Replacements in event title for rentals of the common house
 				$event_name_replaces = array(
-					'#_RENTAL_BEFORE_APARTMENTNUM' => ($EM_Event->event_status == 0 ? 'Ansøgning: Lejlighed ' : pll_translate_string('RENTAL_BEFORE_APARTMENTNUM', $calendar_language)),
-					'#_RENTAL_AFTER_APARTMENTNUM' => ($EM_Event->event_status == 0 ? '' : pll_translate_string('RENTAL_AFTER_APARTMENTNUM', $calendar_language)),
+					'#_RENTAL_BEFORE_APARTMENTNUM' => pll_translate_string(($EM_Event->event_status == 0 ? 'RENTAL_BEFORE_APARTMENTNUM_NOTAPPROVED' : 'RENTAL_BEFORE_APARTMENTNUM_APPROVED'), $calendar_language),
+					'#_RENTAL_AFTER_APARTMENTNUM' => pll_translate_string(($EM_Event->event_status == 0 ? 'RENTAL_AFTER_APARTMENTNUM_NOTAPPROVED' : 'RENTAL_AFTER_APARTMENTNUM_APPROVED'), $calendar_language),
 				);
 				$event_name = str_replace(array_keys($event_name_replaces), $event_name_replaces, $EM_Event->event_name);
 
