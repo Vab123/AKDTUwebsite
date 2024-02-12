@@ -41,7 +41,7 @@ function send_opdater_fælleshus_internet($debug = false, $force_send = false) {
 		# This is a real run
 
 		# Update the password according to the struct
-		$status = update_common_house_internet_password($password_struct);
+		$status = set_fælleshus_password($new_password);
 
 		# Check if successful
 		if ($status['password'] != $new_password) {
