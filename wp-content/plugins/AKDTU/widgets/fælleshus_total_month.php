@@ -5,8 +5,8 @@
  */
 
 function fælleshus_total_month_widget() {
-	$show_months_ahead = 4; // How many months in the future from now to include in table
-	$show_months_ago = 5; // How many months ago from now to include in table
+	$show_months_ahead = 2; // How many months in the future from now to include in table
+	$show_months_ago = 7; // How many months ago from now to include in table
 
 	$current_month = (new DateTime)->format('m');
 	$current_year = (new DateTime)->format('Y');
