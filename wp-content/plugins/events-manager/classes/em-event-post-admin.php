@@ -250,33 +250,63 @@ class EM_Event_Post_Admin {
 				if (get_post_type($post_id) == EM_POST_TYPE_EVENT) {
 					global $EM_Notices;
 					include_once WP_PLUGIN_DIR . '/AKDTU/functions/send_mail.php';
-					$EM_Event = em_get_event($post_id, 'post_id');
-					$lang = pll_get_post_language($post_id);
-					if (!user_can($EM_Event->get_contact()->ID, 'publish_events')) {
-						if (is_admin()) {
-							//Send email to user
-							$output_type = get_option('dbem_smtp_html') ? 'html' : 'email';
-							$subject = $EM_Event->output(get_option('dbem_event_rejected_email_subject_' . $lang), 'raw');
-							$body = $EM_Event->output(get_option('dbem_event_rejected_email_body_' . $lang), $output_type);
-							$attachments = get_option('dbem_event_rejected_email_attachments_' . $lang);
-							if (strlen($attachments) > 0) {
-								$attachments = explode(",", $attachments);
-								$root = get_option('dbem_event_attachment_root');
-							} else {
-								$attachments = array();
-							}
-							if (get_option('dbem_event_send_mail_to_owner')) $EM_Event->email_send($subject, $body, $EM_Event->get_contact()->user_email, $attachments);
 
-							$admin_emails = explode(',', get_option('dbem_event_submitted_email_admin')); //admin emails are in an array, single or multiple
+					$EM_Event = em_get_event($post_id, 'post_id');
+
+					if (!user_can($EM_Event->get_contact()->ID, 'publish_events')) {
+						$EM_Event->event_slug .= "-";
+
+						$lang = pll_get_post_language($post_id);
+						$output_type = get_option('dbem_smtp_html') ? 'html' : 'email';
+						$admin_emails = explode(',', get_option('dbem_event_submitted_email_admin')); //admin emails are in an array, single or multiple
+
+						// Check if event is rejected by admin or deleted by user
+						if (is_admin()) {
+							// Event has been rejected by admin
+
+							//Send email to user if required
+							if (get_option('dbem_event_send_mail_to_owner')) {
+								$subject = $EM_Event->output(get_option('dbem_event_rejected_email_subject_' . $lang), 'raw');
+
+								$body = $EM_Event->output(get_option('dbem_event_rejected_email_body_' . $lang), $output_type);
+
+								$attachments = get_option('dbem_event_rejected_email_attachments_' . $lang);
+								if (strlen($attachments) > 0) {
+									$attachments = explode(",", $attachments);
+									$root = get_option('dbem_event_attachment_root');
+								} else {
+									$attachments = array();
+								}
+
+								$EM_Event->email_send($subject, $body, $EM_Event->get_contact()->user_email, $attachments);
+							}
+
+							// Send email to admins, informing that the event has been rejected
 							$subject = $EM_Event->output(get_option('dbem_event_rejected_confirmation_email_subject_' . $lang), 'raw');
 							$body = $EM_Event->output(get_option('dbem_event_rejected_confirmation_email_body_' . $lang), $output_type);
 							$attachments = prepend_attachments_string(get_option('dbem_event_rejected_confirmation_email_attachments_' . $lang));
-
 							$EM_Event->email_send($subject, $body, $admin_emails, $attachments);
 						} else {
-							//Send email to admin
-							$admin_emails = explode(',', get_option('dbem_event_submitted_email_admin')); //admin emails are in an array, single or multiple
-							$output_type = get_option('dbem_smtp_html') ? 'html' : 'email';
+							// Event has been deleted by user
+
+							//Send email to user if required
+							if (get_option('dbem_event_send_mail_to_owner')) {
+								$subject = $EM_Event->output(get_option('dbem_event_deleted_email_subject_' . $lang), 'raw');
+
+								$body = $EM_Event->output(get_option('dbem_event_deleted_email_body_' . $lang), $output_type);
+
+								$attachments = get_option('dbem_event_deleted_email_attachments_' . $lang);
+								if (strlen($attachments) > 0) {
+									$attachments = explode(",", $attachments);
+									$root = get_option('dbem_event_attachment_root');
+								} else {
+									$attachments = array();
+								}
+
+								$EM_Event->email_send($subject, $body, $EM_Event->get_contact()->user_email, $attachments);
+							}
+							
+							// Send email to admins, informing that the event has been deleted
 							$subject = $EM_Event->output(get_option('dbem_event_deleted_email_subject'), 'raw');
 							$body = $EM_Event->output(get_option('dbem_event_deleted_email_body'), $output_type);
 							$attachments = prepend_attachments_string(get_option('dbem_event_deleted_email_attachments'));
