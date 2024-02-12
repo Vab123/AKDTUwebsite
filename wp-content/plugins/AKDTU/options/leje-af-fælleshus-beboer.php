@@ -23,6 +23,20 @@ function AKDTU_save_leje_af_fælleshus_beboer_mail_settings() {
 	update_option('dbem_event_reapproved_email_attachments_da', stripcslashes($_REQUEST['dbem_event_reapproved_email_attachments_da']));
 	update_option('dbem_event_reapproved_email_attachments_en', stripcslashes($_REQUEST['dbem_event_reapproved_email_attachments_en']));
 
+	update_option('dbem_event_rejected_email_subject_da', stripcslashes($_REQUEST['dbem_event_rejected_email_subject_da']));
+	update_option('dbem_event_rejected_email_subject_en', stripcslashes($_REQUEST['dbem_event_rejected_email_subject_en']));
+	update_option('dbem_event_rejected_email_body_da', stripcslashes($_REQUEST['dbem_event_rejected_email_body_da']));
+	update_option('dbem_event_rejected_email_body_en', stripcslashes($_REQUEST['dbem_event_rejected_email_body_en']));
+	update_option('dbem_event_rejected_email_attachments_da', stripcslashes($_REQUEST['dbem_event_rejected_email_attachments_da']));
+	update_option('dbem_event_rejected_email_attachments_en', stripcslashes($_REQUEST['dbem_event_rejected_email_attachments_en']));
+
+	update_option('dbem_event_deleted_email_subject_da', stripcslashes($_REQUEST['dbem_event_deleted_email_subject_da']));
+	update_option('dbem_event_deleted_email_subject_en', stripcslashes($_REQUEST['dbem_event_deleted_email_subject_en']));
+	update_option('dbem_event_deleted_email_body_da', stripcslashes($_REQUEST['dbem_event_deleted_email_body_da']));
+	update_option('dbem_event_deleted_email_body_en', stripcslashes($_REQUEST['dbem_event_deleted_email_body_en']));
+	update_option('dbem_event_deleted_email_attachments_da', stripcslashes($_REQUEST['dbem_event_deleted_email_attachments_da']));
+	update_option('dbem_event_deleted_email_attachments_en', stripcslashes($_REQUEST['dbem_event_deleted_email_attachments_en']));
+
 	# Form info saved. Write success message to admin interface
 	new AKDTU_notice('success', 'Indstillingerne blev gemt');
 }
@@ -207,6 +221,64 @@ function AKDTU_leje_af_fælleshus_beboer_mail_settings() {
 							<th scope=" row">Vedhæftede filer (Engelsk)</th>
 							<td>
 								<input type="text" name="dbem_event_rejected_email_attachments_en" value="<?php echo stripcslashes(get_option('dbem_event_rejected_email_attachments_en')); ?>" style="width: 95%" />
+								<p>Efterlad tom for ikke at vedhæfte noget.</p>
+								<p>Skal være relativt til <code>/var/www/akdtu.dk/public_html</code></p>
+								<p>Flere vedhæftede filer splittes med <code>,</code> uden mellemrum.</p>
+							</td>
+						</tr>
+
+						<tr>
+							<th></th>
+							<td><input type="submit" class="button-primary" value="Gem (Alt)" /></td>
+						</tr>
+					</tbody>
+				</table>
+				<hr>
+				<h3>Mail ved leje slettet af beboer</h3>
+				<table class="form-table" role="presentation">
+					<tbody>
+						<tr>
+							<th scope="row">Emne (Dansk)</th>
+							<td>
+								<input type="text" name="dbem_event_deleted_email_subject_da" value="<?php echo stripcslashes(get_option('dbem_event_deleted_email_subject_da')); ?>" style="width: 95%" />
+								<p>Efterlad tom for ikke at sende nogen mail</p>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">Indhold (Dansk)</th>
+							<td>
+								<textarea rows="5" style="width:95%" name="dbem_event_deleted_email_body_da"><?php echo stripcslashes(get_option('dbem_event_deleted_email_body_da')); ?></textarea>
+								<p>Understøtter <a href="/wp-admin/edit.php?post_type=event&page=events-manager-help#booking-placeholders" target="_blank">Tilmeldingsrelaterede pladsholdere</a>, <a href="/wp-admin/edit.php?post_type=event&page=events-manager-help#event-placeholders" target="_blank">Event relateret pladsholdere</a> og <a href="/wp-admin/edit.php?post_type=event&page=events-manager-help#location-placeholders" target="_blank">Lokationsrelateret pladsholdere</a>.</p>
+							</td>
+						</tr>
+						<tr>
+							<th scope=" row">Vedhæftede filer (Dansk)</th>
+							<td>
+								<input type="text" name="dbem_event_deleted_email_attachments_da" value="<?php echo stripcslashes(get_option('dbem_event_deleted_email_attachments_da')); ?>" style="width: 95%" />
+								<p>Efterlad tom for ikke at vedhæfte noget.</p>
+								<p>Skal være relativt til <code>/var/www/akdtu.dk/public_html</code></p>
+								<p>Flere vedhæftede filer splittes med <code>,</code> uden mellemrum.</p>
+							</td>
+						</tr>
+
+						<tr>
+							<th scope="row">Emne (Engelsk)</th>
+							<td>
+								<input type="text" name="dbem_event_deleted_email_subject_en" value="<?php echo stripcslashes(get_option('dbem_event_deleted_email_subject_en')); ?>" style="width: 95%" />
+								<p>Efterlad tom for ikke at sende nogen mail</p>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">Indhold (Engelsk)</th>
+							<td>
+								<textarea rows="5" style="width:95%" name="dbem_event_deleted_email_body_en"><?php echo stripcslashes(get_option('dbem_event_deleted_email_body_en')); ?></textarea>
+								<p>Understøtter <a href="/wp-admin/edit.php?post_type=event&page=events-manager-help#booking-placeholders" target="_blank">Tilmeldingsrelaterede pladsholdere</a>, <a href="/wp-admin/edit.php?post_type=event&page=events-manager-help#event-placeholders" target="_blank">Event relateret pladsholdere</a> og <a href="/wp-admin/edit.php?post_type=event&page=events-manager-help#location-placeholders" target="_blank">Lokationsrelateret pladsholdere</a>.</p>
+							</td>
+						</tr>
+						<tr>
+							<th scope=" row">Vedhæftede filer (Engelsk)</th>
+							<td>
+								<input type="text" name="dbem_event_deleted_email_attachments_en" value="<?php echo stripcslashes(get_option('dbem_event_deleted_email_attachments_en')); ?>" style="width: 95%" />
 								<p>Efterlad tom for ikke at vedhæfte noget.</p>
 								<p>Skal være relativt til <code>/var/www/akdtu.dk/public_html</code></p>
 								<p>Flere vedhæftede filer splittes med <code>,</code> uden mellemrum.</p>
