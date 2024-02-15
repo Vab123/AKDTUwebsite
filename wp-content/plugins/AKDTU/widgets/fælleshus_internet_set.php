@@ -31,8 +31,7 @@ function fælleshus_internet_set_dashboard_widget() {
 			<thead>
 				<tr>
 					<th colspan="2" style="font-weight:bold;">
-						Bemærk: Internetforbindelsen i fælleshuset opdateres automatisk hver dag klokken 12:01. Nedenstående bør være de korrekte informationer.<br>
-						Hvis ikke, så kan informationerne gennemtvinges ved at trykke på knappen. Dette sender også en mail med login-informationer til lejeren!
+						Bemærk: Internetforbindelsen i fælleshuset opdateres automatisk klokken 12:01 i starten og slutningen af lejeperioder. Det du sætter adgangskoden til herunder vil derfor i fremtiden blive overskrevet.
 					</th>
 				</tr>
 			</thead>
