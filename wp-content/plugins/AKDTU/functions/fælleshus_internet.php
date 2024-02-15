@@ -52,7 +52,7 @@ function hash_password($event) {
  */
 function default_password() {
 	## Generate password in case the common house is NOT rented for an apartment
-	return "Bestyrelsen2023";
+	return "Bestyrelsen2024";
 }
 
 /**
