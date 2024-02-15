@@ -8,9 +8,9 @@
  * Cron-job responsible for sending information about the changing of the password to the router in the common house
  * 
  * @param bool $debug Flag, for whether the users should actually be deleted (false), or if this is a test run to show sample results (true)
- * @param bool $force_send Flag, for whether to force sending emails with information to the Board and renter (if renter exists)
+ * @param bool $force_update Flag, for whether to force updating the password
  */
-function send_opdater_fælleshus_internet($debug = false, $force_send = false) {
+function send_opdater_fælleshus_internet($debug = false, $force_update = false) {
 	# Cron-job frequency
 	$run_every_hours_amount = 24; # How many hours go between each run of the cron-job
 
@@ -31,9 +31,9 @@ function send_opdater_fælleshus_internet($debug = false, $force_send = false) {
 
 	# Extract values from struct
 	$new_password = $password_struct['password'];
-	$password_should_be_changed = $password_struct['should_be_changed'] || $force_send;
+	$password_should_be_changed = $password_struct['should_be_changed'] || $force_update;
 	$event = $password_struct['event'];
-	$send_mail_to_renter = $password_struct['send_mail_to_renter'] || $force_send;
+	$send_mail_to_renter = $password_struct['send_mail_to_renter'];
 	$rented_state = $password_struct['rented_state'];
 
 	# Check if this is a real run, and the password should be changed
