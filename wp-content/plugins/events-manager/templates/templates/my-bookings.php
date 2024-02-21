@@ -37,8 +37,7 @@
 					<thead>
 						<tr>
 							<th class='manage-column' scope='col'><?php pll_e('Garden day', 'events-manager'); ?></th>
-							<th class='manage-column' scope='col'><?php pll_e('Date', 'events-manager'); ?></th>
-							<!-- <th class='manage-column' scope='col'><?php pll_e('Spaces', 'events-manager'); ?></th> -->
+							<th class='manage-column' scope='col'><?php pll_e('Date and time', 'events-manager'); ?></th>
 							<th class='manage-column' scope='col'><?php pll_e('Status', 'events-manager'); ?></th>
 							<th class='manage-column' scope='col'>&nbsp;</th>
 						</tr>
@@ -56,8 +55,9 @@
 								?>
 								<tr>
 									<td><?php echo $EM_Event->output("#_EVENTNAME"); ?></td>
-									<td><?php print_r($EM_Booking->get_tickets()->get_first()->ticket_name); ?></td>
-									<!-- <td><?php echo $EM_Booking->get_spaces() ?></td> -->
+									<td><?php $date_formatter = new IntlDateFormatter(pll_current_language('locale'), IntlDateFormatter::SHORT, IntlDateFormatter::SHORT);
+									$date_formatter->setPattern('dd. MMMM YYYY');
+									echo $date_formatter->format(new DateTime($EM_Booking->get_tickets()->get_first()->ticket_name)) . '<br>' . $EM_Booking->get_event()->output_times(); ?></td>
 									<td>
 										<?php echo $EM_Booking->get_status(); ?>
 									</td>
