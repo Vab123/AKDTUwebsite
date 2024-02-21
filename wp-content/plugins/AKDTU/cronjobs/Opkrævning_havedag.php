@@ -189,22 +189,22 @@ function send_opkrævning_havedag($debug = false) {
 				# Send or echo mail
 				send_AKDTU_email($debug, $subject_replaces, $content_replaces, 'HAVEDAG');
 
-				// Remove menu item for the event if this is a real run
+				# Remove menu item for the event if this is a real run
 				if (!$debug) {
-					// Names of menus to remove items from
+					# Names of menus to remove items from
 					$menu_names = array(
 						"da" => "Dansk - logget ind",
 						"en" => "Engelsk - logget ind"
 					);
 
-					// Remove all events from menus
+					# Remove all events from menus
 					foreach (pll_get_post_translations($events[0]->post_id) as $language_code => $post_id) {
-						// Get the relevant menu
+						# Get the relevant menu
 						$menu = wp_get_nav_menu_object( $menu_names[$language_code] );
 
-						// Check if a menu was found
+						# Check if a menu was found
 						if (is_nav_menu($menu)) {
-							// Get all items in the menu pointing to this event
+							# Get all items in the menu pointing to this event
 							$menu_items = array_filter(
 								wp_get_nav_menu_items( $menu->term_id ) ,
 								function($menu_item) use ($post_id) {
@@ -212,9 +212,9 @@ function send_opkrævning_havedag($debug = false) {
 								}
 							);
 			
-							// Remove the menu item from the menu
+							# Remove the menu item from the menu
 							foreach ($menu_items as $menu_item) {
-								wp_delete_post($menu_item->ID);	// wp_delete_post removes the item from the menu
+								wp_delete_post($menu_item->ID);	# wp_delete_post removes the item from the menu
 							}
 						}
 					}

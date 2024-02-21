@@ -1,6 +1,6 @@
 <?php
 
-// define(MPDF_ROOT, __DIR__ . '/../../../wiki/lib/plugins/dw2pdf/vendor/mpdf/mpdf/');
+# define(MPDF_ROOT, __DIR__ . '/../../../wiki/lib/plugins/dw2pdf/vendor/mpdf/mpdf/');
 require_once __DIR__ . '/../../../wiki/lib/plugins/dw2pdf/DokuImageProcessorDecorator.php';
 require_once __DIR__ . '/../../../wiki/lib/plugins/dw2pdf/vendor/autoload.php';
 
@@ -31,7 +31,7 @@ class AKDTUpdf extends \Mpdf\Mpdf
 
 		$mode = '';
 
-        // we're always UTF-8
+        # we're always UTF-8
         parent::__construct(
             array(
                 'mode' => $mode,
@@ -49,10 +49,10 @@ class AKDTUpdf extends \Mpdf\Mpdf
 					"calibri-bold" => [
 						'R' =>  'calibri-bold.ttf',
 					],
-					// "robotoblack" => [
-					// 	'R' => 'Roboto-Black.ttf',
-					// 	'I' => 'Roboto-BlackItalic.ttf',
-					// ]
+					# "robotoblack" => [
+					# 	'R' => 'Roboto-Black.ttf',
+					# 	'I' => 'Roboto-BlackItalic.ttf',
+					# ]
 				],
 				'dpi' => 300,
 				'margin_left' => $margin_left,
@@ -71,7 +71,7 @@ class AKDTUpdf extends \Mpdf\Mpdf
         $this->ignore_invalid_utf8 = true;
         $this->tabSpaces = 4;
 
-        // assumed that global language can be used, maybe Bookcreator needs more nuances?
+        # assumed that global language can be used, maybe Bookcreator needs more nuances?
         $this->SetDirectionality('ltr');
     }
 

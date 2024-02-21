@@ -5,11 +5,11 @@
  */
 
 function opret_havedag_dashboard_widget() {
-	$start_showing_fall_from_month = 4;		// Month in which to start displaying fall garden day information (Including this month)
+	$start_showing_fall_from_month = 4;		# Month in which to start displaying fall garden day information (Including this month)
 	$start_showing_fall_from_month_name_da = "april";
 	$start_showing_fall_from_month_name_en = "April";
 
-	$stop_showing_fall_after_month = 10;	// Month in which to stop displaying fall garden day information (After this month)
+	$stop_showing_fall_after_month = 10;	# Month in which to stop displaying fall garden day information (After this month)
 	$stop_showing_fall_after_month_name_da = "oktober";
 	$stop_showing_fall_after_month_name_en = "October";
 	?>

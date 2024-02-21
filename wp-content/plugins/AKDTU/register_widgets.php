@@ -67,7 +67,7 @@ function add_widgets() {
 		include_once "widgets/tilføj_dokumenter.php";
 		include_once "widgets/fjern_dokumenter.php";
 
-		if (current_user_can('add_users')) { // Only admins
+		if (current_user_can('add_users')) { # Only admins
 			# show_board widget
 			include_once "widgets/show_board.php";
 			include_once "actions/remove_boardmember.php";
@@ -133,7 +133,7 @@ function AKDTU_widgets() {
 
 	wp_add_dashboard_widget('fælleshus_internet_dashboard_widget', 'Fælleshus internetforbindelse', 'fælleshus_internet_dashboard_widget');
 
-	if (current_user_can('add_users')) { // Only admins
+	if (current_user_can('add_users')) { # Only admins
 		wp_add_dashboard_widget('show_board_widget', 'Bestyrelsesmedlemmer', 'show_board_widget');
 		wp_add_dashboard_widget('add_boardmember_widget', 'Tilføj bestyrelsesmedlem', 'add_boardmember_widget');
 

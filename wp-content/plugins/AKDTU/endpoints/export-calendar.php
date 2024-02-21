@@ -75,7 +75,7 @@ function AKDTU_export_calendar() {
 				$calendar_export_string .= "DTSTART;TZID=Europe/Copenhagen:" . $starttime->format("Ymd") . "T" . $starttime->format("His") . "\n";
 				$calendar_export_string .= "DTEND;TZID=Europe/Copenhagen:" . $endtime->format("Ymd") . "T" . $endtime->format("His") . "\n";
 				$calendar_export_string .= "LOCATION:Kollegiebakken 19, 2800 Kongens Lyngby, Denmark\n";
-				// $calendar_export_string .= "DESCRIPTION:" . $event_name . "\n";
+				# $calendar_export_string .= "DESCRIPTION:" . $event_name . "\n";
 				$calendar_export_string .= "STATUS:CONFIRMED\n";
 				$calendar_export_string .= "END:VEVENT\n";
 			}
