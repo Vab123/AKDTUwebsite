@@ -48,7 +48,15 @@ If you have any questions or comments, you are welcome to contact the Board on <
 				</tr>
 				<tr>
 					<td><label>Havedage, åååå-mm-dd, adskilt af komma</label></td>
-					<td><textarea rows="2" name="gardenday_dates" style="width:100%;"><?php echo (intval(date('n')) < 4 ? date('Y') : strval(intval(date('Y') + 1))) . "-" . (intval(date('n')) >= 4 && intval(date('n')) <= 10 ? "10" : "04") . "-" . "01"; ?>,<?php echo (intval(date('n')) < 4 ? date('Y') : strval(intval(date('Y') + 1))) . "-" . (intval(date('n')) >= 4 && intval(date('n')) <= 10 ? "10" : "04") . "-" . "02"; ?>,<?php echo (intval(date('n')) < 4 ? date('Y') : strval(intval(date('Y') + 1))) . "-" . (intval(date('n')) >= 4 && intval(date('n')) <= 10 ? "10" : "04") . "-" . "03"; ?></textarea></td>
+					<td><textarea rows="2" name="gardenday_dates" style="width:100%;"><?php echo (intval(date('n')) < 4 ? date('Y') : strval(intval(date('Y') + 1))) . "-" . (intval(date('n')) >= 4 && intval(date('n')) <= 10 ? "10" : "04") . "-" . "01"; ?>, <?php echo (intval(date('n')) < 4 ? date('Y') : strval(intval(date('Y') + 1))) . "-" . (intval(date('n')) >= 4 && intval(date('n')) <= 10 ? "10" : "04") . "-" . "02"; ?>, <?php echo (intval(date('n')) < 4 ? date('Y') : strval(intval(date('Y') + 1))) . "-" . (intval(date('n')) >= 4 && intval(date('n')) <= 10 ? "10" : "04") . "-" . "03"; ?></textarea></td>
+				</tr>
+				<tr>
+					<td><label>Start-tidspunkt for havedage</label></td>
+					<td><input type="time" name="start_time" value="10:00:00" /></td>
+				</tr>
+				<tr>
+					<td><label>Slut-tidspunkt for havedage</label></td>
+					<td><input type="time" name="end_time" value="15:00:00" /></td>
 				</tr>
 				<tr>
 					<td><label>Seneste tidspunkt for tilmelding</label></td>
