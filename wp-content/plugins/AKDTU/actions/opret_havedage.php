@@ -113,7 +113,7 @@ function opret_havedage($danish_name, $danish_post_content, $english_name, $engl
 	$danish_menu = wp_get_nav_menu_object( 'Dansk - logget ind' );
 	$danish_menu_root_event_id = 3455;	// ID of "Havedage" page
 	if(add_event_to_menu($danish_menu, $danish_menu_root_event_id, $danish_events[0])) {
-		new AKDTU_notice('success', "Danske havedage blev oprettet og automatisk tilføjet hjemmesidens menu for beboere. Begivenhederne bliver automatisk offentliggjort " . $publish_date_as_string . ".");
+		new AKDTU_notice('success', "Danske havedage blev oprettet og automatisk tilføjet hjemmesidens menu for beboere. Begivenhederne bliver automatisk offentliggjort " . $publish_date_as_string . ". Tilmelding sker på https://akdtu.dk/events/" . $danish_events[0]['event_slug'] . "/");
 	}
 	else {
 		new AKDTU_notice('error', "Danish events could not be added to menu automatically. Slug is " . $danish_events[0]['event_slug']);
@@ -123,7 +123,7 @@ function opret_havedage($danish_name, $danish_post_content, $english_name, $engl
 	$english_menu = wp_get_nav_menu_object( 'Engelsk - logget ind' );
 	$english_menu_root_event_id = 3499;	// ID of "Garden days" page
 	if(add_event_to_menu($english_menu, $english_menu_root_event_id, $english_events[0])) {
-		new AKDTU_notice('success', "Engelske havedage blev oprettet og automatisk tilføjet hjemmesidens menu for beboere. Begivenhederne bliver automatisk offentliggjort " . $publish_date_as_string . ".");
+		new AKDTU_notice('success', "Engelske havedage blev oprettet og automatisk tilføjet hjemmesidens menu for beboere. Begivenhederne bliver automatisk offentliggjort " . $publish_date_as_string . ". Tilmelding sker på https://akdtu.dk/en/events/" . $english_events[0]['event_slug'] . "/");
 	}
 	else {
 		new AKDTU_notice('error', "English events could not be added to menu automatically. Slug is " . $english_events[0]['event_slug']);
@@ -260,26 +260,26 @@ function opret_havedag($args){
 			$ticket_num = 1;
 
 			// Go through all tickets
-			foreach ($args as $gardenday_date) {
+			foreach (array_reverse($args) as $gardenday_date) {
 				// Create new ticket
-				$ticket = new EM_Ticket(array('event_id'=>$event->event_id)); // Create ticket object
+				$ticket = new EM_Ticket(array('event_id' => $event->event_id)); // Create ticket object
 
 				// Add ticket to the correct garden day
-				$ticket->get_post(array('event_id'=>$event->event_id)); // Update ticket object
+				$ticket->get_post(array('event_id' => $event->event_id)); // Update ticket object
 
 				// Set info about the ticket
-				$ticket->__set('event_id',$event->event_id); // Link ticket with event
-				$ticket->__set('ticket_name',$gardenday_date['date']); // Name of ticket
+				$ticket->__set('event_id', $event->event_id); // Link ticket with event
+				$ticket->__set('ticket_name', $gardenday_date['date']); // Name of ticket
 
-				$ticket->__set('ticket_spaces',$rsvp['spaces']); // Amount of spaces on ticket
-				$ticket->__set('ticket_members',0); // Boolean, only for members
-				$ticket->__set('ticket_guests',0); // Boolean, allow guests
-				$ticket->__set('ticket_required',0); // Boolean, required
-				$ticket->__set('ticket_meta',array('recurrences'=>NULL)); // Set ticket meta
+				$ticket->__set('ticket_spaces', $rsvp['spaces']); // Amount of spaces on ticket
+				$ticket->__set('ticket_members', 0); // Boolean, only for members
+				$ticket->__set('ticket_guests', 0); // Boolean, allow guests
+				$ticket->__set('ticket_required', 0); // Boolean, required
+				$ticket->__set('ticket_meta', array('recurrences' => NULL)); // Set ticket meta
 
-				$ticket->__set('ticket_price',0); // Ticket price
+				$ticket->__set('ticket_price', 0); // Ticket price
 
-				$ticket->__set('ticket_order',$ticket_num); // Ticket order
+				$ticket->__set('ticket_order', $ticket_num); // Ticket order
 				$ticket_num++;
 
 				// Save ticket
