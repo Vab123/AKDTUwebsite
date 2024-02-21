@@ -12,7 +12,7 @@ if (isset($_REQUEST['action'])) {
 			$_REQUEST['danish_post_content'],
 			$_REQUEST['english_name'],
 			$_REQUEST['english_post_content'],
-			explode(",",$_REQUEST['gardenday_dates']),
+			array_map('trim', explode(",",$_REQUEST['gardenday_dates'])),
 			new DateTime($_REQUEST['latest_signup']),
 			$_REQUEST['spaces'],
 			$_REQUEST['max_spaces'],
