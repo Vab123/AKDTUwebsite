@@ -23,7 +23,7 @@ function opret_havedag_dashboard_widget() { ?>
 					<td><textarea rows="35" name="danish_post_content" style="width:100%;">Tilmeld dig kun havedag én dag. Man er velkommen til at deltage flere dage end den man har tilmeldt sig, men i så fald bedes man sende en besked til bestyrelsen på <a href="mailto:bestyrelsen@akdtu.dk">bestyrelsen@akdtu.dk</a>.
 Du kan ændre hvilken dato du har tilmeldt dig senere, indtil midnat d. <?php echo "01" . "/" . (intval(date('n')) >= 4 && intval(date('n')) <= 10 ? "10" : "04") . "/" . (intval(date('n')) < 4 ? date('Y') : strval(intval(date('Y') + 1))); ?> eller dagene er fyldt. Det gør du ved først at afmelde dig din nuværende dag <a href="/for-beboere/havedage/mine-tilmeldinger/">her</a>, og derefter tilmelde dig en anden dag i stedet.
 
-I foråret bliver havedagenes overordnede emner følgende:
+I <?php echo (intval(date('n')) >= 4 && intval(date('n')) <= 10 ? "efteråret" : "foråret"); ?> bliver havedagenes overordnede emner følgende:
 - 1. <?php echo (intval(date('n')) >= 4 && intval(date('n')) <= 10 ? "oktober" : "april"); ?>: EMNE
 - 2. <?php echo (intval(date('n')) >= 4 && intval(date('n')) <= 10 ? "oktober" : "april"); ?>: EMNE
 - 3. <?php echo (intval(date('n')) >= 4 && intval(date('n')) <= 10 ? "oktober" : "april"); ?>: EMNE
@@ -39,7 +39,7 @@ Hvis du har nogen spørgsmål eller kommentarer er du velkommen til at kontakte 
 					<td><textarea rows="35" name="english_post_content" style="width:100%;">Only sign up for one garden day. You are welcome to join other days as well, but in that case please send a message to the board at <a href="mailto:bestyrelsen@akdtu.dk">bestyrelsen@akdtu.dk</a>.
 You can change which date you want to attend later, until <?php echo "01" . "/" . (intval(date('n')) >= 4 && intval(date('n')) <= 10 ? "10" : "04") . "/" . (intval(date('n')) < 4 ? date('Y') : strval(intval(date('Y') + 1))); ?> at 12 am. or the dates are full. This is done by cancelling your current selection <a href="/en/for-residents/garden-days/my-signups/">here</a>, and afterwards selecting a different day instead.
 
-In the spring, the garden days will have the following overall topics:
+In the <?php echo (intval(date('n')) >= 4 && intval(date('n')) <= 10 ? "fall" : "spring"); ?>, the garden days will have the following overall topics:
 - <?php echo (intval(date('n')) >= 4 && intval(date('n')) <= 10 ? "October" : "April"); ?> 1st: EMNE
 - <?php echo (intval(date('n')) >= 4 && intval(date('n')) <= 10 ? "October" : "April"); ?> 2nd: EMNE
 - <?php echo (intval(date('n')) >= 4 && intval(date('n')) <= 10 ? "October" : "April"); ?> 3rd: EMNE
