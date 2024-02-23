@@ -152,7 +152,7 @@ function authenticate_router($router_settings) {
 	$c['ssl']["verify_peer"] = false;
 	$c['ssl']["verify_peer_name"] = false;
 
-	// Check if the path exists
+	// Check if the path to login exists
 	if (!file_exists($router_settings["url_for_logging_in"])) {
 		# Email should be sent as an html-email
 		add_filter('wp_mail_content_type', function ($content_type) {
@@ -241,9 +241,7 @@ function set_fælleshus_password($new_password) {
 		$c['ssl']["verify_peer"] = false;
 		$c['ssl']["verify_peer_name"] = false;
 
-		
-
-		// Check if the path exists
+		// Check if the path to update settings exists
 		if (!file_exists($router_settings["url_for_setting_values"])) {
 			# Email should be sent as an html-email
 			add_filter('wp_mail_content_type', function ($content_type) {
