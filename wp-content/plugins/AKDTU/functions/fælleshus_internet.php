@@ -159,7 +159,7 @@ function authenticate_router($router_settings) {
 			return 'text/html';
 		});
 
-		wp_mail("netgruppen@akdtu.dk", "authenticate_router failed", "Tried to authenticate to router, but it failed<br>url: " . $router_settings["url_for_logging_in"] . "<br>This needs to be fixed. Nothing else was done.");
+		wp_mail("netgruppen@akdtu.dk", "authenticate_router failed", "Forsøgte at logge ind på routeren, men det fejlede.<br>url: " . $router_settings["url_for_logging_in"] . "<br>Dette skal fikses. Intet andet blev gjort.");
 
 		# Authentication failed. Return false
 		return false;
@@ -248,7 +248,7 @@ function set_fælleshus_password($new_password) {
 				return 'text/html';
 			});
 
-			wp_mail("netgruppen@akdtu.dk", "set_fælleshus_password failed", "Tried to update router password, but it failed<br>url: " . $router_settings["url_for_setting_values"] . "<br>This needs to be fixed. Nothing else was done.");
+			wp_mail("netgruppen@akdtu.dk", "set_fælleshus_password fejlet", "Forsøgte at opdatere routerens adgangskode, men det fejlede.<br>url: " . $router_settings["url_for_setting_values"] . "<br>Dette skal fikses. Intet andet blev gjort.");
 
 			# Authentication failed. Return false
 			return false;
