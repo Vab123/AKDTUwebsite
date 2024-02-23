@@ -113,7 +113,7 @@ function opret_havedage($danish_name, $danish_post_content, $english_name, $engl
 	$danish_menu = wp_get_nav_menu_object( 'Dansk - logget ind' );
 	$danish_menu_root_event_id = 3455;	# ID of "Havedage" page
 	if(add_event_to_menu($danish_menu, $danish_menu_root_event_id, $danish_events[0])) {
-		new AKDTU_notice('success', "Danske havedage blev oprettet og automatisk tilføjet hjemmesidens menu for beboere. Begivenhederne bliver automatisk offentliggjort " . $publish_date_as_string . ". Tilmelding sker på https:#akdtu.dk/events/" . $danish_events[0]['event_slug'] . "/");
+		new AKDTU_notice('success', "Danske havedage blev oprettet og automatisk tilføjet hjemmesidens menu for beboere. Begivenhederne bliver automatisk offentliggjort " . $publish_date_as_string . ". Tilmelding sker på https://akdtu.dk/events/" . $danish_events[0]['event_slug'] . "/");
 	}
 	else {
 		new AKDTU_notice('error', "Danish events could not be added to menu automatically. Slug is " . $danish_events[0]['event_slug']);
@@ -123,7 +123,7 @@ function opret_havedage($danish_name, $danish_post_content, $english_name, $engl
 	$english_menu = wp_get_nav_menu_object( 'Engelsk - logget ind' );
 	$english_menu_root_event_id = 3499;	# ID of "Garden days" page
 	if(add_event_to_menu($english_menu, $english_menu_root_event_id, $english_events[0])) {
-		new AKDTU_notice('success', "Engelske havedage blev oprettet og automatisk tilføjet hjemmesidens menu for beboere. Begivenhederne bliver automatisk offentliggjort " . $publish_date_as_string . ". Tilmelding sker på https:#akdtu.dk/en/events/" . $english_events[0]['event_slug'] . "/");
+		new AKDTU_notice('success', "Engelske havedage blev oprettet og automatisk tilføjet hjemmesidens menu for beboere. Begivenhederne bliver automatisk offentliggjort " . $publish_date_as_string . ". Tilmelding sker på https://akdtu.dk/en/events/" . $english_events[0]['event_slug'] . "/");
 	}
 	else {
 		new AKDTU_notice('error', "English events could not be added to menu automatically. Slug is " . $english_events[0]['event_slug']);

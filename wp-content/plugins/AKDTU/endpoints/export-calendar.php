@@ -35,13 +35,11 @@ function AKDTU_export_calendar() {
 			}
 
 			# Get a list of all active events
-			if (user_can(get_user_by('login', $_GET['user']), 'edit_others_events')) {
-				$events = $wpdb->get_results('SELECT event_id,post_id,event_status FROM ' . EM_EVENTS_TABLE . ' WHERE event_status IN (0,1)');
-			} else {
-				$events = $wpdb->get_results('SELECT event_id,post_id,event_status FROM ' . EM_EVENTS_TABLE . ' WHERE event_status = 1');
-			}
-
-
+			// if (user_can(get_user_by('login', $_GET['user']), 'edit_others_events')) {
+			$events = $wpdb->get_results('SELECT event_id,post_id,event_status FROM ' . EM_EVENTS_TABLE . ' WHERE event_status IN (0,1)');
+			// } else {
+			// 	$events = $wpdb->get_results('SELECT event_id,post_id,event_status FROM ' . EM_EVENTS_TABLE . ' WHERE event_status = 1');
+			// }
 
 			# Only use events which are in the desired language, or where no translation exists
 			$events = array_filter($events, function ($event) use ($calendar_language) {
@@ -55,6 +53,11 @@ function AKDTU_export_calendar() {
 
 			# Start calendar export string with info about the calendar
 			$calendar_export_string = "BEGIN:VCALENDAR\nVERSION:2.0\nMETHOD:PUBLISH\nNAME:" . $calendar_names[$calendar_language] . "\nX-WR-CALNAME:" . $calendar_names[$calendar_language] . "\nDESCRIPTION:" . $calendar_descriptions[$calendar_language] . "\nX-WR-CALDESC:" . $calendar_descriptions[$calendar_language] . "\nTIMEZONE-ID:Europe/Copenhagen\nX-WR-TIMEZONE:Europe/Copenhagen\nREFRESH-INTERVAL;VALUE=DURATION:PT12H\nX-PUBLISHED-TTL:PT12H\n";
+
+			$status_codes = array(
+				0 => "CONFIRMED",
+				1 => "CONFIRMED"
+			);
 
 			# Go through all events and export them
 			foreach ($events as $EM_Event) {
@@ -76,7 +79,7 @@ function AKDTU_export_calendar() {
 				$calendar_export_string .= "DTEND;TZID=Europe/Copenhagen:" . $endtime->format("Ymd") . "T" . $endtime->format("His") . "\n";
 				$calendar_export_string .= "LOCATION:Kollegiebakken 19, 2800 Kongens Lyngby, Denmark\n";
 				# $calendar_export_string .= "DESCRIPTION:" . $event_name . "\n";
-				$calendar_export_string .= "STATUS:CONFIRMED\n";
+				$calendar_export_string .= "STATUS:" . $status_codes[$EM_Event->get_status()] . "\n";
 				$calendar_export_string .= "END:VEVENT\n";
 			}
 

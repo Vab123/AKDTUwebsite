@@ -21,9 +21,9 @@ function get_router_settings() {
 		"old_pass" => "", # Previous password of the internet-connection (not admin interface). Does not matter, but here for future reference
 	);
 
-	$router_settings["url_for_getting_values"] = "https:#" . $router_settings["ip"] . ":" . $router_settings["port"] . "/appGet.cgi"; # URL for post-requests when getting current values from the router
-	$router_settings["url_for_setting_values"] = "https:#" . $router_settings["ip"] . ":" . $router_settings["port"] . "/start_apply2.htm"; # URL for post-requests when setting new values from the router
-	$router_settings["url_for_logging_in"] = "https:#" . $router_settings["ip"] . ":" . $router_settings["port"] . "/login.cgi"; # URL for post-requests when logging into the router
+	$router_settings["url_for_getting_values"] = "https://" . $router_settings["ip"] . ":" . $router_settings["port"] . "/appGet.cgi"; # URL for post-requests when getting current values from the router
+	$router_settings["url_for_setting_values"] = "https://" . $router_settings["ip"] . ":" . $router_settings["port"] . "/start_apply2.htm"; # URL for post-requests when setting new values from the router
+	$router_settings["url_for_logging_in"] = "https://" . $router_settings["ip"] . ":" . $router_settings["port"] . "/login.cgi"; # URL for post-requests when logging into the router
 
 	return $router_settings;
 }
@@ -167,7 +167,7 @@ function authenticate_router($router_settings) {
 	# Check if authentication was successful, and return header content to make future requests
 	if (array_key_exists("asus_token", $r)) {
 		# Authentication success. Extract headers for future requests.
-		$new_headers = "user-agent: asusrouter-Android-DUTUtil-1.0.0.245\r\ncookie: asus_token=" . $r->asus_token . "\r\nReferer: https:#" . $router_settings["ip"] . "." . $router_settings["port"] . "/device-map/router.asp\r\nContent-Type: application/x-www-form-urlencoded";
+		$new_headers = "user-agent: asusrouter-Android-DUTUtil-1.0.0.245\r\ncookie: asus_token=" . $r->asus_token . "\r\nReferer: https://" . $router_settings["ip"] . "." . $router_settings["port"] . "/device-map/router.asp\r\nContent-Type: application/x-www-form-urlencoded";
 
 		return $new_headers;
 	}
@@ -200,7 +200,7 @@ function set_fælleshus_password($new_password) {
 		$encoded_old_password = urlencode( $router_settings["old_pass"] );
 		$encoded_ssid = urlencode( $router_settings["ssid"] );
 	
-		# Payload contains a lot of values. Format is taken from https:#github.com/aaron-junot/change-wifi-pass/blob/a6b88bc14d9a17cdf7c4ee3c0951a68c77a1dc7b/change_pass.py#L39
+		# Payload contains a lot of values. Format is taken from https://github.com/aaron-junot/change-wifi-pass/blob/a6b88bc14d9a17cdf7c4ee3c0951a68c77a1dc7b/change_pass.py#L39
 		$payload = "current_page=%2F" . 
 				  "&next_page=%2F" .
 				  "&action_mode=apply_new" .
