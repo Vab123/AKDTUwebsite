@@ -132,8 +132,8 @@ function AKDTU_widgets() {
 
 	wp_add_dashboard_widget('fælleshus_vis_foreløbig_pris_widget', 'Foreløbig opkrævning for leje af fælleshus', 'fælleshus_vis_foreløbig_pris_widget');
 	wp_add_dashboard_widget('fælleshus_juster_pris_widget', 'Juster opkrævning for leje af fælleshus', 'fælleshus_juster_pris_widget');
-	wp_add_dashboard_widget('fælleshus_total_widget', 'Samlet indtægt for opkrævning for leje af fælleshus, årsbasis', 'fælleshus_total_widget');
-	wp_add_dashboard_widget('fælleshus_total_month_widget', 'Samlet indtægt for opkrævning for leje af fælleshus, månedsbasis', 'fælleshus_total_month_widget');
+	wp_add_dashboard_widget('fælleshus_total_widget', 'Samlet indtægt for leje af fælleshus, år', 'fælleshus_total_widget');
+	wp_add_dashboard_widget('fælleshus_total_month_widget', 'Samlet indtægt for leje af fælleshus, måned', 'fælleshus_total_month_widget');
 
 	wp_add_dashboard_widget('opret_havedag_dashboard_widget', 'Opret havedage', 'opret_havedag_dashboard_widget');
 
