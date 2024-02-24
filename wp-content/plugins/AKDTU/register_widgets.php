@@ -5,67 +5,87 @@ add_action('init', 'add_widgets');
 
 function add_widgets() {
 	if (current_user_can('edit_others_events')) {
-		## Actions
-		# allow_user_signups widget
-		include_once "actions/allow_user_signup.php";
-		include_once "actions/delete_user_signup.php";
 
+		# allowed_renter_signups widget
+		include_once "widgets/allowed_renter_signups.php";
+		
 		# allow_renter_signups widget
+		include_once "widgets/allow_renter_signups.php";
 		include_once "actions/allow_renter_signup.php";
 		include_once "actions/delete_renter_signup.php";
 
+		# allowed_user_signups widget
+		include_once "widgets/allowed_user_signups.php";
+
+		# allow_user_signups widget
+		include_once "widgets/allow_user_signups.php";
+		include_once "actions/allow_user_signup.php";
+		include_once "actions/delete_user_signup.php";
+
 		# book_fælleshus widget
+		include_once "widgets/book_fælleshus_beboer.php";
+		include_once "widgets/book_fælleshus_bestyrelse.php";
 		include_once "actions/book_fælleshus.php";
 
-		# opret_havedage widget
-		include_once "actions/opret_havedage.php";
-
-		# tilføj_til_havedag widget
-		include_once "actions/tilmeld_lejlighed_til_havedag.php";
+		# fjern_dokumenter widget
+		include_once "widgets/fjern_dokumenter.php";
+		include_once "actions/remove_document.php";
 
 		# fjern_tilmelding_til_havedag widget
+		include_once "widgets/havedag_fjern_tilmelding.php";
 		include_once "actions/afmeld_lejlighed_til_havedag.php";
 
-		# fælleshus_juster_pris widget
-		include_once "actions/fælleshus_juster_pris.php";
-
 		# fælleshus_afventer widget
+		include_once "widgets/fælleshus_afventer.php";
 		include_once "actions/publish_leje.php";
 		include_once "actions/delete_leje.php";
 
+		# fælleshus_internet_toggle widget
+		include_once "actions/fælleshus_internet_force_update.php";
+		include_once "widgets/fælleshus_internet_toggle.php";
+
+		# fælleshus_juster_pris widget
+		include_once "widgets/fælleshus_juster_pris.php";
+		include_once "actions/fælleshus_juster_pris.php";
+
+		# fælleshus_næste_reservationer widget
+		include_once "widgets/fælleshus_næste_reservationer.php";
+
+		# fælleshus_tidligere_reservertioner widget
+		include_once "widgets/fælleshus_tidligere_reservationer.php";
+
+		# fælleshus_total widget
+		include_once "widgets/fælleshus_total.php";
+
+		# fælleshus_total_month widget
+		include_once "widgets/fælleshus_total_month.php";
+		
+		# fælleshus_vis_foreløbig_pris widget
+		include_once "widgets/fælleshus_vis_foreløbig_pris.php";
+
+		# havedag_future widget
+		include_once "widgets/havedag_future.php";
+
+		# havedag_past widget
+		include_once "widgets/havedag_past.php";
+
+		# moves_future widget
+		include_once "widgets/moves_future.php";
+
+		# moves_past widget
+		include_once "widgets/moves_past.php";
+
+		# opret_havedage widget
+		include_once "widgets/opret_havedage.php";
+		include_once "actions/opret_havedage.php";
+
 		# tilføj_dokumenter widget
+		include_once "widgets/tilføj_dokumenter.php";
 		include_once "actions/upload_document.php";
 
-		# fjern_dokumenter widget
-		include_once "actions/remove_document.php";
-
-		# fælleshus_internet widget
-		include_once "actions/fælleshus_internet_force_update.php";
-
-		## Widgets
-		include_once "widgets/allowed_renter_signups.php";
-		include_once "widgets/allowed_user_signups.php";
-		include_once "widgets/allow_renter_signups.php";
-		include_once "widgets/allow_user_signups.php";
-		include_once "widgets/book_fælleshus_beboer.php";
-		include_once "widgets/book_fælleshus_bestyrelse.php";
-		include_once "widgets/fælleshus_afventer.php";
-		include_once "widgets/fælleshus_internet_toggle.php";
-		include_once "widgets/fælleshus_næste_reservationer.php";
-		include_once "widgets/fælleshus_tidligere_reservationer.php";
-		include_once "widgets/fælleshus_vis_foreløbig_pris.php";
-		include_once "widgets/fælleshus_juster_pris.php";
-		include_once "widgets/fælleshus_total.php";
-		include_once "widgets/fælleshus_total_month.php";
-		include_once "widgets/havedag_future.php";
-		include_once "widgets/havedag_past.php";
-		include_once "widgets/opret_havedage.php";
+		# tilføj_til_havedag widget
 		include_once "widgets/havedag_tilføj_tilmelding.php";
-		include_once "widgets/havedag_fjern_tilmelding.php";
-		include_once "widgets/moves_future.php";
-		include_once "widgets/moves_past.php";
-		include_once "widgets/tilføj_dokumenter.php";
-		include_once "widgets/fjern_dokumenter.php";
+		include_once "actions/tilmeld_lejlighed_til_havedag.php";
 
 		if (current_user_can('add_users')) { # Only admins
 			# show_board widget
@@ -99,8 +119,6 @@ function add_widgets() {
 }
 
 function AKDTU_widgets() {
-	global $wp_meta_boxes;
-
 	wp_add_dashboard_widget('book_fælleshus_beboer_dashboard_widget', 'Reserver fælleshus til beboer', 'book_fælleshus_beboer_dashboard_widget');
 	wp_add_dashboard_widget('book_fælleshus_bestyrelse_dashboard_widget', 'Reserver fælleshus til bestyrelse', 'book_fælleshus_bestyrelse_dashboard_widget');
 	wp_add_dashboard_widget('fælleshus_næste_reservationer_dashboard_widget', 'Næste reservationer af fælleshus', 'fælleshus_næste_reservationer_dashboard_widget');
