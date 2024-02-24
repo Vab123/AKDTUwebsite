@@ -19,6 +19,11 @@ function padded_apartment_number_from_apartment_number($apartment) {
 	# Finds the apartment number from a username for an apartment-, archive-, or renter user
 	return str_pad($apartment,3,"0",STR_PAD_LEFT);
 }
+
+function unpadded_apartment_number_from_padded_apartment_number($apartment) {
+	# Finds the apartment number from a username for an apartment-, archive-, or renter user
+	return ltrim($apartment,"0");
+}
 ############################################################
 
 ############################################################
@@ -34,7 +39,7 @@ function padded_apartment_number_from_apartment_number($apartment) {
  */
 function apartment_number_from_username($username) {
 	# Finds the apartment number from a username for an apartment-, archive-, or renter user
-	return ltrim(substr($username,4,3),"0");
+	return unpadded_apartment_number_from_padded_apartment_number(padded_apartment_number_from_username($username));
 }
 #
 /**
@@ -46,7 +51,19 @@ function apartment_number_from_username($username) {
  */
 function apartment_number_and_type_from_username($username) {
 	# Finds the apartment number from a username for an apartment-, archive-, or renter user, including the suffix if it is an archive-, or renter user
-	return ltrim(substr($username,4),"0");
+	return unpadded_apartment_number_from_padded_apartment_number(padded_apartment_number_and_type_from_username($username));
+}
+#
+/**
+ * Returns the apartment number, padded with zeros if the number is less than 3 digits, from the username
+ * 
+ * @param int $username Username
+ * 
+ * @return string Apartment number, padded with zeros if the number is less than 3 digits
+ */
+function padded_apartment_number_and_type_from_username($username) {
+	# Finds the apartment number from a username for an apartment-, archive-, or renter user
+	return substr($username,4);
 }
 #
 /**
@@ -58,7 +75,7 @@ function apartment_number_and_type_from_username($username) {
  */
 function padded_apartment_number_from_username($username) {
 	# Finds the apartment number from a username for an apartment-, archive-, or renter user
-	return padded_apartment_number_from_apartment_number(apartment_number_from_username($username));
+	return substr($username,4,3);
 }
 ############################################################
 
@@ -102,6 +119,18 @@ function apartment_number_and_type_from_id($id) {
 function padded_apartment_number_from_id($id) {
 	# Finds the apartment number from an id for an apartment-, archive-, or renter user
 	return padded_apartment_number_from_apartment_number(apartment_number_from_id($id));
+}
+#
+/**
+ * Returns the apartment number, padded with zeros if the number is less than 3 digits, from the user id
+ * 
+ * @param int $id User id
+ * 
+ * @return string Apartment number, padded with zeros if the number is less than 3 digits, corresponding to the user id
+ */
+function padded_apartment_number_and_type_from_id($id) {
+	# Finds the apartment number from an id for an apartment-, archive-, or renter user
+	return padded_apartment_number_from_apartment_number(apartment_number_and_type_from_id($id));
 }
 ############################################################
 
@@ -275,7 +304,7 @@ function is_archive_user_from_id($id) {
  */
 function is_vicevært_from_username($username) {
 	# Checks if the username belongs to a vicevært user
-	return count(array_filter(get_user_by('login', $username)->roles,function($role){return $role == 'vicevaert';})) > 0;
+	return in_array('vicevaert', get_user_by('login', $username)->roles);
 }
 #
 /**
@@ -306,10 +335,7 @@ function is_vicevært_from_id($id) {
  */
 function is_boardmember_from_username($username) {
 	# Checks if the username belongs to a board member
-	$user = SwpmMemberUtils::get_user_by_user_name($username);
-	$level = SwpmMembershipLevelUtils::get_membership_level_name_by_level_id($user->membership_level);
-
-	return $level == "Beboerprofil til bestyrelsesmedlem";
+	return SwpmMembershipLevelUtils::get_membership_level_name_by_level_id(SwpmMemberUtils::get_user_by_user_name($username)->membership_level) == "Beboerprofil til bestyrelsesmedlem";
 }
 #
 /**
@@ -396,18 +422,8 @@ function was_boardmember_from_id($id, $datetime) {
  * @return array[int] Array of apartment numbers for all current boardmembers
  */
 function all_boardmember_apartments() {
-	# Prepare list for apartment numbers
-	$board_member_usernames = array();
-
-	# Go through all apartment numbers
-	foreach (all_apartments() as $apartment) {
-		if(is_boardmember_from_apartment_number($apartment)) {
-			$board_member_usernames[] = $apartment;
-		}
-	}
-
 	# Return array of boardmembers
-	return $board_member_usernames;
+	return array_filter(all_apartments(), function($apartment) {return is_boardmember_from_apartment_number($apartment);});
 }
 #
 /**
