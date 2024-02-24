@@ -25,6 +25,8 @@ if (isset($_REQUEST['action'])) {
  * @param array $file File to be uploaded
  * @param DateTime $document_date Date for the document (e.g. date of meeting)
  * @param string $document_typetype Additional type info for the uploaded document, or empty string if such is not relevant
+ * 
+ * @return bool True if the document was uploaded and stored correctly
  */
 function upload_dokument($document_type, $file, $document_date, $document_typetype = ''){
 	global $bestyrelsesdocuments_document_types;
@@ -33,7 +35,8 @@ function upload_dokument($document_type, $file, $document_date, $document_typety
 	if( strtolower(pathinfo($file["name"], PATHINFO_EXTENSION)) != "pdf" ) {
 		# Uploaded file is not a pdf. Write error message to admin interface
 		new AKDTU_notice('error','Kun pdf-filer kan uploades.');
-		return;
+
+		return false;
 	}
 
 	# Check if this is a valid document type
@@ -50,16 +53,24 @@ function upload_dokument($document_type, $file, $document_date, $document_typety
 			if (move_uploaded_file($file["tmp_name"], $target_file)) {
 				# Uploaded document was saved. Write success message to admin interface
 				new AKDTU_notice('success','Dokumentet blev gemt.');
+
+				return true;
 			} else {
 				# Uploaded document was not saved. Write error message to admin interface
 				new AKDTU_notice('error','Dokumentet kunne ikke gemmes.');
+
+				return false;
 			}
 		} else {
 			# File already exists. Write error message to admin interface
 			new AKDTU_notice('error','Der findes allerede et dokument af samme type fra samme dato. Slet dette før du uploader et nyt. Dokumentet er ikke gemt.');
+
+			return false;
 		}
 	} else {
 		# No valid type of document matched. Write error message to admin interface
 		new AKDTU_notice('error','Forkert information modtaget. Dokumentet er ikke gemt.' . json_encode($bestyrelsesdocuments_document_types));
+
+		return false;
 	}
 }

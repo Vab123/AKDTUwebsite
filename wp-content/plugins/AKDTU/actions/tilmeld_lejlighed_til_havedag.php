@@ -17,6 +17,8 @@ if (isset($_REQUEST['action'])) {
  * @param int $apartment_number Apartment number
  * @param int $havedag_event_id Event id of the garden day
  * @param string $gardenday_date Date of the garden day, where the apartment should be signed up
+ * 
+ * @return bool True if apartment was added to the garden day successfully
  */
 function add_signup_to_gardenday_for_apartment($apartment_number, $gardenday_event_id, $gardenday_date){
 	if ($apartment_number > 0) {
@@ -36,20 +38,16 @@ function add_signup_to_gardenday_for_apartment($apartment_number, $gardenday_eve
 
 		# Add tickets to booking
 		$result2 = $wpdb->insert(EM_TICKETS_BOOKINGS_TABLE, array( 'booking_id' => $wpdb->insert_id, 'ticket_id' => $gardenday_date, 'ticket_booking_spaces' => 1, 'ticket_booking_price' => 0 ) );
-
-		# Get the garden day event
-		$event = em_get_event($gardenday_event_id,'event_id');
-		
-		# Get all bookings  for the garden day event
-		$bookings = $event->get_bookings();
 		
 		# Get all tickets to all bookings for the garden day event
-		$tickets = $bookings->get_tickets()->tickets;
+		$tickets = em_get_event($gardenday_event_id,'event_id')->get_bookings()->get_tickets()->tickets;
 
 		# Check if new booking was successfully added
 		if ($result === 1 && $result2 === 1 && isset($tickets[$gardenday_date])) {
 			# Booking was added. Write success message to admin interface
 			new AKDTU_notice('success','Lejlighed ' . $apartment_number . ' er nu tilmeldt havedagen ' . $tickets[$gardenday_date]->ticket_name . '.');
+
+			return true;
 		}else{
 			# Booking was not added
 
@@ -61,6 +59,8 @@ function add_signup_to_gardenday_for_apartment($apartment_number, $gardenday_eve
 				# Garden day does not exist, and user could not be signed up. Write error message to admin interface
 				new AKDTU_notice('error','Lejlighed ' . $apartment_number . ' kunne ikke tilmeldes havedagen.');
 			}
+
+			return false;
 		}
 	}
 }

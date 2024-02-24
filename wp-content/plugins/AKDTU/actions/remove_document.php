@@ -18,6 +18,8 @@ if (isset($_REQUEST['action'])) {
  * 
  * @param string $document_type Internal representation of the type of document to be deleted
  * @param string $filename Filename of the document to be deleted
+ * 
+ * @return bool True if the document was removed successfully
  */
 function fjern_dokument($document_type, $filename){
 	global $bestyrelsesdocuments_document_types;
@@ -40,13 +42,19 @@ function fjern_dokument($document_type, $filename){
 			if (unlink($target_file)) {
 				# The file was deleted. Write success message to admin interface
 				new AKDTU_notice('success','Dokumentet blev fjernet.');
+
+				return true;
 			} else {
 				# The file was not deleted. Write error message to admin interface
 				new AKDTU_notice('error','Dokumentet kunne ikke fjernes.');
+
+				return false;
 			}
 		} else {
 			# The file did not exist. Write error message to admin interface
 			new AKDTU_notice('error','Der findes ingen dokumenter af denne type. Noget er gået galt.');
+
+			return false;
 		}
 	}
 }

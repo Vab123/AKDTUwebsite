@@ -17,6 +17,8 @@ if (isset($_REQUEST['action'])) {
  * @param int $apartment_number Apartment number
  * @param int $havedag_event_id Event id of the garden day
  * @param string $havedag_dato Date of the garden day, where the apartment should no longer be signed up
+ * 
+ * @return bool True if the registration was deleted successfully
  */
 function remove_signup_to_gardenday_for_apartment($apartment_number, $havedag_event_id, $havedag_dato){
 	# Check if the apartment number is valid
@@ -47,15 +49,28 @@ function remove_signup_to_gardenday_for_apartment($apartment_number, $havedag_ev
 			$result = $wpdb->delete(EM_BOOKINGS_TABLE, array('event_id' => $havedag_event_id, 'person_id' => $user_id ));
 
 			# Write success message to admin interface
-			new AKDTU_notice('success', 'Lejlighed ' . $apartment_number . ' er nu ikke længere tilmeldt havedagen ' . $tickets[$havedag_dato]->ticket_name . '.');
+			if ($result && $result2) {
+				new AKDTU_notice('success', 'Lejlighed ' . $apartment_number . ' er nu ikke længere tilmeldt havedagen ' . $tickets[$havedag_dato]->ticket_name . '.');
+
+				return true;
+			}
+			else {
+				new AKDTU_notice('error', 'Lejlighed ' . $apartment_number . ' kunne ikke fjernes fra havedagen ' . $tickets[$havedag_dato]->ticket_name . '.');
+
+				return false;
+			}
 		} else {
 			# Something went wrong. Output an error message
 			if (isset($tickets[$havedag_dato])) {
 				# The apartment was not signed up to the garden day on that date
 				new AKDTU_notice('error', 'Lejlighed ' . $apartment_number . ' var i forvejen ikke tilmeldt havedagen ' . $tickets[$havedag_dato]->ticket_name . '.');
+
+				return false;
 			} else {
 				# The apartment was not signed up to the garden day at all
 				new AKDTU_notice('error', 'Lejlighed ' . $apartment_number . ' var i forvejen ikke tilmeldt havedagen.');
+
+				return false;
 			}
 		}
 	}

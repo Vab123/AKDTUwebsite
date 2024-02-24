@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file Action to add a new board member to the system
+ * @file Action to add a new vicevært to the system
  */
 
 # Register custom action
@@ -12,9 +12,14 @@ if (isset($_REQUEST['action'])) {
 }
 
 /**
- * Add a new board member to the system
+ * Add a new vicevært to the system
  * 
- * @param int $apartment_number Apartment number of the new board member
+ * @param string $first_name First name of the new vicevært
+ * @param string $last_name Last name of the new vicevært
+ * @param string $username Username of the new vicevært
+ * @param string $email Email address of the new vicevært
+ * 
+ * @return bool True if the vicevært was created successfully
  */
 function add_vicevært($first_name, $last_name, $username, $email){
 	global $wpdb;
@@ -26,7 +31,6 @@ function add_vicevært($first_name, $last_name, $username, $email){
 		
 		# Get SWPM role for new user
 		$all_membership_levels = SwpmMembershipLevelUtils::get_all_membership_levels_in_array();
-		$temp_membership_level = array_search("Administrator" , $all_membership_levels);
 		$vicevært_level = array_search($vicevært_level_name , $all_membership_levels);
 
 		# SWPM user info
@@ -39,11 +43,12 @@ function add_vicevært($first_name, $last_name, $username, $email){
 		$member_info['plain_password'] = 'default_password';
 
 		# Create SWPM user
-		$wpdb->insert($wpdb->prefix . 'swpm_members_tbl', $member_info);
+		if (!$wpdb->insert($wpdb->prefix . 'swpm_members_tbl', $member_info)) {
+			new AKDTU_notice('error', 'Viceværten kunne ikke oprettes.');
 
+			return false;
+		}
 
-
-		
 		# Get wordpress role for new user
 		$user_role = $wpdb->get_var('SELECT role FROM ' . $wpdb->prefix . 'swpm_membership_tbl WHERE id = ' . $member_info['membership_level']);
 		
@@ -76,7 +81,13 @@ function add_vicevært($first_name, $last_name, $username, $email){
 		if ($new_user_wp_id != false) {
 			# Success. Write success message to admin interface
 			new AKDTU_notice('success','Vicevært med brugernavn ' . $member_info['user_name'] . ' oprettet');
+
+			return true;
 		}
+
+		new AKDTU_notice('error', 'Viceværten kunne ikke oprettes.');
+
+		return false;
 	}
 }
 

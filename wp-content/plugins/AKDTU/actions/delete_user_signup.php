@@ -17,6 +17,8 @@ if (isset($_REQUEST['action'])) {
  * @param int $apartment_number Apartment number for the permit
  * @param string $phone_number Phone number for the permit
  * @param string $takeover_time Date and time for takeover of the user for the permit
+ * 
+ * @return bool True if the permit was removed successfully
  */
 function delete_user_signup($apartment_number, $phone_number, $takeover_time){
 	global $wpdb;
@@ -35,8 +37,12 @@ function delete_user_signup($apartment_number, $phone_number, $takeover_time){
 	if ($deleted == 0) {
 		# Deletion failed. Write error message to admin interface
 		new AKDTU_notice('error','Der blev ikke fundet nogen bruger med de givne oplysninger.');
+
+		return false;
 	}else{
 		# Deletion succeeded. Write success message to admin interface
 		new AKDTU_notice('success','Tilladelsen til brugeroprettelse blev slettet.');
+
+		return true;
 	}
 }

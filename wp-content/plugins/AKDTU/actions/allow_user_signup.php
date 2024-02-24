@@ -17,6 +17,8 @@ if (isset($_REQUEST['action'])) {
  * @param int $apartment_number Apartment number for the permit
  * @param string $phone_number Phone number for the permit
  * @param string $takeover_time Date and time for takeover of the user for the permit
+ * 
+ * @return bool True if the permit was created successfully
  */
 function allow_user_signup($apartment_number, $phone_number, $takeover_time) {
 	global $wpdb;
@@ -25,6 +27,8 @@ function allow_user_signup($apartment_number, $phone_number, $takeover_time) {
 	if ($wpdb->query("SELECT apartment_number FROM " . $wpdb->prefix . "swpm_allowed_membercreation WHERE apartment_number=". $apartment_number) > 0) {
 		# A permit already exists. Output error message and return
 		new AKDTU_notice('error', 'Tilladelsen til brugeroprettelse kunne ikke oprettes. Check om der allerede findes en tilladelse til brugeren.');
+
+		return false;
 	} else {
 		# A permit does not exist. Create new permit
 		
@@ -41,6 +45,14 @@ function allow_user_signup($apartment_number, $phone_number, $takeover_time) {
 		$inserted = $wpdb->insert($wpdb->prefix . 'swpm_allowed_membercreation', $data);
 
 		# Write success message to admin interface
-		new AKDTU_notice('success', 'Tilladelsen til brugeroprettelse blev oprettet.');
+		if ($inserted) {
+			new AKDTU_notice('success', 'Tilladelsen til brugeroprettelse blev oprettet.');
+
+			return true;
+		}
+		
+		new AKDTU_notice('error', 'Tilladelsen til brugeroprettelse blev ikke oprettet.');
+
+		return false;
 	}
 }

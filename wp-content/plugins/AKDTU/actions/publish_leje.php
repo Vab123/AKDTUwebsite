@@ -15,6 +15,8 @@ if (isset($_REQUEST['action'])) {
  * Approve a rental request
  * 
  * @param int $event_id Event id of the rental to be approved
+ * 
+ * @return bool True if the event was approved successfully
  */
 function publish_leje($event_id) {
 	# Find the correct event
@@ -24,8 +26,14 @@ function publish_leje($event_id) {
 	$event->set_status(1, true);
 
 	# Save changes
-	$event->save();
+	if ($event->save()) {
+		# Success. Write success message to admin interface
+		new AKDTU_notice('success','Lejen er nu godkendt.');
 
-	# Success. Write success message to admin interface
-	new AKDTU_notice('success','Lejen er nu godkendt.');
+		return true;
+	}
+
+	new AKDTU_notice('error','Lejen kunne ikke godkendes');
+
+	return false;
 }

@@ -39,6 +39,8 @@ if (isset($_REQUEST['action'])) {
  * @param string $publish_date Date for the publication of the events. Also the first day where signups are allowed
  * @param string $start_time Time for the start of the garden days
  * @param string $end_time Time for the end of the garden days
+ * 
+ * @return bool True if all events was saved correctly
  */
 function opret_havedage($danish_name, $danish_post_content, $english_name, $english_post_content, $gardendays, $latest_signup, $spaces, $max_spaces, $publish_date, $start_time, $end_time){
 	# Sort gardenday dates
@@ -117,6 +119,8 @@ function opret_havedage($danish_name, $danish_post_content, $english_name, $engl
 	}
 	else {
 		new AKDTU_notice('error', "Danish events could not be added to menu automatically. Slug is " . $danish_events[0]['event_slug']);
+
+		return false;
 	}
 	
 	# Add first English event to the correct menu
@@ -127,7 +131,11 @@ function opret_havedage($danish_name, $danish_post_content, $english_name, $engl
 	}
 	else {
 		new AKDTU_notice('error', "English events could not be added to menu automatically. Slug is " . $english_events[0]['event_slug']);
+
+		return false;
 	}
+
+	return true;
 }
 
 /**

@@ -15,6 +15,8 @@ if (isset($_REQUEST['action'])) {
  * Add a new board member to the system
  * 
  * @param int $user_id User id of the old board member
+ * 
+ * @return bool True if the board member was removed successfully
  */
 function remove_boardmember($user_id){
 	# Check if the user id is valid
@@ -35,9 +37,17 @@ function remove_boardmember($user_id){
 		$wp_user->set_role('subscriber');
 		
 		# Update old boardmember in the database
-		$wpdb->update($wpdb->prefix . 'AKDTU_boardmembers',array('end_datetime' => (new DateTime('now',new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s')), array('apartment_number' => apartment_number_from_id($_REQUEST['user']), 'end_datetime' => '9999-12-31 23:59:59'));
+		$rows_changed = $wpdb->update($wpdb->prefix . 'AKDTU_boardmembers',array('end_datetime' => (new DateTime('now',new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s')), array('apartment_number' => apartment_number_from_id($_REQUEST['user']), 'end_datetime' => '9999-12-31 23:59:59'));
 
 		# Write success message to admin interface
-		new AKDTU_notice('success','Bestyrelsesmedlemmet blev fjernet');
+		if ($rows_changed > 0) {
+			new AKDTU_notice('success','Bestyrelsesmedlemmet blev fjernet');
+
+			return true;
+		}
+
+		new AKDTU_notice('success','Bestyrelsesmedlemmet blev ikke fjernet');
+
+		return false;
 	}
 }

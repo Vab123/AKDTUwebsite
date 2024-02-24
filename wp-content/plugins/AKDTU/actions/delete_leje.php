@@ -12,9 +12,11 @@ if (isset($_REQUEST['action'])) {
 }
 
 /**
- * Add a new board member to the system
+ * Deletes a rental request
  * 
  * @param int $event_id Event id of the rental to be deleted
+ * 
+ * @return bool True if the rental was deleted successfully
  */
 function delete_leje($event_id) {
 	# Get event
@@ -28,8 +30,14 @@ function delete_leje($event_id) {
 	$event_post_admin->trashed_post($event->post_id);
 
 	# Delete post
-	$result = wp_trash_post($event->post_id);
+	if (wp_trash_post($event->post_id)) {
+		# Write success message to admin interface
+		new AKDTU_notice('success','Lejen er nu afvist.');
 
-	# Write success message to admin interface
+		return true;
+	}
+
 	new AKDTU_notice('success','Lejen er nu afvist.');
+
+	return false;
 }

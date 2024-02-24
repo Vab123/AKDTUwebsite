@@ -26,7 +26,7 @@ if (isset($_REQUEST['action'])) {
  * @param DateTime $start_date Start-date and -time of the rental
  * @param DateTime $end_date End-date and -time of the rental
  * 
- * @return bool True if the booking was successful
+ * @return bool True if the booking was successfully created
  */
 function book_fælleshus_beboer($event_owner, $title, $start_date, $end_date) {
 	global $wpdb;
@@ -34,7 +34,7 @@ function book_fælleshus_beboer($event_owner, $title, $start_date, $end_date) {
 	# Check if end-date is before or the same as the start-date
 	if ($end_date <= $start_date) {
 		new AKDTU_notice('error','Sluttidspunkt skal være før starttidspunkt.');
-		return;
+		return false;
 	}
 
 	# Create Wordpress post
@@ -78,18 +78,17 @@ function book_fælleshus_beboer($event_owner, $title, $start_date, $end_date) {
 	if ($event->validate() && $event->save_meta() && $event->save()){ # Save event and event metadata
 		# Saving was successful. Write success message to the admin interface
 		new AKDTU_notice('success','Fælleshuset er nu reserveret.');
-		$success = true;
+		
+		return true;
 	} else {
 		# Saving failed. Write error message to the admin interface
 		new AKDTU_notice('error','Fælleshuset kunne ikke reserveres.');
 		foreach ($event->errors as $error) {
 			new AKDTU_notice('warning',$error);
 		}
-		$success = false;
-	}
 
-	# Return success state
-	return $success;
+		return false;
+	}
 }
 
 /**
@@ -101,14 +100,14 @@ function book_fælleshus_beboer($event_owner, $title, $start_date, $end_date) {
  * @param DateTime $start_date Start-date and -time of the rental
  * @param DateTime $end_date End-date and -time of the rental
  * 
- * @return bool True if the booking was successful
+ * @return bool True if the booking was successfully created
  */
 function book_fælleshus_bestyrelse($event_owner, $title_da, $title_en, $start_date, $end_date) {
 	global $wpdb;
 
 	if ($end_date <= $start_date) {
 		new AKDTU_notice('error','Sluttidspunkt skal være før starttidspunkt.');
-		return;
+		return false;
 	}
 
 	# Create Wordpress posts
@@ -177,19 +176,20 @@ function book_fælleshus_bestyrelse($event_owner, $title_da, $title_en, $start_d
 	update_post_meta($event_en->post_id, '_event_approvals_count', 1); # Set approval status
 
 	if ($event_da->validate() && $event_da->save_meta() && $event_da->save() && $event_en->validate() && $event_en->save_meta() && $event_en->save()){ # Save event and event metadata
-		pll_save_post_translations( array('en'  => $id_en, 'da' => $id_da ) );
+		pll_save_post_translations( array('en' => $id_en, 'da' => $id_da ) );
 		new AKDTU_notice('success','Fælleshuset er nu reserveret.');
-		$success = true;
+
+		return true;
 	} else {
 		new AKDTU_notice('error','Fælleshuset kunne ikke reserveres.');
+
 		foreach ($event_da->errors as $error) {
 			new AKDTU_notice('warning','DA: ' . $error);
 		}
 		foreach ($event_en->errors as $error) {
 			new AKDTU_notice('warning','EN: ' . $error);
 		}
-		$success = false;
+		
+		return false;
 	}
-
-	return $success;
 }

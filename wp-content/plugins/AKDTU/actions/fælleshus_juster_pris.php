@@ -17,6 +17,8 @@ if (isset($_REQUEST['action'])) {
  * @param string $username Username for the user recieving the price adjustment
  * @param bool $is_archive Flag, true if the user is an archive user
  * @param int $price_change Amount to adjust the price by
+ * 
+ * @return bool True if the price-adjustment was successfully saved
  */
 function fælleshus_juster_pris($username, $is_archive, $price_change){
 	global $wpdb;
@@ -35,8 +37,12 @@ function fælleshus_juster_pris($username, $is_archive, $price_change){
 	if ($inserted == 0) {
 		# Insertion failed. Write error message to admin interface
 		new AKDTU_notice('error',$wpdb->last_error);
+
+		return false;
 	}else{
 		# Insertion succeeded. Write success message to admin interface
 		new AKDTU_notice('success','Ændringen i opkrævning af leje blev gemt.');
+
+		return true;
 	}
 }

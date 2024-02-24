@@ -18,6 +18,8 @@ if (isset($_REQUEST['action'])) {
  * @param string $phone_number Phone number for the permit
  * @param string $start_time Start-date and -time for takeover of the user for the permit
  * @param string $end_time End-date and -time for takeover of the user for the permit
+ * 
+ * @return bool True if the permit was removed successfully
  */
 function delete_renter_signup($apartment_number, $phone_number, $start_time, $end_time){
 	global $wpdb;
@@ -37,8 +39,12 @@ function delete_renter_signup($apartment_number, $phone_number, $start_time, $en
 	if ($deleted == 0) {
 		# Deletion failed. Write error message to admin interface
 		new AKDTU_notice('error','Der blev ikke fundet nogen midlertidig lejer med de givne oplysninger.');
+
+		return false;
 	}else{
 		# Deletion succeeded. Write success message to admin interface
 		new AKDTU_notice('success','Den midlertidige lejer blev slettet.');
+
+		return true;
 	}
 }

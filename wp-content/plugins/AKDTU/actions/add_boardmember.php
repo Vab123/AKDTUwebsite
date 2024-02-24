@@ -15,6 +15,8 @@ if (isset($_REQUEST['action'])) {
  * Add a new board member to the system
  * 
  * @param int $apartment_number Apartment number of the new board member
+ * 
+ * @return bool True if the board member was created successfully
  */
 function add_boardmember($apartment_number){
 	# Check if the apartment number is valid
@@ -49,9 +51,19 @@ function add_boardmember($apartment_number){
 		$wp_user->set_role('board_member');
 
 		# Insert new boardmember into the database
-		$wpdb->insert($wpdb->prefix . 'AKDTU_boardmembers',array('apartment_number' => $apartment_number, 'start_datetime' => (new DateTime('now',new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s'), 'end_datetime' => '9999-12-31 23:59:59'));
+		$inserted = $wpdb->insert($wpdb->prefix . 'AKDTU_boardmembers',array('apartment_number' => $apartment_number, 'start_datetime' => (new DateTime('now',new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s'), 'end_datetime' => '9999-12-31 23:59:59'));
 
-		# Write success message to admin interface
-		new AKDTU_notice('success','Bestyrelsesmedlemmet blev oprettet');
+		if ($inserted) {
+			# Write success message to admin interface
+			new AKDTU_notice('success','Bestyrelsesmedlemmet blev oprettet');
+
+			return true;
+		}
+		else {
+			# Write error message to admin interface
+			new AKDTU_notice('error','Bestyrelsesmedlemmet blev ikke oprettet');
+
+			return true;
+		}
 	}
 }
