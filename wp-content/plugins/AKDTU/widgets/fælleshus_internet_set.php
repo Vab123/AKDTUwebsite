@@ -13,7 +13,7 @@ function fælleshus_internet_set_dashboard_widget() {
 
 	if (count($event_ids) > 0) {
 		$event_owners = array_map(function ($event_id) {
-			return (is_apartment_from_id(em_get_event($event_id, 'event_id')->owner) ? 'lejlighed ' . apartment_number_from_id(em_get_event($event_id, 'event_id')->owner) : 'Bestyrelsen');
+			return (is_apartment_from_id(em_get_event($event_id, 'event_id')->owner) ? 'lejlighed ' . padded_apartment_number_from_id(em_get_event($event_id, 'event_id')->owner) : 'Bestyrelsen');
 		}, $event_ids);
 
 		$rented = true;
@@ -39,7 +39,7 @@ function fælleshus_internet_set_dashboard_widget() {
 				<form action="" method="post">
 					<tr class="alternate">
 						<td style="vertical-align:middle">
-							SSID:
+							SSID
 						</td>
 						<td style="vertical-align:middle">
 							<b><?php echo $router_settings["ssid"]; ?></b>
@@ -47,7 +47,7 @@ function fælleshus_internet_set_dashboard_widget() {
 					</tr>
 					<tr>
 						<td style="vertical-align:middle">
-							Adgangskode:
+							Adgangskode
 						</td>
 						<td style="vertical-align:middle">
 							<input type="text" name="new_password" placeholder="Ny adgangskode" />
@@ -55,7 +55,7 @@ function fælleshus_internet_set_dashboard_widget() {
 					</tr>
 					<tr>
 						<td style="vertical-align:middle">
-							Fælleshus status:
+							Fælleshus status
 						</td>
 						<td style="vertical-align:middle">
 							<b><?php echo ($rented ? "Lejet af " . implode(", ", $event_owners) : "Ledigt"); ?></b>
