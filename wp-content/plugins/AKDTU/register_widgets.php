@@ -131,7 +131,7 @@ function AKDTU_widgets() {
 	wp_add_dashboard_widget('tilføj_dokument_dashboard_widget', 'Upload bestyrelsesdokument', 'tilføj_dokument_dashboard_widget');
 	wp_add_dashboard_widget('fjern_dokument_dashboard_widget', 'Fjern bestyrelsesdokument', 'fjern_dokument_dashboard_widget');
 
-	wp_add_dashboard_widget('fælleshus_internet_dashboard_widget', 'Fælleshus internetforbindelse', 'fælleshus_internet_dashboard_widget');
+	wp_add_dashboard_widget('fælleshus_internet_dashboard_widget', 'Opdater fælleshus internetforbindelse', 'fælleshus_internet_dashboard_widget');
 
 	if (current_user_can('add_users')) { # Only admins
 		wp_add_dashboard_widget('show_board_widget', 'Bestyrelsesmedlemmer', 'show_board_widget');
@@ -139,7 +139,7 @@ function AKDTU_widgets() {
 
 		wp_add_dashboard_widget('fælleshus_vlan_dashboard_widget', 'Fælleshus VLAN', 'fælleshus_vlan_dashboard_widget');
 
-		wp_add_dashboard_widget('fælleshus_internet_set_dashboard_widget', 'Fælleshus internetforbindelse adgangskode', 'fælleshus_internet_set_dashboard_widget');
+		wp_add_dashboard_widget('fælleshus_internet_set_dashboard_widget', 'Indstil fælleshus internetforbindelse', 'fælleshus_internet_set_dashboard_widget');
 		
 		wp_add_dashboard_widget('show_vicevært_widget', 'Viceværter', 'show_vicevært_widget');
 		wp_add_dashboard_widget('add_vicevært_widget', 'Tilføj vicevært', 'add_vicevært_widget');
