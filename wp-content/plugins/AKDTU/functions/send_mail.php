@@ -4,12 +4,21 @@
  * @file Functionality related to the sending of emails from the website to the board, residents, etc.
  */
 
+ /**
+ * Returns the global file-path to the root of the website document folder.
+ * 
+ * @return array[string] Global file-path
+ */
+function website_root_folder() {
+	return '/var/www/akdtu.dk/public_html';
+}
+
 /**
  * Creates a string of file-paths from a comma-seperated string of attachments.
  * 
  * Prepends global file-path
  * 
- * @param string $ATTACHMENTS comma-seperated string of attachments, relative to /var/www/akdtu.dk/public_html, starting with "/"
+ * @param string $ATTACHMENTS comma-seperated string of attachments, relative to website_root_folder, starting with "/"
  * 
  * @return array[string] Key-value array, with the global path to each file
  */
@@ -18,7 +27,7 @@ function prepend_attachments_string($ATTACHMENTS = '') {
 	if (strlen($ATTACHMENTS) > 0) {
 		# Attachment string contains something. Split them up and prepend global path to each element
 		return array_map(function ($key) {
-			return '/var/www/akdtu.dk/public_html' . trim($key);
+			return website_root_folder() . trim($key);
 		}, explode(',', $ATTACHMENTS));
 	}
 

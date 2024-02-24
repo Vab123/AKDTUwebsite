@@ -66,7 +66,7 @@ function AKDTU_leje_af_fælleshus_bestyrelse_modtaget_mail_settings() {
 							<td>
 								<input type="text" name="dbem_event_submitted_email_attachments" value="<?php echo stripcslashes(get_option('dbem_event_submitted_email_attachments')); ?>" style="width: 95%" />
 								<p>Efterlad tom for ikke at vedhæfte noget.</p>
-								<p>Skal være relativt til <code>/var/www/akdtu.dk/public_html</code></p>
+								<p>Skal være relativt til <code><?php echo website_root_folder(); ?></code></p>
 								<p>Flere vedhæftede filer splittes med <code>,</code> uden mellemrum.</p>
 							</td>
 						</tr>
@@ -100,7 +100,7 @@ function AKDTU_leje_af_fælleshus_bestyrelse_modtaget_mail_settings() {
 							<td>
 								<input type="text" name="dbem_event_resubmitted_email_attachments" value="<?php echo stripcslashes(get_option('dbem_event_resubmitted_email_attachments')); ?>" style="width: 95%" />
 								<p>Efterlad tom for ikke at vedhæfte noget.</p>
-								<p>Skal være relativt til <code>/var/www/akdtu.dk/public_html</code></p>
+								<p>Skal være relativt til <code><?php echo website_root_folder(); ?></code></p>
 								<p>Flere vedhæftede filer splittes med <code>,</code> uden mellemrum.</p>
 							</td>
 						</tr>
@@ -134,7 +134,7 @@ function AKDTU_leje_af_fælleshus_bestyrelse_modtaget_mail_settings() {
 							<td>
 								<input type="text" name="dbem_event_deleted_email_attachments" value="<?php echo stripcslashes(get_option('dbem_event_deleted_email_attachments')); ?>" style="width: 95%" />
 								<p>Efterlad tom for ikke at vedhæfte noget.</p>
-								<p>Skal være relativt til <code>/var/www/akdtu.dk/public_html</code></p>
+								<p>Skal være relativt til <code><?php echo website_root_folder(); ?></code></p>
 								<p>Flere vedhæftede filer splittes med <code>,</code> uden mellemrum.</p>
 							</td>
 						</tr>

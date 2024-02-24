@@ -101,7 +101,7 @@ function AKDTU_fælleshus_internet_mail_settings() {
 							<th scope="row">Vedhæftede filer</th>
 							<td>
 								<textarea type="text" name="AKDTU_FÆLLESHUS_INTERNET_ATTACHMENTS" rows="5" , cols="50"><?php echo stripcslashes(get_option('AKDTU_FÆLLESHUS_INTERNET_ATTACHMENTS')); ?></textarea>
-								<p>Stinavn, relativt til <code>/var/www/akdtu.dk/public_html</code>. Skal starte med <code>/</code></p>
+								<p>Skal være relativt til <code><?php echo website_root_folder(); ?></code>. Skal starte med <code>/</code></p>
 								<p>Flere vedhæftede filer adskilles med <code>,</code></p>
 							</td>
 						</tr>
@@ -169,7 +169,7 @@ function AKDTU_fælleshus_internet_mail_settings() {
 							<th scope="row">Vedhæftede filer</th>
 							<td>
 								<textarea type="text" name="AKDTU_FÆLLESHUS_INTERNET_BRUGER_DA_ATTACHMENTS" rows="5" , cols="50"><?php echo stripcslashes(get_option('AKDTU_FÆLLESHUS_INTERNET_BRUGER_DA_ATTACHMENTS')); ?></textarea>
-								<p>Stinavn, relativt til <code>/var/www/akdtu.dk/public_html</code>. Skal starte med <code>/</code></p>
+								<p>Skal være relativt til <code><?php echo website_root_folder(); ?></code>. Skal starte med <code>/</code></p>
 								<p>Flere vedhæftede filer adskilles med <code>,</code></p>
 							</td>
 						</tr>
@@ -241,7 +241,7 @@ function AKDTU_fælleshus_internet_mail_settings() {
 							<th scope="row">Vedhæftede filer</th>
 							<td>
 								<textarea type="text" name="AKDTU_FÆLLESHUS_INTERNET_BRUGER_EN_ATTACHMENTS" rows="5" , cols="50"><?php echo stripcslashes(get_option('AKDTU_FÆLLESHUS_INTERNET_BRUGER_EN_ATTACHMENTS')); ?></textarea>
-								<p>Stinavn, relativt til <code>/var/www/akdtu.dk/public_html</code>. Skal starte med <code>/</code></p>
+								<p>Skal være relativt til <code><?php echo website_root_folder(); ?></code>. Skal starte med <code>/</code></p>
 								<p>Flere vedhæftede filer adskilles med <code>,</code></p>
 							</td>
 						</tr>

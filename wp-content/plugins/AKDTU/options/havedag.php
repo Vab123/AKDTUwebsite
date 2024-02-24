@@ -107,7 +107,7 @@ function AKDTU_havedag_opkrævning_mail_settings() {
 							<th scope="row">Opkrævningsmail - Vedhæftede filer</th>
 							<td>
 								<textarea type="text" name="AKDTU_HAVEDAG_ATTACHMENTS" rows="5" , cols="50"><?php echo stripcslashes(get_option('AKDTU_HAVEDAG_ATTACHMENTS')); ?></textarea>
-								<p>Stinavn, relativt til <code>/var/www/akdtu.dk/public_html</code>. Skal starte med <code>/</code></p>
+								<p>Skal være relativt til <code><?php echo website_root_folder(); ?></code>. Skal starte med <code>/</code></p>
 								<p>Flere vedhæftede filer adskilles med <code>,</code></p>
 							</td>
 						</tr>
@@ -198,7 +198,7 @@ function AKDTU_havedag_opkrævning_mail_settings() {
 							<th scope="row">Varselsmail - Vedhæftede filer</th>
 							<td>
 								<textarea type="text" name="AKDTU_HAVEDAG_WARNING_ATTACHMENTS" rows="5" , cols="50"><?php echo stripcslashes(get_option('AKDTU_HAVEDAG_WARNING_ATTACHMENTS')); ?></textarea>
-								<p>Stinavn, relativt til <code>/var/www/akdtu.dk/public_html</code>. Skal starte med <code>/</code></p>
+								<p>Skal være relativt til <code><?php echo website_root_folder(); ?></code>. Skal starte med <code>/</code></p>
 								<p>Flere vedhæftede filer adskilles med <code>,</code></p>
 							</td>
 						</tr>
