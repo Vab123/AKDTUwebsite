@@ -152,26 +152,20 @@ function authenticate_router($router_settings) {
 	$c['ssl']["verify_peer"] = false;
 	$c['ssl']["verify_peer_name"] = false;
 
-	// Check if the path to login exists
-	if (!file_exists($router_settings["url_for_logging_in"])) {
-		# Email should be sent as an html-email
-		add_filter('wp_mail_content_type', function ($content_type) {
-			return 'text/html';
-		});
-
-		wp_mail("netgruppen@akdtu.dk", "authenticate_router failed", "Forsøgte at logge ind på routeren, men det fejlede.<br>url: " . $router_settings["url_for_logging_in"] . "<br>Dette skal fikses. Intet andet blev gjort.");
-
-		# Authentication failed. Return false
-		return false;
-	}
-
 	# Send post-request to router
 	$r = file_get_contents($router_settings["url_for_logging_in"], false, stream_context_create($c));
  
 	# Check if request failed
 	if ($r === false) {
-		$error = error_get_last();
-		throw new Exception($error['message']);
+		# Email should be sent as an html-email
+		add_filter('wp_mail_content_type', function ($content_type) {
+			return 'text/html';
+		});
+
+		// Send error mail to netgruppen
+		wp_mail("netgruppen@akdtu.dk", "authenticate_router failed", "Forsøgte at logge ind på routeren, men det fejlede da der ikke kunne oprettes forbindelse til routeren. Måske url'en er forkert?<br><br>url: " . $router_settings["url_for_logging_in"] . "<br><br>Dette skal fikses. Intet andet blev gjort.");
+
+		return false;
 	}
 
 	# Request successful. Parse results
@@ -184,7 +178,18 @@ function authenticate_router($router_settings) {
 
 		return $new_headers;
 	}
+	else {
+		# Email should be sent as an html-email
+		add_filter('wp_mail_content_type', function ($content_type) {
+			return 'text/html';
+		});
 
+		// Send error mail to netgruppen
+		wp_mail("netgruppen@akdtu.dk", "authenticate_router failed", "Forsøgte at logge ind på routeren. Forbindelsen blev oprettet, men routeren ikke sendte positivt svar tilbage. Måske brugernavn eller adgangskode er forkert?<br><br>url: " . $router_settings["url_for_logging_in"] . "<br><br>Dette skal fikses. Intet andet blev gjort.");
+
+		// Authentication failed
+		return false;
+	}
 }
 
 /**
@@ -240,28 +245,21 @@ function set_fælleshus_password($new_password) {
 		$c['http']['content'] = $payload;
 		$c['ssl']["verify_peer"] = false;
 		$c['ssl']["verify_peer_name"] = false;
-
-		// Check if the path to update settings exists
-		if (!file_exists($router_settings["url_for_setting_values"])) {
-			# Email should be sent as an html-email
-			add_filter('wp_mail_content_type', function ($content_type) {
-				return 'text/html';
-			});
-
-			wp_mail("netgruppen@akdtu.dk", "set_fælleshus_password fejlet", "Forsøgte at opdatere routerens adgangskode, men det fejlede.<br>url: " . $router_settings["url_for_setting_values"] . "<br>Dette skal fikses. Intet andet blev gjort.");
-
-			# Authentication failed. Return false
-			return false;
-		}
 	
 		# Send post request
 		$r = file_get_contents($router_settings["url_for_setting_values"], false, stream_context_create($c));
 
 		# Check if request was successful
 		if ($r === false) {
-			# Request failed. Return error message
-			$error = error_get_last();
-			return $error['message'];
+			# Email should be sent as an html-email
+			add_filter('wp_mail_content_type', function ($content_type) {
+				return 'text/html';
+			});
+
+			wp_mail("netgruppen@akdtu.dk", "set_fælleshus_password fejlet", "Forsøgte at opdatere routerens adgangskode, men det fejlede.<br><br>url: " . $router_settings["url_for_setting_values"] . "<br><br>Payload: " . $payload . "<br><br>Dette skal fikses. Intet andet blev gjort.");
+
+			# Request failed. Return false.
+			return false;
 		}
 	
 		# Request was successful. Return new password and ssid

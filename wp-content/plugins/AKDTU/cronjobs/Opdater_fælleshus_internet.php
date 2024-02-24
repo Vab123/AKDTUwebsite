@@ -47,7 +47,7 @@ function send_opdater_fælleshus_internet($debug = false, $force_update = false)
 		if ($status['password'] != $new_password) {
 			# Password was NOT updated successfully. Send error message to the network group
 			wp_mail("netgruppen@akdtu.dk", "Ændring af adgangskode til fælleshusets internet fejlet", "Ændring af adgangskode til fælleshusets internet fejlet. Ingen yderligere mails er sendt. Dette skal undersøges nærmere.");
-			return;
+			return false;
 		}
 	} else {
 		# This is NOT a real run. Set status as if it was a successful real run
@@ -142,6 +142,8 @@ function send_opdater_fælleshus_internet($debug = false, $force_update = false)
 			send_AKDTU_email($debug, $subject_replaces_en, $content_replaces_en, 'FÆLLESHUS_INTERNET_BRUGER_EN', $event_owner->user_email);
 		}
 	}
+
+	return true;
 }
 
 ?>
