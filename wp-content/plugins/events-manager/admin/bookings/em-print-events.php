@@ -208,7 +208,6 @@ function em_bookings_print_event() {
 	</style>
 <?php elseif (strtolower($_REQUEST['event_ticket_id']) == 'total') :
 				require_once WP_PLUGIN_DIR . "/AKDTU/functions/users.php";
-				require_once WP_PLUGIN_DIR . "/AKDTU/functions/display_apartments.php";
 
 				$status = array();
 				foreach (all_apartments() as $apartment) {

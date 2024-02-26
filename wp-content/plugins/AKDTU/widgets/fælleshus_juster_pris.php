@@ -16,7 +16,7 @@ function fælleshus_juster_pris_widget() { ?>
 			<tbody>
 				<tr>
 					<td><label>Lejlighed</label></td>
-					<td><?php apartments_dropdown(); ?></td>
+					<td><?php echo apartments_dropdown(true, true, true); ?></td>
 				</tr>
 				<tr style="height:32px;">
 					<td></td>

@@ -51,7 +51,7 @@ function tilføj_til_havedag_dashboard_widget() {
 																														echo 'style="visibility:collapse"';
 																													}; ?>>
 							<td><label>Lejlighed:</label></td>
-							<td><?php apartments_dropdown(); ?></td>
+							<td><?php echo apartments_dropdown(); ?></td>
 						</tr>
 						<tr class="tilføj_havedag_options" id="tilføj_havedag_<?php echo $event->event_id ?>_signup" <?php if ($is_not_first) {
 																															echo 'style="visibility:collapse"';

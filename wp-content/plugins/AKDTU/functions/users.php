@@ -6,6 +6,57 @@
 
 ############################################################
 #
+# Display names
+#
+/**
+ * Returns the display name of the user with the specified username
+ * 
+ * @param string $username Username of a user
+ * 
+ * @return string Display name of the user
+ */
+function name_from_username($username) {
+	# Finds the apartment number from a username for an apartment-, archive-, or renter user
+	$user = get_user_by('login', $username);
+	return $user->first_name . " " . $user->last_name;
+}
+#
+/**
+ * Returns the display name of the user with the specified username
+ * 
+ * @param int $apartment Apartment number to find the display name of
+ * 
+ * @return string Display name of the user
+ */
+function name_from_apartment_number($apartment) {
+	return name_from_username(username_from_apartment_number($apartment));
+}
+#
+/**
+ * Returns the display name of the user with the specified username
+ * 
+ * @param int $apartment Apartment number to find the display name of, padded with zeroes if the number is less than 3 digits
+ * 
+ * @return string Display name of the user
+ */
+function name_from_padded_apartment_number($apartment) {
+	return name_from_apartment_number(unpadded_apartment_number_from_padded_apartment_number($apartment));
+}
+#
+/**
+ * Returns the display name of the user with the specified username
+ * 
+ * @param int $id ID of the user to find the display name of
+ * 
+ * @return string Display name of the user
+ */
+function name_from_id($id) {
+	return name_from_username(username_from_id($id));
+}
+############################################################
+
+############################################################
+#
 # Apartment number, padded with zeros
 #
 /**
@@ -19,7 +70,14 @@ function padded_apartment_number_from_apartment_number($apartment) {
 	# Finds the apartment number from a username for an apartment-, archive-, or renter user
 	return str_pad($apartment,3,"0",STR_PAD_LEFT);
 }
-
+#
+/**
+ * Returns the apartment number, without any padding zeroes
+ * 
+ * @param int $apartment Apartment number, padded with zeros if the number is less than 3 digits
+ * 
+ * @return string Apartment number
+ */
 function unpadded_apartment_number_from_padded_apartment_number($apartment) {
 	# Finds the apartment number from a username for an apartment-, archive-, or renter user
 	return ltrim($apartment,"0");
@@ -492,5 +550,52 @@ function all_moved_after_ids($moved_after_date) {
 	return array_map(function ($apartment) {return id_from_apartment_number($apartment);}, all_moved_after_apartment_numbers($moved_after_date));
 }
 ############################################################
+
+/**
+ * Returns an array with the apartment numbers for all apartments
+ * 
+ * @return array[int] Array of apartment numbers for all apartments
+ */
+function all_apartments() {
+	# Prepare array for apartment numbers
+	$apartments = array();
+
+	# Go through all floors
+	for ($floor = 0; $floor < 3; $floor++) {
+		# Go through all apartment numbers on this floor
+		for ($apartment = 100 * $floor + 1; $apartment < 100 * $floor + 25; $apartment++) {
+			# Add apartment number to array
+			$apartments[] = $apartment;
+		}
+	}
+
+	# Return array of apartment numbers
+	return $apartments;
+}
+
+/**
+ * Creates a html-dropdown element containing an element for each apartment. Values are always unpadded apartment numbers
+ * 
+ * @param bool $display_apartment_numbers True if the dropdown should contain the apartment numbers of the apartment users. Default: true
+ * @param bool $display_names True if the dropdown should contain the names of the apartment users. Default: true
+ * @param bool $use_padded_apartment_numbers True if the apartment numbers should contain leading zeros if the number is less than three digits. Default: true
+ * 
+ * @return string Dropdown containing all apartment users
+ * 
+ * @throws InvalidArgumentException If $display_apartment_numbers and $display_names are both false
+ */
+function apartments_dropdown($display_apartment_numbers = true, $display_names = true, $use_padded_apartment_numbers = true) {
+	if (!$display_apartment_numbers && !$display_names) {
+		throw new InvalidArgumentException("Both $display_apartment_numbers and $display_names cannot be false");
+	}
+
+	$dropdown = '<select name="user">';
+	foreach (all_apartments() as $apartment) {
+		$dropdown .= '<option value="' . ($apartment) . '">' . ($display_apartment_numbers ? ($use_padded_apartment_numbers ? padded_apartment_number_from_apartment_number($apartment) : $apartment) : '') . ($display_apartment_numbers && $display_names ? ' - ' : '') . ($display_names ? name_from_apartment_number($apartment) : '') . '</option>';
+	}
+	$dropdown .= '</select>';
+
+	return $dropdown;
+}
 
 ?>

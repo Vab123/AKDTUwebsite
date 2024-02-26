@@ -16,7 +16,7 @@ function add_boardmember_widget() { ?>
 			<tbody>
 				<tr>
 					<td><label>Lejlighed:</label></td>
-					<td><?php apartments_dropdown(); ?></td>
+					<td><?php echo apartments_dropdown(); ?></td>
 				</tr>
 				<tr>
 					<td></td>
