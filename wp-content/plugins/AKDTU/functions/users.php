@@ -557,20 +557,20 @@ function all_moved_after_ids($moved_after_date) {
  * @return array[int] Array of apartment numbers for all apartments
  */
 function all_apartments() {
-	# Prepare array for apartment numbers
-	$apartments = array();
-
-	# Go through all floors
-	for ($floor = 0; $floor < 3; $floor++) {
-		# Go through all apartment numbers on this floor
-		for ($apartment = 100 * $floor + 1; $apartment < 100 * $floor + 25; $apartment++) {
-			# Add apartment number to array
-			$apartments[] = $apartment;
-		}
-	}
-
 	# Return array of apartment numbers
-	return $apartments;
+	return array_merge(
+		...array_map(
+			function ($floor) {
+				return array_map(
+					function ($apartment) use ($floor) {
+						return $floor * 100 + $apartment;
+					},
+					[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]
+				);
+			},
+			[0,1,2]
+		)
+	);
 }
 
 /**
@@ -579,19 +579,20 @@ function all_apartments() {
  * @param bool $display_apartment_numbers True if the dropdown should contain the apartment numbers of the apartment users. Default: true
  * @param bool $display_names True if the dropdown should contain the names of the apartment users. Default: true
  * @param bool $use_padded_apartment_numbers True if the apartment numbers should contain leading zeros if the number is less than three digits. Default: true
+ * @param string $apartment_number_and_name_separator String separator placed between apartment number and name, if both $display_apartment_numbers and $display_names are true. Default: ' - '
  * 
  * @return string Dropdown containing all apartment users
  * 
  * @throws InvalidArgumentException If $display_apartment_numbers and $display_names are both false
  */
-function apartments_dropdown($display_apartment_numbers = true, $display_names = true, $use_padded_apartment_numbers = true) {
+function apartments_dropdown($display_apartment_numbers = true, $display_names = true, $use_padded_apartment_numbers = true, $apartment_number_and_name_separator = ' - ') {
 	if (!$display_apartment_numbers && !$display_names) {
 		throw new InvalidArgumentException("Both $display_apartment_numbers and $display_names cannot be false");
 	}
 
 	$dropdown = '<select name="user">';
 	foreach (all_apartments() as $apartment) {
-		$dropdown .= '<option value="' . ($apartment) . '">' . ($display_apartment_numbers ? ($use_padded_apartment_numbers ? padded_apartment_number_from_apartment_number($apartment) : $apartment) : '') . ($display_apartment_numbers && $display_names ? ' - ' : '') . ($display_names ? name_from_apartment_number($apartment) : '') . '</option>';
+		$dropdown .= '<option value="' . ($apartment) . '">' . ($display_apartment_numbers ? ($use_padded_apartment_numbers ? padded_apartment_number_from_apartment_number($apartment) : $apartment) : '') . ($display_apartment_numbers && $display_names ? $apartment_number_and_name_separator : '') . ($display_names ? name_from_apartment_number($apartment) : '') . '</option>';
 	}
 	$dropdown .= '</select>';
 
