@@ -40,7 +40,7 @@ function fælleshus_vis_foreløbig_pris_widget() {
 							echo 'class="alternate"';
 						};
 						$row++; ?>>
-						<td><?php echo apartment_number_from_username($username) . (is_archive_user_from_username($username) ? ' (TB)' : ''); ?></td>
+						<td><?php echo padded_apartment_number_from_username($username) . (is_archive_user_from_username($username) ? ' (TB)' : ''); ?></td>
 						<td><?php echo $price_to_pay[$username]; ?> kr.</td>
 						<td><?php echo (isset($price_adjustments[apartment_number_from_username($username)]) ? $price_adjustments[apartment_number_from_username($username)] : 0); ?> kr.</td>
 						<td><?php echo $price; ?> kr.</td>

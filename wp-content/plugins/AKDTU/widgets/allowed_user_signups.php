@@ -38,7 +38,7 @@ function allowed_user_signups_widget() {
 							echo 'class="alternate"';
 						};
 						$row++; ?>>
-						<td style="vertical-align:middle"><?php echo $user->apartment_number; ?></td>
+						<td style="vertical-align:middle"><?php echo padded_apartment_number_from_apartment_number($user->apartment_number); ?></td>
 						<td style="vertical-align:middle"><?php echo $user->phone_number; ?></td>
 						<td style="vertical-align:middle"><?php echo (new DateTime($user->allow_creation_date))->format('d-m-Y H:i'); ?></td>
 						<td style="vertical-align:middle"><?php echo ($user->initial_reset == 1 ? "Ja" : "Nej"); ?></td>

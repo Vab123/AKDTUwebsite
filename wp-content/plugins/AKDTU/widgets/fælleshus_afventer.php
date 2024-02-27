@@ -42,7 +42,7 @@ function fælleshus_afventer_dashboard_widget() {
 						};
 						$row++; ?>>
 						<td style="vertical-align:middle"><?php if (is_apartment_from_id($event->event_owner)) {
-																echo "Lejl. " . apartment_number_from_id($event->event_owner);
+																echo "Lejl. " . padded_apartment_number_from_id($event->event_owner);
 															} else {
 																echo "Bestyrelsen";
 															}; ?></td>

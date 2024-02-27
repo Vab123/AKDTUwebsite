@@ -41,7 +41,7 @@ function fælleshus_tidligere_reservationer_dashboard_widget() {
 											};
 											$row++; ?>>
 						<td style="vertical-align:middle"><?php if (is_apartment_from_id($event->event_owner)) {
-																echo "Lejl. " . apartment_number_from_id($event->event_owner) . (is_archive_user_from_id($event->event_owner) ? ' (TB)' : '');
+																echo "Lejl. " . padded_apartment_number_from_id($event->event_owner) . (is_archive_user_from_id($event->event_owner) ? ' (TB)' : '');
 															} elseif (is_vicevært_from_id($event->event_owner)) {
 																echo "Vicevært";
 															} else {

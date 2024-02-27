@@ -29,7 +29,7 @@ function show_board_widget() {
 							echo 'class="alternate"';
 						};
 						$row++; ?>>
-						<td style="vertical-align:middle"><?php echo apartment_number_from_username($board_member->user_name); ?></td>
+						<td style="vertical-align:middle"><?php echo padded_apartment_number_from_username($board_member->user_name); ?></td>
 						<td style="vertical-align:middle"><?php echo $board_member->first_name . ' '  . $board_member->last_name; ?></td>
 						<?php if (is_admin()) : ?><td>
 								<form action="" method="post" style="text-align:center">

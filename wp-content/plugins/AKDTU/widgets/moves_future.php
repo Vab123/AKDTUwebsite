@@ -34,7 +34,7 @@ function moves_future_dashboard_widget() {
 							echo 'class="alternate"';
 						};
 						$row++; ?>>
-						<td style="vertical-align:middle"><?php echo $user->apartment_number; ?></td>
+						<td style="vertical-align:middle"><?php echo padded_apartment_number_from_apartment_number($user->apartment_number); ?></td>
 						<td style="vertical-align:middle"><?php echo (new DateTime($user->allow_creation_date))->format('d-m-Y H:i'); ?></td>
 					</tr>
 				<?php

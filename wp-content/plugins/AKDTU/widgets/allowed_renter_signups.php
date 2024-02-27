@@ -37,7 +37,7 @@ function allowed_renter_signups_widget() {
 							echo 'class="alternate"';
 						};
 						$row++; ?>>
-						<td style="vertical-align:middle"><?php echo $user->apartment_number; ?></td>
+						<td style="vertical-align:middle"><?php echo padded_apartment_number_from_apartment_number($user->apartment_number); ?></td>
 						<td style="vertical-align:middle"><?php echo $user->phone_number; ?></td>
 						<td style="vertical-align:middle"><?php echo (new DateTime($user->start_time))->format('d-m-Y H:i') . ' - ' . (new DateTime($user->end_time))->format('d-m-Y H:i'); ?></td>
 						<td style="vertical-align:middle;text-align:center">
