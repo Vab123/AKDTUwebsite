@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @var $AKDTU_SHORTCODES Structure containing filenames for all functions to load.
+ * @var $AKDTU_FUNCTIONS Structure containing filenames for all functions to load.
  */
 $AKDTU_FUNCTIONS = array(
 	"bestyrelsesdokumenter.php",
