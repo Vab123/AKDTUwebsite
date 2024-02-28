@@ -8,13 +8,13 @@
  * @var $bestyrelsesdocuments_document_types Information about the types of documents published on the website by the Board
  * 
  * Keys:
- * 		short: Internal reference to the type of document. Same as the key to the array
- * 		name: External reference to the type of document.
- * 		has_type: Flag, if the document has multiple sub-types, such as minutes from ordinary or extra-ordinary general assemblies
- * 		type_options: Array of key-values for the sub-types of the document, if these exists, or NULL otherwise
- * 		folder: Folder containing all of the document-files
- * 		date-format: Format string for the date of the document
- * 		after-date-text: Text which should be added after the date in the document file-name. "%1$s" is replaced with the specific type of document, if has_type is true
+ * 	- `short` Internal reference to the type of document. Same as the key to the array
+ * 	- `name` External reference to the type of document.
+ * 	- `has_type` Flag, if the document has multiple sub-types, such as minutes from ordinary or extra-ordinary general assemblies
+ * 	- `type_options` Array of key-values for the sub-types of the document, if these exists, or NULL otherwise
+ * 	- `folder` Folder containing all of the document-files
+ * 	- `date-format` Format string for the date of the document
+ * 	- `after-date-text` Text which should be added after the date in the document file-name. "%1$s" is replaced with the specific type of document, if `has_type` is true
  */
 $bestyrelsesdocuments_document_types = array(
 	'board' => array(

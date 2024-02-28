@@ -579,7 +579,7 @@ function all_apartments() {
  * @param bool $display_apartment_numbers True if the dropdown should contain the apartment numbers of the apartment users. Default: true
  * @param bool $display_names True if the dropdown should contain the names of the apartment users. Default: true
  * @param bool $use_padded_apartment_numbers True if the apartment numbers should contain leading zeros if the number is less than three digits. Default: true
- * @param string $apartment_number_and_name_separator String separator placed between apartment number and name, if both $display_apartment_numbers and $display_names are true. Default: ' - '
+ * @param string $apartment_number_and_name_separator String separator placed between apartment number and name, if both `$display_apartment_numbers` and `$display_names` are true. Default: ' - '
  * 
  * @return string Dropdown containing all apartment users
  * 

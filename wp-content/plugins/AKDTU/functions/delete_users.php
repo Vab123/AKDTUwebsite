@@ -13,7 +13,7 @@
  * @param int $archive_user_id ID of the corresponding archive-user
  * @param bool $debug Flag, indicating if the function call is a real run, or just a test to output sample results
  * 
- * @return string Formatted string with info about the deleted signups, formatted according to FJERNBRUGERADGANG_FORMAT_PREVIOUS_GARDENDAYS
+ * @return string Formatted string with info about the deleted signups, formatted according to `FJERNBRUGERADGANG_FORMAT_PREVIOUS_GARDENDAYS`
  */
 function delete_previous_gardendays($user_id, $archive_user_id, $debug = false) {
 	global $wpdb;
@@ -120,7 +120,7 @@ function delete_previous_gardendays($user_id, $archive_user_id, $debug = false) 
  * @param int $archive_user_id ID of the corresponding archive-user
  * @param bool $debug Flag, indicating if the function call is a real run, or just a test to output sample results
  * 
- * @return string Formatted string with info about the signups, formatted according to FJERNBRUGERADGANG_FORMAT_FUTURE_GARDENDAYS
+ * @return string Formatted string with info about the signups, formatted according to `FJERNBRUGERADGANG_FORMAT_FUTURE_GARDENDAYS`
  */
 function find_future_gardendays($user_id, $archive_user_id, $debug = false) {
 	global $wpdb;
@@ -231,7 +231,7 @@ function find_future_gardendays($user_id, $archive_user_id, $debug = false) {
  * @param int $archive_user_id ID of the corresponding archive-user
  * @param bool $debug Flag, indicating if the function call is a real run, or just a test to output sample results
  * 
- * @return string Formatted string with info about the rentals, formatted according to FJERNBRUGERADGANG_FORMAT_RENTALS
+ * @return string Formatted string with info about the rentals, formatted according to `FJERNBRUGERADGANG_FORMAT_RENTALS`
  */
 function delete_rentals($user_id, $archive_user_id, $debug = false) {
 	global $wpdb;
