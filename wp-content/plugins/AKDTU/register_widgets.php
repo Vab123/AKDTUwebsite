@@ -26,17 +26,30 @@
  * - "actionfilename": String. Filename of the file with the action function.
  */
 $AKDTU_WIDGETS = array(
-	"allowed_renter_signups" => array(
-		"require_admin" => false,
+	"add_boardmember" => array(
+		"require_admin" => true,
 		"widgets" => array(
-			"allowed_renter_signups.php" => array(
-				"id" => "allowed_renter_signups_widget",
-				"name" => "Midlertidige lejere",
-				"callback" => "allowed_renter_signups_widget",
+			"add_boardmember.php" => array(
+				"id" => "add_boardmember_widget",
+				"name" => "Tilføj bestyrelsesmedlem",
+				"callback" => "add_boardmember_widget",
 			),
 		),
 		"actions" => array(
-
+			"add_boardmember.php",
+		),
+	),
+	"add_vicevært" => array(
+		"require_admin" => true,
+		"widgets" => array(
+			"add_vicevært.php" => array(
+				"id" => "add_vicevært_widget",
+				"name" => "Tilføj vicevært",
+				"callback" => "add_vicevært_widget",
+			),
+		),
+		"actions" => array(
+			"add_vicevært.php",
 		),
 	),
 	"allow_renter_signups" => array(
@@ -53,19 +66,6 @@ $AKDTU_WIDGETS = array(
 			"delete_renter_signup.php",
 		),
 	),
-	"allowed_user_signups" => array(
-		"require_admin" => false,
-		"widgets" => array(
-			"allowed_user_signups.php" => array(
-				"id" => "allowed_user_signups_widget",
-				"name" => "Tilladte brugeroprettelser",
-				"callback" => "allowed_user_signups_widget",
-			),
-		),
-		"actions" => array(
-
-		),
-	),
 	"allow_user_signups" => array(
 		"require_admin" => false,
 		"widgets" => array(
@@ -78,6 +78,32 @@ $AKDTU_WIDGETS = array(
 		"actions" => array(
 			"allow_user_signup.php", 
 			"delete_user_signup.php",
+		),
+	),
+	"allowed_renter_signups" => array(
+		"require_admin" => false,
+		"widgets" => array(
+			"allowed_renter_signups.php" => array(
+				"id" => "allowed_renter_signups_widget",
+				"name" => "Midlertidige lejere",
+				"callback" => "allowed_renter_signups_widget",
+			),
+		),
+		"actions" => array(
+
+		),
+	),
+	"allowed_user_signups" => array(
+		"require_admin" => false,
+		"widgets" => array(
+			"allowed_user_signups.php" => array(
+				"id" => "allowed_user_signups_widget",
+				"name" => "Tilladte brugeroprettelser",
+				"callback" => "allowed_user_signups_widget",
+			),
+		),
+		"actions" => array(
+
 		),
 	),
 	"book_fælleshus" => array(
@@ -136,6 +162,19 @@ $AKDTU_WIDGETS = array(
 		"actions" => array(
 			"publish_leje.php",
 			"delete_leje.php",
+		),
+	),
+	"fælleshus_internet_set" => array(
+		"require_admin" => true,
+		"widgets" => array(
+			"fælleshus_internet_set.php" => array(
+				"id" => "fælleshus_internet_set_dashboard_widget",
+				"name" => "Indstil fælleshus internetforbindelse",
+				"callback" => "fælleshus_internet_set_dashboard_widget",
+			),
+		),
+		"actions" => array(
+			"fælleshus_internet_force_set.php",
 		),
 	),
 	"fælleshus_internet_toggle" => array(
@@ -227,6 +266,20 @@ $AKDTU_WIDGETS = array(
 		),
 		"actions" => array(
 			
+		),
+	),
+	"fælleshus_vlan_toggle" => array(
+		"require_admin" => true,
+		"widgets" => array(
+			"fælleshus_vlan_toggle.php" => array(
+				"id" => "fælleshus_vlan_dashboard_widget",
+				"name" => "Fælleshus VLAN",
+				"callback" => "fælleshus_vlan_dashboard_widget",
+			),
+		),
+		"actions" => array(
+			"fælleshus_vlan_tænd.php",
+			"fælleshus_vlan_sluk.php",
 		),
 	),
 	"havedag_future" => array(
@@ -333,33 +386,6 @@ $AKDTU_WIDGETS = array(
 			"remove_boardmember.php",
 		),
 	),
-	"add_boardmember" => array(
-		"require_admin" => true,
-		"widgets" => array(
-			"add_boardmember.php" => array(
-				"id" => "add_boardmember_widget",
-				"name" => "Tilføj bestyrelsesmedlem",
-				"callback" => "add_boardmember_widget",
-			),
-		),
-		"actions" => array(
-			"add_boardmember.php",
-		),
-	),
-	"fælleshus_vlan_toggle" => array(
-		"require_admin" => true,
-		"widgets" => array(
-			"fælleshus_vlan_toggle.php" => array(
-				"id" => "fælleshus_vlan_dashboard_widget",
-				"name" => "Fælleshus VLAN",
-				"callback" => "fælleshus_vlan_dashboard_widget",
-			),
-		),
-		"actions" => array(
-			"fælleshus_vlan_tænd.php",
-			"fælleshus_vlan_sluk.php",
-		),
-	),
 	"show_vicevært" => array(
 		"require_admin" => true,
 		"widgets" => array(
@@ -373,39 +399,13 @@ $AKDTU_WIDGETS = array(
 			"remove_vicevært.php",
 		),
 	),
-	"add_vicevært" => array(
-		"require_admin" => true,
-		"widgets" => array(
-			"add_vicevært.php" => array(
-				"id" => "add_vicevært_widget",
-				"name" => "Tilføj vicevært",
-				"callback" => "add_vicevært_widget",
-			),
-		),
-		"actions" => array(
-			"add_vicevært.php",
-		),
-	),
-	"fælleshus_internet_set" => array(
-		"require_admin" => true,
-		"widgets" => array(
-			"fælleshus_internet_set.php" => array(
-				"id" => "fælleshus_internet_set_dashboard_widget",
-				"name" => "Indstil fælleshus internetforbindelse",
-				"callback" => "fælleshus_internet_set_dashboard_widget",
-			),
-		),
-		"actions" => array(
-			"fælleshus_internet_force_set.php",
-		),
-	),
 );
 
 ## Add widgets
 add_action('init', 'add_widgets');
 
 /**
- * Loads all files required for widgets defined in `$AKDTU_WIDGETS`, and schedules setup of all the widgets.
+ * @Loads all files required for widgets defined in `$AKDTU_WIDGETS`, and schedules setup of all the widgets.
  */
 function add_widgets() {
 	global $AKDTU_WIDGETS;
