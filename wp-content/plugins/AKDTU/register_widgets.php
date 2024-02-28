@@ -405,7 +405,7 @@ $AKDTU_WIDGETS = array(
 add_action('init', 'add_widgets');
 
 /**
- * @Loads all files required for widgets defined in `$AKDTU_WIDGETS`, and schedules setup of all the widgets.
+ * Loads all files required for widgets defined in `$AKDTU_WIDGETS`, and schedules setup of all the widgets.
  */
 function add_widgets() {
 	global $AKDTU_WIDGETS;
