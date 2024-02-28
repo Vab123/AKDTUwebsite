@@ -18,7 +18,7 @@ class AKDTUpdf extends \Mpdf\Mpdf
      * @param string $orientation
      * @param int $fontsize
      */
-    function __construct($pagesize = 'A4', $orientation = 'portrait', $fontsize = 11, $margin_left = 15, $margin_bottom = 16, $margin_right = 15, $margin_top = 16)
+    function __construct($pagesize = 'A4', $orientation = 'portrait', $fontsize = 11, $margin_left = 15, $margin_bottom = 16, $margin_right = 15, $margin_top = 16, $dpi = 300)
     {
 
         $format = $pagesize;
@@ -54,7 +54,7 @@ class AKDTUpdf extends \Mpdf\Mpdf
 					# 	'I' => 'Roboto-BlackItalic.ttf',
 					# ]
 				],
-				'dpi' => 300,
+				'dpi' => $dpi,
 				'margin_left' => $margin_left,
 				'margin_right' => $margin_right,
 				'margin_top' => $margin_top,
