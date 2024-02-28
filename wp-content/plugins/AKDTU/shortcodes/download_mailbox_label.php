@@ -27,20 +27,8 @@ function AKDTU_download_mailbox_label( $atts ){
 	# Get the current user
 	$user = wp_get_current_user();
 
-	# Check if the user has a first name
-	if ( $user->first_name ) {
-		# Check if the user has a last name
-		if ( $user->last_name ) {
-			# Set the full name of the user
-			$name = $user->first_name . ' ' . $user->last_name;
-		} else {
-			# Set the full name of the user
-			$name = $user->first_name;
-		}
-	} else {
-		# Set the full name of the user
-		$name = $user->display_name;
-	}
+	# Set full name of the user
+	$name = ( $user->first_name ? $user->first_name . ( $user->last_name ? ' ' . $user->last_name : '' ) : $user->display_name );
 
 	# Return html form-object where the user can generate a label for their mailbox
 	return '<form action="/export-mailbox-label.php" method="post" enctype="multipart/form-data"><input size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" placeholder="' . $values['name-placeholder'] . '" value="' . $name . '" type="text" name="user_name"><br><br><button type="submit">Download</button></form>';

@@ -18,9 +18,9 @@ add_shortcode("AKDTU-display-calendar-export-link", "AKDTU_display_calendar_expo
 function AKDTU_display_calendar_export_link($atts) {
 	# Default values
 	$default = array(
-		'lang' => 'da', # Language of the calendar
+		'lang' => 'da', 																				# Language of the calendar
 		'before' => 'Du kan abonnere på kalenderen i Google Calendar, Outlook, mm. med følgende URL: ', # Text to write before the html code-object
-		'after' => '', # Text to write after the html code-object
+		'after' => '', 																					# Text to write after the html code-object
 	);
 	
 	# Combine default values and provided settings
