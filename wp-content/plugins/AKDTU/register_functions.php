@@ -1,12 +1,21 @@
 <?php
 
-require_once "functions/bestyrelsesdokumenter.php";
-require_once "functions/delete_users.php";
-require_once "functions/fælleshus.php";
-require_once "functions/fælleshus_internet.php";
-require_once "functions/notice.php";
-require_once "functions/send_mail.php";
-require_once "functions/users.php";
-require_once "functions/vlan.php";
+/**
+ * @var $AKDTU_SHORTCODES Structure containing filenames for all functions to load.
+ */
+$AKDTU_FUNCTIONS = array(
+	"bestyrelsesdokumenter.php",
+	"delete_users.php",
+	"fælleshus.php",
+	"fælleshus_internet.php",
+	"notice.php",
+	"send_mail.php",
+	"users.php",
+	"vlan.php",
+);
+
+foreach ($AKDTU_FUNCTIONS as $function_file) {
+	include_once "functions/" . $function_file;
+}
 
 ?>

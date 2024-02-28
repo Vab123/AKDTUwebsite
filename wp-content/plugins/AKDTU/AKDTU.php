@@ -12,8 +12,6 @@ Copyright (c) 2022, Victor Brandsen
 
 */
 
-include_once "register_definitions.php";
-
 include_once "register_settings.php";
 
 require_once "register_functions.php";

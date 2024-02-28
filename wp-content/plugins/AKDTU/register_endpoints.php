@@ -1,9 +1,15 @@
 <?php
 
-# Export common house calendar as .ics
-include_once "endpoints/export-calendar.php";
+/**
+ * @var $AKDTU_ENDPOINTS Structure containing filenames for all endpoints to load.
+ */
+$AKDTU_ENDPOINTS = array(
+	"export-calendar.php",
+	// "export-mailbox-label.php",
+);
 
-# Export pdf with label for letter-box. Disabled
-# include_once "endpoints/export-mailbox-label.php";
+foreach ($AKDTU_ENDPOINTS as $endpoint_file) {
+	include_once "endpoints/" . $endpoint_file;
+}
 
 ?>

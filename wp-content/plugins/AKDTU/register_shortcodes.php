@@ -1,11 +1,18 @@
 <?php
 
-include_once "shortcodes/display_list.php";
-include_once "shortcodes/display_bestyrelsesmøder.php";
-include_once "shortcodes/display_budget.php";
-include_once "shortcodes/display_årsrapport.php";
-include_once "shortcodes/display_generalforsamlinger.php";
-include_once "shortcodes/display_export_calendar_link.php";
+/**
+ * @var $AKDTU_SHORTCODES Structure containing filenames for all shortcodes to load.
+ */
+$AKDTU_SHORTCODES = array(
+	"display_list.php",
+	"display_bestyrelsesmøder.php",
+	"display_budget.php",
+	"display_årsrapport.php",
+	"display_generalforsamlinger.php",
+	"display_export_calendar_link.php",
+	"download_mailbox_label.php",
+);
 
-
-include_once "shortcodes/download_mailbox_label.php";
+foreach ($AKDTU_SHORTCODES as $shortcode_file) {
+	include_once "shortcodes/" . $shortcode_file;
+}
