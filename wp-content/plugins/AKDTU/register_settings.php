@@ -13,16 +13,6 @@
  * - "additional_constant": Additional constant to define. E.g. `additional_constant => "_FORMAT", CONSTANT_ROOT => "EMAIL"` would create `AKDTU_EMAIL_FORMAT`.
  */
 $AKDTU_CONSTANTS = array(
-	"FÆLLESHUS" => array(						# Mail om opkrævning for leje af fælleshus
-		'_FORMAT',								# Format af opkrævning
-	),
-	"FÆLLESHUS_INTERNET" => array(), 			# Mail om ændring af VLAN status i fælleshuset
-	"FÆLLESHUS_INTERNET_BRUGER_DA" => array(	# Mail om ændring af VLAN status i fælleshuset
-		"_TOGGLE"
-	),
-	"FÆLLESHUS_INTERNET_BRUGER_EN" => array(	# Mail om ændring af VLAN status i fælleshuset
-		"_TOGGLE"
-	),
 	"FJERNBRUGERADGANG" => array(				# Mail med info om fjernet brugeradgang
 		"_FORMAT_RENTALS", 						# Format for reservationer af fælleshuset
 		"_FORMAT_PREVIOUS_GARDENDAYS", 			# Format for tilmeldinger til tidligere havedage
@@ -32,6 +22,16 @@ $AKDTU_CONSTANTS = array(
 		"_FORMAT_RENTALS", 						# Format for reservationer af fælleshuset
 		"_FORMAT_PREVIOUS_GARDENDAYS", 			# Format for tilmeldinger til tidligere havedage
 		"_FORMAT_FUTURE_GARDENDAYS" 			# Format for tilmeldinger til fremtidige havedage
+	),
+	"FÆLLESHUS" => array(						# Mail om opkrævning for leje af fælleshus
+		'_FORMAT',								# Format af opkrævning
+	),
+	"FÆLLESHUS_INTERNET" => array(), 			# Mail om ændring af VLAN status i fælleshuset
+	"FÆLLESHUS_INTERNET_BRUGER_DA" => array(	# Mail om ændring af VLAN status i fælleshuset
+		"_TOGGLE"
+	),
+	"FÆLLESHUS_INTERNET_BRUGER_EN" => array(	# Mail om ændring af VLAN status i fælleshuset
+		"_TOGGLE"
 	),
 	"NYBRUGER_BRUGER_DA" => array(), 			# Mail med info om ny bruger
 	"NYBRUGER_BRUGER_EN" => array(), 			# Mail med info om ny bruger
