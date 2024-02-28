@@ -36,7 +36,6 @@ function calc_rental_cost($startdatetime, $enddatetime, $owner_id) {
 	# Round end date to appropriate 12:00
 	if ($enddatetime->format('H:i:s') != '12:00:00') {
 		# Round to 12:00
-
 		if ($enddatetime->format('H:i:s') > '12:00:00') {
 			# Add 1 day
 			$enddatetime->add(new DateInterval('P1D'));
