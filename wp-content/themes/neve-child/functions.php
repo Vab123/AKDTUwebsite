@@ -1,25 +1,5 @@
 <?php
 
-/**
- * Removes Wordpress Admin bar for some user roles.
- *
- * @param array $allowed_roles allowed roles.
- *
- * @return boolean
- */
-function tf_check_user_role($allowed_roles) {
-	/*@ Check user logged-in */
-	if (is_user_logged_in()) :
-		/*@ Check if user role is allowed */
-		return empty(array_intersect(wp_get_current_user()->roles, $allowed_roles));
-	endif;
-}
-
-$allowed_roles = ['administrator', 'editor'];
-if (tf_check_user_role($allowed_roles)) :
-	add_filter('show_admin_bar', '__return_false');
-endif;
-
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
 function my_theme_enqueue_styles() {
 	wp_enqueue_style(
@@ -186,6 +166,10 @@ pll_register_string('simple-membership', 'RENTAL_BEFORE_APARTMENTNUM_APPROVED', 
 pll_register_string('simple-membership', 'RENTAL_AFTER_APARTMENTNUM_NOTAPPROVED', 'simple-membership-calendar');
 pll_register_string('simple-membership', 'RENTAL_AFTER_APARTMENTNUM_APPROVED', 'simple-membership-calendar');
 
+
+/**
+ * Restrict sending emails when changing to and from default user
+ */
 ## Dont send email change notifications when changing to or from @akdtu.dk
 if (!function_exists('send_email_change_email')) {
 	function send_email_change_email($return, $user, $userdata) {
@@ -201,7 +185,9 @@ if (!function_exists('send_password_change_email')) {
 	add_filter('send_password_change_email', 'send_password_change_email', 10, 3);
 }
 
-## Custom user role for board-member user profiles
+/**
+ * Custom user role for board-member user profiles
+ */
 add_role(
 	'board_member',
 	'Bestyrelsesmedlem',
@@ -209,3 +195,11 @@ add_role(
 		'read' => true
 	)
 );
+
+/**
+ * Remove admin bar from certain user roles
+ */
+$allowed_roles = ['administrator', 'editor', 'board_member'];
+if (is_user_logged_in() && empty(array_intersect(wp_get_current_user()->roles, $allowed_roles))) {
+	add_filter('show_admin_bar', '__return_false');
+}
