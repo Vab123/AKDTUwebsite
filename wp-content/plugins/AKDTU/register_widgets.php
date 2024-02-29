@@ -410,8 +410,8 @@ add_action('init', 'add_widgets');
 function add_widgets() {
 	global $AKDTU_WIDGETS;
 
-	if (current_user_can('add_users')) { # Only admins
-		$is_administrator = current_user_can('edit_others_events');
+	if (current_user_can('edit_others_events')) { # Board members and admins
+		$is_administrator = current_user_can('add_users'); # Only admins
 
 		foreach ($AKDTU_WIDGETS as $group_name => $group_spec) {
 			if (!$group_spec["require_admin"] || $is_administrator) {
@@ -435,8 +435,8 @@ function add_widgets() {
 function AKDTU_widgets() {
 	global $AKDTU_WIDGETS;
 
-	if (current_user_can('add_users')) { # Only admins
-		$is_administrator = current_user_can('edit_others_events');
+	if (current_user_can('edit_others_events')) { # Board members and admins
+		$is_administrator = current_user_can('add_users'); # Only admins
 
 		foreach ($AKDTU_WIDGETS as $group_name => $group_spec) {
 			if (!$group_spec["require_admin"] || $is_administrator) {
