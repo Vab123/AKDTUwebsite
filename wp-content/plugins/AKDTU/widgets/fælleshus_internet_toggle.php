@@ -54,7 +54,7 @@ function fælleshus_internet_dashboard_widget() {
 						<b><?php echo $password_struct["password"]; ?></b>
 					</td>
 				</tr>
-				<tr>
+				<tr class="alternate">
 					<td style="vertical-align:middle">
 						Fælleshus status
 					</td>
@@ -62,7 +62,7 @@ function fælleshus_internet_dashboard_widget() {
 						<b><?php echo ($rented ? "Lejet af " . implode(", ", $event_owners) : "Ledigt"); ?></b>
 					</td>
 				</tr>
-				<tr class="alternate">
+				<tr>
 					<td style="vertical-align:middle">
 						Mail sendes i dag
 					</td>
@@ -70,7 +70,7 @@ function fælleshus_internet_dashboard_widget() {
 						<b><?php echo ($password_struct["should_be_changed"] ? "Ja" : "Nej"); ?></b>
 					</td>
 				</tr>
-				<tr>
+				<tr class="alternate">
 					<td style="vertical-align:middle"></td>
 					<form action="" method="post">
 						<input type="hidden" name="action" value="fælleshus_internet_force_update" />

@@ -53,7 +53,7 @@ function fælleshus_internet_set_dashboard_widget() {
 							<input type="text" name="new_password" placeholder="Ny adgangskode" />
 						</td>
 					</tr>
-					<tr>
+					<tr class="alternate">
 						<td style="vertical-align:middle">
 							Fælleshus status
 						</td>
