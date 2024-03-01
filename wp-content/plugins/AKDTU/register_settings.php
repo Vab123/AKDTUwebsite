@@ -36,6 +36,14 @@ $AKDTU_CONSTANTS = array(
 	"NYBRUGER_BRUGER_DA" => array(), 			# Mail med info om ny bruger
 	"NYBRUGER_BRUGER_EN" => array(), 			# Mail med info om ny bruger
 	"NYBRUGER_BESTYRELSE" => array(), 			# Mail med info om ny bruger
+	"HAVEDAG" => array(
+		"_DAYS",
+		"_FORMAT",
+	),
+	"HAVEDAG_WARNING" => array(
+		"_DAYS",
+		"_FORMAT",
+	),
 );
 
 /**
@@ -101,12 +109,7 @@ define('BESTYRELSE_FOLDER', 'public_files/bestyrelsesmøder/');	# Where minutes 
 define('GF_FOLDER', 'public_files/generalforsamlinger/'); 		# Where minutes from General Assemblies should be saved.
 define('ÅRSRAPPORT_FOLDER', 'public_files/årsrapporter/'); 		# Where annual reports should be saved.
 define('BUDGET_FOLDER', 'public_files/budgetter/'); 			# Where budgets should be saved.
+define('AKDTU_DIR', WP_PLUGIN_DIR . '/AKDTU');
 
 register_setting('options', 'NYBRUGER_BRUGER_TOGGLE', array('type' => 'string', 'default' => '')); # Whether emails should be sent to new users
 define('NYBRUGER_BRUGER_TOGGLE', get_option('AKDTU_NYBRUGER_BRUGER_TOGGLE'));
-
-register_setting('options', 'HAVEDAG_DAYS', array('type' => 'string', 'default' => '')); 			# Amount of days after the last garden day to send email charging people who have not attended
-define('HAVEDAG_DAYS', get_option('AKDTU_HAVEDAG_DAYS'));
-
-register_setting('options', 'HAVEDAG_WARNING_DAYS', array('type' => 'string', 'default' => '')); 	# Amount of days after the last garden day to send warning mail about pending email charging people who have not attended
-define('HAVEDAG_WARNING_DAYS', get_option('AKDTU_HAVEDAG_WARNING_DAYS'));
