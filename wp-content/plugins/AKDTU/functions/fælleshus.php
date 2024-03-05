@@ -5,6 +5,53 @@
  */
 
 /**
+ * Returns the name of a new common house rental request, considering if the user is a vicevært
+ * 
+ * @param int $apartment_num Apartment number of the new renter
+ * @param bool $is_vicevært Boolean flag. True if the user is a vicevært. (Default: false)
+ * 
+ * @return string Name of the new common house rental request
+*/
+function common_house_rental_name($apartment_num, $is_vicevært = false) {
+	if ($is_vicevært) {
+		return "#_VICEVÆRT_RESERVATION";
+	}
+
+	return "#_RENTAL_BEFORE_APARTMENTNUM" . padded_apartment_number_from_apartment_number($apartment_num) . "#_RENTAL_AFTER_APARTMENTNUM";
+}
+
+/**
+ * Returns the formatted version of the name of an event, replacing certain values
+ * 
+ * @param EM_Event $EM_Event Event to get the name of
+ * @param string $language Slug of the language to format the event name in (Default: "da_DK")
+ * @param bool $is_export Whether the formatted string is to be exported to ics or printed on the website (Default: false)
+ * 
+ * @return string Formatted version of the name of the event in `$EM_Event`
+ */
+function format_common_house_rental_name($EM_Event, $language = "da_DK", $is_export = false) {
+	$event_name_replaces = array(
+		'#_RENTAL_BEFORE_APARTMENTNUM' => pll_translate_string(($is_export ? 'EXPORT_' : '') . ($EM_Event->event_status == 0 ? 'RENTAL_BEFORE_APARTMENTNUM_NOTAPPROVED' : 'RENTAL_BEFORE_APARTMENTNUM_APPROVED'), $language),
+		'#_RENTAL_AFTER_APARTMENTNUM' => pll_translate_string(($is_export ? 'EXPORT_' : '') . ($EM_Event->event_status == 0 ? 'RENTAL_AFTER_APARTMENTNUM_NOTAPPROVED' : 'RENTAL_AFTER_APARTMENTNUM_APPROVED'), $language),
+		'#_VICEVÆRT_RESERVATION' => pll_translate_string('VICEVÆRT_RESERVATION', 'events-manager', $language),
+		'&nbsp;' => ' ',
+	);
+
+	return str_replace(array_keys($event_name_replaces), $event_name_replaces, $EM_Event->event_name);
+}
+
+/**
+ * Checks if the event is a common house rental by an apartment
+ * 
+ * @param EM_Event $EM_Event Event to check
+ * 
+ * @return bool True if the event is a common house rental by an apartment
+ */
+function is_common_house_rental($EM_Event) {
+	return substr($EM_Event->event_name, 0, 28) == "#_RENTAL_BEFORE_APARTMENTNUM";
+}
+
+/**
  * Calculates the rental cost for renting the common house for a period.
  * 
  * Can handle starting- and ending-times not being exactly 12:00

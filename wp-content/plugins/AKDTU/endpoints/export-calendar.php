@@ -131,20 +131,10 @@ function event_as_ics($EM_Event, $calendar_language) {
 	$endtime = new DateTime($EM_Event->event_end_date . " " . $EM_Event->event_end_time);
 
 	# Replacements in event title for rentals of the common house
-	$event_name_replaces = array(
-		'#_RENTAL_BEFORE_APARTMENTNUM' => pll_translate_string(($EM_Event->event_status == 0 ? 'RENTAL_BEFORE_APARTMENTNUM_NOTAPPROVED' : 'RENTAL_BEFORE_APARTMENTNUM_APPROVED'), $calendar_language),
-		'#_RENTAL_AFTER_APARTMENTNUM' => pll_translate_string(($EM_Event->event_status == 0 ? 'RENTAL_AFTER_APARTMENTNUM_NOTAPPROVED' : 'RENTAL_AFTER_APARTMENTNUM_APPROVED'), $calendar_language),
-		'&nbsp;' => ' ',
-	);
-	$event_name = str_replace(array_keys($event_name_replaces), $event_name_replaces, $EM_Event->event_name);
+	$event_name = format_common_house_rental_name($EM_Event, $calendar_language);
 
 	# Replacements in event description for rentals of the common house
-	$event_description_replaces = array(
-		'#_RENTAL_BEFORE_APARTMENTNUM' => pll_translate_string(($EM_Event->event_status == 0 ? 'EXPORT_RENTAL_BEFORE_APARTMENTNUM_NOTAPPROVED' : 'EXPORT_RENTAL_BEFORE_APARTMENTNUM_APPROVED'), $calendar_language),
-		'#_RENTAL_AFTER_APARTMENTNUM' => pll_translate_string(($EM_Event->event_status == 0 ? 'EXPORT_RENTAL_AFTER_APARTMENTNUM_NOTAPPROVED' : 'EXPORT_RENTAL_AFTER_APARTMENTNUM_APPROVED'), $calendar_language),
-		'&nbsp;' => ' ',
-	);
-	$event_description = str_replace(array_keys($event_description_replaces), $event_description_replaces, $EM_Event->event_name);
+	$event_description = format_common_house_rental_name($EM_Event, $calendar_language, true);
 
 	# Write info about calendar event
 	$event_as_ics_string .= "BEGIN:VEVENT\r\n";

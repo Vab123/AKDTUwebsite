@@ -13,7 +13,7 @@ if (isset($_REQUEST['action'])) {
 			book_fælleshus_bestyrelse(wp_get_current_user(), $_REQUEST['name_da'], $_REQUEST['name_en'], new DateTime($_REQUEST['start_date']), new DateTime($_REQUEST['end_date']));
 		} elseif ($_REQUEST['type'] == 'beboer') {
 			# Book the common house for a resident
-			book_fælleshus_beboer(get_user_by('login', username_from_apartment_number($_REQUEST['user'])), '#_RENTAL_BEFORE_APARTMENTNUM' . str_pad($_REQUEST['user'],3,"0",STR_PAD_LEFT) . '#_RENTAL_AFTER_APARTMENTNUM', new DateTime($_REQUEST['start_date']), new DateTime($_REQUEST['end_date']));
+			book_fælleshus_beboer(get_user_by('login', username_from_apartment_number($_REQUEST['user'])), common_house_rental_name($_REQUEST['user']), new DateTime($_REQUEST['start_date']), new DateTime($_REQUEST['end_date']));
 		}
 	}
 }

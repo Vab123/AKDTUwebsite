@@ -2224,12 +2224,7 @@ class EM_Event extends EM_Object {
 					break;
 				case '#_NAME': //deprecated
 				case '#_EVENTNAME':
-					$replacements = array(
-						'#_RENTAL_BEFORE_APARTMENTNUM' => pll__(($this->event_status == 0 ? 'RENTAL_BEFORE_APARTMENTNUM_NOTAPPROVED' : 'RENTAL_BEFORE_APARTMENTNUM_APPROVED'), 'events-manager'),
-						'#_RENTAL_AFTER_APARTMENTNUM' => pll__(($this->event_status == 0 ? 'RENTAL_AFTER_APARTMENTNUM_NOTAPPROVED' : 'RENTAL_AFTER_APARTMENTNUM_APPROVED'), 'events-manager'),
-						'#_VICEVÆRT_RESERVATION' => pll__('VICEVÆRT_RESERVATION', 'events-manager'),
-					);
-					$replace = str_replace(array_keys($replacements), $replacements, $this->event_name);
+					$replace = format_common_house_rental_name($this, pll_current_language('slug'));
 					break;
 				case '#_NOTES': //deprecated
 				case '#_EVENTNOTES':
