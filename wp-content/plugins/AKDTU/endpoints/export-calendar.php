@@ -134,21 +134,16 @@ function event_as_ics($EM_Event, $calendar_language) {
 	$event_name_replaces = array(
 		'#_RENTAL_BEFORE_APARTMENTNUM' => pll_translate_string(($EM_Event->event_status == 0 ? 'RENTAL_BEFORE_APARTMENTNUM_NOTAPPROVED' : 'RENTAL_BEFORE_APARTMENTNUM_APPROVED'), $calendar_language),
 		'#_RENTAL_AFTER_APARTMENTNUM' => pll_translate_string(($EM_Event->event_status == 0 ? 'RENTAL_AFTER_APARTMENTNUM_NOTAPPROVED' : 'RENTAL_AFTER_APARTMENTNUM_APPROVED'), $calendar_language),
+		'&nbsp;' => ' ',
 	);
 	$event_name = str_replace(array_keys($event_name_replaces), $event_name_replaces, $EM_Event->event_name);
 
 	# Replacements in event description for rentals of the common house
-	if ($EM_Event->event_status == 0) {
-		$event_description_replaces = array(
-			'#_RENTAL_BEFORE_APARTMENTNUM' => ($calendar_language == 'da' ? 'Lejlighed' : '') . ($calendar_language == 'en' ? 'Apartment' : ''),
-			'#_RENTAL_AFTER_APARTMENTNUM' => ($calendar_language == 'da' ? 'har ansøgt om at reservere fælleshuset i denne periode. Ansøgningen er endnu ikke godkendt af bestyrelsen, og er derfor ikke endelig.' : '') . ($calendar_language == 'en' ? 'has requested to book the common house in this period. The request has not yet been approved by the Board, and is therefore not final.' : '')
-		);
-	} else {
-		$event_description_replaces = array(
-			'#_RENTAL_BEFORE_APARTMENTNUM' => ($calendar_language == 'da' ? 'Fælleshuset er reserveret af lejlighed' : '') . ($calendar_language == 'en' ? 'The common house is reserved by apartment' : ''),
-			'#_RENTAL_AFTER_APARTMENTNUM' => ($calendar_language == 'da' ? 'og er derfor ikke tilgængeligt i denne periode.' : '') . ($calendar_language == 'en' ? 'and is therefore not available in this period' : '')
-		);
-	}
+	$event_description_replaces = array(
+		'#_RENTAL_BEFORE_APARTMENTNUM' => pll_translate_string(($EM_Event->event_status == 0 ? 'EXPORT_RENTAL_BEFORE_APARTMENTNUM_NOTAPPROVED' : 'EXPORT_RENTAL_BEFORE_APARTMENTNUM_APPROVED'), $calendar_language),
+		'#_RENTAL_AFTER_APARTMENTNUM' => pll_translate_string(($EM_Event->event_status == 0 ? 'EXPORT_RENTAL_AFTER_APARTMENTNUM_NOTAPPROVED' : 'EXPORT_RENTAL_AFTER_APARTMENTNUM_APPROVED'), $calendar_language),
+		'&nbsp;' => ' ',
+	);
 	$event_description = str_replace(array_keys($event_description_replaces), $event_description_replaces, $EM_Event->event_name);
 
 	# Write info about calendar event

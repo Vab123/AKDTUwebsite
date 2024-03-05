@@ -60,6 +60,10 @@ pll_register_string('events-manager', 'RENTAL_BEFORE_APARTMENTNUM_NOTAPPROVED', 
 pll_register_string('events-manager', 'RENTAL_BEFORE_APARTMENTNUM_APPROVED', 'events-manager-calendar');
 pll_register_string('events-manager', 'RENTAL_AFTER_APARTMENTNUM_NOTAPPROVED', 'events-manager-calendar');
 pll_register_string('events-manager', 'RENTAL_AFTER_APARTMENTNUM_APPROVED', 'events-manager-calendar');
+pll_register_string('events-manager', 'EXPORT_RENTAL_BEFORE_APARTMENTNUM_NOTAPPROVED', 'events-manager-calendar-export');
+pll_register_string('events-manager', 'EXPORT_RENTAL_BEFORE_APARTMENTNUM_APPROVED', 'events-manager-calendar-export');
+pll_register_string('events-manager', 'EXPORT_RENTAL_AFTER_APARTMENTNUM_NOTAPPROVED', 'events-manager-calendar-export');
+pll_register_string('events-manager', 'EXPORT_RENTAL_AFTER_APARTMENTNUM_APPROVED', 'events-manager-calendar-export');
 
 ## \wp-content\plugins\events-manager\templates\tables\events.php
 ## used styles: _e(), _e (), esc_html_e()
