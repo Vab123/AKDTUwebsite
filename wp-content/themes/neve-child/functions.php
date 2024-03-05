@@ -55,6 +55,12 @@ pll_register_string('events-manager', 'Bookings', 'events-manager-mine-begivenhe
 pll_register_string('events-manager', 'Booked', 'events-manager-mine-begivenheder');
 pll_register_string('events-manager', 'No events', 'events-manager-mine-begivenheder');
 
+## replaces for calendar
+pll_register_string('events-manager', 'RENTAL_BEFORE_APARTMENTNUM_NOTAPPROVED', 'events-manager-calendar');
+pll_register_string('events-manager', 'RENTAL_BEFORE_APARTMENTNUM_APPROVED', 'events-manager-calendar');
+pll_register_string('events-manager', 'RENTAL_AFTER_APARTMENTNUM_NOTAPPROVED', 'events-manager-calendar');
+pll_register_string('events-manager', 'RENTAL_AFTER_APARTMENTNUM_APPROVED', 'events-manager-calendar');
+
 ## \wp-content\plugins\events-manager\templates\tables\events.php
 ## used styles: _e(), _e (), esc_html_e()
 pll_register_string('events-manager', 'Rental of common house format with %s', 'events-manager-mine-begivenheder');
@@ -159,12 +165,6 @@ pll_register_string('simple-membership', 'New password has been sent to your ema
 
 ## wp-content\plugins\simple-membership\classes\class.swpm-access-control.php
 pll_register_string('simple-membership', 'You need to login to view this content. ', 'simple-membership-access-control');
-
-## replaces for calendar
-pll_register_string('simple-membership', 'RENTAL_BEFORE_APARTMENTNUM_NOTAPPROVED', 'simple-membership-calendar');
-pll_register_string('simple-membership', 'RENTAL_BEFORE_APARTMENTNUM_APPROVED', 'simple-membership-calendar');
-pll_register_string('simple-membership', 'RENTAL_AFTER_APARTMENTNUM_NOTAPPROVED', 'simple-membership-calendar');
-pll_register_string('simple-membership', 'RENTAL_AFTER_APARTMENTNUM_APPROVED', 'simple-membership-calendar');
 
 
 /**
