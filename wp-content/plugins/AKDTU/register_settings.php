@@ -103,7 +103,7 @@ foreach ($AKDTU_CONSTANTS as $constant_root => $additionals) {
 
 
 
-# Additioanl settings and constants
+# Additional settings and constants
 define('WORKING_DIR', ABSPATH); 								# Working directory on the server.
 define('BESTYRELSE_FOLDER', 'public_files/bestyrelsesmøder/');	# Where minutes from Board meetings should be saved.
 define('GF_FOLDER', 'public_files/generalforsamlinger/'); 		# Where minutes from General Assemblies should be saved.
