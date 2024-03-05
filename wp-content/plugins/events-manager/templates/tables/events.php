@@ -31,22 +31,22 @@
 				<?php endif; ?>
 				<a href='<?php echo add_query_arg('view', 'past', $url); ?>' <?php echo ( isset($_GET['view']) && $_GET['view'] == 'past' ) ? 'class="current"':''; ?>><?php pll_e( 'Past Events', 'events-manager'); ?> <span class="count">(<?php echo $past_count; ?>)</span></a>
 				
-				<?php if( current_user_can('edit_others_events') ): ?>
+				<!-- <?php if( current_user_can('edit_others_events') ): ?>
 					<div class="admin-events-filter">
 						<a href='<?php echo add_query_arg('admin_mode', 1, $url); ?>' <?php echo ( !empty($_GET['admin_mode']) ) ? 'class="current"':''; ?>><?php pll_e( 'All Events', 'events-manager'); ?></a> &nbsp;|&nbsp;
 						<a href='<?php echo add_query_arg('admin_mode', null, $url); ?>' <?php echo ( empty($_GET['admin_mode']) ) ? 'class="current"':''; ?>><?php pll_e( 'My Events', 'events-manager'); ?></a>
 					</div>
-				<?php endif; ?>
+				<?php endif; ?> -->
 			</div>
 			<?php if (current_user_can('edit_others_events')): ?>
-			<p class="search-box">
+			<!-- <p class="search-box">
 				<label class="screen-reader-text" for="post-search-input"><?php pll_e('Search Events','events-manager'); ?>:</label>
 				<input type="text" id="post-search-input" name="em_search" value="<?php echo (!empty($_REQUEST['em_search'])) ? esc_attr($_REQUEST['em_search']):''; ?>" />
 				<?php if( !empty($_REQUEST['view']) ): ?>
 				<input type="hidden" name="view" value="<?php echo esc_attr($_REQUEST['view']); ?>" />
 				<?php endif; ?>
 				<input type="submit" value="<?php pll_e('Search Events','events-manager'); ?>" class="button" />
-			</p>
+			</p> -->
 			<?php endif; ?>
 			<div class="tablenav">
 				<?php
@@ -105,19 +105,7 @@
 							*/ ?>
 							<td>
 								<strong>
-									<?php // if( current_user_can('delete_events') && $EM_Event->start()->getTimestamp() > $delete_before_event_time && $EM_Event->end()->getTimestamp() > $delete_before_event_time ) : ?>
-									<?php
-										$replacements = array(
-											'#_RENTAL_BEFORE_APARTMENTNUM' => pll__(($EM_Event->event_status == 0 ? 'RENTAL_BEFORE_APARTMENTNUM_NOTAPPROVED' : 'RENTAL_BEFORE_APARTMENTNUM_APPROVED'),'events-manager'),
-											'#_RENTAL_AFTER_APARTMENTNUM' => pll__(($EM_Event->event_status == 0 ? 'RENTAL_AFTER_APARTMENTNUM_NOTAPPROVED' : 'RENTAL_AFTER_APARTMENTNUM_APPROVED'),'events-manager'),
-											'#_VICEVÆRT_RESERVATION' => pll__('VICEVÆRT_RESERVATION', 'events-manager'),
-										);
-										$event_name = str_replace(array_keys($replacements),$replacements,esc_html($EM_Event->event_name));
-										echo $event_name;
-									?>
-									<?php //else: 
-										// echo esc_html($EM_Event->event_name);
-									// endif; ?>
+									<?php echo format_common_house_rental_name($EM_Event); ?>
 								</strong>
 								<?php 
 								if( get_option('dbem_rsvp_enabled') == 1 && $EM_Event->event_rsvp == 1 ){

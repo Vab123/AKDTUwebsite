@@ -4,39 +4,35 @@ $hours_format = em_get_hour_format();
 $required = apply_filters('em_required_html', '<i>*</i>');
 ?>
 <div class="event-form-when" id="em-form-when">
-	<p class="em-date-range">
-		<?php pll_e('From ', 'events-manager'); ?>
-		<input class="em-date-start em-date-input-loc" type="text" />
-		<input class="em-date-input" type="hidden" name="event_start_date" value="<?php echo $EM_Event->start()->getDate();; ?>" />
-		<?php pll_e('to', 'events-manager'); ?>
-		<input class="em-date-end em-date-input-loc" type="text" />
-		<input class="em-date-input" type="hidden" name="event_end_date" value="<?php echo $EM_Event->end()->getDate();; ?>" />
-	</p>
-	<p class="em-time-range">
-		<span class="em-event-text"><?php pll_e('Event starts at', 'events-manager'); ?></span>
-		<?php echo '<input class="em-time-input em-time-start" type="text" size="8" maxlength="8" name="event_start_time" value=';
-		if ($EM_Event->can_manage('edit_recurring_events', 'edit_others_recurring_events') || count(array_filter(wp_get_current_user()->roles, function ($role) {
+		<?php
+		if (is_admin() && current_user_can('edit_others_events') || count(array_filter(wp_get_current_user()->roles, function ($role) {
 			return $role == 'vicevaert';
 		})) > 0) {
-			echo '"' . $EM_Event->start()->format($hours_format) . '"';
-		} else {
-			echo '"12:00" readonly';
-		}
-		?> />
-		<?php pll_e('to', 'events-manager'); ?>
-		<?php echo '<input class="em-time-input em-time-end" type="text" size="8" maxlength="8" name="event_end_time" value=';
-		if ($EM_Event->can_manage('edit_recurring_events', 'edit_others_recurring_events') || count(array_filter(wp_get_current_user()->roles, function ($role) {
-			return $role == 'vicevaert';
-		})) > 0) {
-			echo '"' . $EM_Event->end()->format($hours_format) . '" />';
+			echo '<p class="em-date-range">';
+			echo pll__('Startdate', 'events-manager') . '<input class="em-date-start em-date-input-loc" type="text" /><input class="em-date-input" type="hidden" name="event_start_date" value="' . $EM_Event->start()->getDate() . '" />' . pll__('Enddate', 'events-manager') . '<input class="em-date-end em-date-input-loc" type="text" /><input class="em-date-input" type="hidden" name="event_end_date" value="' . $EM_Event->end()->getDate() . '" />';
+			echo '</p>';
+
+			echo '<p class="em-time-range">';
+			echo pll__('Event starts at', 'events-manager') . ' <input class="em-time-input em-time-start" type="text" size="8" maxlength="8" name="event_start_time" value="' . $EM_Event->start()->format($hours_format) . '" /> ' . pll__('to', 'events-manager') . ' <input class="em-time-input em-time-end" type="text" size="8" maxlength="8" name="event_end_time" value="' . $EM_Event->end()->format($hours_format) . '" />';
 			pll_e('All day', 'events-manager');
-			echo '<input type="checkbox" class="em-time-all-day" name="event_all_day" id="em-time-all-day" value="1" ';
-			if (!empty($EM_Event->event_all_day)) echo 'checked="checked"';
+			echo '<input type="checkbox" class="em-time-all-day" name="event_all_day" id="em-time-all-day" value="1" />';
+			echo '</p>';
 		} else {
-			echo '"12:00" readonly';
+			echo '<p class="em-date-range">';
+			echo pll__('Startdate', 'events-manager') . ' <input class="em-date-start em-date-input-loc" type="text" /><input class="em-date-input" type="hidden" name="event_start_date" value="' . $EM_Event->start()->getDate() . '" /> ' . pll__('Starttime', 'events-manager') . ' ' . pll__("12:00 (noon)", 'events-manager');
+			echo '</p>';
+
+			echo '<p class="em-date-range">';
+			echo pll__('Enddate', 'events-manager') . ' <input class="em-date-end em-date-input-loc" type="text" /><input class="em-date-input" type="hidden" name="event_end_date" value="' . $EM_Event->end()->getDate() . '" /> ' . pll__('Endtime', 'events-manager') . ' ' . pll__("12:00 (noon)", 'events-manager');
+			echo '</p>';
+
+			echo '<p class="em-time-range">';
+			echo '<input class="em-time-input em-time-start" type="hidden" size="8" maxlength="8" name="event_start_time" value="12:00" />';
+			echo '<input class="em-time-input em-time-end" type="hidden" size="8" maxlength="8" name="event_end_time" value="12:00" />';
+			echo '<input type="checkbox" class="em-time-all-day" name="event_all_day" style="display:none;" id="em-time-all-day" value="1" />';
+			echo '</p>';
 		}
-		?> />
-	</p>
+		?>
 	<?php if (get_option('dbem_timezone_enabled') && $EM_Event->can_manage('edit_recurring_events', 'edit_others_recurring_events')) : ?>
 		<p class="em-timezone">
 			<label for="event-timezone"><?php pll_e('Timezone', 'events-manager'); ?></label>

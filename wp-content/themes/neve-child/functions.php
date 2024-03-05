@@ -60,6 +60,9 @@ pll_register_string('events-manager', 'RENTAL_BEFORE_APARTMENTNUM_NOTAPPROVED', 
 pll_register_string('events-manager', 'RENTAL_BEFORE_APARTMENTNUM_APPROVED', 'events-manager-calendar');
 pll_register_string('events-manager', 'RENTAL_AFTER_APARTMENTNUM_NOTAPPROVED', 'events-manager-calendar');
 pll_register_string('events-manager', 'RENTAL_AFTER_APARTMENTNUM_APPROVED', 'events-manager-calendar');
+
+pll_register_string('events-manager', 'VICEVÆRT_RESERVATION', 'events-manager-calendar');
+
 pll_register_string('events-manager', 'EXPORT_RENTAL_BEFORE_APARTMENTNUM_NOTAPPROVED', 'events-manager-calendar-export');
 pll_register_string('events-manager', 'EXPORT_RENTAL_BEFORE_APARTMENTNUM_APPROVED', 'events-manager-calendar-export');
 pll_register_string('events-manager', 'EXPORT_RENTAL_AFTER_APARTMENTNUM_NOTAPPROVED', 'events-manager-calendar-export');
@@ -70,6 +73,10 @@ pll_register_string('events-manager', 'EXPORT_RENTAL_AFTER_APARTMENTNUM_APPROVED
 pll_register_string('events-manager', 'Rental of common house format with %s', 'events-manager-mine-begivenheder');
 pll_register_string('events-manager', 'From ', 'events-manager-mine-begivenheder');
 pll_register_string('events-manager', 'to', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'Startdate', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'Enddate', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'Starttime', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'Endtime', 'events-manager-mine-begivenheder');
 pll_register_string('events-manager', 'Event starts at', 'events-manager-mine-begivenheder');
 pll_register_string('events-manager', 'All day', 'events-manager-mine-begivenheder');
 pll_register_string('events-manager', 'Timezone', 'events-manager-mine-begivenheder');
@@ -85,6 +92,9 @@ pll_register_string('events-manager', 'which will be paid with the rent at the e
 pll_register_string('events-manager', 'Default common house rental month', 'events-manager-mine-begivenheder');
 pll_register_string('events-manager', 'Month_array', 'events-manager-mine-begivenheder');
 pll_register_string('events-manager', 'Rental is free for members of the board.', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'Submit event', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'Update event', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', '12:00 (noon)', 'events-manager-mine-begivenheder');
 
 ## wp-content\plugins\events-manager\templates\templates\my-bookings.php
 ## used styles: _e(), _e (), esc_html_e()

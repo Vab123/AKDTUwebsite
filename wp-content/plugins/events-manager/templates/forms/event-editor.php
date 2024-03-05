@@ -68,12 +68,7 @@ if (!empty($_REQUEST['success'])) {
 				<?php em_locate_template('forms/event/group.php', true); ?>
 			</div>
 		<?php else :
-			if (count(array_filter(wp_get_current_user()->roles, function ($role) { return $role == 'vicevaert'; })) > 0) {
-				$new_event_name = pll__('Vicevært rental of common house format', 'events-manager');
-			} else {
-				# Beboer
-				$new_event_name = sprintf(pll__('Rental of common house format with %s', 'events-manager'), substr(wp_get_current_user()->user_login, 4, 3));
-			}
+			$new_event_name = common_house_rental_name(apartment_number_from_username(wp_get_current_user()->user_login), is_vicevært_from_id(wp_get_current_user()->ID));
 			echo '<input type="hidden" name="event_name" id="event-name" value="' . $new_event_name . '" readonly hidden /><br />';
 			em_locate_template('forms/event/group.php', true);
 			endif; ?>
@@ -164,7 +159,7 @@ if (!empty($_REQUEST['success'])) {
 			</div>
 		<?php endif; ?>
 
-		<?php if (get_option('dbem_rsvp_enabled') && $EM_Event->can_manage('manage_bookings', 'manage_others_bookings')) : ?>
+		<?php if (is_admin() && get_option('dbem_rsvp_enabled') && $EM_Event->can_manage('manage_bookings', 'manage_others_bookings')) : ?>
 			<!-- START Bookings -->
 			<h3><?php pll_e('Bookings/Registration', 'events-manager'); ?></h3>
 			<div class="inside event-form-bookings">
@@ -177,9 +172,9 @@ if (!empty($_REQUEST['success'])) {
 	</div>
 	<p class="submit">
 		<?php if (empty($EM_Event->event_id)) : ?>
-			<input type='submit' class='button-primary' value='<?php echo esc_attr(sprintf(__('Submit %s', 'events-manager'), __('Event', 'events-manager'))); ?>' />
+			<input type='submit' class='button-primary' value='<?php pll_e('Submit event', 'events-manager'); ?>' />
 		<?php else : ?>
-			<input type='submit' class='button-primary' value='<?php echo esc_attr(sprintf(__('Update %s', 'events-manager'), __('Event', 'events-manager'))); ?>' />
+			<input type='submit' class='button-primary' value='<?php pll_e('Update event', 'events-manager'); ?>' />
 		<?php endif; ?>
 	</p>
 	<input type="hidden" name="event_id" value="<?php echo $EM_Event->event_id; ?>" />
