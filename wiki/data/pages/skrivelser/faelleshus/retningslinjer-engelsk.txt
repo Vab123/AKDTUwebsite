@@ -5,21 +5,28 @@ The rules for the common house are to be followed whether it has been rented or 
 
 //Please refer to the association’s regulations: “ved skader/mangler kan der rettes erstatningskrav til den/de pågældende brugere af fælleshuset. Ved skader/mangler er det op til bestyrelsen om dette skal udbedres af skadeforvolder, bestyrelsen eller en af bestyrelsen udpeget tredjepart afhængig af skaden/manglens art.”//
 
-You are liable for any defects, missing cleaning, noise complaints and so forth in the period where you unlock the common house with your personal chip until it is securely locked. The instructions can be found on the door.
+You are liable for any defects, missing cleaning, noise complaints and so forth in the period where you unlock the common house with your personal chip until it is securely locked. The instructions can be found on [[https://akdtu.dk/en/for-residents/the-common-house/guide-to-access-control/|the website]].
 
 In case of doubts or questions to the rules, contact [[udlejning@akdtu.dk]].
-====Before use====
-  * The board ([[udlejning@akdtu.dk]]) should be notified about defects and missing components so you are not liable for these.
-  * You are not allowed to hang things up using tape 
 
-====During use====
+==== Internet ====
+There is an internet connection in the common house, which you, during your rental period, get control over and the responsibility of. Due to the fact that the association in case of e.g. illegal use can be required by relevant government entities to inform them of users of the connection within a given time interval, this connection is only available during rentals of the common house, and it is here ensured that only the renter and any guests of the renter has access to the internet connection. This is done by automatically changing the password to the router at the start and end of the rental period.
+
+The password is automatically updated at the start of the rental period, and there will afterwards be sent an email containing login-information to the emailaddress the renter has written on their account on the association website, [[http://akdtu.dk|akdtu.dk]]. Please note that this procedure can take a while, and that it therefore is possible that the password is sent up to 60 minutes after the start of the rental period. In case you have still not recieved the password to the internet connection after 60 minutes, the association network group can be contacted on [[netgruppen@akdtu.dk]]. Remember to check if the email containing the password is in your spam-folder.
+
+As a renter of the common house, you are welcome to share the password with your guests. Be aware that you, as a renter, still are held responsible for all use, e.g. in case of illegal activity.
+
+==== Checklist for the use of the common house ====
+=== General rules ===
+  * The board ([[udlejning@akdtu.dk]]) should be notified about defects and missing components so you are not liable for these.
+  * You are not allowed to hang things up using tape
   * No smoking indoors
   * Show consideration to other residents 
   * Keep doors and windows closed if being loud
   * You are not allowed to adjust the thermostats 
   * The common house furniture and equipment should stay inside
 
-====After use====
+=== Cleaning after use ===
   * Main area
     * Vacuum/sweep the floor
     * Vacuum couches

@@ -4,6 +4,6 @@
 
 \\ \\
 
-<WRAP centeralign><html><span style="font-size:100px">19/06 - 30/09</span></html></WRAP>
+<WRAP centeralign><html><span style="font-size:100px">18/03 - 19/04</span></html></WRAP>
 
 {{ :opslag:pil.png?300 |}}

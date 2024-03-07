@@ -1,11 +1,162 @@
-<printable>velkomstbrev_da</printable>
+<printable>velkomstbrev_da,velkomstbrev_da</printable>
 
-Hej Marike (eller andre =))
+===== Introduktion =====
+Velkommen til Andelskollegiet ved DTU - Akademivej, forkortet AKDTU. Dette dokument indeholder generelle informationer, som er vigtige for dig som ny beboer i foreningen. Det er udformet af foreningens bestyrelse. Som ny beboer anbefaler vi, at du sætter dig ind i de praktiske forhold og regler vi har på kollegiet. Hvis du har spørgsmål, som du ikke kan finde svar på på vores hjemmeside, [[http://akdtu.dk|akdtu.dk]], kan du kontakte bestyrelsen på [[bestyrelsen@akdtu.dk]].
 
-Jeg har ændret lidt på hvordan der laves pdf'er på wikien, så det ser lidt anderledes ud.
+===== Andelshavers/Beboers ansvar =====
+For at holde kollegiet flot og fungerende er der en række ting som beboeren/andelshaveren har ansvar for. Det overordnede ansvar står i kollegiets vedtægter §10. Herunder er defineret specifikke ansvars områder (bemærk, at dette ikke er en fuldstændig liste).
 
-Når du redigerer siden her, kan du se at der i toppen af dokumentet står ''%%<printable>velkomstbrev_da</printable>%%''. ''%%<printable></printable>%%'' indsætter info-boksen ovenover, med link til hvor man kan downloade pdf'en, og ''velkomstbrev_da'' inde mellem de to er navnet på en template jeg har lavet specifikt til velkomstbrevet, så det får en fin forside med også, og så der ikke er det lille logo oppe til venstre. Der er også lavet en template til det engelske velkomstbrev, som i stedet hedder ''velkomstbrev_en'' (så du skal skrive ''%%<printable>velkomstbrev_en</printable>%%'' i toppen af siden til det engelske velkomstbrev).
+Enhver har til ansvar at renholde og rydde op på sine udendørs arealer, således at kollegiet fremstår pænt. Dette gælder f.eks.:
+  * Terrasser/altaner, samt at området foran hoveddøren ikke må blive brugt som opbevaringsplads.
+  * For stuelejligheder: Lugning af ukrudt på terrasse og i egen hæk. Haveredskaber kan lånes fra foreningens redskabsskur og fælleshuset. Redskabsskuret tilgås gennem storskraldsrummet i foreningens skraldeskur.
+  * For stue lejligheder: Klipning af egen hæk (højde ca. 110-130 cm). Hækkesakse kan lånes fra forenings redskabsskur.
+  * For 1. og 2. sal: Rense glas og gelænder fri for alger.
+  * For 1. og 2. sal: Behandle gelændere. Først skal gelænderet skrubbes rent. Derefter skal det slibes let med sandpapir (ca. korn 120). Påfør dernæst tynde lag rå linolie. Efter hver behandling skal gelænderet tørre inden et nyt lag påføres. Slibemaskinen kan lånes af foreningen ved forespørgsel hos bestyrelsen, og linolie, mm. kan findes/lånes i foreningens redskabsskur og fælleshuset.
 
-Sig endelig til hvis der er noget ved den template jeg har lavet, som ikke er helt som det skal være, eller hvis der er andet som ikke lige er helt klart.
+Udlufte jævnligt gulvvarme og radiatorer. Hvis man ikke gør dette, medfører det øget slidtage på kollegiets varmesystem, hvilket i sidste ende medfører kostbare reparationer samt højere varme regning for hele kollegiet. Som udgangspunkt anbefales det, at du udlufter gulvvarme og radiatorer minimum én gang per sæson.
 
-%%//%%Victor
+Fejl/defekter på kollegiet (inkl. i lejligheder) som kan have betydning for kollegiet **skal** indberettes til bestyrelsen på [[bestyrelsen@akdtu.dk]]. Det kan f.eks. være utætheder på vand eller varmerør.
+
+===== Foreningens hjemmeside =====
+På vores hjemmeside, [[https://akdtu.dk|akdtu.dk]], skal du efter overtagelse af andel oprette en bruger. For at oprette brugeren skal du benytte det telefonnummer, der er angivet i overdragelsesaftalen. På hjemmesiden kan du f.eks. leje fælleshuset og tilmelde dig havedage, se hhv. afsnittene [[#fælleshuset|Fælleshuset]] og [[#havedage|Havedage]].
+
+===== Facebookgruppe =====
+Foreningen har en privat facebookgruppe, der hedder [[https://www.facebook.com/groups/akdtu|Andelskollegiet ved DTU - Akademivej]]. Gruppen er tiltænkt intern kommunikation mellem andelshavere/beboere, eksempelvis at "advare" andre om evt. støj fra planlagte fester o.lign og køb og salg af møbler o.lign. Derudover benytter bestyrelsen den til nyheder mm. til alle. Bemærk, at for at kontakte bestyrelsen skal du skrive til [[bestyrelsen@akdtu.dk]]. Bestyrelsen tjekker kun regelmæssigt bestyrelsesmailen, **ikke** facebookgruppen.
+
+===== Parkeringskontrol =====
+Foreningen har 19 private parkeringspladser, som kan benyttes af kollegiets beboere og deres gæster. For at sikre at parkeringspladserne ikke benyttes af andre er der indgået aftale med Copark ApS om parkeringskontrol. Du skal oprette dig i Coparks system. Oprettelse i Coparks system foregår via. følgende link, [[https://copark.typeform.com/akdtu|copark]].
+
+Da der går noget tid, inden man helt er oprettet i Coparks system, anbefaler vi, at du opretter dig i Coparks system mindst 24 timer før du skal bruge din første parkeringstilladelse. Kun én bruger kan oprettes pr. lejlighed. Når du som ny andelshaver/beboer opretter dig i Coparks system, bliver tidligere andelshaver/beboer kontaktet af Copark for at bekræfte, at vedkommende er fraflyttet adressen. Derefter ophører tidligere andelshavers/beboers parkeringstilladelse og din profil vil blive aktiveret af Copark. 
+
+Når du er oprettet i systemet og har registreret din nummerplade sker administration af parkeringstilladelser automatisk gennem Coparks app til iOS og Android. Du har mulighed for at oprette én permanent nummerplade, samt 10 gæsteparkeringer á 24 timer pr. måned. Den permanente nummerplade kan skiftes så ofte du vil ("permanent" henviser kun til varigheden af parkeringstilladelsen), så hvis du eksempelvis låner en bil i en længere periode, kan denne blot skrives ind som den permanente nummerplade, i den periode, hvor du bruger bilen. Bestyrelsen vil løbende revurdere antallet af gæsteparkeringer.
+
+Hvis du har brug for en parkeringstilladelse i forbindelse med flytning, kan du skrive til [[bestyrelsen@akdtu.dk]], og bede om en parkeringstilladelse. Husk at skrive nummerpladen på den bil der skal have parkeringstilladelsen, samt en beskrivelse af hvilket tidsrum parkeringstilladelsen skal gælde i. Bemærk, at du skal have svar fra bestyrelsen, inden tilladelsen er gældende.
+
+Skulle det ske, at du får en parkeringsbøde, som du mener er uberettiget, har du mulighed for at klage til bestyrelsen på [[bestyrelsen@akdtu.dk]]. Foreningen har i vores samarbejdsaftale med Copark fået lov til at annullere op til 10 parkeringsbøder pr. løbende 12 måneder, dog senest 2 hverdage efter bøden er udstedt klokken 16. Sørg derfor for at indsende din mail om annullering af parkeringsbøder så hurtigt som muligt efter bøden er udstedt. I din henvendelse skal du nævne løbenummeret, som fremgår af parkeringsbøden.
+
+Annullering af bøder forbeholdes som udgangspunkt beboere i foreningen, men da der potentielt ikke er nok til alle der gerne vil have sin bøde annulleret, vurdere bestyrelsen for hver henvendelse, hvorvidt ønsket om annullering kan imødekommes.
+
+===== Havedage =====
+Man skal to gange årligt deltage i foreningens havedag. Der arrangeres havedage i foråret og efteråret, og man skal deltage i en i hver periode. Information omkring havedage (inkl. hvornår tilmelding åbner/lukker) vil blive udsendt til andelshaverens e-mailadresse, såfremt de har registreret denne hos administrator jf. vores vedtægters §35.2. Du kan tilmelde dig havedage på foreningens hjemmeside under "For beboere/Havedage/".
+
+Bestyrelsen bruger en del tid og energi på at planlægge havedagene, så kollegiet bliver bedst muligt vedligeholdt, men det kræver at der sættes nogle regler for deltagelsen af havedagene:
+  * Man skal deltage **aktivt** og i **hele** tidsrummet (som udgangspunkt kl. 10-15, men ofte kortere).
+  * Det er muligt at ændre sin tilmelding, indtil et specifikt tidspunkt, som indikeret på tilmeldingsformularen.
+  * Har man ikke tilmeldt sig inden deadline vil man blive trukket 750 kr. over den månedlige boligafgift snarest muligt efter afholdelse af havedagene.
+  * Møder man ikke op til den tilmeldte havedag vil man blive trukket 750 kr. over den månedlige boligafgift snarest muligt efter afholdelse af havedagene.
+  * Det tæller ikke som deltagelse i en havedag, hvis man møder op uden at have tilmeldt sig. Dog er det selvfølgelig stadig tilladt at deltage ved flere havedage. Kun den havedag, som man er tilmeldt, tæller.
+  * Ved salg af andel skal man orientere køber om havedage, da andelen ikke slipper for sin forpligtigelse til at deltage i en havedag per periode.
+
+På havedagene sikre vi os i fællesskab, at vores forening fremstår pæn og velholdt. Derudover er det en hyggelig
+dag, hvor vi foreningens beboere møder hinanden. Dagen slutter af med spisning i fælleshuset.
+
+===== Fælleshuset =====
+I foreningen har vi et stort fælleshus på ca. 110 kvm. som frit kan benyttes af alle kollegiets beboere så længe andre også kan benytte det samtidig. Ved selskaber på over ti personer eller ved arrangementer, der kræver al pladsen, skal man leje fælleshuset. Hvis over halvdelen af selskabet er andelshavere/beboere, er man undtaget denne regel. Uanset om fælleshuset er lejet eller ved hverdagsbrug skal retningslinjerne følges. Fælleshuset retningslinjer findes på [[https://akdtu.dk/for-beboere/fælleshuset/retningslinjer-for-brug/|retningslinjer-for-brug]]. Bemærk, at man skal være logget ind for at tilgå hjemmesiden.
+
+Fælleshuset består af et stort rum med mulighed for at opdele det i to. Der er plads til 48 siddende gæster til spisning. Køkkenet er udstyret med alt til madlavning. Lokalet er udstyret med stort anlæg samt projektor og lærred, som tilsluttes med HDMI og minijackstik. Fælleshuset må gerne benyttes til fest med musik - også om natten. Husk dog at tage hensyn til dine naboer, dvs. spil ikke alt for høj musik med åbne døre.
+
+Der er et fællesareal uden for fælleshuset udstyret med tre bordbænkesæt, hvor beboere også kan opholde sig. Foreningen har en fælles grill, som kan lånes. Den stor i foreningens redskabsskur.
+
+===== Leje af fælleshuset =====
+Hvis du ønsker at leje fælleshuset skal du booke det på foreningens hjemmeside. Du kan kun booke fælleshuset, hvis du er logget ind på hjemmesiden. Man booker fælleshuset på [[https://akdtu.dk/for-beboere/fælleshuset/book-faelleshuset/|book-faelleshuset/]]. Du skal blot trykke på ”Tilføj ny”, specificerer hvornår
+du gerne vil booke fælleshuset, og indsende arrangementet. Hvis fælleshuset allerede er booket den dag, du ønsker at booke det, vil din bookning automatisk blive annulleret.
+
+Du kan tjekke, hvornår fælleshuset er udlejet i [[https://akdtu.dk/for-beboere/fælleshuset/kalender/|kalenderen]]. Når din bookning er godkendt, modtager du en e-mail herom. Godkendelsen af din booking sker manuelt af bestyrelsen, så forvent lidt ventetid. Vær desuden ude i god tid med bookingen, da din booking godt kan blive afvist, bl.a. i forbindelse med vedligeholdelse af foreningen, hvor vi normalt stiller fælleshuset til rådighed for håndværkere mm.
+
+===== Adgangskontrol =====
+Vi har adgangskontrol i foreningens fælleshus. Adgangskontrol foregår ved hjælp af prox-brikker, som hver andelshaver har. Som ny andelshaver/beboer i foreningen skal du have fået en prox-brik fra tidligere andelshaver ved overtagelsen af lejligheden. Hvis du ikke har modtaget en prox-brik ved overtagelsen af lejligheden, skal dette anses som en mangel, som er mellem dig som køber og sælger.
+
+**For at komme ind i fællehuset** præsenteres prox brikken til tastaturlæseren, som er monteret til venstre for hoveddøren. Der lyder et bip og en diode på panelet lyser grønt.
+
+**For at komme ud af fælleshuset** trykkes på knappen med et billede af en nøgle på indersiden af døren. Det er vigtigt, at man aldrig rører ved selve låsen, når man forlader fælleshuset.
+
+Hvis man er den sidste, der forlader fælleshuset **skal** alarmen tilsluttes. Dette gøres ved at trykke på # på tastaturet udenfor og derefter præsentere sin prox brik for den. Tastaturet bipper og der tændes en rød lampe. Hvis tastaturet fortsætter med at lyse grønt, skal du tjekke, at alle døre og vinduer er lukkede. Hvis dette ikke løser problemet med at låse fælleshuset, kontakt da bestyrelsen på [[bestyrelsen@akdtu.dk]]. 
+
+Hvis man mister sin prox brik skal man kontakte netgruppen hurtigst muligt, så denne kan spærres. Herved kan vi undgå et potentielt indbrud i fælleshuset. En ny brik koster pt. 120 kr. (prisen kan ændre sig, da den fastsættes af foreningens købspris) og vil blive trukket over huslejen
+
+Adgangskontrollen bliver, udover at fungere som indbrudsalarm, også brugt til at holde styr på, hvem der benytter fælleshuset og hvorvidt reglerne bliver fulgt. Bestyrelsen holder logbog over, hvem der har været i fælleshuset (og også om man ikke har tilsluttet alarmen). Hvis du glemmer at låse fælleshuset efter brugt, er du erstatningspligtig i tilfælde af tyveri/hærværk eller lignende. I denne forbindelse er det ligeledes vigtigt, at du kontakter bestyrelsen hurtigst muligt, hvis du observerer skader, problemer mm. i fælleshuset.
+
+Reglerne i fælleshuset er kort sagt, at man skal sørge for at efterlade fælleshuset i samme stand (eller bedre), når man forlader det. Dertil skal man sørge for at lukke døre/vinduer og slikke alt lys. En oversigt over alle regler i fælleshuset hænger på opslagstavlen i entreen i fælleshuset og de kan endvidere findes på vores hjemmeside, 
+
+Gentagne brud på reglerne kan i yderste konsekvens medføre blokering af din adgang til fælleshuset. 
+
+Hvis du har spørgsmål omkring brugen af adgangskontrollen, skal du kontakte netgruppen på [[netgruppen@akdtu.dk]].
+
+For generelle spørgsmål, skal du kontakte bestyrelsen på [[bestyrelsen@akdtu.dk]].
+
+===== Ekstra nøgler =====
+Det er muligt at tilkøbe ekstranøgler til sin lejlighed, såfremt det er det originale nøglesystem (Carl F).
+
+Ønsker du at bestille ekstranøgler, kan dette gøres på Cobblestones [[https://system17.microbizz.dk/x/qf.php/2787/25|hjemmeside]]. Prisen varierer, da den svarer til foreningens dagspris, men forvent en pris i omegnen af 300 kr. Beløbet vil blive trukket over huslejen.
+
+Foreningen ligger ikke inde med en hovednøgle eller lignende, så hvis du kommer til at smide din nøgle væk, eller på anden vis får dig låst ude, så kan vi ikke hjælpe med at skaffe dig adgang. Enhver vedligeholdelse og udskiftning af låse/nøgler er dit eget ansvar, jf. vores vedtægters §10.1, samt Lejelovens §20.
+
+===== Vand/Varme/El =====
+Du betaler acconto for vand og varme. Kollegiet opvarmes med fjernvarme fra Vestforbrændingen.
+
+Manglende varme i gulvvarme eller radiator kan skyldes flere ting, f.eks.:
+  * Luft i radiator/gulvvarme.
+  * Ventil, der har sat sig fast.
+  * Pakdåse, der skal udskiftes.
+
+Disse tre ting kan man selv ordne; se evt. her for vejledning i udskiftning af pakdåse [[https://youtube.com/watch?v=QltJU9ud6uY&t=28s|her]] eller [[https://youtube.com/watch?v=VaJmzBTOBjQ|her]] for vejledning i udluftning. Bemærk, at udluftningen ser anderledes ud på vores radiatorer. Den er let genkendelig, sidder i modsatte side af regulatoren.
+
+Hvis man stadig har problemer efter at have prøvet disse, skal man kontakte bestyrelsen på [[bestyrelsen@akdtu.dk]].
+
+Ved overtagelse af lejlighed, skal du selv lave en aftale med et elselskab om køb af strøm. El-måleren
+aflæses automatisk.
+
+===== Oprettelse af bruger hos Wise home =====
+For at leve op til gældende lovgivning [[https://www.retsinformation.dk/eli/lta/2020/2251|(BEK nr 2251 af 29/12/2020)]] har foreningen indgået en aftale med Wise home, om at alle andelshavere kan tilgå en oversigt over deres forbrug af varme, koldt vand og varmt vand. For at tilgå Wise homes hjemmeside skal man have adgang til sin profil hos Wise home. Denne bliver oprettet automatisk omkring indflytning, med den mailadresse der står i overdragelsesaftalen fra andelen. Denne fremsendes, sammen med en række andre dokumenter, af foreningens administrator, Cobblestone.
+
+Du skal gå ind på [[https://app.wisehome.dk|Wise homes hjemmeside]]. Her skriver du den førnævnte mailadresse fra overdragelsesaftalen og trykker på "Glemt kodeord?". Du får så tilsendt en mail med et link til, hvor du kan oprette dit kodeord. Bemærk at det tit er set at denne mail ender i spam-mappen, så check også denne.
+
+Efter oprettelse kan du se grafer over forbrug af varme, koldt vand og varmt vand over en selvvalgt periode, ved at logge ind på hjemmesiden.
+
+===== Navn på postkasse =====
+Navneskilte til postkasserne bliver automatisk opdateret ved indflytning, forventet inden for 1 måned efter indflytning. Derfor skal du ved indflytning ikke selv gøre noget. Hvis der alligevel går mere end 1 måned efter indflytning, så skriv gerne en besked til [[bestyrelsen@akdtu.dk]].
+
+===== Affaldssortering =====
+Foreningen sorterer pr. 01/09/2022 affald i 6 affaldsfraktioner: Dagrenovation, plast, glas, metal, papir, og pap. En ny, udvidet affaldsordning forventes implementeret af Lyngby-Taarbæk Kommune inden for det kommende år. Hvis du er i tvivl om hvilken container noget skal i, så henviser vi til Lyngby-Taarbæk forsynings [[https://ltf.dk/affald/sorteringsguide|sorteringsguide]].
+
+Se desuden udvidet affaldsguide på foreningens hjemmeside, [[https://akdtu.dk/for-beboere/vejledninger/affaldssortering/|affaldssortering]].
+
+Den nærmeste genbrugsstation er Firskovvej 9, 2800 Kgs. Lyngby.
+
+===== TV og internet =====
+
+Kollegiet har en fællesantenne, som distribuerer de såkaldte free-to-air kanaler, dvs. følgende kanaler (såfremt du har et TV med digital TV tuner):
+  * DR1
+  * DR2
+  * DR Ramasjang
+  * TV2 Lorry
+  * Folketinget
+  * Hovedstaden
+  * DR1 Syn
+  * DR2 Syn
+
+Kanallisten er korrekt på det tidspunkt denne er skrevet (1/5-2022).
+
+Efter at have underskrevet brugererklæringen (dette sker som udgangspunkt automatisk ved overdragelse af andel) er der adgang til internettet gennem netværksstik i lejligheden. Brugererklæringen burde være blandt de dokumenter, som du har underskrevet i forbindelse med køb af andelen.
+
+Det er tilladt at sætte egen router op (dog skal denne beskyttes med minimum wpa).
+
+Vores internetleverandør er K-Net, som leverer en 10.000/10.000 Mbps fiberforbindelse. Da forbindelse bliver delt mellem alle lejligheder er hastigheden i den enkelte lejlighed mindre, men typisk mellem 500-800 Mbps. På deres side vil der blive skrevet status information, derudover har de en facebook- og twitter-profil som man kan følge for at være sikker på at få informationerne. Links til disse findes på deres hjemmeside. For mere information om K-net, se [[https://k-net.dk|k-net.dk]].
+
+===== Netgruppen =====
+Netværksgruppen/Netgruppen står for vedligeholdelse af kollegiets netværksudstyr og hjemmeside (inkl. egen udvikling), samt kommunikation med vores internetleverandør K-Net. Det er, som regel, et medlem af Netværksgruppen som er kollegiets repræsentant i K-Nets bestyrelse.
+
+Netgruppen kan kontaktes på [[netgruppen@akdtu.dk]].
+
+Hvis du vil høre mere om arbejdet i Netværksgruppen eller er interesseret i at være en del af Netværksgruppen, er du velkommen til at kontakte os på ovenstående e-mail.
+
+===== Lån af trailer =====
+Foreningen ejer en trailer som, efter aftale, kan lånes af andelshavere/beboere til egen brug. Regler og betingelser samt en lånekontrakt forefindes på: [[https://akdtu.dk/public_files/Trailer_kontrakt.pdf|her]].
+
+Udfyld [[https://akdtu.dk/for-beboere/vejledninger/laan-af-trailer/|ansøgning om lån]] på vores hjemmeside for at lave en aftale om lån af traileren. Bestyrelsen vil vende tilbage på forespørgslen om lån for at aftale overlevering af nøglen til traileren. Efter endt brug skal nøglen afleveres tilbage til bestyrelsesmedlemmet eller lægges i bestyrelsens postkasse ved fælleshuset. 
+
+Lån uden forudgående aftale betragtes som tyveri.\\
+\\
+\\
+
+Vi håber, at ovenstående har givet et grundlæggende indtryk af, hvordan foreningen bliver drevet, hvilke regler, der gælder, og hvad dit ansvar er som andelshaver/beboer. Hvis du har yderligere spørgsmål, evt. til noget som ikke er nævnt i dette velkomstbrev, kontakt os da på [[bestyrelsen@akdtu.dk]].

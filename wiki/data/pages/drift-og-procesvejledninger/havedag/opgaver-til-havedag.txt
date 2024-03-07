@@ -1,11 +1,48 @@
 =====Opgaver til havedag=====
-Note: Nedenstående tabel er ikke fuldt opdateret - ABP 2023-10-25
+Note: Nedenstående tabel er delvist opdateret - ABP 2024-02-04
 ^ Område ^ Opgave ^ Antal Personer ^ Forventet tid ^ Frekvens ^ Beskrivelse ^
-| Udendørs | Vask tage på cykelskure | 1 | 120 min | | Benyt opløsning af IDZ |
-| Udendørs | Vask skralde containere |   |         | | |
-| Udendørs | Fjerne ukrudt i hække mod p-plads | 2 | | | |
-| Udendørs | Fjern blade rundt om fælleshus/græsplæne | |  || Bladene opsamles og køres til genbrugspladsen |
-| Udendørs | Fjern ukrudt i hække mod gangsti |
+| Udendørs | Vask tage på cykelskure | 1 | 120 min | halv årligt | Benyt opløsning af IDZ |
+| Udendørs | Vask skralde containere |   |         | halv årligt | |
+| Udendørs | Fjerne ukrudt i hække mod p-plads | 2 | | halv årligt | |
+| Udendørs | Fjern blade rundt om fælleshus/græsplæne | |  | halv årligt | Bladene opsamles og køres til genbrugspladsen |
+| Udendørs | Fjern ukrudt i hække mod gangsti | | | halv årligt |
+| Udendørs | Luge ukrudt mellem fliser | | | halv årligt | Efterfyld med fugesand |
+| Udendørs | Spule fliser | | | hel årligt |  |
+| Udendørs | Rens lygtepæle | 2 | |  |  |
+|  |  | | | | |
+| Elevator | Skinner til døre renses for snavs | | | halv årligt |  |
+|  |  | | |  | |
+| Opgange | Fjern alt irrelevant fra opslagstavle | | | halv årligt | |
+|  |  | | |  | |
+| Opgange & svalegange | Hovedrengøring af opgange & svalegange | 2 | | halv årligt | |
+| Opgange & svalegange | Rens afløbsrender for alger | 2 | | halv årligt | Benyt opløsning af IDZ |
+| Opgange & svalegange | Vaske glas på svalegange | 1 | |  | |
+| Opgange & svalegange | Slibe gelænder + oliere | 12 | |  | |
+| Opgange & svalegange | Vaske gelænder i trappeopgang | 3 | |  | |
+| Opgange & svalegange | Vaske alle skurvægge | 3 | |  | |
+| Opgange & svalegange | Vaske lamper |  | | halv årligt | |
+| Opgange & svalegange | Vaske hoveddøre |  | | halv årligt | |
+| | |  | | | |
+| Fælleshus | Vaskemaskinens filtre og tætningslister mm. renses |  | | halv årligt | |
+| Fælleshus | Feje alle gulve |  | | halv årligt | Inklusiv under/bag komfur |
+| Fælleshus | Rengøre køleskab & fryser | 1 | | halv årligt | |
+| Fælleshus | Rengøre ovn |  | | halv årligt | Pyrolyse |
+| Fælleshus | Toiletter rengøres |  | | halv årligt | med WC rens, skrubbes og aftørres med klud med universal rens |
+| Fælleshus | Håndvaske skrubbes |  | | halv årligt | Ved kalkaflejringer kan man passende benytte WC rens (husk handsker) |
+| Fælleshus | Vaske døre inkl. fordøren |  | | halv årligt | |
+| Fælleshus | Vaske alle vægge inkl. skillevæg |  | | halv årligt | |
+| Fælleshus | Vaske alle borde inkl. underside |  | | halv årligt | |
+| Fælleshus | Efterspænd alle borde |  | | halv årligt | Kontroller dupper/ben er intakte |
+| Fælleshus | Vaske alle stole |  | | halv årligt | |
+| Fælleshus | Efterspænd alle stole |  | | halv årligt | |
+| Fælleshus | Vaske skraldespande |  | | halv årligt | |
+| Fælleshus | Sortering af alle køkkenskabe |  | | halv årligt | |
+| Fælleshus | Vaske gulv med maskine | 1 | | halv årligt | |
+| Fælleshus | Afkalk elkedel | 1 | | halv årligt | |
+| Fælleshus | Rens filter i projektor | 1 | | halv årligt | |
+|  |  |  | |  | |
+| Kælder | Rengøring af rackskabe |  | | halv årligt | Victors havedag |
+
 
 ====Fælleshus====
 **4 personer**

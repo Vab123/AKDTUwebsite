@@ -12,3 +12,7 @@
   * [[vejledninger:netgruppen:internet-i-faelleshuset]]
   * [[skrivelser:affaldssortering-og-storskrald]] - Oversættes også til engelsk
   * [[drift-og-procesvejledninger:tv]]
+  * [[vejledninger:generalforsamling]]
+  * [[vejledninger:budget_og_regnskab]]
+  * [[skrivelser:velkomstbrev_da]]
+  * [[skrivelser:velkomstbrev_en]]

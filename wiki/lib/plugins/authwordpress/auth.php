@@ -1,4 +1,5 @@
 <?php
+
 /**
  * DokuWiki Plugin authwordpress (Auth Component)
  *
@@ -20,13 +21,18 @@
  * @license    GPL 2 http://www.gnu.org/licenses/gpl-2.0.html
  * @version    1.1
  * @link       https://github.com/dregad/dokuwiki-authwordpress
+ *
+ * @noinspection PhpComposerExtensionStubsInspection
+ *               PhpUnused
+ *               PhpMissingReturnTypeInspection
  */
-
 
 // must be run within Dokuwiki
 if (!defined('DOKU_INC')) {
     die();
 }
+
+use dokuwiki\Logger;
 
 /**
  * WordPress password hashing framework
@@ -39,36 +45,40 @@ require_once('class-phpass.php');
 // @codingStandardsIgnoreLine
 class auth_plugin_authwordpress extends DokuWiki_Auth_Plugin
 {
-
     /**
      * SQL statement to retrieve User data from WordPress DB
      * (including group memberships)
      * '%prefix%' will be replaced by the actual prefix (from plugin config)
+     * @var string $sql_wp_user_data
      */
     protected $sql_wp_user_data = "SELECT
             id, user_login, user_pass, user_email, display_name,
-            meta_value AS groups
+            meta_value AS grps
         FROM %prefix%users u
         JOIN %prefix%usermeta m ON u.id = m.user_id AND meta_key = '%prefix%capabilities'";
 
     /**
      * Wordpress database connection
+     * @var PDO $db
      */
     protected $db;
 
     /**
      * Users cache
+     * @var array $users
      */
     protected $users;
 
     /**
      * True if all users have been loaded in the cache
      * @see $users
+     * @var bool $usersCached
      */
     protected $usersCached = false;
 
     /**
      * Filter pattern
+     * @var array $filter
      */
     protected $filter;
 
@@ -105,10 +115,11 @@ class auth_plugin_authwordpress extends DokuWiki_Auth_Plugin
 
 
     /**
-     * Check user+password
+     * Check user+password.
      *
      * @param   string $user the user name
      * @param   string $pass the clear text password
+     *
      * @return  bool
      *
      * @uses PasswordHash::CheckPassword WordPress password hasher
@@ -122,17 +133,18 @@ class auth_plugin_authwordpress extends DokuWiki_Auth_Plugin
 
         $hasher = new PasswordHash(8, true);
         $check = $hasher->CheckPassword($pass, $data['pass']);
-        dbglog("Password " . ($check ? 'OK' : 'Invalid'));
+        $this->logDebug("Password " . ($check ? 'OK' : 'Invalid'));
 
         return $check;
     }
 
     /**
-     * Bulk retrieval of user data
+     * Bulk retrieval of user data.
      *
      * @param   int   $start index of first user to be returned
      * @param   int   $limit max number of users to be returned
      * @param   array $filter array of field/pattern pairs
+     *
      * @return  array userinfo (refer getUserData for internal userinfo details)
      */
     public function retrieveUsers($start = 0, $limit = 0, $filter = array())
@@ -144,6 +156,7 @@ class auth_plugin_authwordpress extends DokuWiki_Auth_Plugin
         // Apply filter and pagination
         $this->setFilter($filter);
         $list = array();
+        $count = $i = 0;
         foreach ($this->users as $user => $info) {
             if ($this->applyFilter($user, $info)) {
                 if ($i >= $start) {
@@ -161,9 +174,10 @@ class auth_plugin_authwordpress extends DokuWiki_Auth_Plugin
     }
 
     /**
-     * Return a count of the number of user which meet $filter criteria
+     * Return a count of the number of user which meet $filter criteria.
      *
      * @param array $filter
+     *
      * @return int
      */
     public function getUserCount($filter = array())
@@ -174,6 +188,7 @@ class auth_plugin_authwordpress extends DokuWiki_Auth_Plugin
             $count = count($this->users);
         } else {
             $this->setFilter($filter);
+            $count = 0;
             foreach ($this->users as $user => $info) {
                 $count += (int)$this->applyFilter($user, $info);
             }
@@ -183,10 +198,12 @@ class auth_plugin_authwordpress extends DokuWiki_Auth_Plugin
 
 
     /**
-     * Returns info about the given user
+     * Returns info about the given user.
      *
-     * @param   string $user the user name
-     * @return  array containing user data or false
+     * @param string $user the user name
+     * @param bool   $requireGroups defaults to true
+     *
+     * @return array|false containing user data or false in case of error
      */
     public function getUserData($user, $requireGroups = true)
     {
@@ -199,19 +216,19 @@ class auth_plugin_authwordpress extends DokuWiki_Auth_Plugin
 
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':user', $user);
-        dbglog("Retrieving data for user '$user'\n$sql");
+        $this->logDebug("Retrieving data for user '$user'\n$sql");
 
         if (!$stmt->execute()) {
             // Query execution failed
             $err = $stmt->errorInfo();
-            dbglog("Error $err[1]: $err[2]");
+            $this->logDebug("Error $err[1]: $err[2]");
             return false;
         }
 
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($user === false) {
             // Unknown user
-            dbglog("Unknown user");
+            $this->logDebug("Unknown user");
             return false;
         }
 
@@ -220,10 +237,13 @@ class auth_plugin_authwordpress extends DokuWiki_Auth_Plugin
 
 
     /**
-     * Connect to Wordpress database
-     * Initializes $db property as PDO object
+     * Connect to Wordpress database.
+     *
+     * Initializes $db property as PDO object.
+     *
+     * @return void
      */
-    protected function connectWordpressDb()
+    protected function connectWordpressDb(): void
     {
         if ($this->db) {
             // Already connected
@@ -246,13 +266,16 @@ class auth_plugin_authwordpress extends DokuWiki_Auth_Plugin
     }
 
     /**
-     * Convert a Wordpress DB User row to DokuWiki user info array
-     * and stores it in the users cache
+     * Cache User Data.
      *
-     * @param  array $user Raw Wordpress user table row
+     * Convert a Wordpress DB User row to DokuWiki user info array
+     * and stores it in the users cache.
+     *
+     * @param  array $row Raw Wordpress user table row
+     *
      * @return array user data
      */
-    protected function cacheUser($row)
+    protected function cacheUser(array $row): array
     {
         global $conf;
 
@@ -264,7 +287,7 @@ class auth_plugin_authwordpress extends DokuWiki_Auth_Plugin
         }
 
         // Group membership - add DokuWiki's default group
-        $groups = array_keys(unserialize($row['groups']));
+        $groups = array_keys(unserialize($row['grps']));
         if ($this->getConf('usedefaultgroup')) {
             $groups[] = $conf['defaultgroup'];
         }
@@ -282,7 +305,7 @@ class auth_plugin_authwordpress extends DokuWiki_Auth_Plugin
     }
 
     /**
-     * Loads all Wordpress users into the cache
+     * Loads all Wordpress users into the cache.
      *
      * @return void
      */
@@ -303,11 +326,13 @@ class auth_plugin_authwordpress extends DokuWiki_Auth_Plugin
     }
 
     /**
-     * Build filter patterns from given criteria
+     * Build filter patterns from given criteria.
      *
      * @param array $filter
+     *
+     * @return void
      */
-    protected function setFilter($filter)
+    protected function setFilter(array $filter): void
     {
         $this->filter = array();
         foreach ($filter as $field => $value) {
@@ -317,13 +342,14 @@ class auth_plugin_authwordpress extends DokuWiki_Auth_Plugin
     }
 
     /**
-     * Return true if given user matches filter pattern, false otherwise
+     * Return true if given user matches filter pattern, false otherwise.
      *
      * @param string $user login
      * @param array  $info User data
+     *
      * @return bool
      */
-    protected function applyFilter($user, $info)
+    protected function applyFilter(string $user, array $info): bool
     {
         foreach ($this->filter as $elem => $pattern) {
             if ($elem == 'grps') {
@@ -337,6 +363,23 @@ class auth_plugin_authwordpress extends DokuWiki_Auth_Plugin
             }
         }
         return true;
+    }
+
+    /**
+     * Add message to debug log.
+     *
+     * @param string $msg
+     *
+     * @return void
+     */
+    protected function logDebug(string $msg): void
+    {
+        global $updateVersion;
+        if ($updateVersion >= 52) {
+            Logger::debug($msg);
+        } else {
+            dbglog($msg);
+        }
     }
 }
 

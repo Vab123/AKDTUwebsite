@@ -47,21 +47,21 @@
   * [[drift-og-procesvejledninger:fælleshus]]
   * [[vejledninger:Adgangskontrol]]
   * [[vejledninger:varmesystem-i-fælleshus]]
+  * [[vejledninger:netgruppen:internet-i-fælleshuset]]
 
 
 
 
 **Netgruppen**
-  * [[drift-og-procesvejledninger:netgruppen]]
+  * [[drift-og-procesvejledninger:netgruppen:hardware]]
+    * [[vejledninger:netgruppen:port-oversigt|Port oversigt]]
   * [[vejledninger:Hjemmeside]]
     * [[vejledninger:Hjemmeside:aendringer]]
     * [[vejledninger:Hjemmeside:planlagte-aendringer]]
+    * [[vejledninger:hjemmeside:FTP]]
   * [[vejledninger:hjemmeside:wiki]]
-  * [[vejledninger:hjemmeside:FTP]]
-  * [[vejledninger:netgruppen:port-oversigt|Port oversigt]]
-  * [[vejledninger:netgruppen:switches]]
-  * [[vejledninger:netgruppen:internet-i-fælleshuset]]
   * [[vejledninger:netgruppen:nye-bestyrelsesmedlemmer]]
+  * [[vejledninger:netgruppen:k-net]]
 
 
 ** Skrivelser **

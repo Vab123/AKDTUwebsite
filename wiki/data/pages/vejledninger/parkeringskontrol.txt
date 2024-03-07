@@ -5,6 +5,10 @@ Alle beboere skal registreres i Coparks system før de har mulighed for at regis
 
 Alle beboere har derefter som udgangspunkt 1 fast nummerplade og 10 gæsteparkeringer om måneden. Disse nummerplader skal registreres i Coparks app (fås til [[https://play.google.com/store/apps/details?id=no.giantleap.parko.copark|Android]] og [[https://apps.apple.com/dk/app/copark/id1503185040?l=da|iOS]]). Den faste nummerplade står som udgangspunkt til at udløbe 31-12 hvert år, men fornyes automatisk. Yderligere faste nummerplader kan oprettes af [[#kontakt|Coparks kundeservice]]
 
+===== Regler =====
+Foreningen kan bede om specielle regler på parkeringspladsen. Der er i øjeblikket følgende regler:
+  * Erhvervskøretøjer/papegøjeplader er fredet på hverdage ml. 06.00 - 17.00
+
 ===== Kontakt =====
 {{anchor:kontakt}}
 Coparks kundeservice står for al kommunikation med bestyrelsen, og kan nås på mail [[kontakt@copark.dk]]. 

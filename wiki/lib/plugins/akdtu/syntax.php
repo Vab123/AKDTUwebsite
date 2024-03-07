@@ -85,7 +85,7 @@ class syntax_plugin_akdtu extends DokuWiki_Syntax_Plugin {
 
 					if (strlen($template) == 0) { $template = "AKDTU"; } // Set default value for template
 
-                    $renderer->doc .= "&book_title=" . htmlentities($title) . "&tpl=" . htmlentities($template); // Output template
+                    $renderer->doc .= $renderer->_xmlEntities("&book_title=" . htmlentities($title) . "&tpl=" . htmlentities($template)); // Output template
                     break;
                 case DOKU_LEXER_EXIT :
 					// End-value found. Output final part of string

@@ -1,8 +1,18 @@
-=====Internet i fælleshuset=====
-<adm warning>Dette er endnu ikke operationelt, men er Work-In-Progress. Det afventer i øjeblikket at der trækkes internetkabel til fælleshuset, samt at kollegiet får en kontrakt om ansvarsfraskrivelse fra K-net. Siden her opdateres løbende.</adm>
+===== Internet i fælleshuset =====
 Der er internet i fælleshuset, som kan benyttes når fælleshuset er udlejet. Denne forbindelse bruger VLAN ''624''.
 
-====Tænd og sluk for internetforbindelsen====
-Forbindelsen tænder og slukker automatisk i forbindelse med almindelige udlejninger af fælleshuset klokken 12:00. Da dette kan tage et øjeblik forventes det at forbindelsen er tændt ca. 15 minutter inde i udlejningsperioden, men som udgangspunkt bør det ske allerede efter 1 minut.
+==== Adgang til internetforbindelsen ====
+Adgang til internetforbindelsen styres ved at koden til routeren ændres. Dette bliver automatisk gjort af hjemmesiden, i form af et cron-job, der køres hver dag klokken 12:00:01. Cron-jobbet ændrer koden, samt sender en mail med informationer til beboeren, og eventuelt bestyrelsen/netgruppen (Dette kan slås til eller fra på [[https://akdtu.dk/wp-admin/admin.php?page=akdtu-plugin-mail-f%C3%A6lleshus-internet|hjemmesiden]])
 
-I forbindelse med unormale udlejningstidspunkter (bestyrelsesmøder, generalforsamlinger, etc.) kan internetforbindelsen startes af en administrator på hjemmesiden, gennem widgeten "Fælleshus internetforbindelse".
+I forbindelse med unormale udlejningstidspunkter (bestyrelsesmøder, generalforsamlinger, etc.) kan koden til internetforbindelsen opdateres af bestyrelsesmedlemmer på hjemmesiden, gennem widgeten "Fælleshus internetforbindelse". __**Bemærk**__: Dette sender også en mail til beboeren med adgangskoden, hvis fælleshuset er udlejet af en lejlighed.
+
+=== Når fælleshuset er lejet af en lejlighed ===
+Adgangskoden sættes til en hash af start-datoen for lejeperioden og lejerens lejlighedsnummer. Den aktuelle kode kan af bestyrelsesmedlemmer ses på [[https://akdtu.dk/wp-admin/index.php|hjemmesiden]], på widget'en "Fælleshus Internetforbindelse".
+
+{{ :vejledninger:netgruppen:eksempel_-_faelleshus_internet_widget.png?nolink |}}
+
+=== Når fælleshuset er lejet af bestyrelsen, vicevært, etc. ===
+Adgangskoden er ''Bestyrelsen2024''
+
+=== Når fælleshuset ikke er lejet ===
+Adgangskoden er ''Bestyrelsen2024''

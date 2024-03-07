@@ -1,14 +1,10 @@
-a:2:{s:7:"current";a:9:{s:4:"date";a:2:{s:7:"created";i:1672338207;s:8:"modified";i:1672338226;}s:7:"creator";s:15:"Victor Brandsen";s:4:"user";s:6:"victor";s:11:"last_change";a:8:{s:4:"date";i:1672338226;s:2:"ip";s:14:"82.211.219.109";s:4:"type";s:1:"E";s:2:"id";s:52:"drift-og-procesvejledninger:vand-og-varme-aflaesning";s:4:"user";s:6:"victor";s:3:"sum";s:0:"";s:5:"extra";s:0:"";s:10:"sizechange";i:-23;}s:11:"contributor";a:1:{s:6:"victor";s:15:"Victor Brandsen";}s:5:"title";s:24:"Vand og varme aflæsning";s:11:"description";a:2:{s:15:"tableofcontents";a:3:{i:0;a:4:{s:3:"hid";s:24:"vand_og_varme_aflaesning";s:5:"title";s:24:"Vand og varme aflæsning";s:4:"type";s:2:"ul";s:5:"level";i:2;}i:1;a:4:{s:3:"hid";s:32:"aflaesningssystem_kamstrup_ready";s:5:"title";s:36:"Aflæsningssystem – Kamstrup READy";s:4:"type";s:2:"ul";s:5:"level";i:3;}i:2;a:4:{s:3:"hid";s:6:"malere";s:5:"title";s:7:"Målere";s:4:"type";s:2:"ul";s:5:"level";i:3;}}s:8:"abstract";s:264:"Vand og varme aflæsning
-
-Techem
+a:2:{s:7:"current";a:9:{s:4:"date";a:2:{s:7:"created";i:1672338207;s:8:"modified";i:1698262448;}s:7:"creator";s:15:"Victor Brandsen";s:4:"user";s:6:"victor";s:11:"last_change";a:8:{s:4:"date";i:1698262448;s:2:"ip";s:13:"82.211.220.70";s:4:"type";s:1:"E";s:2:"id";s:52:"drift-og-procesvejledninger:vand-og-varme-aflaesning";s:4:"user";s:0:"";s:3:"sum";s:0:"";s:5:"extra";s:0:"";s:10:"sizechange";i:-3;}s:11:"contributor";a:1:{s:6:"victor";s:15:"Victor Brandsen";}s:5:"title";s:21:"Vand og varme målere";s:11:"description";a:2:{s:15:"tableofcontents";a:3:{i:0;a:4:{s:3:"hid";s:20:"vand_og_varme_malere";s:5:"title";s:21:"Vand og varme målere";s:4:"type";s:2:"ul";s:5:"level";i:2;}i:1;a:4:{s:3:"hid";s:32:"aflaesningssystem_kamstrup_ready";s:5:"title";s:36:"Aflæsningssystem – Kamstrup READy";s:4:"type";s:2:"ul";s:5:"level";i:3;}i:2;a:4:{s:3:"hid";s:6:"malere";s:5:"title";s:7:"Målere";s:4:"type";s:2:"ul";s:5:"level";i:3;}}s:8:"abstract";s:289:"Vand og varme målere
 
 Aflæsningssystem – Kamstrup READy
+
+Foreningens målere integrere direkte op mod wisehomes system så beboerne selv kan følge med i deres forbrug. Se hjemmesiden for vejledning i oprettelse af nye beboere.
 
 Målere
 
 År for installation:	2016
-Skift målere:		2032
-
-Budget for skift - 2016 priser rundet op til nærmeste 5.000 kr.
-Målere: 		285.000 kr. inkl. moms.
-Montering:		55.000 kr. inkl. moms.";}s:8:"internal";a:2:{s:5:"cache";b:1;s:3:"toc";b:1;}s:8:"relation";a:1:{s:10:"firstimage";s:0:"";}}s:10:"persistent";a:5:{s:4:"date";a:2:{s:7:"created";i:1672338207;s:8:"modified";i:1672338226;}s:7:"creator";s:15:"Victor Brandsen";s:4:"user";s:6:"victor";s:11:"last_change";a:8:{s:4:"date";i:1672338226;s:2:"ip";s:14:"82.211.219.109";s:4:"type";s:1:"E";s:2:"id";s:52:"drift-og-procesvejledninger:vand-og-varme-aflaesning";s:4:"user";s:6:"victor";s:3:"sum";s:0:"";s:5:"extra";s:0:"";s:10:"sizechange";i:-23;}s:11:"contributor";a:1:{s:6:"victor";s:15:"Victor Brandsen";}}}
+Skift målere:		2032";}s:8:"internal";a:2:{s:5:"cache";b:1;s:3:"toc";b:1;}s:8:"relation";a:1:{s:10:"firstimage";s:0:"";}}s:10:"persistent";a:5:{s:4:"date";a:2:{s:7:"created";i:1672338207;s:8:"modified";i:1698262448;}s:7:"creator";s:15:"Victor Brandsen";s:4:"user";s:6:"victor";s:11:"last_change";a:8:{s:4:"date";i:1698262448;s:2:"ip";s:13:"82.211.220.70";s:4:"type";s:1:"E";s:2:"id";s:52:"drift-og-procesvejledninger:vand-og-varme-aflaesning";s:4:"user";s:0:"";s:3:"sum";s:0:"";s:5:"extra";s:0:"";s:10:"sizechange";i:-3;}s:11:"contributor";a:1:{s:6:"victor";s:15:"Victor Brandsen";}}}

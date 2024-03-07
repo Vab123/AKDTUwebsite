@@ -11,6 +11,8 @@ Hvis der skal oprettes nye sider foregår det på følgende måde:
   - Naviger derefter til det URL, siden skal ligge på, __på trods af at siden stadig ikke findes__, ved at trykke på det link du nu har tilføjet til menuen i siden. Derefter kan du redigere siden som  beskrevet ovenover. Når du gemmer siden bliver den oprettet, og kan læses som normalt.
 
 ==== Udskrift af indhold ====
+Foreningens wiki bruger pluginnet [[https://www.dokuwiki.org/plugin:dw2pdf|dw2pdf]] til at kunne downloade siderne på wikien som PDF.
+
 Alt indhold på wikien kan downloades som PDF. Dette gøres ved at skrive ''%%<printable>[template]</printable>%%'' i starten af de sider som skal kunne udskrives, hvor ''[template]'' enten efterlades blankt eller erstattes med en af følgende implementerede templates:
   * ''AKDTU'': Standard tema til foreningens dokumenter
   * ''frontpage'': Samme som ''AKDTU'', men med en forside med titel på siden samt dato for seneste revision.

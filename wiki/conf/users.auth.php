@@ -11,3 +11,4 @@
 # login:passwordhash:Real Name:email:groups,comma,separated
 
 admin:$2y$10$obphWW72FtYHgaiHzN2tOOH.C1irMxqcV78PS5jsDaWPH0UFBM46m:Victor Brandsen:victor2@akdtu.dk:admin,user
+deleteme:$1$4fd0ad31$.cId7p1uxI4a.RcrH81On0:-:-:admin,user

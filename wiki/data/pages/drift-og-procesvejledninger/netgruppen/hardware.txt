@@ -1,0 +1,56 @@
+===== Hardware =====
+Udskiftning af alt udstyret må forventes at koste ca 75.000 kr.
+
+==== UPS ====
+| Model | APC Smart-UPS 1500VA USB & Serial RM 2U 230V |
+| Serienummer | SMT1500RMI2UC |
+| Batteri | [[https://www.apc.com/shop/dk/en/products/APC-Replacement-Battery-Cartridge-24-with-2-Year-Warranty/P-RBC24|APC Replacement Battery Cartridge 24 with 2 Year Warranty]] |
+| Manual | {{ :drift-og-procesvejledninger:aste-6z8lua_r5_en.pdf |}} |
+| Batteri sidst skiftet | 04-01-2024 |
+==== Switches ====
+| Model | Aruba 2540 48G 4SFP+ Switch |
+| Installation and getting started | {{ :drift-og-procesvejledninger:netgruppen:aruba_2540_-_installation_and_getting_started_guide.pdf |}} |
+| Quick setup | {{ :drift-og-procesvejledninger:netgruppen:hpe_aruba_2540_quick_setup_guide_en.pdf |}} |
+| Fiber transciever | [[https://www.proshop.dk/Repeater-Transceiver/StarTechcom-HP-J9151D-CompatibleSFP-Module-SFP-transceiver-module-10-GigE/2807753|HP Modul 10GBit SFP+ LR (J9151D)]] |
+
+Derudover har foreningen to Aruba 2530 der tidligere har været i brug og fungerer som reserve. Tilstanden af reserverne er tvivlsomme hvor af den ene vides at være ustabil. De kan derfor ikke sættes i drift uden en vis mængde arbejde.
+Den ene af de to switches i brug serverer stuen og første sal, mens den anden serverer anden sal og fælleshuset. Hver lejlighed har deres eget VLAN, som er konfigureret hos K-net ([[https://admin.k-net.dk]]). Dette VLAN udsendes på en specifik port som ses i [[vejledninger:netgruppen:port-oversigt|port oversigten]].
+
+=== IP adresser ===
+  * 10.20.10.10
+  * 10.20.10.11
+
+=== Tilslutning guide ===
+Der kan forbindes til Switchen gennem routeren i kælderen (anbefalet) eller et USB-kabel.
+  * For at forbinde gennem routeren i kælderen skal der være et kabel fra en port med management-vlan tilsluttet (Se [[vejledninger:netgruppen:port-oversigt|port oversigten]]) til routeren. Herefter kan der forbindes til switchenes web-interfaces gennem en browser, på 10.20.10.10 og 10.20.10.11. Derudover kan der forbindes med terminal-software (som [[https://ttssh2.osdn.jp/index.html.en|Tera term]]) på samme ip'er.
+  * For at forbinde gennem et USB-kabel skal der bruges specielt terminal-software, som [[https://ttssh2.osdn.jp/index.html.en|Tera term]]. Herefter skal der sættes et USB-kabel mellem computeren og den lille management-USB-port på switchen, og der kan derefter opstartes en terminal.
+
+== Anvendte kommandoer ==
+Hvis man starter en terminal op, er her en liste over ofte brugte kommandoer:
+  * ''configure'': Sætter switchen i konfigurations-mode, så indstillinger kan ændres. Er som regel første kommando man skriver ind.
+  * ''sh int status'': Viser status på alle porte, såsom indstillet hastighed og VLAN.
+  * ''interface XX'': Vælger at ændringer skal foretages på interface/port ''XX''. Skrives før ændringerne foretages.
+  * ''speed-duplex auto'': Sætter hastigheden på den aktuelt valgte port til ''auto''. Andre muligheder for hastigheden kan ses ved at skrive ''speed-duplex ?''.
+  * ''switchport mode access'': Sætter den aktuelt valgte port til at være en ''access''-port. En anden mulighed er ''trunk'', men denne benyttes ikke i foreningen.
+  * ''switchport access vlan XX'': Sætter den aktuelt valgte port til at udsende vlan ''XX''.
+  * ''?'': Giver en liste over hvilke kommandoer der kan bruges. Kan også skrives efter en anden kommando for at se en liste over argumenter.
+  * ''save'': Gemmer ændringer.
+
+=== Dokumenter ===
+{{ :vejledninger:netgruppen:access_security_guide.pdf | Access security guide }}
+
+{{ :vejledninger:netgruppen:advanced_traffic_management_guide.pdf | Advanced traffic management guide }}
+
+{{ :vejledninger:netgruppen:aruba_2540_-_installation_and_getting_started_guide.pdf | Installation and getting started }}
+
+{{ :vejledninger:netgruppen:cli_guide.pdf | CLI guide }}
+
+{{ :vejledninger:netgruppen:hpe_aruba_2540_quick_setup_guide_en.pdf | Quick setup guide}}
+
+=== Konfigurations backup ===
+Konfigurations backup, som kan genindstilles gennem switchenes Online Interface:
+
+{{ :vejledninger:netgruppen:konfiguration_backup_20190413.zip | Konfiguration backup 20190413 }}
+
+==== Patch paneler ====
+Der findes patch paneler til switchene, som sider over og under de relevante switche. Derudover findes tre ubrugte patch paneler, hvor der bagtil er tilsluttet et kabel til hver lejlighed. Disse skulle oprindeligt bruges til fastnettelefoni til hver lejlighed, men dette bruges ikke. I stedet kan de bruges som en midlertidig erstatning hvis der er problemer med de eksisterende internetkabler.

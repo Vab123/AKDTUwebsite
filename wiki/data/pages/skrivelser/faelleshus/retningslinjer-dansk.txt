@@ -1,25 +1,32 @@
 <printable></printable>
 
-===== Retningslinjer for brug af fælleshuset =====
-Retningslinjerne for fælleshuset skal følges uanset om man har lejet fælleshuset eller ved almindelig brug. Punkterne under “Efter brug” skal være udført enten inden fælleshuset forlades eller inden lejeperioden ophører. Hvis dette ikke er tilfældet opkræves der et gebyr svarende til foreningens udgifter til professionel rengøring.
+===== Regler for brug af fælleshuset =====
+Reglerne for brug af fælleshuset skal følges uanset om man har lejet fælleshuset eller ved almindelig brug. Punkterne under “Rengøring efter brug” skal være udført enten inden fælleshuset forlades eller inden lejeperioden ophører. Hvis dette ikke er tilfældet opkræves der et gebyr svarende til foreningens udgifter til professionel rengøring.
 
-//Jævnfør foreningens vedtægter kan der ved skader/mangler kan der rettes erstatningskrav til den/de pågældende brugere af fælleshuset. Ved skader/mangler er det op til bestyrelsen om dette skal udbedres af skadeforvolder, bestyrelsen eller en af bestyrelsen udpeget tredjepart afhængig af skaden/manglens art.//
+//Jævnfør foreningens vedtægter §31A.5 kan der ved skader/mangler rettes erstatningskrav til den/de pågældende brugere af fælleshuset. Ved skader/mangler er det op til bestyrelsen om dette skal udbedres af skadeforvolder, bestyrelsen eller en af bestyrelsen udpeget tredjepart afhængig af skaden/manglens art.//
 
-Man hæfter for fejl og mangler, manglende rengøring, støjgener eller lignende fra fælleshuset låses op med din personlige chip til det er korrekt aflåst. For vejledning i brug af adgangskontrollen, se [[akdtu.dk]].
+Man hæfter for fejl og mangler, manglende rengøring, støjgener eller lignende fra fælleshuset låses op med din personlige chip til det er korrekt aflåst. For vejledning i brug af adgangskontrollen, se [[https://akdtu.dk/for-beboere/f%c3%a6lleshuset/vejledning-til-adgangskontrol/|hjemmesiden]].
 
-Ved tvivl eller spørgsmål til retningslinjerne kontakt da [[udlejning@akdtu.dk]].
-====Før brug====
-  * Eventuelle fejler eller mangler sendes hurtigst muligt disse til udlejning@akdtu.dk så man ikke hæfter for disse.
+Ved tvivl eller spørgsmål til reglerne, kontakt da [[udlejning@akdtu.dk]].
+
+==== Internet ====
+Der findes en internetforbindelse i fælleshuset, som man ved leje af fælleshuset får eneret på brugen af, og har ansvaret for under lejen. Da foreningen juridisk i tilfælde af eksempelvis ulovlig aktivitet kan blive påkrævet at informere relevante offentlige myndigheder om brugere af internetforbindelsen inden for et givent tidsinterval, er denne internetforbindelse kun tilgængelig ved leje af fælleshuset, og det sikres at kun lejer og dennes gæster har adgang til internetforbindelsen. Dette gøres ved at adgangskoden til routeren automatisk bliver ændret i starten og slutningen af lejeperioden.
+
+Adgangskoden bliver automatisk opdateret i starten af lejeperioden, og der vil efterfølgende blive sendt en mail med login-informationerne til den mailadresse, lejeren har opgivet på sin profil på foreningens hjemmeside, [[http://akdtu.dk|akdtu.dk]]. Bemærk at denne procedure kan tage et øjeblik, og det kan derfor ske at adgangskoden først bliver sendt op til 60 minutter efter start på lejeperioden. I tilfælde af at man efter 60 minutter stadig ikke har modtaget koden til internetforbindelsen kan foreningens netgruppe kontaktes på [[netgruppen@akdtu.dk]]. Husk at checke om mailen med adgangskoden er endt i dit spam-filter.
+
+Som lejer af fælleshuset er man meget velkommen til at dele adgangskoden med sine gæster. Bemærk dog stadig at man som lejer bliver holdt ansvarlig for brugen, eksempelvis i tilfælde af ulovlig aktivitet.
+
+==== Huskeliste for brug af fælleshuset ====
+=== Generelle regler ===
+  * Eventuelle fejler eller mangler sendes hurtigst muligt disse til [[udlejning@akdtu.dk]] så man ikke hæfter for disse.
   * Der må ikke hænges ting op med tape på vægge og loft
-
-====Under brug====
   * Der må ikke ryges indenfor
   * Vis hensyn til de andre beboere
   * Hold døre og vinduer lukket ved støj
   * Der må ikke stilles på termostaterne
   * Fælleshusets inventar må ikke tages udenfor
 
-====Efter brug====
+=== Rengøring efter brug ===
   * Fælleslokale
     * Støvsug/feje gulvet
     * Støvsug sofa
@@ -74,6 +81,7 @@ Ved tvivl eller spørgsmål til retningslinjerne kontakt da [[udlejning@akdtu.dk
 
 **Når du er helt færdig så husk at aktivere alarmen med din chip.**
 
+<pagebreak>
 ====Standardopstilling af møbler====
 {{ :skrivelser:faelleshus:faelleshus-opstilling_1-768x576-1.jpg?nolink |}}
 

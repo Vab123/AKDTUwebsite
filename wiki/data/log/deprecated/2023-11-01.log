@@ -1,0 +1,13 @@
+2023-10-31 23:01:25		dbglog() is deprecated. It was called from helper_plugin_davcal::__construct() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/davcal/helper.php:20 \dokuwiki\Logger should be used instead!
+2023-10-31 23:01:25		require(syntax.php) is deprecated. It was called from require() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/akdtu/syntax.php:12 Autoloading should be used instead!
+2023-10-31 23:01:26		dbglog() is deprecated. It was called from helper_plugin_davcal::__construct() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/davcal/helper.php:20 \dokuwiki\Logger should be used instead!
+2023-10-31 23:01:26		dbglog() is deprecated. It was called from helper_plugin_davcal::__construct() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/davcal/helper.php:20 \dokuwiki\Logger should be used instead!
+2023-10-31 23:01:26		dbglog() is deprecated. It was called from helper_plugin_davcal::__construct() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/davcal/helper.php:20 \dokuwiki\Logger should be used instead!
+2023-10-31 23:01:26		dbglog() is deprecated. It was called from helper_plugin_davcal::__construct() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/davcal/helper.php:20 \dokuwiki\Logger should be used instead!
+2023-10-31 23:01:26		dbglog() is deprecated. It was called from helper_plugin_davcal::__construct() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/davcal/helper.php:20 \dokuwiki\Logger should be used instead!
+2023-10-31 23:01:26		dbglog() is deprecated. It was called from helper_plugin_davcal::__construct() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/davcal/helper.php:20 \dokuwiki\Logger should be used instead!
+2023-10-31 23:01:27		dbglog() is deprecated. It was called from helper_plugin_davcal::__construct() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/davcal/helper.php:20 \dokuwiki\Logger should be used instead!
+2023-10-31 23:01:27		require(syntax.php) is deprecated. It was called from require() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/akdtu/syntax.php:12 Autoloading should be used instead!
+2023-10-31 23:01:28		dbglog() is deprecated. It was called from helper_plugin_davcal::__construct() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/davcal/helper.php:20 \dokuwiki\Logger should be used instead!
+2023-10-31 23:01:28		dbglog() is deprecated. It was called from helper_plugin_davcal::__construct() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/davcal/helper.php:20 \dokuwiki\Logger should be used instead!
+2023-10-31 23:01:28		dbglog() is deprecated. It was called from helper_plugin_davcal::__construct() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/davcal/helper.php:20 \dokuwiki\Logger should be used instead!

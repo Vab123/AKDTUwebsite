@@ -1,11 +1,162 @@
-<printable>velkomstbrev_en</printable>
+<printable>velkomstbrev_en,velkomstbrev_en</printable>
 
-Hej Marike (eller andre =))
+===== Introduction =====
+Welcome to Andelskollegiet ved DTU - Akademivej, shortened AKDTU. This document contains general information, which is important for you as a new shareholder/resident in the association. This letter has been written by the board of the association. As a new resident, we recommend that you spend some time to familiarise yourself with the practicals and rules that we have in the association. If you have any questions that you cannot find an answer to on our website, [[https://akdtu.dk|akdtu.dk]], you can contact the board at [[bestyrelsen@akdtu.dk]].
 
-Jeg har ændret lidt på hvordan der laves pdf'er på wikien, så det ser lidt anderledes ud.
+===== The Responsibilities of Shareholders/Residents =====
+To maintain clean and functional premises, there are a number of things that you as a shareholder/resident are responsible for. An overview of your responsibilities is in the bylaws of the association §10. Specific areas of your responsibility are defined below. Note that this is not a complete list.
 
-Når du redigerer siden her, kan du se at der i toppen af dokumentet står ''%%<printable>velkomstbrev_en</printable>%%''. ''%%<printable></printable>%%'' indsætter info-boksen ovenover, med link til hvor man kan downloade pdf'en, og ''velkomstbrev_en'' inde mellem de to er navnet på en template jeg har lavet specifikt til velkomstbrevet, så det får en fin forside med på engelsk også, og så der ikke er det lille logo oppe til venstre. Der er også lavet en template til det danske velkomstbrev, som i stedet hedder ''velkomstbrev_da'' (så du skal skrive ''%%<printable>velkomstbrev_da</printable>%%'' i toppen af siden til det danske velkomstbrev).
+Everyone must keep their outdoor areas clean such that the premises of the association appears clean. This includes:
+   * Terraces/balconies, as well as the area in front of the front door, which must not be used as storage space.
+   * For apartments on the ground floor: Weed the terrace and area under the hedge. Gardening tools can be borrowed from the association in the recycling shed (room behind the area for "storskrald").
+   * For apartments on the ground floor: Cut your hedge (height app. 110-130 cm). Hedgeshears can be found in the recycling shed.
+   * For apartments on the first and second floor: Clean the glass and railing on the balcony (remove algae).
+   * For apartments on the first and second floor: Treat the railing. First, scrub the railing such that it is clean. Then grind it with a grinding machine (app. grain 120). Then, add a thin layer of raw linseed oil (”linolie” in Danish). After each treatment, the railing must dry before a new layer is added. Grinding machines can be borrowed from the association upon request to the board, and linseed oil and other tools are found in the room behind the recycling shed or in the common house.
 
-Sig endelig til hvis der er noget ved den template jeg har lavet, som ikke er helt som det skal være, eller hvis der er andet som ikke lige er helt klart.
+Regularly ventilate the in-floor heating and radiators. Failure to do so will result in increased wear and tear on the heating system of the association, and may result in costly repairs, and therefore also a higher heating bill for all residents in the association.
 
-%%//%%Victor
+Errors/Defects on the premises of the association (including in the apartments) which may have an impact on the association, must be reported to the board at [[bestyrelsen@akdtu.dk]]. An example of such error/defect would be leaks in pipes that supply water or heating.
+
+===== The Websiet of the Association =====
+On our website, [[https://akdtu.dk|akdtu.dk]], you must create a user account after you have taken over the apartment. To create a user account you must use the telephonenumber that you have provided in the transfer agreement. On our website you can e.g. rent the common house and register for garden days, see sections [[#common house|Common House]] and [[#garden days|Garden Days]].
+
+===== Facebook Group =====
+The association has a private Facebook group, which is called [[https://www.facebook.com/groups/akdtu|Andelskollegiet ved DTU - Akademivej]]. The groups is intended for internal communication between shareholders/residents, for example to ”warn” others about expected noise from planned parties, purchase and sale of furniture, etc. Thereto, the board uses the website for announcements intended for all residents. Note that to contact the board you must write to [[bestyrelsen@akdtu.dk]]. The board reads the e-mail regularly, **not** the Facebook group.
+
+===== Parking Control =====
+The association has 19 private parking spaces, which can be used by any of the residents of the association and their guests. To ensure that the parking spaces are not used by other people, an agreement with Copark ApS has been made regarding parking control. You need to create an account in the system of Copark. To create an account, use this link [[https://copark.typeform.com/akdtu|copark]]. Note that the link is only available in Danish.
+
+Since there is some processing time after signing up on the link above, it is recommended to sign up at least 24 hours before you need your first parking permit. Only one account can be set up per apartment. When you sign up as a new shareholder/resident in the association, the old shareholder receives an e-mail from Copark to confirm that they have moved out of the unit. Once the old shareholder has confirmed that they have moved, your profile will be added to the address and activated by Copark.
+
+As soon as you have signed in and registered your license plate in the app by Copark, which is available for iOS and Android, the administration of parking permits is handled automatically. You can register one permanent license plate and up to 10 visitors of 24 hours each per month. The permanent license plate can be changed as often as you would like to (”permanent” only refers to the duration of the parking permit). Thus, if you e.g. lend a car for an extended period of time, you can simply add the license plate of the car as the permanent license plate in the app, since it can be changed/removed once you no longer have that car at you disposal. The board reevaluates the amount of guest parkings from time to time.
+
+If you need a parking permit when moving in, you can write an e-mail to [[bestyrelsen@akdtu.dk]], and ask for a permit. You need to write the license plate of the car that needs the permit, and the timeperiod in which the permit should be valid. Note that you need to get a response before the permit is valid.
+
+If you receive a parking ticket that you think is unjustified, you can send a complaint to the board at [[bestyrelsen@akdtu.dk]]. According to our agreement with Copark, the board has permission to cancel up to 10 parking tickets every 12 months, but at the latest 2 workdays after the ticket was issued at 16:00. Please send your complaint regarding parking tickets immediately once you receive the parking ticket. In your complaint, you must mention the serial number, which is on the parking ticket. 
+
+In general, annullments of parking tickets are reserved for residents, but due to the limit of 10 annullments per 12 months, the board evaluates whether each inquiry for an annullment of the parking ticket can be met independently.
+
+===== Garden Days =====
+All shareholders need to participate in a garden day twice a year. Usually, the board arranges three garden days in the Spring and three garden days in the Fall, and all shareholders must participate in one garden day in each season. Information regarding the garden days(including when the registration opens/closes) will be sent to the shareholder’s e-mail address, if the shareholder’s e-mail is registered by our administrator, c.f. the bylaws of the association, §35.2. You can register for the garden days on the website of the association under ”For residents/GardenDays/”.
+
+The board spends a lot of time and energy on planning the garden days, such that the premises of the association are maintained in the best possible way. As a result, there are some rules with respect to participation in the garden days:
+
+   * You must participate **actively** and for the **entire** duration of the garden day (10-15, often shorter).
+   * It is possible to change your registration until the specified time and date provided on the registration form.
+   * If you have not registered for a garden day before the deadline, you as a shareholder will be charged a fee of 750 DKK through the monthly rent. The additional fee will be charged as soon as possible after the conduction of the last garden day of that season.
+   * If you do not show up to the garden day that you registered for, you will be charged a fee of 750 DKK through the monthly rent.
+   * If you show up to a garden day without having registered for that garden day, it does not count as participation in the garden day. It is allowed to participate in more than one garden day if one desires to do so, but only the garden day that you are registered for counts as participation.
+   * If a sale overlaps with a period of garden days, the seller of the apartment must inform the new shareholder/resident about the garden day. If no one registers (seller or buyer) for the garden day, the fee of 750 DKK will still be charged.
+
+Garden days are important for our association. In unison, we make sure that the premises of the association appears neat and well-maintained. In addition, it is a pleasant day where residents can meet each other. By the end of the garden day, the association hosts a get-together which includes a late-lunch.
+
+===== Common House =====
+In the association, we have a common house of app. 110 squaremeters which can be used by the residents as long as other residents can also use it simultaneously. If you have a party with more than 10 people present or simply want to have the common house to yourself, you must rent the common house. Note that if more than half of your party are also residents in the association, you don’t have to rent the common house. The price for renting the common house is 300 DKK per 24 hours.
+
+Whether the common house is rented or not, you must follow the rules and guidelines in the common house. The rules and guidelines for using the common house are found at [[https://akdtu.dk/en/for-residents/the-common-house/usage-guidelines/|usage-guidelines]]. You have to be logged in on our website to access this webpage.
+
+The common house consists of a big room that can be separated into two rooms. There is space for 48 seated guests. The kitchen is supplied with everything necessary for cooking. In the big room, there is a stereo and projector with a big canvas. You can connect you laptop, etc. to these with HDMI and/or minijackstick. It is allowed to use the common house for parties with music - also throughout the night. Please remember to mind your fellow residents, i.e. don’t play very loud music with open doors/windows.
+
+Outside the common house, there is a common area featuring three table-bench sets. The association have a common grill, which can be borrowed from the recycling shed.
+
+===== Renting the Common House =====
+If you wish to rent the common house you can do so on the website. You can only book the common house on the website while you are logged in to your profile. To book the common house use this [[https://akdtu.dk/en/for-residents/the-common-house/book-the-common-house/|link]]. You need to click on ”Add new”, specify when you want to book the common house and submit the request. If the common house is not available on the desired date, your booking will automatically be cancelled.
+
+You can check when the common house has already been booked on our website, [[https://akdtu.dk/en/for-residents/the-common-house/calendar/|for- residents/the-common-house/calendar]]. When your booking has been approved by the board, you will receive an e-mail confirming your booking. As the approval is done manually by the board, it may take a couple of days before you receive a response to a booking. Thus, it is recommended to make the booking well in advance. Furthermore, be aware that the board may reject a booking even though there is no other event in the calendar on the website. We usually make the common house available to craftsmen who do work related to general maintenance of the premises of the association in limited timeperiods.
+
+===== Access Control =====
+The association has access control to the common house. The access control is managed by use of so-called prox-keys that all shareholder have. As a new shareholder in the association, you must receive a prox-key from the previous shareholder upon taking over the apartment. If you do not receive a prox-key from the previous shareholder, you must view this as a "mangel", which is a matter between you as the new shareholder and the previous shareholder.
+
+**To enter the common house**, the prox chip is presented to the keyboard reader to the left of the main entrance. A beep sound will play, and a diode on the panel lights green.
+
+**To exit the common house**, press the exit button (a button with a picture of a key) on the inside of the door at the main entrance. It is important that you don't touch the lock itself on the door when you exit the common house.
+
+If you are the last person to leave the common house, the alarm **must** be activated. This is done by pressing # on the keyboard outside and then presenting you prox-key to the keyboard. The keyboard beeps and a diode on the panel lights red. If the keyboard continues to glow green after you do this action, check that all doors and windows are closed. Open and close all doors which may have been open, and try again. If you still cannot lock the doors, contact the board at [[bestyrelsen@akdtu.dk]].
+
+If you lose your prox-key, you must contact the network group at [[netgruppen@akdtu.dk]] as soon as possible, such that your prox-key can be blocked. Thereby, we can avoid potential burglaries in the common house. A new prox-key currently costs 120 DKK. Note that the price may change as it is determined by the purchase price of the association). The price for the new prox-key will be deducted from the rent after purchase.
+
+The access control in the common house is not only used as a burglary alarm. It also allows the board to keep track of who uses the common house and whether the rules are followed when shareholders/residents use it. The board keeps a logbook of who has been in the common house, and also whether the alarm was activate when residents leave the common house. If you forget to lock the common house after you have used it, you may be liable for damages due to burglary, vandalism, etc. For this reason, it is also very important that you contact the board as quickly as possible if you notice any damages or problems when you use the common house.
+
+The rules in the common house can be summarised by "leave the common house in the same condition (or better) than when you entered it". Make sure that all doors and windows are closed and all light is turned off. An overview of all rules in the common house can be found on a bulletin board in the entrance of the common house as well as on the website of the association.
+
+Further explanation can be found in the common house or on the website of the association. Breaking the rules repeatedly
+might lead to you being not being allowed to use the common house.
+
+Repeated violations of the rules can ultimately lead to a blockage of your access to the common house.
+
+If you have any questions regarding the access control please contact the network group at [[netgruppen@akdtu.dk]].
+
+===== Extra Keys =====
+It is only possible to buy extra keys to an apartment if the lock still employs the original lock system (Carl F).
+
+If you want to purchase extra keys, you can do so on Cobblestones [[https://system17.microbizz.dk/x/qf.php/2787/25|website]]. Note that the website is only available in Danish. The price of a key varies; however, you should expect the price to be app. 300 DKK. The price of a new key will be deducted through the monthly rent after the purchase of a new key.
+
+The board does not have master keys to the apartments in the association; thus, if you accidentally lose all your keys or lock yourself out of your apartment, the board cannot help you regain access to your apartment. All maintenance and replacement of lock/keys are responsibilities of the shareholder according to the bylaws of the association §10.1, and the Danish tennancy law §20.
+
+===== Water/Heating/Electricity =====
+You pay for water and heating in advance through the monthly rent. The association uses district heating from Vestforbrændingen.
+
+Missing heating from the underfloor heating or radiator can be caused by several issues, e.g.
+    * Air in the radiator/underfloor heating - this may also cause a noisy radiator
+    * A valve that is stuck
+    * A packing box that needs to be exchanged
+
+These three issues can be handled by shareholders themselves, see exchange of packing box [[https://www.youtube.com/watch?v=QltJU9ud6uY&t=28s|here]] or a guide to vent the radiator [[https://www.youtube.com/watch?v=VaJmzBTOBjQ|here]]. In the guide explaining how to vent the radiator, a different radiator than the ones in the apartments of our association is used.
+
+If you are still experiences problems with the heating after having tried these solutions, contact the board [[bestyrelsen@akdtu.dk]].
+
+Upon takeover of an apartment in the association, you are responsible for making an agreement with a company that supplies electricity. The use of electricity is automatically read and supplied to the supplier of your choice.
+
+===== Creation of a Wise Home Account =====
+To meet the current legislation [[https://www.retsinformation.dk/eli/lta/2020/2251|(BEK nr 2251 af 29/12/2020)]], the association has entered into an agreement with Wise home, such that all shareholders can access an overview of their consumption of heating, cold water, and warm water.
+
+This is done on the [[https://app.wisehome.dk|Wise home website (Danish)]], where all shareholders automatically have a user created during the moving period.
+
+To access the Wise home website, you must have access to your user at Wise home. This is automatically created during the moving period, using the e-mail address from the transfer agreement. This is sent to you, along with a number of other documents, by the association administrator, Cobblestone.
+
+Afterwards, you can go to the Wise home website. Here, you have to write the aforementioned e-mail address from the transfer agreement, and press “Glemt kodeord?” (Danish: “Forgot password?”). An email is then sent to you, containing a link to where you can create a password. Please note that this email often ends up in the spam-folder, so remember to check this.
+
+After creating a user, you can see detailed graphs of consumption of heating, cold water, and warm water over a chosen period on the website, by signing in.
+
+===== Name on Letter Box =====
+Name labels on the letter boxes are automatically updated when a new shareholder/resident moves into an apartment. Expect the exchange of the name label to be done within one month of you moving in. You do not need to do anything when you move in. If the name label hasn't been exchanged after  you have lived in the apartment for more than one month, please write a message to [[bestyrelsen@akdtu.dk]].
+
+===== Trash and Recycling =====
+As of 01/09/2022, the association sorts its trash in seven different trashfractions: daily renovation (dagrenovation), plastic (plast), glass (glas), metal (metal), paper (papir), cardboard (pap), and environmentally hazardous waste (miljøfarligt affald). A new, extended trash sorting scheme is expected to be implemented in Lyngby-Taarbæk Kommune within the next 12 months. For the new trash sorting scheme, please read Lyngby-Taarbæk forsiningens [[https://ltf.dk/affald/sorter-dit-affald/guide-til-sortering|trash-sorting-guide]]. It is only available in Danish.
+
+In addition to the official guide above, we also have a trash sorting guide on our [[https://akdtu.dk/en/for-residents/guides/trash-and-recycling/|website]].
+
+The closest recycling centre is located at Firskovvej 9, 2800 Kgs. Lyngby.
+
+===== TV and Internet =====
+The association has a shared antenna that distributes the so-called free-to-air channels.
+    * DR1
+    * DR2
+    * DR Ramasjang
+    * TV2 Lorry
+    * Folketinget
+    * Hovedstaden
+    * DR1 Syn
+    * DR2 Syn
+
+The channel list is correct for the time the list is written (1/5-2022).
+
+After signing the user declaration (This happens automatically when purchasing a share in the association), you will have access to the internet through network connectors in the apartment.
+
+You are allowed to set up your own router (however, it must be protected with a minimum wpa).
+
+Our internet provider is K-Net, which provides a 10,000/10,000 Mbps fiber connection. This connection is shared between all apartments, so the speed in each apartment is less, but typically between 500-800 Mbps. On the website of K-net, status updates and other information is posted regularly. In addition, they have a facebook, google plus and twitter profile which you can follow to get all the information available. Links to these can be found on their website.For more information about K-net, see their website [[https://k-net.dk/|k-net.dk]].
+
+===== The Network Group =====
+The network group (netgruppen) is responsible for the maintenance of the association's network equipment and website (incl. own development), as well as communication with our internet provider K-Net. It is, as a rule, a member of the Network Group who is the association’s representative on K-Net’s board.
+
+The network group can be contacted at [[netgruppen@akdtu.dk]].
+
+If you want to hear more about the work in the network group or are interested in being part of the network group, please feel free to contact us at the email above.
+
+===== Borrowing the Trailer =====
+The association owns a trailer which, by agreement with the board, can be borrowed for free by shareholders/residents. You can read the rules and conditions, as well as find the contract to sign [[https://akdtu.dk/public_files/Trailer_contract.pdf|here]].
+
+To make a booking for the trailer, please fill out the [[https://akdtu.dk/en/for-residents/guides/borrowing-the-trailer/|application form]]. You need to attach a signed scan of the contract linked above in the application form. The board will respond to your request to borrow the trailer within a few days. If the request is met, a you and a board member have to agree on a time where the key to the trailer is handed over. After you have finished using the trailer, you need to hand in the key either to a boardmember or by putting it into the postal box outside the common house.
+
+Borrowing the trailer without preceding agreement with the board is considered theft.

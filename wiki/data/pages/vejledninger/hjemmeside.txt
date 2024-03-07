@@ -90,11 +90,20 @@ For leje af fælleshuset findes følgende widgets:
 
 ** Bestyrelsesmedlemmer **
   * Denne widget er kun for administratorer på hjemmesiden
-  * Denne widget viser et overblik over hvilke medlemmer der i øjeblikket er i bestyrelsen, samt giver mulighed for at fjerne dem. Disse bestyrelsesmedlemmer er dem, der har en beboerprofil der ikke skal betale leje af fælleshuset, og har ikke noget at gøre med bestyrelsesprofiler på hjemmesiden. Disse oprettes gennem pluginnet "WP medlemskab".
+  * Denne widget viser et overblik over hvilke medlemmer der i øjeblikket er i bestyrelsen, samt giver mulighed for at fjerne dem. Disse bestyrelsesmedlemmer er dem, der har en beboerprofil der ikke skal betale leje af fælleshuset, og har ikke noget at gøre med bestyrelsesprofiler på hjemmesiden. Disse oprettes gennem pluginnet "WP medlemskab", eller widgetten "Tilføj bestyrelsesmedlem".
 
 ** Tilføj bestyrelsesmedlem **
   * Denne widget er kun for administratorer på hjemmesiden
   * Denne widget tillader administratorer at tilføje nye bestyrelsesmedlemmer til hjemmesiden. Denne widget ændrer kun typen af bestyrelsesmedlemmets beboerprofil, så de ikke skal betale for leje af fælleshuset, og har ikke noget at gøre med bestyrelsesprofiler på hjemmesiden. Disse oprettes gennem pluginnet "WP medlemskab".
+
+
+** Viceværter **
+  * Denne widget er kun for administratorer på hjemmesiden
+  * Denne widget viser et overblik over hvilke profiler der i øjeblikket er oprettet til viceværter, samt giver mulighed for at fjerne dem. Disse oprettes gennem pluginnet "WP medlemskab", eller widgetten "Tilføj vicevært".
+
+** Tilføj vicevært **
+  * Denne widget er kun for administratorer på hjemmesiden
+  * Denne widget tillader administratorer at oprette nye profiler til viceværter på hjemmesiden. Denne widget opretter profilerne korrekt, med de givne oplysninger, og et hemmeligt kodeord. Viceværten skal så selv ind og nulstille kodeordet, så kun de kender dette.
 
 ===== Sider/Pages =====
 Hjemmesiden er bygget op omkring en række sider, og her ses et overblik over disse. Hvis man holder musen over hver side på listen kan disse redigeres, lyn-redigeres, sendes til papirkurven eller vises.
@@ -130,6 +139,10 @@ Der er indbygget forskellige systemer på hjemmesiden, som automatisk jævnligt 
 ==== Automatisk mail om opkrævning af leje af fælleshus ====
 Den første dag i hver måned kan hjemmesiden automatisk sende en mail om hvilke beløb der skal opkræves for leje af fælleshuset i den foregående måned. Indstillingerne for denne mail findes under "AKDTU" i det sorte bånd til venstre på kontrolpanelet, i fanen "Mail om leje af fælleshus". Her kan der indskrives modtageradresse på mailen, eventuelle andre der skal sættes cc, hvilken svaradresse der eventuelt skal stå i mailen, emnet på mailen, samt formatet af indholdet i mailen. Der er måder at indsætte diverse info om betalingerne på, som står beskrevet på siden.
 
+==== Automatisk mail om opkrævning for manglende deltagelse i havedage ====
+Efter afholdelse af havedage kan hjemmesiden automatisk sende en mail om hvilke beløb der skal opkræves for manglende deltagelse. Indstillingerne for denne mail findes under "AKDTU" i det sorte bånd til venstre på kontrolpanelet, i fanen "Mail: Havedag opkrævning". Her kan der indskrives modtageradresse på mailen, eventuelle andre der skal sættes cc, hvilken svaradresse der eventuelt skal stå i mailen, emnet på mailen, samt formatet af indholdet i mailen. Der er måder at indsætte diverse info om betalingerne på, som står beskrevet på siden.
+
+Der kan desuden også opsættes at der afsendes en advarsels-mail til bestyrelsen/netgruppen nogen dage før den rigtige mail, så man lige kan checke at informationerne er korrekte, og at der ikke mangler nogen på tilmeldingslisterne.
 ==== Automatisk mail om fjernelse af brugeradgang, i forbindelse med salg af andel ====
 Hjemmesiden kan automatisk fjerne adgang til brugerprofiler for beboere der har solgt deres adgang, såfremt dette er skrevet ind i den tilegnede widget på kontrolpanelet (se beskrivelse længere oppe). Hjemmesiden kan i den forbindelse også automatisk sende en mail om at adgangen er fjernet, samt en uddybning af hvilke reservationer af fælleshuset, sælger måtte have haft, samt eventuelle tilmeldinger til havedage. Indstillingerne for denne mail findes under "AKDTU" i det sorte bånd til venstre på kontrolpanelet, i fanen "Mail om fjernelse af brugeradgang". Her kan der indskrives modtageradresse på mailen, eventuelle andre der skal sættes cc, hvilken svaradresse der eventuelt skal stå i mailen, emnet på mailen, samt formatet af indholdet i mailen. Der er måder at indsætte diverse info om betalingerne på, som står beskrevet på siden.
 
@@ -139,11 +152,16 @@ Hjemmesiden kan automatisk fjerne adgang til brugerprofiler for beboere der har 
 ==== Automatisk mail om brugeradgang til midlertidig lejer i forbindelse med udlandsophold ====
 Hjemmesiden kan automatisk give og fjerne adgang til brugerprofiler for midlertidige lejere, der flytter ind i forbindelse med andelshavers udlandsophold, såfremt dette er skrevet ind i den tilegnede widget på kontrolpanelet (se beskrivelse længere oppe). Hjemmesiden kan i den forbindelse også automatisk sende en mail når adgangen er fjernet, samt en uddybning af hvilke reservationer af fælleshuset, lejeren måtte have haft, samt eventuelle tilmeldinger til havedage. Indstillingerne for denne mail findes under "AKDTU" i det sorte bånd til venstre på kontrolpanelet, i fanen "Mail om fjernelse af lejeradgang". Her kan der indskrives modtageradresse på mailen, eventuelle andre der skal sættes cc, hvilken svaradresse der eventuelt skal stå i mailen, emnet på mailen, samt formatet af indholdet i mailen. Der er måder at indsætte diverse info om betalingerne på, som står beskrevet på siden.
 
+==== Mails ved tilmeldinger til havedage ====
+Hjemmesiden kan automatisk sende mails når lejligheder tilmelder sig havedage, både til beboeren og til bestyrelsen. Indstillingerne til disse findes under "AKDTU" i det sorte bånd til venstre på kontrolpanelet, i fanerne "Mail: Havedag tilmelding - beboer" og "Mail: Havedag tilmelding - bestyrelse". Her kan der indskrives modtageradresse på mailen til bestyrelsen, eventuelle andre der skal sættes cc, hvilken svaradresse der eventuelt skal stå i hver mail, emnet på hver mail, samt formatet af indholdet i hver mail.
+
+==== Mails ved ansøgninger om leje af fælleshuset ====
+Hjemmesiden sender automatisk mails når lejligheder ansøger om leje af fælleshuset, både til beboeren og til bestyrelsen. Indstillingerne til disse findes under "AKDTU" i det sorte bånd til venstre på kontrolpanelet, i fanerne "Mail: Leje af fælleshus - beboer", "Mail: Leje af fælleshus - bestyrelse, modtaget" og "Mail: Leje af fælleshus - bestyrelse, besluttet". Her kan der indskrives modtageradresse på mails til bestyrelsen, eventuelle andre der skal sættes cc, hvilken svaradresse der eventuelt skal stå i hver mail, emnet på hver mail, samt formatet af indholdet i hver mail.
 ===== Stier på hjemmesiden =====
   * AKDTU plugin: ''/public_html/wp-content/plugins/AKDTU''
   * Events manager: ''/public_html/wp-content/plugins/events-manager''
   * Neve child theme: ''/public_html/wp-content/themes/neve-child''
   * Simple membership: ''/public_html/wp-content/plugins/simple-membership''
   * Wiki root: ''/public_html/wiki''
-  * Wiki "export as pdf"-template: ''/public_html/wiki/lib/plugins/dw2pdf/tpl/AKDTU''
+  * Wiki "export as pdf"-templates: ''/public_html/wiki/lib/plugins/dw2pdf/tpl/''
   * Wiki sidebar template: ''/public_html/wiki/lib/tpl/readthedokus/tpl_parts''

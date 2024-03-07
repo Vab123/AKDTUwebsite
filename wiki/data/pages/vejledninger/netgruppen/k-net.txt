@@ -1,0 +1,13 @@
+===== K-Net =====
+Foreningens internetudbyder er K-Net.
+
+Administrationsside for netværk: [[https://k-net.dk/admin]]\\
+Username: akd-netgrp\\
+Password: \\
+
+==== Kollegiets ansvar ====
+  * Alt udstyr på kollegie.
+  * Fiberforbindelse mellem kollegie og K-net.
+
+==== Google Drive ====
+[[https://drive.google.com/drive/folders/1kJcl_S4SyvqjZ3eUEV0MZzdIWDXcD88O | Link til Google Drive]]
