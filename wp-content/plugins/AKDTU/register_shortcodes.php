@@ -11,6 +11,7 @@ $AKDTU_SHORTCODES = array(
 	"display_generalforsamlinger.php",
 	"display_export_calendar_link.php",
 	"download_mailbox_label.php",
+	"contact-form-7-custom-tags.php",
 );
 
 foreach ($AKDTU_SHORTCODES as $shortcode_file) {
