@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @file Widget to adjust the price for renting the common house for a resident
+ */
+
+function fælleshus_juster_pris_widget() { ?>
+	<form action="" method="post">
+		<input type="hidden" name="action" value="fælleshus_juster_pris" />
+		<table>
+			<colgroup>
+				<col span="1" style="width: 40%">
+				<col span="1" style="width: 60%">
+			</colgroup>
+			<thead></thead>
+			<tbody>
+				<tr>
+					<td><label>Lejlighed</label></td>
+					<td><?php echo apartments_dropdown(); ?></td>
+				</tr>
+				<tr style="height:32px;">
+					<td></td>
+					<td><input type="checkbox" name="archive" id="juster_pris_archive" /><label for="juster_pris_archive">Tidligere beboer</label></td>
+				</tr>
+				<tr>
+					<td><label>Prisjustering</label></td>
+					<td><input type="number" name="price_change" /></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="submit" class="button-secondary" value="Juster" /></td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+<?php } ?>
