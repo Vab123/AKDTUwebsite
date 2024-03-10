@@ -1116,6 +1116,9 @@ class EM_Booking extends EM_Object {
 			$placeholder_atts = array($result);
 			if (!empty($placeholders[3][$key])) $placeholder_atts[] = $placeholders[3][$key];
 			switch ($result) {
+				case '#_APT':
+					$replace = (is_apartment_from_id($this->get_person()->data->ID) ? padded_apartment_number_from_id($this->get_person()->data->ID) : "Bestyrelsesprofil");
+					break;
 				case '#_EVENTINFO':
 					$spaces = array();
 					foreach ($this->get_event()->get_tickets()->tickets as $ticket) {
