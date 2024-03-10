@@ -1116,6 +1116,10 @@ class EM_Booking extends EM_Object {
 			$placeholder_atts = array($result);
 			if (!empty($placeholders[3][$key])) $placeholder_atts[] = $placeholders[3][$key];
 			switch ($result) {
+				case '#_GARDENDAYDATE':
+					$date_formatter = new IntlDateFormatter(pll_get_post_language($this->get_event()->post_id, "locale"), IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+					$replace = $date_formatter->format(new DateTime($this->get_tickets()->get_first()->__get("ticket_name")));
+					break;
 				case '#_APT':
 					$replace = (is_apartment_from_id($this->get_person()->data->ID) ? padded_apartment_number_from_id($this->get_person()->data->ID) : "Bestyrelsesprofil");
 					break;
@@ -1131,7 +1135,9 @@ class EM_Booking extends EM_Object {
 						}
 					}
 
-					$replace = implode("\n",array_map(function($info,$date){return $date . ' : ' . $info['booked'] . ' / ' . $info['total'];}, $spaces, array_keys($spaces))) . "\n" . 'Total: ' . array_sum(array_map(function($info){return $info['booked'];}, $spaces)) . ' / ' . array_sum(array_map(function($info){return $info['total'];}, $spaces));
+					$date_formatter = new IntlDateFormatter("da_DK", IntlDateFormatter::SHORT, IntlDateFormatter::NONE);
+
+					$replace = implode("\n",array_map(function($info,$date) use($date_formatter) {return $date_formatter->format(new DateTime($date)) . ' : ' . $info['booked'] . ' / ' . $info['total'];}, $spaces, array_keys($spaces))) . "\n" . 'Total: ' . array_sum(array_map(function($info){return $info['booked'];}, $spaces)) . ' / ' . array_sum(array_map(function($info){return $info['total'];}, $spaces));
 					break;
 				case '#_BOOKINGID':
 					$replace = $this->booking_id;

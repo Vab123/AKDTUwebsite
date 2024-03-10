@@ -11,6 +11,8 @@ $EM_Tickets = $EM_Event->get_bookings()->get_tickets(); //already instantiated, 
  * Then, you should create a em_booking_form_tickets_col_arraykey action for your collumn data, which will pass a ticket and event object.
  */
 $collumns = $EM_Tickets->get_ticket_collumns(); //array of collumn type => title
+
+$havedag_formatter = new IntlDateFormatter(pll_current_language('locale'), IntlDateFormatter::LONG, IntlDateFormatter::NONE);
 ?>
 <table class="em-tickets" cellspacing="0" cellpadding="0">
 	<tr>
@@ -28,7 +30,7 @@ $collumns = $EM_Tickets->get_ticket_collumns(); //array of collumn type => title
 					switch($type){
 						case 'type':
 							?>
-							<td class="em-bookings-ticket-table-type"><?php echo wp_kses_data($EM_Ticket->ticket_name); ?><?php if(!empty($EM_Ticket->ticket_description)) :?><br><span class="ticket-desc"><?php echo wp_kses($EM_Ticket->ticket_description,$allowedposttags); ?></span><?php endif; ?></td>
+							<td class="em-bookings-ticket-table-type"><?php echo ((bool)strtotime($EM_Ticket->ticket_name) ? $havedag_formatter->format(new DateTime($EM_Ticket->ticket_name)) : $EM_Ticket->ticket_name); ?><?php if(!empty($EM_Ticket->ticket_description)) :?><br><span class="ticket-desc"><?php echo wp_kses($EM_Ticket->ticket_description,$allowedposttags); ?></span><?php endif; ?></td>
 							<?php
 							break;
 						case 'price':

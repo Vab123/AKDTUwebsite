@@ -13,6 +13,8 @@ function tilføj_til_havedag_dashboard_widget() {
 
 	$events = EM_Events::get(array('scope' => $scope, 'limit' => $search_limit, 'offset' => $offset, 'order' => $order, 'orderby' => 'event_start', 'bookings' => true, 'owner' => $owner, 'pagination' => 0));
 
+	$havedag_formatter = new IntlDateFormatter('da_DK', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+
 	if (count($events) > 0) : ?>
 		<table id="tilføj_til_havedag_widget_table" width="100%">
 			<colgroup>
@@ -43,7 +45,7 @@ function tilføj_til_havedag_dashboard_widget() {
 							<td><label>Dato:</label></td>
 							<td><select name="havedag_dato">
 									<?php foreach ($event->get_bookings()->get_tickets() as $ticket) : ?>
-										<option value="<?php echo $ticket->ticket_id; ?>"><?php echo $ticket->ticket_name; ?></option>
+										<option value="<?php echo $ticket->ticket_id; ?>"><?php echo ((bool)strtotime($ticket->ticket_name) ? $havedag_formatter->format(new DateTime($ticket->ticket_name)) : $ticket->ticket_name); ?></option>
 									<?php endforeach; ?>
 								</select></td>
 						</tr>

@@ -22,6 +22,11 @@ function havedag_past_dashboard_widget() {
 
 		foreach ($events as $event) : ?>
 			<table class="widefat">
+				<colgroup>
+					<col span="1" style="width: 45%" />
+					<col span="1" style="width: 20%" />
+					<col span="1" style="width: 35%" />
+				</colgroup>
 				<thead>
 					<tr>
 						<th>Dato</th>
@@ -33,12 +38,15 @@ function havedag_past_dashboard_widget() {
 					<?php $row = 0;
 					$total_booked = 0;
 					$total_spaces = 0;
+
+					$havedag_formatter = new IntlDateFormatter('da_DK', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+
 					foreach ($event->get_tickets() as $ticket) : ?>
 						<tr <?php if ($row % 2 == 0) {
 								echo 'class="alternate"';
 							};
 							$row++; ?>>
-							<td><?php echo $ticket->ticket_name; ?></td>
+							<td><?php echo ((bool)strtotime($ticket->ticket_name) ? $havedag_formatter->format(new DateTime($ticket->ticket_name)) : $ticket->ticket_name); ?></td>
 							<td><?php echo $ticket->get_booked_spaces() . "/" . $ticket->get_spaces();
 								$total_booked += $ticket->get_booked_spaces();
 								$total_spaces += $ticket->get_spaces(); ?></td>
