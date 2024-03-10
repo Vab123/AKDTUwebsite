@@ -1135,7 +1135,7 @@ class EM_Booking extends EM_Object {
 						}
 					}
 
-					$date_formatter = new IntlDateFormatter("da_DK", IntlDateFormatter::SHORT, IntlDateFormatter::NONE);
+					$date_formatter = new IntlDateFormatter("da_DK", IntlDateFormatter::LONG, IntlDateFormatter::NONE);
 
 					$replace = implode("\n",array_map(function($info,$date) use($date_formatter) {return $date_formatter->format(new DateTime($date)) . ' : ' . $info['booked'] . ' / ' . $info['total'];}, $spaces, array_keys($spaces))) . "\n" . 'Total: ' . array_sum(array_map(function($info){return $info['booked'];}, $spaces)) . ' / ' . array_sum(array_map(function($info){return $info['total'];}, $spaces));
 					break;

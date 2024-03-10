@@ -21,7 +21,7 @@ function em_bookings_print_event() {
 		$_REQUEST['event_ticket_id'] = array_keys(em_get_event($_REQUEST['event_id'], 'event_id')->get_tickets()->tickets)[0];
 	}
 	$translations = pll_get_post_translations($EM_Event->post_id);
-	$target_ticket_name = em_get_event($_REQUEST['event_id'], 'event_id')->get_bookings();
+
 	$tickets = array();
 	foreach ($translations as $translation) {
 		foreach (em_get_event($translation, 'post_id')->get_bookings()->get_tickets()->tickets as $translated_ticket) {
@@ -65,14 +65,17 @@ function em_bookings_print_event() {
 	$showed_up = (count($res) == 0 ? array() : json_decode($res[0]->showed_up));
 	for ($floor = 0; $floor <= 2; $floor++) {
 		for ($apartment = 1; $apartment <= 24; $apartment++) {
-			if (array_key_exists(get_user_by('login', 'lejl' . str_pad($apartment_num, 3, "0", STR_PAD_LEFT) . '_archive')->ID, $showed_up)) {
-				$showed_up[get_user_by('login', 'lejl' . str_pad($apartment_num, 3, "0", STR_PAD_LEFT))->ID] = $showed_up[get_user_by('login', 'lejl' . str_pad($apartment_num, 3, "0", STR_PAD_LEFT) . '_archive')->ID];
+			if (array_key_exists(get_user_by('login', username_from_apartment_number($apartment) . '_archive')->ID, $showed_up)) {
+				$showed_up[get_user_by('login', username_from_apartment_number($apartment))->ID] = $showed_up[get_user_by('login', username_from_apartment_number($apartment) . '_archive')->ID];
 			}
-			if (array_key_exists(get_user_by('login', 'lejl' . str_pad($apartment_num, 3, "0", STR_PAD_LEFT))->ID, $showed_up)) {
-				$showed_up[get_user_by('login', 'lejl' . str_pad($apartment_num, 3, "0", STR_PAD_LEFT) . '_archive')->ID] = $showed_up[get_user_by('login', 'lejl' . str_pad($apartment_num, 3, "0", STR_PAD_LEFT))->ID];
+			if (array_key_exists(get_user_by('login', username_from_apartment_number($apartment))->ID, $showed_up)) {
+				$showed_up[get_user_by('login', username_from_apartment_number($apartment) . '_archive')->ID] = $showed_up[get_user_by('login', username_from_apartment_number($apartment))->ID];
 			}
 		}
 	}
+	
+	$havedag_formatter = new IntlDateFormatter('da_DK', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+
 	?>
 	<div class='wrap'>
 		<?php if (is_admin()) : ?><h1 class="wp-heading-inline"><?php else : ?><h2><?php endif; ?>
@@ -92,7 +95,7 @@ function em_bookings_print_event() {
 				foreach ($res as $key => $value) : ?>
 					<option value="<?php echo $key; ?>" <?php if (!empty($_REQUEST['event_ticket_id']) && $_REQUEST['event_ticket_id'] == $key) {
 															echo " selected";
-														} ?>><?php echo $value->__get('ticket_name'); ?></option>
+														} ?>><?php echo ((bool)strtotime($value->__get('ticket_name')) ? $havedag_formatter->format(new DateTime($value->__get('ticket_name'))) : $value->__get('ticket_name')); ?></option>
 				<?php endforeach; ?>
 				<option value="total" <?php if (!empty($_REQUEST['event_ticket_id']) && strtolower($_REQUEST['event_ticket_id']) == 'total') {
 											echo " selected";
