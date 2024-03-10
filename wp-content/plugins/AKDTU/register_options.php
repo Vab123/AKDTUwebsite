@@ -1113,7 +1113,8 @@ $AKDTU_OPTIONS = array(
 								"style" => "width: 300px",
 								"comments" => array(
 									"Understøtter <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#booking-placeholders' target='_blank'>Tilmeldingsrelaterede pladsholdere</a>, <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#event-placeholders' target='_blank'>Event relateret pladsholdere</a> og <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#location-placeholders' target='_blank'>Lokationsrelateret pladsholdere</a>.",
-									"<code>#_BOOKINGNAME</code> erstattes med navnet på havedagen.",
+									"<code>#_EVENTNAME</code> erstattes med navnet på havedagen (e.g. \"Havedag efterår 2024\").",
+									"<code>#_BOOKINGNAME</code> erstattes med navnet på brugeren.",
 									"<code>#_BOOKINGTICKETNAME</code> erstattes med datoen på havedagen.",
 									"<code>#_BOOKINGCOMMENT</code> erstattes med en eventuel kommentar til tilmeldingen.",
 								),
@@ -1138,7 +1139,8 @@ $AKDTU_OPTIONS = array(
 								"style" => "width: 300px",
 								"comments" => array(
 									"Understøtter <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#booking-placeholders' target='_blank'>Tilmeldingsrelaterede pladsholdere</a>, <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#event-placeholders' target='_blank'>Event relateret pladsholdere</a> og <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#location-placeholders' target='_blank'>Lokationsrelateret pladsholdere</a>.",
-									"<code>#_BOOKINGNAME</code> erstattes med navnet på havedagen.",
+									"<code>#_EVENTNAME</code> erstattes med navnet på havedagen (e.g. \"Havedag efterår 2024\").",
+									"<code>#_BOOKINGNAME</code> erstattes med navnet på brugeren.",
 									"<code>#_BOOKINGTICKETNAME</code> erstattes med datoen på havedagen.",
 									"<code>#_BOOKINGCOMMENT</code> erstattes med en eventuel kommentar til tilmeldingen.",
 								),
@@ -1168,7 +1170,8 @@ $AKDTU_OPTIONS = array(
 								"style" => "width: 300px",
 								"comments" => array(
 									"Understøtter <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#booking-placeholders' target='_blank'>Tilmeldingsrelaterede pladsholdere</a>, <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#event-placeholders' target='_blank'>Event relateret pladsholdere</a> og <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#location-placeholders' target='_blank'>Lokationsrelateret pladsholdere</a>.",
-									"<code>#_BOOKINGNAME</code> erstattes med navnet på havedagen.",
+									"<code>#_EVENTNAME</code> erstattes med navnet på havedagen (e.g. \"Havedag efterår 2024\").",
+									"<code>#_BOOKINGNAME</code> erstattes med navnet på brugeren.",
 									"<code>#_BOOKINGTICKETNAME</code> erstattes med datoen på havedagen.",
 									"<code>#_BOOKINGCOMMENT</code> erstattes med en eventuel kommentar til tilmeldingen.",
 								),
@@ -1193,7 +1196,8 @@ $AKDTU_OPTIONS = array(
 								"style" => "width: 300px",
 								"comments" => array(
 									"Understøtter <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#booking-placeholders' target='_blank'>Tilmeldingsrelaterede pladsholdere</a>, <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#event-placeholders' target='_blank'>Event relateret pladsholdere</a> og <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#location-placeholders' target='_blank'>Lokationsrelateret pladsholdere</a>.",
-									"<code>#_BOOKINGNAME</code> erstattes med navnet på havedagen.",
+									"<code>#_EVENTNAME</code> erstattes med navnet på havedagen (e.g. \"Havedag efterår 2024\").",
+									"<code>#_BOOKINGNAME</code> erstattes med navnet på brugeren.",
 									"<code>#_BOOKINGTICKETNAME</code> erstattes med datoen på havedagen.",
 									"<code>#_BOOKINGCOMMENT</code> erstattes med en eventuel kommentar til tilmeldingen.",
 								),
@@ -1269,7 +1273,8 @@ $AKDTU_OPTIONS = array(
 								"style" => "width: 600px",
 								"comments" => array(
 									"Understøtter <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#booking-placeholders' target='_blank'>Tilmeldingsrelaterede pladsholdere</a>, <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#event-placeholders' target='_blank'>Event relateret pladsholdere</a> og <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#location-placeholders' target='_blank'>Lokationsrelateret pladsholdere</a>.",
-									"<code>#_BOOKINGNAME</code> erstattes med navnet på havedagen.",
+									"<code>#_EVENTNAME</code> erstattes med navnet på havedagen (e.g. \"Havedag efterår 2024\").",
+									"<code>#_BOOKINGNAME</code> erstattes med navnet på brugeren.",
 									"<code>#_BOOKINGTICKETNAME</code> erstattes med datoen på havedagen.",
 									"<code>#_BOOKINGCOMMENT</code> erstattes med en eventuel kommentar til tilmeldingen.",
 									"<code>#_BOOKEDSPACES</code> erstattes med det samlede antal af tilmeldinger.",
@@ -1302,7 +1307,8 @@ $AKDTU_OPTIONS = array(
 								"style" => "width: 600px",
 								"comments" => array(
 									"Understøtter <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#booking-placeholders' target='_blank'>Tilmeldingsrelaterede pladsholdere</a>, <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#event-placeholders' target='_blank'>Event relateret pladsholdere</a> og <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#location-placeholders' target='_blank'>Lokationsrelateret pladsholdere</a>.",
-									"<code>#_BOOKINGNAME</code> erstattes med navnet på havedagen.",
+									"<code>#_EVENTNAME</code> erstattes med navnet på havedagen (e.g. \"Havedag efterår 2024\").",
+									"<code>#_BOOKINGNAME</code> erstattes med navnet på brugeren.",
 									"<code>#_BOOKINGTICKETNAME</code> erstattes med datoen på havedagen.",
 									"<code>#_BOOKINGCOMMENT</code> erstattes med en eventuel kommentar til tilmeldingen.",
 									"<code>#_BOOKEDSPACES</code> erstattes med det samlede antal af tilmeldinger.",
