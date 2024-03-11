@@ -19,7 +19,6 @@ function send_opkrævning_havedag($debug = false) {
 
 		# Prepare strings for payment info
 		$payment_info = "";
-		$payment_info_warning = "";
 
 		# Date formatters
 		$month = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen');
@@ -131,21 +130,10 @@ function send_opkrævning_havedag($debug = false) {
 
 				# Add info to the real email
 				$payment_info .= str_replace(array_keys($replaces), $replaces, nl2br(HAVEDAG_FORMAT));
-				
-				# Info format for the warning email
-				$replaces_warning = array(
-					'#APT' => padded_apartment_number_from_apartment_number($apartment) . (in_array($apartment, $moved_users) ? ' (Tidligere beboer)' : '' ),
-					'#PRICE' => $price,
-					'#BOARDMEMBER' => (is_boardmember_from_apartment_number($apartment) ? HAVEDAG_WARNING_BOARDMEMBER : '')
-				);
-
-				# Add info to the warning email
-				$payment_info_warning .= str_replace(array_keys($replaces_warning), $replaces_warning, nl2br(HAVEDAG_WARNING_FORMAT));
 
 				# Add spaces if this is not the last user that did not show up
 				if ($it < count($users_that_should_pay)) {
 					$payment_info .= '<br>';
-					$payment_info_warning .= '<br>';
 				}
 
 				# Increment counter
@@ -161,21 +149,38 @@ function send_opkrævning_havedag($debug = false) {
 			# Time difference between now and the end-time of the last garden day
 			$diff = $now->diff($ago);
 	
+
+			# Replacements for real email subject
+			$real_message_subject_replaces = array(
+				'#SEASON' => ((new DateTime($events[0]->event_end_date . " " . $events[0]->event_end_time, new DateTimeZone('Europe/Copenhagen')))->format('m') > 6 ? "efterår" : "forår"),
+				'#YEAR' => $year->format(new DateTime($events[0]->event_end_date . " " . $events[0]->event_end_time, new DateTimeZone('Europe/Copenhagen')))
+			);
+
+			# Replacements for real email content
+			$real_message_content_replaces = array(
+				'#PAYMENT_INFO' => $payment_info,
+				'#SEASON' => ((new DateTime($events[0]->event_end_date . " " . $events[0]->event_end_time, new DateTimeZone('Europe/Copenhagen')))->format('m') > 6 ? "efterår" : "forår"),
+				'#YEAR' => $year->format(new DateTime($events[0]->event_end_date . " " . $events[0]->event_end_time, new DateTimeZone('Europe/Copenhagen')))
+			);
+
+			# Replacements for warning email subject
+			$warning_message_subject_replaces = array(
+				'#SEASON' => ((new DateTime($events[0]->event_end_date . " " . $events[0]->event_end_time, new DateTimeZone('Europe/Copenhagen')))->format('m') > 6 ? "efterår" : "forår"),
+				'#YEAR' => $year->format(new DateTime($events[0]->event_end_date . " " . $events[0]->event_end_time, new DateTimeZone('Europe/Copenhagen'))),
+				'#DAYS' => HAVEDAG_WARNING_DAYS,
+			);
+	
+			# Replacements for warning email content
+			$warning_message_content_replaces = array(
+				'#SEASON' => ((new DateTime($events[0]->event_end_date . " " . $events[0]->event_end_time, new DateTimeZone('Europe/Copenhagen')))->format('m') > 6 ? "efterår" : "forår"),
+				'#YEAR' => $year->format(new DateTime($events[0]->event_end_date . " " . $events[0]->event_end_time, new DateTimeZone('Europe/Copenhagen'))),
+				'#DAYS' => HAVEDAG_WARNING_DAYS,
+				'#REALMESSAGECONTENT' => AKDTU_email_content($real_message_content_replaces, 'HAVEDAG'),
+			);
+
+
 			# Check if the real email should be sent or echoed
 			if ((HAVEDAG_DAYS >= 0 && $diff->days == HAVEDAG_DAYS) || $debug) {
-				# Replacements for real email subject
-				$subject_replaces = array(
-					'#SEASON' => ((new DateTime($events[0]->event_end_date . " " . $events[0]->event_end_time, new DateTimeZone('Europe/Copenhagen')))->format('m') > 6 ? "efterår" : "forår"),
-					'#YEAR' => $year->format(new DateTime($events[0]->event_end_date . " " . $events[0]->event_end_time, new DateTimeZone('Europe/Copenhagen')))
-				);
-		
-				# Replacements for real email content
-				$content_replaces = array(
-					'#PAYMENT_INFO' => $payment_info,
-					'#SEASON' => ((new DateTime($events[0]->event_end_date . " " . $events[0]->event_end_time, new DateTimeZone('Europe/Copenhagen')))->format('m') > 6 ? "efterår" : "forår"),
-					'#YEAR' => $year->format(new DateTime($events[0]->event_end_date . " " . $events[0]->event_end_time, new DateTimeZone('Europe/Copenhagen')))
-				);
-
 				# Add headline if real email should be echoed
 				if ($debug) {
 					# Check if real email will be sent automatically or not
@@ -187,7 +192,7 @@ function send_opkrævning_havedag($debug = false) {
 				}
 
 				# Send or echo mail
-				send_AKDTU_email($debug, $subject_replaces, $content_replaces, 'HAVEDAG');
+				send_AKDTU_email($debug, $real_message_subject_replaces, $real_message_content_replaces, 'HAVEDAG');
 
 				# Remove menu item for the event if this is a real run
 				if (!$debug) {
@@ -223,21 +228,6 @@ function send_opkrævning_havedag($debug = false) {
 			
 			# Check if the warning email should be sent or echoed
 			if ((HAVEDAG_DAYS >= 0 && HAVEDAG_WARNING_DAYS >= 0 && $diff->days == HAVEDAG_DAYS - HAVEDAG_WARNING_DAYS) || $debug) {
-				# Replacements for warning email subject
-				$subject_replaces_warning = array(
-					'#SEASON' => ((new DateTime($events[0]->event_end_date . " " . $events[0]->event_end_time, new DateTimeZone('Europe/Copenhagen')))->format('m') > 6 ? "efterår" : "forår"),
-					'#YEAR' => $year->format(new DateTime($events[0]->event_end_date . " " . $events[0]->event_end_time, new DateTimeZone('Europe/Copenhagen'))),
-					'#DAYS' => HAVEDAG_WARNING_DAYS,
-				);
-		
-				# Replacements for warning email content
-				$content_replaces_warning = array(
-					'#PAYMENT_INFO' => $payment_info_warning,
-					'#SEASON' => ((new DateTime($events[0]->event_end_date . " " . $events[0]->event_end_time, new DateTimeZone('Europe/Copenhagen')))->format('m') > 6 ? "efterår" : "forår"),
-					'#YEAR' => $year->format(new DateTime($events[0]->event_end_date . " " . $events[0]->event_end_time, new DateTimeZone('Europe/Copenhagen'))),
-					'#DAYS' => HAVEDAG_WARNING_DAYS,
-				);
-
 				# Add headline if warning email should be echoed
 				if ($debug) {
 					echo '<hr>';
@@ -250,7 +240,7 @@ function send_opkrævning_havedag($debug = false) {
 				}
 
 				# Send or echo mail
-				send_AKDTU_email($debug, $subject_replaces_warning, $content_replaces_warning, 'HAVEDAG_WARNING');
+				send_AKDTU_email($debug, $warning_message_subject_replaces, $warning_message_content_replaces, 'HAVEDAG_WARNING');
 			}
 		} else {
 			# Write error if there was not found any garden days. If this is reached, there may be no garden days in the system
