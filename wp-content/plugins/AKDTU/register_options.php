@@ -43,7 +43,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FÆLLESHUS_TO",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sende nogen mail",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -54,7 +54,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FÆLLESHUS_FROM",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for <code>AKDTU &#60;hjemmeside@akdtu.dk&#62;</code>",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -65,7 +65,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FÆLLESHUS_CC",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sætte nogen cc",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -76,7 +76,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FÆLLESHUS_REPLYTO",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sætte nogen svaradresse",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -87,7 +87,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FÆLLESHUS_SUBJECT",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"<code>#APT</code> erstattes med lejlighedsnummeret",
 								),
@@ -95,11 +95,9 @@ $AKDTU_OPTIONS = array(
 							array(
 								"headline" => "Vedhæftede filer",
 								"name" => "AKDTU_FÆLLESHUS_ATTACHMENTS",
-								"tag" => "textarea",
+								"tag" => "input",
 								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
+								"style" => "width: 600px;",
 								"comments" => array(
 									"Skal være relativt til <code>" . website_root_folder() . "</code>. Skal starte med <code>/</code>",
 									"Flere vedhæftede filer adskilles med <code>,</code>",
@@ -110,9 +108,9 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FÆLLESHUS_MAILCONTENT",
 								"tag" => "textarea",
 								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
+								"rows" => 10,
+								"cols" => 'auto',
+								"style" => "width: 600px;",
 								"comments" => array(
 									"<code>#PAYMENT_INFO</code> erstattes med info omkring hvem der skal betale for leje. Formatet for dette kan rettes nedenunder.",
 									"<code>#MONTH</code> erstattes med måned.",
@@ -124,9 +122,9 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FÆLLESHUS_FORMAT",
 								"tag" => "textarea",
 								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
+								"rows" => 10,
+								"cols" => 'auto',
+								"style" => "width: 600px;",
 								"comments" => array(
 									"Dette gentages for hver lejlighed, der har lejet fælleshuset den foregående måned, med linjeskift mellem.",
 									"<code>#APT</code> erstattes med lejlighedsnummer. Hvis der nyligt er flyttet en ny beboer ind står dette også herefter som <code>(Ny beboer)</code> eller <code>(Tidligere beboer)</code>",
@@ -173,7 +171,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FÆLLESHUS_INTERNET_TO",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sende nogen mail",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -184,7 +182,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FÆLLESHUS_INTERNET_FROM",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for <code>AKDTU &#60;hjemmeside@akdtu.dk&#62;</code>",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -195,7 +193,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FÆLLESHUS_INTERNET_CC",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sætte nogen cc",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -206,7 +204,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FÆLLESHUS_INTERNET_REPLYTO",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sætte nogen svaradresse",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -217,7 +215,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FÆLLESHUS_INTERNET_SUBJECT",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"<code>#APT</code> erstattes med lejlighedsnummeret",
 								),
@@ -225,11 +223,9 @@ $AKDTU_OPTIONS = array(
 							array(
 								"headline" => "Vedhæftede filer",
 								"name" => "AKDTU_FÆLLESHUS_INTERNET_ATTACHMENTS",
-								"tag" => "textarea",
+								"tag" => "input",
 								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
+								"style" => "width: 600px;",
 								"comments" => array(
 									"Skal være relativt til <code>" . website_root_folder() . "</code>. Skal starte med <code>/</code>",
 									"Flere vedhæftede filer adskilles med <code>,</code>",
@@ -240,9 +236,9 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FÆLLESHUS_INTERNET_MAILCONTENT",
 								"tag" => "textarea",
 								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
+								"rows" => 10,
+								"cols" => 'auto',
+								"style" => "width: 600px;",
 								"comments" => array(
 									"<code>#RENTER</code> erstattes med info om hvem fælleshuset er lejet af.",
 									"<code>#SSID</code> erstattes med navnet på internetforbindelsen.",
@@ -270,7 +266,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FÆLLESHUS_INTERNET_BRUGER_DA_FROM",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for <code>AKDTU &#60;hjemmeside@akdtu.dk&#62;</code>",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -281,7 +277,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FÆLLESHUS_INTERNET_BRUGER_DA_CC",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sætte nogen cc",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -292,7 +288,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FÆLLESHUS_INTERNET_BRUGER_DA_REPLYTO",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sætte nogen svaradresse",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -303,7 +299,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FÆLLESHUS_INTERNET_BRUGER_DA_SUBJECT",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"<code>#APT</code> erstattes med lejlighedsnummeret",
 								),
@@ -311,11 +307,11 @@ $AKDTU_OPTIONS = array(
 							array(
 								"headline" => "Vedhæftede filer",
 								"name" => "AKDTU_FÆLLESHUS_INTERNET_BRUGER_DA_ATTACHMENTS",
-								"tag" => "textarea",
+								"tag" => "input",
 								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
+								"rows" => 10,
+								"cols" => 'auto',
+								"style" => "width: 600px;",
 								"comments" => array(
 									"Skal være relativt til <code>" . website_root_folder() . "</code>. Skal starte med <code>/</code>",
 									"Flere vedhæftede filer adskilles med <code>,</code>",
@@ -326,9 +322,9 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FÆLLESHUS_INTERNET_BRUGER_DA_MAILCONTENT",
 								"tag" => "textarea",
 								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
+								"rows" => 10,
+								"cols" => 'auto',
+								"style" => "width: 600px;",
 								"comments" => array(
 									"<code>#RENTALSTARTDATETIME</code> erstattes med start-dato på lejeperioden.",
 									"<code>#RENTALENDDATETIME</code> erstattes med slut-dato på lejeperioden.",
@@ -360,7 +356,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FÆLLESHUS_INTERNET_BRUGER_EN_FROM",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for <code>AKDTU &#60;hjemmeside@akdtu.dk&#62;</code>",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -371,7 +367,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FÆLLESHUS_INTERNET_BRUGER_EN_CC",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sætte nogen cc",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -382,7 +378,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FÆLLESHUS_INTERNET_BRUGER_EN_REPLYTO",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sætte nogen svaradresse",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -393,7 +389,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FÆLLESHUS_INTERNET_BRUGER_EN_SUBJECT",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"<code>#APT</code> erstattes med lejlighedsnummeret",
 								),
@@ -401,11 +397,9 @@ $AKDTU_OPTIONS = array(
 							array(
 								"headline" => "Vedhæftede filer",
 								"name" => "AKDTU_FÆLLESHUS_INTERNET_BRUGER_EN_ATTACHMENTS",
-								"tag" => "textarea",
+								"tag" => "input",
 								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
+								"style" => "width: 600px;",
 								"comments" => array(
 									"Skal være relativt til <code>" . website_root_folder() . "</code>. Skal starte med <code>/</code>",
 									"Flere vedhæftede filer adskilles med <code>,</code>",
@@ -416,9 +410,9 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FÆLLESHUS_INTERNET_BRUGER_EN_MAILCONTENT",
 								"tag" => "textarea",
 								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
+								"rows" => 10,
+								"cols" => 'auto',
+								"style" => "width: 600px;",
 								"comments" => array(
 									"<code>#RENTALSTARTDATETIME</code> erstattes med start-dato på lejeperioden.",
 									"<code>#RENTALENDDATETIME</code> erstattes med slut-dato på lejeperioden.",
@@ -470,7 +464,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FJERNBRUGERADGANG_TO",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sende nogen mail",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -481,7 +475,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FJERNBRUGERADGANG_FROM",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for <code>AKDTU &#60;hjemmeside@akdtu.dk&#62;</code>",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -492,7 +486,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FJERNBRUGERADGANG_CC",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sætte nogen cc",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -503,7 +497,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FJERNBRUGERADGANG_REPLYTO",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sætte nogen svaradresse",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -514,7 +508,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FJERNBRUGERADGANG_SUBJECT",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"<code>#APT</code> erstattes med lejlighedsnummeret",
 								),
@@ -522,11 +516,9 @@ $AKDTU_OPTIONS = array(
 							array(
 								"headline" => "Vedhæftede filer",
 								"name" => "AKDTU_FJERNBRUGERADGANG_ATTACHMENTS",
-								"tag" => "textarea",
+								"tag" => "input",
 								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
+								"style" => "width: 600px;",
 								"comments" => array(
 									"Skal være relativt til <code>" . website_root_folder() . "</code>. Skal starte med <code>/</code>",
 									"Flere vedhæftede filer adskilles med <code>,</code>",
@@ -537,9 +529,9 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FJERNBRUGERADGANG_MAILCONTENT",
 								"tag" => "textarea",
 								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
+								"rows" => 10,
+								"cols" => 'auto',
+								"style" => "width: 600px;",
 								"comments" => array(
 									"<code>#APT</code> erstattes med lejlighedsnummeret.",
 									"<code>#NEWMAIL</code> erstattes med brugerens nye emailadresse.",
@@ -558,9 +550,9 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FJERNBRUGERADGANG_FORMAT_RENTALS",
 								"tag" => "textarea",
 								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
+								"rows" => 10,
+								"cols" => 'auto',
+								"style" => "width: 600px;",
 								"comments" => array(
 									"Dette gentages for hver leje af fælleshuset, brugeren har foretaget, med linjeskift mellem.",
 									"<code>#NAME</code> erstattes med navnet på begivenheden.",
@@ -583,9 +575,9 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FJERNBRUGERADGANG_FORMAT_PREVIOUS_GARDENDAYS",
 								"tag" => "textarea",
 								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
+								"rows" => 10,
+								"cols" => 'auto',
+								"style" => "width: 600px;",
 								"comments" => array(
 									"Dette gentages for hver fremtidig havedag, brugeren er tilmeldt, med linjeskift mellem.",
 									"<code>#NAME</code> erstattes med navnet på havedagen.",
@@ -602,9 +594,9 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FJERNBRUGERADGANG_FORMAT_FUTURE_GARDENDAYS",
 								"tag" => "textarea",
 								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
+								"rows" => 10,
+								"cols" => 'auto',
+								"style" => "width: 600px;",
 								"comments" => array(
 									"Dette gentages for hver fremtidig havedag, brugeren er tilmeldt, med linjeskift mellem.",
 									"<code>#NAME</code> erstattes med navnet på havedagen.",
@@ -656,7 +648,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FJERNLEJERADGANG_TO",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sende nogen mail",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -667,7 +659,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FJERNLEJERADGANG_FROM",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for <code>AKDTU &#60;hjemmeside@akdtu.dk&#62;</code>",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -678,7 +670,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FJERNLEJERADGANG_CC",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sætte nogen cc",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -689,7 +681,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FJERNLEJERADGANG_REPLYTO",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sætte nogen svaradresse",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -700,7 +692,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FJERNLEJERADGANG_SUBJECT",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"<code>#APT</code> erstattes med lejlighedsnummeret",
 								),
@@ -708,11 +700,9 @@ $AKDTU_OPTIONS = array(
 							array(
 								"headline" => "Vedhæftede filer",
 								"name" => "AKDTU_FJERNLEJERADGANG_ATTACHMENTS",
-								"tag" => "textarea",
+								"tag" => "input",
 								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
+								"style" => "width: 600px;",
 								"comments" => array(
 									"Skal være relativt til <code>" . website_root_folder() . "</code>. Skal starte med <code>/</code>",
 									"Flere vedhæftede filer adskilles med <code>,</code>",
@@ -723,9 +713,9 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FJERNLEJERADGANG_MAILCONTENT",
 								"tag" => "textarea",
 								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
+								"rows" => 10,
+								"cols" => 'auto',
+								"style" => "width: 600px;",
 								"comments" => array(
 									"<code>#APT</code> erstattes med lejlighedsnummeret.",
 									"<code>#NEWMAIL</code> erstattes med lejerens nye emailadresse.",
@@ -744,9 +734,9 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FJERNLEJERADGANG_FORMAT_RENTALS",
 								"tag" => "textarea",
 								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
+								"rows" => 10,
+								"cols" => 'auto',
+								"style" => "width: 600px;",
 								"comments" => array(
 									"Dette gentages for hver leje af fælleshuset, lejeren har foretaget, med linjeskift mellem.",
 									"<code>#NAME</code> erstattes med navnet på begivenheden.",
@@ -769,9 +759,9 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FJERNLEJERADGANG_FORMAT_PREVIOUS_GARDENDAYS",
 								"tag" => "textarea",
 								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
+								"rows" => 10,
+								"cols" => 'auto',
+								"style" => "width: 600px;",
 								"comments" => array(
 									"Dette gentages for hver tidligere havedag, lejeren er tilmeldt, med linjeskift mellem.",
 									"<code>#NAME</code> erstattes med navnet på havedagen.",
@@ -788,9 +778,9 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_FJERNLEJERADGANG_FORMAT_FUTURE_GARDENDAYS",
 								"tag" => "textarea",
 								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
+								"rows" => 10,
+								"cols" => 'auto',
+								"style" => "width: 600px;",
 								"comments" => array(
 									"Dette gentages for hver fremtidig havedag, lejeren er tilmeldt, med linjeskift mellem.",
 									"<code>#NAME</code> erstattes med navnet på havedagen.",
@@ -842,7 +832,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_NYBRUGER_BESTYRELSE_TO",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sende nogen mail",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -853,7 +843,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_NYBRUGER_BESTYRELSE_FROM",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for <code>AKDTU &#60;hjemmeside@akdtu.dk&#62;</code>",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -864,7 +854,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_NYBRUGER_BESTYRELSE_CC",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sætte nogen cc",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -875,7 +865,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_NYBRUGER_BESTYRELSE_REPLYTO",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sætte nogen svaradresse",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -886,7 +876,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_NYBRUGER_BESTYRELSE_SUBJECT",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"<code>#APT</code> erstattes med lejlighedsnummeret.",
 									"<code>#NEWLOGIN</code> erstattes med brugernavnet på profilen.",
@@ -898,11 +888,9 @@ $AKDTU_OPTIONS = array(
 							array(
 								"headline" => "Vedhæftede filer",
 								"name" => "AKDTU_NYBRUGER_BESTYRELSE_ATTACHMENTS",
-								"tag" => "textarea",
+								"tag" => "input",
 								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
+								"style" => "width: 600px;",
 								"comments" => array(
 									"Skal være relativt til <code>" . website_root_folder() . "</code>. Skal starte med <code>/</code>",
 									"Flere vedhæftede filer adskilles med <code>,</code>",
@@ -913,9 +901,9 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_NYBRUGER_BESTYRELSE_MAILCONTENT",
 								"tag" => "textarea",
 								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
+								"rows" => 10,
+								"cols" => 'auto',
+								"style" => "width: 600px;",
 								"comments" => array(
 									"<code>#APT</code> erstattes med lejlighedsnummeret.",
 									"<code>#NEWLOGIN</code> erstattes med brugernavnet på profilen.",
@@ -944,7 +932,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_NYBRUGER_BRUGER_FROM",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for <code>AKDTU &#60;hjemmeside@akdtu.dk&#62;</code>",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -955,7 +943,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_NYBRUGER_BRUGER_CC",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sætte nogen cc",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -966,7 +954,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_NYBRUGER_BRUGER_REPLYTO",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sætte nogen svaradresse",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -977,7 +965,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_NYBRUGER_BRUGER_DA_SUBJECT",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"<code>#APT</code> erstattes med lejlighedsnummeret.",
 									"<code>#NEWLOGIN</code> erstattes med brugernavnet på profilen.",
@@ -989,11 +977,9 @@ $AKDTU_OPTIONS = array(
 							array(
 								"headline" => "Vedhæftede filer (Dansk)",
 								"name" => "AKDTU_NYBRUGER_BRUGER_DA_ATTACHMENTS",
-								"tag" => "textarea",
+								"tag" => "input",
 								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
+								"style" => "width: 600px;",
 								"comments" => array(
 									"Skal være relativt til <code>" . website_root_folder() . "</code>. Skal starte med <code>/</code>",
 									"Flere vedhæftede filer adskilles med <code>,</code>",
@@ -1004,9 +990,9 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_NYBRUGER_BRUGER_DA_MAILCONTENT",
 								"tag" => "textarea",
 								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
+								"rows" => 10,
+								"cols" => 'auto',
+								"style" => "width: 600px;",
 								"comments" => array(
 									"<code>#APT</code> erstattes med lejlighedsnummeret.",
 									"<code>#NEWLOGIN</code> erstattes med brugernavnet på profilen.",
@@ -1020,7 +1006,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_NYBRUGER_BRUGER_EN_SUBJECT",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"<code>#APT</code> erstattes med lejlighedsnummeret.",
 									"<code>#NEWLOGIN</code> erstattes med brugernavnet på profilen.",
@@ -1032,11 +1018,9 @@ $AKDTU_OPTIONS = array(
 							array(
 								"headline" => "Vedhæftede filer (Engelsk)",
 								"name" => "AKDTU_NYBRUGER_BRUGER_EN_ATTACHMENTS",
-								"tag" => "textarea",
+								"tag" => "input",
 								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
+								"style" => "width: 600px;",
 								"comments" => array(
 									"Skal være relativt til <code>" . website_root_folder() . "</code>. Skal starte med <code>/</code>",
 									"Flere vedhæftede filer adskilles med <code>,</code>",
@@ -1047,9 +1031,9 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_NYBRUGER_BRUGER_EN_MAILCONTENT",
 								"tag" => "textarea",
 								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
+								"rows" => 10,
+								"cols" => 'auto',
+								"style" => "width: 600px;",
 								"comments" => array(
 									"<code>#APT</code> erstattes med lejlighedsnummeret.",
 									"<code>#NEWLOGIN</code> erstattes med brugernavnet på profilen.",
@@ -1098,7 +1082,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_bookings_email_confirmed_subject_da",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sende nogen mail",
 								),
@@ -1125,7 +1109,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_bookings_email_confirmed_subject_en",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sende nogen mail",
 								),
@@ -1157,7 +1141,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_bookings_email_cancelled_subject_da",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sende nogen mail",
 								),
@@ -1184,7 +1168,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_bookings_email_cancelled_subject_en",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sende nogen mail",
 								),
@@ -1246,7 +1230,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_bookings_notify_admin",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sende nogen mail",
 									"Kan KUN skrives ind som <code>bestyrelsen@akdtu.dk</code>",
@@ -1262,7 +1246,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_bookings_contact_email_confirmed_subject",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sende nogen mail",
 								),
@@ -1297,7 +1281,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_bookings_contact_email_cancelled_subject",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sende nogen mail",
 								),
@@ -1362,7 +1346,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_approved_email_subject_da",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sende nogen mail",
 								),
@@ -1384,7 +1368,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_approved_email_attachments_da",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at vedhæfte noget.",
 									"Skal være relativt til <code>" . website_root_folder() . "</code>",
@@ -1396,7 +1380,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_approved_email_subject_en",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sende nogen mail",
 								),
@@ -1418,7 +1402,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_approved_email_attachments_en",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at vedhæfte noget.",
 									"Skal være relativt til <code>" . website_root_folder() . "</code>",
@@ -1435,7 +1419,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_reapproved_email_subject_da",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sende nogen mail",
 								),
@@ -1457,7 +1441,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_reapproved_email_attachments_da",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at vedhæfte noget.",
 									"Skal være relativt til <code>" . website_root_folder() . "</code>",
@@ -1469,7 +1453,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_reapproved_email_subject_en",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sende nogen mail",
 								),
@@ -1491,7 +1475,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_reapproved_email_attachments_en",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at vedhæfte noget.",
 									"Skal være relativt til <code>" . website_root_folder() . "</code>",
@@ -1508,7 +1492,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_rejected_email_subject_da",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sende nogen mail",
 								),
@@ -1530,7 +1514,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_rejected_email_attachments_da",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at vedhæfte noget.",
 									"Skal være relativt til <code>" . website_root_folder() . "</code>",
@@ -1542,7 +1526,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_rejected_email_subject_en",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sende nogen mail",
 								),
@@ -1564,7 +1548,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_rejected_email_attachments_en",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at vedhæfte noget.",
 									"Skal være relativt til <code>" . website_root_folder() . "</code>",
@@ -1581,7 +1565,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_deleted_email_subject_da",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sende nogen mail",
 								),
@@ -1603,7 +1587,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_deleted_email_attachments_da",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at vedhæfte noget.",
 									"Skal være relativt til <code>" . website_root_folder() . "</code>",
@@ -1615,7 +1599,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_deleted_email_subject_en",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sende nogen mail",
 								),
@@ -1637,7 +1621,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_deleted_email_attachments_en",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at vedhæfte noget.",
 									"Skal være relativt til <code>" . website_root_folder() . "</code>",
@@ -1677,14 +1661,14 @@ $AKDTU_OPTIONS = array(
 				"save-button-text" => "Gem (Alt)",
 				"settings" => array(
 					"group1" => array(
-						"h3" => "Mail ved godkendt leje",
+						"h3" => "Mail ved modtaget ansøgning",
 						"content" => array(
 							array(
 								"headline" => "Emne",
 								"name" => "dbem_event_submitted_email_subject",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sende nogen mail",
 								),
@@ -1706,7 +1690,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_submitted_email_attachments",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at vedhæfte noget.",
 									"Skal være relativt til <code>" . website_root_folder() . "</code>",
@@ -1723,7 +1707,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_resubmitted_email_subject",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sende nogen mail",
 								),
@@ -1745,7 +1729,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_resubmitted_email_attachments",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at vedhæfte noget.",
 									"Skal være relativt til <code>" . website_root_folder() . "</code>",
@@ -1762,7 +1746,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_deleted_email_subject",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sende nogen mail",
 								),
@@ -1784,7 +1768,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_deleted_email_attachments",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at vedhæfte noget.",
 									"Skal være relativt til <code>" . website_root_folder() . "</code>",
@@ -1831,7 +1815,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_approved_confirmation_email_subject_da",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sende nogen mail",
 								),
@@ -1845,6 +1829,9 @@ $AKDTU_OPTIONS = array(
 								"cols" => "auto",
 								"style" => "width: 600px",
 								"comments" => array(
+									"<code>#_RENTERAPPROVEDMESSAGE</code> erstattes med beskeden der sendes til lejeren ved godkendt leje.",
+									"<code>#_RENTERREAPPROVEDMESSAGE</code> erstattes med beskeden der sendes til lejeren ved godkendt ændring af leje.",
+									"<code>#_RENTERREJECTEDMESSAGE</code> erstattes med beskeden der sendes til lejeren ved afvist leje.",
 									"Understøtter <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#booking-placeholders' target='_blank'>Tilmeldingsrelaterede pladsholdere</a>, <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#event-placeholders' target='_blank'>Event relateret pladsholdere</a> og <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#location-placeholders' target='_blank'>Lokationsrelateret pladsholdere</a>.",
 								),
 							),
@@ -1853,7 +1840,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_approved_confirmation_email_attachments_da",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at vedhæfte noget.",
 									"Skal være relativt til <code>" . website_root_folder() . "</code>",
@@ -1865,7 +1852,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_approved_confirmation_email_subject_en",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sende nogen mail",
 								),
@@ -1879,6 +1866,9 @@ $AKDTU_OPTIONS = array(
 								"cols" => "auto",
 								"style" => "width: 600px",
 								"comments" => array(
+									"<code>#_RENTERAPPROVEDMESSAGE</code> erstattes med beskeden der sendes til lejeren ved godkendt leje.",
+									"<code>#_RENTERREAPPROVEDMESSAGE</code> erstattes med beskeden der sendes til lejeren ved godkendt ændring af leje.",
+									"<code>#_RENTERREJECTEDMESSAGE</code> erstattes med beskeden der sendes til lejeren ved afvist leje.",
 									"Understøtter <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#booking-placeholders' target='_blank'>Tilmeldingsrelaterede pladsholdere</a>, <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#event-placeholders' target='_blank'>Event relateret pladsholdere</a> og <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#location-placeholders' target='_blank'>Lokationsrelateret pladsholdere</a>.",
 								),
 							),
@@ -1887,7 +1877,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_approved_confirmation_email_attachments_en",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at vedhæfte noget.",
 									"Skal være relativt til <code>" . website_root_folder() . "</code>",
@@ -1904,7 +1894,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_reapproved_confirmation_email_subject_da",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sende nogen mail",
 								),
@@ -1918,6 +1908,9 @@ $AKDTU_OPTIONS = array(
 								"cols" => "auto",
 								"style" => "width: 600px",
 								"comments" => array(
+									"<code>#_RENTERAPPROVEDMESSAGE</code> erstattes med beskeden der sendes til lejeren ved godkendt leje.",
+									"<code>#_RENTERREAPPROVEDMESSAGE</code> erstattes med beskeden der sendes til lejeren ved godkendt ændring af leje.",
+									"<code>#_RENTERREJECTEDMESSAGE</code> erstattes med beskeden der sendes til lejeren ved afvist leje.",
 									"Understøtter <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#booking-placeholders' target='_blank'>Tilmeldingsrelaterede pladsholdere</a>, <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#event-placeholders' target='_blank'>Event relateret pladsholdere</a> og <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#location-placeholders' target='_blank'>Lokationsrelateret pladsholdere</a>.",
 								),
 							),
@@ -1926,7 +1919,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_reapproved_confirmation_email_attachments_da",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at vedhæfte noget.",
 									"Skal være relativt til <code>" . website_root_folder() . "</code>",
@@ -1938,7 +1931,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_reapproved_confirmation_email_subject_en",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sende nogen mail",
 								),
@@ -1952,6 +1945,9 @@ $AKDTU_OPTIONS = array(
 								"cols" => "auto",
 								"style" => "width: 600px",
 								"comments" => array(
+									"<code>#_RENTERAPPROVEDMESSAGE</code> erstattes med beskeden der sendes til lejeren ved godkendt leje.",
+									"<code>#_RENTERREAPPROVEDMESSAGE</code> erstattes med beskeden der sendes til lejeren ved godkendt ændring af leje.",
+									"<code>#_RENTERREJECTEDMESSAGE</code> erstattes med beskeden der sendes til lejeren ved afvist leje.",
 									"Understøtter <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#booking-placeholders' target='_blank'>Tilmeldingsrelaterede pladsholdere</a>, <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#event-placeholders' target='_blank'>Event relateret pladsholdere</a> og <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#location-placeholders' target='_blank'>Lokationsrelateret pladsholdere</a>.",
 								),
 							),
@@ -1960,7 +1956,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_reapproved_confirmation_email_attachments_en",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at vedhæfte noget.",
 									"Skal være relativt til <code>" . website_root_folder() . "</code>",
@@ -1977,7 +1973,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_rejected_confirmation_email_subject_da",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sende nogen mail",
 								),
@@ -1991,6 +1987,9 @@ $AKDTU_OPTIONS = array(
 								"cols" => "auto",
 								"style" => "width: 600px",
 								"comments" => array(
+									"<code>#_RENTERAPPROVEDMESSAGE</code> erstattes med beskeden der sendes til lejeren ved godkendt leje.",
+									"<code>#_RENTERREAPPROVEDMESSAGE</code> erstattes med beskeden der sendes til lejeren ved godkendt ændring af leje.",
+									"<code>#_RENTERREJECTEDMESSAGE</code> erstattes med beskeden der sendes til lejeren ved afvist leje.",
 									"Understøtter <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#booking-placeholders' target='_blank'>Tilmeldingsrelaterede pladsholdere</a>, <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#event-placeholders' target='_blank'>Event relateret pladsholdere</a> og <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#location-placeholders' target='_blank'>Lokationsrelateret pladsholdere</a>.",
 								),
 							),
@@ -1999,7 +1998,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_rejected_confirmation_email_attachments_da",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at vedhæfte noget.",
 									"Skal være relativt til <code>" . website_root_folder() . "</code>",
@@ -2011,7 +2010,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_rejected_confirmation_email_subject_en",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sende nogen mail",
 								),
@@ -2025,6 +2024,9 @@ $AKDTU_OPTIONS = array(
 								"cols" => "auto",
 								"style" => "width: 600px",
 								"comments" => array(
+									"<code>#_RENTERAPPROVEDMESSAGE</code> erstattes med beskeden der sendes til lejeren ved godkendt leje.",
+									"<code>#_RENTERREAPPROVEDMESSAGE</code> erstattes med beskeden der sendes til lejeren ved godkendt ændring af leje.",
+									"<code>#_RENTERREJECTEDMESSAGE</code> erstattes med beskeden der sendes til lejeren ved afvist leje.",
 									"Understøtter <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#booking-placeholders' target='_blank'>Tilmeldingsrelaterede pladsholdere</a>, <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#event-placeholders' target='_blank'>Event relateret pladsholdere</a> og <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#location-placeholders' target='_blank'>Lokationsrelateret pladsholdere</a>.",
 								),
 							),
@@ -2033,7 +2035,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "dbem_event_rejected_confirmation_email_attachments_en",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at vedhæfte noget.",
 									"Skal være relativt til <code>" . website_root_folder() . "</code>",
@@ -2080,7 +2082,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_HAVEDAG_DAYS",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Antallet af dage efter sidste havedag, hvor der skal sendes en opkrævningsmail. Minimum er <code>1</code>. Skriv <code>-1</code> for ikke at sende nogen mail",
 								),
@@ -2090,7 +2092,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_HAVEDAG_TO",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for <code>AKDTU &#60;hjemmeside@akdtu.dk&#62;</code>",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -2101,7 +2103,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_HAVEDAG_FROM",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for <code>AKDTU &#60;hjemmeside@akdtu.dk&#62;</code>",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -2112,7 +2114,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_HAVEDAG_CC",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sætte nogen cc",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -2123,7 +2125,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_HAVEDAG_REPLYTO",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sætte nogen svaradresse",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -2134,7 +2136,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_HAVEDAG_SUBJECT",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"<code>#SEASON</code> erstattes med <code>forår</code> eller <code>efterår</code>.",
 									"<code>#YEAR</code> erstattes med året.",
@@ -2143,11 +2145,9 @@ $AKDTU_OPTIONS = array(
 							array(
 								"headline" => "Vedhæftede filer",
 								"name" => "AKDTU_HAVEDAG_ATTACHMENTS",
-								"tag" => "textarea",
+								"tag" => "input",
 								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
+								"style" => "width: 600px;",
 								"comments" => array(
 									"Skal være relativt til <code>" . website_root_folder() . "</code>. Skal starte med <code>/</code>",
 									"Flere vedhæftede filer adskilles med <code>,</code>",
@@ -2158,9 +2158,9 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_HAVEDAG_MAILCONTENT",
 								"tag" => "textarea",
 								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
+								"rows" => 10,
+								"cols" => 'auto',
+								"style" => "width: 600px;",
 								"comments" => array(
 									"<code>#PAYMENT_INFO</code> erstattes med info omkring hvem der skal betale for ikke at have mødt op til havedagene. Formatet for dette kan rettes nedenunder.",
 									"<code>#SEASON</code> erstattes med <code>forår</code> eller <code>efterår</code>.",
@@ -2170,11 +2170,9 @@ $AKDTU_OPTIONS = array(
 							array(
 								"headline" => "Format for info om betaling",
 								"name" => "AKDTU_HAVEDAG_FORMAT",
-								"tag" => "textarea",
+								"tag" => "input",
 								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
+								"style" => "width: 600px;",
 								"comments" => array(
 									"Dette gentages for hver lejlighed, der skal opkræves for manglende deltagelse i den seneste havedag, med linjeskift mellem.",
 									"<code>#APT</code> erstattes med lejlighedsnummer. Hvis der efter deadline for tilmelding til havedagen er flyttet en ny beboer ind står dette også herefter som <code>(Tidligere beboer)</code>.",
@@ -2185,11 +2183,9 @@ $AKDTU_OPTIONS = array(
 							array(
 								"headline" => "Format for bestyrelsesmedlemmer",
 								"name" => "AKDTU_HAVEDAG_BOARDMEMBER",
-								"tag" => "textarea",
+								"tag" => "input",
 								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
+								"style" => "width: 600px;",
 								"comments" => array(
 									"Dette er hvad <code>#BOARDMEMBER</code> erstattes med i ovenstående format for info om betaling."
 								),
@@ -2204,7 +2200,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_HAVEDAG_WARNING_DAYS",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Antallet af dage efter sidste havedag, hvor der skal sendes en opkrævningsmail. Minimum er <code>1</code>. Skriv <code>-1</code> for ikke at sende nogen mail",
 								),
@@ -2214,7 +2210,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_HAVEDAG_WARNING_TO",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for <code>AKDTU &#60;hjemmeside@akdtu.dk&#62;</code>",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -2225,7 +2221,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_HAVEDAG_WARNING_FROM",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for <code>AKDTU &#60;hjemmeside@akdtu.dk&#62;</code>",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -2236,7 +2232,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_HAVEDAG_WARNING_CC",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sætte nogen cc",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -2247,7 +2243,7 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_HAVEDAG_WARNING_REPLYTO",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"Efterlad tom for ikke at sætte nogen svaradresse",
 									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
@@ -2258,20 +2254,19 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_HAVEDAG_WARNING_SUBJECT",
 								"tag" => "input",
 								"type" => "text",
-								"style" => "width: 300px",
+								"style" => "width: 600px",
 								"comments" => array(
 									"<code>#SEASON</code> erstattes med <code>forår</code> eller <code>efterår</code>.",
 									"<code>#YEAR</code> erstattes med året.",
+									"<code>#DAYS</code> erstattes med antallet af dage mellem afsending af denne varselsmail og afsendelse af den rigtige opkrævningsmail",
 								),
 							),
 							array(
 								"headline" => "Vedhæftede filer",
 								"name" => "AKDTU_HAVEDAG_WARNING_ATTACHMENTS",
-								"tag" => "textarea",
+								"tag" => "input",
 								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
+								"style" => "width: 600px;",
 								"comments" => array(
 									"Skal være relativt til <code>" . website_root_folder() . "</code>. Skal starte med <code>/</code>",
 									"Flere vedhæftede filer adskilles med <code>,</code>",
@@ -2282,40 +2277,14 @@ $AKDTU_OPTIONS = array(
 								"name" => "AKDTU_HAVEDAG_WARNING_MAILCONTENT",
 								"tag" => "textarea",
 								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
+								"rows" => 10,
+								"cols" => 'auto',
+								"style" => "width: 600px;",
 								"comments" => array(
-									"<code>#PAYMENT_INFO</code> erstattes med info omkring hvem der skal betale for ikke at have mødt op til havedagene. Formatet for dette kan rettes nedenunder.",
 									"<code>#SEASON</code> erstattes med <code>forår</code> eller <code>efterår</code>.",
 									"<code>#YEAR</code> erstattes med år.",
-								),
-							),
-							array(
-								"headline" => "Format for info om betaling",
-								"name" => "AKDTU_HAVEDAG_WARNING_FORMAT",
-								"tag" => "textarea",
-								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
-								"comments" => array(
-									"Dette gentages for hver lejlighed, der skal opkræves for manglende deltagelse i den seneste havedag, med linjeskift mellem.",
-									"<code>#APT</code> erstattes med lejlighedsnummer. Hvis der efter deadline for tilmelding til havedagen er flyttet en ny beboer ind står dette også herefter som <code>(Tidligere beboer)</code>.",
-									"<code>#PRICE</code> erstattes med pris.",
-									"<code>#BOARDMEMBER</code> erstattes med hvad der er skrevet nedenunder, hvis lejligheden tilhører et bestyrelsesmedlem.",
-								),
-							),
-							array(
-								"headline" => "Format for bestyrelsesmedlemmer",
-								"name" => "AKDTU_HAVEDAG_BOARDMEMBER",
-								"tag" => "textarea",
-								"type" => "text",
-								"rows" => 5,
-								"cols" => 50,
-								"style" => "",
-								"comments" => array(
-									"Dette er hvad <code>#BOARDMEMBER</code> erstattes med i ovenstående format for info om betaling."
+									"<code>#DAYS</code> erstattes med antallet af dage mellem afsending af denne varselsmail og afsendelse af den rigtige opkrævningsmail",
+									"<code>#REALMESSAGECONTENT</code> erstattes med indholdet af den rigtige opkrævningsmail, som defineret ovenover.",
 								),
 							),
 						),
