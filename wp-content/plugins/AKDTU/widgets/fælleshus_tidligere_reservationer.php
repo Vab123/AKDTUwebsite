@@ -52,8 +52,7 @@ function fælleshus_tidligere_reservationer_dashboard_widget() {
 															$end_date = new DateTime($event->event_end_date . " " . $event->event_end_time, new DateTimeZone('UTC'));
 
 															echo $start_date->format("d-m-y H:i") . " - " . $end_date->format("d-m-y H:i"); ?></td>
-						<td style="vertical-align:middle"><?php
-															echo calc_rental_cost($start_date,$end_date,$event->owner); ?>,00 kr.</td>
+						<td style="vertical-align:middle"><?php echo calc_rental_cost($start_date,$end_date,$event->owner); ?>,00 kr.</td>
 					</tr>
 				<?php endforeach; ?>
 			</tbody>

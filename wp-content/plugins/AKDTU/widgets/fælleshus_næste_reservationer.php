@@ -54,8 +54,7 @@ function fælleshus_næste_reservationer_dashboard_widget() {
 															$end_date = new DateTime($event->event_end_date . " " . $event->event_end_time, new DateTimeZone('UTC'));
 
 															echo $start_date->format("d-m-y H:i") . " - " . $end_date->format("d-m-y H:i"); ?></td>
-						<td style="vertical-align:middle"><?php
-															echo calc_rental_cost($start_date,$end_date,$event->owner); ?>,00 kr.</td>
+						<td style="vertical-align:middle"><?php echo calc_rental_cost($start_date,$end_date,$event->owner); ?>,00 kr.</td>
 						<td style="vertical-align:middle">
 							<form style="display: inline;" action="" method="post" style="text-align:center" style="text-align:center">
 								<input type="hidden" name="action" value="delete_leje" />

@@ -41,11 +41,7 @@ function fælleshus_afventer_dashboard_widget() {
 							echo 'class="alternate"';
 						};
 						$row++; ?>>
-						<td style="vertical-align:middle"><?php if (is_apartment_from_id($event->event_owner)) {
-																echo "Lejl. " . padded_apartment_number_from_id($event->event_owner);
-															} else {
-																echo "Bestyrelsen";
-															}; ?></td>
+						<td style="vertical-align:middle"><?php echo (is_apartment_from_id($event->event_owner) ? "Lejl. " . padded_apartment_number_from_id($event->event_owner) : "Bestyrelsen"); ?></td>
 						<td style="vertical-align:middle"><?php
 															$start_date = new DateTime($event->event_start_date . " " . $event->event_start_time, new DateTimeZone('UTC'));
 															$start_date = $start_date->format("d-m-y");
