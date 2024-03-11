@@ -43,8 +43,6 @@ $AKDTU_CONSTANTS = array(
 	),
 	"HAVEDAG_WARNING" => array(
 		"_DAYS",
-		"_FORMAT",
-		"_BOARDMEMBER",
 	),
 );
 
