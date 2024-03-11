@@ -24,26 +24,37 @@ function delete_previous_gardendays($user_id, $archive_user_id, $debug = false) 
 	# Event: Collection of all garden days for an entire season, with a ticket for each individual garden day, and potentially with bookings from many users
 	#
 
-	# Prepare string with info about deleted signups
-	$returnstring = '';
+	# Current time, formatted as string
+	$current_time = (new DateTime("now", new DateTimeZone('Europe/Copenhagen')))->format("Y-m-d H:i:s");
 
 	# Get EM-structs for the user, and all of their bookings
-	$EM_Person = new EM_Person($user_id);
-	$EM_Bookings = $EM_Person->get_bookings();
-	$Bookings_count = count($EM_Bookings->bookings);
+	$EM_Bookings = array_filter((new EM_Person($user_id))->get_bookings()->load(), function ($EM_Booking) use($current_time) {
+		$EM_Event = em_get_event($EM_Booking->event_id);
+		$event_time = $EM_Event->event_start_date . ' ' . $EM_Event->event_start_time;
 
-	# Counter for the amount of processed bookings
-	$it = 1;
+		return $event_time < $current_time;
+	});
+
+	if (!$debug) {
+		array_walk($EM_Bookings, function ($EM_Booking) use($archive_user_id) {
+			move_booking_to_user($archive_user_id, $EM_Booking);
+		});
+	}
+
+	$pending_or_approved_bookings = array_filter($EM_Bookings, function ($EM_Booking) {
+		# Check if booking is pending or approved
+		# 0 => Pending
+		# 1 => Approved
+		# 2 => Rejected
+		# 3 => Cancelled
+		# 4 => Awaiting Online Payment
+		# 5 => Awaiting payment
+		return $EM_Booking->booking_status <= 1;
+	});
 
 	# Check if the person has made any bookings
-	if ($Bookings_count > 0) {
-		# Current time, formatted as string
-		$current_time = new DateTime("now", new DateTimeZone('Europe/Copenhagen'));
-		$current_time = $current_time->format("Y-m-d H:i:s");
-
-		# Go through all of their bookings/signups
-		foreach ($EM_Bookings as $EM_Booking) {
-			# Get the event, corresponding to the booking
+	if (count($pending_or_approved_bookings) > 0) {
+		return join('<br><br>', array_map(function ($EM_Booking) {
 			$event_id = $EM_Booking->event_id;
 			$EM_Event = em_get_event($event_id);
 
@@ -51,64 +62,25 @@ function delete_previous_gardendays($user_id, $archive_user_id, $debug = false) 
 			$ticketid = array_keys($EM_Booking->get_tickets()->tickets)[0];
 			$ticket_date = new DateTime($EM_Booking->get_tickets()->tickets[$ticketid]->__get('ticket_name'));
 
-			# Only delete bookings where the event has already happened. Other bookings are kept
-			if ($EM_Event->event_start_date . ' ' . $EM_Event->event_start_time < $current_time) {
-				if ($EM_Booking->status <= 1) {
-					# Check if booking is pending or approved
-					# 0 => Pending
-					# 1 => Approved
-					# 2 => Rejected
-					# 3 => Cancelled
-					# 4 => Awaiting Online Payment
-					# 5 => Awaiting payment
-					#
-					# Booking is Pending or Approved: Save information about event
-					
-					# Save information about event
-					$replaces = array(
-						'#NAME' => $EM_Event->event_name,
+			# Save information about event
+			$replaces = array(
+				'#NAME' => $EM_Event->event_name,
 
-						'#DATE_YEAR' => $ticket_date->format('Y'),
-						'#DATE_MONTH' => $ticket_date->format('m'),
-						'#DATE_DAY' => $ticket_date->format('d'),
-						'#DATE_HOUR' => $ticket_date->format('H'),
-						'#DATE_MINUTE' => $ticket_date->format('i'),
-						'#DATE_SECOND' => $ticket_date->format('s')
-					);
+				'#DATE_YEAR' => $ticket_date->format('Y'),
+				'#DATE_MONTH' => $ticket_date->format('m'),
+				'#DATE_DAY' => $ticket_date->format('d'),
+				'#DATE_HOUR' => $ticket_date->format('H'),
+				'#DATE_MINUTE' => $ticket_date->format('i'),
+				'#DATE_SECOND' => $ticket_date->format('s')
+			);
 
-					# Append information to return string
-					$returnstring .= str_replace(array_keys($replaces), $replaces, nl2br(FJERNBRUGERADGANG_FORMAT_PREVIOUS_GARDENDAYS));
-
-					# If this is not the last booking, add linebreaks to return string
-					if ($it < $Bookings_count) {
-						$returnstring .= '<br><br>';
-					}
-				}
-
-				# Check if this is a real call, or only a check of dummy results
-				if (!$debug) {
-					# Real run. Move booking to archive user
-					$sql = $wpdb->prepare("UPDATE " . EM_BOOKINGS_TABLE . " SET person_id=%d WHERE booking_id=%d", $archive_user_id, $EM_Booking->booking_id);
-					$result = $wpdb->query($sql);
-				}
-
-				# Increment counter of the current booking
-				$it++;
-			} else {
-				# Booking is in the future, and should not be deleted. Decrease total amount of bookings
-				$Bookings_count--;
-			}
-		}
-	}
-
-	# Check if there were any bookings to delete
-	if ($it == 1) {
+			# Append information to return string
+			return str_replace(array_keys($replaces), $replaces, nl2br(FJERNBRUGERADGANG_FORMAT_PREVIOUS_GARDENDAYS));
+		}, $pending_or_approved_bookings));
+	} else {
 		# Return string is information about the fact that no bookings was deleted
-		$returnstring = '(Ingen tilmeldinger til tidligere havedage blev fundet)';
+		return '(Ingen tilmeldinger til tidligere havedage blev fundet)';
 	}
-
-	# Return formatted string
-	return $returnstring;
 }
 
 /**
@@ -131,25 +103,37 @@ function find_future_gardendays($user_id, $archive_user_id, $debug = false) {
 	# Event: Collection of all garden days for an entire season, with a ticket for each individual garden day, and potentially with bookings from many users
 	#
 
-	# Prepare string with info about deleted signups
-	$returnstring = '';
+	# Current time, formatted as string
+	$current_time = (new DateTime("now", new DateTimeZone('Europe/Copenhagen')))->format("Y-m-d H:i:s");
 
 	# Get EM-structs for the user, and all of their bookings
-	$EM_Person = new EM_Person($user_id);
-	$EM_Bookings = $EM_Person->get_bookings();
-	$Bookings_count = count($EM_Bookings->bookings);
+	$EM_Bookings = array_filter((new EM_Person($user_id))->get_bookings()->load(), function ($EM_Booking) use($current_time) {
+		$EM_Event = em_get_event($EM_Booking->event_id);
+		$event_time = $EM_Event->event_start_date . ' ' . $EM_Event->event_start_time;
 
-	# Counter for the amount of processed bookings
-	$it = 1;
+		return $event_time >= $current_time;
+	});
+
+	if (!$debug) {
+		array_walk($EM_Bookings, function ($EM_Booking) use($archive_user_id) {
+			move_booking_to_user($archive_user_id, $EM_Booking);
+		});
+	}
+
+	$pending_or_approved_bookings = array_filter($EM_Bookings, function ($EM_Booking) {
+		# Check if booking is pending or approved
+		# 0 => Pending
+		# 1 => Approved
+		# 2 => Rejected
+		# 3 => Cancelled
+		# 4 => Awaiting Online Payment
+		# 5 => Awaiting payment
+		return $EM_Booking->booking_status <= 1;
+	});
 
 	# Check if the person has made any bookings
-	if ($Bookings_count > 0) {
-		# Current time, formatted as string
-		$current_time = new DateTime("now", new DateTimeZone('Europe/Copenhagen'));
-		$current_time = $current_time->format("Y-m-d H:i:s");
-
-		# Go through all of their bookings
-		foreach ($EM_Bookings as $EM_Booking) {
+	if (count($pending_or_approved_bookings) > 0) {
+		return join('<br><br>', array_map(function ($EM_Booking) {
 			$event_id = $EM_Booking->event_id;
 			$EM_Event = em_get_event($event_id);
 
@@ -157,69 +141,25 @@ function find_future_gardendays($user_id, $archive_user_id, $debug = false) {
 			$ticketid = array_keys($EM_Booking->get_tickets()->tickets)[0];
 			$ticket_date = new DateTime($EM_Booking->get_tickets()->tickets[$ticketid]->__get('ticket_name'));
 
-			# Only show bookings where the event has not yet happened.
-			if ($EM_Event->event_start_date . ' ' . $EM_Event->event_start_time >= $current_time) {
+			# Save information about event
+			$replaces = array(
+				'#NAME' => $EM_Event->event_name,
 
-				if ($EM_Booking->booking_status <= 1) {
-					# Check if booking is pending or approved
-					# 0 => Pending
-					# 1 => Approved
-					# 2 => Rejected
-					# 3 => Cancelled
-					# 4 => Awaiting Online Payment
-					# 5 => Awaiting payment
-					#
-					# Booking is Pending or Approved: Do not delete
+				'#DATE_YEAR' => $ticket_date->format('Y'),
+				'#DATE_MONTH' => $ticket_date->format('m'),
+				'#DATE_DAY' => $ticket_date->format('d'),
+				'#DATE_HOUR' => $ticket_date->format('H'),
+				'#DATE_MINUTE' => $ticket_date->format('i'),
+				'#DATE_SECOND' => $ticket_date->format('s')
+			);
 
-					# Save information about event
-					$replaces = array(
-						'#NAME' => $EM_Event->event_name,
-
-						'#DATE_YEAR' => $ticket_date->format('Y'),
-						'#DATE_MONTH' => $ticket_date->format('m'),
-						'#DATE_DAY' => $ticket_date->format('d'),
-						'#DATE_HOUR' => $ticket_date->format('H'),
-						'#DATE_MINUTE' => $ticket_date->format('i'),
-						'#DATE_SECOND' => $ticket_date->format('s')
-					);
-
-					# Append information to return string
-					$returnstring .= str_replace(array_keys($replaces), $replaces, nl2br(FJERNBRUGERADGANG_FORMAT_FUTURE_GARDENDAYS));
-
-					# If this is not the last booking, add linebreaks to return string
-					if ($it < $Bookings_count) {
-						$returnstring .= '<br><br>';
-					}
-
-					$it++;
-				} else {
-					# Booking is neither Pending nor Approved: Delete
-
-					# Check if this is a real call, or only a check of dummy results
-					if (!$debug) {
-						# Real run. Move booking to archive user
-						$sql = $wpdb->prepare("UPDATE " . EM_BOOKINGS_TABLE . " SET person_id=%d WHERE booking_id=%d", $archive_user_id, $EM_Booking->booking_id);
-						$wpdb->query($sql);
-					}
-
-					# Booking is neither Pending nor Approved, and should not be moved. Decrease total amount of bookings
-					$Bookings_count--;
-				}
-			} else {
-				# Booking is not in the future, and should not be moved. Decrease total amount of bookings
-				$Bookings_count--;
-			}
-		}
-	}
-	
-	# Check if there were any bookings to delete
-	if ($it == 1) {
+			# Append information to return string
+			return str_replace(array_keys($replaces), $replaces, nl2br(FJERNBRUGERADGANG_FORMAT_FUTURE_GARDENDAYS));
+		}, $pending_or_approved_bookings));
+	} else {
 		# Return string is information about the fact that no bookings was deleted
-		$returnstring = '(Ingen tilmeldinger til fremtidige havedage blev fundet)';
+		return '(Ingen tilmeldinger til fremtidige havedage blev fundet)';
 	}
-
-	# Return formatted string
-	return $returnstring;
 }
 
 /**
@@ -236,22 +176,20 @@ function find_future_gardendays($user_id, $archive_user_id, $debug = false) {
 function delete_rentals($user_id, $archive_user_id, $debug = false) {
 	global $wpdb;
 
-	# Prepare string with info about deleted signups
-	$returnstring = '';
+	$EM_Events = array_map(function ($event_id) {
+		return em_get_event($event_id, 'event_id');
+	},	$wpdb->get_col('SELECT event_id FROM ' . EM_EVENTS_TABLE . ' WHERE event_owner = "' . $user_id . '" AND event_status >= 0'));
 
-	# Get EM-structs for the user, and all of their rentals
-	$event_ids = $wpdb->get_col('SELECT event_id FROM ' . EM_EVENTS_TABLE . ' WHERE event_owner = "' . $user_id . '" AND event_status >= 0');
-	$events_count = count($event_ids);
-	$EM_Events = EM_Events::get($event_ids);
-	$Events_count = count($EM_Events);
+	# Check if this is a real call, or only a check of dummy results
+	if (!$debug) {
+		# Real run. Move the events to archive user
+		array_walk($EM_Events, function ($EM_Event) use($archive_user_id) {
+			move_event_to_user($archive_user_id, $EM_Event);
+		});
+	}
 
-	# Check if the apartment has rented the common house, at some point
-	if ($Events_count > 0 && $events_count > 0) {
-		# Counter for the amount of processed rentals
-		$it = 1;
-
-		# Go through all of their rentals
-		foreach ($EM_Events as $EM_Event) {
+	if (count($EM_Events) > 0) {
+		return join('<br><br>', array_map(function ($EM_Event) {
 			# Get start- and finish-times of the event
 			$start_date = new DateTime($EM_Event->event_start_date . " " . $EM_Event->event_start_time);
 			$end_date = new DateTime($EM_Event->event_end_date . " " . $EM_Event->event_end_time);
@@ -276,35 +214,12 @@ function delete_rentals($user_id, $archive_user_id, $debug = false) {
 			);
 
 			# Add information about the rental to return string
-			$returnstring .= str_replace(array_keys($replaces), $replaces, nl2br(FJERNBRUGERADGANG_FORMAT_RENTALS));
-
-			# If this is not the last rental, add linebreaks to return string
-			if ($it < $Events_count) {
-				$returnstring .= '<br><br>';
-				$it++;
-			}
-
-			# Check if this is a real call, or only a check of dummy results
-			if (!$debug) {
-				# Real run. Move the event to archive user
-				$sql = $wpdb->prepare("UPDATE " . EM_EVENTS_TABLE . " SET event_owner=%d WHERE event_id=%d", $archive_user_id, $EM_Event->event_id);
-				$wpdb->query($sql);
-
-				# Move the corresponding post to archive user
-				$post_updated = wp_update_post(
-					array(
-						'ID'          => $EM_Event->post_id,
-						'post_author' => $archive_user_id,
-					)
-				);
-			}
-		}
+			return str_replace(array_keys($replaces), $replaces, nl2br(FJERNBRUGERADGANG_FORMAT_RENTALS));
+		}, $EM_Events));
 	} else {
 		# There were no rentals to delete. Return string is information about the fact that no rentals was deleted
-		$returnstring = '(Ingen udlejninger af fælleshuset blev fundet)';
+		return '(Ingen udlejninger af fælleshuset blev fundet)';
 	}
-
-	return $returnstring;
 }
 
 /**
@@ -332,4 +247,38 @@ function reset_user_info($user_id, $new_pass, $new_first_name, $new_last_name, $
 		);
 		wp_update_user($args);
 	}
+}
+
+/**
+ * Moves a booking to a different user
+ * 
+ * @param int $user_id ID of the user to move the booking to
+ * @param EM_Booking $EM_Booking The booking to be moved
+ */
+function move_booking_to_user($user_id, $EM_Booking) {
+	global $wpdb;
+
+	$sql = $wpdb->prepare("UPDATE " . EM_BOOKINGS_TABLE . " SET person_id=%d WHERE booking_id=%d", $user_id, $EM_Booking->booking_id);
+	$wpdb->query($sql);
+}
+
+/**
+ * Moves an event to a different user
+ * 
+ * @param int $user_id ID of the user to move the event to
+ * @param EM_Event $EM_Event The event to be moved
+ */
+function move_event_to_user($user_id, $EM_Event) {
+	global $wpdb;
+
+	$sql = $wpdb->prepare("UPDATE " . EM_EVENTS_TABLE . " SET event_owner=%d WHERE event_id=%d", $user_id, $EM_Event->event_id);
+	$wpdb->query($sql);
+
+	# Move the corresponding post to archive user
+	$post_updated = wp_update_post(
+		array(
+			'ID'          => $EM_Event->post_id,
+			'post_author' => $user_id,
+		)
+	);
 }
