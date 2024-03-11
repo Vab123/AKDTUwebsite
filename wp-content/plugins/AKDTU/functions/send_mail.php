@@ -127,26 +127,21 @@ function echo_AKDTU_email_as_table($TO, $FROM, $REPLYTO, $CC, $attachments, $mai
  * @param string $content_replaces Key-value array of replaces, where the keys should be replaced with the values in the content of the email
  * @param string $CONSTANT_ROOT Root of the PHP constant, which contains info about the email. Defined in register_definitions.php and register_settings.php
  * @param bool|string $override_TO If not false, the recipient address of the email is overwritten with the value of this parameter
- * 
- * @return array[string] Key-value array, with the global path to each file
  */
 function send_AKDTU_email($debug = true, $subject_replaces = array(), $content_replaces = array(), $CONSTANT_ROOT = '', $override_TO = false) {
-	$SUBJECT = constant($CONSTANT_ROOT . '_SUBJECT'); # Mail subject
-	$MAILCONTENT = stripcslashes(constant($CONSTANT_ROOT . '_MAILCONTENT')); # Mail content, strip slashes
 	$REPLYTO = constant($CONSTANT_ROOT . '_REPLYTO'); # Reply-To address
 	$CC = constant($CONSTANT_ROOT . '_CC'); # CC address
 	$FROM = constant($CONSTANT_ROOT . '_FROM'); # From address
 	$TO = ($override_TO ? $override_TO : constant($CONSTANT_ROOT . '_TO')); # To address
-	$ATTACHMENTS = constant($CONSTANT_ROOT . '_ATTACHMENTS'); # Attachment string
 
 	# Perform replaces in the subject of the email
-	$mailsubject = (count($subject_replaces) > 0 ? str_replace(array_keys($subject_replaces), $subject_replaces, nl2br($SUBJECT)) : nl2br($SUBJECT));
+	$mailsubject = AKDTU_email_subject($subject_replaces, $CONSTANT_ROOT);
 
 	# Perform replaces in the content of the email
-	$mailcontent = (count($content_replaces) > 0 ? str_replace(array_keys($content_replaces), $content_replaces, nl2br($MAILCONTENT)) : nl2br($MAILCONTENT));
+	$mailcontent = AKDTU_email_content($content_replaces, $CONSTANT_ROOT);
 
 	# Prepare attachments
-	$attachments = prepend_attachments_string($ATTACHMENTS);
+	$attachments = AKDTU_email_attachments($CONSTANT_ROOT);
 
 	# Check if the email should be sent or echoed as a table
 	if ($debug) {
@@ -178,4 +173,45 @@ function send_AKDTU_email($debug = true, $subject_replaces = array(), $content_r
 		# Send email
 		wp_mail($TO, $mailsubject, $mailcontent, $headers, $attachments);
 	}
+}
+
+/**
+ * Performs replaces on the subject of an email before sending
+ * 
+ * @param string $subject_replaces Key-value array of replaces, where the keys should be replaced with the values in the subject of the email
+ * @param string $CONSTANT_ROOT Root of the PHP constant, which contains info about the email. Defined in register_definitions.php and register_settings.php
+ * 
+ * @return string Formatted subject of the email
+ */
+function AKDTU_email_subject($subject_replaces = array(), $CONSTANT_ROOT = '') {
+	$SUBJECT = constant($CONSTANT_ROOT . '_SUBJECT'); # Mail subject
+
+	return (count($subject_replaces) > 0 ? str_replace(array_keys($subject_replaces), $subject_replaces, nl2br($SUBJECT)) : nl2br($SUBJECT));
+}
+
+/**
+ * Performs replaces on the content of the email before sending
+ * 
+ * @param string $content_replaces Key-value array of replaces, where the keys should be replaced with the values in the content of the email
+ * @param string $CONSTANT_ROOT Root of the PHP constant, which contains info about the email. Defined in register_definitions.php and register_settings.php
+ * 
+ * @return string Formatted content of the email
+ */
+function AKDTU_email_content($content_replaces = array(), $CONSTANT_ROOT = '') {
+	$MAILCONTENT = stripcslashes(constant($CONSTANT_ROOT . '_MAILCONTENT')); # Mail content, strip slashes
+
+	return (count($content_replaces) > 0 ? str_replace(array_keys($content_replaces), $content_replaces, nl2br($MAILCONTENT)) : nl2br($MAILCONTENT));
+}
+
+/**
+ * Performs replaces on the attachments of the email before sending
+ * 
+ * @param string $CONSTANT_ROOT Root of the PHP constant, which contains info about the email. Defined in register_definitions.php and register_settings.php
+ * 
+ * @return array[string] Array of paths to attachments for the email
+ */
+function AKDTU_email_attachments($CONSTANT_ROOT = '') {
+	$ATTACHMENTS = constant($CONSTANT_ROOT . '_ATTACHMENTS'); # Attachment string
+
+	return prepend_attachments_string($ATTACHMENTS);
 }
