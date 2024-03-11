@@ -89,7 +89,9 @@ $AKDTU_OPTIONS = array(
 								"type" => "text",
 								"style" => "width: 600px",
 								"comments" => array(
-									"<code>#APT</code> erstattes med lejlighedsnummeret",
+									"<code>#MONTHNUM</code> erstattes med måneden som tal (e.g. \"03\").",
+									"<code>#MONTH</code> erstattes med måneden som tekst (e.g. \"marts\").",
+									"<code>#YEAR</code> erstattes med år.",
 								),
 							),
 							array(
@@ -113,7 +115,8 @@ $AKDTU_OPTIONS = array(
 								"style" => "width: 600px;",
 								"comments" => array(
 									"<code>#PAYMENT_INFO</code> erstattes med info omkring hvem der skal betale for leje. Formatet for dette kan rettes nedenunder.",
-									"<code>#MONTH</code> erstattes med måned.",
+									"<code>#MONTHNUM</code> erstattes med måneden som tal (e.g. \"03\").",
+									"<code>#MONTH</code> erstattes med måneden som tekst (e.g. \"marts\").",
 									"<code>#YEAR</code> erstattes med år.",
 								),
 							),
