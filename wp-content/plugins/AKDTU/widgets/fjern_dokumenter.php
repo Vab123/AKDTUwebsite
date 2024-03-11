@@ -5,7 +5,7 @@
  */
 
 function fjern_dokument_dashboard_widget() {
-	include WP_PLUGIN_DIR . '/AKDTU/functions/bestyrelsesdokumenter.php';
+	global $bestyrelsesdocuments_document_types;
 ?>
 	<table id="fjern_dokument_widget_table" class="widefat" width="100%">
 		<colgroup>
@@ -27,7 +27,7 @@ function fjern_dokument_dashboard_widget() {
 		<tbody>
 			<?php $is_not_first = false;
 			foreach ($bestyrelsesdocuments_document_types as $type => $typearray) :
-				$files = array_filter(scandir($typearray['folder'], 1), function($item) {
+				$files = array_filter(scandir($typearray['folder'], 1), function($item) use($typearray) {
 					return !is_dir($typearray['folder'] . $item);
 				});
 				$odd_entry = true;
@@ -42,8 +42,9 @@ function fjern_dokument_dashboard_widget() {
 						<td><input type="submit" style="vertical-align:middle;" class="button-secondary" value="Slet"></td>
 					</form>
 				</tr>
-			<?php $odd_entry = !$odd_entry;
-			endforeach;
+			<?php 
+				$odd_entry = !$odd_entry;
+				endforeach;
 			$is_not_first = true;
 			endforeach; ?>
 		</tbody>

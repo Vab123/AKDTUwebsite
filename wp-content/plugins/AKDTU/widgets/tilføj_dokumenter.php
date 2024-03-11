@@ -5,7 +5,7 @@
  */
 
 function tilføj_dokument_dashboard_widget() {
-	include WP_PLUGIN_DIR . '/AKDTU/functions/bestyrelsesdokumenter.php';
+	global $bestyrelsesdocuments_document_types;
 ?>
 	<table id="tilføj_dokument_widget_table" width="100%">
 		<colgroup>
