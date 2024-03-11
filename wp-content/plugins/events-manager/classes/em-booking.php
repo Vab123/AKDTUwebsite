@@ -1137,7 +1137,7 @@ class EM_Booking extends EM_Object {
 
 					$date_formatter = new IntlDateFormatter("da_DK", IntlDateFormatter::LONG, IntlDateFormatter::NONE);
 
-					$replace = implode("\n",array_map(function($info,$date) use($date_formatter) {return $date_formatter->format(new DateTime($date)) . ' : ' . $info['booked'] . ' / ' . $info['total'];}, $spaces, array_keys($spaces))) . "\n" . 'Total: ' . array_sum(array_map(function($info){return $info['booked'];}, $spaces)) . ' / ' . array_sum(array_map(function($info){return $info['total'];}, $spaces));
+					$replace = '<table>' . implode("",array_map(function($info,$date) use($date_formatter) {return '<tr><td>' . $date_formatter->format(new DateTime($date)) . '</td><td>' . $info['booked'] . ' / ' . $info['total'] . '</td></tr>';}, $spaces, array_keys($spaces))) . "<tr><td>" . 'Total</td><td>' . array_sum(array_map(function($info){return $info['booked'];}, $spaces)) . ' / ' . array_sum(array_map(function($info){return $info['total'];}, $spaces)) . '</td></tr></table>';
 					break;
 				case '#_BOOKINGID':
 					$replace = $this->booking_id;
