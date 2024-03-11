@@ -6,11 +6,11 @@ save_settings($AKDTU_OPTIONS['leje-af-fælleshus-bestyrelse-modtaget.php']);
 function AKDTU_leje_af_fælleshus_bestyrelse_modtaget_mail_settings() {
 	global $AKDTU_OPTIONS;
 
-	render_options_page($AKDTU_OPTIONS['leje-af-fælleshus-bestyrelse-besluttet.php']);
+	render_options_page($AKDTU_OPTIONS['leje-af-fælleshus-bestyrelse-modtaget.php']);
 }
 
 function test_leje_af_fælleshus_bestyrelse_modtaget_mail() {
-	$events = array_filter(EM_Events::get(array('scope' => 'future', 'limit' => 10, 'offset' => 0, 'order' => 'ASC', 'orderby' => 'event_start', 'bookings' => false, 'owner' => false, 'pagination' => 0)), function ($event) {
+	$events = array_filter(EM_Events::get(array('limit' => 10, 'offset' => 0, 'order' => 'DESC', 'orderby' => 'event_date_modified', 'bookings' => false, 'owner' => false, 'pagination' => 0)), function ($event) {
 		return substr($event->event_name, 0, 28) == "#_RENTAL_BEFORE_APARTMENTNUM";
 	});
 
@@ -18,7 +18,6 @@ function test_leje_af_fælleshus_bestyrelse_modtaget_mail() {
 		$EM_Event = $events[array_keys($events)[0]];
 
 		$admin_email = get_option('dbem_event_submitted_email_admin');
-		$owner_email = get_userdata($EM_Event->event_owner)->user_confirmation_email;
 
 		echo '<h3>Mail ved ny ansøgning</h3>';
 		echo_AKDTU_email_as_table(
