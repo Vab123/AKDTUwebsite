@@ -2190,7 +2190,16 @@ class EM_Event extends EM_Object {
 			$placeholder_atts = array($result);
 			if (!empty($placeholders[3][$key])) $placeholder_atts[] = $placeholders[3][$key];
 			switch ($result) {
-					//Event Details
+				//Event Details
+				case '#_RENTERAPPROVEDMESSAGE':
+					$replace = $this->output(get_option('dbem_event_approved_email_body_' . pll_get_post_language($this->post_id, 'slug')), 'raw');
+					break;
+				case '#_RENTERREAPPROVEDMESSAGE':
+					$replace = $this->output(get_option('dbem_event_reapproved_email_body_' . pll_get_post_language($this->post_id, 'slug')), 'raw');
+					break;
+				case '#_RENTERREJECTEDMESSAGE':
+					$replace = $this->output(get_option('dbem_event_rejected_email_body_' . pll_get_post_language($this->post_id, 'slug')), 'raw');
+					break;
 				case '#_EVENTPRICE':
 					require_once WP_PLUGIN_DIR . '/AKDTU/functions/fælleshus.php';
 					$replace = calc_rental_cost(new DateTime(trim($this->event_start_date . ' ' . $this->event_start_time)), new DateTime(trim($this->event_end_date . ' ' . $this->event_end_time)), $this->owner);
