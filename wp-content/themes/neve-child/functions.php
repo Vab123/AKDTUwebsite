@@ -95,6 +95,7 @@ pll_register_string('events-manager', 'Rental is free for members of the board.'
 pll_register_string('events-manager', 'Submit event', 'events-manager-mine-begivenheder');
 pll_register_string('events-manager', 'Update event', 'events-manager-mine-begivenheder');
 pll_register_string('events-manager', '12:00 (noon)', 'events-manager-mine-begivenheder');
+pll_register_string('events-manager', 'Rental price', 'events-manager-mine-begivenheder');
 
 ## wp-content\plugins\events-manager\templates\templates\my-bookings.php
 ## used styles: _e(), _e (), esc_html_e()
@@ -212,6 +213,16 @@ add_role(
 	'Bestyrelsesmedlem',
 	array(
 		'read' => true,
+		'publish_events' => true,
+		'delete_others_events' => true,
+		'edit_others_events' => true,
+		'delete_events' => true,
+		'edit_events' => true,
+		'read_private_events' => true,
+		'read_private_locations' => true,
+		'read_others_locations' => true,
+		'manage_others_bookings' => true,
+		'manage_bookings' => true,
 	)
 );
 add_role(
@@ -219,6 +230,16 @@ add_role(
 	'Bestyrelsessuppleant',
 	array(
 		'read' => true,
+		'publish_events' => true,
+		'delete_others_events' => true,
+		'edit_others_events' => true,
+		'delete_events' => true,
+		'edit_events' => true,
+		'read_private_events' => true,
+		'read_private_locations' => true,
+		'read_others_locations' => true,
+		'manage_others_bookings' => true,
+		'manage_bookings' => true,
 	)
 );
 

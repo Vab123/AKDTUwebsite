@@ -77,7 +77,8 @@
 						<?php if( get_option('dbem_locations_enabled') ): ?>
 						<th><?php pll_e( 'Location', 'events-manager'); ?></th>
 						<?php endif; ?>
-						<th colspan="2"><?php pll_e( 'Date and time', 'events-manager'); ?></th>
+						<th><?php pll_e( 'Date and time', 'events-manager'); ?></th>
+						<th><?php pll_e( 'Rental price', 'events-manager'); ?></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -149,20 +150,12 @@
 								<?php echo $EM_Event->output_times(); ?>
 							</td>
 							<td>
-								<?php 
-								if ( $EM_Event->is_recurrence() ) {
-									$recurrence_delete_confirm = pll_e('WARNING! You will delete ALL recurrences of this event, including booking history associated with any event in this recurrence. To keep booking information, go to the relevant single event and save it to detach it from this recurrence series.','events-manager');
-									?>
-									<strong>
-									<?php echo $EM_Event->get_recurrence_description(); ?> <br />
-									<a href="<?php echo esc_url($EM_Event->get_edit_reschedule_url()); ?>"><?php pll_e( 'Edit Recurring Events', 'events-manager'); ?></a>
-									<?php if( current_user_can('delete_events')) : ?>
-									<span class="trash"><a href="<?php echo esc_url(add_query_arg(array('action'=>'event_delete', 'event_id'=>$EM_Event->recurrence_id, '_wpnonce'=> wp_create_nonce('event_delete_'.$EM_Event->recurrence_id)))); ?>" class="em-event-rec-delete" onclick ="if( !confirm('<?php echo $recurrence_delete_confirm; ?>') ){ return false; }"><?php pll_e('Delete','events-manager'); ?></a></span>
-									<?php endif; ?>										
-									</strong>
-									<?php
-								}
-								?>
+							<?php 
+								$startdate = new DateTime($EM_Event->event_start_date . " " . $EM_Event->event_start_time);
+								$enddate = new DateTime($EM_Event->event_end_date . " " . $EM_Event->event_end_time);
+								$owner_id = $EM_Event->owner;
+								echo pll__('Common house rental price, pre', 'events-manager') . " " . calc_rental_cost($startdate, $enddate, $owner_id) . " " . pll__('Common house rental price, post', 'events-manager');
+							?>
 							</td>
 						</tr>
 						<?php
