@@ -10,7 +10,7 @@ if (isset($_REQUEST['action'])) {
 		# Check if the common house should be booked for the board
 		if ($_REQUEST['type'] == 'bestyrelse') {
 			# Book the common house for the board
-			book_fælleshus_bestyrelse(wp_get_current_user(), $_REQUEST['name_da'], $_REQUEST['name_en'], new DateTime($_REQUEST['start_date']), new DateTime($_REQUEST['end_date']));
+			book_fælleshus_bestyrelse(wp_get_current_user(), $_REQUEST['name_da'], $_REQUEST['name_en'], new DateTime($_REQUEST['start_date']), new DateTime($_REQUEST['end_date']), isset($_REQUEST['all_day']));
 		} elseif ($_REQUEST['type'] == 'beboer') {
 			# Book the common house for a resident
 			book_fælleshus_beboer(get_user_by('login', username_from_apartment_number($_REQUEST['user'])), common_house_rental_name($_REQUEST['user']), new DateTime($_REQUEST['start_date']), new DateTime($_REQUEST['end_date']));
@@ -99,10 +99,11 @@ function book_fælleshus_beboer($event_owner, $title, $start_date, $end_date) {
  * @param string $title_en English title of the rental
  * @param DateTime $start_date Start-date and -time of the rental
  * @param DateTime $end_date End-date and -time of the rental
+ * @param bool $all_day True if the event is an all-day event
  * 
  * @return bool True if the booking was successfully created
  */
-function book_fælleshus_bestyrelse($event_owner, $title_da, $title_en, $start_date, $end_date) {
+function book_fælleshus_bestyrelse($event_owner, $title_da, $title_en, $start_date, $end_date, $all_day) {
 	global $wpdb;
 
 	if ($end_date <= $start_date) {
@@ -132,14 +133,15 @@ function book_fælleshus_bestyrelse($event_owner, $title_da, $title_en, $start_d
 
 	$event_da->__set('event_start_date', $start_date->format("Y-m-d")); # Start date of event
 	$event_da->__set('event_end_date', $end_date->format("Y-m-d")); # End date of event
-	$event_da->__set('event_start_time', $start_date->format("H:i:s")); # Start time of event
-	$event_da->__set('event_end_time', $end_date->format("H:i:s")); # End time of event
+	$event_da->__set('event_start_time', ($all_day ? "00:00:00" : $start_date->format("H:i:s"))); # Start time of event
+	$event_da->__set('event_end_time', ($all_day ? "23:59:59" : $end_date->format("H:i:s"))); # End time of event
 	$event_da->__set('event_start', $start_date->format("Y-m-d") . ' ' . $start_date->format("H:i:s")); # Start of event
 	$event_da->__set('event_end', $end_date->format("Y-m-d") . ' ' . $end_date->format("H:i:s")); # End of event
 	$event_da->__set('start_date', $start_date->format("Y-m-d")); # Start date of event
 	$event_da->__set('end_date', $end_date->format("Y-m-d")); # End date of event
-	$event_da->__set('start_time', $start_date->format("H:i:s")); # Start time of event
-	$event_da->__set('end_time', $end_date->format("H:i:s")); # End time of event
+	$event_da->__set('start_time', ($all_day ? "00:00:00" : $start_date->format("H:i:s"))); # Start time of event
+	$event_da->__set('end_time', ($all_day ? "23:59:59" : $end_date->format("H:i:s"))); # End time of event
+	$event_da->__set('event_all_day', $all_day); # If event is an all-day event
 
 	$event_da->__set('location_id', 0); # Location ID
 	$event_da->__set('event_spaces', NULL); # Total amount of spaces on event
@@ -156,14 +158,15 @@ function book_fælleshus_bestyrelse($event_owner, $title_da, $title_en, $start_d
 
 	$event_en->__set('event_start_date', $start_date->format("Y-m-d")); # Start date of event
 	$event_en->__set('event_end_date', $end_date->format("Y-m-d")); # End date of event
-	$event_en->__set('event_start_time', $start_date->format("H:i:s")); # Start time of event
-	$event_en->__set('event_end_time', $end_date->format("H:i:s")); # End time of event
+	$event_en->__set('event_start_time', ($all_day ? "00:00:00" : $start_date->format("H:i:s"))); # Start time of event
+	$event_en->__set('event_end_time', ($all_day ? "23:59:59" : $end_date->format("H:i:s"))); # End time of event
 	$event_en->__set('event_start', $start_date->format("Y-m-d") . ' ' . $start_date->format("H:i:s")); # Start of event
 	$event_en->__set('event_end', $end_date->format("Y-m-d") . ' ' . $end_date->format("H:i:s")); # End of event
 	$event_en->__set('start_date', $start_date->format("Y-m-d")); # Start date of event
 	$event_en->__set('end_date', $end_date->format("Y-m-d")); # End date of event
-	$event_en->__set('start_time', $start_date->format("H:i:s")); # Start time of event
-	$event_en->__set('end_time', $end_date->format("H:i:s")); # End time of event
+	$event_en->__set('start_time', ($all_day ? "00:00:00" : $start_date->format("H:i:s"))); # Start time of event
+	$event_en->__set('end_time', ($all_day ? "23:59:59" : $end_date->format("H:i:s"))); # End time of event
+	$event_en->__set('event_all_day', $all_day); # If event is an all-day event
 
 	$event_en->__set('location_id', 0); # Location ID
 	$event_en->__set('event_spaces', NULL); # Total amount of spaces on event

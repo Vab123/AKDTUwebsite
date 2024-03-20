@@ -32,6 +32,10 @@ function book_fælleshus_bestyrelse_dashboard_widget() { ?>
 					<td><input type="datetime-local" name="end_date" /></td>
 				</tr>
 				<tr>
+					<td><label>Hele dagen</label></td>
+					<td><input type="checkbox" name="all_day" /></td>
+				</tr>
+				<tr>
 					<td></td>
 					<td><input type="submit" class="button-secondary" value="Reservér" /></td>
 				</tr>
