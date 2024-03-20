@@ -468,15 +468,15 @@ function is_board_deputy_from_id($id) {
 
 ############################################################
 #
-# Check if user was a boardmember at a given time
+# Check if user was a board member at a given time
 #
 /**
- * Checks if a username belongs to a boardmember at a given time
+ * Checks if a username belongs to a board member at a given time
  * 
  * @param string $username Username
  * @param DateTime $datetime PHP DateTime object, with the time to check
  * 
- * @return bool True if the username belongs to a boardmember at the given time
+ * @return bool True if the username belongs to a board member at the given time
  */
 function was_boardmember_from_username($username, $datetime) {
 	# Checks if the username belonged to a board member at the time
@@ -484,12 +484,12 @@ function was_boardmember_from_username($username, $datetime) {
 }
 #
 /**
- * Checks if an apartment number belongs to a boardmember at a given time
+ * Checks if an apartment number belongs to a board member at a given time
  * 
  * @param int $number Apartment number
  * @param DateTime $datetime PHP DateTime object, with the time to check
  * 
- * @return bool True if the apartment number belongs to a boardmember at the given time
+ * @return bool True if the apartment number belongs to a board member at the given time
  */
 function was_boardmember_from_apartment_number($number, $datetime) {
 	global $wpdb;
@@ -498,16 +498,63 @@ function was_boardmember_from_apartment_number($number, $datetime) {
 }
 #
 /**
- * Checks if a user id belongs to a boardmember at a given time
+ * Checks if a user id belongs to a board member at a given time
  * 
  * @param int $id User id
  * @param DateTime $datetime PHP DateTime object, with the time to check
  * 
- * @return bool True if the user id belongs to a boardmember at the given time
+ * @return bool True if the user id belongs to a board member at the given time
  */
 function was_boardmember_from_id($id, $datetime) {
 	# Checks if the user id belongs to a board member
 	return was_boardmember_from_apartment_number(apartment_number_from_id($id), $datetime);
+}
+############################################################
+
+
+
+############################################################
+#
+# Check if user was a board deputy at a given time
+#
+/**
+ * Checks if a username belongs to a board deputy at a given time
+ * 
+ * @param string $username Username
+ * @param DateTime $datetime PHP DateTime object, with the time to check
+ * 
+ * @return bool True if the username belongs to a board deputy at the given time
+ */
+function was_board_deputy_from_username($username, $datetime) {
+	# Checks if the username belonged to a board deputy at the time
+	return was_board_deputy_from_apartment_number(apartment_number_from_username($username), $datetime);
+}
+#
+/**
+ * Checks if an apartment number belongs to a board deputy at a given time
+ * 
+ * @param int $number Apartment number
+ * @param DateTime $datetime PHP DateTime object, with the time to check
+ * 
+ * @return bool True if the apartment number belongs to a board deputy at the given time
+ */
+function was_board_deputy_from_apartment_number($number, $datetime) {
+	global $wpdb;
+	# Checks if the apartment number belongs to a board deputy
+	return $wpdb->get_var($wpdb->prepare('SELECT COUNT(*) FROM ' . $wpdb->prefix . 'AKDTU_board_deputies WHERE apartment_number = "' . $number . '" AND start_datetime <= "' . $datetime->format('Y-m-d H:i:s') . '" AND end_datetime >= "' . $datetime->format('Y-m-d H:i:s') . '"')) > 0;
+}
+#
+/**
+ * Checks if a user id belongs to a board deputy at a given time
+ * 
+ * @param int $id User id
+ * @param DateTime $datetime PHP DateTime object, with the time to check
+ * 
+ * @return bool True if the user id belongs to a board_deputy at the given time
+ */
+function was_board_deputy_from_id($id, $datetime) {
+	# Checks if the user id belongs to a board deputy
+	return was_board_deputy_from_apartment_number(apartment_number_from_id($id), $datetime);
 }
 ############################################################
 
@@ -582,6 +629,52 @@ function all_board_deputies_usernames() {
 function all_board_deputies_ids() {
 	# Lists the usernames of all board deputies
 	return array_map(function($apartment_number) {return id_from_apartment_number($apartment_number);}, all_board_deputies_apartments());
+}
+############################################################
+
+
+
+############################################################
+#
+# Check if a user had to pay rental costs at a given time
+#
+/**
+ * Check if an apartment had to pay rental costs at a given time
+ * 
+ * @param int $apartment_number Apartment number to check
+ * @param DateTime $datetime Time and date to check whether the apartment had to pay rental costs
+ * 
+ * @return bool True if the user had to pay rental cost at the given time
+ */
+function had_to_pay_rental_cost_from_apartment_number($apartment_number, $datetime) {
+	# Return array of board deputies
+	return had_to_pay_rental_cost_from_id(id_from_apartment_number($apartment_number), $datetime);
+}
+#
+/**
+ * Check if a username had to pay rental costs at a given time
+ * 
+ * @param string $username Username of the user to check
+ * @param DateTime $datetime Time and date to check whether the apartment had to pay rental costs
+ * 
+ * @return bool True if the user had to pay rental cost at the given time
+ */
+function had_to_pay_rental_cost_from_username($username, $datetime) {
+	# Lists the usernames of all board deputies
+	return had_to_pay_rental_cost_from_id(id_from_username($username), $datetime);
+}
+#
+/**
+ * Gets a list of the user ids of all current board deputies
+ * 
+ * @param int $user_id Id of the user to check
+ * @param DateTime $datetime Time and date to check whether the apartment had to pay rental costs
+ * 
+ * @return bool True if the user had to pay rental cost at the given time
+ */
+function had_to_pay_rental_cost_from_id($user_id, $datetime) {
+	# Lists the usernames of all board deputies
+	return !(!is_apartment_from_id($user_id) || was_boardmember_from_id($user_id, $datetime));
 }
 ############################################################
 

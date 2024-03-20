@@ -89,7 +89,7 @@ if (!empty($_REQUEST['success'])) {
 		<?php if (!$EM_Event->can_manage('edit_recurring_events', 'edit_others_recurring_events') && count(array_filter(wp_get_current_user()->roles, function ($role) { return $role == 'vicevaert'; })) == 0) : ?>
 			<div class="inside event-form-price">
 				<h3 class="event-form-price"><?php pll_e('Price', 'events-manager'); ?></h3>
-				<?php if (!current_user_can('rent_common_house_for_free')) : ?>
+				<?php if (had_to_pay_rental_cost_from_id(wp_get_current_user()->ID, new DateTime('now', new DateTimeZone('Europe/Copenhagen')))) : ?>
 					<span><?php pll_e('Price calculation steps', 'events-manager'); ?></span>
 					<p><?php pll_e('The expected price for the rental is:', 'events-manager'); ?> <span id="event-form-price">
 							<?php
