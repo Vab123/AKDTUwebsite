@@ -89,7 +89,7 @@ if (!empty($_REQUEST['success'])) {
 		<?php if (!$EM_Event->can_manage('edit_recurring_events', 'edit_others_recurring_events') && count(array_filter(wp_get_current_user()->roles, function ($role) { return $role == 'vicevaert'; })) == 0) : ?>
 			<div class="inside event-form-price">
 				<h3 class="event-form-price"><?php pll_e('Price', 'events-manager'); ?></h3>
-				<?php if (in_array(SwpmMembershipLevelUtils::get_membership_level_name_of_a_member(SwpmMemberUtils::get_user_by_user_name(wp_get_current_user()->user_login)->member_id), array('Beboer', 'Midlertidig lejer'))) : ?>
+				<?php if (!current_user_can('rent_common_house_for_free')) : ?>
 					<span><?php pll_e('Price calculation steps', 'events-manager'); ?></span>
 					<p><?php pll_e('The expected price for the rental is:', 'events-manager'); ?> <span id="event-form-price">
 							<?php

@@ -113,7 +113,7 @@ function js_calc_rental_cost_script() {
  */
 function calc_rental_cost($startdatetime, $enddatetime, $owner_id) {
 	# Check if event-owner is not a regular apartment user, or a board member
-	if (!is_apartment_from_id($owner_id) || was_boardmember_from_id($owner_id, $enddatetime)){
+	if (user_can(get_user_by("id", $owner_id), "rent_common_house_for_free")){
 		# Event owner is not a regular apartment user, and should not pay
 		return 0;
 	}
