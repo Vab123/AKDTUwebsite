@@ -243,17 +243,6 @@ add_role(
 	)
 );
 
-$roles_that_can_rent_common_house_for_free = array(
-	'board_member',
-	'administrator',
-	'editor',
-	'vicevaert',
-);
-
-foreach ($roles_that_can_rent_common_house_for_free as $role) {
-	get_role($role)->add_cap('rent_common_house_for_free');
-}
-
 
 /**
  * Remove admin bar from certain user roles
