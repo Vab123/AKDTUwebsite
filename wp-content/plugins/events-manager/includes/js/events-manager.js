@@ -902,37 +902,7 @@ function em_setup_datepicker(wrap){
 		});
 	}
 }
-function update_price(start_date,end_date){
-	// Give dates in DD/MM/YYYY. Function converts
-	if (start_date != "" && end_date != "") {
-		var enddate = new Date(end_date.substring(3,5) + "/"  + end_date.substring(0,2) + "/" + end_date.substring(6,10));
-		var startdate = new Date(start_date.substring(3,5) + "/"  + start_date.substring(0,2) + "/" + start_date.substring(6,10));
 
-		var diff = enddate - startdate;
-		var daysDiff = Math.floor(diff / (1000 * 60 * 60 * 24));
-
-		var price_element = document.getElementById('event-form-price');
-		var month_element = document.getElementById('event-form-price-month');
-
-		if (price_element != null && month_element != null){
-			if (AKDTU_months === undefined) {
-				AKDTU_months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-			}
-			if (daysDiff > 0) {
-				var price = 100 + daysDiff*100;
-				price_element.innerHTML = (AKDTU_price_mark_pre === undefined ? "" : AKDTU_price_mark_pre + " ") + price + (AKDTU_price_mark_post === undefined ? " DKK" : " " + AKDTU_price_mark_post);
-
-				month_after_enddate = (new Date(enddate.getTime()));
-				month_after_enddate.setDate(1);
-				month_after_enddate.setMonth(enddate.getMonth()+1);
-				month_element.innerHTML = AKDTU_months[month_after_enddate.getMonth()];
-			} else {
-				price_element.innerHTML = (AKDTU_price_mark_invalid === undefined ? "INVALID DATES" : AKDTU_price_mark_invalid);
-				month_element.innerHTML = (AKDTU_price_mark_invalid_month === undefined ? "INVALID DATES" : AKDTU_price_mark_invalid_month);
-			}
-		}
-	}
-}
 function em_setup_timepicker(wrap){
 	wrap = jQuery(wrap);
 	var timepicker_options = {

@@ -117,6 +117,8 @@ if (!empty($_REQUEST['success'])) {
 				var AKDTU_price_mark_invalid = "<?php pll_e('Common house rental price, invalid', 'events-manager'); ?>";
 				var AKDTU_months = [<?php pll_e('Month_array', 'events-manager'); ?>];
 				var AKDTU_price_mark_invalid_month = "<?php pll_e('Common house rental price month, invalid', 'events-manager'); ?>";
+
+				<?php echo js_calc_rental_cost_script(); ?>
 			</script>
 		<?php endif; ?>
 
