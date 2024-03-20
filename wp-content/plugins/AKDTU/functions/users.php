@@ -425,6 +425,49 @@ function is_boardmember_from_id($id) {
 
 ############################################################
 #
+# Check if user is currently a board deputy
+#
+/**
+ * Checks if a username belongs to a current board deputy
+ * 
+ * @param string $username Username
+ * 
+ * @return bool True if the username belongs to a current board deputy
+ */
+function is_board_deputy_from_username($username) {
+	# Checks if the username belongs to a board member
+	return SwpmMembershipLevelUtils::get_membership_level_name_by_level_id(SwpmMemberUtils::get_user_by_user_name($username)->membership_level) == "Beboerprofil til bestyrelsessuppleant";
+}
+#
+/**
+ * Checks if an apartment number belongs to a current board deputy
+ * 
+ * @param string $number Apartment number
+ * 
+ * @return bool True if the username belongs to a current board deputy
+ */
+function is_board_deputy_from_apartment_number($number) {
+	# Checks if the apartment number belongs to a board member
+	return is_board_deputy_from_username(username_from_apartment_number($number));
+}
+#
+/**
+ * Checks if a user id belongs to a current board deputy
+ * 
+ * @param int $id User id
+ * 
+ * @return bool True if the user id belongs to a current board deputy
+ */
+function is_board_deputy_from_id($id) {
+	# Checks if the user id belongs to a board member
+	return is_board_deputy_from_username(username_from_id($id));
+}
+############################################################
+
+
+
+############################################################
+#
 # Check if user was a boardmember at a given time
 #
 /**
@@ -502,6 +545,43 @@ function all_boardmember_usernames() {
 function all_boardmember_ids() {
 	# Lists the usernames of all board members
 	return array_map(function($apartment_number) {return id_from_apartment_number($apartment_number);}, all_boardmember_apartments());
+}
+############################################################
+
+
+
+############################################################
+#
+# Get all current board deputies
+#
+/**
+ * Gets a list of the apartment numbers of all current board deputies
+ * 
+ * @return array[int] Array of apartment numbers for all current board deputies
+ */
+function all_board_deputies_apartments() {
+	# Return array of board deputies
+	return array_filter(all_apartments(), function($apartment) {return is_board_deputy_from_apartment_number($apartment);});
+}
+#
+/**
+ * Gets a list of the usernames of all current board deputies
+ * 
+ * @return array[string] Array of usernames for all current board deputies
+ */
+function all_board_deputies_usernames() {
+	# Lists the usernames of all board deputies
+	return array_map(function($apartment_number) {return username_from_apartment_number($apartment_number);}, all_board_deputies_apartments());
+}
+#
+/**
+ * Gets a list of the user ids of all current board deputies
+ * 
+ * @return array[string] Array of user ids for all current board deputies
+ */
+function all_board_deputies_ids() {
+	# Lists the usernames of all board deputies
+	return array_map(function($apartment_number) {return id_from_apartment_number($apartment_number);}, all_board_deputies_apartments());
 }
 ############################################################
 
