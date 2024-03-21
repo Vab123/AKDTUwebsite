@@ -124,8 +124,8 @@ function send_opkrævning_havedag($debug = false) {
 				# Info format for the real email
 				$replaces = array(
 					'#APT' => padded_apartment_number_from_apartment_number($apartment) . (in_array($apartment, $moved_users) ? ' (Tidligere beboer)' : '' ),
-					'#PRICE' => $price,
-					'#BOARDMEMBER' => (is_boardmember_from_apartment_number($apartment) ? HAVEDAG_BOARDMEMBER : '')
+					'#PRICE' => number_format($price, 2, ",", "."),
+					'#BOARDSTATUS' => (is_boardmember_from_apartment_number($apartment) ? HAVEDAG_BOARDMEMBER : '') . (is_board_deputy_from_apartment_number($apartment) ? HAVEDAG_BOARD_DEPUTY : '')
 				);
 
 				# Add info to the real email
@@ -160,7 +160,8 @@ function send_opkrævning_havedag($debug = false) {
 			$real_message_content_replaces = array(
 				'#PAYMENT_INFO' => $payment_info,
 				'#SEASON' => ((new DateTime($events[0]->event_end_date . " " . $events[0]->event_end_time, new DateTimeZone('Europe/Copenhagen')))->format('m') > 6 ? "efterår" : "forår"),
-				'#YEAR' => $year->format(new DateTime($events[0]->event_end_date . " " . $events[0]->event_end_time, new DateTimeZone('Europe/Copenhagen')))
+				'#YEAR' => $year->format(new DateTime($events[0]->event_end_date . " " . $events[0]->event_end_time, new DateTimeZone('Europe/Copenhagen'))),
+				'#LASTSIGNUPDATE' => (new DateTime($latest_signup_date))->format('d-m-Y'),
 			);
 
 			# Replacements for warning email subject

@@ -45,8 +45,7 @@ function send_opkrævning_fælleshus($debug = false) {
 			$final_price = get_final_price($price_to_pay, $price_adjustments);
 
 			# Get moved users
-			$query = $wpdb->prepare('SELECT apartment_number FROM ' . $wpdb->prefix . 'swpm_allowed_membercreation WHERE allow_creation_date >= "' . $mention_moved_users_date . '" AND initial_reset = 1 ORDER BY allow_creation_date ASC, apartment_number ASC');
-			$moved_users = $wpdb->get_col($query);
+			$moved_users = $wpdb->get_col($wpdb->prepare('SELECT apartment_number FROM ' . $wpdb->prefix . 'swpm_allowed_membercreation WHERE allow_creation_date >= "' . $mention_moved_users_date . '" AND initial_reset = 1 ORDER BY allow_creation_date ASC, apartment_number ASC'));
 
 			# Prepare string for payment info
 			$payment_info = '';
@@ -68,7 +67,7 @@ function send_opkrævning_fælleshus($debug = false) {
 						# Replacements for the format of the payment
 						$replaces = array(
 							'#APT' => apartment_number_from_username($username) . (is_archive_user_from_username($username) ? ' (Tidligere beboer)' : (in_array(apartment_number_from_username($username), $moved_users) ? ' (Ny beboer)' : '')),
-							'#PRICE' => $price
+							'#PRICE' => number_format($price, 2, ",", "."),
 						);
 
 						# Append payment info

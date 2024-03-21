@@ -48,9 +48,9 @@ function fælleshus_total_month_widget() {
 					};
 					$row++; ?>>
 					<td><?php echo $monthyear_formatter->format($month_start); ?></td>
-					<td><?php echo (!is_null($price_to_pay) && !empty($price_to_pay) ? array_sum($price_to_pay) : 0); ?> kr.</td>
-					<td><?php echo (!is_null($price_adjustments) && !empty($price_adjustments) ? array_sum($price_adjustments) : 0); ?> kr.</td>
-					<td><?php echo (!is_null($final_price) && !empty($final_price) ? array_sum($price_to_pay) + array_sum($price_adjustments) : 0); ?> kr.</td>
+					<td><?php echo number_format((!is_null($price_to_pay) && !empty($price_to_pay) ? array_sum($price_to_pay) : 0), 2, ",", "."); ?> kr.</td>
+					<td><?php echo number_format((!is_null($price_adjustments) && !empty($price_adjustments) ? array_sum($price_adjustments) : 0), 2, ",", "."); ?> kr.</td>
+					<td><?php echo number_format((!is_null($final_price) && !empty($final_price) ? array_sum($price_to_pay) + array_sum($price_adjustments) : 0), 2, ",", "."); ?> kr.</td>
 				</tr>
 			<?php endfor; ?>
 		</tbody>
