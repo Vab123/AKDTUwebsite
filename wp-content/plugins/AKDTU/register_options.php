@@ -2087,7 +2087,7 @@ $AKDTU_OPTIONS = array(
 								"type" => "text",
 								"style" => "width: 600px",
 								"comments" => array(
-									"Antallet af dage efter sidste havedag, hvor der skal sendes en opkrævningsmail. Minimum er <code>1</code>. Skriv <code>-1</code> for ikke at sende nogen mail",
+									"Antallet af dage efter sidste havedag, hvor der skal sendes en opkrævningsmail. Minimum er <code>0</code>. Skriv <code>-1</code> for ikke at sende nogen mail",
 								),
 							),
 							array(
@@ -2168,6 +2168,7 @@ $AKDTU_OPTIONS = array(
 									"<code>#PAYMENT_INFO</code> erstattes med info omkring hvem der skal betale for ikke at have mødt op til havedagene. Formatet for dette kan rettes nedenunder.",
 									"<code>#SEASON</code> erstattes med <code>forår</code> eller <code>efterår</code>.",
 									"<code>#YEAR</code> erstattes med år.",
+									"<code>#LASTSIGNUPDATE</code> erstattes med datoen for sidste tilmelding, som også er den dato der bestemmer om den tidligere eller nye beboer skal betale ved manglende deltagelse i forbindelse med en flytning."
 								),
 							),
 							array(
@@ -2180,7 +2181,7 @@ $AKDTU_OPTIONS = array(
 									"Dette gentages for hver lejlighed, der skal opkræves for manglende deltagelse i den seneste havedag, med linjeskift mellem.",
 									"<code>#APT</code> erstattes med lejlighedsnummer. Hvis der efter deadline for tilmelding til havedagen er flyttet en ny beboer ind står dette også herefter som <code>(Tidligere beboer)</code>.",
 									"<code>#PRICE</code> erstattes med pris.",
-									"<code>#BOARDMEMBER</code> erstattes med hvad der er skrevet nedenunder, hvis lejligheden tilhører et bestyrelsesmedlem.",
+									"<code>#BOARDSTATUS</code> erstattes med hvad der er skrevet nedenunder, hvis lejligheden tilhører et bestyrelsesmedlem eller en bestyrelsessuppleant.",
 								),
 							),
 							array(
@@ -2190,7 +2191,17 @@ $AKDTU_OPTIONS = array(
 								"type" => "text",
 								"style" => "width: 600px;",
 								"comments" => array(
-									"Dette er hvad <code>#BOARDMEMBER</code> erstattes med i ovenstående format for info om betaling."
+									"Dette er hvad <code>#BOARDSTATUS</code> erstattes med i ovenstående format for info om betaling, hvis brugeren er et bestyrelsesmedlem."
+								),
+							),
+							array(
+								"headline" => "Format for bestyrelsessuppleanter",
+								"name" => "AKDTU_HAVEDAG_BOARD_DEPUTY",
+								"tag" => "input",
+								"type" => "text",
+								"style" => "width: 600px;",
+								"comments" => array(
+									"Dette er hvad <code>#BOARDSTATUS</code> erstattes med i ovenstående format for info om betaling, hvis brugeren er en bestyrelsessuppleant."
 								),
 							),
 						),
@@ -2205,7 +2216,7 @@ $AKDTU_OPTIONS = array(
 								"type" => "text",
 								"style" => "width: 600px",
 								"comments" => array(
-									"Antallet af dage efter sidste havedag, hvor der skal sendes en opkrævningsmail. Minimum er <code>1</code>. Skriv <code>-1</code> for ikke at sende nogen mail",
+									"Antallet af dage før afsendelsen af den rigtige mail (defineret ovenover), hvor der skal sendes en opkrævningsmail. Minimum er <code>0</code>. Skriv <code>-1</code> for ikke at sende nogen mail",
 								),
 							),
 							array(
