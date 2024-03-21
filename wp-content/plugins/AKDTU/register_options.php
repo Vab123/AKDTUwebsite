@@ -150,6 +150,262 @@ $AKDTU_OPTIONS = array(
 			),
 		),
 	),
+	"havedag.php" => array(
+		"page-title" => "Mail: Havedag opkrævning",
+		"menu-title" => "Mail: Havedag opkrævning",
+		"menu-slug" => "akdtu-plugin-havedag-opkrævning-settings",
+		"function" => "AKDTU_havedag_opkrævning_mail_settings",
+		"default-tab" => "settings",
+		"h1" => "Mailindstillinger",
+		"h2" => "Mail der sendes med opkrævninger for manglende deltagelse på havedage",
+		"tabs" => array(
+			"settings" => array(
+				"save-success-message" => "Indstillingerne blev gemt",
+				"tab-title" => "Indstillinger",
+				"tab-type" => "settings",
+				"save-action" => "AKDTU_save_havedag_mail_settings",
+				"save-button-text" => "Gem (Alt)",
+				"settings" => array(
+					"group1" => array(
+						"h3" => "Opkrævningsmail",
+						"content" => array(
+							array(
+								"headline" => "Afsendelsestidspunkt",
+								"name" => "AKDTU_HAVEDAG_DAYS",
+								"tag" => "input",
+								"type" => "text",
+								"style" => "width: 600px",
+								"comments" => array(
+									"Antallet af dage efter sidste havedag, hvor der skal sendes en opkrævningsmail. Minimum er <code>0</code>. Skriv <code>-1</code> for ikke at sende nogen mail",
+								),
+							),
+							array(
+								"headline" => "Modtager adresse",
+								"name" => "AKDTU_HAVEDAG_TO",
+								"tag" => "input",
+								"type" => "text",
+								"style" => "width: 600px",
+								"comments" => array(
+									"Efterlad tom for <code>AKDTU &#60;hjemmeside@akdtu.dk&#62;</code>",
+									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
+								),
+							),
+							array(
+								"headline" => "Afsender adresse",
+								"name" => "AKDTU_HAVEDAG_FROM",
+								"tag" => "input",
+								"type" => "text",
+								"style" => "width: 600px",
+								"comments" => array(
+									"Efterlad tom for <code>AKDTU &#60;hjemmeside@akdtu.dk&#62;</code>",
+									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
+								),
+							),
+							array(
+								"headline" => "Cc adresse",
+								"name" => "AKDTU_HAVEDAG_CC",
+								"tag" => "input",
+								"type" => "text",
+								"style" => "width: 600px",
+								"comments" => array(
+									"Efterlad tom for ikke at sætte nogen cc",
+									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
+								),
+							),
+							array(
+								"headline" => "Svaradresse",
+								"name" => "AKDTU_HAVEDAG_REPLYTO",
+								"tag" => "input",
+								"type" => "text",
+								"style" => "width: 600px",
+								"comments" => array(
+									"Efterlad tom for ikke at sætte nogen svaradresse",
+									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
+								),
+							),
+							array(
+								"headline" => "Emne",
+								"name" => "AKDTU_HAVEDAG_SUBJECT",
+								"tag" => "input",
+								"type" => "text",
+								"style" => "width: 600px",
+								"comments" => array(
+									"<code>#SEASON</code> erstattes med <code>forår</code> eller <code>efterår</code>.",
+									"<code>#YEAR</code> erstattes med året.",
+								),
+							),
+							array(
+								"headline" => "Vedhæftede filer",
+								"name" => "AKDTU_HAVEDAG_ATTACHMENTS",
+								"tag" => "input",
+								"type" => "text",
+								"style" => "width: 600px;",
+								"comments" => array(
+									"Skal være relativt til <code>" . website_root_folder() . "</code>. Skal starte med <code>/</code>",
+									"Flere vedhæftede filer adskilles med <code>,</code>",
+								),
+							),
+							array(
+								"headline" => "Mail indhold",
+								"name" => "AKDTU_HAVEDAG_MAILCONTENT",
+								"tag" => "textarea",
+								"type" => "text",
+								"rows" => 10,
+								"cols" => 'auto',
+								"style" => "width: 600px;",
+								"comments" => array(
+									"<code>#PAYMENT_INFO</code> erstattes med info omkring hvem der skal betale for ikke at have mødt op til havedagene. Formatet for dette kan rettes nedenunder.",
+									"<code>#SEASON</code> erstattes med <code>forår</code> eller <code>efterår</code>.",
+									"<code>#YEAR</code> erstattes med år.",
+									"<code>#LASTSIGNUPDATE</code> erstattes med datoen for sidste tilmelding, som også er den dato der bestemmer om den tidligere eller nye beboer skal betale ved manglende deltagelse i forbindelse med en flytning."
+								),
+							),
+							array(
+								"headline" => "Format for info om betaling",
+								"name" => "AKDTU_HAVEDAG_FORMAT",
+								"tag" => "input",
+								"type" => "text",
+								"style" => "width: 600px;",
+								"comments" => array(
+									"Dette gentages for hver lejlighed, der skal opkræves for manglende deltagelse i den seneste havedag, med linjeskift mellem.",
+									"<code>#APT</code> erstattes med lejlighedsnummer. Hvis der efter deadline for tilmelding til havedagen er flyttet en ny beboer ind står dette også herefter som <code>(Tidligere beboer)</code>.",
+									"<code>#PRICE</code> erstattes med pris.",
+									"<code>#BOARDSTATUS</code> erstattes med hvad der er skrevet nedenunder, hvis lejligheden tilhører et bestyrelsesmedlem eller en bestyrelsessuppleant.",
+								),
+							),
+							array(
+								"headline" => "Format for bestyrelsesmedlemmer",
+								"name" => "AKDTU_HAVEDAG_BOARDMEMBER",
+								"tag" => "input",
+								"type" => "text",
+								"style" => "width: 600px;",
+								"comments" => array(
+									"Dette er hvad <code>#BOARDSTATUS</code> erstattes med i ovenstående format for info om betaling, hvis brugeren er et bestyrelsesmedlem."
+								),
+							),
+							array(
+								"headline" => "Format for bestyrelsessuppleanter",
+								"name" => "AKDTU_HAVEDAG_BOARD_DEPUTY",
+								"tag" => "input",
+								"type" => "text",
+								"style" => "width: 600px;",
+								"comments" => array(
+									"Dette er hvad <code>#BOARDSTATUS</code> erstattes med i ovenstående format for info om betaling, hvis brugeren er en bestyrelsessuppleant."
+								),
+							),
+						),
+					),
+					"group2" => array(
+						"h3" => "Varselsmail",
+						"content" => array(
+							array(
+								"headline" => "Afsendelsestidspunkt",
+								"name" => "AKDTU_HAVEDAG_WARNING_DAYS",
+								"tag" => "input",
+								"type" => "text",
+								"style" => "width: 600px",
+								"comments" => array(
+									"Antallet af dage før afsendelsen af den rigtige mail (defineret ovenover), hvor der skal sendes en opkrævningsmail. Minimum er <code>0</code>. Skriv <code>-1</code> for ikke at sende nogen mail",
+								),
+							),
+							array(
+								"headline" => "Modtager adresse",
+								"name" => "AKDTU_HAVEDAG_WARNING_TO",
+								"tag" => "input",
+								"type" => "text",
+								"style" => "width: 600px",
+								"comments" => array(
+									"Efterlad tom for <code>AKDTU &#60;hjemmeside@akdtu.dk&#62;</code>",
+									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
+								),
+							),
+							array(
+								"headline" => "Afsender adresse",
+								"name" => "AKDTU_HAVEDAG_WARNING_FROM",
+								"tag" => "input",
+								"type" => "text",
+								"style" => "width: 600px",
+								"comments" => array(
+									"Efterlad tom for <code>AKDTU &#60;hjemmeside@akdtu.dk&#62;</code>",
+									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
+								),
+							),
+							array(
+								"headline" => "Cc adresse",
+								"name" => "AKDTU_HAVEDAG_WARNING_CC",
+								"tag" => "input",
+								"type" => "text",
+								"style" => "width: 600px",
+								"comments" => array(
+									"Efterlad tom for ikke at sætte nogen cc",
+									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
+								),
+							),
+							array(
+								"headline" => "Svaradresse",
+								"name" => "AKDTU_HAVEDAG_WARNING_REPLYTO",
+								"tag" => "input",
+								"type" => "text",
+								"style" => "width: 600px",
+								"comments" => array(
+									"Efterlad tom for ikke at sætte nogen svaradresse",
+									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
+								),
+							),
+							array(
+								"headline" => "Emne",
+								"name" => "AKDTU_HAVEDAG_WARNING_SUBJECT",
+								"tag" => "input",
+								"type" => "text",
+								"style" => "width: 600px",
+								"comments" => array(
+									"<code>#SEASON</code> erstattes med <code>forår</code> eller <code>efterår</code>.",
+									"<code>#YEAR</code> erstattes med året.",
+									"<code>#DAYS</code> erstattes med antallet af dage mellem afsending af denne varselsmail og afsendelse af den rigtige opkrævningsmail",
+								),
+							),
+							array(
+								"headline" => "Vedhæftede filer",
+								"name" => "AKDTU_HAVEDAG_WARNING_ATTACHMENTS",
+								"tag" => "input",
+								"type" => "text",
+								"style" => "width: 600px;",
+								"comments" => array(
+									"Skal være relativt til <code>" . website_root_folder() . "</code>. Skal starte med <code>/</code>",
+									"Flere vedhæftede filer adskilles med <code>,</code>",
+								),
+							),
+							array(
+								"headline" => "Mail indhold",
+								"name" => "AKDTU_HAVEDAG_WARNING_MAILCONTENT",
+								"tag" => "textarea",
+								"type" => "text",
+								"rows" => 10,
+								"cols" => 'auto',
+								"style" => "width: 600px;",
+								"comments" => array(
+									"<code>#SEASON</code> erstattes med <code>forår</code> eller <code>efterår</code>.",
+									"<code>#YEAR</code> erstattes med år.",
+									"<code>#DAYS</code> erstattes med antallet af dage mellem afsending af denne varselsmail og afsendelse af den rigtige opkrævningsmail",
+									"<code>#REALMESSAGECONTENT</code> erstattes med indholdet af den rigtige opkrævningsmail, som defineret ovenover.",
+								),
+							),
+						),
+					),
+				),
+			),
+			"test" => array(
+				"tab-title" => "Afprøv",
+				"tab-type" => "test",
+				"includes" => array(
+					
+				),
+				"function-calls" => array(
+					"send_opkrævning_havedag(true);",
+				)
+			),
+		),
+	),
 	"fælleshus-internet.php" => array(
 		"page-title" => "Mail: Fælleshus internet",
 		"menu-title" => "Mail: Fælleshus internet",
@@ -2057,262 +2313,6 @@ $AKDTU_OPTIONS = array(
 				),
 				"function-calls" => array(
 					"test_leje_af_fælleshus_bestyrelse_besluttet_mail();",
-				)
-			),
-		),
-	),
-	"havedag.php" => array(
-		"page-title" => "Mail: Havedag opkrævning",
-		"menu-title" => "Mail: Havedag opkrævning",
-		"menu-slug" => "akdtu-plugin-havedag-opkrævning-settings",
-		"function" => "AKDTU_havedag_opkrævning_mail_settings",
-		"default-tab" => "settings",
-		"h1" => "Mailindstillinger",
-		"h2" => "Mail der sendes med opkrævninger for manglende deltagelse på havedage",
-		"tabs" => array(
-			"settings" => array(
-				"save-success-message" => "Indstillingerne blev gemt",
-				"tab-title" => "Indstillinger",
-				"tab-type" => "settings",
-				"save-action" => "AKDTU_save_havedag_mail_settings",
-				"save-button-text" => "Gem (Alt)",
-				"settings" => array(
-					"group1" => array(
-						"h3" => "Opkrævningsmail",
-						"content" => array(
-							array(
-								"headline" => "Afsendelsestidspunkt",
-								"name" => "AKDTU_HAVEDAG_DAYS",
-								"tag" => "input",
-								"type" => "text",
-								"style" => "width: 600px",
-								"comments" => array(
-									"Antallet af dage efter sidste havedag, hvor der skal sendes en opkrævningsmail. Minimum er <code>0</code>. Skriv <code>-1</code> for ikke at sende nogen mail",
-								),
-							),
-							array(
-								"headline" => "Modtager adresse",
-								"name" => "AKDTU_HAVEDAG_TO",
-								"tag" => "input",
-								"type" => "text",
-								"style" => "width: 600px",
-								"comments" => array(
-									"Efterlad tom for <code>AKDTU &#60;hjemmeside@akdtu.dk&#62;</code>",
-									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
-								),
-							),
-							array(
-								"headline" => "Afsender adresse",
-								"name" => "AKDTU_HAVEDAG_FROM",
-								"tag" => "input",
-								"type" => "text",
-								"style" => "width: 600px",
-								"comments" => array(
-									"Efterlad tom for <code>AKDTU &#60;hjemmeside@akdtu.dk&#62;</code>",
-									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
-								),
-							),
-							array(
-								"headline" => "Cc adresse",
-								"name" => "AKDTU_HAVEDAG_CC",
-								"tag" => "input",
-								"type" => "text",
-								"style" => "width: 600px",
-								"comments" => array(
-									"Efterlad tom for ikke at sætte nogen cc",
-									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
-								),
-							),
-							array(
-								"headline" => "Svaradresse",
-								"name" => "AKDTU_HAVEDAG_REPLYTO",
-								"tag" => "input",
-								"type" => "text",
-								"style" => "width: 600px",
-								"comments" => array(
-									"Efterlad tom for ikke at sætte nogen svaradresse",
-									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
-								),
-							),
-							array(
-								"headline" => "Emne",
-								"name" => "AKDTU_HAVEDAG_SUBJECT",
-								"tag" => "input",
-								"type" => "text",
-								"style" => "width: 600px",
-								"comments" => array(
-									"<code>#SEASON</code> erstattes med <code>forår</code> eller <code>efterår</code>.",
-									"<code>#YEAR</code> erstattes med året.",
-								),
-							),
-							array(
-								"headline" => "Vedhæftede filer",
-								"name" => "AKDTU_HAVEDAG_ATTACHMENTS",
-								"tag" => "input",
-								"type" => "text",
-								"style" => "width: 600px;",
-								"comments" => array(
-									"Skal være relativt til <code>" . website_root_folder() . "</code>. Skal starte med <code>/</code>",
-									"Flere vedhæftede filer adskilles med <code>,</code>",
-								),
-							),
-							array(
-								"headline" => "Mail indhold",
-								"name" => "AKDTU_HAVEDAG_MAILCONTENT",
-								"tag" => "textarea",
-								"type" => "text",
-								"rows" => 10,
-								"cols" => 'auto',
-								"style" => "width: 600px;",
-								"comments" => array(
-									"<code>#PAYMENT_INFO</code> erstattes med info omkring hvem der skal betale for ikke at have mødt op til havedagene. Formatet for dette kan rettes nedenunder.",
-									"<code>#SEASON</code> erstattes med <code>forår</code> eller <code>efterår</code>.",
-									"<code>#YEAR</code> erstattes med år.",
-									"<code>#LASTSIGNUPDATE</code> erstattes med datoen for sidste tilmelding, som også er den dato der bestemmer om den tidligere eller nye beboer skal betale ved manglende deltagelse i forbindelse med en flytning."
-								),
-							),
-							array(
-								"headline" => "Format for info om betaling",
-								"name" => "AKDTU_HAVEDAG_FORMAT",
-								"tag" => "input",
-								"type" => "text",
-								"style" => "width: 600px;",
-								"comments" => array(
-									"Dette gentages for hver lejlighed, der skal opkræves for manglende deltagelse i den seneste havedag, med linjeskift mellem.",
-									"<code>#APT</code> erstattes med lejlighedsnummer. Hvis der efter deadline for tilmelding til havedagen er flyttet en ny beboer ind står dette også herefter som <code>(Tidligere beboer)</code>.",
-									"<code>#PRICE</code> erstattes med pris.",
-									"<code>#BOARDSTATUS</code> erstattes med hvad der er skrevet nedenunder, hvis lejligheden tilhører et bestyrelsesmedlem eller en bestyrelsessuppleant.",
-								),
-							),
-							array(
-								"headline" => "Format for bestyrelsesmedlemmer",
-								"name" => "AKDTU_HAVEDAG_BOARDMEMBER",
-								"tag" => "input",
-								"type" => "text",
-								"style" => "width: 600px;",
-								"comments" => array(
-									"Dette er hvad <code>#BOARDSTATUS</code> erstattes med i ovenstående format for info om betaling, hvis brugeren er et bestyrelsesmedlem."
-								),
-							),
-							array(
-								"headline" => "Format for bestyrelsessuppleanter",
-								"name" => "AKDTU_HAVEDAG_BOARD_DEPUTY",
-								"tag" => "input",
-								"type" => "text",
-								"style" => "width: 600px;",
-								"comments" => array(
-									"Dette er hvad <code>#BOARDSTATUS</code> erstattes med i ovenstående format for info om betaling, hvis brugeren er en bestyrelsessuppleant."
-								),
-							),
-						),
-					),
-					"group2" => array(
-						"h3" => "Varselsmail",
-						"content" => array(
-							array(
-								"headline" => "Afsendelsestidspunkt",
-								"name" => "AKDTU_HAVEDAG_WARNING_DAYS",
-								"tag" => "input",
-								"type" => "text",
-								"style" => "width: 600px",
-								"comments" => array(
-									"Antallet af dage før afsendelsen af den rigtige mail (defineret ovenover), hvor der skal sendes en opkrævningsmail. Minimum er <code>0</code>. Skriv <code>-1</code> for ikke at sende nogen mail",
-								),
-							),
-							array(
-								"headline" => "Modtager adresse",
-								"name" => "AKDTU_HAVEDAG_WARNING_TO",
-								"tag" => "input",
-								"type" => "text",
-								"style" => "width: 600px",
-								"comments" => array(
-									"Efterlad tom for <code>AKDTU &#60;hjemmeside@akdtu.dk&#62;</code>",
-									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
-								),
-							),
-							array(
-								"headline" => "Afsender adresse",
-								"name" => "AKDTU_HAVEDAG_WARNING_FROM",
-								"tag" => "input",
-								"type" => "text",
-								"style" => "width: 600px",
-								"comments" => array(
-									"Efterlad tom for <code>AKDTU &#60;hjemmeside@akdtu.dk&#62;</code>",
-									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
-								),
-							),
-							array(
-								"headline" => "Cc adresse",
-								"name" => "AKDTU_HAVEDAG_WARNING_CC",
-								"tag" => "input",
-								"type" => "text",
-								"style" => "width: 600px",
-								"comments" => array(
-									"Efterlad tom for ikke at sætte nogen cc",
-									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
-								),
-							),
-							array(
-								"headline" => "Svaradresse",
-								"name" => "AKDTU_HAVEDAG_WARNING_REPLYTO",
-								"tag" => "input",
-								"type" => "text",
-								"style" => "width: 600px",
-								"comments" => array(
-									"Efterlad tom for ikke at sætte nogen svaradresse",
-									"Kan skrives ind som <code>Bestyrelsen &#60;bestyrelsen@akdtu.dk&#62;</code> eller <code>bestyrelsen@akdtu.dk</code>",
-								),
-							),
-							array(
-								"headline" => "Emne",
-								"name" => "AKDTU_HAVEDAG_WARNING_SUBJECT",
-								"tag" => "input",
-								"type" => "text",
-								"style" => "width: 600px",
-								"comments" => array(
-									"<code>#SEASON</code> erstattes med <code>forår</code> eller <code>efterår</code>.",
-									"<code>#YEAR</code> erstattes med året.",
-									"<code>#DAYS</code> erstattes med antallet af dage mellem afsending af denne varselsmail og afsendelse af den rigtige opkrævningsmail",
-								),
-							),
-							array(
-								"headline" => "Vedhæftede filer",
-								"name" => "AKDTU_HAVEDAG_WARNING_ATTACHMENTS",
-								"tag" => "input",
-								"type" => "text",
-								"style" => "width: 600px;",
-								"comments" => array(
-									"Skal være relativt til <code>" . website_root_folder() . "</code>. Skal starte med <code>/</code>",
-									"Flere vedhæftede filer adskilles med <code>,</code>",
-								),
-							),
-							array(
-								"headline" => "Mail indhold",
-								"name" => "AKDTU_HAVEDAG_WARNING_MAILCONTENT",
-								"tag" => "textarea",
-								"type" => "text",
-								"rows" => 10,
-								"cols" => 'auto',
-								"style" => "width: 600px;",
-								"comments" => array(
-									"<code>#SEASON</code> erstattes med <code>forår</code> eller <code>efterår</code>.",
-									"<code>#YEAR</code> erstattes med år.",
-									"<code>#DAYS</code> erstattes med antallet af dage mellem afsending af denne varselsmail og afsendelse af den rigtige opkrævningsmail",
-									"<code>#REALMESSAGECONTENT</code> erstattes med indholdet af den rigtige opkrævningsmail, som defineret ovenover.",
-								),
-							),
-						),
-					),
-				),
-			),
-			"test" => array(
-				"tab-title" => "Afprøv",
-				"tab-type" => "test",
-				"includes" => array(
-					
-				),
-				"function-calls" => array(
-					"send_opkrævning_havedag(true);",
 				)
 			),
 		),
