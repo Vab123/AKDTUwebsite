@@ -14,9 +14,6 @@ function send_opkrævning_havedag($debug = false) {
 	if (HAVEDAG_TO != '' || HAVEDAG_WARNING_TO != '' || $debug) {
 		global $wpdb;
 
-		# Price for not showing up to a garden day
-		$price = 750;
-
 		# Prepare strings for payment info
 		$payment_info = "";
 
@@ -28,34 +25,20 @@ function send_opkrævning_havedag($debug = false) {
 		$year = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen');
 		$year->setPattern('YYYY');
 
-		# Settings for lookup for garden days
-		$scope = ($debug ? 'future' : 'past');
-		$search_limit = 20;
-		$offset = 0;
-		$order = ($debug ? 'ASC' : 'DESC');
-		$owner = false;
-	
-		# Get past or future garden days
-		$events = array_filter(EM_Events::get(array('scope' => $scope, 'limit' => $search_limit, 'offset' => $offset, 'order' => $order, 'orderby' => 'event_start', 'bookings' => true, 'owner' => $owner, 'pagination' => 0)), function ($event) {
-			return pll_get_post_language($event->post_id, "slug") == "da";
-		});
+		$gardendays = next_gardenday('da', 1);
 		
 		# Check if this is a test-run, and no future garden days were found. Revert to using the past garden day
-		if ($debug && count($events) == 0) {
+		if ($debug && is_null($gardendays)) {
 			# Debug is on, but no future events was found. Go back to past events
-			$scope = 'past';
-			$order = 'DESC';
-	
-			# Get past garden days
-			$events = array_filter(EM_Events::get(array('scope' => $scope, 'limit' => $search_limit, 'offset' => $offset, 'order' => $order, 'orderby' => 'event_start', 'bookings' => true, 'owner' => $owner, 'pagination' => 0)), function ($event) {
-				return pll_get_post_language($event->post_id, "slug") == "da";
-			});
+			$gardendays = previous_gardenday('da', 1);
 		}
 	
 		# Check if a garden day was found
-		if (count($events) > 0) {
+		if (!is_null($gardendays)) {
+			$gardenday = $gardendays['da'];
+
 			# Get all translations of the event
-			$translations = pll_get_post_translations($events[0]->post_id);
+			$translations = pll_get_post_translations($gardenday->post_id);
 
 			# Prepare array for all tickets for garden days
 			$tickets = array();
@@ -90,7 +73,7 @@ function send_opkrævning_havedag($debug = false) {
 			}
 
 			# Get array of arrays of signups to each garden day
-			$res = $wpdb->get_col('SELECT showed_up FROM wp_em_tilmeldinger WHERE event_id = ' . $events[0]->event_id);
+			$res = $wpdb->get_col('SELECT showed_up FROM wp_em_tilmeldinger WHERE event_id = ' . $gardenday->event_id);
 			$res = array_map(function ($a) {
 				return json_decode($a);
 			}, $res);
@@ -124,7 +107,7 @@ function send_opkrævning_havedag($debug = false) {
 				# Info format for the real email
 				$replaces = array(
 					'#APT' => padded_apartment_number_from_apartment_number($apartment) . (in_array($apartment, $moved_users) ? ' (Tidligere beboer)' : '' ),
-					'#PRICE' => number_format($price, 2, ",", "."),
+					'#PRICE' => number_format(gardenday_price($apartment), 2, ",", "."),
 					'#BOARDSTATUS' => (is_boardmember_from_apartment_number($apartment) ? HAVEDAG_BOARDMEMBER : '') . (is_board_deputy_from_apartment_number($apartment) ? HAVEDAG_BOARD_DEPUTY : '')
 				);
 
@@ -144,7 +127,7 @@ function send_opkrævning_havedag($debug = false) {
 			$now = new DateTime;
 
 			# End-time of the last garden day
-			$ago = new DateTime($events[0]->event_end_date . " 00:00:00", new DateTimeZone('Europe/Copenhagen'));
+			$ago = new DateTime($gardenday->event_end_date . " 00:00:00", new DateTimeZone('Europe/Copenhagen'));
 
 			# Time difference between now and the end-time of the last garden day
 			$diff = $now->diff($ago);
@@ -152,29 +135,29 @@ function send_opkrævning_havedag($debug = false) {
 
 			# Replacements for real email subject
 			$real_message_subject_replaces = array(
-				'#SEASON' => ((new DateTime($events[0]->event_end_date . " " . $events[0]->event_end_time, new DateTimeZone('Europe/Copenhagen')))->format('m') > 6 ? "efterår" : "forår"),
-				'#YEAR' => $year->format(new DateTime($events[0]->event_end_date . " " . $events[0]->event_end_time, new DateTimeZone('Europe/Copenhagen')))
+				'#SEASON' => ((new DateTime($gardenday->event_end_date . " " . $gardenday->event_end_time, new DateTimeZone('Europe/Copenhagen')))->format('m') > 6 ? "efterår" : "forår"),
+				'#YEAR' => $year->format(new DateTime($gardenday->event_end_date . " " . $gardenday->event_end_time, new DateTimeZone('Europe/Copenhagen')))
 			);
 
 			# Replacements for real email content
 			$real_message_content_replaces = array(
 				'#PAYMENT_INFO' => $payment_info,
-				'#SEASON' => ((new DateTime($events[0]->event_end_date . " " . $events[0]->event_end_time, new DateTimeZone('Europe/Copenhagen')))->format('m') > 6 ? "efterår" : "forår"),
-				'#YEAR' => $year->format(new DateTime($events[0]->event_end_date . " " . $events[0]->event_end_time, new DateTimeZone('Europe/Copenhagen'))),
+				'#SEASON' => ((new DateTime($gardenday->event_end_date . " " . $gardenday->event_end_time, new DateTimeZone('Europe/Copenhagen')))->format('m') > 6 ? "efterår" : "forår"),
+				'#YEAR' => $year->format(new DateTime($gardenday->event_end_date . " " . $gardenday->event_end_time, new DateTimeZone('Europe/Copenhagen'))),
 				'#LASTSIGNUPDATE' => (new DateTime($latest_signup_date))->format('d-m-Y'),
 			);
 
 			# Replacements for warning email subject
 			$warning_message_subject_replaces = array(
-				'#SEASON' => ((new DateTime($events[0]->event_end_date . " " . $events[0]->event_end_time, new DateTimeZone('Europe/Copenhagen')))->format('m') > 6 ? "efterår" : "forår"),
-				'#YEAR' => $year->format(new DateTime($events[0]->event_end_date . " " . $events[0]->event_end_time, new DateTimeZone('Europe/Copenhagen'))),
+				'#SEASON' => ((new DateTime($gardenday->event_end_date . " " . $gardenday->event_end_time, new DateTimeZone('Europe/Copenhagen')))->format('m') > 6 ? "efterår" : "forår"),
+				'#YEAR' => $year->format(new DateTime($gardenday->event_end_date . " " . $gardenday->event_end_time, new DateTimeZone('Europe/Copenhagen'))),
 				'#DAYS' => HAVEDAG_WARNING_DAYS,
 			);
 	
 			# Replacements for warning email content
 			$warning_message_content_replaces = array(
-				'#SEASON' => ((new DateTime($events[0]->event_end_date . " " . $events[0]->event_end_time, new DateTimeZone('Europe/Copenhagen')))->format('m') > 6 ? "efterår" : "forår"),
-				'#YEAR' => $year->format(new DateTime($events[0]->event_end_date . " " . $events[0]->event_end_time, new DateTimeZone('Europe/Copenhagen'))),
+				'#SEASON' => ((new DateTime($gardenday->event_end_date . " " . $gardenday->event_end_time, new DateTimeZone('Europe/Copenhagen')))->format('m') > 6 ? "efterår" : "forår"),
+				'#YEAR' => $year->format(new DateTime($gardenday->event_end_date . " " . $gardenday->event_end_time, new DateTimeZone('Europe/Copenhagen'))),
 				'#DAYS' => HAVEDAG_WARNING_DAYS,
 				'#REALMESSAGECONTENT' => AKDTU_email_content($real_message_content_replaces, 'HAVEDAG'),
 			);
@@ -204,7 +187,7 @@ function send_opkrævning_havedag($debug = false) {
 					);
 
 					# Remove all events from menus
-					foreach (pll_get_post_translations($events[0]->post_id) as $language_code => $post_id) {
+					foreach (pll_get_post_translations($gardenday->post_id) as $language_code => $post_id) {
 						# Get the relevant menu
 						$menu = wp_get_nav_menu_object( $menu_names[$language_code] );
 

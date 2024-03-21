@@ -268,13 +268,12 @@ function em_bookings_print_event() {
 	<hr>
 	<h2>Opkrævning:</h2>
 	<?php
-		$price = 750;
 		foreach (all_apartments() as $apartment) {
 			if (in_array($apartment, $showed_up_users)) {
 				# Apartment showed up as they were supposed to. No charge
 			} elseif(in_array($apartment, $not_showed_up_users)) {
 				# Apartment was signed up, but did not show. Charge
-				echo '<b>Lejlighed ' . padded_apartment_number_from_apartment_number($apartment) . (in_array($apartment, $moved_users) ? ' (Tidligere beboer)' : '') . '</b>: ' . $price . ',00 kr';
+				echo '<b>Lejlighed ' . padded_apartment_number_from_apartment_number($apartment) . (in_array($apartment, $moved_users) ? ' (Tidligere beboer)' : '') . '</b>: ' . number_format(gardenday_price($apartment), 2, ",", ".") . ' kr';
 
 				if (is_boardmember_from_apartment_number($apartment)) {
 					# Make board members clearer to see
@@ -284,7 +283,7 @@ function em_bookings_print_event() {
 				echo '<br>';
 			} else {
 				# Apartment was not signed up. Charge
-				echo '<b>Lejlighed ' . padded_apartment_number_from_apartment_number($apartment) . (in_array($apartment, $moved_users) ? ' (Tidligere beboer)' : '') . '</b>: ' . $price . ',00 kr';
+				echo '<b>Lejlighed ' . padded_apartment_number_from_apartment_number($apartment) . (in_array($apartment, $moved_users) ? ' (Tidligere beboer)' : '') . '</b>: ' . number_format(gardenday_price($apartment), 2, ",", ".") . ' kr';
 
 				if (is_boardmember_from_apartment_number($apartment)) {
 					# Make board members clearer to see

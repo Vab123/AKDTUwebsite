@@ -8,6 +8,7 @@ $AKDTU_FUNCTIONS = array(
 	"delete_users.php",
 	"fælleshus.php",
 	"fælleshus_internet.php",
+	"havedag.php",
 	"notice.php",
 	"render_options_page.php",
 	"send_mail.php",
