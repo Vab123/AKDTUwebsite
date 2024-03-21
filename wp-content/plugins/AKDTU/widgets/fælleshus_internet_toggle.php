@@ -9,16 +9,26 @@ function fælleshus_internet_dashboard_widget() {
 
 	$now = (new DateTime('now', new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s');
 
-	$event_ids = $wpdb->get_col('SELECT event_id FROM ' . EM_EVENTS_TABLE . ' WHERE event_start <= "' . $now . '" AND event_end >= "' . $now . '" AND event_status = 1');
+	$events = $wpdb->get_col('SELECT event_id FROM ' . EM_EVENTS_TABLE . ' WHERE event_start <= "' . $now . '" AND event_end >= "' . $now . '" AND event_status = 1');
 
-	if (count($event_ids) > 0) {
-		$event_owners = array_map(function ($event_id) {
-			return (is_apartment_from_id(em_get_event($event_id, 'event_id')->owner) ? 'lejlighed ' . padded_apartment_number_from_id(em_get_event($event_id, 'event_id')->owner) : 'Bestyrelsen');
-		}, $event_ids);
+	if (count($events) > 0) {
+		$events = array_map(function ($event_id) {
+			return em_get_event($event_id, 'event_id');
+		}, $events);
+		$events = array_filter($events, function ($event) {
+			return count(pll_get_post_translations(em_get_event($event->post_id))) == 1 || pll_get_post_language($event->post_id, "slug") == "da";
+		});
+
+		$event_owners = array_map(function ($event) {
+			return (is_apartment_from_id($event->owner) ? 'lejlighed ' . padded_apartment_number_from_id($event->owner) : 'bestyrelsen');
+		}, $events);
+		
+		$last = array_pop($event_owners);
+    	$event_owners = implode(', ', $event_owners) . ' og ' . $last;
 
 		$rented = true;
 	} else {
-		$event_owners = array('Ingen');
+		$event_owners = 'Ingen';
 		$rented = false;
 	}
 
@@ -59,7 +69,7 @@ function fælleshus_internet_dashboard_widget() {
 						Fælleshus status
 					</td>
 					<td style="vertical-align:middle">
-						<b><?php echo ($rented ? "Lejet af " . implode(", ", $event_owners) : "Ledigt"); ?></b>
+						<b><?php echo ($rented ? "Lejet af " . $event_owners : "Ledigt"); ?></b>
 					</td>
 				</tr>
 				<tr>
