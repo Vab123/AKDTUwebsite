@@ -2,21 +2,6 @@
 
 /**
  * @var $AKDTU_OPTIONS Structure containing information about all option pages to load.
- * 
- * Structure:
- * 
- * - "optionfilename" => array
- * > - "page-title" => string
- * > - "menu-title" => string
- * > - "menu-slug" => string
- * > - "function" => string
- * 
- * Keys: 
- * - "page-title": String. Title of the options page. Shown at the top of the page.
- * - "menu-title": String. Title of the menu object. Shown in the menu at the left of the control panel.
- * - "menu-slug": String. Slug for the menu page. Part of the page URL.
- * - "function": String. Name of the function to call to get the content of the menu page.
- * - "optionfilename": String. Filename of the file with the option function.
  */
 $AKDTU_OPTIONS = array(
 	"fælleshus.php" => array(
