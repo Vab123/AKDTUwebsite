@@ -700,7 +700,7 @@ function all_moved_after_apartment_numbers($moved_after_date) {
 }
 #
 /**
- * Gets a list of the apartment numbers of the apartments where residents have moved out after a given date
+ * Gets a list of the usernames of the apartments where residents have moved out after a given date
  * 
  * @param string $moved_after_date String representation of the date, after which the apartment owner should have moved out. Format: (YYYY-MM-DD)
  * 
@@ -712,7 +712,7 @@ function all_moved_after_usernames($moved_after_date) {
 }
 #
 /**
- * Gets a list of the apartment numbers of the apartments where residents have moved out after a given date
+ * Gets a list of the user ids of the apartments where residents have moved out after a given date
  * 
  * @param string $moved_after_date String representation of the date, after which the apartment owner should have moved out. Format: (YYYY-MM-DD)
  * 
