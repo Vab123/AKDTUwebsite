@@ -24,7 +24,7 @@ function allow_user_signup($apartment_number, $phone_number, $takeover_time) {
 	global $wpdb;
 
 	# Check if there already exists a permit for user creation already exists
-	if ($wpdb->query("SELECT apartment_number FROM " . $wpdb->prefix . "swpm_allowed_membercreation WHERE apartment_number=". $apartment_number) > 0) {
+	if ($wpdb->query('SELECT apartment_number FROM ' . $wpdb->prefix . 'swpm_allowed_membercreation WHERE apartment_number="'. $apartment_number . '" AND allow_creation_date >= "' . (new DateTime('now', new DateTimeZone('Europe/Copenhagen')))->format("Y-m-d H:i:s") . '"') > 0) {
 		# A permit already exists. Output error message and return
 		new AKDTU_notice('error', 'Tilladelsen til brugeroprettelse kunne ikke oprettes. Check om der allerede findes en tilladelse til brugeren.');
 
