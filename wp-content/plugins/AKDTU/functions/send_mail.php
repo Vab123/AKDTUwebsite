@@ -125,7 +125,7 @@ function echo_AKDTU_email_as_table($TO, $FROM, $REPLYTO, $CC, $attachments, $mai
  * @param bool $debug Flag, if the email should be sent (false) or echoed as a table (true)
  * @param string $subject_replaces Key-value array of replaces, where the keys should be replaced with the values in the subject of the email
  * @param string $content_replaces Key-value array of replaces, where the keys should be replaced with the values in the content of the email
- * @param string $CONSTANT_ROOT Root of the PHP constant, which contains info about the email. Defined in register_definitions.php and register_settings.php
+ * @param string $CONSTANT_ROOT Root of the PHP constant, which contains info about the email. Defined in register_options.php and register_settings.php
  * @param bool|string $override_TO If not false, the recipient address of the email is overwritten with the value of this parameter
  */
 function send_AKDTU_email($debug = true, $subject_replaces = array(), $content_replaces = array(), $CONSTANT_ROOT = '', $override_TO = false) {
@@ -179,7 +179,7 @@ function send_AKDTU_email($debug = true, $subject_replaces = array(), $content_r
  * Performs replaces on the subject of an email before sending
  * 
  * @param string $subject_replaces Key-value array of replaces, where the keys should be replaced with the values in the subject of the email
- * @param string $CONSTANT_ROOT Root of the PHP constant, which contains info about the email. Defined in register_definitions.php and register_settings.php
+ * @param string $CONSTANT_ROOT Root of the PHP constant, which contains info about the email. Defined in register_options.php and register_settings.php
  * 
  * @return string Formatted subject of the email
  */
@@ -193,7 +193,7 @@ function AKDTU_email_subject($subject_replaces = array(), $CONSTANT_ROOT = '') {
  * Performs replaces on the content of the email before sending
  * 
  * @param string $content_replaces Key-value array of replaces, where the keys should be replaced with the values in the content of the email
- * @param string $CONSTANT_ROOT Root of the PHP constant, which contains info about the email. Defined in register_definitions.php and register_settings.php
+ * @param string $CONSTANT_ROOT Root of the PHP constant, which contains info about the email. Defined in register_options.php and register_settings.php
  * 
  * @return string Formatted content of the email
  */
@@ -206,7 +206,7 @@ function AKDTU_email_content($content_replaces = array(), $CONSTANT_ROOT = '') {
 /**
  * Performs replaces on the attachments of the email before sending
  * 
- * @param string $CONSTANT_ROOT Root of the PHP constant, which contains info about the email. Defined in register_definitions.php and register_settings.php
+ * @param string $CONSTANT_ROOT Root of the PHP constant, which contains info about the email. Defined in register_options.php and register_settings.php
  * 
  * @return array[string] Array of paths to attachments for the email
  */
