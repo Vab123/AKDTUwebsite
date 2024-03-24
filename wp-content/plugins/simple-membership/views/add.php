@@ -9,6 +9,8 @@ if (!empty($force_strong_pass)) {
 }
 // Filter allowing to change the default value of user_name
 $user_name = apply_filters('swpm_registration_form_set_username', $user_name);
+
+require_once WP_PLUGIN_DIR . '/AKDTU/register_functions.php';
 ?>
 <p><?php pll_e('Registration form message', 'simple-membership'); ?></p>
 <div class="swpm-registration-widget-form">
@@ -17,15 +19,7 @@ $user_name = apply_filters('swpm_registration_form_set_username', $user_name);
         <table>
             <tr class="swpm-registration-username-row" <?php apply_filters('swpm_registration_form_username_tr_attributes', ''); ?>>
                 <td><label for="user_name"><?php pll_e('Apartment number','simple-membership'); ?></label></td>
-                <td><select id="apartment_number" class="validate[required]" name="apartment_number">
-				<?php 
-					for ($floor = 0; $floor < 3; $floor++){
-						for ($apartment = 1; $apartment < 25; $apartment++){
-							echo '<option value="'.(100*$floor + $apartment).'">'.(100*$floor + $apartment).'</option>';
-						}
-					}
-				?>
-				</select></td>
+                <td><?php echo apartments_dropdown(true, false, true, '', 'apartment_number', 'apartment_number', 'validate[required]') ?></td>
             </tr>
             <tr class="swpm-registration-confirmation-row">
                 <td><label for="temporary_renter"><?php pll_e('Are you a temporary renter?','simple-membership') ?></label></td>
