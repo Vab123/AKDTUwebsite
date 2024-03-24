@@ -753,17 +753,20 @@ function all_apartments() {
  * @param bool $display_names True if the dropdown should contain the names of the apartment users. Default: true
  * @param bool $use_padded_apartment_numbers True if the apartment numbers should contain leading zeros if the number is less than three digits. Default: true
  * @param string $apartment_number_and_name_separator String separator placed between apartment number and name, if both `$display_apartment_numbers` and `$display_names` are true. Default: ' - '
+ * @param string $name Name of the dropdown. Default: 'user'
+ * @param string $id ID of the dropdown. Default: ''
+ * @param string $class Class(es) of the dropdown. Multiple classes are space-separated. Default: ''
  * 
  * @return string Dropdown containing all apartment users
  * 
  * @throws InvalidArgumentException If $display_apartment_numbers and $display_names are both false
  */
-function apartments_dropdown($display_apartment_numbers = true, $display_names = true, $use_padded_apartment_numbers = true, $apartment_number_and_name_separator = ' - ') {
+function apartments_dropdown($display_apartment_numbers = true, $display_names = true, $use_padded_apartment_numbers = true, $apartment_number_and_name_separator = ' - ', $name = "user", $id = "", $class = "") {
 	if (!$display_apartment_numbers && !$display_names) {
 		throw new InvalidArgumentException("Both $display_apartment_numbers and $display_names cannot be false");
 	}
 
-	$dropdown = '<select name="user">';
+	$dropdown = '<select' . ($name != "" ? ' name="' . $name . '"' : '') . ($class != "" ? ' class="' . $class . '"' : '') . ($id != "" ? ' id="' . $id . '"' : '') . '>';
 	foreach (all_apartments() as $apartment) {
 		$dropdown .= '<option value="' . ($apartment) . '">' . ($display_apartment_numbers ? ($use_padded_apartment_numbers ? padded_apartment_number_from_apartment_number($apartment) : $apartment) : '') . ($display_apartment_numbers && $display_names ? $apartment_number_and_name_separator : '') . ($display_names ? name_from_apartment_number($apartment) : '') . '</option>';
 	}
