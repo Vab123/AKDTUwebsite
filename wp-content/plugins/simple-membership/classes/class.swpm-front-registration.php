@@ -87,8 +87,8 @@ class SwpmFrontRegistration extends SwpmRegistration {
 	}
 
 	public function register_front_end() {
-		require_once WP_PLUGIN_DIR . '/AKDTU/register_definitions.php';
-		require_once WP_PLUGIN_DIR . '/AKDTU/functions/send_mail.php';
+		require_once WP_PLUGIN_DIR . '/AKDTU/register_settings.php';
+		require_once WP_PLUGIN_DIR . '/AKDTU/register_functions.php';
 		global $wpdb;
 
 		$apartment = sanitize_text_field($_POST['apartment_number']);
