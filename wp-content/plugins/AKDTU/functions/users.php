@@ -759,7 +759,7 @@ function all_apartments() {
  * 
  * @return string Dropdown containing all apartment users
  * 
- * @throws InvalidArgumentException If $display_apartment_numbers and $display_names are both false
+ * @throws InvalidArgumentException If `$display_apartment_numbers` and `$display_names` are both false
  */
 function apartments_dropdown($display_apartment_numbers = true, $display_names = true, $use_padded_apartment_numbers = true, $apartment_number_and_name_separator = ' - ', $name = "user", $id = "", $class = "") {
 	if (!$display_apartment_numbers && !$display_names) {
@@ -767,9 +767,10 @@ function apartments_dropdown($display_apartment_numbers = true, $display_names =
 	}
 
 	$dropdown = '<select' . ($name != "" ? ' name="' . $name . '"' : '') . ($class != "" ? ' class="' . $class . '"' : '') . ($id != "" ? ' id="' . $id . '"' : '') . '>';
-	foreach (all_apartments() as $apartment) {
-		$dropdown .= '<option value="' . ($apartment) . '">' . ($display_apartment_numbers ? ($use_padded_apartment_numbers ? padded_apartment_number_from_apartment_number($apartment) : $apartment) : '') . ($display_apartment_numbers && $display_names ? $apartment_number_and_name_separator : '') . ($display_names ? name_from_apartment_number($apartment) : '') . '</option>';
-	}
+	$dropdown .= join('', array_map(function ($apartment) use($display_apartment_numbers, $display_names, $use_padded_apartment_numbers, $apartment_number_and_name_separator) {
+		return '<option value="' . ($apartment) . '">' . ($display_apartment_numbers ? ($use_padded_apartment_numbers ? padded_apartment_number_from_apartment_number($apartment) : $apartment) : '') . ($display_apartment_numbers && $display_names ? $apartment_number_and_name_separator : '') . ($display_names ? name_from_apartment_number($apartment) : '') . '</option>';
+	}, all_apartments()));
+
 	$dropdown .= '</select>';
 
 	return $dropdown;
