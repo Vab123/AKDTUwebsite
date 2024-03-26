@@ -4,6 +4,84 @@
  * @file Functionality related to the manipulation of VLANS using the K-Net API (https://wiki.k-net.dk/api-instructions)
  */
 
+$AKDTU_VLANS = array(
+	'001' => 550,
+	'002' => 551,
+	'003' => 552,
+	'004' => 553,
+	'005' => 554,
+	'006' => 555,
+	'007' => 556,
+	'008' => 557,
+	'009' => 558,
+	'010' => 559,
+	'011' => 560,
+	'012' => 561,
+	'013' => 562,
+	'014' => 563,
+	'015' => 564,
+	'016' => 565,
+	'017' => 566,
+	'018' => 567,
+	'019' => 568,
+	'020' => 569,
+	'021' => 570,
+	'022' => 571,
+	'023' => 572,
+	'024' => 573,
+	'101' => 574,
+	'102' => 575,
+	'103' => 576,
+	'104' => 577,
+	'105' => 578,
+	'106' => 579,
+	'107' => 580,
+	'108' => 581,
+	'109' => 582,
+	'110' => 583,
+	'111' => 584,
+	'112' => 585,
+	'113' => 586,
+	'114' => 587,
+	'115' => 588,
+	'116' => 589,
+	'117' => 590,
+	'118' => 591,
+	'119' => 592,
+	'120' => 593,
+	'121' => 594,
+	'122' => 595,
+	'123' => 596,
+	'124' => 597,
+	'201' => 598,
+	'202' => 599,
+	'203' => 600,
+	'204' => 601,
+	'205' => 602,
+	'206' => 603,
+	'207' => 604,
+	'208' => 605,
+	'209' => 606,
+	'210' => 607,
+	'211' => 608,
+	'212' => 609,
+	'213' => 610,
+	'214' => 611,
+	'215' => 612,
+	'216' => 613,
+	'217' => 614,
+	'218' => 615,
+	'219' => 616,
+	'220' => 617,
+	'221' => 618,
+	'222' => 619,
+	'223' => 620,
+	'224' => 621,
+	'servers' => 622,
+	'fælleshus_adk' => 623,
+	'fælleshus' => 624,
+);
+
 /**
  * Set the state of a VLAN
  * 
@@ -88,10 +166,10 @@ function get_vlan($vlan_id) {
  * @return array[Any] json-decoded response from K-Net API
  */
 function set_fælleshus_vlan($state) {
-	# Fælleshus VLAN is number 624
-	
+	global $AKDTU_VLANS;
+
 	# Set desired state and return
-	return set_vlan(624, $state);
+	return set_vlan($AKDTU_VLANS['fælleshus'], $state);
 }
 
 /**
@@ -100,8 +178,8 @@ function set_fælleshus_vlan($state) {
  * @return array[Any] json-decoded response from K-Net API
  */
 function get_fælleshus_vlan() {
-	# Fælleshus VLAN is number 624
-	
+	global $AKDTU_VLANS;
+
 	# Get info and return
-	return get_vlan(624);
+	return get_vlan($AKDTU_VLANS['fælleshus']);
 }
