@@ -14,17 +14,19 @@ add_shortcode("AKDTU-display-generalforsamlinger", "AKDTU_display_generalforsaml
  *   'before-link-text' => '': Text written before element link
  *   'after-link-text' => '': Text written after element link
  *   'download-name'  => '': Name of downloaded file: %1$s is year, %2$s is month, %3$s is day, %4$s is type
+ *	 'list-style-type' => 'disclosure-closed': Type of the items in the list
  * 
  * @return string Formatted list of all found documents
  */
 function AKDTU_display_generalforsamling( $atts ){
 	# Default values
 	$default = array(
-		'date-format' => 'd. MMMM YYYY', 	# Format for output for date of document
-		'entry-text' => '%s', 				# What to write in element text
-		'before-link-text' => '', 			# Text written before element link
-		'after-link-text' => ' - %2$s', 	# Text written after element link
-		'download-name'  => '', 			# Name of downloaded file: %1$s is year, %2$s is month, %3$s is day, %4$s is type
+		'date-format' 		=> 'd. MMMM YYYY',		# Format for output for date of document
+		'entry-text' 		=> '%s', 				# What to write in element text
+		'before-link-text' 	=> '', 					# Text written before element link
+		'after-link-text' 	=> ' - %2$s', 			# Text written after element link
+		'download-name'  	=> '', 					# Name of downloaded file: %1$s is year, %2$s is month, %3$s is day, %4$s is type
+		'list-style-type'	=> 'disclosure-closed',	# Type of the items in the list
     );
 
 	# Combine default values and provided settings
