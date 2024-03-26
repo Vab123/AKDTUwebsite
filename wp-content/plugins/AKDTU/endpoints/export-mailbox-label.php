@@ -4,7 +4,7 @@ add_action('plugins_loaded', 'AKDTU_export_mailbox_label');
 
 /**
  * 
- * Exports the AKDTU calendar to ICS format, allowing users to subscribe to the calendar with Google Calendar, Outlook, etc. Ends further code execution.
+ * Exports a PDF-file with a label for the mailbox for an apartment.
  * 
  * @return void
  * 
