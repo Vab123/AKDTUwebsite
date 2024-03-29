@@ -17,7 +17,7 @@ function allowed_user_signups_widget() {
 				<col span="1" style="width: 15%" />
 				<col span="1" style="width: 40%" />
 				<col span="1" style="width: 20%" />
-				<col span="1" style="width: 15%" />
+				<col span="1" style="width: 0%" />
 			</colgroup>
 			<thead>
 				<tr>
@@ -25,7 +25,7 @@ function allowed_user_signups_widget() {
 					<th class='manage-column' scope='col'>Telefon</th>
 					<th class='manage-column' scope='col'>Tilladt fra</th>
 					<th class='manage-column' scope='col'>Klargjort</th>
-					<th class='manage-column' scope='col'>Handlinger</th>
+					<th class='manage-column' scope='col'></th>
 				</tr>
 			</thead>
 			<tbody>

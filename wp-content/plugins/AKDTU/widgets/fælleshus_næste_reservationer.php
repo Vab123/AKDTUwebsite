@@ -25,14 +25,14 @@ function fælleshus_næste_reservationer_dashboard_widget() {
 				<col span="1" style="width: 20%">
 				<col span="1" style="width: 35%">
 				<col span="1" style="width: 25%">
-				<col span="1" style="width: 20%">
+				<col span="1" style="width: 0%">
 			</colgroup>
 			<thead>
 				<tr>
 					<th>Lejer</th>
 					<th>Tidspunkt</th>
 					<th>Pris</th>
-					<th>Handlinger</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>

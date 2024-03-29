@@ -12,13 +12,13 @@ function show_board_widget() {
 			<colgroup>
 				<col span="1" style="width: 20%" />
 				<col span="1" style="width: 60%" />
-				<col span="1" style="width: 20%" />
+				<col span="1" style="width: 0%" />
 			</colgroup>
 			<thead>
 				<tr>
 					<th>Lejlighed</th>
 					<th>Navn</th>
-					<th>Handlinger</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>

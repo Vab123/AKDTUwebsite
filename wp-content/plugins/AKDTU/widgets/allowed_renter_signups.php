@@ -17,14 +17,14 @@ function allowed_renter_signups_widget() {
 				<col span="1" style="width: 10%" />
 				<col span="1" style="width: 35%" />
 				<col span="1" style="width: 40%" />
-				<col span="1" style="width: 15%" />
+				<col span="1" style="width: 0%" />
 			</colgroup>
 			<thead>
 				<tr>
 					<th class='manage-column' scope='col'>Lejl.</th>
 					<th class='manage-column' scope='col'>Telefon</th>
 					<th class='manage-column' scope='col'>Periode</th>
-					<th class='manage-column' scope='col'>Handlinger</th>
+					<th class='manage-column' scope='col'></th>
 				</tr>
 			</thead>
 			<tbody>
