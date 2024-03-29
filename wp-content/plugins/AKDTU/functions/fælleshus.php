@@ -79,7 +79,9 @@ function js_calc_rental_cost_script() {
 					AKDTU_months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 				}
 				if (daysDiff > 0) {
-					if (enddate.getMonth() + 1 < 4 || enddate.getFullYear < 2024) {
+					// Price was changed 1/4/2024. These are the prices from before this date.
+					// How to get the timestamp: var d = new Date("04/01/2024 00:00"); d.getTime();
+					if (enddate.getTime() < 1711922400000) {
 						var price = 100 + daysDiff*100;		// Price before 1/4/2024
 					}
 					else {
@@ -146,7 +148,9 @@ function calc_rental_cost($startdatetime, $enddatetime, $owner_id) {
 	# Get difference in days
 	$diff_in_days = ceil( $diff_in_seconds / (60 * 60 * 24));
 	
-	if (intval($enddatetime->format('m')) < 4 || intval($enddatetime->format('Y')) < 2024) {	# Price was changed 1/4/2024. These are the prices from before this date.
+	# Price was changed 1/4/2024. These are the prices from before this date.
+	# How to get the timestamp: (new DateTime("04/01/2024 00:00:00", new DateTimeZone("Europe/Copenhagen")))->getTimestamp()
+	if ($enddatetime->getTimestamp() < 1711922400) {
 		# Return price: 200 for first day, and 100 for subsequent days
 		return 100 + 100 * $diff_in_days;
 	}
