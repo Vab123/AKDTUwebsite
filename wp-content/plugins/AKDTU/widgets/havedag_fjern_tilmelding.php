@@ -19,7 +19,7 @@ function fjern_tilmelding_til_havedag_dashboard_widget() {
 				<tr>
 					<td><label>Begivenhed:</label></td>
 					<td><select name="havedag_event" onchange="update_remove_gardenday_display(this.value)">
-							<?php
+							<?php 
 							foreach ($gardendays as $gardenday) {
 								foreach ($gardenday as $language => $event) {
 									echo '<option value="' . $event->event_id . '">' . $event->event_name . '</option>';

@@ -16,10 +16,9 @@ function fjern_dokument_dashboard_widget() {
 			<tr>
 				<td><label>Dokument type:</label></td>
 				<td><select name="document_type" onchange="update_remove_document_display(this.value)">
-						<?php
-						foreach ($bestyrelsesdocuments_document_types as $type) {
-							echo '<option value="' . $type['short'] . '">' . $type['name'] . '</option>';
-						}
+						<?php echo join('', array_map(function ($type) {
+							return '<option value="' . $type['short'] . '">' . $type['name'] . '</option>';
+						}, $bestyrelsesdocuments_document_types));
 						?>
 					</select></td>
 			</tr>

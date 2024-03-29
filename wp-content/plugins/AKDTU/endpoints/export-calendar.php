@@ -83,9 +83,9 @@ function AKDTU_export_calendar() {
 			$calendar_export_string .= "END:VTIMEZONE\r\n";
 
 			# Go through all events and export them
-			foreach ($events as $EM_Event) {
-				$calendar_export_string .= event_as_ics($EM_Event, $calendar_language);
-			}
+			$calendar_export_string .= join('', array_map(function ($EM_Event) use($calendar_language) {
+				return event_as_ics($EM_Event, $calendar_language);
+			}, $events));
 
 			# End calendar export string
 			$calendar_export_string .= "END:VCALENDAR";

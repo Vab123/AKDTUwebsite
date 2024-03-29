@@ -79,24 +79,19 @@ function render_settings_tab($tab) {
 
 		$settings_group_as_string .= '<table class="form-table" role="presentation">';
 		$settings_group_as_string .= '<tbody>';
-		foreach ($settings_group['content'] as $setting) {
-			$settings_group_as_string .= '<tr><th scope="row">' . $setting['headline'] . '</th>';
 
-			$settings_group_as_string .= '<td>';
-			if ($setting['tag'] == "input") {
-				$settings_group_as_string .= '<input type="' . $setting['type'] . '" name="' . $setting['name'] . '" style="' . $setting['style'] . '" ' . ($setting['type'] == 'checkbox' ? (get_option('AKDTU_FÆLLESHUS_INTERNET_BRUGER_DA_TOGGLE') ? ' checked' : '') : ' value="' . stripcslashes(get_option($setting['name'])) . '"') . '/>';
-			}
-			if ($setting['tag'] == "textarea") {
-				$settings_group_as_string .= '<textarea type="' . $setting['type'] . '" name="' . $setting['name'] . '" rows="' . $setting['rows'] . '" cols="' . $setting['cols'] . '" style="' . $setting['style'] . '">' . stripcslashes(get_option($setting['name'])) . '</textarea>';
-			}
+		$settings_group_as_string .= join('', array_map(function ($setting) {
+			return '<tr><th scope="row">' . $setting['headline'] . '</th>' .
+				'<td>' .
+					($setting['tag'] == "input" ? '<input type="' . $setting['type'] . '" name="' . $setting['name'] . '" style="' . $setting['style'] . '" ' . ($setting['type'] == 'checkbox' ? (get_option('AKDTU_FÆLLESHUS_INTERNET_BRUGER_DA_TOGGLE') ? ' checked' : '') : ' value="' . stripcslashes(get_option($setting['name'])) . '"') . '/>' : '') . 
+					($setting['tag'] == "textarea" ? '<textarea type="' . $setting['type'] . '" name="' . $setting['name'] . '" rows="' . $setting['rows'] . '" cols="' . $setting['cols'] . '" style="' . $setting['style'] . '">' . stripcslashes(get_option($setting['name'])) . '</textarea>' : '') .
+					join('', array_map(function ($comment) {
+						return '<p>' . $comment . '</p>';
+					}, $setting['comments'])) .
+				'</td>' .
+			'</tr>';
+		}, $settings_group['content']));
 
-			foreach ($setting['comments'] as $comment) {
-				$settings_group_as_string .= '<p>' . $comment . '</p>';
-			}
-			
-			$settings_group_as_string .= '</td>';
-			$settings_group_as_string .= '</tr>';
-		}
 		$settings_group_as_string .= '<tr><th></th><td><input type="submit" class="button-primary" value="' . $tab['save-button-text'] . '" /></td>';
 		$settings_group_as_string .= '</tbody>';
 		$settings_group_as_string .= '</table>';

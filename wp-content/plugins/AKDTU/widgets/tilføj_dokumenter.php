@@ -16,11 +16,9 @@ function tilføj_dokument_dashboard_widget() {
 			<tr>
 				<td><label>Dokument type:</label></td>
 				<td><select name="document_type" onchange="update_upload_document_display(this.value)">
-						<?php
-						foreach ($bestyrelsesdocuments_document_types as $short => $type_def) {
-							echo '<option value="' . $short . '">' . $type_def['name'] . '</option>';
-						}
-						?>
+						<?php echo join('', array_map(function ($type) {
+							return '<option value="' . $type['short'] . '">' . $type['name'] . '</option>';
+						}, $bestyrelsesdocuments_document_types)); ?>
 					</select></td>
 			</tr>
 		</thead>
