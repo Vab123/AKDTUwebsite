@@ -14,9 +14,6 @@ function send_opkrævning_havedag($debug = false) {
 	if (HAVEDAG_TO != '' || HAVEDAG_WARNING_TO != '' || $debug) {
 		global $wpdb;
 
-		# Prepare strings for payment info
-		$payment_info = "";
-
 		# Date formatters
 		$month = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen');
 		$month->setPattern('MMMM');
@@ -25,17 +22,17 @@ function send_opkrævning_havedag($debug = false) {
 		$year = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen');
 		$year->setPattern('YYYY');
 
-		$gardendays = next_gardenday('da', 1);
+		$gardenday = next_gardenday('da', 1);
 		
 		# Check if this is a test-run, and no future garden days were found. Revert to using the past garden day
-		if ($debug && is_null($gardendays)) {
+		if ($debug && is_null($gardenday)) {
 			# Debug is on, but no future events was found. Go back to past events
-			$gardendays = previous_gardenday('da', 1);
+			$gardenday = previous_gardenday('da', 1);
 		}
 	
 		# Check if a garden day was found
-		if (!is_null($gardendays)) {
-			$gardenday = $gardendays['da'];
+		if (!is_null($gardenday)) {
+			$gardenday = $gardenday[0];
 
 			# Get all translations of the event
 			$translations = pll_get_post_translations($gardenday->post_id);
@@ -99,29 +96,18 @@ function send_opkrævning_havedag($debug = false) {
 			# Get a list of all users that did not show up to the garden day
 			$users_that_should_pay = array_filter(all_apartments(), function($apartment) use($status) { return !$status[$apartment]; });
 
-			# User counter
-			$it = 1;
-
 			# Go through all users that should pay
-			foreach ($users_that_should_pay as $apartment) {
+			$payment_info = join('<br>', array_map(function($apartment) use($moved_users) {
 				# Info format for the real email
 				$replaces = array(
 					'#APT' => padded_apartment_number_from_apartment_number($apartment) . (in_array($apartment, $moved_users) ? ' (Tidligere beboer)' : '' ),
 					'#PRICE' => number_format(gardenday_price($apartment), 2, ",", "."),
 					'#BOARDSTATUS' => (is_boardmember_from_apartment_number($apartment) ? HAVEDAG_BOARDMEMBER : '') . (is_board_deputy_from_apartment_number($apartment) ? HAVEDAG_BOARD_DEPUTY : '')
 				);
-
+				
 				# Add info to the real email
-				$payment_info .= str_replace(array_keys($replaces), $replaces, nl2br(HAVEDAG_FORMAT));
-
-				# Add spaces if this is not the last user that did not show up
-				if ($it < count($users_that_should_pay)) {
-					$payment_info .= '<br>';
-				}
-
-				# Increment counter
-				$it++;
-			}
+				return str_replace(array_keys($replaces), $replaces, nl2br(HAVEDAG_FORMAT));
+			}, $users_that_should_pay));
 			
 			# Current time
 			$now = new DateTime;
@@ -131,7 +117,6 @@ function send_opkrævning_havedag($debug = false) {
 
 			# Time difference between now and the end-time of the last garden day
 			$diff = $now->diff($ago);
-	
 
 			# Replacements for real email subject
 			$real_message_subject_replaces = array(
