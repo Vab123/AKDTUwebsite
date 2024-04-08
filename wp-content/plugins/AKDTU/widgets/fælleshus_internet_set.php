@@ -5,32 +5,10 @@
  */
 
 function fælleshus_internet_set_dashboard_widget() {
-	global $wpdb;
+	$rental_info = get_current_common_house_renters();
 
-	$now = (new DateTime('now', new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s');
-
-	$events = $wpdb->get_col('SELECT event_id FROM ' . EM_EVENTS_TABLE . ' WHERE event_start <= "' . $now . '" AND event_end >= "' . $now . '" AND event_status = 1');
-
-	if (count($events) > 0) {
-		$events = array_map(function ($event_id) {
-			return em_get_event($event_id, 'event_id');
-		}, $events);
-		$events = array_filter($events, function ($event) {
-			return count(pll_get_post_translations(em_get_event($event->post_id))) == 1 || pll_get_post_language($event->post_id, "slug") == "da";
-		});
-
-		$event_owners = array_map(function ($event) {
-			return (is_apartment_from_id($event->owner) ? 'lejlighed ' . padded_apartment_number_from_id($event->owner) : 'bestyrelsen');
-		}, $events);
-		
-		$last = array_pop($event_owners);
-    	$event_owners = implode(', ', $event_owners) . ' og ' . $last;
-
-		$rented = true;
-	} else {
-		$event_owners = 'Ingen';
-		$rented = false;
-	}
+	$event_owners = $rental_info['renters'];
+	$rented = $rental_info['rented'];
 
 	$router_settings = get_router_settings(); ?>
 		<table width="100%" class="widefat">

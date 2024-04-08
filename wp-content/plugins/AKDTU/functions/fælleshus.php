@@ -5,6 +5,132 @@
  */
 
 /**
+ * Filters out duplicate events, such as when the board has a booking in Danish and in English.
+ * 
+ * @param EM_Event[] $events Array of events to remove duplicates from
+ * 
+ * @return EM_Event[] Array of filtered events, without duplicates
+ */
+function remove_duplicate_events($events, $keep_single_events = true, $paired_event_language_slug = "da") {
+	if ($keep_single_events) {
+		// Filter events to remove duplicates
+		return array_filter($events, function ($event) use($paired_event_language_slug) {
+			return count(pll_get_post_translations(em_get_event($event->post_id))) == 1 || pll_get_post_language($event->post_id, "slug") == $paired_event_language_slug;
+		});
+	}
+	else {
+		// Filter events to remove duplicates
+		return array_filter($events, function ($event) use($paired_event_language_slug) {
+			return pll_get_post_language($event->post_id, "slug") == $paired_event_language_slug;
+		});
+	}
+}
+
+/**
+ * Gets all translations of a series of events. Assumes no duplicate events are provided
+ * 
+ * @param EM_Event[] $events Array of events to get all translations of
+ * 
+ * @return EM_Event[][string] Array of arrays with all translations of the provided events. Keys are language slugs, values are events
+ */
+function get_all_translations($events) {
+	return array_map(function ($event) {
+		# Find all translations
+		$translations = pll_get_post_translations($event->post_id);
+
+		# Create array mapping language slugs to event for this garden day
+		return array_combine(array_map(function ($post_id) {
+			return pll_get_post_language($post_id, 'slug');
+		}, $translations), array_map(function ($post_id) {
+			return em_get_event($post_id, 'post_id');
+		}, $translations));
+	}, $events);
+}
+
+/**
+ * Returns a formatted string for the owners of a set of events. Filters out duplicate events, such as when the board has a booking in Danish and in English.
+ * 
+ * @param int[] $event_ids Ids of the events to find the owners of
+ * @param bool $use_padded_apartment_numbers True if padded apartment numbers should be used. Otherwise non-padded apartment numbers are used. Default: true
+ * @param string $apartment_text Text to write in front of the apartment numbers when the owner of an event is an apartment user. Default: 'lejlighed '
+ * @param string $board_text Text to write in front of the apartment numbers when the owner of an event is not an apartment user. Default: 'bestyrelsen'
+ * @param string $nobody_text Text to write when the common house is not currently rented by anyone. Default: 'ingen'
+ * @param string $and_text Text to write before the last owner when more than one event is supplied. Default: ' og '
+ * 
+ * @return string[string] Array containing the following keys:
+ * 		'renters' [string]:  Formatted string containing information about the owners of the events
+ * 		'rented' [bool]:     True if the common house is rented. False otherwise
+ */
+function get_common_house_renters($event_ids, $use_padded_apartment_numbers = true, $apartment_text = 'lejlighed ', $board_text = 'bestyrelsen', $nobody_text = 'ingen', $and_text = ' og ') {
+	// Get the actual events
+	$events = array_map(function ($event_id) {
+		return em_get_event($event_id, 'event_id');
+	}, $event_ids);
+
+	// Filter events to remove duplicates
+	$events = remove_duplicate_events($events);
+
+	// Check how many events actually exist
+	if (count($events) > 0) {
+		// There exists at least one event.
+		// Find owners of all the remaining events
+		$event_owners = array_map(function ($event) use($apartment_text, $board_text, $use_padded_apartment_numbers) {
+			return (is_apartment_from_id($event->owner) ? $apartment_text . ($use_padded_apartment_numbers ? padded_apartment_number_from_id($event->owner) : apartment_number_from_id($event->owner)) : $board_text);
+		}, $events);
+		
+		// Check if more than one event exists
+		if (count($events) > 1) {
+			// More than one event exists
+			// Format the owners correctly
+			$last = array_pop($event_owners);
+			$event_owners = implode(', ', $event_owners) . $and_text . $last;
+		}
+		else {
+			// Only one event exists
+			$event_owners = $event_owners[0];
+		}
+
+		// The common house is rented
+		$rented = true;
+	} else {
+		// There does not exist any events.
+		$event_owners = $nobody_text;
+
+		// The common house is not rented
+		$rented = false;
+	}
+
+	// Return information
+	return array(
+		'renters' => $event_owners,
+		'rented' => $rented,
+	);
+}
+
+/**
+ * Returns a formatted string for the current renters of the common house. Filters out duplicate events, such as when the board has a booking in Danish and in English.
+ * 
+ * @param bool $use_padded_apartment_numbers True if padded apartment numbers should be used. Otherwise non-padded apartment numbers are used. Default: true
+ * @param string $apartment_text Text to write in front of the apartment numbers when the owner of an event is an apartment user. Default: 'lejlighed '
+ * @param string $board_text Text to write in front of the apartment numbers when the owner of an event is not an apartment user. Default: 'bestyrelsen'
+ * @param string $nobody_text Text to write when the common house is not currently rented by anyone. Default: 'ingen'
+ * @param string $and_text Text to write before the last owner when more than one event is supplied. Default: ' og '
+ * 
+ * @return string[string] Array containing the following keys:
+ * 		'renters' [string]:  Formatted string containing information about the owners of the events
+ * 		'rented' [bool]:     True if the common house is rented. False otherwise
+ */
+function get_current_common_house_renters($use_padded_apartment_numbers = true, $apartment_text = 'lejlighed ', $board_text = 'bestyrelsen', $nobody_text = 'ingen', $and_text = ' og ') {
+	global $wpdb;
+
+	$now = (new DateTime('now', new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s');
+
+	$events = $wpdb->get_col('SELECT event_id FROM ' . EM_EVENTS_TABLE . ' WHERE event_start <= "' . $now . '" AND event_end >= "' . $now . '" AND event_status = 1');
+
+	return get_common_house_renters($events, $use_padded_apartment_numbers, $apartment_text, $board_text, $nobody_text, $and_text);
+}
+
+/**
  * Returns the machine-readable name of an event corresponding to a rental of the common house for an apartment.
  * 
  * @param int $apartment_num Apartment number of the user creating the rental.
@@ -178,7 +304,9 @@ function get_price_to_pay($period_start, $period_end) {
 	$event_ids = $wpdb->get_col('SELECT event_id FROM ' . EM_EVENTS_TABLE . ' WHERE event_end_date >= "' . $period_start->format('Y-m-d') . '" AND event_end_date <= "' . $period_end->format('Y-m-d') . '" AND event_status = 1');
 
 	# Get array of events ending in this month
-	$events = array_map(function($id){return em_get_event($id,'event_id');},$event_ids);
+	$events = array_map(function($id){
+		return em_get_event($id,'event_id');
+	}, $event_ids);
 
 	# Prepare array for rental information
 	$price_to_pay = array();

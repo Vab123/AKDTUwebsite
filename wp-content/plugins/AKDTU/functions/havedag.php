@@ -37,30 +37,14 @@ function next_gardenday($language = 'all', $amount = 1) {
 	# Check which language the caller walts
 	if ($language == 'all') {
 		# The user wants all languages. First find only Danish languages, to not have the same garden day multiple days when triggering on Danish and English events
-		$events = array_filter($events, function ($event) {
-			return pll_get_post_language($event->post_id, "slug") == "da";
-		});
-
-		# Find all translations of the Danish garden days and create an appropriate array
-		$events = array_map(function ($event) {
-			# Find all translations
-			$translations = pll_get_post_translations($event->post_id);
-
-			# Create array mapping language slugs to event for this garden day
-			return array_combine(array_map(function ($post_id) {
-				return pll_get_post_language($post_id, 'slug');
-			}, $translations), array_map(function ($post_id) {
-				return em_get_event($post_id, 'post_id');
-			}, $translations));
-		}, $events);
+		# Then find all translations of the Danish garden days and create an appropriate array
+		$events = get_all_translations(remove_duplicate_events($events, false, "da"));
 	}
 	else {
 		# Filter only the events with the required language
-		$events = array_filter($events, function ($event) use($language) {
-			return pll_get_post_language($event->post_id, "slug") == $language;
-		});
+		$events = remove_duplicate_events($events, false, $language);
 	}
-		
+
 	# Return events if any were found. Otherwise, return null
 	return (count($events) > 0 ? array_slice($events, 0, $amount) : null);
 }
@@ -87,9 +71,7 @@ function previous_gardenday($language = 'all', $amount = 1) {
 	# Check which language the caller walts
 	if ($language == 'all') {
 		# The user wants all languages. First find only Danish languages, to not have the same garden day multiple days when triggering on Danish and English events
-		$events = array_filter($events, function ($event) {
-			return pll_get_post_language($event->post_id, "slug") == "da";
-		});
+		$events = remove_duplicate_events($events, false, "da");
 
 		# Find all translations of the Danish garden days and create an appropriate array
 		$events = array_map(function ($event) {
@@ -106,9 +88,7 @@ function previous_gardenday($language = 'all', $amount = 1) {
 	}
 	else {
 		# Filter only the events with the required language
-		$events = array_filter($events, function ($event) use($language) {
-			return pll_get_post_language($event->post_id, "slug") == $language;
-		});
+		$events = remove_duplicate_events($events, false, $language);
 	}
 		
 	# Return events if any were found. Otherwise, return null
