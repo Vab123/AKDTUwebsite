@@ -142,6 +142,17 @@ function common_house_rental_name($apartment_num) {
 }
 
 /**
+ * Checks if an event is a rental of the common house by an apartment
+ * 
+ * @param EM_Event $event The event to be checked
+ * 
+ * @return bool True if the event is a rental of the common house by an apartment
+ */
+function is_common_house_rental($event) {
+	return substr($event->event_name, 0, 28) == "#_RENTAL_BEFORE_APARTMENTNUM";
+}
+
+/**
  * Returns the formatted version of the names of events corresponding to rentals of the common house.
  * The name of the event should be as defined in common_house_rental_name() above.
  * 

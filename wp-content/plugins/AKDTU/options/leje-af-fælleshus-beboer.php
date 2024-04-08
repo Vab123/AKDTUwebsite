@@ -10,8 +10,8 @@ function AKDTU_leje_af_fælleshus_beboer_mail_settings() {
 }
 
 function test_leje_af_fælleshus_beboer_mail() {
-	$events = array_filter(EM_Events::get(array('scope' => 'future', 'limit' => 10, 'offset' => 0, 'order' => 'ASC', 'orderby' => 'event_start', 'bookings' => false, 'owner' => false, 'pagination' => 0)), function ($event) {
-		return substr($event->event_name, 0, 28) == "#_RENTAL_BEFORE_APARTMENTNUM";
+	$events = array_filter(EM_Events::get(array('scope' => 'future', 'limit' => 50, 'offset' => 0, 'order' => 'ASC', 'orderby' => 'event_start', 'bookings' => false, 'owner' => false, 'pagination' => 0)), function ($event) {
+		return is_common_house_rental($event);
 	});
 
 	if (count($events) > 0) {
