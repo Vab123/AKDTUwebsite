@@ -64,7 +64,7 @@ function send_opdater_fælleshus_internet($debug = false, $force_update = false)
 
 		# Replacements for email content
 		$content_replaces = array(
-			'#RENTER' => ($rented_state == 0 ? "Ingen" : "") . ($rented_state == 1 ? "Lejlighed " . apartment_number_from_id($event->owner) : "") . ($rented_state == 2 ? "Bestyrelsen" : ""),
+			'#RENTER' => get_common_house_renters(array($event))['renters'],
 			'#SSID' => $status["ssid"],
 			'#NEWPASS' => $status["password"],
 			'#UPDATETIME' => (new DateTime('now', new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s'),
