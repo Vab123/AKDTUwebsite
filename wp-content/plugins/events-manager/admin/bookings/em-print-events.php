@@ -57,8 +57,8 @@ function em_bookings_print_event() {
 			return (get_userdata($a->person_id)->get("user_login") < get_userdata($b->person_id)->get("user_login")) ? -1 : 1;
 		});
 		//columns to show in table
-		$cols = array('checkbox' => "Deltager", 'user_login' => "Lejlighed", 'user_name' => "Navn", 'booking_comment' => "Kommentar", 'booking_spaces' => "Pladser");
-		$widths = array("checkbox" => "5%", "user_login" => "10%", "user_name" => "30%", "booking_comment" => "50%", "booking_spaces" => "5%");
+		$cols = array('checkbox' => "Deltager", 'user_login' => "Lejlighed", 'user_name' => "Navn", 'booking_comment' => "Kommentar");
+		$widths = array("checkbox" => "5%", "user_login" => "10%", "user_name" => "20%", "booking_comment" => "65%");
 	}
 
 	$res = $wpdb->get_results('SELECT ticket_id,showed_up FROM wp_em_tilmeldinger WHERE event_id = ' . $_REQUEST['event_id'] . ' AND ticket_id = ' . $_REQUEST['event_ticket_id']);
@@ -134,7 +134,7 @@ function em_bookings_print_event() {
 									foreach ($bookings as $booking) {
 										$user = get_userdata($booking->person_id);
 									?>
-										<tr>
+										<tr <?php if ($rowno % 2 == 0) {echo ' class="alternate"';}; ?> >
 											<?php
 											foreach ($cols as $action => $header) {
 												if ($action == "checkbox") {
@@ -157,6 +157,7 @@ function em_bookings_print_event() {
 											} ?>
 										</tr>
 									<?php
+									$rowno++;
 									}
 									?>
 								</tbody>
@@ -210,90 +211,170 @@ function em_bookings_print_event() {
 		}
 	</style>
 <?php elseif (strtolower($_REQUEST['event_ticket_id']) == 'total') :
-				require_once WP_PLUGIN_DIR . "/AKDTU/functions/users.php";
+	require_once WP_PLUGIN_DIR . "/AKDTU/functions/users.php";
 
-				$status = array();
-				foreach (all_apartments() as $apartment) {
-					$status[$apartment] = false;
-				}
+	$status = array();
+	foreach (all_apartments() as $apartment) {
+		$status[$apartment] = false;
+	}
 
-				$res = $wpdb->get_col('SELECT showed_up FROM wp_em_tilmeldinger WHERE event_id = ' . $_REQUEST['event_id']);
-				$res = array_map(function ($a) {
-					return json_decode($a);
-				}, $res);
-				foreach ($res as $arr) {
-					foreach ($arr as $user_id => $stat) {
-						if (is_apartment_from_id($user_id)) {
-							$status[apartment_number_from_id($user_id)] = $stat || $status[apartment_number_from_id($user_id)];
-						}
-					}
-				}
-
-				$booked_users = array_map(function ($booking) {
-					$user_login = get_userdata($booking->person_id)->get('user_login');
-					if (is_apartment_from_username($user_login)) {
-						return apartment_number_from_username($user_login);
-					}
-				}, $bookings);
-
-				$latest_signup_date = em_get_event($bookings[0]->event_id, 'event_id')->rsvp_date;
-
-				$moved_users = all_moved_after_apartment_numbers($latest_signup_date);
-
-				$not_showed_up_users = array_filter($booked_users, function($apartment) use($status) { return $status[$apartment] != 1; });
-				$not_showed_up_users_fullnames = array_map(function($apartment) use($moved_users) {return padded_apartment_number_from_apartment_number($apartment) . (in_array($apartment, $moved_users) ? ' (Tidligere beboer)' : '');}, $not_showed_up_users);
-				
-				$showed_up_users = array_filter($booked_users, function($apartment) use($status) { return $status[$apartment] == 1; });
-				$showed_up_users_fullnames = array_map(function($apartment) use($moved_users) {return padded_apartment_number_from_apartment_number($apartment) . (in_array($apartment, $moved_users) ? ' (Tidligere beboer)' : '');}, $showed_up_users);
-	
-				$not_signed_up_users = array_filter(all_apartments(), function($apartment) use($booked_users) { return !in_array($apartment, $booked_users); });
-				$not_signed_up_users_fullnames = array_map(function($apartment) use($moved_users) {return padded_apartment_number_from_apartment_number($apartment) . (in_array($apartment, $moved_users) ? ' (Tidligere beboer)' : '');}, $not_signed_up_users);
-?>
-	<h2>Lejligheder tilmeldt havedage, men IKKE mødt op ifølge online tilmeldingslister:</h2>
-	<?php
-		echo (count($not_showed_up_users_fullnames) > 0 ? implode(", ", $not_showed_up_users_fullnames) : '(Ingen)');
-	?>
-
-	<h2>Lejligheder IKKE tilmeldt havedage: (Check selv om det er tidligere beboere)</h2>
-	<?php
-		echo (count($not_signed_up_users_fullnames) > 0 ? implode(", ", $not_signed_up_users_fullnames) : '(Ingen)');
-	?>
-
-	<h2>Lejligheder tilmeldt havedage og mødt op ifølge online tilmeldingslister:</h2>
-	<?php
-		echo (count($showed_up_users_fullnames) > 0 ? implode(", ", $showed_up_users_fullnames) : '(Ingen)');
-	?>
-
-	<br><br>
-	<hr>
-	<h2>Opkrævning:</h2>
-	<?php
-		foreach (all_apartments() as $apartment) {
-			if (in_array($apartment, $showed_up_users)) {
-				# Apartment showed up as they were supposed to. No charge
-			} elseif(in_array($apartment, $not_showed_up_users)) {
-				# Apartment was signed up, but did not show. Charge
-				echo '<b>Lejlighed ' . padded_apartment_number_from_apartment_number($apartment) . (in_array($apartment, $moved_users) ? ' (Tidligere beboer)' : '') . '</b>: ' . number_format(gardenday_price($apartment), 2, ",", ".") . ' kr';
-
-				if (is_boardmember_from_apartment_number($apartment)) {
-					# Make board members clearer to see
-					echo ' - <b><u><i>Bestyrelsesmedlem</i></u></b>';
-				}
-
-				echo '<br>';
-			} else {
-				# Apartment was not signed up. Charge
-				echo '<b>Lejlighed ' . padded_apartment_number_from_apartment_number($apartment) . (in_array($apartment, $moved_users) ? ' (Tidligere beboer)' : '') . '</b>: ' . number_format(gardenday_price($apartment), 2, ",", ".") . ' kr';
-
-				if (is_boardmember_from_apartment_number($apartment)) {
-					# Make board members clearer to see
-					echo ' - <b><u><i>Bestyrelsesmedlem</i></u></b>';
-				}
-
-				echo '<br>';
+	$res = $wpdb->get_col('SELECT showed_up FROM wp_em_tilmeldinger WHERE event_id = ' . $_REQUEST['event_id']);
+	$res = array_map(function ($a) {
+		return json_decode($a);
+	}, $res);
+	foreach ($res as $arr) {
+		foreach ($arr as $user_id => $stat) {
+			if (is_apartment_from_id($user_id)) {
+				$status[apartment_number_from_id($user_id)] = $stat || $status[apartment_number_from_id($user_id)];
 			}
 		}
-	?>
+	}
+
+	$booking_info = array_map(function ($booking) {
+		$user_login = get_userdata($booking->person_id)->get('user_login');
+		if (is_apartment_from_username($user_login)) {
+			return array(
+				"apt" => apartment_number_from_username($user_login),
+				"date" => array_values(
+					array_map(
+						function($ticket) {
+							return new DateTime($ticket->ticket_name, new DateTimeZone("Europe/Copenhagen"));
+						},
+						$booking->get_tickets()->tickets
+					)
+				)[0]
+			);
+		}
+	}, $bookings);
+
+	$booked_users = array();
+	array_walk(
+		$booking_info,
+		function($value, $key) use(&$booked_users) {
+			$booked_users[$value["apt"]] = $value["date"];
+		}
+	);
+
+	$latest_signup_date = em_get_event($bookings[0]->event_id, 'event_id')->rsvp_date;
+
+	$moved_users = all_moved_after_apartment_numbers($latest_signup_date);
+	
+	$showed_up_users = array_filter(array_keys($booked_users), function($apartment) use($status) { return $status[$apartment] == 1; });
+?>
+<div class="table-container">
+	<table class="widefat showeduptable">
+		<colgroup>
+			<col span="1" width="35%">
+			<col span="1" width="25%">
+			<col span="1" width="20%">
+			<col span="1" width="20%">
+		</colgroup>
+		<thead>
+			<td>Lejlighed</td>
+			<td>Tilmeldt</td>
+			<td>Mødt op</td>
+			<td>Opkræves</td>
+		</thead>
+		<tbody>
+			<?php
+				foreach (all_apartments() as $apartment) {
+					if ($apartment < 100) {
+						echo '<tr' . ($apartment % 2 == 1 ? ' class="alternate"' : '') . '>';
+
+						echo '<td>' . padded_apartment_number_from_apartment_number($apartment) . (in_array($apartment, $moved_users) ? ' (Tidligere beboer)' : '') . (in_array($apartment, array_keys($booked_users)) && was_boardmember_from_apartment_number($apartment, $booked_users[$apartment]) ? ' - <u><b>Bestyrelsesmedlem</b></u>' : '') . (in_array($apartment, array_keys($booked_users)) && was_board_deputy_from_apartment_number($apartment, $booked_users[$apartment]) ? ' - <u><b>Bestyrelsessuppleant</b></u>' : '') . '</td>';
+						echo '<td>' . (in_array($apartment, array_keys($booked_users)) ? $havedag_formatter->format($booked_users[$apartment]) : '<span style="font-weight: bold">✕</span>') . '</td>';
+						echo '<td style="font-weight: bold">' . (in_array($apartment, $showed_up_users) ? "✓" : "✕") . '</td>';
+						echo '<td>' . (!in_array($apartment, $showed_up_users) ? number_format(gardenday_price($apartment), 2, ",", ".") : number_format(0, 2, ",", ".")) . ' kr.</td>';
+
+						echo '</tr>';
+					}
+				}
+			?>
+		</tbody>
+	</table>
+	<table class="widefat showeduptable">
+		<colgroup>
+			<col span="1" width="35%">
+			<col span="1" width="25%">
+			<col span="1" width="20%">
+			<col span="1" width="20%">
+		</colgroup>
+		<thead>
+			<td>Lejlighed</td>
+			<td>Tilmeldt</td>
+			<td>Mødt op</td>
+			<td>Opkræves</td>
+		</thead>
+		<tbody>
+			<?php
+				foreach (all_apartments() as $apartment) {
+					if ($apartment > 100 && $apartment < 200) {
+						echo '<tr' . ($apartment % 2 == 1 ? ' class="alternate"' : '') . '>';
+
+						echo '<td>' . padded_apartment_number_from_apartment_number($apartment) . (in_array($apartment, $moved_users) ? ' (Tidligere beboer)' : '') . (in_array($apartment, array_keys($booked_users)) && was_boardmember_from_apartment_number($apartment, $booked_users[$apartment]) ? ' - <u><b>Bestyrelsesmedlem</b></u>' : '') . (in_array($apartment, array_keys($booked_users)) && was_board_deputy_from_apartment_number($apartment, $booked_users[$apartment]) ? ' - <u><b>Bestyrelsessuppleant</b></u>' : '') . '</td>';
+						echo '<td>' . (in_array($apartment, array_keys($booked_users)) ? $havedag_formatter->format($booked_users[$apartment]) : '<span style="font-weight: bold">✕</span>') . '</td>';
+						echo '<td style="font-weight: bold">' . (in_array($apartment, $showed_up_users) ? "✓" : "✕") . '</td>';
+						echo '<td>' . (!in_array($apartment, $showed_up_users) ? number_format(gardenday_price($apartment), 2, ",", ".") : number_format(0, 2, ",", ".")) . ' kr.</td>';
+
+						echo '</tr>';
+					}
+				}
+			?>
+		</tbody>
+	</table>
+	<table class="widefat showeduptable">
+		<colgroup>
+			<col span="1" width="35%">
+			<col span="1" width="25%">
+			<col span="1" width="20%">
+			<col span="1" width="20%">
+		</colgroup>
+		<thead>
+			<td>Lejlighed</td>
+			<td>Tilmeldt</td>
+			<td>Mødt op</td>
+			<td>Opkræves</td>
+		</thead>
+		<tbody>
+			<?php
+				foreach (all_apartments() as $apartment) {
+					if ($apartment > 200) {
+						echo '<tr' . ($apartment % 2 == 1 ? ' class="alternate"' : '') . '>';
+
+						echo '<td>' . padded_apartment_number_from_apartment_number($apartment) . (in_array($apartment, $moved_users) ? ' (Tidligere beboer)' : '') . (in_array($apartment, array_keys($booked_users)) && was_boardmember_from_apartment_number($apartment, $booked_users[$apartment]) ? ' - <u><b>Bestyrelsesmedlem</b></u>' : '') . (in_array($apartment, array_keys($booked_users)) && was_board_deputy_from_apartment_number($apartment, $booked_users[$apartment]) ? ' - <u><b>Bestyrelsessuppleant</b></u>' : '') . '</td>';
+						echo '<td>' . (in_array($apartment, array_keys($booked_users)) ? $havedag_formatter->format($booked_users[$apartment]) : '<span style="font-weight: bold">✕</span>') . '</td>';
+						echo '<td style="font-weight: bold">' . (in_array($apartment, $showed_up_users) ? "✓" : "✕") . '</td>';
+						echo '<td>' . (!in_array($apartment, $showed_up_users) ? number_format(gardenday_price($apartment), 2, ",", ".") : number_format(0, 2, ",", ".")) . ' kr.</td>';
+
+						echo '</tr>';
+					}
+				}
+			?>
+		</tbody>
+	</table>
+</div>
+<style>
+	.table-container{
+		display: flex;
+		justify-content: space-between;
+	}
+	.showeduptable {
+		width: 33%;
+		display: inline-table; 
+		vertical-align: top;
+	}
+	@media screen and (max-width: 1265px) {
+		.showeduptable {
+			width: 100%;
+		}
+		.showeduptable:not(:first-child) {
+			margin-top: 20px;
+		}
+		.table-container {
+			display: initial;
+		}
+	}
+</style>
 <?php endif;
 		endif;
 	}
