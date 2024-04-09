@@ -16,7 +16,10 @@
  * @return int Price of the apartment not participating.
  */
 function gardenday_price($apartment_number, $garden_day_id) {
-	return 750;
+	if (em_get_event($garden_day_id, 'event_id')->rsvp_date >= "2022-09-18") {
+		// Remove this check when the price changes the first time. This is only to show how this can be done in the future.
+		return 750;
+	}
 }
 
 /**
