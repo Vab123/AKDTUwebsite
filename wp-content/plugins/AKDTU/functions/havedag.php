@@ -7,11 +7,15 @@
 /**
  * Calculates the price for an apartment not participating in a garden day.
  * 
+ * The function must reflect all previous changes in prices. The price has previously been changed on:
+ * - Never
+ * 
  * @param int $apartment_number Apartment number of the apartment not participating.
+ * @param int $garden_day_id Id of the garden day event
  * 
  * @return int Price of the apartment not participating.
  */
-function gardenday_price($apartment_number) {
+function gardenday_price($apartment_number, $garden_day_id) {
 	return 750;
 }
 

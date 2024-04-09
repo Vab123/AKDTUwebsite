@@ -97,11 +97,11 @@ function send_opkrævning_havedag($debug = false) {
 			$users_that_should_pay = array_filter(all_apartments(), function($apartment) use($status) { return !$status[$apartment]; });
 
 			# Go through all users that should pay
-			$payment_info = join('<br>', array_map(function($apartment) use($moved_users) {
+			$payment_info = join('<br>', array_map(function($apartment) use($moved_users, $gardenday) {
 				# Info format for the real email
 				$replaces = array(
 					'#APT' => padded_apartment_number_from_apartment_number($apartment) . (in_array($apartment, $moved_users) ? ' (Tidligere beboer)' : '' ),
-					'#PRICE' => number_format(gardenday_price($apartment), 2, ",", "."),
+					'#PRICE' => number_format(gardenday_price($apartment, $gardenday->event_id), 2, ",", "."),
 					'#BOARDSTATUS' => (is_boardmember_from_apartment_number($apartment) ? HAVEDAG_BOARDMEMBER : '') . (is_board_deputy_from_apartment_number($apartment) ? HAVEDAG_BOARD_DEPUTY : '')
 				);
 				
