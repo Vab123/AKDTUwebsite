@@ -18,7 +18,7 @@ function em_bookings_print_event() {
 	}
 	$header_button_classes = is_admin() ? 'page-title-action' : 'button add-new-h2';
 	if (empty($_REQUEST['event_ticket_id'])) {
-		$_REQUEST['event_ticket_id'] = array_keys(em_get_event($_REQUEST['event_id'], 'event_id')->get_tickets()->tickets)[0];
+		$_REQUEST['event_ticket_id'] = "total";
 	}
 	$translations = pll_get_post_translations($EM_Event->post_id);
 
@@ -83,7 +83,6 @@ function em_bookings_print_event() {
 				<?php if (!is_admin()) : ?></h2><?php else : ?></h1>
 			<hr class="wp-header-end" /><?php endif; ?>
 		<?php if (!is_admin()) echo $EM_Notices; ?>
-		<h2><?php esc_html_e('Date', 'events-manager'); ?></h2>
 		<input type='hidden' name='selected_id' id='selected_id' value='<?php echo $_REQUEST['event_ticket_id']; ?>' />
 		<form method='GET' action=''>
 			<input type="hidden" name="post_type" value="event" />
