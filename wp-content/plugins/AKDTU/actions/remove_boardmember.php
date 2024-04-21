@@ -37,7 +37,7 @@ function remove_boardmember($user_id){
 		$wp_user->set_role('subscriber');
 		
 		# Update old boardmember in the database
-		$rows_changed = $wpdb->update($wpdb->prefix . 'AKDTU_boardmembers',array('end_datetime' => (new DateTime('now',new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s')), array('apartment_number' => apartment_number_from_id($_REQUEST['user']), 'end_datetime' => '9999-12-31 23:59:59'));
+		$rows_changed = $wpdb->update($wpdb->prefix . 'AKDTU_boardmembers',array('end_datetime' => (new DateTime('now - 1 minute', new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s')), array('apartment_number' => apartment_number_from_id($_REQUEST['user']), 'end_datetime' => '9999-12-31 23:59:59'));
 
 		# Write success message to admin interface
 		if ($rows_changed > 0) {
