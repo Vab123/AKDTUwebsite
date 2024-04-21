@@ -581,15 +581,35 @@ function all_board_ids() {
 #
 # Get board-email adresses
 #
-
+/**
+ * Defines the user email for a board-related person, by their apartment number
+ * 
+ * @param string $number Apartment number of the board-related person
+ * 
+ * @return string Email adress of the board-related person
+ */
 function board_email_from_apartment_number($number) {
 	return board_email_from_id(id_from_apartment_number($number));
 }
 #
+/**
+ * Defines the user email for a board-related person, by their username
+ * 
+ * @param string $username Username of the board-related person
+ * 
+ * @return string Email adress of the board-related person
+ */
 function board_email_from_username($username) {
 	return board_email_from_id(id_from_username($username));
 }
 #
+/**
+ * Defines the user email for a board-related person, by their user id
+ * 
+ * @param string $id User id of the board-related person
+ * 
+ * @return string Email adress of the board-related person
+ */
 function board_email_from_id($id) {
 	return strtolower(explode(" ", get_user_by('ID', $id)->first_name)[0]) . apartment_number_from_id($id) . "@akdtu.dk";
 }
@@ -697,93 +717,215 @@ function was_board_deputy_from_id($id, $datetime) {
 #
 #
 #
+/**
+ * Checks if a user was chairman of the board at a given time, by their apartment number
+ * 
+ * @param string $number Apartment number of the user
+ * @param DateTime $datetime Time to check if the user was chairman of the board
+ * 
+ * @return bool True if the user was chairman of the board at the given time
+ */
 function was_chairman_from_apartment_number($number, $datetime) {
 	global $AKDTU_BOARD_TYPES;
 	# Checks if the user was chairman at the given time
 	return user_type_from_apartment_number($number, $datetime) == $AKDTU_BOARD_TYPES['chairman']['id'];
 }
 #
+/**
+ * Checks if a user was chairman of the board at a given time, by their username
+ * 
+ * @param string $username Username of the user
+ * @param DateTime $datetime Time to check if the user was chairman of the board
+ * 
+ * @return bool True if the user was chairman of the board at the given time
+ */
 function was_chairman_from_username($username, $datetime) {
 	return was_chairman_from_apartment_number(apartment_number_from_username($username), $datetime);
 }
 #
+/**
+ * Checks if a user was chairman of the board at a given time, by their user id
+ * 
+ * @param string $id User id of the user
+ * @param DateTime $datetime Time to check if the user was chairman of the board
+ * 
+ * @return bool True if the user was chairman of the board at the given time
+ */
 function was_chairman_from_id($id, $datetime) {
 	return was_chairman_from_apartment_number(apartment_number_from_id($id), $datetime);
 }
 #
 #
 #
+/**
+ * Checks if a user was deputy chairman of the board at a given time, by their apartment number
+ * 
+ * @param string $number Apartment number of the user
+ * @param DateTime $datetime Time to check if the user was deputy chairman of the board
+ * 
+ * @return bool True if the user was deputy chairman of the board at the given time
+ */
 function was_deputy_chairman_from_apartment_number($number, $datetime) {
 	global $AKDTU_BOARD_TYPES;
 	# Checks if the user was chairman at the given time
 	return user_type_from_apartment_number($number, $datetime) == $AKDTU_BOARD_TYPES['deputy-chairman']['id'];
 }
 #
+/**
+ * Checks if a user was deputy chairman of the board at a given time, by their username
+ * 
+ * @param string $username Username of the user
+ * @param DateTime $datetime Time to check if the user was deputy chairman of the board
+ * 
+ * @return bool True if the user was deputy chairman of the board at the given time
+ */
 function was_deputy_chairman_from_username($username, $datetime) {
 	return was_deputy_chairman_from_apartment_number(apartment_number_from_username($username), $datetime);
 }
 #
+/**
+ * Checks if a user was deputy chairman of the board at a given time, by their user id
+ * 
+ * @param string $id User id of the user
+ * @param DateTime $datetime Time to check if the user was deputy chairman of the board
+ * 
+ * @return bool True if the user was deputy chairman of the board at the given time
+ */
 function was_deputy_chairman_from_id($id, $datetime) {
 	return was_deputy_chairman_from_apartment_number(apartment_number_from_id($id), $datetime);
 }
 #
 #
 #
+/**
+ * Checks if a user was a default member of the board at a given time, by their apartment number
+ * 
+ * @param string $number Apartment number of the user
+ * @param DateTime $datetime Time to check if the user was a default member of the board
+ * 
+ * @return bool True if the user was a default member of the board at the given time
+ */
 function was_default_boardmember_from_apartment_number($number, $datetime) {
 	global $AKDTU_BOARD_TYPES;
 	# Checks if the user was chairman at the given time
 	return user_type_from_apartment_number($number, $datetime) == $AKDTU_BOARD_TYPES['default']['id'];
 }
 #
+/**
+ * Checks if a user was a default member of the board at a given time, by their username
+ * 
+ * @param string $username Username of the user
+ * @param DateTime $datetime Time to check if the user was a default member of the board
+ * 
+ * @return bool True if the user was a default member of the board at the given time
+ */
 function was_default_boardmember_from_username($username, $datetime) {
 	return was_default_boardmember_from_apartment_number(apartment_number_from_username($username), $datetime);
 }
 #
+/**
+ * Checks if a user was a default member of the board at a given time, by their user id
+ * 
+ * @param string $id User id of the user
+ * @param DateTime $datetime Time to check if the user was a default member of the board
+ * 
+ * @return bool True if the user was a default member of the board at the given time
+ */
 function was_default_boardmember_from_id($id, $datetime) {
 	return was_default_boardmember_from_apartment_number(apartment_number_from_id($id), $datetime);
 }
 #
 #
 #
+/**
+ * Gets the user type of a board member or deputy at a given time, by their apartment number
+ * 
+ * @param string $number Apartment number of the user
+ * @param DateTime $datetime Time to find the user type of the user
+ * 
+ * @return int User type of the user if they were a board member or deputy at the given time. 0 otherwise.
+ */
 function user_type_from_apartment_number($number, $datetime) {
 	global $wpdb;
-	# Checks if the user was chairman at the given time
-	return $wpdb->get_var($wpdb->prepare('SELECT member_type FROM ' . $wpdb->prefix . 'AKDTU_boardmembers WHERE apartment_number = "' . $number . '" AND start_datetime <= "' . $datetime->format('Y-m-d H:i:s') . '" AND end_datetime >= "' . $datetime->format('Y-m-d H:i:s') . '"'));
+	
+	$user_type = $wpdb->get_var($wpdb->prepare('SELECT member_type FROM ' . $wpdb->prefix . 'AKDTU_boardmembers WHERE apartment_number = "' . $number . '" AND start_datetime <= "' . $datetime->format('Y-m-d H:i:s') . '" AND end_datetime >= "' . $datetime->format('Y-m-d H:i:s') . '"'));
+
+	if (is_null($user_type)) {
+		global $AKDTU_BOARD_TYPES;
+		return $AKDTU_BOARD_TYPES['none']['id'];
+	}
+
+	return $user_type;
 }
 #
+/**
+ * Gets the user type of a board member or deputy at a given time, by their username
+ * 
+ * @param string $username Username of the user
+ * @param DateTime $datetime Time to find the user type of the user
+ * 
+ * @return int User type of the user if they were a board member or deputy at the given time. 0 otherwise.
+ */
 function user_type_from_username($username, $datetime) {
 	return user_type_from_apartment_number(apartment_number_from_username($username), $datetime);
 }
 #
+/**
+ * Gets the user type of a board member or deputy at a given time, by their user id
+ * 
+ * @param string $id User id of the user
+ * @param DateTime $datetime Time to find the user type of the user
+ * 
+ * @return int User type of the user if they were a board member or deputy at the given time. 0 otherwise.
+ */
 function user_type_from_id($id, $datetime) {
 	return user_type_from_apartment_number(apartment_number_from_id($id), $datetime);
 }
 #
 #
 #
+/**
+ * Gets the name of the user type of a board member or deputy at a given time, by their apartment number
+ * 
+ * @param string $number Apartment number of the user
+ * @param DateTime $datetime Time to find the user type of the user
+ * 
+ * @return string Name of the user type of the user at the given time..
+ */
 function user_type_name_from_apartment_number($number, $datetime) {
 	global $AKDTU_BOARD_TYPES;
 	$user_type = user_type_from_apartment_number($number, $datetime);
-	# Checks if the user was chairman at the given time
-	return array_map(
-		function($type) {
-			return $type['name'];
-		},
-		array_values(
-			array_filter(
-				$AKDTU_BOARD_TYPES,
-				function($type) use($user_type) {
-					return $type['id'] == $user_type;
-				}
-			)
+
+	return array_values(
+		array_filter(
+			$AKDTU_BOARD_TYPES,
+			function($type) use($user_type) {
+				return $type['id'] == $user_type;
+			}
 		)
-	)[0];
+	)[0]['name'];
 }
 #
+/**
+ * Gets the name of the user type of a board member or deputy at a given time, by their username
+ * 
+ * @param string $username Username of the user
+ * @param DateTime $datetime Time to find the user type of the user
+ * 
+ * @return string Name of the user type of the user at the given time..
+ */
 function user_type_name_from_username($username, $datetime) {
 	return user_type_name_from_apartment_number(apartment_number_from_username($username), $datetime);
 }
 #
+/**
+ * Gets the name of the user type of a board member or deputy at a given time, by their user ID
+ * 
+ * @param string $id User id of the user
+ * @param DateTime $datetime Time to find the user type of the user
+ * 
+ * @return string Name of the user type of the user at the given time..
+ */
 function user_type_name_from_id($id, $datetime) {
 	return user_type_name_from_apartment_number(apartment_number_from_id($id), $datetime);
 }
@@ -880,6 +1022,8 @@ function all_moved_after_ids($moved_after_date) {
 	return array_map(function ($apartment) {return id_from_apartment_number($apartment);}, all_moved_after_apartment_numbers($moved_after_date));
 }
 ############################################################
+
+
 
 /**
  * Returns an array with the apartment numbers for all apartments
