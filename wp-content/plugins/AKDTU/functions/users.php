@@ -393,7 +393,7 @@ function is_vicevært_from_id($id) {
  */
 function is_boardmember_from_username($username) {
 	# Checks if the username belongs to a board member
-	return SwpmMembershipLevelUtils::get_membership_level_name_by_level_id(SwpmMemberUtils::get_user_by_user_name($username)->membership_level) == "Beboerprofil til bestyrelsesmedlem";
+	return was_boardmember_from_username($username, new DateTime('now', new DateTimeZone('Europe/Copenhagen')));
 }
 #
 /**
@@ -436,7 +436,7 @@ function is_boardmember_from_id($id) {
  */
 function is_board_deputy_from_username($username) {
 	# Checks if the username belongs to a board member
-	return SwpmMembershipLevelUtils::get_membership_level_name_by_level_id(SwpmMemberUtils::get_user_by_user_name($username)->membership_level) == "Beboerprofil til bestyrelsessuppleant";
+	return was_board_deputy_from_username($username, new DateTime('now', new DateTimeZone('Europe/Copenhagen')));
 }
 #
 /**
@@ -461,100 +461,6 @@ function is_board_deputy_from_apartment_number($number) {
 function is_board_deputy_from_id($id) {
 	# Checks if the user id belongs to a board member
 	return is_board_deputy_from_username(username_from_id($id));
-}
-############################################################
-
-
-
-############################################################
-#
-# Check if user was a board member at a given time
-#
-/**
- * Checks if a username belongs to a board member at a given time
- * 
- * @param string $username Username
- * @param DateTime $datetime PHP DateTime object, with the time to check
- * 
- * @return bool True if the username belongs to a board member at the given time
- */
-function was_boardmember_from_username($username, $datetime) {
-	# Checks if the username belonged to a board member at the time
-	return was_boardmember_from_apartment_number(apartment_number_from_username($username), $datetime);
-}
-#
-/**
- * Checks if an apartment number belongs to a board member at a given time
- * 
- * @param int $number Apartment number
- * @param DateTime $datetime PHP DateTime object, with the time to check
- * 
- * @return bool True if the apartment number belongs to a board member at the given time
- */
-function was_boardmember_from_apartment_number($number, $datetime) {
-	global $wpdb;
-	# Checks if the apartment number belongs to a board member
-	return $wpdb->get_var($wpdb->prepare('SELECT COUNT(*) FROM ' . $wpdb->prefix . 'AKDTU_boardmembers WHERE apartment_number = "' . $number . '" AND start_datetime <= "' . $datetime->format('Y-m-d H:i:s') . '" AND end_datetime >= "' . $datetime->format('Y-m-d H:i:s') . '"')) > 0;
-}
-#
-/**
- * Checks if a user id belongs to a board member at a given time
- * 
- * @param int $id User id
- * @param DateTime $datetime PHP DateTime object, with the time to check
- * 
- * @return bool True if the user id belongs to a board member at the given time
- */
-function was_boardmember_from_id($id, $datetime) {
-	# Checks if the user id belongs to a board member
-	return was_boardmember_from_apartment_number(apartment_number_from_id($id), $datetime);
-}
-############################################################
-
-
-
-############################################################
-#
-# Check the type of users at a given time
-#
-/**
- * Checks if a username belongs to a board deputy at a given time
- * 
- * @param string $username Username
- * @param DateTime $datetime PHP DateTime object, with the time to check
- * 
- * @return bool True if the username belongs to a board deputy at the given time
- */
-function was_board_deputy_from_username($username, $datetime) {
-	# Checks if the username belonged to a board deputy at the time
-	return was_board_deputy_from_apartment_number(apartment_number_from_username($username), $datetime);
-}
-#
-/**
- * Checks if an apartment number belongs to a board deputy at a given time
- * 
- * @param int $number Apartment number
- * @param DateTime $datetime PHP DateTime object, with the time to check
- * 
- * @return bool True if the apartment number belongs to a board deputy at the given time
- */
-function was_board_deputy_from_apartment_number($number, $datetime) {
-	global $wpdb;
-	# Checks if the apartment number belongs to a board deputy
-	return $wpdb->get_var($wpdb->prepare('SELECT COUNT(*) FROM ' . $wpdb->prefix . 'AKDTU_board_deputies WHERE apartment_number = "' . $number . '" AND start_datetime <= "' . $datetime->format('Y-m-d H:i:s') . '" AND end_datetime >= "' . $datetime->format('Y-m-d H:i:s') . '"')) > 0;
-}
-#
-/**
- * Checks if a user id belongs to a board deputy at a given time
- * 
- * @param int $id User id
- * @param DateTime $datetime PHP DateTime object, with the time to check
- * 
- * @return bool True if the user id belongs to a board_deputy at the given time
- */
-function was_board_deputy_from_id($id, $datetime) {
-	# Checks if the user id belongs to a board deputy
-	return was_board_deputy_from_apartment_number(apartment_number_from_id($id), $datetime);
 }
 ############################################################
 
@@ -599,6 +505,80 @@ function all_boardmember_ids() {
 
 ############################################################
 #
+# Get all current board deputies
+#
+/**
+ * Gets a list of the apartment numbers of all current board deputies
+ * 
+ * @return array[int] Array of apartment numbers for all current board deputies
+ */
+function all_board_deputies_apartments() {
+	# Return array of board deputies
+	return array_filter(all_apartments(), function($apartment) {return is_board_deputy_from_apartment_number($apartment);});
+}
+#
+/**
+ * Gets a list of the usernames of all current board deputies
+ * 
+ * @return array[string] Array of usernames for all current board deputies
+ */
+function all_board_deputies_usernames() {
+	# Lists the usernames of all board deputies
+	return array_map(function($apartment_number) {return username_from_apartment_number($apartment_number);}, all_board_deputies_apartments());
+}
+#
+/**
+ * Gets a list of the user ids of all current board deputies
+ * 
+ * @return array[string] Array of user ids for all current board deputies
+ */
+function all_board_deputies_ids() {
+	# Lists the usernames of all board deputies
+	return array_map(function($apartment_number) {return id_from_apartment_number($apartment_number);}, all_board_deputies_apartments());
+}
+############################################################
+
+
+
+############################################################
+#
+# Get all current board members and deputies
+#
+/**
+ * Gets a list of the apartment numbers of all current board members and deputies
+ * 
+ * @return array[int] Array of apartment numbers for all current board members and deputies
+ */
+function all_board_apartments() {
+	# Return array of board members and deputies
+	return array_filter(all_apartments(), function($apartment) {return is_boardmember_from_apartment_number($apartment) || is_board_deputy_from_apartment_number($apartment);});
+}
+#
+/**
+ * Gets a list of the usernames of all current board members and deputies
+ * 
+ * @return array[string] Array of usernames for all current board members and deputies
+ */
+function all_board_usernames() {
+	# Lists the usernames of all board members and deputies
+	return array_map(function($apartment_number) {return username_from_apartment_number($apartment_number);}, all_board_apartments());
+}
+#
+/**
+ * Gets a list of the user ids of all current board members and deputies
+ * 
+ * @return array[string] Array of user ids for all current board members and deputies
+ */
+function all_board_ids() {
+	# Lists the usernames of all board members and deputies
+	return array_map(function($apartment_number) {return id_from_apartment_number($apartment_number);}, all_board_apartments());
+}
+############################################################
+
+
+
+############################################################
+#
 # Get board-email adresses
 #
 
@@ -620,6 +600,102 @@ function board_email_from_id($id) {
 ############################################################
 #
 # Check type of user at a given time
+#
+/**
+ * Checks if a username belongs to a board member at a given time
+ * 
+ * @param string $username Username
+ * @param DateTime $datetime PHP DateTime object, with the time to check
+ * 
+ * @return bool True if the username belongs to a board member at the given time
+ */
+function was_boardmember_from_username($username, $datetime) {
+	# Checks if the username belonged to a board member at the time
+	return was_boardmember_from_apartment_number(apartment_number_from_username($username), $datetime);
+}
+#
+/**
+ * Checks if an apartment number belongs to a board member at a given time
+ * 
+ * @param int $number Apartment number
+ * @param DateTime $datetime PHP DateTime object, with the time to check
+ * 
+ * @return bool True if the apartment number belongs to a board member at the given time
+ */
+function was_boardmember_from_apartment_number($number, $datetime) {
+	global $wpdb;
+	global $AKDTU_BOARD_TYPES;
+
+	# Checks if the apartment number belongs to a board member
+	$member_type = $wpdb->get_var($wpdb->prepare('SELECT member_type FROM ' . $wpdb->prefix . 'AKDTU_boardmembers WHERE apartment_number = "' . $number . '" AND start_datetime <= "' . $datetime->format('Y-m-d H:i:s') . '" AND end_datetime >= "' . $datetime->format('Y-m-d H:i:s') . '"'));
+
+	return !is_null($member_type) && (
+		$member_type == $AKDTU_BOARD_TYPES['chairman']['id'] ||
+		$member_type == $AKDTU_BOARD_TYPES['deputy-chairman']['id'] ||
+		$member_type == $AKDTU_BOARD_TYPES['default']['id']
+	);
+}
+#
+/**
+ * Checks if a user id belongs to a board member at a given time
+ * 
+ * @param int $id User id
+ * @param DateTime $datetime PHP DateTime object, with the time to check
+ * 
+ * @return bool True if the user id belongs to a board member at the given time
+ */
+function was_boardmember_from_id($id, $datetime) {
+	# Checks if the user id belongs to a board member
+	return was_boardmember_from_apartment_number(apartment_number_from_id($id), $datetime);
+}
+#
+#
+#
+/**
+ * Checks if a username belongs to a board deputy at a given time
+ * 
+ * @param string $username Username
+ * @param DateTime $datetime PHP DateTime object, with the time to check
+ * 
+ * @return bool True if the username belongs to a board deputy at the given time
+ */
+function was_board_deputy_from_username($username, $datetime) {
+	# Checks if the username belonged to a board deputy at the time
+	return was_board_deputy_from_apartment_number(apartment_number_from_username($username), $datetime);
+}
+#
+/**
+ * Checks if an apartment number belongs to a board deputy at a given time
+ * 
+ * @param int $number Apartment number
+ * @param DateTime $datetime PHP DateTime object, with the time to check
+ * 
+ * @return bool True if the apartment number belongs to a board deputy at the given time
+ */
+function was_board_deputy_from_apartment_number($number, $datetime) {
+	global $wpdb;
+	global $AKDTU_BOARD_TYPES;
+
+	# Checks if the apartment number belongs to a board member
+	$member_type = $wpdb->get_var($wpdb->prepare('SELECT member_type FROM ' . $wpdb->prefix . 'AKDTU_boardmembers WHERE apartment_number = "' . $number . '" AND start_datetime <= "' . $datetime->format('Y-m-d H:i:s') . '" AND end_datetime >= "' . $datetime->format('Y-m-d H:i:s') . '"'));
+
+	return !is_null($member_type) && $member_type == $AKDTU_BOARD_TYPES['deputy']['id'];
+}
+#
+/**
+ * Checks if a user id belongs to a board deputy at a given time
+ * 
+ * @param int $id User id
+ * @param DateTime $datetime PHP DateTime object, with the time to check
+ * 
+ * @return bool True if the user id belongs to a board_deputy at the given time
+ */
+function was_board_deputy_from_id($id, $datetime) {
+	# Checks if the user id belongs to a board deputy
+	return was_board_deputy_from_apartment_number(apartment_number_from_id($id), $datetime);
+}
+#
+#
 #
 function was_chairman_from_apartment_number($number, $datetime) {
 	global $AKDTU_BOARD_TYPES;
@@ -710,43 +786,6 @@ function user_type_name_from_username($username, $datetime) {
 #
 function user_type_name_from_id($id, $datetime) {
 	return user_type_name_from_apartment_number(apartment_number_from_id($id), $datetime);
-}
-############################################################
-
-
-
-############################################################
-#
-# Get all current board deputies
-#
-/**
- * Gets a list of the apartment numbers of all current board deputies
- * 
- * @return array[int] Array of apartment numbers for all current board deputies
- */
-function all_board_deputies_apartments() {
-	# Return array of board deputies
-	return array_filter(all_apartments(), function($apartment) {return is_board_deputy_from_apartment_number($apartment);});
-}
-#
-/**
- * Gets a list of the usernames of all current board deputies
- * 
- * @return array[string] Array of usernames for all current board deputies
- */
-function all_board_deputies_usernames() {
-	# Lists the usernames of all board deputies
-	return array_map(function($apartment_number) {return username_from_apartment_number($apartment_number);}, all_board_deputies_apartments());
-}
-#
-/**
- * Gets a list of the user ids of all current board deputies
- * 
- * @return array[string] Array of user ids for all current board deputies
- */
-function all_board_deputies_ids() {
-	# Lists the usernames of all board deputies
-	return array_map(function($apartment_number) {return id_from_apartment_number($apartment_number);}, all_board_deputies_apartments());
 }
 ############################################################
 
