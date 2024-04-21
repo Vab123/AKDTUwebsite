@@ -19,15 +19,27 @@ $AKDTU_FUNCTIONS = array(
 $AKDTU_BOARD_TYPES = array(
 	'chairman' => array(
 		'id' => 1,
-		'name' => 'Formand'
+		'name' => 'Formand',
+		'user_level' => 'Beboerprofil til bestyrelsesmedlem',
+		'user_role' => 'board_member',
 	),
 	'deputy-chairman' => array(
 		'id' => 2,
-		'name' => 'Næstformand'
+		'name' => 'Næstformand',
+		'user_level' => 'Beboerprofil til bestyrelsesmedlem',
+		'user_role' => 'board_member',
+	),
+	'deputy' => array(
+		'id' => 3,
+		'name' => 'Suppleant',
+		'user_level' => 'Beboerprofil til bestyrelsessuppleant',
+		'user_role' => 'deputy',
 	),
 	'default' => array(
 		'id' => 0,
-		'name' => 'Medlem'
+		'name' => 'Medlem',
+		'user_level' => 'Beboerprofil til bestyrelsesmedlem',
+		'user_role' => 'board_member',
 	),
 );
 
