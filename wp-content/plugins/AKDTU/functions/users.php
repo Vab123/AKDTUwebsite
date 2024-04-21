@@ -476,8 +476,13 @@ function is_board_deputy_from_id($id) {
  * @return array[int] Array of apartment numbers for all current boardmembers
  */
 function all_boardmember_apartments() {
-	# Return array of boardmembers
-	return array_filter(all_apartments(), function($apartment) {return is_boardmember_from_apartment_number($apartment);});
+	$now = new DateTime('now', new DateTimeZone("Europe/Copenhagen"));
+
+	global $wpdb;
+	global $AKDTU_BOARD_TYPES;
+
+	// Find all board members
+	return $wpdb->get_col('SELECT apartment_number FROM ' . $wpdb->prefix . 'AKDTU_boardmembers WHERE start_datetime <= "' . $now->format('Y-m-d H:i:s') . '" AND end_datetime >= "' . $now->format('Y-m-d H:i:s') . '" AND member_type IN ("' . $AKDTU_BOARD_TYPES['chairman']['id'] . '","' . $AKDTU_BOARD_TYPES['deputy-chairman']['id'] . '","' . $AKDTU_BOARD_TYPES['default']['id'] . '") ORDER BY apartment_number ASC');
 }
 #
 /**
@@ -513,8 +518,13 @@ function all_boardmember_ids() {
  * @return array[int] Array of apartment numbers for all current board deputies
  */
 function all_board_deputies_apartments() {
-	# Return array of board deputies
-	return array_filter(all_apartments(), function($apartment) {return is_board_deputy_from_apartment_number($apartment);});
+	$now = new DateTime('now', new DateTimeZone("Europe/Copenhagen"));
+
+	global $wpdb;
+	global $AKDTU_BOARD_TYPES;
+
+	// Find all board deputies
+	return $wpdb->get_col($wpdb->prepare('SELECT apartment_number FROM ' . $wpdb->prefix . 'AKDTU_boardmembers WHERE start_datetime <= "' . $now->format('Y-m-d H:i:s') . '" AND end_datetime >= "' . $now->format('Y-m-d H:i:s') . '" AND member_type = "' . $AKDTU_BOARD_TYPES['deputy']['id'] . '" ORDER BY apartment_number ASC'));
 }
 #
 /**
@@ -550,8 +560,12 @@ function all_board_deputies_ids() {
  * @return array[int] Array of apartment numbers for all current board members and deputies
  */
 function all_board_apartments() {
-	# Return array of board members and deputies
-	return array_filter(all_apartments(), function($apartment) {return is_boardmember_from_apartment_number($apartment) || is_board_deputy_from_apartment_number($apartment);});
+	$now = new DateTime('now', new DateTimeZone("Europe/Copenhagen"));
+
+	global $wpdb;
+
+	// Find all board members and board deputies
+	return $wpdb->get_col($wpdb->prepare('SELECT apartment_number FROM ' . $wpdb->prefix . 'AKDTU_boardmembers WHERE start_datetime <= "' . $now->format('Y-m-d H:i:s') . '" AND end_datetime >= "' . $now->format('Y-m-d H:i:s') . '" ORDER BY apartment_number ASC'));
 }
 #
 /**
