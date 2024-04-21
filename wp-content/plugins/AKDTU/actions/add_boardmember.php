@@ -7,7 +7,7 @@
 # Register custom action
 if (isset($_REQUEST['action'])) {
 	if ($_REQUEST['action'] == 'add_boardmember' && isset($_REQUEST['user'])){
-		add_boardmember($_REQUEST['user']);
+		add_boardmember($_REQUEST['user'], isset($_REQUEST['chairman']), isset($_REQUEST['deputy-chairman']));
 	}
 }
 
@@ -18,10 +18,21 @@ if (isset($_REQUEST['action'])) {
  * 
  * @return bool True if the board member was created successfully
  */
-function add_boardmember($apartment_number){
+function add_boardmember($apartment_number, $is_chairman = false, $is_deputy_chairman = false){
 	# Check if the apartment number is valid
 	if ($apartment_number > 0) {
 		global $wpdb;
+		global $AKDTU_BOARD_TYPES;
+
+		if ($is_chairman) {
+			$user_type = $AKDTU_BOARD_TYPES['chairman']['id'];
+		}
+		elseif ($is_deputy_chairman) {
+			$user_type = $AKDTU_BOARD_TYPES['deputy-chairman']['id'];
+		}
+		else {
+			$user_type = $AKDTU_BOARD_TYPES['default']['id'];
+		}
 
 		# Get the SWPM member corresponding to the apartment
 		$swpm_user = SwpmMemberUtils::get_user_by_user_name( username_from_apartment_number($apartment_number) );
@@ -51,7 +62,7 @@ function add_boardmember($apartment_number){
 		$wp_user->set_role('board_member');
 
 		# Insert new boardmember into the database
-		$inserted = $wpdb->insert($wpdb->prefix . 'AKDTU_boardmembers',array('apartment_number' => $apartment_number, 'start_datetime' => (new DateTime('now',new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s'), 'end_datetime' => '9999-12-31 23:59:59'));
+		$inserted = $wpdb->insert($wpdb->prefix . 'AKDTU_boardmembers',array('apartment_number' => $apartment_number, 'start_datetime' => (new DateTime('now',new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s'), 'end_datetime' => '9999-12-31 23:59:59', 'member_type' => $user_type));
 
 		if ($inserted) {
 			# Write success message to admin interface

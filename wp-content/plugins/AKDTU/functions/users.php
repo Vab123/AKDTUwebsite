@@ -515,7 +515,7 @@ function was_boardmember_from_id($id, $datetime) {
 
 ############################################################
 #
-# Check if user was a board deputy at a given time
+# Check the type of users at a given time
 #
 /**
  * Checks if a username belongs to a board deputy at a given time
@@ -592,6 +592,124 @@ function all_boardmember_usernames() {
 function all_boardmember_ids() {
 	# Lists the usernames of all board members
 	return array_map(function($apartment_number) {return id_from_apartment_number($apartment_number);}, all_boardmember_apartments());
+}
+############################################################
+
+
+
+############################################################
+#
+# Get board-email adresses
+#
+
+function board_email_from_apartment_number($number) {
+	return board_email_from_id(id_from_apartment_number($number));
+}
+#
+function board_email_from_username($username) {
+	return board_email_from_id(id_from_username($username));
+}
+#
+function board_email_from_id($id) {
+	return strtolower(explode(" ", get_user_by('ID', $id)->first_name)[0]) . apartment_number_from_id($id) . "@akdtu.dk";
+}
+############################################################
+
+
+
+############################################################
+#
+# Check type of user at a given time
+#
+function was_chairman_from_apartment_number($number, $datetime) {
+	global $AKDTU_BOARD_TYPES;
+	# Checks if the user was chairman at the given time
+	return user_type_from_apartment_number($number, $datetime) == $AKDTU_BOARD_TYPES['chairman']['id'];
+}
+#
+function was_chairman_from_username($username, $datetime) {
+	return was_chairman_from_apartment_number(apartment_number_from_username($username), $datetime);
+}
+#
+function was_chairman_from_id($id, $datetime) {
+	return was_chairman_from_apartment_number(apartment_number_from_id($id), $datetime);
+}
+#
+#
+#
+function was_deputy_chairman_from_apartment_number($number, $datetime) {
+	global $AKDTU_BOARD_TYPES;
+	# Checks if the user was chairman at the given time
+	return user_type_from_apartment_number($number, $datetime) == $AKDTU_BOARD_TYPES['deputy-chairman']['id'];
+}
+#
+function was_deputy_chairman_from_username($username, $datetime) {
+	return was_deputy_chairman_from_apartment_number(apartment_number_from_username($username), $datetime);
+}
+#
+function was_deputy_chairman_from_id($id, $datetime) {
+	return was_deputy_chairman_from_apartment_number(apartment_number_from_id($id), $datetime);
+}
+#
+#
+#
+function was_default_boardmember_from_apartment_number($number, $datetime) {
+	global $AKDTU_BOARD_TYPES;
+	# Checks if the user was chairman at the given time
+	return user_type_from_apartment_number($number, $datetime) == $AKDTU_BOARD_TYPES['default']['id'];
+}
+#
+function was_default_boardmember_from_username($username, $datetime) {
+	return was_default_boardmember_from_apartment_number(apartment_number_from_username($username), $datetime);
+}
+#
+function was_default_boardmember_from_id($id, $datetime) {
+	return was_default_boardmember_from_apartment_number(apartment_number_from_id($id), $datetime);
+}
+#
+#
+#
+function user_type_from_apartment_number($number, $datetime) {
+	global $wpdb;
+	# Checks if the user was chairman at the given time
+	return $wpdb->get_var($wpdb->prepare('SELECT member_type FROM ' . $wpdb->prefix . 'AKDTU_boardmembers WHERE apartment_number = "' . $number . '" AND start_datetime <= "' . $datetime->format('Y-m-d H:i:s') . '" AND end_datetime >= "' . $datetime->format('Y-m-d H:i:s') . '"'));
+}
+#
+function user_type_from_username($username, $datetime) {
+	return user_type_from_apartment_number(apartment_number_from_username($username), $datetime);
+}
+#
+function user_type_from_id($id, $datetime) {
+	return user_type_from_apartment_number(apartment_number_from_id($id), $datetime);
+}
+#
+#
+#
+function user_type_name_from_apartment_number($number, $datetime) {
+	global $AKDTU_BOARD_TYPES;
+	$user_type = user_type_from_apartment_number($number, $datetime);
+	# Checks if the user was chairman at the given time
+	return array_map(
+		function($type) {
+			return $type['name'];
+		},
+		array_values(
+			array_filter(
+				$AKDTU_BOARD_TYPES,
+				function($type) use($user_type) {
+					return $type['id'] == $user_type;
+				}
+			)
+		)
+	)[0];
+}
+#
+function user_type_name_from_username($username, $datetime) {
+	return user_type_name_from_apartment_number(apartment_number_from_username($username), $datetime);
+}
+#
+function user_type_name_from_id($id, $datetime) {
+	return user_type_name_from_apartment_number(apartment_number_from_id($id), $datetime);
 }
 ############################################################
 

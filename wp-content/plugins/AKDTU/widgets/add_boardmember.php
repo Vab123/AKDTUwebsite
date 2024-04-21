@@ -19,6 +19,14 @@ function add_boardmember_widget() { ?>
 					<td><?php echo apartments_dropdown(); ?></td>
 				</tr>
 				<tr>
+					<td><label>Formand:</label></td>
+					<td><input type="checkbox" name="chairman" /></td>
+				</tr>
+				<tr>
+					<td><label>Næstformand:</label></td>
+					<td><input type="checkbox" name="deputy-chairman" /></td>
+				</tr>
+				<tr>
 					<td></td>
 					<td><input type="submit" class="button-secondary" value="Tilføj" /></td>
 				</tr>
