@@ -4,7 +4,9 @@
  * @file Widget to add new board members to the system
  */
 
-function add_boardmember_widget() { ?>
+function add_boardmember_widget() { 
+	global $AKDTU_BOARD_TYPES;
+	?>
 	<form action="" method="post">
 		<input type="hidden" name="action" value="add_boardmember" />
 		<table width="100%">
@@ -19,16 +21,10 @@ function add_boardmember_widget() { ?>
 					<td><?php echo apartments_dropdown(); ?></td>
 				</tr>
 				<tr>
-					<td><label>Formand:</label></td>
-					<td><input type="checkbox" name="chairman" /></td>
-				</tr>
-				<tr>
-					<td><label>Næstformand:</label></td>
-					<td><input type="checkbox" name="deputy-chairman" /></td>
-				</tr>
-				<tr>
-					<td><label>Suppleant:</label></td>
-					<td><input type="checkbox" name="deputy" /></td>
+					<td><label>Medlemstype:</label></td>
+					<td><select name="user-type"><?php echo join("", array_map(function ($key, $user_type) {
+						return ($user_type['id'] == $user_type['none']['id'] ? '' : '<option value="' . $key . '">' . $user_type['name'] . '</option>');
+					}, array_keys($AKDTU_BOARD_TYPES), array_values($AKDTU_BOARD_TYPES))); ?></select></td>
 				</tr>
 				<tr>
 					<td></td>

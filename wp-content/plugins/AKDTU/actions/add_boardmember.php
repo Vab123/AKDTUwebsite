@@ -7,7 +7,7 @@
 # Register custom action
 if (isset($_REQUEST['action'])) {
 	if ($_REQUEST['action'] == 'add_boardmember' && isset($_REQUEST['user'])){
-		add_boardmember($_REQUEST['user'], isset($_REQUEST['chairman']), isset($_REQUEST['deputy-chairman']), isset($_REQUEST['deputy']));
+		add_boardmember($_REQUEST['user'], $_REQUEST['user-type']);
 	}
 }
 
@@ -15,35 +15,19 @@ if (isset($_REQUEST['action'])) {
  * Add a new board member to the system
  * 
  * @param int $apartment_number Apartment number of the new board member
+ * @param string $user_type User type to set the user as
  * 
  * @return bool True if the board member was created successfully
  */
-function add_boardmember($apartment_number, $is_chairman = false, $is_deputy_chairman = false, $is_deputy = false){
+function add_boardmember($apartment_number, $user_type){
 	# Check if the apartment number is valid
 	if ($apartment_number > 0) {
 		global $wpdb;
 		global $AKDTU_BOARD_TYPES;
 
-		if ($is_chairman) {
-			$user_type = $AKDTU_BOARD_TYPES['chairman']['id'];
-			$user_level = $AKDTU_BOARD_TYPES['chairman']['user_level'];
-			$user_role = $AKDTU_BOARD_TYPES['chairman']['user_role'];
-		}
-		elseif ($is_deputy_chairman) {
-			$user_type = $AKDTU_BOARD_TYPES['deputy-chairman']['id'];
-			$user_level = $AKDTU_BOARD_TYPES['deputy-chairman']['user_level'];
-			$user_role = $AKDTU_BOARD_TYPES['deputy-chairman']['user_role'];
-		}
-		elseif ($is_deputy) {
-			$user_type = $AKDTU_BOARD_TYPES['deputy']['id'];
-			$user_level = $AKDTU_BOARD_TYPES['deputy']['user_level'];
-			$user_role = $AKDTU_BOARD_TYPES['deputy']['user_role'];
-		}
-		else {
-			$user_type = $AKDTU_BOARD_TYPES['default']['id'];
-			$user_level = $AKDTU_BOARD_TYPES['default']['user_level'];
-			$user_role = $AKDTU_BOARD_TYPES['default']['user_role'];
-		}
+		$user_type = $AKDTU_BOARD_TYPES[$user_type]['id'];
+		$user_level = $AKDTU_BOARD_TYPES[$user_type]['user_level'];
+		$user_role = $AKDTU_BOARD_TYPES[$user_type]['user_role'];
 
 		# Get the SWPM member corresponding to the apartment
 		$swpm_user = SwpmMemberUtils::get_user_by_user_name( username_from_apartment_number($apartment_number) );
