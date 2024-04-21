@@ -84,14 +84,13 @@ function AKDTU_board_list( $atts ){
 	$board_list .= '<hr class="wp-block-separator has-alpha-channel-opacity"><h3 class="wp-block-heading">' . $values['chairman'] . '</h3>';
 	if (count($chairmen) > 0) {
 		$board_list .= join('<hr class="wp-block-separator has-css-opacity is-style-dots">', array_map(function ($person_id) use($values) {
-			$user = get_user_by('ID', $person_id);
 			$chairman_email = 'formand@akdtu.dk';
 
 			return person_as_string(
 				$values['apartment'],
 				padded_apartment_number_from_id($person_id),
 				$values['name'],
-				$user->first_name . ' ' . $user->last_name,
+				name_from_id($person_id),
 				$values['email'],
 				$chairman_email
 			);
@@ -105,13 +104,11 @@ function AKDTU_board_list( $atts ){
 	$board_list .= '<hr class="wp-block-separator has-alpha-channel-opacity"><h3 class="wp-block-heading">' . $values['deputy-chairman'] . '</h3>';
 	if (count($deputychairmen) > 0) {
 		$board_list .= join('<hr class="wp-block-separator has-css-opacity is-style-dots">', array_map(function ($person_id) use($values) {
-			$user = get_user_by('ID', $person_id);
-
 			return person_as_string(
 				$values['apartment'],
 				padded_apartment_number_from_id($person_id),
 				$values['name'],
-				$user->first_name . ' ' . $user->last_name,
+				name_from_id($person_id),
 				$values['email'],
 				board_email_from_id($person_id)
 			);
@@ -125,13 +122,11 @@ function AKDTU_board_list( $atts ){
 	$board_list .= '<hr class="wp-block-separator has-alpha-channel-opacity"><h3 class="wp-block-heading">' . $values['members'] . '</h3>';
 	if (count($base_members) > 0) {
 		$board_list .= join('<hr class="wp-block-separator has-css-opacity is-style-dots">', array_map(function ($person_id) use($values) {
-			$user = get_user_by('ID', $person_id);
-
 			return person_as_string(
 				$values['apartment'],
 				padded_apartment_number_from_id($person_id),
 				$values['name'],
-				$user->first_name . ' ' . $user->last_name,
+				name_from_id($person_id),
 				$values['email'],
 				board_email_from_id($person_id)
 			);
@@ -145,13 +140,11 @@ function AKDTU_board_list( $atts ){
 	$board_list .= '<hr class="wp-block-separator has-alpha-channel-opacity"><h3 class="wp-block-heading">' . $values['deputies'] . '</h3>';
 	if (count($boarddeputies) > 0) {
 		$board_list .= join('<hr class="wp-block-separator has-css-opacity is-style-dots">', array_map(function ($person_id) use($values) {
-			$user = get_user_by('ID', $person_id);
-
 			return person_as_string(
 				$values['apartment'],
 				padded_apartment_number_from_id($person_id),
 				$values['name'],
-				$user->first_name . ' ' . $user->last_name,
+				name_from_id($person_id),
 				$values['email'],
 				board_email_from_id($person_id)
 			);
