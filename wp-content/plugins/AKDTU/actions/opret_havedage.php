@@ -107,9 +107,9 @@ function opret_havedage($danish_name, $danish_post_content, $english_name, $engl
 		));
 	}
 
-	$date_da = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT);
+	$date_da = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen');
 	$date_da->setPattern('dd. MMMM YYYY HH:mm');
-	$publish_date_as_string = $date_da->format(new DateTime($publish_date));
+	$publish_date_as_string = $date_da->format(new DateTime($publish_date, new DateTimeZone('Europe/Copenhagen')));
 
 	# Add first Danish event to the correct menu
 	$danish_menu = wp_get_nav_menu_object( 'Dansk - logget ind' );

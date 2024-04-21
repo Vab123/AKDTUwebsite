@@ -7,7 +7,7 @@
 function tilføj_til_havedag_dashboard_widget() {
 	$gardendays = next_gardenday('all', 1);
 
-	$havedag_formatter = new IntlDateFormatter('da_DK', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+	$havedag_formatter = new IntlDateFormatter('da_DK', IntlDateFormatter::LONG, IntlDateFormatter::NONE, 'Europe/Copenhagen');
 
 	if (!is_null($gardendays)) : ?>
 		<table id="tilføj_til_havedag_widget_table" width="100%">
@@ -42,7 +42,7 @@ function tilføj_til_havedag_dashboard_widget() {
 								<td><label>Dato:</label></td>
 								<td><select name="havedag_dato">
 										<?php foreach ($event->get_bookings()->get_tickets() as $ticket) : ?>
-											<option value="<?php echo $ticket->ticket_id; ?>"><?php echo ((bool)strtotime($ticket->ticket_name) ? $havedag_formatter->format(new DateTime($ticket->ticket_name)) : $ticket->ticket_name); ?></option>
+											<option value="<?php echo $ticket->ticket_id; ?>"><?php echo ((bool)strtotime($ticket->ticket_name) ? $havedag_formatter->format(new DateTime($ticket->ticket_name, new DateTimeZone('Europe/Copenhagen'))) : $ticket->ticket_name); ?></option>
 										<?php endforeach; ?>
 									</select></td>
 							</tr>

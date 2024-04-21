@@ -30,12 +30,12 @@ function havedag_future_dashboard_widget() {
 					$total_booked = 0;
 					$total_spaces = 0;
 
-					$havedag_formatter = new IntlDateFormatter("da_DK", IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+					$havedag_formatter = new IntlDateFormatter("da_DK", IntlDateFormatter::LONG, IntlDateFormatter::NONE, 'Europe/Copenhagen');
 
 					foreach ($gardenday->get_tickets() as $ticket) {
 						$returnstring .= '<tr' . ($row % 2 == 0 ? ' class="alternate"' : '') . '>';
 						$row++;
-							$returnstring .= '<td>' . ((bool)strtotime($ticket->ticket_name) ? $havedag_formatter->format(new DateTime($ticket->ticket_name)) : $ticket->ticket_name) . '</td>';
+							$returnstring .= '<td>' . ((bool)strtotime($ticket->ticket_name) ? $havedag_formatter->format(new DateTime($ticket->ticket_name, new DateTimeZone('Europe/Copenhagen'))) : $ticket->ticket_name) . '</td>';
 							$returnstring .= '<td>' . $ticket->get_booked_spaces() . "/" . $ticket->get_spaces();
 								$total_booked += $ticket->get_booked_spaces();
 								$total_spaces += $ticket->get_spaces();

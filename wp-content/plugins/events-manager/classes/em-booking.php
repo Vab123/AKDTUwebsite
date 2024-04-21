@@ -1117,8 +1117,8 @@ class EM_Booking extends EM_Object {
 			if (!empty($placeholders[3][$key])) $placeholder_atts[] = $placeholders[3][$key];
 			switch ($result) {
 				case '#_GARDENDAYDATE':
-					$date_formatter = new IntlDateFormatter(pll_get_post_language($this->get_event()->post_id, "locale"), IntlDateFormatter::LONG, IntlDateFormatter::NONE);
-					$replace = $date_formatter->format(new DateTime($this->get_tickets()->get_first()->__get("ticket_name")));
+					$date_formatter = new IntlDateFormatter(pll_get_post_language($this->get_event()->post_id, "locale"), IntlDateFormatter::LONG, IntlDateFormatter::NONE, 'Europe/Copenhagen');
+					$replace = $date_formatter->format(new DateTime($this->get_tickets()->get_first()->__get("ticket_name"), new DateTimeZone('Europe/Copenhagen')));
 					break;
 				case '#_APT':
 					$replace = (is_apartment_from_id($this->get_person()->data->ID) ? padded_apartment_number_from_id($this->get_person()->data->ID) : "Bestyrelsesprofil");
@@ -1135,9 +1135,9 @@ class EM_Booking extends EM_Object {
 						}
 					}
 
-					$date_formatter = new IntlDateFormatter("da_DK", IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+					$date_formatter = new IntlDateFormatter("da_DK", IntlDateFormatter::LONG, IntlDateFormatter::NONE, 'Europe/Copenhagen');
 
-					$replace = '<table>' . implode("",array_map(function($info,$date) use($date_formatter) {return '<tr><td>' . $date_formatter->format(new DateTime($date)) . '</td><td>' . $info['booked'] . '</td><td> / </td><td>' . $info['total'] . '</td></tr>';}, $spaces, array_keys($spaces))) . "<tr><td>" . 'Total</td><td>' . array_sum(array_map(function($info){return $info['booked'];}, $spaces)) . '</td><td> / </td><td>' . array_sum(array_map(function($info){return $info['total'];}, $spaces)) . '</td></tr></table>';
+					$replace = '<table>' . implode("",array_map(function($info,$date) use($date_formatter) {return '<tr><td>' . $date_formatter->format(new DateTime($date, new DateTimeZone('Europe/Copenhagen'))) . '</td><td>' . $info['booked'] . '</td><td> / </td><td>' . $info['total'] . '</td></tr>';}, $spaces, array_keys($spaces))) . "<tr><td>" . 'Total</td><td>' . array_sum(array_map(function($info){return $info['booked'];}, $spaces)) . '</td><td> / </td><td>' . array_sum(array_map(function($info){return $info['total'];}, $spaces)) . '</td></tr></table>';
 					break;
 				case '#_BOOKINGID':
 					$replace = $this->booking_id;

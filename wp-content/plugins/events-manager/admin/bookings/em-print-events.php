@@ -74,7 +74,7 @@ function em_bookings_print_event() {
 		}
 	}
 	
-	$havedag_formatter = new IntlDateFormatter('da_DK', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+	$havedag_formatter = new IntlDateFormatter('da_DK', IntlDateFormatter::LONG, IntlDateFormatter::NONE, 'Europe/Copenhagen');
 
 	?>
 	<div class='wrap'>
@@ -94,7 +94,7 @@ function em_bookings_print_event() {
 				foreach ($res as $key => $value) : ?>
 					<option value="<?php echo $key; ?>" <?php if (!empty($_REQUEST['event_ticket_id']) && $_REQUEST['event_ticket_id'] == $key) {
 															echo " selected";
-														} ?>><?php echo ((bool)strtotime($value->__get('ticket_name')) ? $havedag_formatter->format(new DateTime($value->__get('ticket_name'))) : $value->__get('ticket_name')); ?></option>
+														} ?>><?php echo ((bool)strtotime($value->__get('ticket_name')) ? $havedag_formatter->format(new DateTime($value->__get('ticket_name'), new DateTimeZone('Europe/Copenhagen'))) : $value->__get('ticket_name')); ?></option>
 				<?php endforeach; ?>
 				<option value="total" <?php if (!empty($_REQUEST['event_ticket_id']) && strtolower($_REQUEST['event_ticket_id']) == 'total') {
 											echo " selected";

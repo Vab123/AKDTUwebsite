@@ -55,8 +55,8 @@
 								?>
 								<tr>
 									<td><?php echo $EM_Event->output("#_EVENTNAME"); ?></td>
-									<td><?php $date_formatter = new IntlDateFormatter(pll_current_language('locale'), IntlDateFormatter::LONG, IntlDateFormatter::NONE);
-									echo $date_formatter->format(new DateTime($EM_Booking->get_tickets()->get_first()->ticket_name)) . '<br>' . $EM_Booking->get_event()->output_times(); ?></td>
+									<td><?php $date_formatter = new IntlDateFormatter(pll_current_language('locale'), IntlDateFormatter::LONG, IntlDateFormatter::NONE, 'Europe/Copenhagen');
+									echo $date_formatter->format(new DateTime($EM_Booking->get_tickets()->get_first()->ticket_name), new DateTimeZone('Europe/Copenhagen')) . '<br>' . $EM_Booking->get_event()->output_times(); ?></td>
 									<td>
 										<?php echo $EM_Booking->get_status(); ?>
 									</td>

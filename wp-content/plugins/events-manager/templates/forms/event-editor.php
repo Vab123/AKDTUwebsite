@@ -103,9 +103,9 @@ if (!empty($_REQUEST['success'])) {
 							<?php if ($EM_Event->event_start_date == "" || $EM_Event->event_end_date == "") {
 								pll_e('Default common house rental month', 'events-manager');
 							} else {
-								$month = new IntlDateFormatter(pll_current_language(), IntlDateFormatter::SHORT, IntlDateFormatter::SHORT);
+								$month = new IntlDateFormatter(pll_current_language(), IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen');
 								$month->setPattern('MMMM');
-								echo $month->format(new DateTime(trim($EM_Event->event_end_date . ' ' . $EM_Event->event_end_time)));
+								echo $month->format(new DateTime(trim($EM_Event->event_end_date . ' ' . $EM_Event->event_end_time), new DateTimeZone('Europe/Copenhagen')));
 							} ?></span>.</p>
 				<?php else : ?>
 					<p><?php pll_e('Rental is free for members of the board.', 'events-manager'); ?></p>
