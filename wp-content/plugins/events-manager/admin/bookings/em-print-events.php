@@ -356,6 +356,7 @@ function em_bookings_print_event() {
 	.table-container{
 		display: flex;
 		justify-content: space-between;
+		align-items: flex-start;
 	}
 	.showeduptable {
 		width: 33%;
