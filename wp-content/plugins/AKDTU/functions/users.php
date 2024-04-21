@@ -946,7 +946,6 @@ function user_type_name_from_id($id, $datetime) {
  * @return bool True if the user had to pay rental cost at the given time
  */
 function had_to_pay_rental_cost_from_apartment_number($apartment_number, $datetime) {
-	# Return array of board deputies
 	return had_to_pay_rental_cost_from_id(id_from_apartment_number($apartment_number), $datetime);
 }
 #
@@ -959,7 +958,6 @@ function had_to_pay_rental_cost_from_apartment_number($apartment_number, $dateti
  * @return bool True if the user had to pay rental cost at the given time
  */
 function had_to_pay_rental_cost_from_username($username, $datetime) {
-	# Lists the usernames of all board deputies
 	return had_to_pay_rental_cost_from_id(id_from_username($username), $datetime);
 }
 #
@@ -972,7 +970,7 @@ function had_to_pay_rental_cost_from_username($username, $datetime) {
  * @return bool True if the user had to pay rental cost at the given time
  */
 function had_to_pay_rental_cost_from_id($user_id, $datetime) {
-	# Lists the usernames of all board deputies
+	# Check if the user is not an apartment user or was a board member at the given time. In these cases, the user should not pay any rental cost.
 	return !(!is_apartment_from_id($user_id) || was_boardmember_from_id($user_id, $datetime));
 }
 ############################################################
