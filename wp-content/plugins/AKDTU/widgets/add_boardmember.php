@@ -27,6 +27,10 @@ function add_boardmember_widget() { ?>
 					<td><input type="checkbox" name="deputy-chairman" /></td>
 				</tr>
 				<tr>
+					<td><label>Suppleant:</label></td>
+					<td><input type="checkbox" name="deputy" /></td>
+				</tr>
+				<tr>
 					<td></td>
 					<td><input type="submit" class="button-secondary" value="Tilføj" /></td>
 				</tr>

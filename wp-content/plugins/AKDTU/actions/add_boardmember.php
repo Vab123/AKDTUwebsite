@@ -7,7 +7,7 @@
 # Register custom action
 if (isset($_REQUEST['action'])) {
 	if ($_REQUEST['action'] == 'add_boardmember' && isset($_REQUEST['user'])){
-		add_boardmember($_REQUEST['user'], isset($_REQUEST['chairman']), isset($_REQUEST['deputy-chairman']));
+		add_boardmember($_REQUEST['user'], isset($_REQUEST['chairman']), isset($_REQUEST['deputy-chairman']), isset($_REQUEST['deputy']));
 	}
 }
 
@@ -18,7 +18,7 @@ if (isset($_REQUEST['action'])) {
  * 
  * @return bool True if the board member was created successfully
  */
-function add_boardmember($apartment_number, $is_chairman = false, $is_deputy_chairman = false){
+function add_boardmember($apartment_number, $is_chairman = false, $is_deputy_chairman = false, $is_deputy = false){
 	# Check if the apartment number is valid
 	if ($apartment_number > 0) {
 		global $wpdb;
@@ -26,12 +26,23 @@ function add_boardmember($apartment_number, $is_chairman = false, $is_deputy_cha
 
 		if ($is_chairman) {
 			$user_type = $AKDTU_BOARD_TYPES['chairman']['id'];
+			$user_level = $AKDTU_BOARD_TYPES['chairman']['user_level'];
+			$user_role = $AKDTU_BOARD_TYPES['chairman']['user_role'];
 		}
 		elseif ($is_deputy_chairman) {
 			$user_type = $AKDTU_BOARD_TYPES['deputy-chairman']['id'];
+			$user_level = $AKDTU_BOARD_TYPES['deputy-chairman']['user_level'];
+			$user_role = $AKDTU_BOARD_TYPES['deputy-chairman']['user_role'];
+		}
+		elseif ($is_deputy) {
+			$user_type = $AKDTU_BOARD_TYPES['deputy']['id'];
+			$user_level = $AKDTU_BOARD_TYPES['deputy']['user_level'];
+			$user_role = $AKDTU_BOARD_TYPES['deputy']['user_role'];
 		}
 		else {
 			$user_type = $AKDTU_BOARD_TYPES['default']['id'];
+			$user_level = $AKDTU_BOARD_TYPES['default']['user_level'];
+			$user_role = $AKDTU_BOARD_TYPES['default']['user_role'];
 		}
 
 		# Get the SWPM member corresponding to the apartment
@@ -47,7 +58,7 @@ function add_boardmember($apartment_number, $is_chairman = false, $is_deputy_cha
 		$temp_membership_level = array_search("Administrator" , $membership_levels);
 
 		# Find the index of the board member level
-		$new_membership_level = array_search("Beboerprofil til bestyrelsesmedlem" , $membership_levels);
+		$new_membership_level = array_search($user_level , $membership_levels);
 
 		# Set the level of the apartment user to the temporary level
 		SwpmMemberUtils::update_membership_level( $swpm_user_memberid, $temp_membership_level );
@@ -59,7 +70,7 @@ function add_boardmember($apartment_number, $is_chairman = false, $is_deputy_cha
 		$wp_user = get_user_by('login', username_from_apartment_number($apartment_number) );
 
 		# Set the role of the Wordpress user to be a board member
-		$wp_user->set_role('board_member');
+		$wp_user->set_role($user_role);
 
 		# Insert new boardmember into the database
 		$inserted = $wpdb->insert($wpdb->prefix . 'AKDTU_boardmembers',array('apartment_number' => $apartment_number, 'start_datetime' => (new DateTime('now',new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s'), 'end_datetime' => '9999-12-31 23:59:59', 'member_type' => $user_type));

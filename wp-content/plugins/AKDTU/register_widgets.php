@@ -39,19 +39,6 @@ $AKDTU_WIDGETS = array(
 			"add_boardmember.php",
 		),
 	),
-	"add_board_deputy" => array(
-		"require_admin" => true,
-		"widgets" => array(
-			"add_board_deputy.php" => array(
-				"id" => "add_board_deputy_widget",
-				"name" => "Tilføj bestyrelsessuppleant",
-				"callback" => "add_board_deputy_widget",
-			),
-		),
-		"actions" => array(
-			"add_board_deputy.php",
-		),
-	),
 	"add_vicevært" => array(
 		"require_admin" => true,
 		"widgets" => array(
@@ -397,19 +384,6 @@ $AKDTU_WIDGETS = array(
 		),
 		"actions" => array(
 			"remove_boardmember.php",
-		),
-	),
-	"show_deputies" => array(
-		"require_admin" => true,
-		"widgets" => array(
-			"show_deputies.php" => array(
-				"id" => "show_deputies_widget",
-				"name" => "Bestyrelsessuppleanter",
-				"callback" => "show_deputies_widget",
-			),
-		),
-		"actions" => array(
-			"remove_board_deputy.php",
 		),
 	),
 	"show_vicevært" => array(
