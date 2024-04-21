@@ -524,7 +524,7 @@ function all_board_deputies_apartments() {
 	global $AKDTU_BOARD_TYPES;
 
 	// Find all board deputies
-	return $wpdb->get_col($wpdb->prepare('SELECT apartment_number FROM ' . $wpdb->prefix . 'AKDTU_boardmembers WHERE start_datetime <= "' . $now->format('Y-m-d H:i:s') . '" AND end_datetime >= "' . $now->format('Y-m-d H:i:s') . '" AND member_type = "' . $AKDTU_BOARD_TYPES['deputy']['id'] . '" ORDER BY apartment_number ASC'));
+	return $wpdb->get_col($wpdb->prepare('SELECT DISTINCT apartment_number FROM ' . $wpdb->prefix . 'AKDTU_boardmembers WHERE start_datetime <= "' . $now->format('Y-m-d H:i:s') . '" AND end_datetime >= "' . $now->format('Y-m-d H:i:s') . '" AND member_type = "' . $AKDTU_BOARD_TYPES['deputy']['id'] . '" ORDER BY apartment_number ASC'));
 }
 #
 /**
@@ -565,7 +565,7 @@ function all_board_apartments() {
 	global $wpdb;
 
 	// Find all board members and board deputies
-	return $wpdb->get_col($wpdb->prepare('SELECT apartment_number FROM ' . $wpdb->prefix . 'AKDTU_boardmembers WHERE start_datetime <= "' . $now->format('Y-m-d H:i:s') . '" AND end_datetime >= "' . $now->format('Y-m-d H:i:s') . '" ORDER BY apartment_number ASC'));
+	return $wpdb->get_col($wpdb->prepare('SELECT DISTINCT apartment_number FROM ' . $wpdb->prefix . 'AKDTU_boardmembers WHERE start_datetime <= "' . $now->format('Y-m-d H:i:s') . '" AND end_datetime >= "' . $now->format('Y-m-d H:i:s') . '" ORDER BY apartment_number ASC'));
 }
 #
 /**
@@ -661,13 +661,7 @@ function was_boardmember_from_apartment_number($number, $datetime) {
 	global $AKDTU_BOARD_TYPES;
 
 	# Checks if the apartment number belongs to a board member
-	$member_type = $wpdb->get_var($wpdb->prepare('SELECT member_type FROM ' . $wpdb->prefix . 'AKDTU_boardmembers WHERE apartment_number = "' . $number . '" AND start_datetime <= "' . $datetime->format('Y-m-d H:i:s') . '" AND end_datetime >= "' . $datetime->format('Y-m-d H:i:s') . '"'));
-
-	return !is_null($member_type) && (
-		$member_type == $AKDTU_BOARD_TYPES['chairman']['id'] ||
-		$member_type == $AKDTU_BOARD_TYPES['deputy-chairman']['id'] ||
-		$member_type == $AKDTU_BOARD_TYPES['default']['id']
-	);
+	return $wpdb->get_var('SELECT COUNT(*) FROM ' . $wpdb->prefix . 'AKDTU_boardmembers WHERE apartment_number = "' . $number . '" AND start_datetime <= "' . $datetime->format('Y-m-d H:i:s') . '" AND end_datetime >= "' . $datetime->format('Y-m-d H:i:s') . '" AND member_type IN ("' . $AKDTU_BOARD_TYPES['chairman']['id'] . '","' . $AKDTU_BOARD_TYPES['deputy-chairman']['id'] . '","' . $AKDTU_BOARD_TYPES['default']['id'] . '")') > 0;
 }
 #
 /**
@@ -711,9 +705,7 @@ function was_board_deputy_from_apartment_number($number, $datetime) {
 	global $AKDTU_BOARD_TYPES;
 
 	# Checks if the apartment number belongs to a board member
-	$member_type = $wpdb->get_var($wpdb->prepare('SELECT member_type FROM ' . $wpdb->prefix . 'AKDTU_boardmembers WHERE apartment_number = "' . $number . '" AND start_datetime <= "' . $datetime->format('Y-m-d H:i:s') . '" AND end_datetime >= "' . $datetime->format('Y-m-d H:i:s') . '"'));
-
-	return !is_null($member_type) && $member_type == $AKDTU_BOARD_TYPES['deputy']['id'];
+	return $wpdb->get_var('SELECT COUNT(*) FROM ' . $wpdb->prefix . 'AKDTU_boardmembers WHERE apartment_number = "' . $number . '" AND start_datetime <= "' . $datetime->format('Y-m-d H:i:s') . '" AND end_datetime >= "' . $datetime->format('Y-m-d H:i:s') . '" AND member_type = "' . $AKDTU_BOARD_TYPES['deputy']['id'] . '"') > 0;
 }
 #
 /**
