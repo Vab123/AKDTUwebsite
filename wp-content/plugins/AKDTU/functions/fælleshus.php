@@ -175,6 +175,29 @@ function format_common_house_rental_name($EM_Event, $calendar_language = "da_DK"
 }
 
 /**
+ * Returns the formatted version of the names of events corresponding to rentals of the common house.
+ * The name of the event should be as defined in common_house_rental_name() above.
+ * 
+ * Performs the appropriate replaces in the name, defined by us.
+ * 
+ * @param EM_Event $EM_Event The event to output the name of.
+ * @param string $calendar_language Locale of the language to write the name of the event in. (Default: "da_DK").
+ * @param bool $is_export True if the name of the event is to be used when exporting the calendar to ics-format.
+ * 
+ * @return string Formatted version of the name of the event.
+ */
+function format_common_house_rental_description($EM_Event, $calendar_language = "da_DK", $is_export = false) {
+	$event_name_replaces = array(
+		'#APT' => padded_apartment_number_from_id($EM_Event->owner),
+		'#_RENTAL_BEFORE_APARTMENTNUM' => pll_translate_string(($is_export ? 'EXPORT_' : '') . ($EM_Event->event_status == 0 ? 'RENTAL_BEFORE_APARTMENTNUM_NOTAPPROVED' : 'RENTAL_BEFORE_APARTMENTNUM_APPROVED'), $calendar_language),
+		'#_RENTAL_AFTER_APARTMENTNUM' => pll_translate_string(($is_export ? 'EXPORT_' : '') . ($EM_Event->event_status == 0 ? 'RENTAL_AFTER_APARTMENTNUM_NOTAPPROVED' : 'RENTAL_AFTER_APARTMENTNUM_APPROVED'), $calendar_language),
+		'&nbsp;' => ' ',
+	);
+
+	return str_replace(array_keys($event_name_replaces), $event_name_replaces, pll_translate_string(($is_export ? 'EXPORT_' : '') . ($EM_Event->event_status == 0 ? 'RENTAL_DESCRIPTION_NOTAPPROVED' : 'RENTAL_DESCRIPTION_APPROVED'), $calendar_language));
+}
+
+/**
  * Returns a javascript function for calculating the price for renting the common house in a determined period.
  * 
  * The name of the function must be update_price.
