@@ -126,6 +126,15 @@ function event_as_ics($EM_Event, $calendar_language) {
 		1 => "CONFIRMED"
 	);
 
+	$apartment_string = array(
+		'da' => 'Lejlighed ',
+		'en' => 'Apartment ',
+	);
+	$board_string = array(
+		'da' => 'Bestyrelsen',
+		'en' => 'The Board',
+	);
+
 	# Time info about the event
 	$starttime = new DateTime($EM_Event->event_start_date . " " . $EM_Event->event_start_time);
 	$endtime = new DateTime($EM_Event->event_end_date . " " . $EM_Event->event_end_time);
@@ -134,12 +143,13 @@ function event_as_ics($EM_Event, $calendar_language) {
 	$event_name = format_common_house_rental_name($EM_Event, $calendar_language);
 
 	# Replacements in event description for rentals of the common house
-	$event_description = format_common_house_rental_name($EM_Event, $calendar_language, true);
+	$event_description = format_common_house_rental_description($EM_Event, $calendar_language, true);
 
 	# Write info about calendar event
 	$event_as_ics_string .= "BEGIN:VEVENT\r\n";
 	$event_as_ics_string .= "SUMMARY:" . $event_name . "\r\n";
-	$event_as_ics_string .= "UID:" . $event_name . "//" . $starttime->format("Ymd") . "\r\n";
+	$event_as_ics_string .= "ORGANIZER;CN=" . (is_apartment_user_from_id($EM_Event->owner) ? $apartment_string[$calendar_language] . padded_apartment_number_from_id($EM_Event->owner) : $board_string[$calendar_language]) . ":\r\n";
+	$event_as_ics_string .= "UID:" . $EM_Event->owner . "//" . $starttime->format("Ymd") . "\r\n";
 	$event_as_ics_string .= "DTSTAMP;TZID=Europe/Copenhagen:" . $starttime->format("Ymd\THis") . "\r\n";
 	$event_as_ics_string .= "DTSTART;TZID=Europe/Copenhagen:" . $starttime->format("Ymd\THis") . "\r\n";
 	$event_as_ics_string .= "DTEND;TZID=Europe/Copenhagen:" . $endtime->format("Ymd\THis") . "\r\n";
