@@ -5,23 +5,10 @@
  */
 
 function fælleshus_vlan_dashboard_widget() {
-	global $wpdb;
+	$rental_info = get_current_common_house_renters();
 
-	try {
-		$now = (new DateTime('now', new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s');
-
-		$event_ids = $wpdb->get_col('SELECT event_id FROM ' . EM_EVENTS_TABLE . ' WHERE event_start <= "' . $now . '" AND event_end >= "' . $now . '" AND event_status = 1');
-
-		if (count($event_ids) > 0) {
-			$event_owners = array_map(function ($event_id) {
-				return (is_apartment_from_id(em_get_event($event_id, 'event_id')->owner) ? 'lejlighed ' . apartment_number_from_id(em_get_event($event_id, 'event_id')->owner) : 'Bestyrelsen');
-			}, $event_ids);
-
-			$rented = true;
-		} else {
-			$event_owners = array('Ingen');
-			$rented = false;
-		}
+	$event_owners = $rental_info['renters'];
+	$rented = $rental_info['rented'];
 
 		$state = get_fælleshus_vlan()->state; ?>
 		<table width="100%" class="widefat">
@@ -43,7 +30,7 @@ function fælleshus_vlan_dashboard_widget() {
 						Fælleshus status:
 					</td>
 					<td style="vertical-align:middle">
-						<b><?php echo ($rented ? "Lejet af " . implode(", ", $event_owners) : "Ledigt"); ?></b>
+						<b><?php echo ($rented ? "Lejet af " . $event_owners : "Ledigt"); ?></b>
 					</td>
 				</tr>
 				<tr class="alternate">
@@ -65,9 +52,6 @@ function fælleshus_vlan_dashboard_widget() {
 			</tbody>
 		</table>
 <?php
-	} catch (Exception $e) {
-		echo "Cronjob 'Opdater fælleshus VLAN' fejlet.\nFejlinfo: " . $e->getMessage();
-	}
 }
 
 ?>
