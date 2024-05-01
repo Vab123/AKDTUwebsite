@@ -116,7 +116,8 @@ function send_opkrævning_havedag($debug = false) {
 			$ago = new DateTime($gardenday->event_end_date . " 00:00:00", new DateTimeZone('Europe/Copenhagen'));
 
 			# Time difference between now and the end-time of the last garden day
-			$diff = $now->diff($ago);
+			$diff = $ago->diff($now);
+			$diff_in_days = ($diff->invert == 1 ? -($diff->days) : $diff->days);
 
 			# Replacements for real email subject
 			$real_message_subject_replaces = array(
@@ -149,7 +150,7 @@ function send_opkrævning_havedag($debug = false) {
 
 
 			# Check if the real email should be sent or echoed
-			if ((HAVEDAG_DAYS >= 0 && $diff->days == HAVEDAG_DAYS) || $debug) {
+			if ((HAVEDAG_DAYS >= 0 && $diff_in_days == HAVEDAG_DAYS) || $debug) {
 				# Add headline if real email should be echoed
 				if ($debug) {
 					# Check if real email will be sent automatically or not
@@ -196,7 +197,7 @@ function send_opkrævning_havedag($debug = false) {
 			}
 			
 			# Check if the warning email should be sent or echoed
-			if ((HAVEDAG_DAYS >= 0 && HAVEDAG_WARNING_DAYS >= 0 && $diff->days == HAVEDAG_DAYS - HAVEDAG_WARNING_DAYS) || $debug) {
+			if ((HAVEDAG_DAYS >= 0 && HAVEDAG_WARNING_DAYS >= 0 && $diff_in_days == HAVEDAG_DAYS - HAVEDAG_WARNING_DAYS) || $debug) {
 				# Add headline if warning email should be echoed
 				if ($debug) {
 					echo '<hr>';
