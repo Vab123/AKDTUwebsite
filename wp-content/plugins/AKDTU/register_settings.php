@@ -81,11 +81,11 @@ function AKDTU_REGISTER($CONSTANT_ROOT, $additionals = array()) {
  */
 function AKDTU_DEFINE($CONSTANT_ROOT, $additionals = array()) {
 	# Define default constants
-	define($CONSTANT_ROOT . '_TO', get_option('AKDTU_' . $CONSTANT_ROOT . '_TO')); 						# To address.
-	define($CONSTANT_ROOT . '_FROM', get_option('AKDTU_' . $CONSTANT_ROOT . '_FROM')); 					# From address.
-	define($CONSTANT_ROOT . '_REPLYTO', get_option('AKDTU_' . $CONSTANT_ROOT . '_REPLYTO')); 			# Reply-to address. Set to '' for no reply-to address.
-	define($CONSTANT_ROOT . '_CC', get_option('AKDTU_' . $CONSTANT_ROOT . '_CC')); 						# CC address. Set to '' for no cc address.
-	define($CONSTANT_ROOT . '_SUBJECT', get_option('AKDTU_' . $CONSTANT_ROOT . '_SUBJECT')); 			# Email subject.
+	define($CONSTANT_ROOT . '_TO',          get_option('AKDTU_' . $CONSTANT_ROOT . '_TO')); 			# To address.
+	define($CONSTANT_ROOT . '_FROM',        get_option('AKDTU_' . $CONSTANT_ROOT . '_FROM')); 			# From address.
+	define($CONSTANT_ROOT . '_REPLYTO',     get_option('AKDTU_' . $CONSTANT_ROOT . '_REPLYTO')); 		# Reply-to address. Set to '' for no reply-to address.
+	define($CONSTANT_ROOT . '_CC',          get_option('AKDTU_' . $CONSTANT_ROOT . '_CC')); 			# CC address. Set to '' for no cc address.
+	define($CONSTANT_ROOT . '_SUBJECT',     get_option('AKDTU_' . $CONSTANT_ROOT . '_SUBJECT')); 		# Email subject.
 	define($CONSTANT_ROOT . '_MAILCONTENT', get_option('AKDTU_' . $CONSTANT_ROOT . '_MAILCONTENT')); 	# Email content.
 	define($CONSTANT_ROOT . '_ATTACHMENTS', get_option('AKDTU_' . $CONSTANT_ROOT . '_ATTACHMENTS')); 	# Email attachments.
 
