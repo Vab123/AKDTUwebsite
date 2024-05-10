@@ -22,12 +22,21 @@ function send_opkrævning_havedag($debug = false) {
 		$year = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen');
 		$year->setPattern('YYYY');
 
-		$gardenday = next_gardenday('da', 1);
-		
-		# Check if this is a test-run, and no future garden days were found. Revert to using the past garden day
-		if ($debug && is_null($gardenday)) {
-			# Debug is on, but no future events was found. Go back to past events
+		if ($debug) {
+			# Fake run. Use next garden day if possible
+			$gardenday = next_gardenday('da', 1);
+
+			if (is_null($gardenday)) {
+				$gardenday = previous_gardenday('da', 1);
+			}
+		}
+		else {
+			# Real run
 			$gardenday = previous_gardenday('da', 1);
+		}
+
+		if (is_null($gardenday)) {
+			wp_mail("netgruppen@akdtu.dk", "Cronjob \"send_opkrævning_havedag\" fandt ingen havedage", "Cronjobbet som sørger for automatisk at sende opkrævninger for manglende deltagelse ved havedage kunne ikke finde nogen havedage at vurdere. Dette betyder at det ikke kunne bedømmes om der skulle sendes nogen opkrævninger i dag. Såfremt der skulle sendes nogen opkrævninger i dag er dette altså ikke sket. Problemet her skal fikses.");
 		}
 	
 		# Check if a garden day was found
@@ -110,7 +119,7 @@ function send_opkrævning_havedag($debug = false) {
 			}, $users_that_should_pay));
 			
 			# Current time
-			$now = new DateTime;
+			$now = new DateTime("now", new DateTimeZone('Europe/Copenhagen'));
 
 			# End-time of the last garden day
 			$ago = new DateTime($gardenday->event_end_date . " 00:00:00", new DateTimeZone('Europe/Copenhagen'));
