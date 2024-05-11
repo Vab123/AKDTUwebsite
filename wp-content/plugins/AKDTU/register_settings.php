@@ -25,6 +25,7 @@ $AKDTU_CONSTANTS = array(
 	),
 	"FÆLLESHUS" => array(						# Mail om opkrævning for leje af fælleshus
 		'_FORMAT',								# Format af opkrævning
+		'_NONE_FORMAT',							# Format af tekst ved ingen opkrævning
 	),
 	"FÆLLESHUS_INTERNET" => array(), 			# Mail om ændring af VLAN status i fælleshuset
 	"FÆLLESHUS_INTERNET_BRUGER_DA" => array(	# Mail om ændring af VLAN status i fælleshuset

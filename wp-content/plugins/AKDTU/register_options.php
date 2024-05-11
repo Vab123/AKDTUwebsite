@@ -102,7 +102,7 @@ $AKDTU_OPTIONS = array(
 									"<code>#PAYMENT_INFO</code> erstattes med info omkring hvem der skal betale for leje. Formatet for dette kan rettes nedenunder.",
 									"<code>#MONTHNUM</code> erstattes med måneden som tal (e.g. \"03\").",
 									"<code>#MONTH</code> erstattes med måneden som tekst (e.g. \"marts\").",
-									"<code>#YEAR</code> erstattes med år.",
+									"<code>#YEAR</code> erstattes med året.",
 								),
 							),
 							array(
@@ -117,6 +117,19 @@ $AKDTU_OPTIONS = array(
 									"Dette gentages for hver lejlighed, der har lejet fælleshuset den foregående måned, med linjeskift mellem.",
 									"<code>#APT</code> erstattes med lejlighedsnummer. Hvis der nyligt er flyttet en ny beboer ind står dette også herefter som <code>(Ny beboer)</code> eller <code>(Tidligere beboer)</code>",
 									"<code>#PRICE</code> erstattes med pris.",
+								),
+							),
+							array(
+								"headline" => "Tekst ved ingen betalinger",
+								"name" => "AKDTU_FÆLLESHUS_NONE_FORMAT",
+								"tag" => "textarea",
+								"type" => "text",
+								"rows" => 10,
+								"cols" => 'auto',
+								"style" => "width: 600px;",
+								"comments" => array(
+									"Dette skrives i mailen såfremt der ikke er nogen lejligheder der har lejet fælleshuset i den foregående måned.",
+									"<code>#MONYEAR</code> erstattes med måneden og året som tekst (e.g. \"marts 2024\").",
 								),
 							),
 						),

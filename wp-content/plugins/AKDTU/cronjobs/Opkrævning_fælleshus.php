@@ -81,7 +81,14 @@ function send_opkrævning_fælleshus($debug = false) {
 				}
 			} else {
 				# There were no rentals. Payment info reflects that there were no rentals
-				$payment_info = "Der var ingen udlejninger i " . $month_year . ", så intet skal opkræves.";
+
+				# Replacements
+				$replaces = array(
+					'#MONYEAR' => $month_year,
+				);
+
+				# Append payment info
+				$payment_info = str_replace(array_keys($replaces), $replaces, nl2br(FÆLLESHUS_NONE_FORMAT));
 			}
 
 			# Replacements for email subject
