@@ -91,11 +91,21 @@ $AKDTU_VLANS = array(
  * @return array[Any] json-decoded response from K-Net API
  */
 function set_vlan($vlan_id, $state) {
+	global $AKDTU_VLANS;
+
+	// Check if selected VLAN is of correct type
 	if (!is_int($vlan_id)) {
 		new AKDTU_notice('error', 'DEBUG: VLAN id empty or not integer');
 		return false;
 	}
 
+	// Check if selected VLAN is valid
+	if (!in_array($vlan_id, array_keys($AKDTU_VLANS))) {
+		new AKDTU_notice('error', 'DEBUG: VLAN ' . $vlan_id . ' not found in list of valid VLANs');
+		return false;
+	}
+
+	// Translate state into integer
 	if (is_bool($state)) {
 		$state = ($state ? 1 : 0);
 	} elseif (is_int($state)) {
@@ -108,6 +118,7 @@ function set_vlan($vlan_id, $state) {
 		return false;
 	}
 
+	// Prepare data payload
 	$c['http']['method'] = 'PUT';
 	$c['http']['header'] = "Content-Type: application/json\r\nAuthorization: Basic " . base64_encode('api_akdnetgrp:Lit5dok4cah1Ohng');
 	$c['http']['content'] = '
@@ -119,15 +130,20 @@ function set_vlan($vlan_id, $state) {
 			"comment": "API change from akdtu.dk - netgruppen@akdtu.dk"
 		}
 		';
+	
+	// Send data payload
 	$r = @file_get_contents('https://api.k-net.dk/v2/network/vlan/' . $vlan_id . '/', false, stream_context_create($c));
 
+	// Check if an error was recieved
 	if ($r === false) {
 		$error = error_get_last();
 		throw new Exception($error['message']);
 	}
 
+	// Decode returned data
 	$data = json_decode($r);
 
+	// Return returned data
 	return $data;
 }
 
@@ -139,22 +155,37 @@ function set_vlan($vlan_id, $state) {
  * @return array[Any] json-decoded response from K-Net API
  */
 function get_vlan($vlan_id) {
+	global $AKDTU_VLANS;
+
+	// Check if selected VLAN is of correct type
 	if (!is_int($vlan_id)) {
 		new AKDTU_notice('error', 'DEBUG: VLAN id empty or not integer');
 		return false;
 	}
 
+	// Check if selected VLAN is valid
+	if (!in_array($vlan_id, array_keys($AKDTU_VLANS))) {
+		new AKDTU_notice('error', 'DEBUG: VLAN ' . $vlan_id . ' not found in list of valid VLANs');
+		return false;
+	}
+
+	// Prepare payload
 	$c['http']['method'] = 'GET';
 	$c['http']['header'] = "Content-Type: application/json\r\nAuthorization: Basic " . base64_encode('api_akdnetgrp:Lit5dok4cah1Ohng');
+
+	// Send payload
 	$r = @file_get_contents('https://api.k-net.dk/v2/network/vlan/' . $vlan_id . '/', false, stream_context_create($c));
 
+	// Check if an error was recieved
 	if ($r === false) {
 		$error = error_get_last();
 		throw new Exception($error['message']);
 	}
 
+	// Decode returned data
 	$data = json_decode($r);
 
+	// Return returned data
 	return $data;
 }
 
