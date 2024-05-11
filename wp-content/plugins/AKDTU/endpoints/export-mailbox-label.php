@@ -4,6 +4,7 @@
 if (strpos($_SERVER["REQUEST_URI"], 'export-mailbox-label.php') == 1) {
 	add_action('plugins_loaded', 'AKDTU_export_mailbox_label');
 }
+
 /**
  * 
  * Exports a PDF-file with a label for the mailbox for an apartment.
