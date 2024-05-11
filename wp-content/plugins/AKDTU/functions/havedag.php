@@ -5,17 +5,35 @@
  */
 
 /**
- * Calculates the price for an apartment not participating in a garden day.
+ * Calculates the price for an apartment not having signed up to a garden day.
  * 
  * The function must reflect all previous changes in prices. The price has previously been changed on:
  * - Never
  * 
- * @param int $apartment_number Apartment number of the apartment not participating.
+ * @param int $apartment_number Apartment number of the apartment not having signed up.
  * @param int $garden_day_id Id of the garden day event
  * 
- * @return int Price of the apartment not participating.
+ * @return int Price of the apartment not having signed up.
  */
-function gardenday_price($apartment_number, $garden_day_id) {
+function gardenday_price_not_signed_up($apartment_number, $garden_day_id) {
+	if (em_get_event($garden_day_id, 'event_id')->rsvp_date >= "2022-09-18") {
+		// Remove this check when the price changes the first time. This is only to show how this can be done in the future.
+		return 750;
+	}
+}
+
+/**
+ * Calculates the price for an apartment not attending a garden day they have signed up to.
+ * 
+ * The function must reflect all previous changes in prices. The price has previously been changed on:
+ * - Never
+ * 
+ * @param int $apartment_number Apartment number of the apartment not attending a garden day they have signed up to.
+ * @param int $garden_day_id Id of the garden day event
+ * 
+ * @return int Price of the apartment not attending a garden day they have signed up to.
+ */
+function gardenday_price_not_showed_up($apartment_number, $garden_day_id) {
 	if (em_get_event($garden_day_id, 'event_id')->rsvp_date >= "2022-09-18") {
 		// Remove this check when the price changes the first time. This is only to show how this can be done in the future.
 		return 750;

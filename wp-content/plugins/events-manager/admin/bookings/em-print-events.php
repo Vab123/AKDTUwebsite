@@ -230,10 +230,9 @@ function em_bookings_print_event() {
 	}
 
 	$booking_info = array_map(function ($booking) {
-		$user_login = get_userdata($booking->person_id)->get('user_login');
-		if (is_apartment_from_username($user_login)) {
+		if (is_apartment_from_id($booking->person_id)) {
 			return array(
-				"apt" => apartment_number_from_username($user_login),
+				"apt" => apartment_number_from_id($booking->person_id),
 				"date" => array_values(
 					array_map(
 						function($ticket) {
@@ -278,12 +277,14 @@ function em_bookings_print_event() {
 			<?php
 				foreach (all_apartments() as $apartment) {
 					if ($apartment < 100) {
+						$apartment_price = (!in_array($apartment, $showed_up_users) ? (in_array($apartment, array_keys($booked_users)) ? gardenday_price_not_showed_up($apartment, $bookings[0]->event_id) : gardenday_price_not_signed_up($apartment, $bookings[0]->event_id)) : 0);
+
 						echo '<tr' . ($apartment % 2 == 1 ? ' class="alternate"' : '') . '>';
 
 						echo '<td>' . padded_apartment_number_from_apartment_number($apartment) . (in_array($apartment, $moved_users) ? ' (Tidligere beboer)' : '') . (in_array($apartment, array_keys($booked_users)) && was_boardmember_from_apartment_number($apartment, $booked_users[$apartment]) ? ' - <u><b>Bestyrelsesmedlem</b></u>' : '') . (in_array($apartment, array_keys($booked_users)) && was_board_deputy_from_apartment_number($apartment, $booked_users[$apartment]) ? ' - <u><b>Bestyrelsessuppleant</b></u>' : '') . '</td>';
 						echo '<td>' . (in_array($apartment, array_keys($booked_users)) ? $havedag_formatter->format($booked_users[$apartment]) : '<span style="font-weight: bold">✕</span>') . '</td>';
 						echo '<td style="font-weight: bold">' . (in_array($apartment, $showed_up_users) ? "✓" : "✕") . '</td>';
-						echo '<td>' . (!in_array($apartment, $showed_up_users) ? number_format(gardenday_price($apartment, $bookings[0]->event_id), 2, ",", ".") : number_format(0, 2, ",", ".")) . ' kr.</td>';
+						echo '<td>' . number_format($apartment_price, 2, ",", ".") . ' kr.</td>';
 
 						echo '</tr>';
 					}
@@ -308,12 +309,14 @@ function em_bookings_print_event() {
 			<?php
 				foreach (all_apartments() as $apartment) {
 					if ($apartment > 100 && $apartment < 200) {
+						$apartment_price = (!in_array($apartment, $showed_up_users) ? (in_array($apartment, array_keys($booked_users)) ? gardenday_price_not_showed_up($apartment, $bookings[0]->event_id) : gardenday_price_not_signed_up($apartment, $bookings[0]->event_id)) : 0);
+
 						echo '<tr' . ($apartment % 2 == 1 ? ' class="alternate"' : '') . '>';
 
 						echo '<td>' . padded_apartment_number_from_apartment_number($apartment) . (in_array($apartment, $moved_users) ? ' (Tidligere beboer)' : '') . (in_array($apartment, array_keys($booked_users)) && was_boardmember_from_apartment_number($apartment, $booked_users[$apartment]) ? ' - <u><b>Bestyrelsesmedlem</b></u>' : '') . (in_array($apartment, array_keys($booked_users)) && was_board_deputy_from_apartment_number($apartment, $booked_users[$apartment]) ? ' - <u><b>Bestyrelsessuppleant</b></u>' : '') . '</td>';
 						echo '<td>' . (in_array($apartment, array_keys($booked_users)) ? $havedag_formatter->format($booked_users[$apartment]) : '<span style="font-weight: bold">✕</span>') . '</td>';
 						echo '<td style="font-weight: bold">' . (in_array($apartment, $showed_up_users) ? "✓" : "✕") . '</td>';
-						echo '<td>' . (!in_array($apartment, $showed_up_users) ? number_format(gardenday_price($apartment, $bookings[0]->event_id), 2, ",", ".") : number_format(0, 2, ",", ".")) . ' kr.</td>';
+						echo '<td>' . number_format($apartment_price, 2, ",", ".") . ' kr.</td>';
 
 						echo '</tr>';
 					}
@@ -338,12 +341,14 @@ function em_bookings_print_event() {
 			<?php
 				foreach (all_apartments() as $apartment) {
 					if ($apartment > 200) {
+						$apartment_price = (!in_array($apartment, $showed_up_users) ? (in_array($apartment, array_keys($booked_users)) ? gardenday_price_not_showed_up($apartment, $bookings[0]->event_id) : gardenday_price_not_signed_up($apartment, $bookings[0]->event_id)) : 0);
+
 						echo '<tr' . ($apartment % 2 == 1 ? ' class="alternate"' : '') . '>';
 
 						echo '<td>' . padded_apartment_number_from_apartment_number($apartment) . (in_array($apartment, $moved_users) ? ' (Tidligere beboer)' : '') . (in_array($apartment, array_keys($booked_users)) && was_boardmember_from_apartment_number($apartment, $booked_users[$apartment]) ? ' - <u><b>Bestyrelsesmedlem</b></u>' : '') . (in_array($apartment, array_keys($booked_users)) && was_board_deputy_from_apartment_number($apartment, $booked_users[$apartment]) ? ' - <u><b>Bestyrelsessuppleant</b></u>' : '') . '</td>';
 						echo '<td>' . (in_array($apartment, array_keys($booked_users)) ? $havedag_formatter->format($booked_users[$apartment]) : '<span style="font-weight: bold">✕</span>') . '</td>';
 						echo '<td style="font-weight: bold">' . (in_array($apartment, $showed_up_users) ? "✓" : "✕") . '</td>';
-						echo '<td>' . (!in_array($apartment, $showed_up_users) ? number_format(gardenday_price($apartment, $bookings[0]->event_id), 2, ",", ".") : number_format(0, 2, ",", ".")) . ' kr.</td>';
+						echo '<td>' . number_format($apartment_price, 2, ",", ".") . ' kr.</td>';
 
 						echo '</tr>';
 					}

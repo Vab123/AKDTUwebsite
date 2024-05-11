@@ -58,14 +58,14 @@ function send_opkrævning_havedag($debug = false) {
 			}
 
 			# Prepare array for all bookings for garden days
-			$bookings = array();
+			$signed_up_users = array();
 
 			# Go through all tickets
 			foreach ($tickets as $translated_ticket) {
 				# Store all bookings on the garden days
 				foreach ($translated_ticket->get_bookings()->bookings as $booking) {
-					if ($booking->booking_status == 1) {
-						array_push($bookings, $booking);
+					if ($booking->booking_status == 1 && is_apartment_from_id($booking->person_id)) {
+						array_push($signed_up_users, apartment_number_from_id($booking->person_id));
 					}
 				}
 			}
@@ -97,7 +97,7 @@ function send_opkrævning_havedag($debug = false) {
 			}
 
 			# Get the date for the last allowed signup date
-			$latest_signup_date = em_get_event($bookings[0]->event_id, 'event_id')->rsvp_date;
+			$latest_signup_date = $gardenday->rsvp_date;
 
 			# Get all apartments where the resident has moved after the last allowed signup date
 			$moved_users = all_moved_after_apartment_numbers($latest_signup_date);
@@ -106,11 +106,13 @@ function send_opkrævning_havedag($debug = false) {
 			$users_that_should_pay = array_filter(all_apartments(), function($apartment) use($status) { return !$status[$apartment]; });
 
 			# Go through all users that should pay
-			$payment_info = join('<br>', array_map(function($apartment) use($moved_users, $gardenday) {
+			$payment_info = join('<br>', array_map(function($apartment) use($moved_users, $signed_up_users, $gardenday) {
+				$apartment_price = (in_array($apartment, $signed_up_users) ? gardenday_price_not_showed_up($apartment, $gardenday->event_id) : gardenday_price_not_signed_up($apartment, $gardenday->event_id));
+
 				# Info format for the real email
 				$replaces = array(
 					'#APT' => padded_apartment_number_from_apartment_number($apartment) . (in_array($apartment, $moved_users) ? ' (Tidligere beboer)' : '' ),
-					'#PRICE' => number_format(gardenday_price($apartment, $gardenday->event_id), 2, ",", "."),
+					'#PRICE' => number_format($apartment_price, 2, ",", "."),
 					'#BOARDSTATUS' => (is_boardmember_from_apartment_number($apartment) ? HAVEDAG_BOARDMEMBER : '') . (is_board_deputy_from_apartment_number($apartment) ? HAVEDAG_BOARD_DEPUTY : '')
 				);
 				
