@@ -63,7 +63,7 @@ function send_opkrævning_fælleshus($debug = false) {
 					if ($price > 0) {
 						# Replacements for the format of the payment
 						$replaces = array(
-							'#APT' => apartment_number_from_username($username) . (is_archive_user_from_username($username) ? ' (Tidligere beboer)' : (in_array(apartment_number_from_username($username), $moved_users) ? ' (Ny beboer)' : '')),
+							'#APT' => padded_apartment_number_from_username($username) . (is_archive_user_from_username($username) ? ' (Tidligere beboer)' : (in_array(apartment_number_from_username($username), $moved_users) ? ' (Ny beboer)' : '')),
 							'#PRICE' => number_format($price, 2, ",", "."),
 						);
 
