@@ -15,12 +15,9 @@ function send_opkrævning_havedag($debug = false) {
 		global $wpdb;
 
 		# Date formatters
-		$month = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen');
-		$month->setPattern('MMMM');
-		$monthnum = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen');
-		$monthnum->setPattern('MM');
-		$year = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen');
-		$year->setPattern('YYYY');
+		$year = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen', null, 'YYYY');
+		
+		$gardenday_formatter = new IntlDateFormatter('da_DK', IntlDateFormatter::LONG, IntlDateFormatter::NONE, 'Europe/Copenhagen');
 
 		if ($debug) {
 			# Fake run. Use next garden day if possible
@@ -141,7 +138,7 @@ function send_opkrævning_havedag($debug = false) {
 				'#PAYMENT_INFO' => $payment_info,
 				'#SEASON' => ((new DateTime($gardenday->event_end_date . " " . $gardenday->event_end_time, new DateTimeZone('Europe/Copenhagen')))->format('m') > 6 ? "efterår" : "forår"),
 				'#YEAR' => $year->format(new DateTime($gardenday->event_end_date . " " . $gardenday->event_end_time, new DateTimeZone('Europe/Copenhagen'))),
-				'#LASTSIGNUPDATE' => (new DateTime($latest_signup_date))->format('d-m-Y'),
+				'#LASTSIGNUPDATE' => $gardenday_formatter->format(new DateTime($latest_signup_date)),
 			);
 
 			# Replacements for warning email subject

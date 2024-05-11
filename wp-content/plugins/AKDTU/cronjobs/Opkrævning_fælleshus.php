@@ -29,12 +29,9 @@ function send_opkrævning_fælleshus($debug = false) {
 			$month_end->setTime(23, 59, 59);
 
 			# Date formatters
-			$month = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen');
-			$month->setPattern('MMMM');
-			$monthnum = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen');
-			$monthnum->setPattern('MM');
-			$year = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen');
-			$year->setPattern('YYYY');
+			$month = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen', null, 'MMMM');
+			$monthnum = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen', null, 'MM');
+			$year = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen', null, 'YYYY');
 
 			# Month and year of the previous month, formatted as string
 			$month_year = $month->format($month_ini) . " " . $year->format($month_ini);

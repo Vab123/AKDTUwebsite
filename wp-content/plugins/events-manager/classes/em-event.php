@@ -2207,22 +2207,19 @@ class EM_Event extends EM_Object {
 				case '#_EVENTPAYMENTMONTH':
 					$payment_month = new DateTime($this->end()->format('d-m-Y H:i:s'), new DateTimeZone('Europe/Copenhagen'));
 					$payment_month->setDate($payment_month->format('Y'), $payment_month->format('m'), 1)->modify('+1 month');
-					$month_formatter = new IntlDateFormatter(pll_get_post_language($this->post_id, 'locale'), IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen');
-					$month_formatter->setPattern('MMMM');
+					$month_formatter = new IntlDateFormatter(pll_get_post_language($this->post_id, 'locale'), IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen', null, 'MMMM');
 					$replace = $month_formatter->format($payment_month);
 					break;
 				case '#_EVENTPAYMENTYEAR':
 					$payment_year = new DateTime($this->end()->format('d-m-Y H:i:s'), new DateTimeZone('Europe/Copenhagen'));
 					$payment_year->setDate($payment_year->format('Y'), $payment_year->format('m'), 1)->modify('+1 month');
-					$year_formatter = new IntlDateFormatter(pll_get_post_language($this->post_id, 'locale'), IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen');
-					$year_formatter->setPattern('YYYY');
+					$year_formatter = new IntlDateFormatter(pll_get_post_language($this->post_id, 'locale'), IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen', null, 'YYYY');
 					$replace = $year_formatter->format($payment_year);
 					break;
 				case '#_EVENTPAYMENTMONTH_DA':
 					$payment_month = new DateTime($this->end()->format('d-m-Y H:i:s'), new DateTimeZone('Europe/Copenhagen'));
 					$payment_month->setDate($payment_month->format('Y'), $payment_month->format('m'), 1)->modify('+1 month');
-					$month_formatter = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen');
-					$month_formatter->setPattern('MMMM');
+					$month_formatter = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen', null, 'MMMM');
 					$replace = $month_formatter->format($payment_month);
 					break;
 				case '#_EVENTID':

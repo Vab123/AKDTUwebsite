@@ -15,16 +15,12 @@ function send_opdater_fælleshus_internet($debug = false, $force_update = false)
 	$run_every_hours_amount = 24; # How many hours go between each run of the cron-job
 
 	# Date formats, Danish
-	$date_da = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen');
-	$date_da->setPattern('dd. MMMM YYYY');
-	$time_da = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen');
-	$time_da->setPattern('HH:mm');
+	$date_da = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen', null, 'dd. MMMM YYYY');
+	$time_da = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen', null, 'HH:mm');
 	
 	# Date formats, English
-	$date_en = new IntlDateFormatter('en_US', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen');
-	$date_en->setPattern('dd. MMMM YYYY');
-	$time_en = new IntlDateFormatter('en_US', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen');
-	$time_en->setPattern('HH:mm');
+	$date_en = new IntlDateFormatter('en_US', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen', null, 'dd. MMMM YYYY');
+	$time_en = new IntlDateFormatter('en_US', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen', null, 'HH:mm');
 
 	# Get struct containing info about the password to the router
 	$password_struct = generate_password_info($run_every_hours_amount);

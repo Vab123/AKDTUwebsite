@@ -40,8 +40,7 @@ function fælleshus_total_month_widget() {
 				$price_adjustments = get_price_adjustments($month_start, $month_end);
 				$final_price = get_final_price($price_to_pay, $price_adjustments);
 
-				$monthyear_formatter = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen');
-				$monthyear_formatter->setPattern('MMM YYYY');
+				$monthyear_formatter = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen', null, 'MMM YYYY');
 			?>
 				<tr <?php if ($row % 2 == 0) {
 						echo 'class="alternate"';

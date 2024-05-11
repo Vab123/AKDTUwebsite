@@ -8,8 +8,7 @@ function fælleshus_vis_foreløbig_pris_widget() {
 	$month_start = new DateTime("first day of this month", new DateTimeZone('Europe/Copenhagen'));
 	$month_end = new DateTime("last day of this month", new DateTimeZone('Europe/Copenhagen'));
 
-	$month = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen');
-	$month->setPattern('MMMM');
+	$month = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen', null, 'MMMM');
 
 	$price_to_pay = get_price_to_pay($month_start, $month_end);
 	$price_adjustments = get_price_adjustments($month_start, $month_end);
