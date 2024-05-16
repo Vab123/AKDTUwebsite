@@ -18,10 +18,10 @@ $AKDTU_FUNCTIONS = array(
 
 $AKDTU_USER_TYPES = array(
 	'vicevært' => array(
-		'id' => -1,
-		'name' => 'Vicevært',
-		'user_level' => 'Vicevært',
-		'user_role' => 'vicevaert'
+		'id' => -1,													# ID of the user type, used in database
+		'name' => 'Vicevært',										# Human readable name of the user type
+		'user_level' => 'Vicevært',									# User level of the user type, as defined in the simple-membership plugin
+		'user_role' => 'vicevaert',									# User role of the user type, as defined in wordpress (potentially through functions.php)
 	),
 	'none' => array(
 		'id' => 0,													# ID of the user type, used in database
