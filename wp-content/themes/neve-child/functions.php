@@ -244,12 +244,24 @@ add_role(
 		'manage_bookings' => true,
 	)
 );
+add_role(
+	'vicevaert',
+	'Vicevært',
+	array(
+		'read' => true,
+		'delete_events' => true,
+		'edit_events' => true,
+		'read_private_events' => true,
+		'read_private_locations' => true,
+		'read_others_locations' => true,
+	)
+);
 
 
 /**
  * Remove admin bar from certain user roles
  */
-$allowed_roles = ['administrator', 'editor', 'board_member'];
+$allowed_roles = ['administrator', 'editor', 'board_member', 'deputy'];
 if (is_user_logged_in() && empty(array_intersect(wp_get_current_user()->roles, $allowed_roles))) {
 	add_filter('show_admin_bar', '__return_false');
 }
