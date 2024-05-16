@@ -23,11 +23,11 @@ function add_boardmember($apartment_number, $user_type){
 	# Check if the apartment number is valid
 	if ($apartment_number > 0) {
 		global $wpdb;
-		global $AKDTU_BOARD_TYPES;
+		global $AKDTU_USER_TYPES;
 
-		$user_type = $AKDTU_BOARD_TYPES[$user_type]['id'];
-		$user_level = $AKDTU_BOARD_TYPES[$user_type]['user_level'];
-		$user_role = $AKDTU_BOARD_TYPES[$user_type]['user_role'];
+		$user_type = $AKDTU_USER_TYPES[$user_type]['id'];
+		$user_level = $AKDTU_USER_TYPES[$user_type]['user_level'];
+		$user_role = $AKDTU_USER_TYPES[$user_type]['user_role'];
 
 		# Get the SWPM member corresponding to the apartment
 		$swpm_user = SwpmMemberUtils::get_user_by_user_name( username_from_apartment_number($apartment_number) );

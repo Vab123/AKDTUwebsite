@@ -479,10 +479,10 @@ function all_boardmember_apartments() {
 	$now = new DateTime('now', new DateTimeZone("Europe/Copenhagen"));
 
 	global $wpdb;
-	global $AKDTU_BOARD_TYPES;
+	global $AKDTU_USER_TYPES;
 
 	// Find all board members
-	return $wpdb->get_col('SELECT apartment_number FROM ' . $wpdb->prefix . 'AKDTU_boardmembers WHERE start_datetime <= "' . $now->format('Y-m-d H:i:s') . '" AND end_datetime >= "' . $now->format('Y-m-d H:i:s') . '" AND member_type IN ("' . $AKDTU_BOARD_TYPES['chairman']['id'] . '","' . $AKDTU_BOARD_TYPES['deputy-chairman']['id'] . '","' . $AKDTU_BOARD_TYPES['default']['id'] . '") ORDER BY apartment_number ASC');
+	return $wpdb->get_col('SELECT apartment_number FROM ' . $wpdb->prefix . 'AKDTU_boardmembers WHERE start_datetime <= "' . $now->format('Y-m-d H:i:s') . '" AND end_datetime >= "' . $now->format('Y-m-d H:i:s') . '" AND member_type IN ("' . $AKDTU_USER_TYPES['chairman']['id'] . '","' . $AKDTU_USER_TYPES['deputy-chairman']['id'] . '","' . $AKDTU_USER_TYPES['default']['id'] . '") ORDER BY apartment_number ASC');
 }
 #
 /**
@@ -521,10 +521,10 @@ function all_board_deputies_apartments() {
 	$now = new DateTime('now', new DateTimeZone("Europe/Copenhagen"));
 
 	global $wpdb;
-	global $AKDTU_BOARD_TYPES;
+	global $AKDTU_USER_TYPES;
 
 	// Find all board deputies
-	return $wpdb->get_col($wpdb->prepare('SELECT DISTINCT apartment_number FROM ' . $wpdb->prefix . 'AKDTU_boardmembers WHERE start_datetime <= "' . $now->format('Y-m-d H:i:s') . '" AND end_datetime >= "' . $now->format('Y-m-d H:i:s') . '" AND member_type = "' . $AKDTU_BOARD_TYPES['deputy']['id'] . '" ORDER BY apartment_number ASC'));
+	return $wpdb->get_col($wpdb->prepare('SELECT DISTINCT apartment_number FROM ' . $wpdb->prefix . 'AKDTU_boardmembers WHERE start_datetime <= "' . $now->format('Y-m-d H:i:s') . '" AND end_datetime >= "' . $now->format('Y-m-d H:i:s') . '" AND member_type = "' . $AKDTU_USER_TYPES['deputy']['id'] . '" ORDER BY apartment_number ASC'));
 }
 #
 /**
@@ -658,10 +658,10 @@ function was_boardmember_from_username($username, $datetime) {
  */
 function was_boardmember_from_apartment_number($number, $datetime) {
 	global $wpdb;
-	global $AKDTU_BOARD_TYPES;
+	global $AKDTU_USER_TYPES;
 
 	# Checks if the apartment number belongs to a board member
-	return $wpdb->get_var('SELECT COUNT(*) FROM ' . $wpdb->prefix . 'AKDTU_boardmembers WHERE apartment_number = "' . $number . '" AND start_datetime <= "' . $datetime->format('Y-m-d H:i:s') . '" AND end_datetime >= "' . $datetime->format('Y-m-d H:i:s') . '" AND member_type IN ("' . $AKDTU_BOARD_TYPES['chairman']['id'] . '","' . $AKDTU_BOARD_TYPES['deputy-chairman']['id'] . '","' . $AKDTU_BOARD_TYPES['default']['id'] . '")') > 0;
+	return $wpdb->get_var('SELECT COUNT(*) FROM ' . $wpdb->prefix . 'AKDTU_boardmembers WHERE apartment_number = "' . $number . '" AND start_datetime <= "' . $datetime->format('Y-m-d H:i:s') . '" AND end_datetime >= "' . $datetime->format('Y-m-d H:i:s') . '" AND member_type IN ("' . $AKDTU_USER_TYPES['chairman']['id'] . '","' . $AKDTU_USER_TYPES['deputy-chairman']['id'] . '","' . $AKDTU_USER_TYPES['default']['id'] . '")') > 0;
 }
 #
 /**
@@ -702,10 +702,10 @@ function was_board_deputy_from_username($username, $datetime) {
  */
 function was_board_deputy_from_apartment_number($number, $datetime) {
 	global $wpdb;
-	global $AKDTU_BOARD_TYPES;
+	global $AKDTU_USER_TYPES;
 
 	# Checks if the apartment number belongs to a board member
-	return $wpdb->get_var('SELECT COUNT(*) FROM ' . $wpdb->prefix . 'AKDTU_boardmembers WHERE apartment_number = "' . $number . '" AND start_datetime <= "' . $datetime->format('Y-m-d H:i:s') . '" AND end_datetime >= "' . $datetime->format('Y-m-d H:i:s') . '" AND member_type = "' . $AKDTU_BOARD_TYPES['deputy']['id'] . '"') > 0;
+	return $wpdb->get_var('SELECT COUNT(*) FROM ' . $wpdb->prefix . 'AKDTU_boardmembers WHERE apartment_number = "' . $number . '" AND start_datetime <= "' . $datetime->format('Y-m-d H:i:s') . '" AND end_datetime >= "' . $datetime->format('Y-m-d H:i:s') . '" AND member_type = "' . $AKDTU_USER_TYPES['deputy']['id'] . '"') > 0;
 }
 #
 /**
@@ -732,9 +732,9 @@ function was_board_deputy_from_id($id, $datetime) {
  * @return bool True if the user was chairman of the board at the given time
  */
 function was_chairman_from_apartment_number($number, $datetime) {
-	global $AKDTU_BOARD_TYPES;
+	global $AKDTU_USER_TYPES;
 	# Checks if the user was chairman at the given time
-	return user_type_from_apartment_number($number, $datetime) == $AKDTU_BOARD_TYPES['chairman']['id'];
+	return user_type_from_apartment_number($number, $datetime) == $AKDTU_USER_TYPES['chairman']['id'];
 }
 #
 /**
@@ -772,9 +772,9 @@ function was_chairman_from_id($id, $datetime) {
  * @return bool True if the user was deputy chairman of the board at the given time
  */
 function was_deputy_chairman_from_apartment_number($number, $datetime) {
-	global $AKDTU_BOARD_TYPES;
+	global $AKDTU_USER_TYPES;
 	# Checks if the user was chairman at the given time
-	return user_type_from_apartment_number($number, $datetime) == $AKDTU_BOARD_TYPES['deputy-chairman']['id'];
+	return user_type_from_apartment_number($number, $datetime) == $AKDTU_USER_TYPES['deputy-chairman']['id'];
 }
 #
 /**
@@ -812,9 +812,9 @@ function was_deputy_chairman_from_id($id, $datetime) {
  * @return bool True if the user was a default member of the board at the given time
  */
 function was_default_boardmember_from_apartment_number($number, $datetime) {
-	global $AKDTU_BOARD_TYPES;
+	global $AKDTU_USER_TYPES;
 	# Checks if the user was chairman at the given time
-	return user_type_from_apartment_number($number, $datetime) == $AKDTU_BOARD_TYPES['default']['id'];
+	return user_type_from_apartment_number($number, $datetime) == $AKDTU_USER_TYPES['default']['id'];
 }
 #
 /**
@@ -857,8 +857,8 @@ function user_type_from_apartment_number($number, $datetime) {
 	$user_type = $wpdb->get_var($wpdb->prepare('SELECT member_type FROM ' . $wpdb->prefix . 'AKDTU_boardmembers WHERE apartment_number = "' . $number . '" AND start_datetime <= "' . $datetime->format('Y-m-d H:i:s') . '" AND end_datetime >= "' . $datetime->format('Y-m-d H:i:s') . '"'));
 
 	if (is_null($user_type)) {
-		global $AKDTU_BOARD_TYPES;
-		return $AKDTU_BOARD_TYPES['none']['id'];
+		global $AKDTU_USER_TYPES;
+		return $AKDTU_USER_TYPES['none']['id'];
 	}
 
 	return $user_type;
@@ -899,12 +899,12 @@ function user_type_from_id($id, $datetime) {
  * @return string Name of the user type of the user at the given time..
  */
 function user_type_name_from_apartment_number($number, $datetime) {
-	global $AKDTU_BOARD_TYPES;
+	global $AKDTU_USER_TYPES;
 	$user_type = user_type_from_apartment_number($number, $datetime);
 
 	return array_values(
 		array_filter(
-			$AKDTU_BOARD_TYPES,
+			$AKDTU_USER_TYPES,
 			function($type) use($user_type) {
 				return $type['id'] == $user_type;
 			}

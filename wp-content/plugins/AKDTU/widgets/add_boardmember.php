@@ -5,7 +5,7 @@
  */
 
 function add_boardmember_widget() { 
-	global $AKDTU_BOARD_TYPES;
+	global $AKDTU_USER_TYPES;
 	?>
 	<form action="" method="post">
 		<input type="hidden" name="action" value="add_boardmember" />
@@ -24,7 +24,7 @@ function add_boardmember_widget() {
 					<td><label>Medlemstype:</label></td>
 					<td><select name="user-type"><?php echo join("", array_map(function ($key, $user_type) {
 						return ($user_type['id'] == $user_type['none']['id'] ? '' : '<option value="' . $key . '">' . $user_type['name'] . '</option>');
-					}, array_keys($AKDTU_BOARD_TYPES), array_values($AKDTU_BOARD_TYPES))); ?></select></td>
+					}, array_keys($AKDTU_USER_TYPES), array_values($AKDTU_USER_TYPES))); ?></select></td>
 				</tr>
 				<tr>
 					<td></td>

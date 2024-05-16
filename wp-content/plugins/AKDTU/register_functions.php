@@ -16,7 +16,13 @@ $AKDTU_FUNCTIONS = array(
 	"vlan.php",
 );
 
-$AKDTU_BOARD_TYPES = array(
+$AKDTU_USER_TYPES = array(
+	'vicevært' => array(
+		'id' => -1,
+		'name' => 'Vicevært',
+		'user_level' => 'Vicevært',
+		'user_role' => 'vicevaert'
+	),
 	'none' => array(
 		'id' => 0,													# ID of the user type, used in database
 		'name' => 'Beboer',											# Human readable name of the user type
