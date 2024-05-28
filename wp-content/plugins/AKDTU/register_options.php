@@ -2315,6 +2315,26 @@ $AKDTU_OPTIONS = array(
 			),
 		),
 	),
+	// "test.php" => array(
+	// 	"page-title" => "Test",
+	// 	"menu-title" => "Test",
+	// 	"menu-slug" => "akdtu-plugin-test",
+	// 	"function" => "test_page",
+	// 	"default-tab" => "test",
+	// 	"h1" => "Test",
+	// 	"tabs" => array(
+	// 		"test" => array(
+	// 			"tab-title" => "Afprøv",
+	// 			"tab-type" => "test",
+	// 			"includes" => array(
+					
+	// 			),
+	// 			"function-calls" => array(
+	// 				"test();",
+	// 			)
+	// 		),
+	// 	),
+	// ),
 );
 
 add_action('admin_menu', 'AKDTU_menu');
