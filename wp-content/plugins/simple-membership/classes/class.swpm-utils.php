@@ -248,6 +248,9 @@ abstract class SwpmUtils {
 		if ( isset( $swpm_data['last_name'] ) ) {
 			$wp_user_info['last_name'] = $swpm_data['last_name'];
 		}
+		if ( isset( $swpm_data['first_name'] ) && isset( $swpm_data['last_name'] ) ) {
+			$wp_user_info['display_name'] = $swpm_data['first_name'] . ' ' . $swpm_data['last_name'];
+		}
 		if ( isset( $swpm_data['plain_password'] ) ) {
 			$wp_user_info['user_pass'] = $swpm_data['plain_password'];
 		}

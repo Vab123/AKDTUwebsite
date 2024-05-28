@@ -192,7 +192,8 @@ class SwpmFrontRegistration extends SwpmRegistration {
 			'ID'         => $user_id,
 			'user_email' => $_POST['email'],
 			'first_name' => $_POST['first_name'],
-			'last_name' => $_POST['last_name']
+			'last_name' => $_POST['last_name'],
+			'display_name' => $_POST['first_name'] . ' ' . $_POST['last_name']
 		);
 		wp_update_user($args);
 

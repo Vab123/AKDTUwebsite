@@ -243,7 +243,8 @@ function reset_user_info($user_id, $new_pass, $new_first_name, $new_last_name, $
 			'ID'         => $user_id,
 			'user_email' => $new_email,
 			'first_name' => $new_first_name,
-			'last_name' => $new_last_name
+			'last_name' => $new_last_name,
+			'display_name' => $new_first_name . ' ' . $new_last_name,
 		);
 		wp_update_user($args);
 	}
