@@ -46,7 +46,7 @@ function gardenday_price_not_showed_up($apartment_number, $garden_day_id) {
  * @param string $language Slug of the language for the events found. 'all' for all languages. (Default: 'all')
  * @param int $amount Number of garden days to find. (Default: 1)
  * 
- * @return EM_Event[]|EM_Event[string]|null Garden day events.
+ * @return EM_Event[]|EM_Event[string]|null Null if no garden days were found. Otherwise, if $language is 'all', an array of key-value-arrays, with keys equal to the language slugs of the garden days and the EM_Events as values. Otherwise, an array of EM_Events.
  */
 function next_gardenday($language = 'all', $amount = 1) {
 	# Settings for lookup for garden days
@@ -80,7 +80,7 @@ function next_gardenday($language = 'all', $amount = 1) {
  * @param string $language Slug of the language for the events found. 'all' for all languages. (Default: 'all')
  * @param int $amount Number of garden days to find. (Default: 1)
  * 
- * @return EM_Event[]|EM_Event[string]|null Garden day events.
+ * @return EM_Event[]|EM_Event[string]|null Null if no garden days were found. Otherwise, if $language is 'all', an array of key-value-arrays, with keys equal to the language slugs of the garden days and the EM_Events as values. Otherwise, an array of EM_Events.
  */
 function previous_gardenday($language = 'all', $amount = 1) {
 	# Settings for lookup for garden days
@@ -118,6 +118,19 @@ function previous_gardenday($language = 'all', $amount = 1) {
 		
 	# Return events if any were found. Otherwise, return null
 	return (count($events) > 0 ? array_slice($events, 0, $amount) : null);
+}
+
+/**
+ * Finds any garden day event.
+ * 
+ * @param string $language Slug of the language for the events found. 'all' for all languages. (Default: 'all')
+ * 
+ * @return EM_Event[]|EM_Event|null If any future garden days exist, one of them is returned. Otherwise, if any past garden days exist, one of them is returned. Otherwise null.
+ */
+function any_gardenday($language = 'all') {
+	$events = next_gardenday($language, 1);
+
+	return (is_null($events) ? previous_gardenday($language, 1) : $events);
 }
 
 ?>
