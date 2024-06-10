@@ -20,24 +20,22 @@ function send_opkrævning_havedag($debug = false) {
 		$gardenday_formatter = new IntlDateFormatter('da_DK', IntlDateFormatter::LONG, IntlDateFormatter::NONE, 'Europe/Copenhagen');
 
 		if ($debug) {
-			# Fake run. Use next garden day if possible
-			$gardenday = next_gardenday('da', 1);
-
-			if (is_null($gardenday)) {
-				$gardenday = previous_gardenday('da', 1);
-			}
+			# Fake run. Any garden day will do.
+			$gardenday = any_gardenday('da', 1);
 		}
 		else {
 			# Real run
 			$gardenday = previous_gardenday('da', 1);
 		}
-
+		
+		# Check if a garden day was found
 		if (is_null($gardenday)) {
 			wp_mail("netgruppen@akdtu.dk", "Cronjob \"send_opkrævning_havedag\" fandt ingen havedage", "Cronjobbet som sørger for automatisk at sende opkrævninger for manglende deltagelse ved havedage kunne ikke finde nogen havedage at vurdere. Dette betyder at det ikke kunne bedømmes om der skulle sendes nogen opkrævninger i dag. Såfremt der skulle sendes nogen opkrævninger i dag er dette altså ikke sket. Problemet her skal fikses.");
+
+			# Write error if there was not found any garden days. If this is reached, there may be no garden days in the system
+			echo "Ingen havedag blev fundet. DETTE ER EN FEJL.";
 		}
-	
-		# Check if a garden day was found
-		if (!is_null($gardenday)) {
+		else {
 			$gardenday = $gardenday[0];
 
 			# Get all translations of the event
@@ -220,9 +218,6 @@ function send_opkrævning_havedag($debug = false) {
 				# Send or echo mail
 				send_AKDTU_email($debug, $warning_message_subject_replaces, $warning_message_content_replaces, 'HAVEDAG_WARNING');
 			}
-		} else {
-			# Write error if there was not found any garden days. If this is reached, there may be no garden days in the system
-			echo "Ingen havedag blev fundet. DETTE ER EN FEJL.";
 		}
 	}
 }
