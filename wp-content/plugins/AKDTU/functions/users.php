@@ -935,6 +935,100 @@ function user_type_name_from_username($username, $datetime) {
 function user_type_name_from_id($id, $datetime) {
 	return user_type_name_from_apartment_number(apartment_number_from_id($id), $datetime);
 }
+#
+#
+#
+/**
+ * Gets the id of the user type of a board member or deputy at a given time, by their apartment number
+ * 
+ * @param string $number Apartment number of the user
+ * @param DateTime $datetime Time to find the user type of the user
+ * 
+ * @return string Id of the user type of the user at the given time..
+ */
+function user_type_id_from_apartment_number($number, $datetime) {
+	global $AKDTU_USER_TYPES;
+	$user_type = user_type_from_apartment_number($number, $datetime);
+
+	return array_keys(
+		array_filter(
+			$AKDTU_USER_TYPES,
+			function($type) use($user_type) {
+				return $type['id'] == $user_type;
+			}
+		)
+	)[0];
+}
+#
+/**
+ * Gets the id of the user type of a board member or deputy at a given time, by their username
+ * 
+ * @param string $username Username of the user
+ * @param DateTime $datetime Time to find the user type of the user
+ * 
+ * @return string Id of the user type of the user at the given time..
+ */
+function user_type_id_from_username($username, $datetime) {
+	return user_type_id_from_apartment_number(apartment_number_from_username($username), $datetime);
+}
+#
+/**
+ * Gets the id of the user type of a board member or deputy at a given time, by their user ID
+ * 
+ * @param string $id User id of the user
+ * @param DateTime $datetime Time to find the user type of the user
+ * 
+ * @return string Id of the user type of the user at the given time..
+ */
+function user_type_id_from_id($id, $datetime) {
+	return user_type_id_from_apartment_number(apartment_number_from_id($id), $datetime);
+}
+############################################################
+
+
+############################################################
+#
+#
+#
+function all_networkgroup_apartment_numbers() {
+	return array_map(function ($person_id) {return apartment_number_from_id($person_id);}, all_networkgroup_ids());
+}
+#
+function all_networkgroup_usernames() {
+	return array_map(function ($person_id) {return username_from_id($person_id);}, all_networkgroup_ids());
+}
+#
+function all_networkgroup_ids() {
+	return array(8, 20);
+}
+#
+#
+#
+function is_KNet_representative_from_apartment_number($number) {
+	return is_KNet_representative_from_id(id_from_apartment_number($number));
+}
+#
+function is_KNet_representative_from_username($username) {
+	return is_KNet_representative_from_id(username_from_apartment_number($username));
+}
+#
+function is_KNet_representative_from_id($id) {
+	return $id == 8;
+}
+#
+#
+#
+function is_KNet_deputy_from_apartment_number($number) {
+	return is_KNet_deputy_from_id(id_from_apartment_number($number));
+}
+#
+function is_KNet_deputy_from_username($username) {
+	return is_KNet_deputy_from_id(username_from_apartment_number($username));
+}
+#
+function is_KNet_deputy_from_id($id) {
+	return $id == 20;
+}
 ############################################################
 
 
