@@ -55,6 +55,21 @@ $AKDTU_USER_TYPES = array(
 	),
 );
 
+$KNET_USER_TYPES = array(
+	'none' => array(
+		'id' => -1,													# ID of the user type, used in database
+		'name' => 'Ikke relateret',									# Human readable name of the user type
+	),
+	'representative' => array(
+		'id' => 0,													# ID of the user type, used in database
+		'name' => 'Repræsentant',									# Human readable name of the user type
+	),
+	'deputy' => array(
+		'id' => 1,													# ID of the user type, used in database
+		'name' => 'Suppleant',										# Human readable name of the user type
+	),
+);
+
 foreach ($AKDTU_FUNCTIONS as $function_file) {
 	include_once "functions/" . $function_file;
 }
