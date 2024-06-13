@@ -39,6 +39,19 @@ $AKDTU_WIDGETS = array(
 			"add_boardmember.php",
 		),
 	),
+	"add_networkgroupmember" => array(
+		"require_admin" => true,
+		"widgets" => array(
+			"add_networkgroupmember.php" => array(
+				"id" => "add_networkgroupmember_widget",
+				"name" => "Tilføj netgruppemedlem",
+				"callback" => "add_networkgroupmember_widget",
+			),
+		),
+		"actions" => array(
+			"add_networkgroupmember.php",
+		),
+	),
 	"add_vicevært" => array(
 		"require_admin" => true,
 		"widgets" => array(
@@ -384,6 +397,19 @@ $AKDTU_WIDGETS = array(
 		),
 		"actions" => array(
 			"remove_boardmember.php",
+		),
+	),
+	"show_networkgroup" => array(
+		"require_admin" => true,
+		"widgets" => array(
+			"show_networkgroup.php" => array(
+				"id" => "show_networkgroup_widget",
+				"name" => "Netgruppemedlemmer",
+				"callback" => "show_networkgroup_widget",
+			),
+		),
+		"actions" => array(
+			"remove_networkgroupmember.php",
 		),
 	),
 	"show_vicevært" => array(
