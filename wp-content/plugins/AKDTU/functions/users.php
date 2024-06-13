@@ -946,7 +946,7 @@ function user_type_name_from_id($id, $datetime) {
  * 
  * @return string Id of the user type of the user at the given time..
  */
-function user_type_id_from_apartment_number($number, $datetime) {
+function user_type_key_from_apartment_number($number, $datetime) {
 	global $AKDTU_USER_TYPES;
 	$user_type = user_type_from_apartment_number($number, $datetime);
 
@@ -968,8 +968,8 @@ function user_type_id_from_apartment_number($number, $datetime) {
  * 
  * @return string Id of the user type of the user at the given time..
  */
-function user_type_id_from_username($username, $datetime) {
-	return user_type_id_from_apartment_number(apartment_number_from_username($username), $datetime);
+function user_type_key_from_username($username, $datetime) {
+	return user_type_key_from_apartment_number(apartment_number_from_username($username), $datetime);
 }
 #
 /**
@@ -980,42 +980,79 @@ function user_type_id_from_username($username, $datetime) {
  * 
  * @return string Id of the user type of the user at the given time..
  */
-function user_type_id_from_id($id, $datetime) {
-	return user_type_id_from_apartment_number(apartment_number_from_id($id), $datetime);
+function user_type_key_from_id($id, $datetime) {
+	return user_type_key_from_apartment_number(apartment_number_from_id($id), $datetime);
 }
 ############################################################
 
 
 ############################################################
 #
+# Check if a user is related to the network group
 #
-#
+/**
+ * Gets the apartment numbers of all apartments that are members of the network group
+ * 
+ * @return int[] Array of apartment numbers
+ */
 function all_networkgroup_apartment_numbers() {
-	return array_map(function ($id) {return apartment_number_from_id($id);}, all_networkgroup_ids());
+	global $wpdb;
+
+	$now = new DateTime('now', new DateTimeZone('Europe/Copenhagen'));
+
+	return $wpdb->get_col($wpdb->prepare('SELECT apartment_number FROM ' . $wpdb->prefix . 'AKDTU_networkgroupmembers WHERE start_datetime <= "' . $now->format('Y-m-d H:i:s') . '" AND end_datetime >= "' . $now->format('Y-m-d H:i:s') . '" ORDER BY member_type ASC, apartment_number ASC'));
 }
 #
+/**
+ * Gets the usernames of all apartments that are members of the network group
+ * 
+ * @return string[] Array of usernames
+ */
 function all_networkgroup_usernames() {
-	return array_map(function ($id) {return username_from_id($id);}, all_networkgroup_ids());
+	return array_map(function ($apartment_number) {return username_from_apartment_number($apartment_number);}, all_networkgroup_apartment_numbers());
 }
 #
+/**
+ * Gets the user ids of all apartments that are members of the network group
+ * 
+ * @return int[] Array of user ids
+ */
 function all_networkgroup_ids() {
-	return array(8, 20);
+	return array_map(function ($apartment_number) {return id_from_apartment_number($apartment_number);}, all_networkgroup_apartment_numbers());
 }
 #
 #
 #
+/**
+ * Checks if an apartment is currently the representative of the dorm in K-Net
+ * 
+ * @param int $number Apartment number to check
+ * @return bool True if the apartment is currently the representative in K-Net
+ */
 function is_KNet_representative_from_apartment_number($number) {
 	$now = new DateTime('now', new DateTimeZone('Europe/Copenhagen'));
 
 	return was_KNet_representative_from_apartment_number($number, $now);
 }
 #
+/**
+ * Checks if an apartment is currently the representative of the dorm in K-Net
+ * 
+ * @param string $username Username to check
+ * @return bool True if the apartment is currently the representative in K-Net
+ */
 function is_KNet_representative_from_username($username) {
 	$now = new DateTime('now', new DateTimeZone('Europe/Copenhagen'));
 
 	return is_KNet_representative_from_username($username, $now);
 }
 #
+/**
+ * Checks if an apartment is currently the representative of the dorm in K-Net
+ * 
+ * @param int $id User id to check
+ * @return bool True if the apartment is currently the representative in K-Net
+ */
 function is_KNet_representative_from_id($id) {
 	$now = new DateTime('now', new DateTimeZone('Europe/Copenhagen'));
 
@@ -1024,32 +1061,72 @@ function is_KNet_representative_from_id($id) {
 #
 #
 #
+/**
+ * Checks if an apartment was the representative of the dorm in K-Net at a specified time
+ * 
+ * @param int $number Apartment number to check
+ * @param DateTime $datetime Time to check if the apartment was the K-Net representative
+ * @return bool True if the apartment was the representative in K-Net at the specified time
+ */
 function was_KNet_representative_from_apartment_number($number, $datetime) {
-	return was_KNet_representative_from_id(id_from_apartment_number($number), $datetime);
+	global $KNET_USER_TYPES;
+	return KNet_type_from_apartment_number($number, $datetime) == $KNET_USER_TYPES['representative']['id'];
 }
 #
+/**
+ * Checks if an apartment was the representative of the dorm in K-Net at a specified time
+ * 
+ * @param string $username Username to check
+ * @param DateTime $datetime Time to check if the apartment was the K-Net representative
+ * @return bool True if the apartment was the representative in K-Net at the specified time
+ */
 function was_KNet_representative_from_username($username, $datetime) {
-	return was_KNet_representative_from_id(id_from_username($username), $datetime);
+	return was_KNet_representative_from_apartment_number(apartment_number_from_username($username), $datetime);
 }
 #
+/**
+ * Checks if an apartment was the representative of the dorm in K-Net at a specified time
+ * 
+ * @param int $id User id to check
+ * @param DateTime $datetime Time to check if the apartment was the K-Net representative
+ * @return bool True if the apartment was the representative in K-Net at the specified time
+ */
 function was_KNet_representative_from_id($id, $datetime) {
-	return $id == 8;
+	return was_KNet_representative_from_apartment_number(apartment_number_from_id($id), $datetime);
 }
 #
 #
 #
+/**
+ * Checks if an apartment is currently the deputy of the dorm in K-Net
+ * 
+ * @param int $number Apartment number to check
+ * @return bool True if the apartment is currently the deputy in K-Net
+ */
 function is_KNet_deputy_from_apartment_number($number) {
 	$now = new DateTime('now', new DateTimeZone('Europe/Copenhagen'));
 
 	return was_KNet_deputy_from_apartment_number($number, $now);
 }
 #
+/**
+ * Checks if an apartment is currently the deputy of the dorm in K-Net
+ * 
+ * @param string $username Username to check
+ * @return bool True if the apartment is currently the deputy in K-Net
+ */
 function is_KNet_deputy_from_username($username) {
 	$now = new DateTime('now', new DateTimeZone('Europe/Copenhagen'));
 
 	return was_KNet_deputy_from_username($username, $now);
 }
 #
+/**
+ * Checks if an apartment is currently the deputy of the dorm in K-Net
+ * 
+ * @param int $id User id to check
+ * @return bool True if the apartment is currently the deputy in K-Net
+ */
 function is_KNet_deputy_from_id($id) {
 	$now = new DateTime('now', new DateTimeZone('Europe/Copenhagen'));
 
@@ -1058,16 +1135,181 @@ function is_KNet_deputy_from_id($id) {
 #
 #
 #
+/**
+ * Checks if an apartment was the deputy of the dorm in K-Net at a specified time
+ * 
+ * @param int $number Apartment number to check
+ * @param DateTime $datetime Time to check if the apartment was the K-Net deputy
+ * @return bool True if the apartment was the deputy in K-Net at the specified time
+ */
 function was_KNet_deputy_from_apartment_number($number, $datetime) {
-	return was_KNet_deputy_from_id(id_from_apartment_number($number), $datetime);
+	global $KNET_USER_TYPES;
+	return KNet_type_from_apartment_number($number, $datetime) == $KNET_USER_TYPES['deputy']['id'];
 }
 #
+/**
+ * Checks if an apartment was the deputy of the dorm in K-Net at a specified time
+ * 
+ * @param string $username Username to check
+ * @param DateTime $datetime Time to check if the apartment was the K-Net deputy
+ * @return bool True if the apartment was the deputy in K-Net at the specified time
+ */
 function was_KNet_deputy_from_username($username, $datetime) {
-	return was_KNet_deputy_from_id(id_from_username($username), $datetime);
+	return was_KNet_deputy_from_apartment_number(apartment_number_from_username($username), $datetime);
 }
 #
+/**
+ * Checks if an apartment was the deputy of the dorm in K-Net at a specified time
+ * 
+ * @param int $id User id to check
+ * @param DateTime $datetime Time to check if the apartment was the K-Net deputy
+ * @return bool True if the apartment was the deputy in K-Net at the specified time
+ */
 function was_KNet_deputy_from_id($id, $datetime) {
-	return $id == 20;
+	return was_KNet_deputy_from_apartment_number(apartment_number_from_id($id), $datetime);
+}
+#
+#
+#
+/**
+ * Gets the K-Net type of a user at a given time, by their apartment number
+ * 
+ * @param string $number Apartment number of the user
+ * @param DateTime $datetime Time to find the K-Net type of the user
+ * 
+ * @return int|bool K-Net type of the user.
+ */
+function KNet_type_from_apartment_number($number, $datetime) {
+	global $wpdb;
+	
+	$user_type = $wpdb->get_var($wpdb->prepare('SELECT member_type FROM ' . $wpdb->prefix . 'AKDTU_networkgroupmembers WHERE apartment_number = "' . $number . '" AND start_datetime <= "' . $datetime->format('Y-m-d H:i:s') . '" AND end_datetime >= "' . $datetime->format('Y-m-d H:i:s') . '"'));
+
+	if (is_null($user_type)) {
+		global $KNET_USER_TYPES;
+		return $KNET_USER_TYPES['none']['id'];
+	}
+
+	return $user_type;
+}
+#
+/**
+ * Gets the K-Net type of a board member or deputy at a given time, by their username
+ * 
+ * @param string $username Username of the user
+ * @param DateTime $datetime Time to find the K-Net type of the user
+ * 
+ * @return int K-Net type of the user.
+ */
+function KNet_type_from_username($username, $datetime) {
+	return KNet_type_from_apartment_number(apartment_number_from_username($username), $datetime);
+}
+#
+/**
+ * Gets the K-Net type of a board member or deputy at a given time, by their user id
+ * 
+ * @param string $id User id of the user
+ * @param DateTime $datetime Time to find the K-Net type of the user
+ * 
+ * @return int K-Net type of the user.
+ */
+function KNet_type_from_id($id, $datetime) {
+	return KNet_type_from_apartment_number(apartment_number_from_id($id), $datetime);
+}
+#
+#
+#
+/**
+ * Gets the name of the K-Net type of a board member or deputy at a given time, by their apartment number
+ * 
+ * @param string $number Apartment number of the user
+ * @param DateTime $datetime Time to find the K-Net type of the user
+ * 
+ * @return string Name of the K-Net type of the user at the given time..
+ */
+function KNet_type_name_from_apartment_number($number, $datetime) {
+	global $KNET_USER_TYPES;
+	$user_type = KNet_type_from_apartment_number($number, $datetime);
+
+	return array_values(
+		array_filter(
+			$KNET_USER_TYPES,
+			function($type) use($user_type) {
+				return $type['id'] == $user_type;
+			}
+		)
+	)[0]['name'];
+}
+#
+/**
+ * Gets the name of the K-Net type of a board member or deputy at a given time, by their username
+ * 
+ * @param string $username Username of the user
+ * @param DateTime $datetime Time to find the K-Net type of the user
+ * 
+ * @return string Name of the K-Net type of the user at the given time..
+ */
+function KNet_type_name_from_username($username, $datetime) {
+	return KNet_type_name_from_apartment_number(apartment_number_from_username($username), $datetime);
+}
+#
+/**
+ * Gets the name of the K-Net type of a board member or deputy at a given time, by their user ID
+ * 
+ * @param string $id User id of the user
+ * @param DateTime $datetime Time to find the K-Net type of the user
+ * 
+ * @return string Name of the K-Net type of the user at the given time..
+ */
+function KNet_type_name_from_id($id, $datetime) {
+	return KNet_type_name_from_apartment_number(apartment_number_from_id($id), $datetime);
+}
+#
+#
+#
+/**
+ * Gets the id of the K-Net type of a board member or deputy at a given time, by their apartment number
+ * 
+ * @param string $number Apartment number of the user
+ * @param DateTime $datetime Time to find the K-Net type of the user
+ * 
+ * @return string Id of the K-Net type of the user at the given time..
+ */
+function KNet_type_key_from_apartment_number($number, $datetime) {
+	global $KNET_USER_TYPES;
+	$user_type = KNet_type_from_apartment_number($number, $datetime);
+
+	return array_keys(
+		array_filter(
+			$KNET_USER_TYPES,
+			function($type) use($user_type) {
+				return $type['id'] == $user_type;
+			}
+		)
+	)[0];
+}
+#
+/**
+ * Gets the id of the K-Net type of a board member or deputy at a given time, by their username
+ * 
+ * @param string $username Username of the user
+ * @param DateTime $datetime Time to find the K-Net type of the user
+ * 
+ * @return string Id of the K-Net type of the user at the given time..
+ */
+function KNet_type_key_from_username($username, $datetime) {
+	return KNet_type_key_from_apartment_number(apartment_number_from_username($username), $datetime);
+}
+#
+/**
+ * Gets the id of the K-Net type of a board member or deputy at a given time, by their user ID
+ * 
+ * @param string $id User id of the user
+ * @param DateTime $datetime Time to find the K-Net type of the user
+ * 
+ * @return string Id of the K-Net type of the user at the given time..
+ */
+function KNet_type_key_from_id($id, $datetime) {
+	return KNet_type_key_from_apartment_number(apartment_number_from_id($id), $datetime);
 }
 ############################################################
 
