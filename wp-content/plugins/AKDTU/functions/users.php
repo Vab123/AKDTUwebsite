@@ -991,15 +991,15 @@ function user_type_id_from_id($id, $datetime) {
 #
 #
 function all_networkgroup_apartment_numbers() {
-	return array(2, 14);
+	return array_map(function ($id) {return apartment_number_from_id($id);}, all_networkgroup_ids());
 }
 #
 function all_networkgroup_usernames() {
-	return array_map(function ($apartment_number) {return username_from_apartment_number($apartment_number);}, all_networkgroup_apartment_numbers());
+	return array_map(function ($id) {return username_from_id($id);}, all_networkgroup_ids());
 }
 #
 function all_networkgroup_ids() {
-	return array_map(function ($apartment_number) {return id_from_apartment_number($apartment_number);}, all_networkgroup_apartment_numbers());
+	return array(8, 20);
 }
 #
 #
