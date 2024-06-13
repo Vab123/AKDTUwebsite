@@ -1005,28 +1005,68 @@ function all_networkgroup_ids() {
 #
 #
 function is_KNet_representative_from_apartment_number($number) {
-	return is_KNet_representative_from_id(id_from_apartment_number($number));
+	$now = new DateTime('now', new DateTimeZone('Europe/Copenhagen'));
+
+	return was_KNet_representative_from_apartment_number($number, $now);
 }
 #
 function is_KNet_representative_from_username($username) {
-	return is_KNet_representative_from_id(username_from_apartment_number($username));
+	$now = new DateTime('now', new DateTimeZone('Europe/Copenhagen'));
+
+	return is_KNet_representative_from_username($username, $now);
 }
 #
 function is_KNet_representative_from_id($id) {
+	$now = new DateTime('now', new DateTimeZone('Europe/Copenhagen'));
+
+	return was_KNet_representative_from_id($id, $now);
+}
+#
+#
+#
+function was_KNet_representative_from_apartment_number($number, $datetime) {
+	return was_KNet_representative_from_id(id_from_apartment_number($number), $datetime);
+}
+#
+function was_KNet_representative_from_username($username, $datetime) {
+	return was_KNet_representative_from_id(id_from_username($username), $datetime);
+}
+#
+function was_KNet_representative_from_id($id, $datetime) {
 	return $id == 8;
 }
 #
 #
 #
 function is_KNet_deputy_from_apartment_number($number) {
-	return is_KNet_deputy_from_id(id_from_apartment_number($number));
+	$now = new DateTime('now', new DateTimeZone('Europe/Copenhagen'));
+
+	return was_KNet_deputy_from_apartment_number($number, $now);
 }
 #
 function is_KNet_deputy_from_username($username) {
-	return is_KNet_deputy_from_id(username_from_apartment_number($username));
+	$now = new DateTime('now', new DateTimeZone('Europe/Copenhagen'));
+
+	return was_KNet_deputy_from_username($username, $now);
 }
 #
 function is_KNet_deputy_from_id($id) {
+	$now = new DateTime('now', new DateTimeZone('Europe/Copenhagen'));
+
+	return was_KNet_deputy_from_id($id, $now);
+}
+#
+#
+#
+function was_KNet_deputy_from_apartment_number($number, $datetime) {
+	return was_KNet_deputy_from_id(id_from_apartment_number($number), $datetime);
+}
+#
+function was_KNet_deputy_from_username($username, $datetime) {
+	return was_KNet_deputy_from_id(id_from_username($username), $datetime);
+}
+#
+function was_KNet_deputy_from_id($id, $datetime) {
 	return $id == 20;
 }
 ############################################################
