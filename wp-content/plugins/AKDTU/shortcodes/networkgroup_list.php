@@ -58,7 +58,7 @@ function AKDTU_networkgroup_list( $atts ){
 		$networkgroup_list .= join('', array_map(function ($person_id) use($values, $now, $member_types) {
 			$member_type = user_type_id_from_id($person_id, $now);
 
-			return '<li>' . name_from_id($person_id) . ' — ' . $member_types[$member_type] . $values['apartment'] . ' ' . padded_apartment_number_from_id($person_id) . (is_KNet_representative_from_id($person_id, $now) ? ' — ' . $values["knet-representative"] : '') . (is_KNet_deputy_from_id($person_id, $now) ? ' — ' . $values["knet-deputy"] : '') . '</li>';
+			return '<li>' . name_from_id($person_id) . ' — ' . $member_types[$member_type] . $values['apartment'] . ' ' . padded_apartment_number_from_id($person_id) . (is_KNet_representative_from_id($person_id) ? ' — ' . $values["knet-representative"] : '') . (is_KNet_deputy_from_id($person_id) ? ' — ' . $values["knet-deputy"] : '') . '</li>';
 		}, $networkgroup_members));
 	}
 
