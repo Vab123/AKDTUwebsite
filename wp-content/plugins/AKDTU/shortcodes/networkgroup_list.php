@@ -53,17 +53,19 @@ function AKDTU_networkgroup_list( $atts ){
 	$networkgroup_list = "";
 
 	// Add info about chairmen to list
-	$networkgroup_list .= '<ul style="list-style-type: ' . $values['list-style-type'] . ';">';
 	if (count($networkgroup_members) > 0) {
+		$networkgroup_list .= '<ul style="list-style-type: ' . $values['list-style-type'] . ';">';
+		
 		$networkgroup_list .= join('', array_map(function ($person_id) use($values, $now, $member_types) {
-			$member_type = user_type_id_from_id($person_id, $now);
+			$member_type = user_type_key_from_id($person_id, $now);
 
 			return '<li>' . name_from_id($person_id) . ' — ' . $member_types[$member_type] . $values['apartment'] . ' ' . padded_apartment_number_from_id($person_id) . (is_KNet_representative_from_id($person_id) ? ' — ' . $values["knet-representative"] : '') . (is_KNet_deputy_from_id($person_id) ? ' — ' . $values["knet-deputy"] : '') . '</li>';
 		}, $networkgroup_members));
+
+		// Add final separator
+		$networkgroup_list .= '</ul>';
 	}
 
-	// Add final separator
-	$networkgroup_list .= '</ul>';
 
 	# Return formatted list of board members and deputies
 	return $networkgroup_list;
