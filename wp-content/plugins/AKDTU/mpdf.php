@@ -14,14 +14,26 @@ class AKDTUpdf extends \Mpdf\Mpdf
     /**
      * DokuPDF constructor.
      *
-     * @param string $pagesize
-     * @param string $orientation
-     * @param int $fontsize
+     * @param mixed[string] $pagesize
      */
-    function __construct($pagesize = 'A4', $orientation = 'portrait', $fontsize = 11, $margin_left = 15, $margin_bottom = 16, $margin_right = 15, $margin_top = 16, $dpi = 300)
+    function __construct($params = array())
     {
+		# Default values
+		$default = array(
+			'pagesize'		=> 'A4',		# Size of the pages created.
+			'orientation'	=> 'portrait',	# Orientation of the pages created. 'landscape' or 'portrait'
+			'fontsize'		=> 11,			# Default font-size of the document
+			'margin_left'	=> 15,			# Margin on the left side of the pages created
+			'margin_bottom'	=> 16,			# Margin on the bottom of the pages created
+			'margin_right'	=> 15,			# Margin on the right side of the pages created
+			'margin_top'	=> 16,			# Margin on the top of the pages created
+			'dpi'			=> 300,			# DPI of the pages created
+		);
 
-        $format = $pagesize;
+		# Combine default values and provided settings
+		$values = shortcode_atts($default, $params);
+
+        $format = $values['pagesize'];
 
 		$defaultConfig = (new Mpdf\Config\ConfigVariables())->getDefaults();
 		$fontDirs = $defaultConfig['fontDir'];
@@ -36,8 +48,8 @@ class AKDTUpdf extends \Mpdf\Mpdf
             array(
                 'mode' => $mode,
                 'format' => $format,
-				'orientation' => $orientation,
-                'default_font_size' => $fontsize,
+				'orientation' => $values['orientation'],
+                'default_font_size' => $values['fontsize'],
                 'ImageProcessorClass' => DokuImageProcessorDecorator::class,
 				'fontDir' => array_merge($fontDirs, [
 					__DIR__ . '/fonts',
@@ -54,11 +66,11 @@ class AKDTUpdf extends \Mpdf\Mpdf
 					# 	'I' => 'Roboto-BlackItalic.ttf',
 					# ]
 				],
-				'dpi' => $dpi,
-				'margin_left' => $margin_left,
-				'margin_right' => $margin_right,
-				'margin_top' => $margin_top,
-				'margin_bottom' => $margin_bottom,
+				'dpi' => $values['dpi'],
+				'margin_left' => $values['margin_left'],
+				'margin_right' => $values['margin_right'],
+				'margin_top' => $values['margin_top'],
+				'margin_bottom' => $values['margin_bottom'],
             )
         );
 

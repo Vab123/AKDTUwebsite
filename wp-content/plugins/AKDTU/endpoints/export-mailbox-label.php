@@ -21,7 +21,17 @@ function AKDTU_export_mailbox_label() {
 
 		$aptnum = (is_apartment_from_username($user->user_login) ? apartment_number_from_username($user->user_login) : "XXX");
 
-		$mpdf = new \AKDTUpdf([210, 297], 'landscape', 32, 10, 11, 11, 11);
+		$params = array(
+			'pagesize'		=> [210, 297],		# Size of the pages created.
+			'orientation'	=> 'landscape',		# Orientation of the pages created. 'landscape' or 'portrait'
+			'fontsize'		=> 32,				# Default font-size of the document
+			'margin_left'	=> 10,				# Margin on the left side of the pages created
+			'margin_bottom'	=> 11,				# Margin on the bottom of the pages created
+			'margin_right'	=> 11,				# Margin on the right side of the pages created
+			'margin_top'	=> 11,				# Margin on the top of the pages created
+		)
+
+		$mpdf = new \AKDTUpdf($params);
 
 		$html = '<html style="margin:0; padding:0;"><body style="margin:0; padding:0;"><table style="border-top: 4px dashed lightgrey; border-bottom: 4px dashed lightgrey; font-family: \'calibri\'; height: 62px; width: 100%;"><tbody><tr><td style="width: 8.3cm"><div style="font-size: 24pt;">Kollegiebakken 19. Lejl:</div></td><td style="width: 1.5cm"><div style="font-size: 24pt;">' . $aptnum . '</div></td><td style="width: 17.8cm" align="right"><div style="font-size: 36pt; overflow: hidden;">' . $_GET['user_name'] . '</div></td></tr></tbody></table></body></html>';
 
