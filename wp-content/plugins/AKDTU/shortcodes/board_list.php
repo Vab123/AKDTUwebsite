@@ -15,12 +15,12 @@ add_shortcode("AKDTU-board-list", "AKDTU_board_list");
  * 
  * @return string Formatted string with details about the person
  */
-function person_as_string($apartment_text = "Lejlighed", $apartment = "", $name_text = "Navn", $name = "", $email_text = "Email", $email = "") {
+function person_as_string($apartment_text = "Lejlighed", $apartment = "", $name_text = "Navn", $name = "", $email_text = "Email", $emails = array()) {
 	$person_as_string = '<table>';
 
 	$person_as_string .= '<tr><td style="width: 0; border-bottom: none; padding: 10px;"><strong>' . $apartment_text . '</strong></td><td style="border-bottom: none; padding: 10px;">' . $apartment . '</td></tr>';
 	$person_as_string .= '<tr><td style="width: 0; border-bottom: none; padding: 10px;"><strong>' . $name_text . '</strong></td><td style="border-bottom: none; padding: 10px;">' . $name . '</td></tr>';
-	$person_as_string .= '<tr><td style="width: 0; border-bottom: none; padding: 10px;"><strong>' . $email_text . '</strong></td><td style="border-bottom: none; padding: 10px;"><a href="mailto:' . $email . '">' . $email . '</a></td></tr>';
+	$person_as_string .= '<tr><td style="width: 0; border-bottom: none; padding: 10px;"><strong>' . $email_text . '</strong></td><td style="border-bottom: none; padding: 10px;">' . join(" — ", array_map(function ($email) {return '<a class="AKDTU_link" href="mailto:' . $email . '">' . $email . '</a>';}, $emails)) . '</td></tr>';
 
 	$person_as_string .= '</table>';
 
@@ -92,7 +92,7 @@ function AKDTU_board_list( $atts ){
 				$values['name'],
 				name_from_id($person_id),
 				$values['email'],
-				$chairman_email
+				array($chairman_email, board_email_from_id($person_id))
 			);
 		}, $chairmen));
 	}
@@ -110,7 +110,7 @@ function AKDTU_board_list( $atts ){
 				$values['name'],
 				name_from_id($person_id),
 				$values['email'],
-				board_email_from_id($person_id)
+				array(board_email_from_id($person_id))
 			);
 		}, $deputychairmen));
 	}
@@ -128,7 +128,7 @@ function AKDTU_board_list( $atts ){
 				$values['name'],
 				name_from_id($person_id),
 				$values['email'],
-				board_email_from_id($person_id)
+				array(board_email_from_id($person_id))
 			);
 		}, $base_members));
 	}
@@ -146,7 +146,7 @@ function AKDTU_board_list( $atts ){
 				$values['name'],
 				name_from_id($person_id),
 				$values['email'],
-				board_email_from_id($person_id)
+				array(board_email_from_id($person_id))
 			);
 		}, $boarddeputies));
 	}
