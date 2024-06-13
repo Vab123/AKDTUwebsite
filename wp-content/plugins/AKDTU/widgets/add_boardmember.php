@@ -23,7 +23,7 @@ function add_boardmember_widget() {
 				<tr>
 					<td><label>Medlemstype:</label></td>
 					<td><select name="user-type"><?php echo join("", array_map(function ($key, $user_type) {
-						return ($user_type['id'] == $user_type['none']['id'] ? '' : '<option value="' . $key . '">' . $user_type['name'] . '</option>');
+						return ($key == 'none' ? '' : '<option value="' . $key . '">' . $user_type['name'] . '</option>');
 					}, array_keys($AKDTU_USER_TYPES), array_values($AKDTU_USER_TYPES))); ?></select></td>
 				</tr>
 				<tr>
