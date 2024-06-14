@@ -19,7 +19,7 @@ function AKDTU_export_calendar() {
 		$now = new DateTime('now', new DateTimeZone('Europe/Copenhagen'));
 
 		# Start date for calendar
-		$calendar_start_date = $now->modify('-1 year');
+		$calendar_start_date = new DateTime('now -1 year', new DateTimeZone('Europe/Copenhagen'));
 
 		# Names for output calendar, in ics
 		$calendar_names = array(
@@ -136,8 +136,9 @@ function event_as_ics($EM_Event, $calendar_language) {
 	);
 
 	# Time info about the event
-	$starttime = new DateTime($EM_Event->event_start_date . " " . $EM_Event->event_start_time);
-	$endtime = new DateTime($EM_Event->event_end_date . " " . $EM_Event->event_end_time);
+	$now = new DateTime('now', new DateTimeZone('Europe/Copenhagen'));
+	$starttime = new DateTime($EM_Event->event_start_date . " " . $EM_Event->event_start_time, new DateTimeZone('Europe/Copenhagen'));
+	$endtime = new DateTime($EM_Event->event_end_date . " " . $EM_Event->event_end_time, new DateTimeZone('Europe/Copenhagen'));
 
 	# Replacements in event title for rentals of the common house
 	$event_name = format_common_house_rental_name($EM_Event, $calendar_language);
@@ -148,9 +149,10 @@ function event_as_ics($EM_Event, $calendar_language) {
 	# Write info about calendar event
 	$event_as_ics_string .= "BEGIN:VEVENT\r\n";
 	$event_as_ics_string .= "SUMMARY:" . $event_name . "\r\n";
-	$event_as_ics_string .= "ORGANIZER;CN=" . (is_apartment_user_from_id($EM_Event->owner) ? $apartment_string[$calendar_language] . padded_apartment_number_from_id($EM_Event->owner) : $board_string[$calendar_language]) . ":\r\n";
-	$event_as_ics_string .= "UID:" . $EM_Event->owner . "//" . $starttime->format("Ymd") . "\r\n";
-	$event_as_ics_string .= "DTSTAMP;TZID=Europe/Copenhagen:" . $starttime->format("Ymd\THis") . "\r\n";
+	$event_as_ics_string .= "ORGANIZER;CN=" . (is_apartment_user_from_id($EM_Event->owner) ? $apartment_string[$calendar_language] . padded_apartment_number_from_id($EM_Event->owner) . ":" : $board_string[$calendar_language] . ":bestyrelsen@akdtu.dk") . "\r\n";
+	$event_as_ics_string .= "UID:v1_" . $EM_Event->owner . "//" . $starttime->format("Ymd") . "\r\n";
+	$event_as_ics_string .= "CREATED;TZID=Europe/Copenhagen:" . get_post_time("Ymd\THis", false, $EM_Event->post_id, false) . "\r\n";
+	$event_as_ics_string .= "DTSTAMP;TZID=Europe/Copenhagen:" . $now->format("Ymd\THis") . "\r\n";
 	$event_as_ics_string .= "DTSTART;TZID=Europe/Copenhagen:" . $starttime->format("Ymd\THis") . "\r\n";
 	$event_as_ics_string .= "DTEND;TZID=Europe/Copenhagen:" . $endtime->format("Ymd\THis") . "\r\n";
 	$event_as_ics_string .= "LOCATION:Kollegiebakken 19, 2800 Kongens Lyngby, Denmark\r\n";
