@@ -298,4 +298,66 @@ function set_fælleshus_password($new_password) {
 	return false;
 }
 
+/**
+ * Function for getting the current SSID and password of the router
+ * 
+ * Returns a key-value array with the following keys and values:
+ * 	- wl0_ssid: SSID of the router
+ * 	- wl0_wpa_psk: Password of the router
+ * 
+ * @return array[string,string]|false Key-value array with the SSID and password to the router, if values were successfully retrieved. False if authentication failed.
+ */
+function get_fælleshus_password() {
+	# Get router password
+	return get_fælleshus_info(array('wl0_ssid','wl0_wpa_psk'));
+}
+
+/**
+ * Utility function for getting info from the common house router
+ * 
+ * Returns a key-value array with the following keys and values:
+ * 	- wl0_ssid: SSID of the router
+ * 	- wl0_wpa_psk: Password of the router
+ * 
+ * @param string|string[] $datapoints Which datapoints to get. The following are permitted values:
+ * 	- cfg_clientlist: Gets basic info about the router
+ * 	- clientlist: Gets basic info about all connected devices. Check 'isOnline' property on returned value to check if devices are currently active.
+ * 	- wl0_ssid: SSID of the 2.4GHz band.
+ * 	- wl0_wpa_psk: Password of the 2.4GHz band.
+ * 	- wl1_ssid: SSID of the 5GHz band.
+ * 	- wl1_wpa_psk: Password of the 5GHz band.
+ * 
+ * @return array[string,string]|false Key-value array with the SSID and password to the router, if values were successfully retrieved. False if authentication failed.
+ */
+function get_fælleshus_info($datapoints = null) {
+	# Get router settings
+	$router_settings = get_router_settings();
+
+	# Log in to router, and get header information for future request
+	$new_headers = authenticate_router($router_settings);
+
+	$hooks = array(
+		'cfg_clientlist' => 'get_cfg_clientlist()',
+		'clientlist'     => 'get_clientlist()',
+		'wl0_ssid'       => 'nvram_char_to_ascii(wl0_ssid,wl0_ssid)',
+		'wl0_wpa_psk'    => 'nvram_char_to_ascii(wl0_wpa_psk,wl0_wpa_psk)',
+		'wl1_ssid'       => 'nvram_char_to_ascii(wl1_ssid,wl1_ssid)',
+		'wl1_wpa_psk'    => 'nvram_char_to_ascii(wl1_wpa_psk,wl1_wpa_psk)',
+	);
+
+	# Check if login was successful
+	if ($new_headers != false && !is_null($datapoints)) {
+		# Prepare information about get-request
+		$c['http']['method'] = 'GET';
+		$c['http']['header'] = $new_headers;
+		$c['ssl']["verify_peer"] = false;
+		$c['ssl']["verify_peer_name"] = false;
+
+		# Send get request and return
+		return json_decode(urldecode(file_get_contents($router_settings["url_for_getting_values"] . '?hook=' . join("%3B", array_map(function ($datapoint) use($hooks) {return $hooks[$datapoint];}, (is_array($datapoints) ? $datapoints : array($datapoints)))), false, stream_context_create($c))), true);
+	}
+
+	return false;
+}
+
 ?>
