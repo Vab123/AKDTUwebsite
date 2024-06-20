@@ -234,7 +234,7 @@ function em_events_admin($args = array()){
 			$limit = ( !empty($_REQUEST['limit']) ) ? $_REQUEST['limit'] : 20;//Default limit
 			$page = ( !empty($_REQUEST['pno']) ) ? $_REQUEST['pno']:1;
 			$offset = ( $page > 1 ) ? ($page-1)*$limit : 0;
-			$order = ( !empty($_REQUEST ['order']) ) ? $_REQUEST ['order']:'ASC';
+			$order = ( !empty($_REQUEST ['order']) ) ? $_REQUEST ['order']:(!empty($_REQUEST ['view']) ? ($_REQUEST ['view'] == 'future' ? 'ASC' : 'DESC') : 'ASC');
 			$search = ( !empty($_REQUEST['em_search']) ) ? $_REQUEST['em_search']:'';
 			//deal with view or scope/status combinations
 			$show_add_new = isset($args['show_add_new']) ? $args['show_add_new']:true;
