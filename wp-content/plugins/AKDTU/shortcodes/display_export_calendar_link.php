@@ -32,5 +32,5 @@ function AKDTU_display_calendar_export_link($atts) {
 	$user = wp_get_current_user();
 
 	# Return link to where the user can subscribe to the common house calendar, formatted in a html code-object
-	return $values['before'] . '<code style="user-select: all;-webkit-touch-callout: all;-webkit-user-select: all;-khtml-user-select: all;-moz-user-select: all;-ms-user-select: all;line-break: anywhere;">https://akdtu.dk/export-calendar.php?lang=' . $values['lang'] . '&user=' . $user->user_login . '&auth=' .  md5($user->user_pass) . '&vers=' . $values['version'] . '</code>' . $values['after'];
+	return $values['before'] . '<code style="user-select: all;-webkit-touch-callout: all;-webkit-user-select: all;-khtml-user-select: all;-moz-user-select: all;-ms-user-select: all;line-break: anywhere;">https://akdtu.dk/calendar/' . $values['version'] . '/' . $values['lang'] . '/' . $user->user_login . '/' .  md5($user->user_pass) . '.ics' . '</code>' . $values['after'];
 }
