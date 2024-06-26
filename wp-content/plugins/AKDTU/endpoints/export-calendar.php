@@ -149,7 +149,7 @@ function event_as_ics($EM_Event, $calendar_language) {
 	# Write info about calendar event
 	$event_as_ics_string .= "BEGIN:VEVENT\r\n";
 	$event_as_ics_string .= "SUMMARY:" . $event_name . "\r\n";
-	$event_as_ics_string .= "ORGANIZER;CN=" . (is_apartment_user_from_id($EM_Event->owner) ? $apartment_string[$calendar_language] . padded_apartment_number_from_id($EM_Event->owner) . ":" : $board_string[$calendar_language] . ":bestyrelsen@akdtu.dk") . "\r\n";
+	$event_as_ics_string .= "ORGANIZER;CN=" . (is_apartment_user_from_id($EM_Event->owner) ? $apartment_string[$calendar_language] . padded_apartment_number_from_id($EM_Event->owner) . ":bestyrelsen@akdtu.dk" : $board_string[$calendar_language] . ":bestyrelsen@akdtu.dk") . "\r\n";
 	$event_as_ics_string .= "UID:v1_" . $EM_Event->owner . "//" . $starttime->format("Ymd") . "\r\n";
 	$event_as_ics_string .= "CREATED;TZID=Europe/Copenhagen:" . get_post_time("Ymd\THis", false, $EM_Event->post_id, false) . "\r\n";
 	$event_as_ics_string .= "DTSTAMP;TZID=Europe/Copenhagen:" . $now->format("Ymd\THis") . "\r\n";
@@ -158,6 +158,7 @@ function event_as_ics($EM_Event, $calendar_language) {
 	$event_as_ics_string .= "LOCATION:Kollegiebakken 19, 2800 Kongens Lyngby, Denmark\r\n";
 	$event_as_ics_string .= join("\r\n ", str_split("DESCRIPTION:" . $event_description, 74)) . "\r\n";
 	$event_as_ics_string .= "STATUS:" . $status_codes[$EM_Event->get_status()] . "\r\n";
+	$event_as_ics_string .= "TRANSP:TRANSPARENT" . "\r\n";
 	$event_as_ics_string .= "END:VEVENT\r\n";
 
 	return $event_as_ics_string;
