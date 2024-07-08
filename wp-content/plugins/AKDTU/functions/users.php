@@ -264,10 +264,17 @@ function id_from_username($username) {
 #
 # Check if an apartment number is valid
 #
+/**
+ * Checks if an apartment number is valid
+ * 
+ * @param int $apartment_number The apartment number to check
+ * 
+ * @return bool True if the apartment number is valid
+ */
 function is_valid_apartment_number($apartment_number) {
 	$apartment_number = intval($apartment_number);
 
-	return $apartment_number % 100 >= 1 && $apartment_number % 100 <= 24 && floor($apartment_number / 100) >= 0 && floor($apartment_number / 100) <= 2
+	return $apartment_number % 100 >= 1 && $apartment_number % 100 <= 24 && floor($apartment_number / 100) >= 0 && floor($apartment_number / 100) <= 2;
 }
 ############################################################
 
