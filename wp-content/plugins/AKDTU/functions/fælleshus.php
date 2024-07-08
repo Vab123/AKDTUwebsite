@@ -450,7 +450,7 @@ function get_final_price($price_to_pay, $price_adjustments) {
  *		'all_day'			bool     - All-day status of the event. Default: false
  *		'event_language'	string   - Language code for the event. Default: 'da_DK'
  *
- * @return int|bool ID of the Wordpress-post of the created event if successful. False if booking could not be created.
+ * @return int|bool ID of the created event if successful. False if booking could not be created.
  */
 function book_common_house($params = array()) {
 	global $wpdb;
