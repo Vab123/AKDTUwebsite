@@ -534,3 +534,24 @@ function add_common_house_booking($all_params = array()) {
 
 	return $posts_info;
 }
+
+/**
+ * Deletes an existing booking of the common house
+ * 
+ * @param int $event_id ID of the common house booking to be deleted
+ *
+ * @return bool True if the event was deleted successfully
+ */
+function delete_common_house_booking($event_id) {
+	# Get event
+	$event = new EM_Event($event_id,'event_id');
+
+	# Create post-admin object
+	$event_post_admin = new EM_Event_Post_Admin();
+
+	# Delete event
+	$event_post_admin->before_delete_post($event->post_id);
+	$event_post_admin->trashed_post($event->post_id);
+
+	return wp_trash_post($event->post_id);
+}

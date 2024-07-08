@@ -19,25 +19,15 @@ if (isset($_REQUEST['action'])) {
  * @return bool True if the rental was deleted successfully
  */
 function delete_leje($event_id) {
-	# Get event
-	$event = new EM_Event($event_id,'event_id');
-
-	# Create post-admin object
-	$event_post_admin = new EM_Event_Post_Admin();
-
-	# Delete event
-	$event_post_admin->before_delete_post($event->post_id);
-	$event_post_admin->trashed_post($event->post_id);
-
 	# Delete post
-	if (wp_trash_post($event->post_id)) {
+	if (delete_common_house_booking($event_id)) {
 		# Write success message to admin interface
-		new AKDTU_notice('success','Lejen er nu afvist.');
+		new AKDTU_notice('success', 'Lejen er nu afvist.');
 
 		return true;
 	}
 
-	new AKDTU_notice('success','Lejen er nu afvist.');
+	new AKDTU_notice('error', 'Lejen blev ikke afvist.');
 
 	return false;
 }
