@@ -46,7 +46,7 @@ function book_fælleshus_beboer($event_owner, $title, $start_date, $end_date) {
 		)
 	);
 
-	$new_event_id = book_common_house($params);
+	$new_event_id = add_common_house_booking($params);
 
 	if (is_numeric($new_event_id)) {
 		new AKDTU_notice('success', 'Fælleshuset er nu reserveret.');
@@ -97,7 +97,7 @@ function book_fælleshus_bestyrelse($event_owner, $title_da, $title_en, $start_d
 		)
 	);
 	
-	$event_ids = book_common_house($params);
+	$event_ids = add_common_house_booking($params);
 
 	if (array_product(array_values($event_ids)) > 0){
 		# All events were created successfully
