@@ -55,6 +55,8 @@ function name_from_id($id) {
 }
 ############################################################
 
+
+
 ############################################################
 #
 # Apartment number, padded with zeros
@@ -83,6 +85,8 @@ function unpadded_apartment_number_from_padded_apartment_number($apartment) {
 	return ltrim($apartment,"0");
 }
 ############################################################
+
+
 
 ############################################################
 #
@@ -254,6 +258,18 @@ function id_from_username($username) {
 }
 ############################################################
 
+
+
+############################################################
+#
+# Check if an apartment number is valid
+#
+function is_valid_apartment_number($apartment_number) {
+	$apartment_number = intval($apartment_number);
+
+	return $apartment_number % 100 >= 1 && $apartment_number % 100 <= 24 && floor($apartment_number / 100) >= 0 && floor($apartment_number / 100) <= 2
+}
+############################################################
 
 
 ############################################################
