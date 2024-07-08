@@ -21,28 +21,16 @@ if (isset($_REQUEST['action'])) {
  * @return bool True if the permit was removed successfully
  */
 function delete_user_signup($apartment_number, $phone_number, $takeover_time){
-	global $wpdb;
-
-	# Data for user
-	$data = array(
-		'apartment_number' => $apartment_number,
-		'phone_number' => $phone_number,
-		'allow_creation_date' => $takeover_time,
-	);
-
-	# Delete renter permission
-	$deleted = $wpdb->delete($wpdb->prefix . 'swpm_allowed_membercreation',$data);
-
 	# Check if deletion was successful
-	if ($deleted == 0) {
-		# Deletion failed. Write error message to admin interface
-		new AKDTU_notice('error','Der blev ikke fundet nogen bruger med de givne oplysninger.');
-
-		return false;
-	}else{
+	if (delete_user_creation_permit($apartment_number, $phone_number, $takeover_time)) {
 		# Deletion succeeded. Write success message to admin interface
 		new AKDTU_notice('success','Tilladelsen til brugeroprettelse blev slettet.');
 
 		return true;
+	} else {
+		# Deletion failed. Write error message to admin interface
+		new AKDTU_notice('error','Der blev ikke fundet nogen bruger med de givne oplysninger.');
+
+		return false;
 	}
 }

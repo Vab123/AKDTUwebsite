@@ -22,29 +22,16 @@ if (isset($_REQUEST['action'])) {
  * @return bool True if the permit was removed successfully
  */
 function delete_renter_signup($apartment_number, $phone_number, $start_time, $end_time){
-	global $wpdb;
-
-	# Data for user
-	$data = array(
-		'apartment_number' => $apartment_number,
-		'phone_number' => $phone_number,
-		'start_time' => $start_time,
-		'end_time' => $end_time,
-	);
-
-	# Delete renter permission
-	$deleted = $wpdb->delete($wpdb->prefix . 'swpm_allowed_rentercreation',$data);
-
 	# Check if deletion was successful
-	if ($deleted == 0) {
-		# Deletion failed. Write error message to admin interface
-		new AKDTU_notice('error','Der blev ikke fundet nogen midlertidig lejer med de givne oplysninger.');
-
-		return false;
-	}else{
+	if (delete_renter_creation_permit($apartment_number, $phone_number, $start_time, $end_time)) {
 		# Deletion succeeded. Write success message to admin interface
-		new AKDTU_notice('success','Den midlertidige lejer blev slettet.');
+		new AKDTU_notice('success', 'Den midlertidige lejer blev slettet.');
 
 		return true;
+	} else {
+		# Deletion failed. Write error message to admin interface
+		new AKDTU_notice('error', 'Der blev ikke fundet nogen midlertidig lejer med de givne oplysninger.');
+
+		return false;
 	}
 }

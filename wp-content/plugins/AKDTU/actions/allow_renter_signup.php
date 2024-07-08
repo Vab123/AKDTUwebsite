@@ -22,32 +22,17 @@ if (isset($_REQUEST['action'])) {
  * @return bool True if the permit was created successfully
  */
 function allow_renter_signup($apartment_number, $phone_number, $start_time, $end_time) {
-	global $wpdb;
-
 	# Check if there already exists a permit for user creation already exists
-	if ($wpdb->query('SELECT apartment_number FROM ' . $wpdb->prefix . 'swpm_allowed_rentercreation WHERE apartment_number="'. $apartment_number . '" AND allow_creation_date >= "' . (new DateTime('now', new DateTimeZone('Europe/Copenhagen')))->format("Y-m-d H:i:s") . '"') > 0) {
+	if (renter_creation_permit_exists($apartment_number)) {
 		# A permit already exists. Output error message and return
 		new AKDTU_notice('error', 'Den midlertidige lejer kunne ikke oprettes. Check om der allerede findes en midlertidig lejer i den samme lejlighed.');
 
 		return false;
 	} else {
 		# A permit does not exist. Create new permit
-		
-		# Data for new user
-		$data = array(
-			'apartment_number' => $apartment_number,
-			'phone_number' => $phone_number,
-			'start_time' => $start_time,
-			'end_time' => $end_time,
-			'initial_reset' => false,
-			'initial_takeover' => false
-		);
-
-		# Insert permit into database
-		$inserted = $wpdb->insert($wpdb->prefix . 'swpm_allowed_rentercreation', $data);
 
 		# Write success message to admin interface
-		if ($inserted) {
+		if (create_renter_creation_permit($apartment_number, $phone_number, $start_time, $end_time)) {
 			new AKDTU_notice('success', 'Den midlertidige lejer blev oprettet.');
 
 			return true;
