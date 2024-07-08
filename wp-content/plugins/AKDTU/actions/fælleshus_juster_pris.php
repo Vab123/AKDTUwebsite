@@ -23,25 +23,15 @@ if (isset($_REQUEST['action'])) {
 function fælleshus_juster_pris($username, $is_archive, $price_change){
 	global $wpdb;
 
-	# Data for adjustment
-	$data = array(
-		'apartment' => $username . ($is_archive ? '_archive' : ''),
-		'price_change' => intval($price_change),
-		'change_date' => (new DateTime('now', new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d')
-	);
-
-	# Insert adjustment into database
-	$inserted = $wpdb->insert($wpdb->prefix . 'em_lejepris_ændringer', $data);
-
 	# Check if insertion was successful
-	if ($inserted == 0) {
+	if (add_common_house_booking_priceadjustment($username, $is_archive, $price_change) == 0) {
 		# Insertion failed. Write error message to admin interface
-		new AKDTU_notice('error',$wpdb->last_error);
+		new AKDTU_notice('error', $wpdb->last_error);
 
 		return false;
 	}else{
 		# Insertion succeeded. Write success message to admin interface
-		new AKDTU_notice('success','Ændringen i opkrævning af leje blev gemt.');
+		new AKDTU_notice('success', 'Ændringen i opkrævning af leje blev gemt.');
 
 		return true;
 	}

@@ -555,3 +555,20 @@ function delete_common_house_booking($event_id) {
 
 	return wp_trash_post($event->post_id);
 }
+
+/**
+ * 
+ */
+function add_common_house_booking_priceadjustment($username, $is_archive, $price_change) {
+	global $wpdb;
+
+	# Data for adjustment
+	$data = array(
+		'apartment' => $username . ($is_archive ? '_archive' : ''),
+		'price_change' => intval($price_change),
+		'change_date' => (new DateTime('now', new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d')
+	);
+
+	# Insert adjustment into database
+	return $wpdb->insert($wpdb->prefix . 'em_lejepris_ændringer', $data);
+}
