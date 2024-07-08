@@ -453,7 +453,6 @@ function get_final_price($price_to_pay, $price_adjustments) {
  * @return array[int]|bool Key-value array. Keys are keys from $params. Values are IDs of the Wordpress-post of each created event if successful, and false if event could not be created.
  */
 function book_common_house($all_params = array()) {
-
 	$posts_info = array_combine(
 		array_keys($all_params), 
 		array_map(
