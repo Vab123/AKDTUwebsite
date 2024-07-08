@@ -36,12 +36,14 @@ function book_fælleshus_beboer($event_owner, $title, $start_date, $end_date) {
 	}
 
 	$params = array(
-		'title' => $title,
-		'event_owner_id' => $event_owner->ID,
-		'start_date' => $start_date,
-		'end_date' => $end_date,
-		'all_day' => false,
-		'event_language' => 'da_DK',
+		'da' => array(
+			'title' => $title,
+			'event_owner_id' => $event_owner->ID,
+			'start_date' => $start_date,
+			'end_date' => $end_date,
+			'all_day' => false,
+			'event_language' => 'da_DK',
+		)
 	);
 
 	$new_event_id = book_common_house($params);
@@ -76,35 +78,35 @@ function book_fælleshus_bestyrelse($event_owner, $title_da, $title_en, $start_d
 		return false;
 	}
 
-	$params_da = array(
-		'title' => $title_da,
-		'event_owner_id' => $event_owner->ID,
-		'start_date' => $start_date,
-		'end_date' => $end_date,
-		'all_day' => $all_day,
-		'event_language' => 'da_DK',
+	$params = array(
+		'da' => array(
+			'title' => $title_da,
+			'event_owner_id' => $event_owner->ID,
+			'start_date' => $start_date,
+			'end_date' => $end_date,
+			'all_day' => $all_day,
+			'event_language' => 'da_DK',
+		),
+		'en' => array(
+			'title' => $title_en,
+			'event_owner_id' => $event_owner->ID,
+			'start_date' => $start_date,
+			'end_date' => $end_date,
+			'all_day' => $all_day,
+			'event_language' => 'en_US',
+		)
 	);
 	
-	$event_da_id = book_common_house($params_da);
+	$event_ids = book_common_house($params);
 
-	$params_en = array(
-		'title' => $title_en,
-		'event_owner_id' => $event_owner->ID,
-		'start_date' => $start_date,
-		'end_date' => $end_date,
-		'all_day' => $all_day,
-		'event_language' => 'en_US',
-	);
-	
-	$event_en_id = book_common_house($params_en);
-
-	if (is_numeric($event_da_id) && is_numeric($event_en_id)){ # Save event and event metadata
-		pll_save_post_translations( array('en' => $event_en_id, 'da' => $event_da_id ) );
+	if (array_product(array_values($event_ids)) > 0){
+		# All events were created successfully
 		new AKDTU_notice('success', 'Fælleshuset er nu reserveret.');
 
 		return true;
 	} else {
-		new AKDTU_notice('error', 'Fælleshuset kunne ikke reserveres. Dansk begivenhed blev ' . (is_numeric($event_da_id) ? '' : 'ikke ') . 'oprettet. Engelsk begivenhed blev ' . (is_numeric($event_en_id) ? '' : 'ikke ') . 'oprettet.');
+		# At least one event was not created successfully
+		new AKDTU_notice('error', 'Fælleshuset kunne ikke reserveres. Dansk begivenhed blev ' . (is_numeric($event_ids['da']) ? '' : 'ikke ') . 'oprettet. Engelsk begivenhed blev ' . (is_numeric($event_ids['en']) ? '' : 'ikke ') . 'oprettet.');
 		
 		return false;
 	}

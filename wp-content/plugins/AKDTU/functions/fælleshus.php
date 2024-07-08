@@ -442,7 +442,7 @@ function get_final_price($price_to_pay, $price_adjustments) {
 /**
  * Creates a new booking of the common house
  * 
- * @param array $params Array of options as key-value pairs. Valid options are:
+ * @param array $params Array of arrays of options as key-value pairs. Keys are two-character language codes of the post. Values are key-value arrays with the followiung valid keys:
  * 		'title' 			string   - Title of the event. Default: ''
  *		'event_owner_id'	int      - Owner of the booking. Default: get_current_user_id()
  *		'start_date'		DateTime - Start-date of the event. Default: new DateTime('now', new DateTimeZone('Europe/Copenhagen'))
@@ -450,66 +450,80 @@ function get_final_price($price_to_pay, $price_adjustments) {
  *		'all_day'			bool     - All-day status of the event. Default: false
  *		'event_language'	string   - Language code for the event. Default: 'da_DK'
  *
- * @return int|bool ID of the created event if successful. False if booking could not be created.
+ * @return int[string]|bool Key-value array. Keys are keys from $params. Values are IDs of the Wordpress-post of each created event if successful, and false if event could not be created.
  */
-function book_common_house($params = array()) {
-	global $wpdb;
+function book_common_house($all_params = array()) {
 
-	# Default values
-	$default = array(
-		'title' => '',
-		'event_owner_id' => get_current_user_id(),
-		'start_date' => new DateTime('now', new DateTimeZone('Europe/Copenhagen')),
-		'end_date' => new DateTime('now', new DateTimeZone('Europe/Copenhagen')),
-		'all_day' => false,
-		'event_language' => 'da_DK',
+	$posts_info = array_combine(
+		array_keys($all_params), 
+		array_map(
+			function ($params_per_language) {
+				global $wpdb;
+
+				# Default values
+				$default = array(
+					'title' => '',
+					'event_owner_id' => get_current_user_id(),
+					'start_date' => new DateTime('now', new DateTimeZone('Europe/Copenhagen')),
+					'end_date' => new DateTime('now', new DateTimeZone('Europe/Copenhagen')),
+					'all_day' => false,
+				);
+
+				# Combine default values and provided settings
+				$params = shortcode_atts($default, $params_per_language);
+
+				# Create Wordpress post
+				$post_id = wp_insert_post( array('post_status' => 'publish', 'post_type' => 'event', 'post_title' => $params['title'],'post_content' => '', 'post_date' => current_time("Y-m-d H:i:s"), 'post_author' => $params['event_owner_id'] ) );
+
+				# Protect event
+				SwpmProtection::get_instance()->apply(array($post_id), 'custom_post')->save();
+				$query = "SELECT id FROM " . $wpdb->prefix . "swpm_membership_tbl WHERE id !=1 ";
+				$level_ids = $wpdb->get_col($query);
+				foreach ($level_ids as $level) {
+					SwpmPermission::get_instance($level)->apply(array($post_id), 'custom_post')->save();
+				}
+
+				# Set post language
+				pll_set_post_language($post_id, $params['event_language']);
+
+				# Set event details
+				$event = new EM_Event($post_id,'post_id');
+
+				$event->__set('event_start_date', $params['start_date']->format("Y-m-d")); # Start date of event
+				$event->__set('event_end_date', $params['end_date']->format("Y-m-d")); # End date of event
+				$event->__set('event_start_time', ($params['all_day'] ? "00:00:00" : $params['start_date']->format("H:i:s"))); # Start time of event
+				$event->__set('event_end_time', ($params['all_day'] ? "23:59:59" : $params['end_date']->format("H:i:s"))); # End time of event
+				$event->__set('event_start', $params['start_date']->format("Y-m-d") . ' ' . $params['start_date']->format("H:i:s")); # Start of event
+				$event->__set('event_end', $params['end_date']->format("Y-m-d") . ' ' . $params['end_date']->format("H:i:s")); # End of event
+				$event->__set('start_date', $params['start_date']->format("Y-m-d")); # Start date of event
+				$event->__set('end_date', $params['end_date']->format("Y-m-d")); # End date of event
+				$event->__set('start_time', ($params['all_day'] ? "00:00:00" : $params['start_date']->format("H:i:s"))); # Start time of event
+				$event->__set('end_time', ($params['all_day'] ? "23:59:59" : $params['end_date']->format("H:i:s"))); # End time of event
+				$event->__set('event_all_day', $params['all_day']); # If event is an all-day event
+
+				$event->__set('location_id', 0); # Location ID
+				$event->__set('event_spaces', NULL); # Total amount of spaces on event
+				$event->__set('event_private', 0); # Boolean, is event private
+				$event->__set('event_language', $params['event_language']); # Language of event
+				$event->__set('blog_id', get_current_blog_id()); # ID of blog, for multi-site installations
+				$event->__set('event_owner', $params['event_owner_id']); # Language of event
+				$event->set_status(1, true); # Publish event
+
+				update_post_meta($event->post_id, '_event_approvals_count', 1); # Set approval status
+
+				if ($event->validate() && $event->save_meta() && $event->save()) {
+					return $post_id;
+				} else {
+					return false;
+				}
+			},
+			array_values($all_params)
+		)
 	);
 
-	# Combine default values and provided settings
-	$params = shortcode_atts($default, $params);
-
-	# Create Wordpress post
-	$id = wp_insert_post( array('post_status' => 'publish', 'post_type' => 'event', 'post_title' => $params['title'],'post_content' => '', 'post_date' => current_time("Y-m-d H:i:s"), 'post_author' => $params['event_owner_id'] ) );
-
-	# Protect event
-	SwpmProtection::get_instance()->apply(array($id), 'custom_post')->save();
-	$query = "SELECT id FROM " . $wpdb->prefix . "swpm_membership_tbl WHERE id !=1 ";
-	$level_ids = $wpdb->get_col($query);
-	foreach ($level_ids as $level) {
-		SwpmPermission::get_instance($level)->apply(array($id), 'custom_post')->save();
+	if (array_product(array_values($posts_info)) > 0) {
+		pll_save_post_translations( $posts_info );
 	}
 
-	# Set post language
-	pll_set_post_language($id, $params['event_language']);
-
-	# Set event details
-	$event = new EM_Event($id,'post_id');
-
-	$event->__set('event_start_date', $params['start_date']->format("Y-m-d")); # Start date of event
-	$event->__set('event_end_date', $params['end_date']->format("Y-m-d")); # End date of event
-	$event->__set('event_start_time', ($params['all_day'] ? "00:00:00" : $params['start_date']->format("H:i:s"))); # Start time of event
-	$event->__set('event_end_time', ($params['all_day'] ? "23:59:59" : $params['end_date']->format("H:i:s"))); # End time of event
-	$event->__set('event_start', $params['start_date']->format("Y-m-d") . ' ' . $params['start_date']->format("H:i:s")); # Start of event
-	$event->__set('event_end', $params['end_date']->format("Y-m-d") . ' ' . $params['end_date']->format("H:i:s")); # End of event
-	$event->__set('start_date', $params['start_date']->format("Y-m-d")); # Start date of event
-	$event->__set('end_date', $params['end_date']->format("Y-m-d")); # End date of event
-	$event->__set('start_time', ($params['all_day'] ? "00:00:00" : $params['start_date']->format("H:i:s"))); # Start time of event
-	$event->__set('end_time', ($params['all_day'] ? "23:59:59" : $params['end_date']->format("H:i:s"))); # End time of event
-	$event->__set('event_all_day', $params['all_day']); # If event is an all-day event
-
-	$event->__set('location_id', 0); # Location ID
-	$event->__set('event_spaces', NULL); # Total amount of spaces on event
-	$event->__set('event_private', 0); # Boolean, is event private
-	$event->__set('event_language', $params['event_language']); # Language of event
-	$event->__set('blog_id', get_current_blog_id()); # ID of blog, for multi-site installations
-	$event->__set('event_owner', $params['event_owner_id']); # Language of event
-	$event->set_status(1, true); # Publish event
-
-	update_post_meta($event->post_id, '_event_approvals_count', 1); # Set approval status
-
-	if ($event->validate() && $event->save_meta() && $event->save()) {
-		return $event->event_id;
-	} else {
-		return false;
-	}
+	return $posts_info;
 }
