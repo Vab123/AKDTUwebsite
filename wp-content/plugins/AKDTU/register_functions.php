@@ -62,11 +62,11 @@ $KNET_USER_TYPES = array(
 	),
 	'representative' => array(
 		'id' => 0,													# ID of the user type, used in database
-		'name' => 'Repræsentant',									# Human readable name of the user type
+		'name' => 'K-NET Repræsentant',								# Human readable name of the user type
 	),
 	'deputy' => array(
 		'id' => 1,													# ID of the user type, used in database
-		'name' => 'Suppleant',										# Human readable name of the user type
+		'name' => 'K-NET Suppleant',								# Human readable name of the user type
 	),
 );
 

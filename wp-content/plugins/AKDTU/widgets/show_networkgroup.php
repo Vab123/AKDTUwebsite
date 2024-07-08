@@ -11,8 +11,8 @@ function show_networkgroup_widget() {
 		<table class="widefat">
 			<colgroup>
 				<col span="1" style="width: 10%" />
-				<col span="1" style="width: 80%" />
-				<col span="1" style="width: 10%" />
+				<col span="1" style="width: 45%" />
+				<col span="1" style="width: 45%" />
 				<col span="1" style="width: 0%" />
 			</colgroup>
 			<thead>
