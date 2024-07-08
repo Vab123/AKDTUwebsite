@@ -450,7 +450,7 @@ function get_final_price($price_to_pay, $price_adjustments) {
  *		'all_day'			bool     - All-day status of the event. Default: false
  *		'event_language'	string   - Language code for the event. Default: 'da_DK'
  *
- * @return int[string]|bool Key-value array. Keys are keys from $params. Values are IDs of the Wordpress-post of each created event if successful, and false if event could not be created.
+ * @return array[int]|bool Key-value array. Keys are keys from $params. Values are IDs of the Wordpress-post of each created event if successful, and false if event could not be created.
  */
 function book_common_house($all_params = array()) {
 
@@ -467,13 +467,21 @@ function book_common_house($all_params = array()) {
 					'start_date' => new DateTime('now', new DateTimeZone('Europe/Copenhagen')),
 					'end_date' => new DateTime('now', new DateTimeZone('Europe/Copenhagen')),
 					'all_day' => false,
+					'event_language' => 'da_DK',
 				);
 
 				# Combine default values and provided settings
 				$params = shortcode_atts($default, $params_per_language);
 
 				# Create Wordpress post
-				$post_id = wp_insert_post( array('post_status' => 'publish', 'post_type' => 'event', 'post_title' => $params['title'],'post_content' => '', 'post_date' => current_time("Y-m-d H:i:s"), 'post_author' => $params['event_owner_id'] ) );
+				$post_id = wp_insert_post( array(
+					'post_status' => 'publish',
+					'post_type' => 'event',
+					'post_title' => $params['title'],
+					'post_content' => '',
+					'post_date' => current_time("Y-m-d H:i:s"),
+					'post_author' => $params['event_owner_id']
+				) );
 
 				# Protect event
 				SwpmProtection::get_instance()->apply(array($post_id), 'custom_post')->save();
@@ -487,7 +495,7 @@ function book_common_house($all_params = array()) {
 				pll_set_post_language($post_id, $params['event_language']);
 
 				# Set event details
-				$event = new EM_Event($post_id,'post_id');
+				$event = new EM_Event($post_id, 'post_id');
 
 				$event->__set('event_start_date', $params['start_date']->format("Y-m-d")); # Start date of event
 				$event->__set('event_end_date', $params['end_date']->format("Y-m-d")); # End date of event
