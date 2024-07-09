@@ -24,15 +24,15 @@ function fælleshus_juster_pris($username, $is_archive, $price_change){
 	global $wpdb;
 
 	# Check if insertion was successful
-	if (add_common_house_booking_priceadjustment($username, $is_archive, $price_change) == 0) {
-		# Insertion failed. Write error message to admin interface
-		new AKDTU_notice('error', $wpdb->last_error);
-
-		return false;
-	}else{
+	if (add_common_house_booking_priceadjustment($username, $is_archive, $price_change)) {
 		# Insertion succeeded. Write success message to admin interface
 		new AKDTU_notice('success', 'Ændringen i opkrævning af leje blev gemt.');
 
 		return true;
+	} else {
+		# Insertion failed. Write error message to admin interface
+		new AKDTU_notice('error', $wpdb->last_error);
+
+		return false;
 	}
 }

@@ -580,7 +580,7 @@ function approve_common_house_booking($event_id) {
  * @param bool $is_archive True if the user is an archive user
  * @param int $price_change Amount to change the price by
  *
- * @return int The number of adjustments added (0 if failed, 1 if successful)
+ * @return bool True if the price adjustment was added
  */
 function add_common_house_booking_priceadjustment($username, $is_archive, $price_change) {
 	global $wpdb;
@@ -593,5 +593,5 @@ function add_common_house_booking_priceadjustment($username, $is_archive, $price
 	);
 
 	# Insert adjustment into database
-	return $wpdb->insert($wpdb->prefix . 'em_lejepris_ændringer', $data);
+	return $wpdb->insert($wpdb->prefix . 'em_lejepris_ændringer', $data) > 0;
 }
