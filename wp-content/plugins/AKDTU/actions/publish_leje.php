@@ -19,14 +19,8 @@ if (isset($_REQUEST['action'])) {
  * @return bool True if the event was approved successfully
  */
 function publish_leje($event_id) {
-	# Find the correct event
-	$event = new EM_Event($event_id,'event_id');
-	
-	# Publish event
-	$event->set_status(1, true);
-
 	# Save changes
-	if ($event->save()) {
+	if (approve_common_house_booking($event_id)) {
 		# Success. Write success message to admin interface
 		new AKDTU_notice('success','Lejen er nu godkendt.');
 

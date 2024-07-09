@@ -557,7 +557,30 @@ function delete_common_house_booking($event_id) {
 }
 
 /**
+ * Approves a common house booking
  * 
+ * @param int $event_id ID of the common house booking to be approved
+ *
+ * @return bool True if the event was approved successfully
+ */
+function approve_common_house_booking($event_id) {
+	# Find the correct event
+	$event = new EM_Event($event_id,'event_id');
+	
+	# Publish event
+	$event->set_status(1, true);
+
+	return $event->save();
+}
+
+/**
+ * Adds a price adjustment to a user
+ * 
+ * @param string $username Username to adjust price for
+ * @param bool $is_archive True if the user is an archive user
+ * @param int $price_change Amount to change the price by
+ *
+ * @return int The number of adjustments added (0 if failed, 1 if successful)
  */
 function add_common_house_booking_priceadjustment($username, $is_archive, $price_change) {
 	global $wpdb;
