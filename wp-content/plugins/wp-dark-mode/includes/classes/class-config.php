@@ -64,6 +64,10 @@ if ( ! class_exists( __NAMESPACE__ . 'Config' ) ) {
 						'type' => 'string',
 						'default' => 'device',
 						'options' => array(
+							'default_light' => [
+								'name' => 'Default Light Mode',
+								'description' => 'Enable this setting if you want light mode as the default mode of your site. Visitors will find the website in light mode first.',
+							],
 							'default' => [
 								'name' => 'Default Dark Mode',
 								'description' => 'Enable this setting if you want dark mode as the default mode of your site. Visitors will find the website in dark mode first.',
@@ -411,6 +415,10 @@ if ( ! class_exists( __NAMESPACE__ . 'Config' ) ) {
 						),
 						'default' => 'sync',
 					),
+					'exclude_cache' => array(
+						'type' => 'boolean',
+						'default' => false,
+					),
 				),
 				'excludes' => array(
 					'elements' => array(
@@ -477,7 +485,7 @@ if ( ! class_exists( __NAMESPACE__ . 'Config' ) ) {
 				'accessibility' => array(
 					'enabled_keyboard_shortcut' => array(
 						'type' => 'boolean',
-						'default' => false,
+						'default' => true,
 					),
 					'enabled_url_param' => array(
 						'type' => 'boolean',

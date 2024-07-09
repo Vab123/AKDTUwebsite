@@ -3,7 +3,7 @@
 
 ====Aflæsningssystem – Kamstrup READy====
 
-Foreningens målere integrere direkte op mod wisehomes system så beboerne selv kan følge med i deres forbrug. Se hjemmesiden for vejledning i oprettelse af nye beboere.
+Foreningens målere integrere direkte op mod wisehomes system så beboerne selv kan følge med i deres forbrug. Se [[https://akdtu.dk/for-beboere/vejledninger/overvaagning-af-forbrug/|hjemmesiden]] for vejledning i oprettelse af nye beboere.
 
 ====Målere====
 År for installation:	2016

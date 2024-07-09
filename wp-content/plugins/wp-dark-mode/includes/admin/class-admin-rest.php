@@ -241,9 +241,9 @@ if ( ! class_exists( __NAMESPACE__ . 'REST' ) ) {
 				update_option( wp_sprintf( 'wp_dark_mode_%s_notice', $notice ), 'hide');
 			} else {
 				// delete options
-				$this->delete_option( $notice );
+				delete_option( wp_sprintf( 'wp_dark_mode_%s_notice', $notice ) );
 				// set transient.
-				$this->set_transient( $notice, 'hide', $remind * DAY_IN_SECONDS );
+				set_transient( wp_sprintf( 'wp_dark_mode_%s_notice', $notice ), 'hide', $remind * DAY_IN_SECONDS );
 			}
 
 			// Send response.

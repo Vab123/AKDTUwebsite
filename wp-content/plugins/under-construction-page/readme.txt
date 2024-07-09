@@ -1,10 +1,10 @@
 === Under Construction ===
 Contributors: WebFactory
-Tags: coming soon page, under construction mode, under construction, under construction page, coming soon, launch page, coming soon mode, offline page, landing page, bunny fonts
+Tags: coming soon page, under construction mode, under construction, under construction page, coming soon mode
 Requires at least: 4.0
 Requires PHP: 5.2
-Tested up to: 6.4
-Stable tag: 3.99
+Tested up to: 6.5
+Stable tag: 4.00
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,11 @@ Or if needed, upload manually;
 
 
 == Changelog ==
+
+= 4.00 =
+* 2024/04/11
+* updated Google Analytics tracking code
+* fixed 2 templates so jquery is not loaded remotely
 
 = 3.99 =
 * 2024/02/17
@@ -290,3 +295,7 @@ Open your site and force refresh browser cache (Ctrl or Shift + F5). If that doe
 = Is UCP compatible with caching plugins? =
 
 UCP is compatible with all caching plugins. However, please note that we automatically empty cache when UCP status is changed only for the following plugins: W3 Total Cache, WP Super Cache, Endurance Page Cache, SiteGround SuperCacher and WP Fastest Cache.
+
+= How can I report security bugs? =
+
+You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/under-construction-page)

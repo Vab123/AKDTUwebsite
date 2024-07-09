@@ -1,8 +1,9 @@
 <?php
 
 namespace WP_STATISTICS;
+use WP_Statistics\Components\Singleton;
 
-class taxonomies_page
+class taxonomies_page extends Singleton
 {
     private static $taxonomies = [];
     private static $defaultTaxonomies = [];
@@ -24,7 +25,7 @@ class taxonomies_page
             // Is Validate Date Request
             $DateRequest = Admin_Template::isValidDateRequest();
             if (!$DateRequest['status']) {
-                wp_die($DateRequest['message']);
+                wp_die(esc_html($DateRequest['message']));
             }
 
             // Get all taxonomies
@@ -45,7 +46,7 @@ class taxonomies_page
 
             // Check Validate int Params
             if (isset($_GET['ID']) and (!is_numeric($_GET['ID']) || ($_GET['ID'] != 0 and term_exists((int)trim($_GET['ID']), self::$taxonomy) == null))) {
-                wp_die(__("The request is invalid.", "wp-statistics"));
+                wp_die(__("The request is invalid.", "wp-statistics")); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped	
             }
         }
     }
@@ -59,7 +60,7 @@ class taxonomies_page
     {
         // Page title
         $taxonomyTitle = array_key_exists(self::$taxonomy, self::$taxonomies) ? self::$taxonomies[self::$taxonomy] : '';
-        $args['title'] = __($taxonomyTitle . ' statistics', 'wp-statistics');
+        $args['title'] = sprintf(__('%s statistics', 'wp-statistics'), $taxonomyTitle);
 
         // Taxonomy
         $args['taxonomies']    = self::$taxonomies;
@@ -75,9 +76,7 @@ class taxonomies_page
         $taxonomy = get_taxonomy(self::$taxonomy);
 
         // Get List Category
-        $terms = get_terms(self::$taxonomy, array(
-            'hide_empty' => true,
-        ));
+        $terms = get_terms(self::$taxonomy);
 
         $args['tabs'] = [];
         foreach (self::$taxonomies as $slug => $title) {
@@ -85,7 +84,7 @@ class taxonomies_page
             $link  = Menus::admin_url('wps_taxonomies_page', ['taxonomy' => $slug]);
             if (!in_array($slug, self::$defaultTaxonomies)) {
                 $class .= ' wps-locked';
-                $link  = sprintf('%s/product/wp-statistics-data-plus?utm_source=wp_statistics&utm_medium=display&utm_campaign=wordpress', WP_STATISTICS_SITE_URL);
+                $link  = sprintf('%s/product/wp-statistics-data-plus?utm_source=wp-statistics&utm_medium=link&utm_campaign=dp-ctax', WP_STATISTICS_SITE_URL);
             }
             $args['tabs'][] = [
                 'link'  => $link,
@@ -100,23 +99,22 @@ class taxonomies_page
 
             // Set Type List
             $args['top_list_type'] = self::$taxonomy;
-            $args['top_title']     = __('Top ' . strtolower($taxonomyTitle) . ' Sorted by Visits', 'wp-statistics');
+            $args['top_title']     = sprintf(__('Top %s Sorted by Views', 'wp-statistics'), strtolower($taxonomyTitle));
 
             // Push List Category
             foreach ($terms as $term) {
                 $args['top_list'][$term->term_id] = array('ID' => $term->term_id, 'name' => $term->name, 'link' => add_query_arg('ID', $term->term_id), 'count_visit' => (int)wp_statistics_pages('total', null, $term->term_id, null, null, self::$taxonomy));
             }
-
         } else {
             $termID = (int)sanitize_text_field($_GET['ID']);
             $term   = get_term($termID);
 
             // Set Type List
             $args['top_list_type'] = $taxonomy->object_type;
-            $args['top_title']     = __($taxonomyTitle . ': ' . ucfirst($term->name) . ' Most Popular Posts by Visits', 'wp-statistics');
+            $args['top_title']     = sprintf(__('%1$s: %2$s Most Popular Posts by Views', 'wp-statistics'), $taxonomyTitle, ucfirst($term->name));
 
             // Set Title
-            $args['title']      = __($taxonomyTitle . ': ' . ucfirst($term->name) . ' Statistics', 'wp-statistics');
+            $args['title']      = sprintf(__('%1$s: %2$s Statistics', 'wp-statistics'), $taxonomyTitle, ucfirst($term->name));
             $args['term_title'] = $term->name;
 
             // Get Top Posts From Category
@@ -159,7 +157,7 @@ class taxonomies_page
             $args['total_posts_visits_in_taxonomy'] = $total_posts_visits_in_taxonomy;
         }
 
-        // Sort By Visit Count
+        // Sort By View Count
         Helper::SortByKeyValue($args['top_list'], 'count_visit');
 
         // Get Only 5 Item
@@ -168,10 +166,11 @@ class taxonomies_page
             $args['top_list'] = $args['top_list'][0];
         }
 
+        $args['DateRang']    = Admin_Template::DateRange();
+        $args['hasDateRang'] = True;
         // Show Template Page
         Admin_Template::get_template(array('layout/header', 'layout/tabbed-page-header', 'pages/taxonomies', 'layout/postbox.hide', 'layout/footer'), $args);
     }
-
 }
 
-new taxonomies_page;
+taxonomies_page::instance();

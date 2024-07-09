@@ -1,8 +1,9 @@
 <?php
 
 namespace WP_STATISTICS;
+use WP_Statistics\Components\Singleton;
 
-class hits_page
+class hits_page extends Singleton
 {
 
     public function __construct()
@@ -17,7 +18,7 @@ class hits_page
             // Is Validate Date Request
             $DateRequest = Admin_Template::isValidDateRequest();
             if (!$DateRequest['status']) {
-                wp_die($DateRequest['message']);
+                wp_die(esc_html($DateRequest['message']));
             }
         }
     }
@@ -31,23 +32,24 @@ class hits_page
     {
 
         // Page title
-        $args['title'] = __('Visit Statistics', 'wp-statistics');
+        $args['title'] = __('View Statistics', 'wp-statistics');
 
         // Get Current Page Url
         $args['pageName']   = Menus::get_page_slug('hits');
         $args['pagination'] = Admin_Template::getCurrentPaged();
 
         // Get Date-Range
-        $args['DateRang'] = Admin_Template::DateRange();
+        $args['DateRang']    = Admin_Template::DateRange();
+        $args['hasDateRang'] = True;
 
-        // Get Total Visits and Visitors
+        // Get Total Views and Visitors
         $args['total_visits']   = (Option::get('visits') ? wp_statistics_visit('total') : 0);
         $args['total_visitors'] = (Option::get('visitors') ? wp_statistics_visitor('total', null, true) : 0);
 
         // Show Template Page
-        Admin_Template::get_template(array('layout/header', 'layout/title', 'layout/date.range', 'pages/hits', 'layout/footer'), $args);
+        Admin_Template::get_template(array('layout/header', 'layout/title', 'pages/hits', 'layout/footer'), $args);
     }
 
 }
 
-new hits_page;
+hits_page::instance();

@@ -178,6 +178,10 @@ if ( ! function_exists('rsssl_wrap_htaccess' ) ) {
 		}
 
 		if ( rsssl_get_option('do_not_edit_htaccess') ) {
+			if ( !empty( get_site_option('rsssl_htaccess_error') ) ) {
+				delete_site_option( 'rsssl_htaccess_error' );
+				delete_site_option( 'rsssl_htaccess_rules' );
+			}
 			return;
 		}
 
@@ -367,7 +371,8 @@ function rsssl_gather_warning_blocks_for_mail( array $changed_fields ){
 			$email_condition_result = rsssl_get_option($fieldname) === $value;
 	    } else {
 			//function check
-		    $email_condition_result = call_user_func($field['email']['condition']);
+		    $function  = $field['email']['condition'];
+		    $email_condition_result = function_exists($function) && $function();
 	    }
         return isset($field['email']['message']) && $field['value'] && $email_condition_result;
     });

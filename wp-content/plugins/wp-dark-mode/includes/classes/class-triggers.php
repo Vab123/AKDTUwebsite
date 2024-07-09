@@ -28,21 +28,13 @@ if ( ! class_exists( __NAMESPACE__ . 'Triggers' ) ) {
 		use \WP_Dark_Mode\Traits\Utility;
 
 		/**
-		 * Register hooks.
-		 *
-		 * @since 5.0.0
-		 */
-		public function actions() {
-			// Add class to html.
-			add_filter( 'language_attributes', array( $this, 'language_attributes' ) );
-		}
-
-		/**
 		 * Filters
 		 *
 		 * @since 5.0.0
 		 */
 		public function filters() {
+			// Add class to html.
+			add_filter( 'language_attributes', array( $this, 'language_attributes' ) );
 		}
 
 		/**
@@ -105,6 +97,12 @@ if ( ! class_exists( __NAMESPACE__ . 'Triggers' ) ) {
 
 			switch ( $mode ) {
 
+				// Light-mode.
+				case 'default_light':
+					return false;
+
+					break;
+
 				// Time based.
 				case 'time':
 					// Checks if Dark Mode is enabled based on time.
@@ -155,6 +153,12 @@ if ( ! class_exists( __NAMESPACE__ . 'Triggers' ) ) {
 
 			// Bail, if admin
 			if ( is_admin() ) {
+				return $output;
+			}
+
+			// Bail, if server-side cache is disabled.
+			$exclude_cache = wp_validate_boolean( $this->get_option( 'performance_exclude_cache' ) );
+			if ( $exclude_cache ) {
 				return $output;
 			}
 

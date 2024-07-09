@@ -11,7 +11,7 @@ class Admin_Taxonomy
     {
 
         // Add Hits Column in All Admin Post-Type Wp_List_Table
-        if (User::Access('read')) {
+        if (User::Access('read') and !Option::get('disable_column')) {
             add_action('admin_init', array($this, 'init'));
         }
 
@@ -53,14 +53,14 @@ class Admin_Taxonomy
             $col = array();
             foreach ($columns as $k => $v) {
                 if ($k == "handle") {
-                    $col['wp-statistics-tax-hits'] = __('Visits', 'wp-statistics');
+                    $col['wp-statistics-tax-hits'] = __('Views', 'wp-statistics');
                 }
                 $col[$k] = $v;
             }
             return $col;
         }
 
-        $columns['wp-statistics-tax-hits'] = __('Visits', 'wp-statistics');
+        $columns['wp-statistics-tax-hits'] = __('Views', 'wp-statistics');
         return $columns;
     }
 
@@ -88,7 +88,7 @@ class Admin_Taxonomy
                 $value = apply_filters("wp_statistics_before_hit_column", $preview_chart_unlock_html, $term_id, $term->taxonomy);
 
                 $value .= sprintf('<a href="%s">%s</a>',
-                    Menus::admin_url('pages', array('type' => $term->taxonomy, 'ID' => $term_id)),
+                    Menus::admin_url('taxonomies', array('taxonomy' => $term->taxonomy, 'ID' => $term_id)),
                     number_format($hit_number)
                 );
             }
@@ -145,7 +145,9 @@ class Admin_Taxonomy
     public static function modify_delete_term($term, $term_id)
     {
         global $wpdb;
-        $wpdb->query("DELETE FROM `" . DB::table('pages') . "` WHERE `id` = " . esc_sql($term_id) . " AND (`type` = 'category' OR `type` = 'post_tag' OR `type` = 'tax');");
+        $wpdb->query(
+            $wpdb->prepare("DELETE FROM `" . DB::table('pages') . "` WHERE `id` = %d AND (`type` = 'category' OR `type` = 'post_tag' OR `type` = 'tax');", esc_sql($term_id))
+        );
     }
 }
 

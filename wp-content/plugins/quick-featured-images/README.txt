@@ -4,8 +4,8 @@ Donate link: https://www.paypal.com/donate?hosted_button_id=NSEQX73VHXKS8
 Tags: featured image,featured images,bulk set,automatic,thumbnails
 Requires at least: 3.8
 Requires PHP: 5.2
-Tested up to: 6.2
-Stable tag: 13.7.0
+Tested up to: 6.5
+Stable tag: 13.7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,9 +29,12 @@ The plugin 'Quick Featured Images' helps you bulk managing featured images, sett
 If you want to include **audios, videos and custom post types** and get more options, than take a look the **Pro version** [Quick Featured Images Pro](https://www.quickfeaturedimages.com/?utm_source=wordpress_org&utm_medium=plugin&utm_campaign=quick-featured-images&utm_content=go_pro).
 
 = Demo =
-You want to test Quick Featured Images before installing on your site? Try it out on your free dummy site and [click here](https://demo.tastewp.com/quick-featured-images).
+You want to test Quick Featured Images before installing on your site? Try it out on your individual and free dummy site and [click here](https://demo.tastewp.com/quick-featured-images).
 
 = What users said =
+* **&#8220;Great for my needs&#8221;** in [Reviews at wordpress.org](https://wordpress.org/support/topic/great-for-my-needs-7/#post-17337619/) by gaiusjaugustus on Januars 12, 2024
+* **&#8220;simple to use&#8221;** in [Reviews at wordpress.org](https://wordpress.org/support/topic/simple-to-use-337/) by rabbitace on September 8, 2023
+* **&#8220;SO helpful!&#8221;** in [Reviews at wordpress.org](https://wordpress.org/support/topic/so-helpful-130/) by brandcandyamy on June 6, 2023
 * **&#8220;OMG, so good!&#8221;** in [Reviews at wordpress.org](https://wordpress.org/support/topic/omg-so-good-2/) by marverix on February 27, 2021
 * **&#8220;This was awesome and saves so much time&#8221;** in [Reviews at wordpress.org](https://wordpress.org/support/topic/this-was-awesome-and-saves-so-much-time/) by frank on December 31, 2020
 * **&#8220;One of My Must Have Plugins&#8221;** in [Reviews at wordpress.org](https://wordpress.org/support/topic/must-have-plugins-2/) by WillOfTheWeb on June 25, 2020
@@ -170,7 +173,7 @@ Under **'Featured Images' &gt; 'Settings'** you can switch on and off the additi
 
 = Languages =
 
-Quick Featured Images is currently available in 9 languages (Arabic, Dutch, Dutch (Belgium), English (US), French (France), German, Greek, Portuguese (Brazil) and Spanish (Spain) ).
+Quick Featured Images is available in multiple languages maintained by the amazing WordPress community (e.g. Arabic, Dutch, Dutch (Belgium), English (US), French (France), German, Greek, Portuguese (Brazil), Spanish (Spain) and more).
 Your language is missing? Please be part of the community an help to translate Quick Featured Images on [GlotPress](https://translate.wordpress.org/projects/wp-plugins/quick-featured-images/). Thank you!
 
 = Your idea to improve the plugin is welcome =
@@ -284,19 +287,18 @@ If you want to contribute a translation of the plugin in your language it would 
 
 == Changelog ==
 
+= 13.7.1 =
+* fixed vulnerability to unauthorized modification of data (reported by Wordfence)
+
 = 13.7.0 =
 * Improved performance when displaying post thumbnails (thanks to @odoremieux)
-* tested successfully with WordPress 6.2 (beta)
 
 = 13.6.0 =
 * improved styles and starting using minify
 * added free vs. pro section
-* tested successfully with WordPress 5.9
-* tested successfully with WordPress 6.0
 
 = 13.5.7 =
 * improved and added text and help
-* tested successfully with WordPress 5.8
 
 = 13.5.6 =
 * added autoload class
@@ -306,8 +308,6 @@ If you want to contribute a translation of the plugin in your language it would 
 
 = 13.5.5 =
 * new branding
-* Tested successfully with WordPress 5.7
-* Tested successfully with WordPress 5.6.2
 
 = 13.5.4 =
 * Fixed assignments errors in the image column on the post overview page
@@ -318,12 +318,10 @@ If you want to contribute a translation of the plugin in your language it would 
 = 13.5.2 =
 * Fixed text domain name in the footer section
 * Updated screenshots for the plugin page
-* Tested successfully with WordPress 5.6
 
 = 13.5.1 =
 * Added catalan translation, thanks to Ibidem Group
 * Changed order of action links 
-* Tested successfully with WordPress 5.5.3
 
 = 13.5.0 =
 * Fixed missed binding to dynamically created selection options in 'Default Images'
@@ -332,7 +330,6 @@ If you want to contribute a translation of the plugin in your language it would 
 = 13.4.2 =
 * Revised an error message in 'Bulk Edit'
 * Fixed deprecated jQuery function live() in 'Default Images'
-* Tested successfully with WP 5.5
 
 = 13.4.1 =
 * Fixed error in image columns on post overview pages
@@ -340,7 +337,6 @@ If you want to contribute a translation of the plugin in your language it would 
 = 13.4.0 =
 * Added new column in the media library to list at each image for which posts it is set as featured image
 * Refactored user query for 'Default Images'
-* Tested successfully with WordPress 5.3.2
 
 = 13.3.6 =
 * Tested successfully with WordPress 5.3
@@ -348,7 +344,6 @@ If you want to contribute a translation of the plugin in your language it would 
 = 13.3.5 =
 * Improved performance for the image column on post overview pages
 * Updated translations
-* Tested successfully with WordPress 5.2.4
 * Pro: Added support of plugin 'Featured Image From URL' in 'Bulk Edit', 'Default Images' and image column
 * Pro: Added support of plugin 'Featured Image By URL' in 'Bulk Edit', 'Default Images' and image column
 
@@ -357,12 +352,10 @@ If you want to contribute a translation of the plugin in your language it would 
 
 = 13.3.3 =
 * Added checkered background for transparent thumbnails
-* Tested successfully with WordPress 5.1
 
 = 13.3.2 =
 * Refactored 'Default Images' for more robustness
 * Updated translations
-* Tested successfully with WordPress 4.9.7
 * Pro: Added support of Facebook images, added Export/Import of rules on page 'Default Images'
 
 = 13.3.1 =
@@ -371,7 +364,6 @@ If you want to contribute a translation of the plugin in your language it would 
 * Changed label 'Preset Featured Images' to WP string 'Default Images' to be translated in much more languages
 * Changed previous mentioned labels in readme file
 * Updated translations due to WordPress 4.9
-* Tested successfully with WordPress 4.9.1
 * Pro: Added in 'Set, replace, remove': Presets for recurring tasks managing featured images
 
 = 13.3 =
@@ -380,14 +372,12 @@ If you want to contribute a translation of the plugin in your language it would 
 * Fixed in 'Set, replace, remove': locale name as variable in error message section
 * Fixed in 'Set, replace, remove': typo in page description
 * Removed redudand explanations
-* Tested successfully with WordPress 4.8.2
 
 = 13.2.2 =
 * Fixed incorrect detection of post type name for the result list
 
 = 13.2.1 =
 * Improved in 'Default Images'': Image paths starting with '/' will be considered
-* Tested successfully with WordPress 4.8.1
 
 = 13.2 =
 * Added in 'Default Images'': Post type filters for first image option
@@ -418,11 +408,9 @@ Fixed in 'Set, replace, remove': unnecessary HTML escaping
 
 = 12.3.5 =
 * Fixed outdated (pre WP 4.8) texts for WP 4.8
-* Tested successfully with WordPress 4.8
 
 = 12.3.4 =
 * Fixed minor errors for SVG support
-* Tested successfully with WordPress 4.7.4
 
 = 12.3.3 =
 * Revised translations
@@ -438,18 +426,15 @@ Fixed in 'Set, replace, remove': unnecessary HTML escaping
 * Changed in part "Replace" of section 'Set, replace, remove': Media library dialog box instead of image list to select the replacement images
 * Improved: Faster check for found attachment against being an image
 * Updated translations
-* Tested successfully with WordPress 4.7.3
 
 = 12.2 =
 * Added in 'Set, replace, remove': server configuration to avoid PHP timeout and memory limitation in most cases
 * Fixed deprecated jquery live()
 * Adjusted texts for WP 4.7
-* Tested successfully with WordPress 4.7
 
 = 12.1.1 =
 * Fixed warning about undefined variable in 'Default Images''
 * Revised german translation
-* Tested successfully with WordPress 4.6.1
 
 = 12.1 =
 * Fixed fatal error at plugin activation
@@ -463,7 +448,6 @@ Fixed in 'Set, replace, remove': unnecessary HTML escaping
 * Revised uninstall function for WordPress 4.6 due to the introduction of WP_Site_Query class
 * Revised style of thumbnails in image column, 'Default Images'' and bulk edit pages
 * Updated *.pot file and german translation
-* Tested successfully with WordPress 4.6
 
 = 11.8.1 =
 * Improved: media dialogs show only images instead of all files
@@ -472,32 +456,26 @@ Fixed in 'Set, replace, remove': unnecessary HTML escaping
 
 = 11.8 =
 * Added brazilian portuguese translation
-* Tested successfully with WordPress 4.5.2
 
 = 11.7.3 =
 * Fixed: outdated translations for post statusses
-* Tested successfully with WordPress 4.5.2
 
 = 11.7.2 =
 * Fixed: broken recognition of first post image works in multilines
-* Tested successfully with WordPress 4.5.1
 
 = 11.7.1 =
 * Revised plugin activation message function
-* Tested successfully with WordPress 4.5
 
 = 11.7 =
 * Improved: 'Default Images'' are working in the frontend, too, e.g. at creating a post with Gravity Forms
 * Improved: Headline structure since WP 4.4 for better accessibility
 * Refactored: Page 'Preset Images'
-* Tested successfully with WordPress 4.4.2
 * Updated *.pot file and translations
 
 = 11.6.1 =
 * Pro version: Added in 'Preset Images': Selection of multiple images to set one of them randomly as default featured image
 * Improved usability: Advice for selection of multiple images in the media dialog box
 * Improved usability in 'Set, replace, remove': On the start page show selected images after closing the media dialog box
-* Tested successfully with WordPress 4.4
 * Updated *.pot file and translations
 
 = 11.6 =
@@ -522,7 +500,6 @@ Fixed in 'Set, replace, remove': unnecessary HTML escaping
 = 11.4.1 =
 * Revised styles for image column in small displays, since WP 4.3
 * Pro version: Added search in post title in 'Default Images'': set default featured image for posts with a specific search string in the title
-* Tested successfully with WordPress 4.3
 
 = 11.4 =
 Added spanish translation for the main texts of the plugin
@@ -552,7 +529,6 @@ Added spanish translation for the main texts of the plugin
 * Pro version: Added option in 'Set, replace, remove': Take first image of NextGen galleries
 * Pro version: Added option in 'Set, replace, remove': Take first external image
 * Pro version: Added option in 'Set, replace, remove': Take first attached image
-* Tested successfully with WordPress 4.2.2
 * Updated *.pot file and german translation
 
 = 10.0 =
@@ -573,52 +549,52 @@ Corrected some texts
 Tested successfully with WordPress 5.6
 
 = 13.5.1 =
-Added catalan translation, changed order of action links, tested with WordPress 5.5.3
+Added catalan translation, changed order of action links
 
 = 13.5.0 =
 Fixed missed binding to dynamically created selection options in 'Default Images'
 
 = 13.4.2 =
-Revisions and fixes for WordPress 5.5, tested successfully with WP 5.5
+Revisions and fixes for WordPress 5.5
 
 = 13.4.1 =
 Fixed error in image columns on post overview pages
 
 = 13.4.0 =
-Added new column in the media library to list at each image for which posts it is set as featured image, tested with WordPress 5.3.2
+Added new column in the media library to list at each image for which posts it is set as featured image
 
 ^= 13.3.6 =
 Tested successfully with WordPress 5.3
 
 = 13.3.5 =
-Improved performance for the image column on post overview pages, tested with WordPress 5.2.4
+Improved performance for the image column on post overview pages
 
 = 13.3.4 =
 Tested with WordPress 5.2.1
 
 = 13.3.3 =
-Added checkered background for transparent thumbnails, tested with WordPress 5.1
+Added checkered background for transparent thumbnails
 
 = 13.3.2 =
-Refactored page Default Images for more robustness, tested with WordPress 4.9.7
+Refactored page Default Images for more robustness
 
 = 13.3.1 =
-Added greek translation, changed labels, updated WP translations, tested with WordPress 4.9.1
+Added greek translation, changed labels, updated WP translations
 
 = 13.3 =
-Added japanese translation and small revisions, tested with WP 4.8.2
+Added japanese translation and small revisions
 
 = 13.2.2 =
 Fixed incorrect detection of post type name for the result list
 
 = 13.2.1 =
-In 'Default Images'' image paths starting with / will be considered, tested with WP 4.8.1
+In 'Default Images'' image paths starting with / will be considered
 
 = 13.2 =
 Added in 'Default Images'': Post type filters for first image option, revised translations
 
 = 13.1 =
-Added french translation, revised sanitations and translations, tested with WordPress 4.8
+Added french translation, revised sanitations and translations
 
 = 13.0.1 =
 Fixed unnecessary HTML escaping
@@ -633,10 +609,10 @@ Added background color for transparent images or vector graphics, rearranged Sel
 Fixed missing sanitations of ID in Columns class to close possible cross-site-scripting security hole
  
 = 12.3.5 =
-Fixed outdated (pre WP 4.8) texts for WP 4.8, tested with WP 4.8
+Fixed outdated (pre WP 4.8) texts for WP 4.8
 
 = 12.3.4 =
-Fixed minor errors for SVG support, tested with WP 4.7.4
+Fixed minor errors for SVG support
 
 = 12.3.3 =
 Revised translations
@@ -660,22 +636,21 @@ Fixed warning about undefined variable in 'Default Images''
 Fixed fatal error at plugin activation, fixed missing default settings
 
 = 12.0 =
-New features: user role option, action links in image columns, tested with WP 4.6
+New features: user role option, action links in image columns
 
 = 11.8.1 =
 Improved media dialogs, revised users list in 'Default Images''
 
 = 11.8 =
-Added brazilian portuguese translation, tested with WP 4.5.3
+Added brazilian portuguese translation
 
 = 11.7.3 =
-Fixed: outdated translations for post statusses, tested with WP 4.5.2
+Fixed: outdated translations for post statuses
 
 = 11.7.2 =
 Fixed: broken recognition of first post image works in multilines
 
-= 11.7.1 =
-Revised plugin activation message function, tested with WP 4.5
+= 11.7.1 =, tested with WP 4.5
 
 = 11.7 =
 'Default Images'' are working in the frontend, too; Revised headline structure for better accessibility
@@ -690,7 +665,7 @@ Added automatic deletion of rules assigned with a deleted image in the library, 
 Added arabic translation, added in 'Set, replace, remove': Back button on result page, some design improvements, changed text domain
 
 = 11.4.1 =
-Revised styles for image column since WP 4.3, tested in WP 4.3
+Revised styles for image column since WP 4.3
 
 = 11.4 =
 Added spanish translation
@@ -705,7 +680,7 @@ Fixed bugs
 Fixed bug and wong links in the Confirmation step
 
 = 11.0 =
-Improved performance of confirmation step and better security, tested with WP 4.2.2
+Improved performance of confirmation step and better security
 
 = 10.0 =
 Introducing Pro version Quick Featured Images Pro, corrected CSS

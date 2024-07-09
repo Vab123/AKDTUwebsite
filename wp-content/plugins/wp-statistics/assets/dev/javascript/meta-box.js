@@ -35,9 +35,14 @@ wps_js.no_meta_box_data = function () {
  */
 wps_js.error_meta_box_data = function (xhr) {
     if (typeof xhr !== 'undefined') {
-        let data = JSON.parse(xhr);
-        if (wps_js.isset(data, 'message')) {
-            return '<div class="o-wrap o-wrap--no-data">' + data['message'] + '</div>';
+        try {
+            let data = JSON.parse(xhr);
+
+            if (wps_js.isset(data, 'message')) {
+                return '<div class="o-wrap o-wrap--no-data">' + data['message'] + '</div>';
+            }
+        } catch (error) {
+            console.log('An unexpected error occurred: ', xhr, error);
         }
     }
     return '<div class="o-wrap o-wrap--no-data">' + wps_js._('rest_connect') + '</div>';
@@ -96,7 +101,7 @@ wps_js.meta_box_button = function (key) {
     jQuery("#" + wps_js.getMetaBoxKey(key) + " button[class*=wps-refresh]").remove();
 
     // Add Refresh Button
-    jQuery(`<button class="handlediv wps-refresh"` + (wps_js.is_active('gutenberg') ? ` style="${gutenberg_style}${position_gutenberg}: 3%;" ` : 'style="line-height: 28px;"') + ` type="button" data-tooltip="` + wps_js._('reload') + `"><span class="wps-refresh-icon"></span> <span class="screen-reader-text">` + wps_js._('reload') + `</span></button>`).insertBefore(selector);
+    jQuery(`<button class="handlediv wps-refresh"` + (wps_js.is_active('gutenberg') ? ` style="${gutenberg_style}${position_gutenberg}: 3%;" ` : 'style="line-height: 28px;"') + ` type="button" data-tooltip="` + wps_js._('reload') + `"></button>`).insertBefore(selector);
 };
 
 wps_js.meta_box_tooltip = function (key) {
@@ -106,8 +111,8 @@ wps_js.meta_box_tooltip = function (key) {
     if (meta_box_info.hasOwnProperty('description')) {
         const title = jQuery(selector).text();
         const tooltip = meta_box_info.description;
-        const newTitle = '<span>' + title + '</span><a href="#" class="wps-tooltip" title="' + tooltip + '"><i class="wps-tooltip-icon"></i></a>';
-        jQuery(selector).html(newTitle);
+        const newTitle = '<a href="#" class="wps-tooltip" title="' + tooltip + '"><i class="wps-tooltip-icon"></i></a>';
+        if(tooltip) jQuery(selector).append(newTitle);
     }
 }
 
@@ -324,12 +329,17 @@ wps_js.meta_box_footer = function (key, data) {
 /**
  * Set As Selected Date Filter
  */
-wps_js.set_date_filter_as_selected = function (key, selectedDateFilter, selectedStartDate, selectedEndDate, fromDate, toDate) {
+wps_js.set_date_filter_as_selected = function (key, selectedDateFilter = "30days", selectedStartDate, selectedEndDate, fromDate, toDate) {
     const metaBoxInner = jQuery(wps_js.meta_box_inner(key));
     const filterBtn = jQuery(metaBoxInner).find('.c-footer__filter__btn');
     const filterList = jQuery(metaBoxInner).find('.c-footer__filters__list');
     const currentFilterTitle = jQuery(metaBoxInner).find('.c-footer__current-filter__title');
     const currentFilterRange = jQuery(metaBoxInner).find('.c-footer__current-filter__date-range');
+
+    if (!selectedDateFilter) {
+        selectedDateFilter = "30days"
+    }
+
     if (selectedDateFilter.length) {
         filterList.find('button[data-filter]').removeClass('is-selected');
         filterList.find('button[data-filter="' + selectedDateFilter + '"').addClass('is-selected');
@@ -390,7 +400,7 @@ jQuery(document).on("click", '.wps-refresh', function (e) {
     // Run Meta Box
     wps_js.run_meta_box(meta_box_name, data, false);
     setTimeout(function () {
-        jQuery('#' + parentID).find('.wps-refresh').blur();
+        jQuery('#' + parentID).find('.wps-refresh').trigger('blur');
     }, 1000);
 });
 

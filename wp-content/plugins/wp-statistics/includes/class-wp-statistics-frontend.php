@@ -2,6 +2,9 @@
 
 namespace WP_STATISTICS;
 
+use WP_Statistics\Components\Assets;
+use WP_Statistics\Service\Integrations\WpConsentApi;
+
 class Frontend
 {
     public function __construct()
@@ -45,8 +48,6 @@ class Frontend
      */
     public function enqueue_scripts()
     {
-        wp_enqueue_script('wp-statistics-tracker', WP_STATISTICS_URL . 'assets/js/tracker.js');
-
         $params = array(
             Hits::$rest_hits_key => 'yes',
         );
@@ -62,16 +63,23 @@ class Frontend
         $hitRequestUrl        = add_query_arg($params, get_rest_url(null, RestAPI::$namespace . '/' . Api\v2\Hit::$endpoint));
         $keepOnlineRequestUrl = add_query_arg($params, get_rest_url(null, RestAPI::$namespace . '/' . Api\v2\CheckUserOnline::$endpoint));
 
+        if (Option::get('bypass_ad_blockers', false)) {
+            $hitRequestUrl        = add_query_arg(array_merge($params, ['action' => 'wp_statistics_hit_record']), admin_url('admin-ajax.php'));
+            $keepOnlineRequestUrl = add_query_arg(array_merge($params, ['action' => 'wp_statistics_keep_online']), admin_url('admin-ajax.php'));
+        }
+
         $jsArgs = array(
             'hitRequestUrl'        => $hitRequestUrl,
             'keepOnlineRequestUrl' => $keepOnlineRequestUrl,
+            'isWpConsentApiActive' => WpConsentApi::isWpConsentApiActive(),
             'option'               => [
+                'consentLevel'       => Option::get('consent_level_integration', 'disabled'),
                 'dntEnabled'         => Option::get('do_not_track'),
                 'cacheCompatibility' => Option::get('use_cache_plugin')
             ],
         );
 
-        wp_localize_script('wp-statistics-tracker', 'WP_Statistics_Tracker_Object', $jsArgs);
+        Assets::script('tracker', 'js/tracker.js', [], $jsArgs, true, Option::get('bypass_ad_blockers', false));
     }
 
     /**
@@ -92,7 +100,7 @@ class Frontend
     public function print_out_plugin_html()
     {
         if (apply_filters('wp_statistics_html_comment', true)) {
-            echo '<!-- Analytics by WP Statistics v' . WP_STATISTICS_VERSION . ' - ' . WP_STATISTICS_SITE . ' -->' . "\n";
+            echo '<!-- Analytics by WP Statistics v' . WP_STATISTICS_VERSION . ' - ' . WP_STATISTICS_SITE . ' -->' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         }
     }
 
@@ -115,7 +123,7 @@ class Frontend
 
         // Get post hits
         $hits      = wp_statistics_pages('total', "", $post_id);
-        $hits_html = '<p>' . sprintf(__('Visits: %s', 'wp-statistics'), $hits) . '</p>';
+        $hits_html = '<p>' . sprintf(__('Views: %s', 'wp-statistics'), $hits) . '</p>';
 
         // Check hits position
         if (Option::get('display_hits_position') == 'before_content') {

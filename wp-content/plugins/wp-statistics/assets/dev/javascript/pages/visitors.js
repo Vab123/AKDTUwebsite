@@ -5,7 +5,7 @@ if (wps_js.isset(wps_js.global, 'request_params', 'page') && wps_js.global.reque
         e.preventDefault();
 
         // Show
-        tb_show('', '#TB_inline?&width=430&height=668&inlineId=visitors-filter-popup');
+        tb_show('', '#TB_inline?&width=430&height=615&inlineId=visitors-filter-popup');
 
         // Add Content
         setTimeout(function () {
@@ -66,7 +66,7 @@ if (wps_js.isset(wps_js.global, 'request_params', 'page') && wps_js.global.reque
 
         // Check IS IP
         var Input_IP = jQuery(FORM_ID + " input[name=ip]").val();
-        if (Input_IP.length > 0 && wps_js.isIP(Input_IP) === false) {
+        if (Input_IP.length > 0 && (Input_IP.includes('#hash#') === false && wps_js.isIP(Input_IP) === false)) {
             alert(wps_js._('er_valid_ip'));
             return false;
         }
@@ -138,17 +138,17 @@ if (wps_js.isset(wps_js.global, 'request_params', 'page') && wps_js.global.reque
 
         // Add IP
         html += `<tr><td>${wps_js._('ip')}</td></tr>`;
-        html += `<tr><td><input name="ip" value="${(wps_js.getLinkParams('ip') != null ? wps_js.getLinkParams('ip') : ``)}" class="wps-width-100" placeholder='xxx.xxx.xxx.xxx' autocomplete="off"></td></tr>`;
+        html += `<tr><td><input name="ip" value="${(wps_js.getLinkParams('ip') != null ? decodeURIComponent(wps_js.getLinkParams('ip')) : ``)}" class="wps-width-100" placeholder='xxx.xxx.xxx.xxx' autocomplete="off"></td></tr>`;
 
         // Add Date
         html += `<tr><td>${wps_js._('date')}</td></tr>`;
         let input_date_style = 'width: calc(50% - 5px);display: inline-block;';
         html += `<tr>
                             <td>
-                                <div style="${input_date_style}">${wps_js._('from')}: <input name="date-from" data-wps-date-picker="from" value="${(wps_js.getLinkParams('from') != null ? wps_js.getLinkParams('from') : ``)}" style="width: calc(100% - 5px);" placeholder="YYYY-MM-DD" autocomplete="off"></div>
-                                <div style="${input_date_style}">${wps_js._('to')}: <input name="date-to" data-wps-date-picker="to" value="${(wps_js.getLinkParams('to') != null ? wps_js.getLinkParams('to') : ``)}" style="width: 100%;" placeholder="YYYY-MM-DD" autocomplete="off"></div>
-                                <input type="hidden" name="from" id="date-from" value="${(wps_js.getLinkParams('from') != null ? wps_js.getLinkParams('from') : ``)}">
-                                <input type="hidden" name="to" id="date-to" value="${(wps_js.getLinkParams('to') != null ? wps_js.getLinkParams('to') : ``)}">
+                                <div style="${input_date_style}">${wps_js._('from')}: <input name="date-from" class="modal-input" data-wps-date-picker="from" value="${(wps_js.getLinkParams('from') != null ? wps_js.getLinkParams('from') : ``)}" style="width: calc(100% - 5px);" placeholder="YYYY-MM-DD" autocomplete="off"></div>
+                                <div style="${input_date_style}">${wps_js._('to')}: <input name="date-to" class="modal-input" data-wps-date-picker="to" value="${(wps_js.getLinkParams('to') != null ? wps_js.getLinkParams('to') : ``)}" style="width: 100%;" placeholder="YYYY-MM-DD" autocomplete="off"></div>
+                                <input type="hidden" name="from" id="date-from" class="modal-input" value="${(wps_js.getLinkParams('from') != null ? wps_js.getLinkParams('from') : ``)}">
+                                <input type="hidden" name="to" id="date-to" class="modal-input" value="${(wps_js.getLinkParams('to') != null ? wps_js.getLinkParams('to') : ``)}">
                             </td>
                             </tr>`;
 
@@ -160,10 +160,16 @@ if (wps_js.isset(wps_js.global, 'request_params', 'page') && wps_js.global.reque
 
         // Set datePicker and Select 2
         setTimeout(function () {
+
+            jQuery(FORM_ID + " input[data-wps-date-picker]").on('change', function() {
+                var dateType = jQuery(this).attr('data-wps-date-picker');
+                jQuery(FORM_ID + " input[name=" + dateType + "]").val(jQuery(this).val());
+            });
             wps_js.date_picker();
             wps_js.select2();
-        }, 200);
+        }, 500);
     }
+
 }
 
 // When close TickBox

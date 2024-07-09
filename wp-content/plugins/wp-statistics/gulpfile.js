@@ -6,16 +6,16 @@ var gulp = require('gulp'),
     babel = require('gulp-babel'),
     uglify = require('gulp-uglify'),
     replace = require('gulp-replace'),
+    path = require('path'),
+    shell = require('gulp-shell'),
     pipeline = require('readable-stream').pipeline;
 const sass = require('gulp-sass')(require('sass'));
 
 // Now you can use gulpSass in your gulp tasks
 
-
 function buildStyles(done) {
     return gulp.src([
         './assets/dev/sass/admin.scss',
-        './assets/dev/sass/jquery-datepicker/datepicker.scss',
         './assets/dev/sass/rtl.scss',
         './assets/dev/sass/frontend.scss',
     ])
@@ -35,7 +35,9 @@ function buildScripts(done) {
         './assets/dev/javascript/meta-box/*.js',
         './assets/dev/javascript/pages/*.js',
         './assets/dev/javascript/run.js',
+        './assets/dev/javascript/image-upload.js',
     ])
+        .pipe(uglify())
         .pipe(concat('admin.min.js'))
         .pipe(insert.prepend('jQuery(document).ready(function ($) {'))
         .pipe(insert.append('});'))
@@ -59,11 +61,30 @@ function tineMCE(done) {
 
 // Gulp Frontend Script
 function frontScripts(done) {
-    gulp.src(['./assets/dev/javascript/tracker.js'])
-        .pipe(gulp.dest('./assets/js/')).pipe(babel({presets: ['@babel/env']})).pipe(replace("\\n", '')).pipe(replace("\\t", '')).pipe(replace("  ", '')).pipe(uglify()).pipe(gulp.dest('./assets/js/'));
+    const jsFiles = [
+        './assets/dev/javascript/tracker.js'
+    ];
+
+    // Process for modern browsers (ES6)
+    gulp.src(jsFiles)
+        .pipe(replace("\\n", ''))
+        .pipe(replace("\\t", ''))
+        .pipe(replace("  ", ''))
+        .pipe(uglify())
+        .pipe(gulp.dest('./assets/js/'));
+
     done()
 }
 
+// Gulp charts Script
+function chartScripts(done) {
+    gulp.src([
+        './assets/dev/javascript/plugin/chartjs-adapter-date-fns.bundle.min.js',
+        './assets/dev/javascript/plugin/chartjs-chart-matrix.min.js'])
+        .pipe(concat('chart-matrix.min.js'))
+        .pipe(gulp.dest('./assets/js/chartjs')).pipe(babel({presets: ['@babel/env']})).pipe(replace("\\n", '')).pipe(replace("\\t", '')).pipe(replace("  ", '')).pipe(uglify()).pipe(gulp.dest('./assets/js/chartjs/'));
+    done()
+}
 
 // Gulp Script Minify
 function concatScripts(done) {
@@ -91,6 +112,28 @@ function minifyCss(done) {
     done()
 }
 
+function addEsnextSuffix(filePath) {
+    const lastDotIndex = filePath.lastIndexOf('.');
+    if (lastDotIndex === -1) return `${filePath}.esnext`;
+    const base = filePath.substring(0, lastDotIndex);
+    const ext = filePath.substring(lastDotIndex);
+    return `${base}.esnext${ext}`;
+}
+
+function revertToES6(cb) {
+    const jsFiles = [
+        './assets/js/tracker.js'
+    ];
+
+    const tasks = jsFiles.map(file => {
+        const outputFile = addEsnextSuffix(file);
+        return `lebab --transform arrow,let,template ${file} -o ${outputFile}`;
+    });
+
+    shell.task(tasks)();
+    cb();
+}
+
 // Gulp Watch
 function watch() {
     gulp.watch('assets/dev/javascript/**/*.js', gulp.series(buildScripts));
@@ -101,10 +144,12 @@ function watch() {
 // global Task
 exports.compileSass = buildStyles;
 exports.script = buildScripts;
+exports.chartScript = chartScripts;
 exports.mce = tineMCE;
 exports.frontScript = frontScripts;
 exports.concatScripts = concatScripts;
 exports.minifyCss = minifyCss;
+exports.revertToES6 = revertToES6;
 exports.watch = watch;
 
 exports.default = gulp.series(watch);

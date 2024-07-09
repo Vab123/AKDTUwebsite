@@ -1,6 +1,6 @@
 <?php
 
-namespace Appsero;
+namespace WP_Dark_Mode\Appsero;
 
 /**
  * Appsero Insights
@@ -34,7 +34,7 @@ class Insights {
     protected $extra_data = [];
 
     /**
-     * AppSero\Client
+     * WP_Dark_Mode\AppSero\Client
      *
      * @var object
      */
@@ -58,7 +58,7 @@ class Insights {
             $client = new Client($client, $name, $file);
         }
 
-        if ( is_object($client) && is_a($client, 'Appsero\Client') ) {
+        if ( is_object($client) && is_a($client, 'WP_Dark_Mode\Appsero\Client') ) {
             $this->client = $client;
         }
     }

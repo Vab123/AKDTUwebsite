@@ -43,7 +43,7 @@ if ( ! class_exists( __NAMESPACE__ . 'Extended' ) ) {
 		 */
 		public function get_system_default_excluded_elements( $elements ) {
 
-			$elements .= ( ! empty( $elements ) ? ', ' : ' ' ) . '#wpadminbar, .wp-dark-mode-switch';
+			$elements .= ( ! empty( $elements ) ? ', ' : ' ' ) . '#wpadminbar, .wp-dark-mode-switch, .elementor-button-content-wrapper';
 
 			return $elements;
 		}

@@ -1,6 +1,26 @@
-======Kontaktpersoner======
-=====Håndværkere=====
-====Bygningsingeniør====
+=====Kontaktpersoner=====
+====Håndværkere====
+===Brolægger===
+**Neumann & søn**
+<WRAP group>
+<WRAP 4cm column>
+CVR\\
+Hjemmeside\\
+Telefon\\
+Email\\
+Note
+</WRAP>
+
+<WRAP 20cm column>
+39682974\\
+https://neumann-son.dk\\
+40 26 32 08\\
+nikolajneumann@live.dk\\
+Neumann & søn har lagt fliser under foreningens skraldeskur. Var nemme at arbejde med, men havde lidt problemer med betaling over EAN/PO nummer, så det er nemmere at få dem til at sende en faktura over mail.
+</WRAP>
+</WRAP>
+
+===Bygningsingeniør===
 **Plan 1**
 <WRAP group>
 <WRAP 4cm column>
@@ -18,7 +38,7 @@ Email
 </WRAP>
 </WRAP>
 
-====Elektriker====
+===Elektriker===
 **PH El og sikring**
 <WRAP group>
 <WRAP 4cm column>
@@ -38,7 +58,7 @@ For fiber opgaver og generelt el arbejde (indenfor normal arbejdstid)
 </WRAP>
 </WRAP>
 
-====Adgangskontrol og alarm - Fælleshus====
+===Adgangskontrol og alarm - Fælleshus===
 **PH El og sikring**
 <WRAP group>
 <WRAP 4cm column>
@@ -57,7 +77,7 @@ Ansvarlig for fælleshus ADK.
 </WRAP>
 </WRAP>
 
-====Gaskedel - Fælleshus====
+===Gaskedel - Fælleshus===
 **Lygas**
 <WRAP group>
 <WRAP 4cm column>
@@ -75,7 +95,7 @@ Email
 </WRAP>
 </WRAP>
 
-====Glarmester====
+===Glarmester===
 **Frese & Søn**
 <WRAP group>
 <WRAP 4cm column>
@@ -93,7 +113,7 @@ Email
 </WRAP>
 </WRAP>
 
-====Kloak og faskiner====
+===Kloak og faskiner===
 **DBE Kloakservice**
 <WRAP group>
 <WRAP 4cm column>
@@ -111,7 +131,7 @@ Email
 </WRAP>
 </WRAP>
 
-====Skadeservice====
+===Skadeservice===
 **Skadeservice Danmark**
 <WRAP group>
 <WRAP 4cm column>
@@ -129,7 +149,7 @@ Email
 </WRAP>
 </WRAP>
 
-====Tømrer====
+===Tømrer===
 **Tømrerfirmaet Sten Jensen**
 <WRAP group>
 <WRAP 4cm column>
@@ -163,7 +183,7 @@ Christian Steenhof\\
 </WRAP>
 </WRAP>
 
-====Maler====
+===Maler===
 **Torups Malerfirma Stig Torup Kristensen**
 <WRAP group>
 <WRAP 4cm column>
@@ -183,7 +203,7 @@ Ingen\\
 </WRAP>
 </WRAP>
 
-====Ventilation====
+===Ventilation===
 **Lygas**
 <WRAP group>
 <WRAP 4cm column>
@@ -201,7 +221,7 @@ Email
 </WRAP>
 </WRAP>
 
-====VVS====
+===VVS===
 **Knud Olsen VVS – Mindre VVS-entrepriser**
 <WRAP group>
 <WRAP 4cm column>
@@ -236,7 +256,7 @@ Email
 </WRAP>
 </WRAP>
 
-====TV - Fællesantenne anlæg====
+===TV - Fællesantenne anlæg===
 **Dansk Digital Center**
 <WRAP group>
 <WRAP 4cm column>
@@ -255,7 +275,7 @@ Email
 </WRAP>
 
 
-=====Blacklistede håndværkere=====
+====Blacklistede håndværkere====
 ** Falsing VVS/Complet VVS **
 
 Samme ejer bag de to firmaer.

@@ -1,0 +1,9 @@
+===== Overlevering =====
+  - Alle brugernavne og adgangskoder overleveres.
+    * Den nye formand opdaterer alle adgangskoder samt kontaktoplysninger.
+    * Administrator-rettigheder til hjemmesiden overleveres, heriblandt konto på hjemmesiden samt hos Simply.
+    * Mailkonto overdrages. Det anbefales at den samme mappe-struktur beholdes, så der kan sikres fremtidig dokumentation. Både modtagne og sendte mails gemmes (Kan sættes op hos Simply.com)
+  - Der instrueres i godkendelse af regninger gennem Cobblestone Cloud.
+    * Formanden bør holde sig opdateret på foreningens driftsregnskab, samt informere bestyrelsen såfremt der er væsentlige afvigelser.
+    * Regnskabet bør desuden ca. en gang hver kvartal gennemgås af formanden, hvor det checkes om alle posteringer er korrekte.
+    * Der er ikke nogen adgang til MitID som skal overleveres. Dette ligger hos administrator.

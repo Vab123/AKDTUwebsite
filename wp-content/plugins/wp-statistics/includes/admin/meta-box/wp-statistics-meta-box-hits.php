@@ -44,7 +44,7 @@ class hits extends MetaBoxAbstract
         $response = self::HitsChart($params);
 
         // Check For No Data Meta Box
-        if ((isset($response['visits']) and (!isset($args['no-data'])) and isset($response['visitors']) and count(array_filter($response['visits'])) < 1 and count(array_filter($response['visitors'])) < 1) || (isset($response['visits']) and !isset($response['visitors']) and count(array_filter($response['visits'])) < 1) || (!isset($response['visits']) and isset($response['visitors']) and count(array_filter($response['visitors'])) < 1)) {
+        if ((isset($response['visits']) and (!isset($args['no-data'])) and isset($response['visitors']) and count(array_filter($response['visits'])) < 0 and count(array_filter($response['visitors'])) < 0) || (isset($response['visits']) and !isset($response['visitors']) and count(array_filter($response['visits'])) < 0) || (!isset($response['visits']) and isset($response['visitors']) and count(array_filter($response['visitors'])) < 0)) {
             $response['no_data'] = 1;
         }
 
@@ -85,9 +85,9 @@ class hits extends MetaBoxAbstract
 
         // Set Title
         if (end($days_time_list) == TimeZone::getCurrentDate("Y-m-d")) {
-            $title = sprintf(__('Visits in the last %s days', 'wp-statistics'), self::$countDays);
+            $title = sprintf(__('Views in the last %s days', 'wp-statistics'), self::$countDays);
         } else {
-            $title = sprintf(__('Visits from %s to %s', 'wp-statistics'), $args['from'], $args['to']);
+            $title = sprintf(__('Views from %1$s to %2$s', 'wp-statistics'), $args['from'], $args['to']);
         }
 
         // Push Basic Chart Data
@@ -96,7 +96,7 @@ class hits extends MetaBoxAbstract
             'date'  => $date
         );
 
-        // Get Visits Chart
+        // Get Views Chart
         if (Option::get('visits')) {
             foreach ($days_time_list as $d) {
                 $total_visits += $visits[] = (int)wp_statistics_visit($d, true);
@@ -120,5 +120,4 @@ class hits extends MetaBoxAbstract
 
         return $data;
     }
-
 }

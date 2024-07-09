@@ -40,6 +40,10 @@ if ( ! class_exists( __NAMESPACE__ . 'Assets' ) ) {
 
 			// Stylesheet tag.
 			add_filter( 'style_loader_tag', array( $this, 'style_loader_tag' ), 10, 2 );
+
+			// Options on Ajax for Cache-free integration.
+			add_action( 'wp_ajax_wp_dark_mode_options', array( $this, 'ajax_options' ) );
+			add_action( 'wp_ajax_nopriv_wp_dark_mode_options', array( $this, 'ajax_options' ) );
 		}
 
 		/**
@@ -85,7 +89,7 @@ if ( ! class_exists( __NAMESPACE__ . 'Assets' ) ) {
 			$script_in_footer = apply_filters( 'wp_dark_mode_loads_scripts_in_footer', $this->get_option( 'performance_load_scripts_in_footer' ) );
 
 			// Enqueue scripts.
-			wp_enqueue_script( 'wp-dark-mode', WP_DARK_MODE_ASSETS . 'js/app.min.js', array(), WP_DARK_MODE_VERSION, $script_in_footer );
+			wp_enqueue_script( 'wp-dark-mode', WP_DARK_MODE_ASSETS . 'js/app.min.js', [], WP_DARK_MODE_VERSION, $script_in_footer );
 
 			// Localize scripts.
 			$localize_scripts = array(
@@ -453,6 +457,22 @@ if ( ! class_exists( __NAMESPACE__ . 'Assets' ) ) {
 			}
 
 			return $html;
+		}
+
+		/**
+		 * Get options via AJAX
+		 *
+		 * @since 5.0.0
+		 */
+		public function ajax_options() {
+			// Check nonce.
+			check_ajax_referer( 'wp_dark_mode_nonce', 'nonce' );
+
+			$options = [
+				'performance_exclude_cache' => $this->get_option( 'performance_exclude_cache' ),
+			];
+
+			wp_send_json_success( $options );
 		}
 	}
 

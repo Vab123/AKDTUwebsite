@@ -1,8 +1,9 @@
 <?php
 
 namespace WP_STATISTICS;
+use WP_Statistics\Components\Singleton;
 
-class searches_page
+class searches_page extends Singleton
 {
 
     public function __construct()
@@ -17,7 +18,7 @@ class searches_page
             // Is Validate Date Request
             $DateRequest = Admin_Template::isValidDateRequest();
             if (!$DateRequest['status']) {
-                wp_die($DateRequest['message']);
+                wp_die(esc_html($DateRequest['message']));
             }
         }
     }
@@ -38,12 +39,13 @@ class searches_page
         $args['pagination'] = Admin_Template::getCurrentPaged();
 
         // Get Date-Range
-        $args['DateRang'] = Admin_Template::DateRange();
+        $args['DateRang']    = Admin_Template::DateRange();
+        $args['hasDateRang'] = True;
 
         // Show Template Page
-        Admin_Template::get_template(array('layout/header', 'layout/title', 'layout/date.range', 'pages/search', 'layout/footer'), $args);
+        Admin_Template::get_template(array('layout/header', 'layout/title', 'pages/search', 'layout/footer'), $args);
     }
 
 }
 
-new searches_page;
+searches_page::instance();

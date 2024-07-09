@@ -63,7 +63,6 @@ if ( ! class_exists( 'Themes' ) ) {
 		 * @return string
 		 */
 		public function add_wp_dark_mode_attribute( $attr ) {
-
 			$trigger = \WP_Dark_Mode\Triggers::get_instance();
 			$wp_dark_mode_is_preactivated = apply_filters( 'wp_dark_mode_is_preactivated', $trigger->is_preactivated() );
 			$attr .= $wp_dark_mode_is_preactivated ? ' data-wp-dark-mode' : '';

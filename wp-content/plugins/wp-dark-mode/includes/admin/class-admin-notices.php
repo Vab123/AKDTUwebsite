@@ -50,11 +50,11 @@ if ( ! class_exists(__NAMESPACE__ . 'Notices') ) {
 		public function init_appsero() {
 
 			// Load Appsero SDK if not loaded.
-			if ( ! class_exists( '\Appsero\Client' ) ) {
+			if ( ! class_exists( '\WP_Dark_Mode\Appsero\Client' ) ) {
 				require_once WP_DARK_MODE_INCLUDES . '/appsero/Client.php';
 			}
 
-			$client = new \Appsero\Client(
+			$client = new \WP_Dark_Mode\Appsero\Client(
 				'10d1a5ba-96f5-48e1-bc0e-38d39b9a2f85',
 				'WP Dark Mode',
 				WP_DARK_MODE_FILE

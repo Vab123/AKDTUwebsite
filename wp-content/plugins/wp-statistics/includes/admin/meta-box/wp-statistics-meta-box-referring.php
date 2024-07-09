@@ -18,6 +18,7 @@ class referring extends MetaBoxAbstract
          */
         $args = apply_filters('wp_statistics_meta_box_referring_args', $args);
 
+
         // Check Number of Country
         $number = (!empty($args['number']) ? $args['number'] : 10);
 
@@ -54,9 +55,7 @@ class referring extends MetaBoxAbstract
     {
         return array(
             'server_ip'  => __('Server IP', 'wp-statistics'),
-            'references' => __('Referral Sources', 'wp-statistics')
+            'references' => __('Number of Referrals', 'wp-statistics')
         );
     }
-
-
 }

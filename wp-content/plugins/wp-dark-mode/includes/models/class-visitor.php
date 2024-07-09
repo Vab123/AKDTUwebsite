@@ -41,7 +41,7 @@ if ( ! class_exists( __NAMESPACE__ . 'Visitor' ) ) {
 			$table_name = $wpdb->prefix . $this->table_name;
 
 			// Create table if not exists.
-			if ( $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name ) ) !== $table_name ) { // phpcs:ignore
+			if ( $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name ) ) !== $table_name ) { // db call ok; no-cache ok.
 				$sql = "CREATE TABLE $table_name (
 					ID int(30) NOT NULL AUTO_INCREMENT,
 					user_id int(11) NULL DEFAULT NULL,
@@ -79,7 +79,7 @@ if ( ! class_exists( __NAMESPACE__ . 'Visitor' ) ) {
 			// Update visitor mode
 			global $wpdb;
 			$table_name = $wpdb->prefix . 'wpdm_visitors';
-			$inserted = $wpdb->insert( $table_name, $data ); // phpcs:ignore
+			$inserted = $wpdb->insert( $table_name, $data ); // db call ok; no-cache ok.
 
 			if ( is_wp_error( $inserted ) ) {
 				throw new \Exception( esc_html__( 'Failed to insert visitor data.', 'wp-dark-mode' ) );
@@ -100,7 +100,7 @@ if ( ! class_exists( __NAMESPACE__ . 'Visitor' ) ) {
 			global $wpdb;
 			$table_name = $wpdb->prefix . 'wpdm_visitors';
 
-			$updated = $wpdb->update( $table_name, $data, array( 'ID' => $id ) ); // phpcs:ignore
+			$updated = $wpdb->update( $table_name, $data, array( 'ID' => $id ) ); // db call ok; no-cache ok.
 
 			if ( is_wp_error( $updated ) ) {
 				throw new \Exception( esc_html__( 'Failed to update visitor data.', 'wp-dark-mode' ) );
@@ -117,7 +117,7 @@ if ( ! class_exists( __NAMESPACE__ . 'Visitor' ) ) {
 		public function get_all() {
 			global $wpdb;
 
-			$visitors = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}wpdm_visitors WHERE ID >= %d ORDER BY created_at DESC", 0 ) ); // phpcs:ignore
+			$visitors = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}wpdm_visitors WHERE ID >= %d ORDER BY created_at DESC", 0 ) ); // db call ok; no-cache ok.
 
 			// If no visitors found.
 			if ( empty( $visitors ) ) {

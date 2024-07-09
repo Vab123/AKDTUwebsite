@@ -135,6 +135,7 @@ class ShortCode
 
         return $result;
     }
+
     /**
      * Format a number in shorthand notation (1K, 1M, 1B).
      *
@@ -193,9 +194,9 @@ class ShortCode
                             'value'       => 'usersonline',
                             'options'     => array(
                                 'usersonline'    => __('Online Users', 'wp-statistics'),
-                                'visits'         => __('Visits', 'wp-statistics'),
+                                'visits'         => __('Views', 'wp-statistics'),
                                 'visitors'       => __('Visitors', 'wp-statistics'),
-                                'pagevisits'     => __('Page Visits', 'wp-statistics'),
+                                'pagevisits'     => __('Page Views', 'wp-statistics'),
                                 'searches'       => __('Searches', 'wp-statistics'),
                                 'postcount'      => __('Post Count', 'wp-statistics'),
                                 'pagecount'      => __('Page Count', 'wp-statistics'),
@@ -236,9 +237,9 @@ class ShortCode
                             ),
                             'value'       => 'none',
                             'options'     => array(
-                                'none'    => __('None', 'wp-statistics'),
-                                'english' => __('English', 'wp-statistics'),
-                                'i18n'    => __('International', 'wp-statistics'),
+                                'none'        => __('None', 'wp-statistics'),
+                                'english'     => __('English', 'wp-statistics'),
+                                'i18n'        => __('International', 'wp-statistics'),
                                 'abbreviated' => __('Abbreviated', 'wp-statistics'), // Added for shorthand notation
                             ),
                         ),

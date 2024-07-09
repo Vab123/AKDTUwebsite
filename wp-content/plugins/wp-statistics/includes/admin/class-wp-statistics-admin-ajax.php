@@ -2,36 +2,113 @@
 
 namespace WP_STATISTICS;
 
+use WP_Statistics\Utils\Request;
+
 class Ajax
 {
-    /**
-     * WP Statistics Ajax
-     */
     public function __construct()
     {
+        add_action('init', [$this, 'registerAjaxCallbacks']);
+    }
 
+    /**
+     * Register AJAX callbacks
+     */
+    public function registerAjaxCallbacks()
+    {
         /**
          * List Of Setup Ajax request in WordPress
          */
-        $list = apply_filters('wp_statistics_ajax_list', array(
-            'close_notice',
-            'close_overview_ads',
-            'clear_user_agent_strings',
-            'query_params_cleanup',
-            'delete_agents',
-            'delete_platforms',
-            'delete_ip',
-            'delete_user_ids',
-            'empty_table',
-            'purge_data',
-            'purge_visitor_hits',
-            'visitors_page_filters',
-            'update_geoip_database',
-            'admin_meta_box'
-        ));
+        $list = [
+            [
+                'class'  => $this, 
+                'action' => 'close_notice',
+                'public' => false
+            ],
+            [
+                'class'  => $this, 
+                'action' => 'clear_user_agent_strings',
+                'public' => false
+            ],
+            [
+                'class'  => $this, 
+                'action' => 'query_params_cleanup',
+                'public' => false
+            ],
+            [
+                'class'  => $this, 
+                'action' => 'delete_agents',
+                'public' => false
+            ],
+            [
+                'class'  => $this, 
+                'action' => 'delete_platforms',
+                'public' => false
+            ],
+            [
+                'class'  => $this, 
+                'action' => 'delete_ip',
+                'public' => false
+            ],
+            [
+                'class'  => $this, 
+                'action' => 'delete_user_ids',
+                'public' => false
+            ],
+            [
+                'class'  => $this, 
+                'action' => 'empty_table',
+                'public' => false
+            ],
+            [
+                'class'  => $this, 
+                'action' => 'purge_data',
+                'public' => false
+            ],
+            [
+                'class'  => $this, 
+                'action' => 'purge_visitor_hits',
+                'public' => false
+            ],
+            [
+                'class'  => $this, 
+                'action' => 'visitors_page_filters',
+                'public' => false
+            ],
+            [
+                'class'  => $this, 
+                'action' => 'update_geoip_database',
+                'public' => false
+            ],
+            [
+                'class'  => $this, 
+                'action' => 'admin_meta_box',
+                'public' => false
+            ],
+            [
+                'class'  => $this, 
+                'action' => 'get_page_filter_items',
+                'public' => false
+            ]
+        ];
 
-        foreach ($list as $method) {
-            add_action('wp_ajax_wp_statistics_' . $method, array($this, $method . '_action_callback'));
+        $list = apply_filters('wp_statistics_ajax_list', $list);
+
+        foreach ($list as $item) {
+            $class    = $item['class'];
+            $action   = $item['action'];
+            $callback = $action . '_action_callback';
+            $isPublic = isset($item['public']) && $item['public'] == true ? true : false;
+
+            // If callback exists in the class, register the action
+            if (method_exists($class, $callback)) {
+                add_action('wp_ajax_wp_statistics_' . $action, [$class, $callback]);
+            
+                // Register the AJAX callback publicly
+                if ($isPublic) {
+                    add_action('wp_ajax_nopriv_wp_statistics_' . $action, [$class, $callback]);
+                }
+            }
         }
     }
 
@@ -63,31 +140,16 @@ class Ajax
                 case 'disable_cleanup_db':
                     Option::update('disable_db_cleanup_notice', true);
                     break;
+
+                case 'disable_php_version_check':
+                    Option::update('disable_php_version_check_notice', true);
+                    break;
             }
 
             Option::update('admin_notices', false);
         }
 
         wp_die();
-    }
-
-    /**
-     * Close Overview Ads
-     */
-    public function close_overview_ads_action_callback()
-    {
-
-        if (Helper::is_request('ajax') and isset($_REQUEST['ads_id'])) {
-
-            // Check Security Nonce
-            check_ajax_referer('wp_rest', 'wps_nonce');
-
-            // Update Option
-            $get_opt         = get_option('wp_statistics_overview_page_ads');
-            $get_opt['view'] = sanitize_text_field($_REQUEST['ads_id']);
-            update_option('wp_statistics_overview_page_ads', $get_opt, 'no');
-        }
-        exit;
     }
 
     /**
@@ -109,19 +171,19 @@ class Ajax
                 $agent = sanitize_text_field($_POST['agent-name']);
 
                 // Remove Type Of Agent
-                $result = $wpdb->query($wpdb->prepare("DELETE FROM " . DB::table('visitor') . " WHERE `agent` = %s", $agent));
+                $result = $wpdb->query($wpdb->prepare("DELETE FROM `" . DB::table('visitor') . "` WHERE `agent` = %s", $agent));
 
                 // Show Result
                 if ($result) {
-                    echo sprintf(__('Successfully deleted %s agent data.', 'wp-statistics'), '<code>' . esc_attr($agent) . '</code>');
+                    echo sprintf(__('Successfully deleted %s agent data.', 'wp-statistics'), '<code>' . esc_attr($agent) . '</code>'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                 } else {
-                    _e('Couldn’t find agent data to delete.', 'wp-statistics');
+                    esc_html_e('Couldn’t find agent data to delete.', 'wp-statistics');
                 }
             } else {
-                _e('Kindly select the items you want to work with.', 'wp-statistics');
+                esc_html_e('Kindly select the items you want to work with.', 'wp-statistics');
             }
         } else {
-            _e('Unauthorized access!', 'wp-statistics');
+            esc_html_e('Unauthorized access!', 'wp-statistics');
         }
 
         exit;
@@ -146,19 +208,19 @@ class Ajax
                 $platform = sanitize_text_field($_POST['platform-name']);
 
                 // Delete List
-                $result = $wpdb->query($wpdb->prepare("DELETE FROM " . DB::table('visitor') . " WHERE `platform` = %s", $platform));
+                $result = $wpdb->query($wpdb->prepare("DELETE FROM `" . DB::table('visitor') . "` WHERE `platform` = %s", $platform));
 
                 // Return Result
                 if ($result) {
-                    echo sprintf(__('Successfully deleted %s platform data.', 'wp-statistics'), '<code>' . esc_attr($platform) . '</code>');
+                    echo sprintf(__('Successfully deleted %s platform data.', 'wp-statistics'), '<code>' . esc_attr($platform) . '</code>'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                 } else {
-                    _e('Couldn’t find platform data to delete.', 'wp-statistics');
+                    esc_html_e('Couldn’t find platform data to delete.', 'wp-statistics');
                 }
             } else {
-                _e('Kindly select the items you want to work with.', 'wp-statistics');
+                esc_html_e('Kindly select the items you want to work with.', 'wp-statistics');
             }
         } else {
-            _e('Unauthorized access!', 'wp-statistics');
+            esc_html_e('Unauthorized access!', 'wp-statistics');
         }
 
         exit;
@@ -183,18 +245,18 @@ class Ajax
                 $ip_address = sanitize_text_field($_POST['ip-address']);
 
                 // Delete IP
-                $result = $wpdb->query($wpdb->prepare("DELETE FROM " . DB::table('visitor') . " WHERE `ip` = %s", $ip_address));
+                $result = $wpdb->query($wpdb->prepare("DELETE FROM `" . DB::table('visitor') . "` WHERE `ip` = %s", $ip_address));
 
                 if ($result) {
-                    echo sprintf(__('Successfully deleted %s IP data.', 'wp-statistics'), '<code>' . esc_attr($ip_address) . '</code>');
+                    echo sprintf(__('Successfully deleted %s IP data.', 'wp-statistics'), '<code>' . esc_attr($ip_address) . '</code>'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                 } else {
-                    _e('Couldn’t find any IP address data to delete.', 'wp-statistics');
+                    esc_html_e('Couldn’t find any IP address data to delete.', 'wp-statistics');
                 }
             } else {
-                _e('Kindly select the items you want to work with.', 'wp-statistics');
+                esc_html_e('Kindly select the items you want to work with.', 'wp-statistics');
             }
         } else {
-            _e('Unauthorized access!', 'wp-statistics');
+            esc_html_e('Unauthorized access!', 'wp-statistics');
         }
 
         exit;
@@ -213,16 +275,16 @@ class Ajax
             check_ajax_referer('wp_rest', 'wps_nonce');
 
             // Delete user ids
-            $result = $wpdb->query($wpdb->prepare("UPDATE " . DB::table('visitor') . " SET `user_id` = 0"));
+            $result = $wpdb->query("UPDATE `" . DB::table('visitor') . "` SET `user_id` = 0");
 
             if ($result) {
-                _e('Successfully deleted User ID data.', 'wp-statistics');
+                esc_html_e('Successfully deleted User ID data.', 'wp-statistics');
             } else {
-                _e('Couldn’t find any user ID data to delete.', 'wp-statistics');
+                esc_html_e('Couldn’t find any user ID data to delete.', 'wp-statistics');
             }
 
         } else {
-            _e('Unauthorized access!', 'wp-statistics');
+            esc_html_e('Unauthorized access!', 'wp-statistics');
         }
 
         exit;
@@ -241,16 +303,16 @@ class Ajax
             check_ajax_referer('wp_rest', 'wps_nonce');
 
             // Delete UAStrings
-            $result = $wpdb->query($wpdb->prepare("UPDATE " . DB::table('visitor') . " SET `UAString` = NULL"));
+            $result = $wpdb->query("UPDATE `" . DB::table('visitor') . "` SET `UAString` = NULL");
 
             if ($result) {
-                _e('Successfully deleted user agent strings data.', 'wp-statistics');
+                esc_html_e('Successfully deleted user agent strings data.', 'wp-statistics');
             } else {
-                _e('Couldn’t find any user agent strings data to delete.', 'wp-statistics');
+                esc_html_e('Couldn’t find any user agent strings data to delete.', 'wp-statistics');
             }
 
         } else {
-            _e('Unauthorized access!', 'wp-statistics');
+            esc_html_e('Unauthorized access!', 'wp-statistics');
         }
 
         exit;
@@ -272,7 +334,7 @@ class Ajax
             $allowedQueryParams = Helper::get_query_params_allow_list();
 
             // Get all rows from pages table
-            $pages = $wpdb->get_results($wpdb->prepare("SELECT * FROM " . DB::table('pages')));
+            $pages = $wpdb->get_results("SELECT * FROM `" . DB::table('pages') . "`");
             if ($pages) {
                 // Update query strings based on allow list
                 foreach ($pages as $page) {
@@ -290,7 +352,7 @@ class Ajax
 
 
             // Get all rows from visitors table
-            $referrers = $wpdb->get_results($wpdb->prepare("SELECT * FROM " . DB::table('visitor')));
+            $referrers = $wpdb->get_results("SELECT * FROM " . DB::table('visitor'));
             if ($referrers) {
                 // Update query strings based on allow list
                 foreach ($referrers as $referrer) {
@@ -301,13 +363,13 @@ class Ajax
                     );
                 }
 
-                _e('Successfully removed query string parameter data from \'visitor\' table.', 'wp-statistics');
+                esc_html_e('Successfully removed query string parameter data from \'visitor\' table.', 'wp-statistics');
             } else {
-                _e('Couldn\'t find any user query string parameter data to delete from \'visitor\' table.', 'wp-statistics');
+                esc_html_e('Couldn\'t find any user query string parameter data to delete from \'visitor\' table.', 'wp-statistics');
             }
 
         } else {
-            _e('Unauthorized access!', 'wp-statistics');
+            esc_html_e('Unauthorized access!', 'wp-statistics');
         }
 
         exit;
@@ -326,7 +388,7 @@ class Ajax
 
         //Check isset Table-post
         if (!isset($_POST['table-name'])) {
-            _e('Kindly select the items you want to work with.', 'wp-statistics');
+            esc_html_e('Kindly select the items you want to work with.', 'wp-statistics');
             exit;
         }
 
@@ -338,7 +400,7 @@ class Ajax
         $list_db_table = DB::table('all', 'historical');
 
         if (!array_key_exists($table_name, $list_db_table) and $table_name != 'all') {
-            _e('Unauthorized access!', 'wp-statistics');
+            esc_html_e('Unauthorized access!', 'wp-statistics');
             exit;
         }
 
@@ -354,7 +416,7 @@ class Ajax
                 echo DB::EmptyTable(DB::table($table_name)); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             }
         } else {
-            _e('Unauthorized access!', 'wp-statistics');
+            esc_html_e('Unauthorized access!', 'wp-statistics');
         }
 
         exit;
@@ -379,7 +441,7 @@ class Ajax
 
             echo Purge::purge_data($purge_days); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         } else {
-            _e('Unauthorized access!', 'wp-statistics');
+            esc_html_e('Unauthorized access!', 'wp-statistics');
         }
 
         exit;
@@ -403,12 +465,12 @@ class Ajax
             }
 
             if ($purge_hits < 10) {
-                _e('Visit count must be 10 or more!', 'wp-statistics');
+                esc_html_e('View count must be 10 or more!', 'wp-statistics');
             } else {
                 echo Purge::purge_visitor_hits($purge_hits); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             }
         } else {
-            _e('Unauthorized access!', 'wp-statistics');
+            esc_html_e('Unauthorized access!', 'wp-statistics');
         }
 
         exit;
@@ -496,19 +558,19 @@ class Ajax
 
             // When GeoIP is enabled, then user can update the GeoIP database
             if ($geoip_name == "country" && Option::get("geoip") !== 'on') {
-                _e('Please first enable GeoIP Collection and save settings!', 'wp-statistics');
+                esc_html_e('Please first enable GeoIP Collection and save settings!', 'wp-statistics');
             } elseif ($geoip_name == "city" && Option::get("geoip_city") !== 'on') {
-                _e('Please first enable GeoIP City and save settings!', 'wp-statistics');
+                esc_html_e('Please first enable GeoIP City and save settings!', 'wp-statistics');
             }
 
             $result = GeoIP::download($geoip_name, "update");
 
             if ($result) {
-                _e($result["notice"]);
+                esc_html_e($result["notice"]);
             }
 
         } else {
-            _e('Unauthorized access!', 'wp-statistics');
+            esc_html_e('Unauthorized access!', 'wp-statistics');
         }
 
         exit;
@@ -543,6 +605,80 @@ class Ajax
             } else {
                 wp_send_json(array('code' => 'not_found_meta_box', 'message' => __('Invalid MetaBox Name in Request.', 'wp-statistics')), 400);
             }
+        }
+
+        exit;
+    }
+
+    /**
+     * Get page filter items
+     */
+    public function get_page_filter_items_action_callback()
+    {
+        if (Helper::is_request('ajax') and User::Access('read')) {
+
+            check_ajax_referer('wp_rest', 'wps_nonce');
+
+            $paged          = Request::get('paged', 1, 'number');
+            $postType       = Request::get('post_type', array_values(Helper::get_list_post_type()));
+            $authorId       = Request::get('author_id', '', 'number');
+            $search         = Request::get('search', '');
+            $page           = Request::get('page');
+            $selectedPost   = Request::get('post_id', false, 'number');
+
+            if (!$page) {
+                wp_send_json([
+                    'code'      => 'not_found_page', 
+                    'message'   => esc_html__('Invalid Page in Request.', 'wp-statistics')
+                ], 400);
+            }
+
+            $query = new \WP_Query([
+                'post_status'    => 'publish', 
+                'posts_per_page' => 10,
+                'paged'          => $paged,
+                'post_type'      => $postType,
+                'author'         => $authorId,
+                's'              => $search
+            ]);
+
+            $posts = [];
+            if ($query->have_posts()) {
+                if ($paged == 1 && empty($search)) {
+                    $allOption = [
+                        'id'    => Menus::admin_url($page),
+                        'text'  => esc_html__('All', 'wp-statistics')
+                    ];
+
+                    if (!$selectedPost) {
+                        $allOption['selected'] = true;
+                    }
+
+                    $posts[] = $allOption;
+                }
+
+                while ($query->have_posts()) {
+                    $query->the_post();
+
+                    $option = [
+                        'id'   => add_query_arg(['pid' => get_the_ID()], Menus::admin_url($page)),
+                        'text' => get_the_title()
+                    ];
+
+                    if ($selectedPost == get_the_ID()) {
+                        $option['selected'] = true;
+                    }
+
+                    $posts[] = $option;
+                }
+            }
+
+            wp_send_json([
+                'results'       => $posts,
+                'pagination'    => [
+                    'more' => $query->max_num_pages > $paged ? true : false
+                ]
+            ]);
         }
 
         exit;

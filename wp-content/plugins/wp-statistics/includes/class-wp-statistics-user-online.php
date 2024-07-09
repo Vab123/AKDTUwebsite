@@ -2,6 +2,8 @@
 
 namespace WP_STATISTICS;
 
+use WP_Statistics\Service\Analytics\VisitorProfile;
+
 class UserOnline
 {
     /**
@@ -23,9 +25,8 @@ class UserOnline
      */
     public function __construct()
     {
-
         # Reset User Online Count
-        add_action('wp_loaded', array($this, 'reset_user_online'));
+        add_action('admin_init', array($this, 'reset_user_online'));
     }
 
     /**
@@ -66,11 +67,17 @@ class UserOnline
                 $reset_time = Option::get('check_online');
             }
 
+            // Failsafe
+            if (!is_numeric($reset_time)) {
+                $reset_time = 120;
+            }
+
             // We want to delete users that are over the number of seconds set by the admin.
             $time_diff = (int)$now - (int)$reset_time;
 
             //Last check Time
             $wps_run = get_option(self::$check_user_online_opt);
+
             if (isset($wps_run) and is_numeric($wps_run)) {
                 if (($wps_run + $reset_time) > $now) {
                     return;
@@ -78,7 +85,9 @@ class UserOnline
             }
 
             // Call the deletion query.
-            $wpdb->query("DELETE FROM `" . DB::table('useronline') . "` WHERE timestamp < {$time_diff}");
+            $wpdb->query(
+                $wpdb->prepare("DELETE FROM `" . DB::table('useronline') . "` WHERE timestamp < %s", $time_diff)
+            );
 
             //Update Last run this Action
             update_option(self::$check_user_online_opt, $now);
@@ -89,13 +98,13 @@ class UserOnline
      * Record Users Online
      *
      * @param array $args
+     * @param $visitorProfile VisitorProfile
      * @throws \Exception
      */
-    public static function record($args = array())
+    public static function record($visitorProfile, $args = array())
     {
-
         # Get User IP
-        $user_ip = IP::getStoreIP();
+        $user_ip = $visitorProfile->getProcessedIPForStorage();
 
         # Check Current Use Exist online list
         $user_online = self::is_ip_online($user_ip);
@@ -104,12 +113,13 @@ class UserOnline
         if ($user_online === false) {
 
             # Added New Online User
-            self::add_user_online($args);
+            self::add_user_online($visitorProfile, $args);
 
         } else {
 
             # Update current User Time
-            self::update_user_online();
+            self::update_user_online($visitorProfile, $args);
+
         }
     }
 
@@ -122,7 +132,9 @@ class UserOnline
     public static function is_ip_online($user_ip = false)
     {
         global $wpdb;
-        $user_online = $wpdb->query("SELECT * FROM `" . DB::table('useronline') . "` WHERE `ip` = '{$user_ip}'");
+        $user_online = $wpdb->query(
+            $wpdb->prepare("SELECT * FROM `" . DB::table('useronline') . "` WHERE `ip` = %s", $user_ip)
+        );
         return (!$user_online ? false : $user_online);
     }
 
@@ -130,31 +142,34 @@ class UserOnline
      * Add User Online to Database
      *
      * @param array $args
+     * @param VisitorProfile $visitorProfile
      * @throws \Exception
      */
-    public static function add_user_online($args = array())
+    public static function add_user_online($visitorProfile, $args = array())
     {
         global $wpdb;
 
-        // Get Current Page
-        $current_page = Pages::get_page_type();
+        $current_page = $visitorProfile->getCurrentPageType();
+        $user_agent   = $visitorProfile->getUserAgent();
 
-        // Get User Agent
-        $user_agent = UserAgent::getUserAgent();
+        $pageId = Pages::getPageId($current_page['type'], $current_page['id']);
 
         //Prepare User online Data
         $user_online = array(
-            'ip'        => IP::getStoreIP(),
+            'ip'        => $visitorProfile->getProcessedIPForStorage(),
             'timestamp' => TimeZone::getCurrentTimestamp(),
             'created'   => TimeZone::getCurrentTimestamp(),
             'date'      => TimeZone::getCurrentDate(),
-            'referred'  => Referred::get(),
+            'referred'  => $visitorProfile->getReferrer(),
             'agent'     => $user_agent['browser'],
             'platform'  => $user_agent['platform'],
             'version'   => $user_agent['version'],
-            'location'  => GeoIP::getCountry(IP::getIP()),
-            'user_id'   => User::get_user_id(),
-            'page_id'   => $current_page['id'],
+            'location'  => $visitorProfile->getCountry(),
+            'region'    => $visitorProfile->getRegion(),
+            'continent' => $visitorProfile->getContinent(),
+            'city'      => $visitorProfile->getCity(),
+            'user_id'   => $visitorProfile->getUserId(),
+            'page_id'   => $pageId,
             'type'      => $current_page['type']
         );
         $user_online = apply_filters('wp_statistics_user_online_information', wp_parse_args($args, $user_online));
@@ -164,6 +179,7 @@ class UserOnline
             DB::table('useronline'),
             $user_online
         );
+
         if (!$insert) {
             if (!empty($wpdb->last_error)) {
                 \WP_Statistics::log($wpdb->last_error);
@@ -179,31 +195,30 @@ class UserOnline
 
     /**
      * Update User Online
+     * @param $visitorProfile VisitorProfile
      */
-    public static function update_user_online()
+    public static function update_user_online($visitorProfile, $args = array())
     {
         global $wpdb;
 
-        // Get Current Page
-        $current_page = Pages::get_page_type();
+        $current_page = $visitorProfile->getCurrentPageType();
+        $user_id      = $visitorProfile->getUserId();
 
-        // Get Current User ID
-        $user_id = User::get_user_id();
+        $pageId = Pages::getPageId($current_page['type'], $current_page['id']);
 
         //Prepare User online Update data
         $user_online = array(
             'timestamp' => TimeZone::getCurrentTimestamp(),
             'date'      => TimeZone::getCurrentDate(),
-            'referred'  => Referred::get(),
             'user_id'   => $user_id,
-            'page_id'   => $current_page['id'],
+            'page_id'   => $pageId,
             'type'      => $current_page['type']
         );
-        $user_online = apply_filters('wp_statistics_update_user_online_data', $user_online);
+        $user_online = apply_filters('wp_statistics_update_user_online_data', wp_parse_args($args, $user_online));
 
         # Update the database with the new information.
         $wpdb->update(DB::table('useronline'), $user_online, array(
-            'ip' => IP::getStoreIP()
+            'ip' => $visitorProfile->getProcessedIPForStorage()
         ));
 
         # Action After Update User Online
@@ -248,7 +263,7 @@ class UserOnline
 
         // Check Count
         if ($args['fields'] == "count") {
-            return $wpdb->get_var($SQL);
+            return $wpdb->get_var($SQL); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared	
         }
 
         // Prepare Query
@@ -260,7 +275,7 @@ class UserOnline
         $args['sql'] = esc_sql($args['sql']) . $wpdb->prepare(" LIMIT %d, %d", $args['offset'], $args['per_page']);
 
         // Send Request
-        $result = $wpdb->get_results($args['sql']);
+        $result = $wpdb->get_results($args['sql']); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared	
 
         // Get List
         $list = array();
@@ -289,7 +304,7 @@ class UserOnline
             }
 
             // Page info
-            $item['page'] = Pages::get_page_info($items->page_id, $items->type);
+            $item['page'] = Visitor::get_page_by_id($items->page_id);
 
             // Push Browser
             $item['browser'] = array(
@@ -313,17 +328,18 @@ class UserOnline
 
             // Push City
             if (GeoIP::active('city')) {
-                $item['city'] = GeoIP::getCity($ip);
+                $item['city']   = !empty($items->city) ? $items->city : GeoIP::getCity($ip);
+                $item['region'] = $items->region;
             }
 
             // Online For Time
             $time_diff = ($items->timestamp - $items->created);
             if ($time_diff > 3600) {
-                $item['online_for'] = date("H:i:s", ($items->timestamp - $items->created));
+                $item['online_for'] = date("H:i:s", ($items->timestamp - $items->created)); // phpcs:ignore WordPress.DateTime.RestrictedFunctions.date_date	
             } else if ($time_diff > 60) {
-                $item['online_for'] = "00:" . date("i:s", ($items->timestamp - $items->created));
+                $item['online_for'] = "00:" . date("i:s", ($items->timestamp - $items->created)); // phpcs:ignore WordPress.DateTime.RestrictedFunctions.date_date
             } else {
-                $item['online_for'] = "00:00:" . date("s", ($items->timestamp - $items->created));
+                $item['online_for'] = "00:00:" . date("s", ($items->timestamp - $items->created)); // phpcs:ignore WordPress.DateTime.RestrictedFunctions.date_date
             }
 
             $list[] = $item;

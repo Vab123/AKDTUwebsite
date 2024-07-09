@@ -41,16 +41,6 @@ class Schedule
 
         } else {
 
-            // Add the report schedule if it doesn't exist and is enabled.
-            if (!wp_next_scheduled('wp_statistics_report_hook') && Option::get('stats_report')) {
-                wp_schedule_event(time(), Option::get('time_report'), 'wp_statistics_report_hook');
-            }
-
-            // Remove the report schedule if it does exist and is disabled.
-            if (wp_next_scheduled('wp_statistics_report_hook') && !Option::get('stats_report')) {
-                wp_unschedule_event(wp_next_scheduled('wp_statistics_report_hook'), 'wp_statistics_report_hook');
-            }
-
             // Add the referrerspam update schedule if it doesn't exist and it should be.
             if (!wp_next_scheduled('wp_statistics_referrerspam_hook') && Option::get('schedule_referrerspam')) {
                 wp_schedule_event(time(), 'weekly', 'wp_statistics_referrerspam_hook');
@@ -95,8 +85,25 @@ class Schedule
             add_action('wp_statistics_add_visit_hook', array($this, 'add_visit_event'));
             add_action('wp_statistics_dbmaint_hook', array($this, 'dbmaint_event'));
             add_action('wp_statistics_dbmaint_visitor_hook', array($this, 'dbmaint_visitor_event'));
-            add_action('wp_statistics_report_hook', array($this, 'send_report'));
         }
+
+        // Add the report schedule if it doesn't exist and is enabled.
+        if (!wp_next_scheduled('wp_statistics_report_hook') && Option::get('stats_report')) {
+            $timeReports         = Option::get('time_report');
+            $schedulesInterval   = wp_get_schedules();
+            $timeReportsInterval = 86400;
+            if (isset($schedulesInterval[$timeReports]['interval'])) {
+                $timeReportsInterval = $schedulesInterval[$timeReports]['interval'];
+            }
+            wp_schedule_event(time() + $timeReportsInterval, $timeReports, 'wp_statistics_report_hook');
+        }
+
+        // Remove the report schedule if it does exist and is disabled.
+        if (wp_next_scheduled('wp_statistics_report_hook') && !Option::get('stats_report')) {
+            wp_unschedule_event(wp_next_scheduled('wp_statistics_report_hook'), 'wp_statistics_report_hook');
+        }
+
+        add_action('wp_statistics_report_hook', array($this, 'send_report'));
     }
 
     /**
@@ -112,6 +119,37 @@ class Schedule
     }
 
     /**
+     * Retrieves an array of schedules with their intervals and display names.
+     *
+     * @return array
+     */
+    public static function getSchedules()
+    {
+        $schedules = [
+            'weekly'   => array(
+                'interval' => 604800,
+                'display'  => __('Once Weekly'),
+                'start'    => date('Y-m-d', strtotime("-1 week")),
+                'end'      => date('Y-m-d')
+            ),
+            'biweekly' => array(
+                'interval' => 1209600,
+                'display'  => __('Once Every 2 Weeks'),
+                'start'    => date('Y-m-d', strtotime("-2 week")),
+                'end'      => date('Y-m-d')
+            ),
+            '4weeks'   => array(
+                'interval' => 2419200,
+                'display'  => __('Once Every 4 Weeks'),
+                'start'    => date('Y-m-d', strtotime("-4 week")),
+                'end'      => date('Y-m-d')
+            )
+        ];
+
+        return apply_filters('wp_statistics_cron_schedules', $schedules);
+    }
+
+    /**
      * Define New Cron Schedules Time in WordPress
      *
      * @param array $schedules
@@ -121,23 +159,14 @@ class Schedule
     {
 
         // Adds once weekly to the existing schedules.
-        $WP_Statistics_schedules = array(
-            'weekly'   => array(
-                'interval' => 604800,
-                'display'  => __('Once Weekly'),
-            ),
-            'biweekly' => array(
-                'interval' => 1209600,
-                'display'  => __('Once Every 2 Weeks'),
-            ),
-            '4weeks'   => array(
-                'interval' => 2419200,
-                'display'  => __('Once Every 4 Weeks'),
-            )
-        );
-        foreach ($WP_Statistics_schedules as $key => $val) {
+        $wpsSchedules = self::getSchedules();
+
+        foreach ($wpsSchedules as $key => $val) {
             if (!array_key_exists($key, $schedules)) {
-                $schedules[$key] = $val;
+                $schedules[$key] = [
+                    'interval' => $val['interval'],
+                    'display'  => $val['display']
+                ];
             }
         }
 
@@ -154,7 +183,7 @@ class Schedule
         $date = TimeZone::getCurrentDate('Y-m-d', '+1');
 
         // check if the record already exists
-        $exists = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM " . DB::table('visit') . " WHERE `last_counter` = %s", $date));
+        $exists = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM `" . DB::table('visit') . "` WHERE `last_counter` = %s", $date));
         if ($exists > 0) {
             return;
         }
@@ -180,24 +209,22 @@ class Schedule
      */
     public function geoip_event()
     {
-
         // Max-mind updates the geo-ip database on the first Tuesday of the month, to make sure we don't update before they post
-        $this_update = strtotime(__('First Tuesday of this month', 'wp-statistics')) + (86400 * 2);
+        $this_update = strtotime('first Tuesday of this month') + (86400 * 2);
         $last_update = Option::get('last_geoip_dl');
 
-        $is_require_update = false;
         foreach (GeoIP::$library as $geo_ip => $value) {
             $file_path = GeoIP::get_geo_ip_path($geo_ip);
+
             if (file_exists($file_path)) {
                 if ($last_update < $this_update) {
-                    $is_require_update = true;
+                    GeoIP::download($geo_ip, "update");
                 }
             }
         }
 
-        if ($is_require_update === true) {
-            Option::update('update_geoip', true);
-        }
+        // Update the last update time
+        Option::update('last_geoip_dl', time());
     }
 
     /**
@@ -216,6 +243,19 @@ class Schedule
     {
         $purge_hits = intval(Option::get('schedule_dbmaint_visitor_hits', false));
         Purge::purge_visitor_hits($purge_hits);
+    }
+
+    public function getEmailSubject()
+    {
+        $schedule = Option::get('time_report', false);
+        $subject  = __('Your WP Statistics Report', 'wp-statistics');
+
+        if ($schedule && array_key_exists($schedule, self::getSchedules())) {
+            $schedule = self::getSchedules()[$schedule];
+            $subject  .= sprintf(__(' for %s to %s', 'wp-statistics'), $schedule['start'], $schedule['end']);
+        }
+
+        return $subject;
     }
 
     /**
@@ -240,6 +280,11 @@ class Schedule
             $final_report_text = apply_filters('wp_statistics_final_text_report_email', $email_content);
 
             /**
+             * Filter to modify email subject
+             */
+            $email_subject = apply_filters('wp_statistics_report_email_subject', self::getEmailSubject());
+
+            /**
              * Filter for enable/disable sending email by template.
              */
             $email_template = apply_filters('wp_statistics_report_email_template', true);
@@ -254,7 +299,7 @@ class Schedule
              */
             $result_email = Helper::send_mail(
                 $email_receivers,
-                __('Statistical reporting', 'wp-statistics'),
+                $email_subject,
                 $final_report_text,
                 $email_template
             );
@@ -262,13 +307,14 @@ class Schedule
             /**
              * Fire actions after sending email
              */
-            do_action('wp_statistics_after_report_email', $result_email, $email_receivers, $email_content);
+            do_action('wp_statistics_after_report_email', $result_email, $email_receivers, $final_report_text);
 
         }
 
         // If SMS
-        if ($type == 'sms' and function_exists('wp_sms_send')) {
-            wp_sms_send(array(get_option('wp_admin_mobile')), $final_text_report);
+        if ($type == 'sms' and function_exists('wp_sms_send') and class_exists('\WP_SMS\Option')) {
+            $adminMobileNumber = \WP_SMS\Option::getOption('admin_mobile_number');
+            wp_sms_send($adminMobileNumber, $email_content);
         }
     }
 

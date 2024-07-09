@@ -1,6 +1,6 @@
 <?php
 
-namespace Appsero;
+namespace WP_Dark_Mode\Appsero;
 
 /**
  * Appsero Client
@@ -110,7 +110,7 @@ class Client {
     /**
      * Initialize insights class
      *
-     * @return Appsero\Insights
+     * @return WP_Dark_Mode\Appsero\Insights
      */
     public function insights() {
         if ( ! class_exists( __NAMESPACE__ . '\Insights' ) ) {
@@ -139,10 +139,10 @@ class Client {
         }
 
         // show deprecated notice
-        _deprecated_function( __CLASS__ . '::updater', '2.0', '\Appsero\Updater::init($client);, for more details please visit: https://appsero.com/docs/appsero-developers-guide/appsero-client/appsero-sdk-updater-changes/' );
+        _deprecated_function( __CLASS__ . '::updater', '2.0', '\WP_Dark_Mode\Appsero\Updater::init($client);, for more details please visit: https://appsero.com/docs/appsero-developers-guide/appsero-client/appsero-sdk-updater-changes/' );
 
         // initialize the new updater
-        if ( method_exists( '\Appsero\Updater', 'init' ) ) {
+        if ( method_exists( '\WP_Dark_Mode\Appsero\Updater', 'init' ) ) {
             \Appsero\Updater::init( $this );
         }
     }
@@ -150,7 +150,7 @@ class Client {
     /**
      * Initialize license checker
      *
-     * @return Appsero\License
+     * @return WP_Dark_Mode\Appsero\License
      */
     public function license() {
         if ( ! class_exists( __NAMESPACE__ . '\License' ) ) {

@@ -3,8 +3,8 @@ Contributors: room34
 Donate link: http://room34.com/donation
 Tags: menus, drafts, unpublished, pages
 Requires at least: 4.0
-Tested up to: 6.4
-Stable tag: 1.5.0
+Tested up to: 6.5.3
+Stable tag: 1.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,6 +29,12 @@ _NOTE: We are aware of a limitation in the plugin, that a page/post must be publ
 == Screenshots ==
 
 == Changelog ==
+
+= 1.5.1 - 2024.05.14 =
+
+* Fixed an issue that would cause categories to be hidden. Added a check to ensure that the logic for hiding menu items only applies to items that are a post type (e.g. post, page, custom post type), not taxonomies or other types of objects.
+* Changed CSS styling for hidden items on the admin Menus page to match the default WordPress styling for deleted items.
+* Bumped "tested up to" to 6.5.3.
 
 = 1.5.0 - 2023.11.01 =
 

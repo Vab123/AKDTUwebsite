@@ -2,7 +2,8 @@
 
 namespace WP_STATISTICS;
 
-use GeoIp2\Exception\AddressNotFoundException;
+use WP_Statistics\Models\VisitorsModel;
+use WP_Statistics\Service\Analytics\GeoIpService;
 
 class GeoIP
 {
@@ -13,14 +14,14 @@ class GeoIP
      */
     public static $library = array(
         'country' => array(
-            'source'     => 'https://cdn.jsdelivr.net/npm/geolite2-country@1.0.2/GeoLite2-Country.mmdb.gz',
+            'source'     => 'https://cdn.jsdelivr.net/npm/geolite2-country/GeoLite2-Country.mmdb.gz',
             'userSource' => 'https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&license_key=&suffix=tar.gz',
             'file'       => 'GeoLite2-Country',
             'opt'        => 'geoip',
             'cache'      => 31536000 //1 Year
         ),
         'city'    => array(
-            'source'     => 'https://cdn.jsdelivr.net/npm/geolite2-city@1.0.0/GeoLite2-City.mmdb.gz',
+            'source'     => 'https://cdn.jsdelivr.net/npm/geolite2-city/GeoLite2-City.mmdb.gz',
             'userSource' => 'https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=&suffix=tar.gz',
             'file'       => 'GeoLite2-City',
             'opt'        => 'geoip_city',
@@ -38,16 +39,9 @@ class GeoIP
     /**
      * Default Private Country
      *
-     * @var String
-     */
-    public static $private_country = '000';
-
-    /**
-     * Cache Option name For Store User City
-     *
      * @var string
      */
-    public static $city_cache_object_name = 'wp_statistics_users_city';
+    public static $private_country = '000';
 
     /**
      * Get Geo IP Path
@@ -63,7 +57,7 @@ class GeoIP
     /**
      * Check Is Active Geo-ip
      *
-     * @param bool $which
+     * @param mixed $which
      * @param bool $CheckDBFile
      * @return boolean
      */
@@ -115,7 +109,7 @@ class GeoIP
     /**
      * Get Default Country Code
      *
-     * @return String
+     * @return string
      */
     public static function getDefaultCountryCode()
     {
@@ -133,25 +127,12 @@ class GeoIP
      *
      * @param bool $ip
      * @param string $return
-     * @return String|null
+     * @return string|null
      * @throws \Exception
      * @see https://github.com/maxmind/GeoIP2-php
      */
     public static function getCountry($ip = false, $return = 'isoCode')
     {
-
-        // Check in WordPress Cache
-        $user_country = wp_cache_get('country-' . $ip, 'wp-statistics');
-        if ($user_country != false) {
-            return $user_country;
-        }
-
-        // Check in WordPress Database
-        $user_country = self::getUserCountryFromDB($ip);
-        if ($user_country != false) {
-            wp_cache_set('country-' . $ip, $user_country, 'wp-statistics', DAY_IN_SECONDS);
-            return $user_country;
-        }
 
         // Default Country Name
         $default_country = self::getDefaultCountryCode();
@@ -193,13 +174,7 @@ class GeoIP
             }
         }
 
-        # Check Has Location
-        if (isset($location) and !empty($location)) {
-            wp_cache_set('country-' . $ip, $location, 'wp-statistics', DAY_IN_SECONDS);
-            return $location;
-        }
-
-        return $default_country;
+        return !empty($location) ? $location : $default_country;
     }
 
     /**
@@ -212,9 +187,10 @@ class GeoIP
     {
         global $wpdb;
 
-        $date = date('Y-m-d', current_time('timestamp') - self::$library['country']['cache']);
-        $sql  = $wpdb->prepare("SELECT `location` FROM " . DB::table('visitor') . " WHERE `ip` = %s and `last_counter` >= %s ORDER BY `ID` DESC LIMIT 1", $ip, $date);
-        $user = $wpdb->get_row($sql);
+        $date = date('Y-m-d', current_time('timestamp') - self::$library['country']['cache']); // phpcs:ignore 	WordPress.DateTime.RestrictedFunctions.date_date
+        $user = $wpdb->get_row(
+            $wpdb->prepare("SELECT `location` FROM `" . DB::table('visitor') . "` WHERE `ip` = %s and `last_counter` >= %s ORDER BY `ID` DESC LIMIT 1", $ip, $date)
+        );
 
         if (null !== $user) {
             return $user->location;
@@ -233,221 +209,174 @@ class GeoIP
      */
     public static function download($pack, $type = "enable")
     {
+        try {
+            WP_Filesystem();
+            global $wp_filesystem;
 
-        // Create Empty Return Function
-        $result["status"] = false;
+            // Create Empty Return Function
+            $result["status"] = false;
 
-        // Sanitize Pack name
-        $pack = strtolower($pack);
+            // Sanitize Pack name
+            $pack = strtolower($pack);
 
-        // If GeoIP is disabled, bail out.
-        if ($type == "update" and Option::get(GeoIP::$library[$pack]['opt']) == '') {
-            return '';
-        }
-
-        // Load Require Function
-        if (!function_exists('download_url')) {
-            include(ABSPATH . 'wp-admin/includes/file.php');
-        }
-        if (!function_exists('wp_generate_password')) {
-            include(ABSPATH . 'wp-includes/pluggable.php');
-        }
-
-        // Get the upload directory from WordPress.
-        $upload_dir = wp_upload_dir();
-
-        // We need the gzopen() function
-        if (false === function_exists('gzopen')) {
-            if ($type == "enable") {
-                Option::update(GeoIP::$library[$pack]['opt'], '');
+            // If GeoIP is disabled, bail out.
+            if ($type == "update" and Option::get(GeoIP::$library[$pack]['opt']) == '') {
+                return '';
             }
 
-            return array_merge($result, array("notice" => __('Error: <code>gzopen()</code> Function Not Found!', 'wp-statistics')));
-        }
+            // Load Require Function
+            if (!function_exists('download_url')) {
+                include(ABSPATH . 'wp-admin/includes/file.php');
+            }
+            if (!function_exists('wp_generate_password')) {
+                include(ABSPATH . 'wp-includes/pluggable.php');
+            }
 
-        // This is the location of the file to download.
-        if (Option::get('geoip_license_type') == "user-license" && Option::get('geoip_license_key')) {
-            $download_url = add_query_arg(array(
-                'license_key' => Option::get('geoip_license_key')
-            ), GeoIP::$library[$pack]['userSource']);
-        } else {
-            $download_url = GeoIP::$library[$pack]['source'];
-        }
+            // Get the upload directory from WordPress.
+            $upload_dir = wp_upload_dir();
 
-        // Apply filter to allow third-party plugins to modify the download url
-        $download_url = apply_filters('wp_statistics_geo_ip_download_url', $download_url, GeoIP::$library[$pack]['source'], $pack);
-
-        ini_set('max_execution_time', '60');
-
-        $response = wp_remote_get($download_url, array(
-            'timeout'   => 60,
-            'sslverify' => false
-        ));
-
-        if (is_wp_error($response)) {
-            \WP_Statistics::log(array('code' => 'download_geoip', 'type' => $pack, 'message' => $response->get_error_message()));
-            return array_merge($result, array("notice" => $response->get_error_message()));
-        }
-
-        // Change download url if the maxmind.com doesn't response.
-        if (wp_remote_retrieve_response_code($response) != '200') {
-            return array_merge($result, array("notice" => sprintf(__('Error: %s, Request URL: %s', 'wp-statistics'), wp_remote_retrieve_body($response), $download_url)));
-        }
-
-        // Create a variable with the name of the database file to download.
-        $DBFile = self::get_geo_ip_path($pack);
-
-        // Check to see if the subdirectory we're going to upload to exists, if not create it.
-        if (!file_exists($upload_dir['basedir'] . '/' . WP_STATISTICS_UPLOADS_DIR)) {
-            if (!@mkdir($upload_dir['basedir'] . '/' . WP_STATISTICS_UPLOADS_DIR, 0755)) {
+            // We need the gzopen() function
+            if (false === function_exists('gzopen')) {
                 if ($type == "enable") {
                     Option::update(GeoIP::$library[$pack]['opt'], '');
                 }
 
-                return array_merge($result, array("notice" => sprintf(__('Error Creating GeoIP Database Directory. Ensure Web Server Has Directory Creation Permissions in: %s', 'wp-statistics'), $upload_dir['basedir'])));
-            }
-        }
-
-        if (!is_writable($upload_dir['basedir'] . '/' . WP_STATISTICS_UPLOADS_DIR)) {
-            if ($type == "enable") {
-                Option::update(GeoIP::$library[$pack]['opt'], '');
+                return array_merge($result, array("notice" => __('Error: <code>gzopen()</code> Function Not Found!', 'wp-statistics')));
             }
 
-            return array_merge($result, array("notice" => sprintf(__('Error Setting Permissions for GeoIP Database Directory. Check Write Permissions for Directories in: %s', 'wp-statistics'), $upload_dir['basedir'])));
-        }
-
-        // Download the file from MaxMind, this places it in a temporary location.
-        $TempFile = download_url($download_url);
-
-        // If we failed, through a message, otherwise proceed.
-        if (is_wp_error($TempFile)) {
-            if ($type == "enable") {
-                Option::update(GeoIP::$library[$pack]['opt'], '');
-            }
-
-            return array_merge($result, array("notice" => sprintf(__('Error Downloading GeoIP Database from: %s - %s', 'wp-statistics'), $download_url, $TempFile->get_error_message())));
-        } else {
-            // Open the downloaded file to unzip it.
-            $ZipHandle = gzopen($TempFile, 'rb');
-
-            // Create th new file to unzip to.
-            $DBfh = fopen($DBFile, 'wb');
-
-            // If we failed to open the downloaded file, through an error and remove the temporary file.  Otherwise do the actual unzip.
-            if (!$ZipHandle) {
-                if ($type == "enable") {
-                    Option::update(GeoIP::$library[$pack]['opt'], '');
-                }
-
-                unlink($TempFile);
-                return array_merge($result, array("notice" => sprintf(__('Error Opening Downloaded GeoIP Database for Reading: %s', 'wp-statistics'), $TempFile)));
+            // This is the location of the file to download.
+            if (Option::get('geoip_license_type') == "user-license" && Option::get('geoip_license_key')) {
+                $download_url = add_query_arg(array(
+                    'license_key' => Option::get('geoip_license_key')
+                ), GeoIP::$library[$pack]['userSource']);
             } else {
-                // If we failed to open the new file, throw and error and remove the temporary file.  Otherwise actually do the unzip.
-                if (!$DBfh) {
+                $download_url = GeoIP::$library[$pack]['source'];
+            }
+
+            // Apply filter to allow third-party plugins to modify the download url
+            $download_url = apply_filters('wp_statistics_geo_ip_download_url', $download_url, GeoIP::$library[$pack]['source'], $pack);
+
+            ini_set('max_execution_time', '120');
+
+            $response = wp_remote_get($download_url, array(
+                'timeout'   => 120,
+                'sslverify' => false
+            ));
+
+            if (is_wp_error($response)) {
+                \WP_Statistics::log(array('code' => 'download_geoip', 'type' => $pack, 'message' => $response->get_error_message()));
+                return array_merge($result, array("notice" => $response->get_error_message()));
+            }
+
+            // Change download url if the maxmind.com doesn't response.
+            if (wp_remote_retrieve_response_code($response) != '200') {
+                return array_merge($result, array("notice" => sprintf(__('Error: %1$s, Request URL: %2$s', 'wp-statistics'), wp_remote_retrieve_body($response), $download_url)));
+            }
+
+            // Create a variable with the name of the database file to download.
+            $DBFile = self::get_geo_ip_path($pack);
+
+            // Check to see if the subdirectory we're going to upload to exists, if not create it.
+            if (!file_exists($upload_dir['basedir'] . '/' . WP_STATISTICS_UPLOADS_DIR)) {
+                if (!$wp_filesystem->mkdir($upload_dir['basedir'] . '/' . WP_STATISTICS_UPLOADS_DIR, 0755)) {
                     if ($type == "enable") {
                         Option::update(GeoIP::$library[$pack]['opt'], '');
                     }
 
-                    unlink($TempFile);
-                    return array_merge($result, array("notice" => sprintf(__('Error Opening Destination GeoIP Database for Writing: %s', 'wp-statistics'), $DBFile)));
+                    return array_merge($result, array("notice" => sprintf(__('Error Creating GeoIP Database Directory. Ensure Web Server Has Directory Creation Permissions in: %s', 'wp-statistics'), $upload_dir['basedir'])));
+                }
+            }
+
+            if (!$wp_filesystem->is_writable($upload_dir['basedir'] . '/' . WP_STATISTICS_UPLOADS_DIR)) {
+                if ($type == "enable") {
+                    Option::update(GeoIP::$library[$pack]['opt'], '');
+                }
+
+                return array_merge($result, array("notice" => sprintf(__('Error Setting Permissions for GeoIP Database Directory. Check Write Permissions for Directories in: %s', 'wp-statistics'), $upload_dir['basedir'])));
+            }
+
+            // Download the file from MaxMind, this places it in a temporary location.
+            $TempFile = download_url($download_url);
+
+            // If we failed, through a message, otherwise proceed.
+            if (is_wp_error($TempFile)) {
+                if ($type == "enable") {
+                    Option::update(GeoIP::$library[$pack]['opt'], '');
+                }
+
+                return array_merge($result, array("notice" => sprintf(__('Error Downloading GeoIP Database from: %1$s - %2$s', 'wp-statistics'), $download_url, $TempFile->get_error_message())));
+            } else {
+                // Open the downloaded file to unzip it.
+                $ZipHandle = gzopen($TempFile, 'rb');
+
+                // Create th new file to unzip to.
+                $DBfh = fopen($DBFile, 'wb'); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen
+
+                // If we failed to open the downloaded file, through an error and remove the temporary file.  Otherwise do the actual unzip.
+                if (!$ZipHandle) {
+                    if ($type == "enable") {
+                        Option::update(GeoIP::$library[$pack]['opt'], '');
+                    }
+
+                    wp_delete_file($TempFile);
+                    return array_merge($result, array("notice" => sprintf(__('Error Opening Downloaded GeoIP Database for Reading: %s', 'wp-statistics'), $TempFile)));
                 } else {
-                    while (($data = gzread($ZipHandle, 4096)) != false) {
-                        fwrite($DBfh, $data);
-                    }
+                    // If we failed to open the new file, throw and error and remove the temporary file.  Otherwise actually do the unzip.
+                    if (!$DBfh) {
+                        if ($type == "enable") {
+                            Option::update(GeoIP::$library[$pack]['opt'], '');
+                        }
 
-                    // Close the files.
-                    gzclose($ZipHandle);
-                    fclose($DBfh);
+                        wp_delete_file($TempFile);
+                        return array_merge($result, array("notice" => sprintf(__('Error Opening Destination GeoIP Database for Writing: %s', 'wp-statistics'), $DBFile)));
+                    } else {
+                        while (($data = gzread($ZipHandle, 4096)) != false) {
+                            fwrite($DBfh, $data); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fwrite
+                        }
 
-                    // Delete the temporary file.
-                    unlink($TempFile);
+                        // Close the files.
+                        gzclose($ZipHandle);
+                        fclose($DBfh); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
 
-                    // Display the success message.
-                    $result["status"] = true;
-                    $result["notice"] = __('GeoIP Database Successfully Updated!', 'wp-statistics');
+                        // Delete the temporary file.
+                        wp_delete_file($TempFile);
 
-                    // Update the options to reflect the new download.
-                    if ($type == "update") {
-                        Option::update('last_geoip_dl', time());
-                        Option::update('update_geoip', false);
-                    }
+                        // Display the success message.
+                        $result["status"] = true;
+                        $result["notice"] = __('GeoIP Database Successfully Updated!', 'wp-statistics');
 
-                    // Populate any missing GeoIP information if the user has selected the option.
-                    if ($pack == "country") {
+                        // Update the options to reflect the new download.
+                        if ($type == "update") {
+                            Option::update('last_geoip_dl', time());
+                        }
+
+                        // Populate any missing GeoIP information if the user has selected the option.
                         if (Option::get('geoip') && GeoIP::IsSupport() && Option::get('auto_pop')) {
-                            self::Update_GeoIP_Visitor();
+                            // Update GeoIP data for visitors with incomplete information
+                            $geoIpService = new GeoIpService();
+                            $geoIpService->batchUpdateIncompleteGeoIpForVisitors();
                         }
                     }
                 }
             }
-        }
 
-        // Send Email
-        if (Option::get('geoip_report') == true) {
+            // Send Email
+            if (Option::get('geoip_report') == true) {
 
-            Helper::send_mail(
-                Option::getEmailNotification(),
-                __('GeoIP update on', 'wp-statistics') . ' ' . get_bloginfo('name'),
-                $result['notice'],
-                true,
-                array("email_title" => __('GeoIP update on', 'wp-statistics') . ' <a href="' . get_bloginfo('url') . '" target="_blank" style="text-decoration: underline; color: #999999; font-family: Nunito; font-size: 13px; font-weight: 400; line-height: 150%;">' . get_bloginfo('name') . '</a>')
-            );
+                Helper::send_mail(
+                    Option::getEmailNotification(),
+                    __('GeoIP update on', 'wp-statistics') . ' ' . get_bloginfo('name'),
+                    $result['notice'],
+                    true,
+                    array("email_title" => __('GeoIP update on', 'wp-statistics') . ' <a href="' . get_bloginfo('url') . '" target="_blank" style="text-decoration: none; color: #303032; font-family: Roboto,Arial,Helvetica,sans-serif; font-size: 16px; font-weight: 600; line-height: 18.75px;font-style: italic">' . get_bloginfo('name') . '</a>')
+                );
+            }
+
+        } catch (\Exception $e) {
+            $result['notice'] = sprintf(__('Error: %1$s', 'wp-statistics'), $e->getMessage());
         }
 
         return $result;
-    }
-
-    /**
-     * Update All GEO-IP Visitors
-     *
-     * @return array
-     */
-    public static function Update_GeoIP_Visitor()
-    {
-        global $wpdb;
-
-        // Find all rows in the table that currently don't have GeoIP info or have an unknown ('000') location.
-        $result = $wpdb->get_results("SELECT id,ip FROM `" . DB::table('visitor') . "` WHERE location = '' or location = '" . GeoIP::$private_country . "' or location IS NULL");
-
-        // Try create a new reader instance.
-        $reader = false;
-        if (Option::get('geoip')) {
-            $reader = GeoIP::Loader('country');
-        }
-
-        if ($reader === false) {
-            return array('status' => false, 'data' => __('Cannot Load GeoIP Database. Ensure It\'s Downloaded via Settings Page.', 'wp-statistics'));
-        }
-
-        $count = 0;
-
-        // Loop through all the missing rows and update them if we find a location for them.
-        foreach ($result as $item) {
-            $count++;
-
-            // If the IP address is only a hash, don't bother updating the record.
-            if (IP::IsHashIP($item->ip) === false and $reader != false) {
-                try {
-                    $record   = $reader->country($item->ip);
-                    $location = $record->country->isoCode;
-                    if ($location == "") {
-                        $location = GeoIP::$private_country;
-                    }
-                } catch (\Exception $e) {
-                    \WP_Statistics::log($e->getMessage());
-                    $location = GeoIP::$private_country;
-                }
-
-                // Update the row in the database.
-                $wpdb->update(
-                    DB::table('visitor'),
-                    array('location' => $location),
-                    array('id' => $item->id)
-                );
-            }
-        }
-
-        return array('status' => true, 'data' => sprintf(__('Updated %s GeoIP Records in Visitor Database.', 'wp-statistics'), $count));
     }
 
     /**
@@ -478,59 +407,47 @@ class GeoIP
     /**
      * Get City Detail By User IP
      *
-     * @param bool $ip
-     * @param string $return
-     * @return String|null
-     * @throws \Exception
+     * @param string|bool $ip
+     * @param bool $dataScope
+     * @return array|string
      * @see https://github.com/maxmind/GeoIP2-php
      */
-    public static function getCity($ip = false, $return = 'name')
+    public static function getCity($ip = false, $dataScope = false)
     {
-
-        // Check in WordPress WP_Cache
-        $user_city = wp_cache_get('city-' . $ip, 'wp-statistics');
-        if ($user_city != false) {
-            return $user_city;
-        }
-
-        // Check in WordPress Persist Cache
-        $user_city = self::getCacheCity($ip);
-        if ($user_city != false) {
-            self::setCacheCity($ip, $user_city);
-            return $user_city;
-        }
-
-        // Default City Name
-        $default_city = __('Unknown', 'wp-statistics');
+        $default_location = [
+            'city'      => __('Unknown', 'wp-statistics'),
+            'region'    => __('Unknown', 'wp-statistics'),
+            'continent' => __('Unknown', 'wp-statistics')
+        ];
 
         // Get User IP
         $ip = ($ip === false ? IP::getIP() : $ip);
-
-        // Sanitize IP
-        if (IP::isIP($ip) === false) {
-            return $default_city;
-        }
 
         // Load GEO-IP
         $reader = self::Loader('city');
 
         //Get City name
-        if ($reader != false) {
-
+        if ($reader != false && IP::isIP($ip) != false) {
             try {
                 //Search in Geo-IP
                 $record = $reader->city($ip);
 
+                $location = [];
+
                 //Get City
-                if ($return == "all") {
-                    $location = $record->city;
-                } elseif ($return == "name") {
-                    $subdiv   = $record->mostSpecificSubdivision->name;
-                    $city     = $record->city->name;
-                    $location = (!empty($city) ? $city : $default_city) . ($subdiv ? (", ") : "") . $subdiv;
-                } else {
-                    $location = $record->city->{$return};
+                $city             = $record->city->name;
+                $location['city'] = !empty($city) ? $city : $default_location['city'];
+
+                //Get Region
+                if ($dataScope) {
+                    $region             = $record->mostSpecificSubdivision->name;
+                    $location['region'] = !empty($region) ? $region : $default_location['region'];
+
+                    // Get Continent
+                    $continent             = $record->continent->name;
+                    $location['continent'] = !empty($continent) ? $continent : $default_location['continent'];
                 }
+
             } catch (\Exception $e) {
                 /**
                  * For debugging, you can comment out the logger.
@@ -540,70 +457,11 @@ class GeoIP
         }
 
         # Check Has Location
-        if (isset($location) and !empty($location)) {
-            self::setCacheCity($ip, $location);
-            return $location;
+        if (isset($location)) {
+            return $dataScope ? $location : $location['city'];
         }
 
-        return $default_city;
-    }
-
-    /**
-     * Set Cache User City
-     *
-     * @param $ip
-     * @param $city
-     * @param bool $opt
-     */
-    public static function setCacheCity($ip, $city, $opt = false)
-    {
-        if (!$opt) {
-            $opt = get_option(self::$city_cache_object_name);
-        }
-        if (empty($opt) || !is_array($opt)) {
-            $opt = array();
-        }
-        $opt[$ip] = array($city, current_time('timestamp'));
-        wp_cache_set('city-' . $ip, $city, 'wp-statistics', DAY_IN_SECONDS);
-        $opt = self::cleanCacheCity($opt);
-        update_option(self::$city_cache_object_name, $opt, 'no');
-    }
-
-    /**
-     * Clean Cache City
-     *
-     * @param bool $option
-     * @param bool $save
-     * @return bool
-     */
-    public static function cleanCacheCity($option = false, $save = false)
-    {
-        if (!$option) {
-            $option = get_option(self::$city_cache_object_name);
-        }
-        if (!empty($option) and is_array($option) and count($option) > 0) {
-            foreach ($option as $ip => $value) {
-                if (isset($value[1])) {
-                    $expire_time = (int)$value[1] + self::$library['city']['cache'];
-                    if ($expire_time <= current_time('timestamp')) {
-                        unset($option[$ip]);
-                    }
-                }
-            }
-        }
-        if ($save) {
-            update_option(self::$city_cache_object_name, $option, 'no');
-        }
-        return $option;
-    }
-
-    /*
-     * Get City with IP From WordPress Option Cache
-     */
-    public static function getCacheCity($ip)
-    {
-        $opt = get_option(self::$city_cache_object_name);
-        return (isset($opt[$ip]) ? $opt[$ip][0] : false);
+        return $dataScope ? $default_location : $default_location['city'];
     }
 
     /**

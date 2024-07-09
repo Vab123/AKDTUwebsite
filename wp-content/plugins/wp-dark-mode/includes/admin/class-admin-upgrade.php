@@ -31,10 +31,10 @@ if ( ! class_exists( __NAMESPACE__ . 'Upgrade' ) ) {
 		 */
 		public function actions() {
 
-			$last_upgrade = get_option( 'wp_dark_mode_upgraded_version', '0.0.0' );
+			$upgraded_version = get_option( 'wp_dark_mode_upgraded_version', '0.0.0' );
 
 			// Bail, if the version is already upgraded.
-			if ( version_compare( WP_DARK_MODE_VERSION, $last_upgrade, '<=' ) ) {
+			if ( version_compare( '5.0.0', $upgraded_version, '<=' ) ) {
 				return;
 			}
 
@@ -192,10 +192,10 @@ if ( ! class_exists( __NAMESPACE__ . 'Upgrade' ) ) {
 					// For typography_font_size.
 					if ( 'typography_font_size' === $new_key ) {
 						$upgradables = [
-							'120' => 0.8,
-							'150' => 1.2,
-							'200' => 1.4,
-							'custom' => 'custom', // phpcs:ignore
+							'120' => '0.8',
+							'150' => '1.2',
+							'200' => '1.4',
+							'custom' => 'custom' // phpcs:ignore
 						];
 
 						$value = isset( $upgradables[ $value ] ) ? $upgradables[ $value ] : $value;
@@ -204,12 +204,12 @@ if ( ! class_exists( __NAMESPACE__ . 'Upgrade' ) ) {
 					// For floating_switch_size.
 					if ( 'floating_switch_size' === $new_key ) {
 						$upgradable_sizes = [
-							'xs' => 0.8,
-							'sm' => 1,
-							'normal' => 1.2,
-							'xl' => 1.4,
-							'xxl' => 1.6,
-							'custom' => 'custom',
+							'xs' => '0.8',
+							'sm' => '1',
+							'normal' => '1.2',
+							'xl' => '1.4',
+							'xxl' => '1.6',
+							'custom' => 'custom' // phpcs:ignore
 						];
 
 						$value = isset( $upgradable_sizes[ $value ] ) ? $upgradable_sizes[ $value ] : 'custom';

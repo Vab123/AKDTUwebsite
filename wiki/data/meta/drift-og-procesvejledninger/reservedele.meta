@@ -1,31 +1,43 @@
-a:2:{s:7:"current";a:9:{s:4:"date";a:2:{s:7:"created";i:1672338497;s:8:"modified";i:1674406182;}s:7:"creator";s:15:"Victor Brandsen";s:4:"user";s:6:"victor";s:11:"last_change";a:8:{s:4:"date";i:1674945151;s:2:"ip";s:14:"82.211.219.109";s:4:"type";s:1:"e";s:2:"id";s:39:"drift-og-procesvejledninger:reservedele";s:4:"user";s:6:"victor";s:3:"sum";s:29:"[Internet og teknisk udstyr] ";s:5:"extra";s:0:"";s:10:"sizechange";i:13;}s:5:"title";s:11:"Reservedele";s:11:"description";a:2:{s:15:"tableofcontents";a:4:{i:0;a:4:{s:3:"hid";s:11:"reservedele";s:5:"title";s:11:"Reservedele";s:4:"type";s:2:"ul";s:5:"level";i:2;}i:1;a:4:{s:3:"hid";s:11:"lejligheder";s:5:"title";s:11:"Lejligheder";s:4:"type";s:2:"ul";s:5:"level";i:3;}i:2;a:4:{s:3:"hid";s:10:"faelleshus";s:5:"title";s:10:"Fælleshus";s:4:"type";s:2:"ul";s:5:"level";i:3;}i:3;a:4:{s:3:"hid";s:26:"internet_og_teknisk_udstyr";s:5:"title";s:26:"Internet og teknisk udstyr";s:4:"type";s:2:"ul";s:5:"level";i:3;}}s:8:"abstract";s:258:"Reservedele
+a:2:{s:7:"current";a:9:{s:4:"date";a:2:{s:7:"created";i:1672338497;s:8:"modified";i:1715106249;}s:7:"creator";s:15:"Victor Brandsen";s:4:"user";s:6:"victor";s:11:"last_change";a:8:{s:4:"date";i:1715106299;s:2:"ip";s:14:"82.211.210.168";s:4:"type";s:1:"e";s:2:"id";s:39:"drift-og-procesvejledninger:reservedele";s:4:"user";s:6:"victor";s:3:"sum";s:12:"[Udendørs] ";s:5:"extra";s:0:"";s:10:"sizechange";i:1;}s:11:"contributor";a:1:{s:6:"victor";s:15:"Victor Brandsen";}s:5:"title";s:11:"Reservedele";s:11:"description";a:2:{s:15:"tableofcontents";a:5:{i:0;a:4:{s:3:"hid";s:11:"reservedele";s:5:"title";s:11:"Reservedele";s:4:"type";s:2:"ul";s:5:"level";i:2;}i:1;a:4:{s:3:"hid";s:8:"udendors";s:5:"title";s:9:"Udendørs";s:4:"type";s:2:"ul";s:5:"level";i:3;}i:2;a:4:{s:3:"hid";s:11:"lejligheder";s:5:"title";s:11:"Lejligheder";s:4:"type";s:2:"ul";s:5:"level";i:3;}i:3;a:4:{s:3:"hid";s:10:"faelleshus";s:5:"title";s:10:"Fælleshus";s:4:"type";s:2:"ul";s:5:"level";i:3;}i:4;a:4:{s:3:"hid";s:26:"internet_og_teknisk_udstyr";s:5:"title";s:26:"Internet og teknisk udstyr";s:4:"type";s:2:"ul";s:5:"level";i:3;}}s:8:"abstract";s:269:"Reservedele
+
+Udendørs
+
+Lygtepæle, Sikringer
+
+Mærke
+
+Type
+
+Dimensioner
+
+Spænding
+
+Brydeevne
+
+Nummer
+
+Standard
+
+Bussmann
+
+C10G6
+
+10 x 38mm
+
+6 A, 500 VAC
+
+120 kA
+
+EN60269
+
+IEC60269
 
 Lejligheder
 
+Nøglesystem
+
+EVVA EPS
+
 Gulvvarme – Badeværelse
 
-Gulvvarme – Køkken
-
-Radiator – Stue
-
-Vinduespartier
-
-Producent
-
-Prod time
-
-Order no
-
-Velfac
-
-06-18
-
-164769/964966
-
-Fælleshus
-
-Gulvvarme
-
-Pettinaroli pakdåse til fordelerrør (7035TEM)
-
-Eksempelvis:";}s:8:"internal";a:2:{s:5:"cache";b:1;s:3:"toc";b:1;}s:8:"relation";a:1:{s:10:"firstimage";s:0:"";}s:11:"contributor";a:1:{s:6:"victor";s:15:"Victor Brandsen";}}s:10:"persistent";a:5:{s:4:"date";a:2:{s:7:"created";i:1672338497;s:8:"modified";i:1674406182;}s:7:"creator";s:15:"Victor Brandsen";s:4:"user";s:6:"victor";s:11:"last_change";a:8:{s:4:"date";i:1674945151;s:2:"ip";s:14:"82.211.219.109";s:4:"type";s:1:"e";s:2:"id";s:39:"drift-og-procesvejledninger:reservedele";s:4:"user";s:6:"victor";s:3:"sum";s:29:"[Internet og teknisk udstyr] ";s:5:"extra";s:0:"";s:10:"sizechange";i:13;}s:11:"contributor";a:1:{s:6:"victor";s:15:"Victor Brandsen";}}}
+Gulvvarme – Køkken";}s:8:"internal";a:2:{s:5:"cache";b:1;s:3:"toc";b:1;}s:8:"relation";a:1:{s:10:"firstimage";s:0:"";}}s:10:"persistent";a:5:{s:4:"date";a:2:{s:7:"created";i:1672338497;s:8:"modified";i:1715106249;}s:7:"creator";s:15:"Victor Brandsen";s:4:"user";s:6:"victor";s:11:"last_change";a:8:{s:4:"date";i:1715106299;s:2:"ip";s:14:"82.211.210.168";s:4:"type";s:1:"e";s:2:"id";s:39:"drift-og-procesvejledninger:reservedele";s:4:"user";s:6:"victor";s:3:"sum";s:12:"[Udendørs] ";s:5:"extra";s:0:"";s:10:"sizechange";i:1;}s:11:"contributor";a:1:{s:6:"victor";s:15:"Victor Brandsen";}}}

@@ -271,7 +271,7 @@ class Quick_Featured_Images_Columns {
 		$text = 'Item not added.';			$this->translation_cache[ 'Item not added.' ]		= esc_html__( $text );
 		$text = 'Item not updated.';		$this->translation_cache[ 'Item not updated.' ]		= esc_html__( $text );
 		$text = 'Meta';						$this->translation_cache[ 'Meta' ]					= __( $text );
-		$text = 'No file was uploaded.';	$this->translation_cache[ 'No file was uploaded.' ]	= __( $text );
+		$text = 'No file has been uploaded.';	$this->translation_cache[ 'No file has been uploaded.' ]	= __( $text );
 		$text = 'No image set';				$this->translation_cache[ 'No image set' ]			= esc_html__( $text );
 		$text = 'Remove featured image';	$this->translation_cache[ 'Remove featured image' ]	= esc_html( _x( $text, 'post' ) );
 		$text = 'Set featured image';		$this->translation_cache[ 'Set featured image' ]	= esc_html( _x( $text, 'post' ) );
@@ -282,11 +282,11 @@ class Quick_Featured_Images_Columns {
 		// preset the "broken image" thumbnail once
 		$esc_path = esc_url( plugin_dir_url( __FILE__ ) );
 		$this->thumbnail_cache = array();
-		$this->thumbnail_cache[ 'No file was uploaded.' ] = sprintf(
+		$this->thumbnail_cache[ 'No file has been uploaded.' ] = sprintf(
 			'<img src="%sassets/images/no-file.png" alt="%s" width="48" height="64" class="qfi-no100p"><br />%s',
 			$esc_path,
 			$this->translation_cache[ 'Error' ],
-			$this->translation_cache[ 'No file was uploaded.' ]
+			$this->translation_cache[ 'No file has been uploaded.' ]
 		);
 	}
 
@@ -427,7 +427,7 @@ class Quick_Featured_Images_Columns {
 				// thumbnail ID is orphaned ("file-less", outdated), so create HTML for a "broken image" symbol
 				} else {
 					// print "broken" icon
-					echo $this->thumbnail_cache[ 'No file was uploaded.' ];
+					echo $this->thumbnail_cache[ 'No file has been uploaded.' ];
 					if ( $this->is_capable_user ) {
 						// display removal link
 						printf(
@@ -516,7 +516,9 @@ class Quick_Featured_Images_Columns {
      */
     public function set_thumbnail () {
 
-		if ( ! isset( $_POST[ 'qfi_nonce' ] ) or ! wp_verify_nonce( $_POST[ 'qfi_nonce' ], 'qfi-image-column' ) ) {
+		if ( ! isset( $_POST[ 'qfi_nonce' ] ) or
+             ! wp_verify_nonce( $_POST[ 'qfi_nonce' ], 'qfi-image-column' ) or
+             ! user_can( get_current_user_id(), 'edit_published_posts') ) {
 			$text = 'Sorry, you are not allowed to edit this item.';
 			die( __( $text ) );
 		}
@@ -578,7 +580,10 @@ class Quick_Featured_Images_Columns {
 	 *
      */
     public function delete_thumbnail () {
-		if ( ! isset( $_POST[ 'qfi_nonce' ] ) or ! wp_verify_nonce( $_POST[ 'qfi_nonce' ], 'qfi-image-column' ) ) {
+
+        if ( ! isset( $_POST[ 'qfi_nonce' ] ) or
+             ! wp_verify_nonce( $_POST[ 'qfi_nonce' ], 'qfi-image-column' ) or
+             ! user_can( get_current_user_id(), 'edit_published_posts') ) {
 			$text = 'Sorry, you are not allowed to delete this item.';
 			die( __( $text ) );
 		}

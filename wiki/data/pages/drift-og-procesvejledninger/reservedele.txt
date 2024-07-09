@@ -1,5 +1,32 @@
 =====Reservedele=====
+====Udendørs====
+=== Lygtepæle, Sikringer ===
+<WRAP group>
+<WRAP 3cm column>
+Mærke\\
+Type\\
+Dimensioner\\
+Spænding\\
+Brydeevne\\
+Nummer\\
+Standard
+</WRAP>
+
+<WRAP auto column>
+Bussmann\\
+C10G6\\
+10 x 38mm\\
+6 A, 500 VAC\\
+120 kA\\
+EN60269\\
+IEC60269
+</WRAP>
+</WRAP>
+
 ====Lejligheder====
+===Nøglesystem===
+EVVA EPS
+
 ===Gulvvarme – Badeværelse===
 
 ===Gulvvarme – Køkken===

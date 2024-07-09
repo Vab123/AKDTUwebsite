@@ -99,6 +99,23 @@
         min-width: unset;
       }
 
+      span.truncate{
+        max-width: 147px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: inherit;
+        display: inline-block;
+
+        &:hover {
+          color: inherit;
+        }
+      }
+
+      span.disabled {
+        color: #999;
+      }
+
       a {
         color: $primary-color !important;
         display: inline-block;
@@ -107,9 +124,57 @@
           color: $dark-color !important;
         }
       }
-
       a.is-normal-text {
         color: $dim-black-color !important;
+      }
+
+      a.button {
+        border-radius: 4px;
+        font-weight: 500 !important;
+        padding: 7px 10px;
+        background-color: #fafafb !important;
+        line-height: 0;
+        text-align: center;
+        font-size: 11px;
+
+        span {
+          font-size: inherit;
+          color: inherit;
+        }
+
+        .hover-effect {
+          min-width: 70px;
+        }
+
+        .hover-effect--show {
+          display: none !important;
+        }
+
+        &:hover {
+          .hover-effect--show {
+            display: inline-block !important;
+          }
+
+          .hover-effect--hide {
+            display: none !important;
+          }
+        }
+
+        svg {
+          vertical-align: middle;
+        }
+      }
+    }
+
+    a.button.disabled {
+      margin: 0!important;
+
+      &:hover {
+        color: #A7AAAD !important;
+      }
+      
+      span:hover {
+        color: #A7AAAD !important;
       }
     }
 
@@ -268,6 +333,10 @@
     scroll-behavior: smooth;
     scrollbar-width: thin;
     scrollbar-color: #DADCE0 $light-tertiary-color;
+
+    table{
+      position: relative;
+    }
 
     /* width */
     &::-webkit-scrollbar {
@@ -459,6 +528,57 @@
       }
     }
   }
+  .o-table--tracker{
+    tbody{
+      tr{
+        td{
+           a{
+             display: inline!important;
+             &.button{
+               color: #0C0C0D;
+               font-size: 12px;
+               font-weight: 400;
+               line-height: 20px;
+               border: 1px solid #EEEFF1;
+               &:hover{
+                 font-weight: 500;
+                 border: 1px solid #DADCE0;
+                 background: #FAFAFB;
+               }
+               &.disabled, &.disabled:focus{
+                 border: 1px solid #DADCE0;
+                 background: #EEEFF1;
+                 span,span:hover{
+                   color: #56585A!important;
+                 }
+
+               }
+             }
+           }
+          &.head{
+            white-space: nowrap;
+            .wps-tooltip{
+              margin-left: 2px;
+            }
+          }
+          &.o-table__cell--right{
+            text-align: right;
+          }
+          ul{
+            display: flex;
+            margin: 0;
+            gap:5px;
+            justify-content: flex-end;
+            align-items: center;
+            li{
+              margin-bottom: 0;
+            }
+          }
+
+        }
+      }
+    }
+  }
 }
 
 #side-sortables #wp-statistics-countries-widget {
@@ -498,7 +618,17 @@
 
         &:last-child {
           padding: 14px 24px 14px 24px;
+          text-align: right!important;
+          .rtl &{
+            text-align: left!important;
+          }
         }
+      }
+      b{
+        font-weight: 500;
+        color: #0C0C0D;
+        line-height: 15.23px;
+        font-size: 13px;
       }
     }
   }
@@ -519,7 +649,7 @@
           padding-left: 16px !important;
 
           @media screen and (min-width: 1450px) {
-            padding-left: 32px !important;
+            padding-left: 24px !important;
           }
         }
 

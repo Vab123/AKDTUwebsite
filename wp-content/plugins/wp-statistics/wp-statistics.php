@@ -2,12 +2,15 @@
 /**
  * Plugin Name: WP Statistics
  * Plugin URI: https://wp-statistics.com/
- * Description: This plugin gives you the complete information on your website's visitors.
- * Version: 14.5
+ * GitHub Plugin URI: https://github.com/wp-statistics/wp-statistics
+ * Description: Get website traffic insights with GDPR/CCPA compliant, privacy-friendly analytics. Includes visitor data, stunning graphs, and no data sharing.
+ * Version: 14.8.1
  * Author: VeronaLabs
  * Author URI: https://veronalabs.com/
  * Text Domain: wp-statistics
  * Domain Path: /languages
+ * License: GPL-2.0+
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
 
 # Exit if accessed directly
@@ -18,7 +21,6 @@ require_once __DIR__ . '/includes/defines.php';
 
 # Include some empty class to make sure they are existed while upgrading plugin.
 require_once WP_STATISTICS_DIR . 'includes/class-wp-statistics-updates.php';
-require_once WP_STATISTICS_DIR . 'includes/class-wp-statistics-welcome.php';
 
 # Load Plugin
 if (!class_exists('WP_Statistics')) {

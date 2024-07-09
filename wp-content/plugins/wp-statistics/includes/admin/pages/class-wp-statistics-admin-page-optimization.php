@@ -2,7 +2,11 @@
 
 namespace WP_STATISTICS;
 
-class optimization_page
+use WP_Statistics\Components\Singleton;
+use WP_Statistics\Service\Admin\NoticeHandler\Notice;
+use WP_Statistics\Service\Analytics\GeoIpService;
+
+class optimization_page extends Singleton
 {
 
     public function __construct()
@@ -33,7 +37,7 @@ class optimization_page
 
         // Check Access Level
         if (Menus::in_page('optimization') and !User::Access('manage')) {
-            wp_die(__('You do not have sufficient permissions to access this page.'));
+            wp_die(__('You do not have sufficient permissions to access this page.')); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped	
         }
 
         // Check Wp Nonce and Require Field
@@ -43,18 +47,20 @@ class optimization_page
 
         // Update All GEO IP Country
         if (isset($_POST['submit'], $_POST['populate-submit']) && intval($_POST['populate-submit']) == 1) {
-            $result = GeoIP::Update_GeoIP_Visitor();
+            // Update GeoIP data for visitors with incomplete information
+            $geoIpService = new GeoIpService();
+            $geoIpService->batchUpdateIncompleteGeoIpForVisitors();
 
             // Show Notice
-            Helper::addAdminNotice($result['data'], ($result['status'] === false ? "error" : "success"));
+            Notice::addFlashNotice(__('GeoIP update for incomplete visitors initiated successfully.', 'wp-statistics'), 'success');
         }
 
         // Check Hash IP Update
         if (isset($_POST['submit'], $_POST['hash-ips-submit']) and intval($_POST['hash-ips-submit']) == 1) {
-            IP::Update_HashIP_Visitor();
+            $result = IP::Update_HashIP_Visitor();
 
             // Show Notice
-            Helper::addAdminNotice(__('IP Addresses Anonymized with Hash Values.', "wp-statistics"), "success");
+            Notice::addFlashNotice(sprintf(__('Successfully anonymized <b>%d</b> IP addresses using hash values.', 'wp-statistics'), $result), 'success');
         }
 
         // Re-install All DB Table
@@ -62,7 +68,7 @@ class optimization_page
             Install::create_table(false);
 
             // Show Notice
-            Helper::addAdminNotice(__('Installation Process Completed.', "wp-statistics"), "success");
+            Notice::addFlashNotice(__('Installation Process Completed.', "wp-statistics"), 'success');
         }
 
         // Optimize Tables
@@ -119,7 +125,7 @@ class optimization_page
                 }
 
                 // Show Notice
-                Helper::addAdminNotice($notice, "info");
+                Notice::addFlashNotice($notice);
             }
         }
 
@@ -137,7 +143,7 @@ class optimization_page
                 }
             }
 
-            // Historical Visits
+            // Historical Views
             if (isset($_POST['wps_historical_visits'])) {
                 // Update DB
                 $result = $wpdb->update($historical_table, array('value' => sanitize_text_field($_POST['wps_historical_visits'])), array('category' => 'visits'));
@@ -148,9 +154,9 @@ class optimization_page
             }
 
             // Show Notice
-            Helper::addAdminNotice(__('Historical Data Successfully Updated.', "wp-statistics"), "success");
+            Notice::addFlashNotice(__('Historical Data Successfully Updated.', "wp-statistics"), "success");
         }
     }
 }
 
-new optimization_page;
+optimization_page::instance();

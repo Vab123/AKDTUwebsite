@@ -4,14 +4,14 @@
   Plugin URI: https://underconstructionpage.com/
   Description: Put your site behind a great looking under construction, coming soon, maintenance mode or landing page.
   Author: WebFactory Ltd
-  Version: 3.99
+  Version: 4.00
   Requires at least: 4.0
   Requires PHP: 5.2
-  Tested up to: 6.4
+  Tested up to: 6.5
   Author URI: https://www.webfactoryltd.com/
   Text Domain: under-construction-page
 
-  Copyright 2015 - 2023  WebFactory Ltd  (email: ucp@webfactoryltd.com)
+  Copyright 2015 - 2024  WebFactory Ltd  (email: ucp@webfactoryltd.com)
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License, version 2, as
@@ -629,14 +629,15 @@ class UCP
 
         if (!empty($options['ga_tracking_id'])) {
             $out .= "
-      <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-        ga('create', '{$options['ga_tracking_id']}', 'auto');
-        ga('send', 'pageview');
-      </script>";
+            <!-- Google tag (gtag.js) -->
+            <script async src='https://www.googletagmanager.com/gtag/js?id={$options['ga_tracking_id']}'></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', '{$options['ga_tracking_id']}');
+            </script>";
         }
 
         if (!empty($options['custom_css'])) {
@@ -1485,7 +1486,7 @@ class UCP
       <input type="checkbox" id="ga_tracking_id_toggle" ' . esc_attr(self::checked(1, empty($options['ga_tracking_id']) ? 0 : 1)) . ' type="checkbox" value="1" name="' . esc_attr(UCP_OPTIONS_KEY) . '[ga_tracking_toggle]">
       <label for="ga_tracking_id_toggle" class="toggle"><span class="toggle_handler"></span></label>
     </div>';
-        echo '<div id="ga_tracking_id_wrapper"><input id="ga_tracking_id" type="text" class="code" name="' . esc_attr(UCP_OPTIONS_KEY) . '[ga_tracking_id]" value="' . esc_attr($options['ga_tracking_id']) . '" placeholder="UA-xxxxxx-xx">';
+        echo '<div id="ga_tracking_id_wrapper"><input id="ga_tracking_id" type="text" class="code" name="' . esc_attr(UCP_OPTIONS_KEY) . '[ga_tracking_id]" value="' . esc_attr($options['ga_tracking_id']) . '" placeholder="G-xxxxxxxxxx">';
         echo '<p class="description">' . esc_attr__('Enter the unique tracking ID found in your GA tracking profile settings to track visits to pages.', 'under-construction-page') . '</p></div>';
         echo '</td></tr>';
 

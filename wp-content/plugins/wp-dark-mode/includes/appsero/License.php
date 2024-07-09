@@ -1,6 +1,6 @@
 <?php
 
-namespace Appsero;
+namespace WP_Dark_Mode\Appsero;
 
 /**
  * Appsero License Checker
@@ -10,7 +10,7 @@ namespace Appsero;
 class License {
 
     /**
-     * AppSero\Client
+     * WP_Dark_Mode\AppSero\Client
      *
      * @var object
      */

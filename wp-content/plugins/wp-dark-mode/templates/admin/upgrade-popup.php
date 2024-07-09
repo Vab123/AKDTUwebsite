@@ -21,7 +21,7 @@ if ( empty( $countdown_timer ) || $countdown_timer < time() ) {
 // Formatted data.
 $data = [
 	'counter_time' => $countdown_timer,
-	'discount'     => 50,
+	'discount'     => 35,
 ];
 
 $countdown_time = [

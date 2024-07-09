@@ -13,6 +13,7 @@
   * [[administrativt:nøglekontrakt|Nøglekontrakt]]
 
 ** Vejledninger **
+  * [[drift-og-procesvejledninger:affaldsskur]]
   * [[drift-og-procesvejledninger:havedag]]
     * [[drift-og-procesvejledninger:havedag:opgaver-til-havedag]]
     * [[drift-og-procesvejledninger:havedag:cykeloprydning]] 
@@ -66,7 +67,7 @@
 
 ** Skrivelser **
   * [[skrivelser:fælleshus:adgangskontrol]]
-  * [[skrivelser:fælleshus:accesscontrol]]
+    * [[skrivelser:fælleshus:accesscontrol]]
   * [[skrivelser:fælleshus:retningslinjer-dansk]]
     * [[skrivelser:fælleshus:retningslinjer-engelsk]]
   * [[skrivelser:affaldssortering-og-storskrald]]
@@ -86,3 +87,7 @@
   * [[opslag:rygning-forbudt]]
   * [[opslag:skrald]]
   * [[opslag:parkering-midlertidigt-forbudt]]
+
+** Formand **
+  * [[formand:ansvar]]
+  * [[formand:overlevering]]

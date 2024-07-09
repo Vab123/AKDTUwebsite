@@ -2,7 +2,10 @@
 
 namespace WP_STATISTICS;
 
-class Hits
+use WP_Statistics\Components\Singleton;
+use WP_Statistics\Service\Analytics\VisitorProfile;
+
+class Hits extends Singleton
 {
     /**
      * Rest-APi Hit Record Params Key
@@ -35,7 +38,6 @@ class Hits
             # Filter Data
             add_filter('wp_statistics_current_page', array($this, 'set_current_page'));
             add_filter('wp_statistics_page_uri', array($this, 'set_page_uri'));
-            add_filter('wp_statistics_track_all_pages', array($this, 'set_track_all'));
             add_filter('wp_statistics_user_id', array($this, 'set_current_user'));
         }
 
@@ -46,21 +48,6 @@ class Hits
 
         # Record WordPress Front Page Hits
         add_action('wp', array($this, 'record_wp_hits'));
-    }
-
-    /**
-     * Set is track All Pages
-     *
-     * @param $track_all
-     * @return mixed
-     */
-    public function set_track_all($track_all)
-    {
-        if (isset($this->rest_hits->track_all) and $this->rest_hits->track_all == 1) {
-            $track_all = true;
-        }
-
-        return $track_all;
     }
 
     /**
@@ -76,7 +63,7 @@ class Hits
             return array(
                 'type'         => esc_sql($this->rest_hits->current_page_type),
                 'id'           => esc_sql($this->rest_hits->current_page_id),
-                'search_query' => isset($this->rest_hits->search_query) ? $this->rest_hits->search_query : ''
+                'search_query' => isset($this->rest_hits->search_query) ? base64_decode($this->rest_hits->search_query) : ''
             );
         }
 
@@ -146,25 +133,28 @@ class Hits
      *
      * @throws \Exception
      */
-    public static function record()
+    public static function record($visitorProfile = null)
     {
+        if (!$visitorProfile) {
+            $visitorProfile = new VisitorProfile();
+        }
 
         # Check Exclusion This Hits
-        $exclusion = Exclusion::check();
+        $exclusion = Exclusion::check($visitorProfile);
 
         # Record Hits Exclusion
         if ($exclusion['exclusion_match'] === true) {
             Exclusion::record($exclusion);
         }
 
-        # Record User Visits
+        # Record User Views
         if (Visit::active() and $exclusion['exclusion_match'] === false) {
             Visit::record();
         }
 
         # Record Visitor Detail
         if (Visitor::active()) {
-            $visitor_id = Visitor::record($exclusion);
+            $visitor_id = Visitor::record($visitorProfile, $exclusion);
         }
 
         # Record Search Engine
@@ -173,18 +163,21 @@ class Hits
         }
 
         # Record Pages
-        if (Pages::active() and $exclusion['exclusion_match'] === false and Pages::is_track_all_page() === true) {
-            $page_id = Pages::record();
+        if (Pages::active() and $exclusion['exclusion_match'] === false) {
+            $page_id = Pages::record($visitorProfile);
         }
 
         # Record Visitor Relationship
-        if (isset($visitor_id) and $visitor_id > 0 and isset($page_id) and $page_id > 0 and Option::get('visitors_log')) {
+        if (isset($visitor_id) and $visitor_id > 0 and isset($page_id) and $page_id > 0) {
             Visitor::save_visitors_relationships($page_id, $visitor_id);
         }
 
         # Record User Online
-        if (UserOnline::active() and ($exclusion['exclusion_match'] === false || Option::get('all_online'))) {
-            UserOnline::record();
+        if (UserOnline::active() and ($exclusion['exclusion_match'] === false)) {
+            $pageID = isset($page_id) && $page_id > 0 ? $page_id : 0;
+            UserOnline::record($visitorProfile, [
+                'page_id' => $pageID,
+            ]);
         }
 
         return $exclusion;
@@ -210,9 +203,9 @@ class Hits
     public static function record_wp_hits()
     {
         if (!Option::get('use_cache_plugin') and !Helper::dntEnabled()) {
-            Hits::record();
+            self::record();
         }
     }
 }
 
-new Hits;
+Hits::instance();

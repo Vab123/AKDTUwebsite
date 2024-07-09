@@ -18,7 +18,7 @@ class Admin_Post
     {
 
         // Add Hits Column in All Admin Post-Type Wp_List_Table
-        if (User::Access('read') and Option::get('pages') and !Option::get('disable_column')) {
+        if (User::Access('read') and !Option::get('disable_column')) {
             add_action('admin_init', array($this, 'init'));
         }
 
@@ -28,9 +28,7 @@ class Admin_Post
         }
 
         // Add Post Hit Number in Publish Meta Box in WordPress Edit a post/page
-        if (Option::get('pages') and Option::get('hit_post_metabox')) {
-            add_action('post_submitbox_misc_actions', array($this, 'post_hit_misc'));
-        }
+        add_action('post_submitbox_misc_actions', array($this, 'post_hit_misc'));
 
         // Remove Post Hits when Post Id deleted
         add_action('deleted_post', array($this, 'modify_delete_post'));
@@ -57,7 +55,7 @@ class Admin_Post
      */
     public function add_hit_column($columns)
     {
-        $columns['wp-statistics-post-hits'] = __('Visits', 'wp-statistics');
+        $columns['wp-statistics-post-hits'] = __('Views', 'wp-statistics');
         return $columns;
     }
 
@@ -93,11 +91,11 @@ class Admin_Post
                     $actual_post_type = substr($actual_post_type, strlen("post_type_"));
                 }
 
-                echo apply_filters("wp_statistics_before_hit_column_{$actual_post_type}", $preview_chart_unlock_html, $post_id, $post_type);
+                echo apply_filters("wp_statistics_before_hit_column_{$actual_post_type}", $preview_chart_unlock_html, $post_id, $post_type); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
-                echo sprintf('<a href="%s" class="wps-admin-column__link">%s</a>',
-                    Menus::admin_url('pages', array('ID' => $post_id, 'type' => $post_type)),
-                    number_format($hit_number)
+                echo sprintf('<a href="%s" class="wps-admin-column__link">%s</a>',  // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                    Menus::admin_url('pages', array('ID' => $post_id, 'type' => $post_type)), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                    esc_html(number_format($hit_number)) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                 );
             }
 
@@ -154,7 +152,9 @@ class Admin_Post
     public static function modify_delete_post($post_id)
     {
         global $wpdb;
-        $wpdb->query("DELETE FROM `" . DB::table('pages') . "` WHERE `id` = " . esc_sql($post_id) . " AND (`type` = 'post' OR `type` = 'page' OR `type` = 'product');");
+        $wpdb->query(
+            $wpdb->prepare("DELETE FROM `" . DB::table('pages') . "` WHERE `id` = %d AND (`type` = 'post' OR `type` = 'page' OR `type` = 'product');", esc_sql($post_id))
+        );
     }
 
     /**
@@ -164,7 +164,7 @@ class Admin_Post
     {
         global $post;
         if ($post->post_status == 'publish') {
-            echo "<div class='misc-pub-section misc-pub-hits'>" . __('Visits', 'wp-statistics') . ": <a href='" . Menus::admin_url('pages', array('ID' => $post->ID, 'type' => Pages::get_post_type($post->ID))) . "'>" . number_format(wp_statistics_pages('total', "", $post->ID)) . "</a></div>";
+            echo "<div class='misc-pub-section misc-pub-hits'>" . __('Views', 'wp-statistics') . ": <a href='" . Menus::admin_url('pages', array('ID' => $post->ID, 'type' => Pages::get_post_type($post->ID))) . "'>" . esc_html(number_format(wp_statistics_pages('total', "", $post->ID))) . "</a></div>"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         }
     }
 

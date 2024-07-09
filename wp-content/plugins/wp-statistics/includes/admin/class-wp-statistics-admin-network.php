@@ -47,8 +47,8 @@ class Network
             <table class="widefat wp-list-table" style="width: auto;">
                 <thead>
                 <tr>
-                    <th style='text-align: left'><?php _e('Website Details', 'wp-statistics'); ?></th>
-                    <th style='text-align: left'><?php _e('Options', 'wp-statistics'); ?></th>
+                    <th style='text-align: left'><?php esc_html_e('Website Details', 'wp-statistics'); ?></th>
+                    <th style='text-align: left'><?php esc_html_e('Options', 'wp-statistics'); ?></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -57,17 +57,16 @@ class Network
 
                 $options = array(
                     __('Overview', 'wp-statistics')           => Menus::get_page_slug('overview'),
-                    __('Visits', 'wp-statistics')             => Menus::get_page_slug('hits'),
+                    __('Views', 'wp-statistics')              => Menus::get_page_slug('hits'),
                     __('Online', 'wp-statistics')             => Menus::get_page_slug('online'),
                     __('Visitors', 'wp-statistics')           => Menus::get_page_slug('visitors'),
                     __('Referrers', 'wp-statistics')          => Menus::get_page_slug('referrers'),
-                    __('Search Words', 'wp-statistics')       => Menus::get_page_slug('words'),
                     __('Search Engines', 'wp-statistics')     => Menus::get_page_slug('searches'),
                     __('Post Types', 'wp-statistics')         => Menus::get_page_slug('pages'),
                     __('Taxonomies', 'wp-statistics')         => Menus::get_page_slug('taxonomies'),
-                    __('Authors', 'wp-statistics')            => Menus::get_page_slug('authors'),
+                    __('Author Analytics', 'wp-statistics')   => Menus::get_page_slug('author-analytics'),
                     __('Browsers', 'wp-statistics')           => Menus::get_page_slug('browser'),
-                    __('Platforms', 'wp-statistics')          => Menus::get_page_slug('platform'),
+                    __('Operating Systems', 'wp-statistics')  => Menus::get_page_slug('platform'),
                     __('Top Visitors Today', 'wp-statistics') => Menus::get_page_slug('top-visitors'),
                     __('Exclusions', 'wp-statistics')         => Menus::get_page_slug('exclusions'),
                     __('Optimization', 'wp-statistics')       => Menus::get_page_slug('optimization'),
@@ -95,10 +94,10 @@ class Network
                             $j           = 0;
 
                             foreach ($options as $key => $value) {
-                                echo '<a href="' . esc_url($url . $value) . '">' . esc_attr($key) . '</a>';
+                                echo '<a href="' . esc_url($url . $value) . '">' . esc_attr($key) . '</a>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                                 $j++;
                                 if ($j < $options_len) {
-                                    echo ' - ';
+                                    echo ' - '; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                                 }
                             }
                             ?>
@@ -122,7 +121,7 @@ class Network
         global $plugin_page;
         $blog_id = str_replace('wp_statistics_blogid_', '', $plugin_page);
         $url     = esc_url(get_admin_url($blog_id) . '/admin.php?page=' . Menus::get_page_slug('overview'));
-        echo "<script>window.location.href = '$url';</script>";
+        echo "<script>window.location.href = '$url';</script>"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
     }
 }
 

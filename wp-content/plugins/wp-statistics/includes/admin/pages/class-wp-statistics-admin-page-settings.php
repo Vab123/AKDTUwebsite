@@ -2,7 +2,10 @@
 
 namespace WP_STATISTICS;
 
-class settings_page
+use WP_Statistics\Components\Singleton;
+use WP_Statistics\Service\Admin\NoticeHandler\Notice;
+
+class settings_page extends Singleton
 {
 
     private static $redirectAfterSave = true;
@@ -15,7 +18,7 @@ class settings_page
 
         // Check Access Level
         if (Menus::in_page('settings') and !User::Access('manage')) {
-            wp_die(__('You do not have sufficient permissions to access this page.'));
+            wp_die(__('You do not have sufficient permissions to access this page.')); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped	
         }
     }
 
@@ -24,12 +27,6 @@ class settings_page
      */
     public static function view()
     {
-
-        // Check admin notices.
-        if (Option::get('admin_notices') == true) {
-            Option::update('disable_donation_nag', false);
-            Option::update('disable_suggestion_nag', false);
-        }
 
         // Add Class inf
         $args['class'] = 'wp-statistics-settings';
@@ -87,8 +84,22 @@ class settings_page
                 $wp_statistics_options = self::{'save_' . $method . '_option'}($wp_statistics_options);
             }
 
+            $wp_statistics_options = apply_filters('wp_statistics_options', $wp_statistics_options);
+
             // Save Option
             Option::save_options($wp_statistics_options);
+
+            // Save Addons Options
+            if (!empty($_POST['wps_addon_settings']) && is_array($_POST['wps_addon_settings'])) {
+                foreach ($_POST['wps_addon_settings'] as $addon_name => $addon_options) {
+                    if (!empty($addon_options) && is_array($addon_options)) {
+                        self::save_addons_options($addon_name, $addon_options);
+                    }
+                }
+            }
+
+            // Trigger Save Settings Action
+            do_action('wp_statistics_save_settings');
 
             // Get tab name for redirect to the current tab
             $tab = isset($_POST['tab']) && $_POST['tab'] ? sanitize_text_field($_POST['tab']) : 'general-settings';
@@ -98,9 +109,9 @@ class settings_page
                 $status = Referred::download_referrer_spam();
                 if (is_bool($status)) {
                     if ($status === false) {
-                        Helper::addAdminNotice(__("Error Encountered While Updating Spam Referrer Blacklist.", "wp-statistics"), "error");
+                        Notice::addFlashNotice(__("Error Encountered While Updating Spam Referrer Blacklist.", "wp-statistics"), "error");
                     } else {
-                        Helper::addAdminNotice(__("Spam Referrer Blacklist Successfully Updated.", "wp-statistics"), "success");
+                        Notice::addFlashNotice(__("Spam Referrer Blacklist Successfully Updated.", "wp-statistics"), "success");
                     }
                     self::$redirectAfterSave = false;
                 }
@@ -120,12 +131,12 @@ class settings_page
 
         // Save Setting
         if (isset($_GET['save_setting'])) {
-            Helper::addAdminNotice(__("Settings Successfully Saved.", "wp-statistics"), "success");
+            Notice::addFlashNotice(__("Settings Successfully Saved.", "wp-statistics"), "success");
         }
 
         // Reset Setting
         if (isset($_GET['reset_settings'])) {
-            Helper::addAdminNotice(__("All Settings Have Been Reset to Default.", "wp-statistics"), "success");
+            Notice::addFlashNotice(__("All Settings Have Been Reset to Default.", "wp-statistics"), "success");
         }
     }
 
@@ -151,8 +162,9 @@ class settings_page
         $wps_option_list = array(
             'wps_anonymize_ips',
             'wps_hash_ips',
+            'wps_privacy_audit',
             'wps_store_ua',
-            'wps_all_online',
+            'wps_consent_level_integration',
             'wps_do_not_track',
         );
 
@@ -183,8 +195,13 @@ class settings_page
                 if (wp_next_scheduled('wp_statistics_report_hook')) {
                     wp_unschedule_event(wp_next_scheduled('wp_statistics_report_hook'), 'wp_statistics_report_hook');
                 }
-
-                wp_schedule_event(time(), sanitize_text_field($_POST['wps_time_report']), 'wp_statistics_report_hook');
+                $timeReports         = sanitize_text_field($_POST['wps_time_report']);
+                $schedulesInterval   = wp_get_schedules();
+                $timeReportsInterval = 86400;
+                if (isset($schedulesInterval[$timeReports]['interval'])) {
+                    $timeReportsInterval = $schedulesInterval[$timeReports]['interval'];
+                }
+                wp_schedule_event(time() + $timeReportsInterval, $timeReports, 'wp_statistics_report_hook');
             }
         }
 
@@ -196,8 +213,7 @@ class settings_page
             "wps_email_list",
             "wps_geoip_report",
             "wps_prune_report",
-            "wps_upgrade_report",
-            "wps_admin_notices",
+            "wps_upgrade_report"
         );
 
         foreach ($wps_option_list as $option) {
@@ -312,7 +328,7 @@ class settings_page
                             $errorMessage
                         );
 
-                        Helper::addAdminNotice($userFriendlyMessage, 'error');
+                        Notice::addFlashNotice($userFriendlyMessage, 'error');
                         self::$redirectAfterSave = false;
                     }
                 }
@@ -450,19 +466,15 @@ class settings_page
             'wps_visitors',
             'wps_visitors_log',
             'wps_enable_user_column',
+            'wps_bypass_ad_blockers',
             'wps_pages',
-            'wps_track_all_pages',
             'wps_use_cache_plugin',
-            'wps_hit_post_metabox',
             'wps_show_hits',
             'wps_display_hits_position',
             'wps_check_online',
             'wps_menu_bar',
             'wps_coefficient',
-            'wps_chart_totals',
-            'wps_hide_notices',
-            'wps_all_online',
-            'wps_addsearchwords',
+            'wps_hide_notices'
         );
 
         foreach ($wps_option_list as $option) {
@@ -470,15 +482,10 @@ class settings_page
             $wp_statistics_options[self::input_name_to_option($option)] = $optionValue;
         }
 
-        // Save Visits Column & Visit Chart Metabox
+        // Save Views Column & View Chart Metabox
         foreach (array('wps_disable_column', 'wps_disable_editor') as $option) {
-            $wps_disable_column = isset($_POST[$option]) && sanitize_text_field($_POST[$option]) == '1' ? '' : '1';
+            $wps_disable_column                                         = isset($_POST[$option]) && sanitize_text_field($_POST[$option]) == '1' ? '' : '1';
             $wp_statistics_options[self::input_name_to_option($option)] = $wps_disable_column;
-        }
-
-        //Add Visitor RelationShip Table
-        if (isset($_POST['wps_visitors_log']) and $_POST['wps_visitors_log'] == 1) {
-            Install::create_visitor_relationship_table();
         }
 
         //Flush Rewrite Use Cache Plugin
@@ -487,6 +494,30 @@ class settings_page
         }
 
         return $wp_statistics_options;
+    }
+
+    /**
+     * Save Addons Options
+     *
+     * @param $addon_name
+     * @param $addon_options
+     */
+    public static function save_addons_options($addon_name, $addon_options)
+    {
+        $options = [];
+        foreach ($addon_options as $option_name => $option_value) {
+            if (in_array($option_name, ['wps_about_widget_content', 'email_content_header', 'email_content_footer'])) {
+                $options[$option_name] = wp_kses_post($option_value);
+            } else {
+                if (is_array($option_value)) {
+                    $options[$option_name] = array_map('sanitize_text_field', $option_value);
+                } else {
+                    $options[$option_name] = sanitize_text_field($option_value);
+                }
+            }
+        }
+
+        Option::saveByAddon($options, $addon_name);
     }
 
     /**
@@ -534,4 +565,4 @@ class settings_page
     }
 }
 
-new settings_page;
+settings_page::instance();

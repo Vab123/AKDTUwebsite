@@ -44,7 +44,7 @@ if ( !class_exists('rsp_upgrade_to_pro') ){
 						$rsssl_admin_url = is_multisite() ? network_admin_url('settings.php') : admin_url("options-general.php");
 						$this->slug = is_multisite() ? "really-simple-ssl-pro-multisite/really-simple-ssl-pro-multisite.php" :  "really-simple-ssl-pro/really-simple-ssl-pro.php";
 						$this->plugin_name = "Really Simple SSL Pro";
-						$this->plugin_constant = "rsssl_pro_version";
+						$this->plugin_constant = "rsssl_pro";
 						$this->prefix = "rsssl_";
 						$this->api_url = "https://really-simple-ssl.com";
 						$this->dashboard_url = add_query_arg(["page" => "really-simple-security"], $rsssl_admin_url );
@@ -369,8 +369,8 @@ if ( !class_exists('rsp_upgrade_to_pro') ){
                             <a href="<?php echo $plugins_url ?>" role="button" class="button-primary rsp-red rsp-hidden rsp-btn rsp-cancel">
 								<?php echo __("Cancel", "really-simple-ssl") ?>
                             </a>
-                            <div class="rsp-error-message rsp-folder rsp-package rsp-install rsp-activate rsp-hidden"><span><?php _e('An Error Occurred:',"really-simple-ssl")?></span>&nbsp;<?php printf(__('Install %sManually%s.',"really-simple-ssl").'&nbsp;', '<a target="_blank" rel="noopener noreferrer" href="'.$this->account_url.'">','</a>')?></div>
-                            <div class="rsp-error-message rsp-license rsp-hidden"><span><?php _e('An Error Occurred:',"really-simple-ssl")?></span>&nbsp;<?php printf(__('Check your %slicense%s.',"really-simple-ssl").'&nbsp;', '<a target="_blank" rel="noopener noreferrer" href="'.$this->instructions.'">','</a>')?></div>
+                            <div class="rsp-error-message rsp-folder rsp-package rsp-install rsp-activate rsp-hidden"><span><?php _e('An error occurred:',"really-simple-ssl")?></span>&nbsp;<?php printf(__('Install %sManually%s.',"really-simple-ssl").'&nbsp;', '<a target="_blank" rel="noopener noreferrer" href="'.$this->account_url.'">','</a>')?></div>
+                            <div class="rsp-error-message rsp-license rsp-hidden"><span><?php _e('An error occurred:',"really-simple-ssl")?></span>&nbsp;<?php printf(__('Check your %slicense%s.',"really-simple-ssl").'&nbsp;', '<a target="_blank" rel="noopener noreferrer" href="'.$this->instructions.'">','</a>')?></div>
                         </div>
                     </div>
                 </div>

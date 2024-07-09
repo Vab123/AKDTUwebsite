@@ -4,12 +4,11 @@ namespace WP_STATISTICS;
 
 use Exception;
 use WP_STATISTICS;
+use WP_Statistics\Utils\Request;
 use WP_Statistics_Mail;
 
 class Helper
 {
-    protected static $admin_notices = [];
-
     /**
      * WP Statistics WordPress Log
      *
@@ -27,7 +26,7 @@ class Helper
             do_action('doing_it_wrong_run', $function, $message, $version);
             error_log("{$function} was called incorrectly. {$message}. This message was added in version {$version}.");
         } else {
-            _doing_it_wrong($function, $message, $version);
+            _doing_it_wrong($function, $message, $version); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         }
     }
 
@@ -79,8 +78,23 @@ class Helper
             return false;
         }
 
+        // Backward-Compatibility with Bypass Ad Blockers option
+        if (self::isBypassAdBlockersRequest()) {
+            return true;
+        }
+
         $rest_prefix = trailingslashit(rest_get_url_prefix());
         return (false !== strpos($_SERVER['REQUEST_URI'], $rest_prefix)) or isset($_REQUEST['rest_route']);
+    }
+
+    /**
+     * Returns true if the request belongs to "Bypass Ad Blockers" feature.
+     *
+     * @return  bool
+     */
+    public static function isBypassAdBlockersRequest()
+    {
+        return (Request::compare('action', 'wp_statistics_hit_record') || Request::compare('action', 'wp_statistics_keep_online'));
     }
 
     /**
@@ -119,32 +133,6 @@ class Helper
     }
 
     /**
-     * Show Admin WordPress UI Notice
-     *
-     * @param $text
-     * @param string $model
-     * @param bool $close_button
-     * @param bool $id
-     * @param bool $echo
-     * @param string $style_extra
-     * @return string
-     */
-    public static function wp_admin_notice($text, $model = "info", $close_button = true, $id = false, $echo = true, $style_extra = 'padding:6px 0')
-    {
-        $text = '
-        <div class="notice notice-' . $model . '' . ($close_button === true ? " is-dismissible" : "") . '"' . ($id != false ? ' id="' . $id . '"' : '') . '>
-           <div style="' . $style_extra . '">' . $text . '</div>
-        </div>
-        ';
-
-        if ($echo) {
-            echo wp_kses_post($text);
-        } else {
-            return $text;
-        }
-    }
-
-    /**
      * Get Screen ID
      *
      * @return string
@@ -175,7 +163,7 @@ class Helper
     public static function is_active_cache_plugin()
     {
         $use = array('status' => false, 'plugin' => '');
-
+// TODO: Optimize this function
         /* WordPress core */
         if (defined('WP_CACHE') && WP_CACHE) {
             $use = array('status' => true, 'plugin' => 'core');
@@ -211,6 +199,11 @@ class Helper
             $use = array('status' => true, 'plugin' => 'W3 Total Cache');
         }
 
+        /* WP-Optimize */
+        if (class_exists('WP_Optimize')) {
+            $use = array('status' => true, 'plugin' => 'WP-Optimize');
+        }
+
         return apply_filters('wp_statistics_cache_status', $use);
     }
 
@@ -224,7 +217,7 @@ class Helper
     public static function get_uploads_dir($path = '')
     {
         $upload_dir = wp_upload_dir();
-        return path_join($upload_dir['basedir'], $path);
+        return wp_normalize_path(path_join($upload_dir['basedir'], $path));
     }
 
     /**
@@ -235,15 +228,8 @@ class Helper
      */
     public static function get_robots_list($type = 'list')
     {
-        global $WP_Statistics;
-
         # Set Default
         $list = array();
-
-        # Load From global
-        if (isset($WP_Statistics->robots_list)) {
-            $list = $WP_Statistics->robots_list;
-        }
 
         # Load From file
         include WP_STATISTICS_DIR . "includes/defines/robots-list.php";
@@ -306,7 +292,9 @@ class Helper
             'pages'   => array('order_by' => 'page_id', 'column' => 'date'),
         );
         foreach ($list_tbl as $tbl => $val) {
-            $first_day = $wpdb->get_var("SELECT `" . $val['column'] . "` FROM `" . WP_STATISTICS\DB::table($tbl) . "` ORDER BY `" . $val['order_by'] . "` ASC LIMIT 1");
+            $first_day = $wpdb->get_var(
+                $wpdb->prepare("SELECT %s FROM `" . WP_STATISTICS\DB::table($tbl) . "` ORDER BY %s ASC LIMIT 1", $val['column'], $val['order_by'])
+            );
             if (!empty($first_day)) {
                 break;
             }
@@ -337,8 +325,8 @@ class Helper
     public static function get_list_post_type()
     {
         // Get default post types which are public (exclude media post type)
-        $post_types     = get_post_types(array('public' => true, '_builtin' => true), 'names', 'and');
-        $post_types     = array_diff($post_types, ['attachment']);
+        $post_types = get_post_types(array('public' => true, '_builtin' => true), 'names', 'and');
+        $post_types = array_diff($post_types, ['attachment']);
 
         // Get custom post types which are public
         $custom_post_types = get_post_types(array('public' => true, '_builtin' => false), 'names', 'and');
@@ -366,7 +354,7 @@ class Helper
      */
     public static function check_url_scheme($url, $accept = array('http', 'https'))
     {
-        $scheme = @parse_url($url, PHP_URL_SCHEME);
+        $scheme = @wp_parse_url($url, PHP_URL_SCHEME);
         return in_array($scheme, $accept);
     }
 
@@ -417,7 +405,7 @@ class Helper
             $array[$key] = html_entity_decode((string)$value, ENT_QUOTES, 'UTF-8');
         }
 
-        return json_encode($array, JSON_UNESCAPED_SLASHES);
+        return wp_json_encode($array, JSON_UNESCAPED_SLASHES);
     }
 
     /**
@@ -539,7 +527,7 @@ class Helper
         $characters   = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $randomString = '';
         for ($i = 0; $i < $num; $i++) {
-            $randomString .= $characters[rand(0, strlen($characters) - 1)];
+            $randomString .= $characters[wp_rand(0, strlen($characters) - 1)];
         }
 
         return $randomString;
@@ -629,23 +617,40 @@ class Helper
     public static function FilterQueryStringUrl($url, $allowedParams)
     {
         // Get query from the URL
-        $urlQuery  = strpos($url, '?');
+        $urlQuery = strpos($url, '?');
 
         // Check if the URL has query strings
         if ($urlQuery !== false) {
+            global $wp;
+            $internalQueryParams    = $wp->public_query_vars;
+            $permalinkStructure     = get_option('permalink_structure');
 
-            // Parse query strings passed via the URL
-            parse_str(substr($url, $urlQuery + 1), $parsedQuery);
+            // Extract the URL path and query string
+            $urlPath     = substr($url, 0, $urlQuery);
+            $queryString = substr($url, $urlQuery + 1);
 
-            // Loop through query params and unset ones not allowed  
+            // Parse the query string into an array
+            parse_str($queryString, $parsedQuery);
+
+            // Get the first query param key
+            reset($parsedQuery);
+            $firstKey = key($parsedQuery);
+
+            // Loop through query params and unset ones not allowed, except the first one
             foreach ($parsedQuery as $key => $value) {
-                if (!in_array($key, $allowedParams)) {
+                $allowedQueryVars = $allowedParams;
+
+                // If ugly permalink is enabled, ignore the first key if it's internal
+                if (empty($permalinkStructure) && $key === $firstKey) {
+                    $allowedQueryVars = array_merge($internalQueryParams, $allowedParams);
+                }
+
+                if (!in_array($key, $allowedQueryVars)) {
                     unset($parsedQuery[$key]);
                 }
             }
 
-            // Rebuild URL with allowed params
-            $urlPath = substr($url, 0, $urlQuery);
+            // Rebuild URL with allowed params, keeping the first query param
             if (!empty($parsedQuery)) {
                 $filteredQuery = http_build_query($parsedQuery);
                 $url           = $urlPath . '?' . $filteredQuery;
@@ -710,7 +715,7 @@ class Helper
      */
     public static function getUrlDecode($value)
     {
-        return utf8_decode(urldecode($value));
+        return mb_convert_encoding(urldecode($value), 'ISO-8859-1', 'UTF-8');
     }
 
     /**
@@ -782,13 +787,18 @@ class Helper
     {
         // Email Template
         if ($email_template) {
-            $email_template = wp_normalize_path(WP_STATISTICS_DIR . 'includes/admin/templates/emails/layout.php');
+            $email_template = WP_STATISTICS_DIR . 'includes/admin/templates/emails/layout.php';
+            $email_template = apply_filters('wp_statistics_email_template_layout', $email_template);
+            $email_template = wp_normalize_path($email_template);
         }
 
-        // Email from
-        $from_name  = get_bloginfo('name');
-        $from_email = get_bloginfo('admin_email');
-        $from       = sprintf('%s <%s>', $from_name, $from_email);
+        $schedule   = Option::get('time_report', false);
+        $emailTitle = sprintf(__('Sent from %s', 'wp-statistics'), wp_parse_url(get_site_url())['host']);
+
+        if ($schedule && array_key_exists($schedule, Schedule::getSchedules())) {
+            $schedule   = Schedule::getSchedules()[$schedule];
+            $emailTitle .= sprintf(__('<br><small>Report Date Range: %s to %s</small>', 'wp-statistics'), $schedule['start'], $schedule['end']);
+        }
 
         //Template Arg
         $template_arg = array(
@@ -798,7 +808,7 @@ class Helper
             'site_url'     => home_url(),
             'site_title'   => get_bloginfo('name'),
             'footer_text'  => '',
-            'email_title'  => apply_filters('wp_statistics_email_title', __('Email from', 'wp-statistics') . ' ' . parse_url(get_site_url())['host']),
+            'email_title'  => apply_filters('wp_statistics_email_title', $emailTitle),
             'logo_image'   => apply_filters('wp_statistics_email_logo', WP_STATISTICS_URL . 'assets/images/logo-statistics-header-blue.png'),
             'logo_url'     => apply_filters('wp_statistics_email_logo_url', get_bloginfo('url')),
             'copyright'    => apply_filters('wp_statistics_email_footer_copyright', Admin_Template::get_template('emails/copyright', array(), true)),
@@ -814,7 +824,6 @@ class Helper
         try {
 
             WP_Statistics_Mail::init()
-                ->setFrom($from)
                 ->setTo($to)
                 ->setSubject($subject)
                 ->setBody($content)
@@ -860,7 +869,7 @@ class Helper
         foreach ($get_tax as $object) {
             $object = get_object_vars($object);
             if ($hide_empty === true) {
-                $count_term_in_tax = wp_count_terms($object['name'], array('hide_empty' => false, 'parent' => 0));
+                $count_term_in_tax = wp_count_terms($object['name']);
                 if ($count_term_in_tax > 0 and isset($object['rewrite']['slug'])) {
                     $taxonomies[$object['name']] = $object['labels']->name;
                 }
@@ -895,13 +904,11 @@ class Helper
      */
     public static function mysql_time_conditions($field = 'date', $time = 'total', $range = array())
     {
-        global $WP_Statistics;
-
         //Get Current Date From WP
         $current_date = TimeZone::getCurrentDate('Y-m-d');
 
         //Create Field Sql
-        $field_sql = function ($time) use ($current_date, $field, $WP_Statistics, $range) {
+        $field_sql = function ($time) use ($current_date, $field, $range) {
             $is_current     = array_key_exists('current_date', $range);
             $getCurrentDate = TimeZone::getCurrentDate('Y-m-d', (int)$time);
             return "`$field` " . ($is_current === true ? '=' : 'BETWEEN') . " '{$getCurrentDate}'" . ($is_current === false ? " AND '{$current_date}'" : "");
@@ -937,13 +944,13 @@ class Helper
                 $where = $field_sql(-365);
                 break;
             case 'this-year':
-                $fromDate = TimeZone::getLocalDate('Y-m-d', strtotime(date('Y-01-01')));
+                $fromDate = TimeZone::getLocalDate('Y-m-d', strtotime(gmdate('Y-01-01')));
                 $toDate   = TimeZone::getCurrentDate('Y-m-d');
                 $where    = "`$field` BETWEEN '{$fromDate}' AND '{$toDate}'";
                 break;
             case 'last-year':
-                $fromDate = TimeZone::getTimeAgo((365 * 2), 'Y-m-d');
-                $toDate   = TimeZone::getTimeAgo(365, 'Y-m-d');
+                $fromDate = TimeZone::getTimeAgo(365, 'Y-01-01');
+                $toDate   = TimeZone::getTimeAgo(365, 'Y-12-31');
                 $where    = "`$field` BETWEEN '{$fromDate}' AND '{$toDate}'";
                 break;
             case 'total':
@@ -982,6 +989,21 @@ class Helper
     public static function compare_uri_hits($a, $b)
     {
         return $a[1] < $b[1];
+    }
+
+    /**
+     * Easy U-sort Array
+     *
+     * @param $a
+     * @param $b
+     * @return int
+     */
+    public static function compare_uri_hits_int($a, $b)
+    {
+        if ($b[1] == $a[1]) return 0;
+        if ($b[1] > $a[1]) return 1;
+        if ($b[1] < $a[1]) return -1;
+
     }
 
     /**
@@ -1163,45 +1185,6 @@ class Helper
     }
 
     /**
-     * Add notice to display in the admin area
-     *
-     * @param $message
-     * @param string $class
-     * @param bool $is_dismissible
-     * @since 13.2.5
-     */
-    public static function addAdminNotice($message, $class = 'info', $is_dismissible = true)
-    {
-        self::$admin_notices[] = array(
-            'message'        => $message,
-            'class'          => $class,
-            'is_dismissible' => (bool)$is_dismissible,
-        );
-    }
-
-    /**
-     * Display all notices in the admin area
-     *
-     * @return void
-     * @since 13.2.5
-     */
-    public static function displayAdminNotices()
-    {
-        foreach ((array)self::$admin_notices as $notice) :
-            $dismissible = $notice['is_dismissible'] ? 'is-dismissible' : '';
-            ?>
-
-            <div class="notice notice-<?php echo esc_attr($notice['class']); ?> <?php echo esc_attr($dismissible); ?>">
-                <p>
-                    <?php echo wp_kses_post($notice['message']); ?>
-                </p>
-            </div>
-
-        <?php
-        endforeach;
-    }
-
-    /**
      * Returns default parameters for hits request
      *
      * @return array
@@ -1211,19 +1194,18 @@ class Helper
         // Create Empty Params Object
         $params = array();
 
-        //track all page
-        $params['track_all'] = (Pages::is_track_all_page() === true ? 1 : 0);
-
         //Set Page Type
         $get_page_type               = Pages::get_page_type();
         $params['current_page_type'] = $get_page_type['type'];
         $params['current_page_id']   = $get_page_type['id'];
-        $params['search_query']      = (isset($get_page_type['search_query']) ? esc_html($get_page_type['search_query']) : '');
+        $params['search_query']      = (isset($get_page_type['search_query']) ? base64_encode(esc_html($get_page_type['search_query'])) : '');
 
-        //page url
+        // page url
         $params['page_uri'] = base64_encode(Pages::get_page_uri());
 
-        //return Json Data
+        // Nonce
+        $params['nonce'] = wp_create_nonce('wp_statistics_tracker_nonce');
+
         return $params;
     }
 
@@ -1265,5 +1247,229 @@ class Helper
         }
 
         return sanitize_url(wp_unslash($_SERVER['REQUEST_URI']));
+    }
+
+    /**
+     * Check whether an add-on is active or not
+     *
+     * @param string $slug
+     * @return bool
+     */
+    public static function isAddOnActive($slug)
+    {
+        if (!function_exists('is_plugin_active')) {
+            include_once(ABSPATH . 'wp-admin/includes/plugin.php');
+        }
+
+        $pluginName = sprintf('wp-statistics-%1$s/wp-statistics-%1$s.php', $slug);
+
+        return is_plugin_active($pluginName);
+    }
+
+    public static function convertBytes($input)
+    {
+        $unit  = strtoupper(substr($input, -1));
+        $value = (int)$input;
+        switch ($unit) {
+            case 'G':
+                $value *= 1024;
+            case 'M':
+                $value *= 1024;
+            case 'K':
+                $value *= 1024;
+        }
+        return $value;
+    }
+
+    public static function checkMemoryLimit()
+    {
+        if (!function_exists('memory_get_peak_usage') or !function_exists('ini_get')) {
+            return false;
+        }
+
+        $memoryLimit = ini_get('memory_limit');
+
+        if (memory_get_peak_usage(true) > self::convertBytes($memoryLimit)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function yieldARow($rows)
+    {
+        $i = 0;
+        while ($row = current($rows)) {
+            yield $row;
+            unset($rows[$i]);
+            $i++;
+        }
+    }
+
+    public static function prepareArrayToStringForQuery($fields = array())
+    {
+        global $wpdb;
+
+        foreach ($fields as &$value) {
+            $value = $wpdb->prepare('%s', $value);
+        }
+
+        return implode(', ', $fields);
+    }
+
+
+    /**
+     * Formats a number into a string with appropriate units (K, M, B, T).
+     *
+     * @param int|float $number The number to be formatted.
+     * @param int $precision The number of decimal places to round the result to for numbers without units. Default is 0.
+     * @return string The formatted number with appropriate units.
+     */
+    public static function formatNumberWithUnit($number, $precision = 0)
+    {
+        if (!is_numeric($number)) return 0;
+
+        $units = ['', 'K', 'M', 'B', 'T'];
+        for ($i = 0; $number >= 1000 && $i < 4; $i++) {
+            $number /= 1000;
+        }
+
+        if (empty($units[$i])) {
+            $formattedNumber = round($number, $precision);
+        } else {
+            $formattedNumber = round($number, 1) . $units[$i];
+        }
+
+        return $formattedNumber;
+    }
+
+
+    /**
+     * Filters an array by keeping only the keys specified in the second argument.
+     *
+     * @param array $arr The array to be filtered.
+     * @param array $keys The keys to keep in the array.
+     * @return array The filtered array.
+     */
+    public static function filterArrayByKeys($array, $keys)
+    {
+        return array_intersect_key($array, array_flip($keys));
+    }
+
+
+    /**
+     * Divides two numbers.
+     *
+     * @param int|float $dividend The number to be divided.
+     * @param int|float $divisor The number to divide by.
+     * @param int $precision The number of decimal places to round the result to. Default is 2.
+     * @return float The result of the division, rounded to the specified precision. Returns 0 if the divisor is 0.
+     */
+    public static function divideNumbers($dividend, $divisor, $precision = 2)
+    {
+        if ($divisor == 0) {
+            return 0;
+        }
+        return round($dividend / $divisor, $precision);
+    }
+
+
+    /**
+     * Calculates the difference between two dates.
+     *
+     * @param string $date1 The first date.
+     * @param string $date2 The second date.
+     */
+    public static function calculateDateDifference($date1, $date2 = 'now')
+    {
+        // Convert dates to DateTime objects
+        $datetime1 = new \DateTime($date1);
+        $datetime2 = new \DateTime($date2);
+
+        $interval = $datetime1->diff($datetime2);
+
+        if ($interval->y > 0) {
+            return _n('a year', sprintf('%d years', $interval->y), $interval->y, 'wp-statistics');
+        } elseif ($interval->m > 0) {
+            return _n('a month', sprintf('%d months', $interval->m), $interval->m, 'wp-statistics');
+        } elseif ($interval->d >= 7) {
+            $weeks = floor($interval->d / 7);
+            return _n('a week', sprintf('%d weeks', $weeks), $weeks, 'wp-statistics');
+        } else {
+            return _n('a day', sprintf('%d days', $interval->d), $interval->d, 'wp-statistics');
+        }
+    }
+
+    /**
+     * Retrieves the name of a post type.
+     *
+     * @param string $postType The post type to retrieve the name for.
+     * @param bool $singular Whether to retrieve the singular name or the plural name.
+     *
+     * @return string The name of the post type.
+     */
+    public static function getPostTypeName($postType, $singular = false)
+    {
+        $postTypeObj = get_post_type_object($postType);
+
+        if (empty($postTypeObj)) return '';
+
+        return $singular == true
+            ? $postTypeObj->labels->singular_name
+            : $postTypeObj->labels->name;
+    }
+
+
+    /**
+     * Retrieves the country code based on the timezone string.
+     *
+     * @return string The country code corresponding to the timezone.
+     */
+    public static function getTimezoneCountry()
+    {
+        $timezone    = get_option('timezone_string');
+        $countryCode = TimeZone::getCountry($timezone);
+        return $countryCode;
+    }
+
+    /**
+     * Returns full URL of a DIR.
+     *
+     * @param string $dir
+     *
+     * @return  string          URL. Empty on error.
+     * @source  https://wordpress.stackexchange.com/a/264870/
+     */
+    public static function dirToUrl($dir)
+    {
+        if (!is_file($dir)) {
+            return '';
+        }
+
+        return esc_url_raw(str_replace(
+            wp_normalize_path(untrailingslashit(ABSPATH)),
+            site_url(),
+            wp_normalize_path($dir)
+        ));
+    }
+
+    /**
+     * Returns full DIR of a local URL.
+     *
+     * @param string $url
+     *
+     * @return  string          DIR. Empty on error.
+     */
+    public static function urlToDir($url)
+    {
+        if (stripos($url, site_url()) === false) {
+            return '';
+        }
+
+        return (str_replace(
+            site_url(),
+            wp_normalize_path(untrailingslashit(ABSPATH)),
+            $url
+        ));
     }
 }

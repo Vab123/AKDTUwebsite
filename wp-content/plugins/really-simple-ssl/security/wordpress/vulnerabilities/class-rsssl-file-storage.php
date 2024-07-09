@@ -63,6 +63,14 @@ class Rsssl_File_Storage {
 	 * @param $file
 	 */
 	public function set( $data, $file ) {
+		if ( ! is_dir( $this->folder ) ) {
+			return;
+		}
+
+		if ( ! is_writable( $this->folder ) ) {
+			return;
+		}
+
 		$data = $this->Encode64WithHash( json_encode( $data ) );
 		//first we check if the storage folder is already in the $file string
 		if ( strpos( $file, $this->folder ) !== false ) {
@@ -85,7 +93,7 @@ class Rsssl_File_Storage {
 
 		// Check if IV generation was successful and cryptographically strong
 		if ($iv === false || $crypto_strong === false) {
-			throw new \RuntimeException( __('Could not generate a secure initialization vector.', 'really-simple-ssl'));
+			return '';
 		}
 
 		$encrypted = openssl_encrypt($data, 'aes-256-cbc', $this->hash, 0, $iv);
@@ -107,10 +115,17 @@ class Rsssl_File_Storage {
 
 		// Check if IV was successfully retrieved
 		if ( $iv === false ) {
-			throw new \RuntimeException( __('Could not retrieve the initialization vector.', 'really-simple-ssl') );
+			return '';
 		}
 
-		$decrypted = openssl_decrypt( $encrypted_data, 'aes-256-cbc', $this->hash, 0, $iv );
+		if ( function_exists( 'openssl_decrypt' ) ) {
+			$decrypted = openssl_decrypt( $encrypted_data, 'aes-256-cbc', $this->hash, 0, $iv );
+		} else {
+			$decrypted = '';
+			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+				error_log( 'Really Simple SSL: OpenSSL functions do not exist. Check with your host if the OpenSSL library for PHP can be enabled.' );
+			}
+		}
 
 		return $decrypted;
 	}
@@ -129,8 +144,6 @@ class Rsssl_File_Storage {
 	}
 
 	public static function GetDate( string $file ) {
-		$storage = new Rsssl_File_Storage();
-		$file    = $storage->folder . '/' . $file;
 		if ( file_exists( $file ) ) {
 			return filemtime( $file );
 		}

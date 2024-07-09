@@ -132,13 +132,13 @@ class rsssl_onboarding {
 	 */
 	public function signup_for_mailinglist( string $email): void {
 		$license_key = '';
-		if ( defined('rsssl_pro_version') ) {
-			$license_key = RSSSL_PRO()->licensing->license_key();
-			$license_key = RSSSL_PRO()->licensing->maybe_decode( $license_key );
+		if ( defined('rsssl_pro') ) {
+			$license_key = RSSSL()->licensing->license_key();
+			$license_key = RSSSL()->licensing->maybe_decode( $license_key );
 		}
 
 		$api_params = array(
-			'has_premium' => defined('rsssl_pro_version'),
+			'has_premium' => defined('rsssl_pro'),
 			'license' => $license_key,
 			'email' => sanitize_email($email),
 			'domain' => esc_url_raw( site_url() ),
@@ -166,8 +166,8 @@ class rsssl_onboarding {
 			return [];
 		}
 
-		if( !defined('rsssl_pro_version')) {
-			$info = __('You can also let the automatic scan of the pro version handle this for you, and get premium support, increased security with HSTS and more!', 'really-simple-ssl'). " " . sprintf('<a target="_blank" rel="noopener noreferrer" href="%s">%s</a>', RSSSL()->admin->pro_url, __("Check out Really Simple SSL Pro", "really-simple-ssl"));;
+		if( !defined('rsssl_pro')) {
+			$info = __('You can also let the automatic scan of the pro version handle this for you, and get premium support, increased security with HSTS and more!', 'really-simple-ssl'). " " . sprintf('<a target="_blank" rel="noopener noreferrer" href="%s">%s</a>',rsssl_link(), __("Check out Really Simple SSL Pro", "really-simple-ssl"));;
 		}
 
 		$steps = [
@@ -246,7 +246,7 @@ class rsssl_onboarding {
 			];
 		} else if ( RSSSL()->certificate->detection_failed() ) {
 			$items[] = [
-				"title" => __("Could not test certificate.", "really-simple-ssl") . " " . __("Automatic certificate detection is not possible on your server.", "really-simple-ssl"),
+				"title" => __("Could not test certificate", "really-simple-ssl") . " " . __("Automatic certificate detection is not possible on your server.", "really-simple-ssl"),
 				"status" => "error",
 				"id" => "certificate",
 			];
@@ -280,7 +280,7 @@ class rsssl_onboarding {
 				"slug" => "complianz-terms-conditions",
 				'constant_premium' => false,
 				"title" => "Complianz Terms & Conditions",
-				"description" => __("Terms & Conditions.", "really-simple-ssl"),
+				"description" => __("Terms & Conditions", "really-simple-ssl"),
 			]
 		];
 		foreach ($plugins_to_install as $plugin_info) {
@@ -396,11 +396,18 @@ class rsssl_onboarding {
 				"title" => __("Advanced Security Headers", "really-simple-ssl"),
 				"id" => "advanced_headers",
 				"premium" => true,
-				"options" => [],
+				"options" => [  'upgrade_insecure_requests',
+								'x_content_type_options',
+								['x_xss_protection' => 'zero'],
+								'x_content_type_options',
+								['x_frame_options' => 'SAMEORIGIN'],
+								['referrer_policy' => 'strict-origin-when-cross-origin'],
+								['csp_frame_ancestors' => 'self'],
+							 ],
 				"activated" => true,
 			],
 			[
-				"title" => __("Password Security", "really-simple-ssl"),
+				"title" => __("Password security", "really-simple-ssl"),
 				"id" => "password_security",
 				"options" => ['enforce_password_security_enabled'],
 				"activated" => true,

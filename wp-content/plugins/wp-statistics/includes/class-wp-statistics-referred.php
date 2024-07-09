@@ -23,7 +23,7 @@ class Referred
      *
      * @var string
      */
-    public static $referrer_spam_link = 'https://cdn.jsdelivr.net/gh/matomo-org/referrer-spam-list@4.0.0/spammers.txt';
+    public static $referrer_spam_link = 'https://cdn.jsdelivr.net/gh/matomo-org/referrer-spam-list@master/spammers.txt';
 
     /**
      * Referred constructor.
@@ -60,33 +60,11 @@ class Referred
         $referred = self::getRefererURL();
 
         // Sanitize Referer Url
-        $referred = esc_url_raw(strip_tags($referred));
+        $referred = esc_url_raw(wp_strip_all_tags($referred));
 
         // If Referer is empty, set only ''
         if (empty($referred)) {
             $referred = '';
-        }
-
-        // Check Search Engine
-        if (Option::get('addsearchwords', false)) {
-
-            // Check to see if this is a search engine referrer
-            $SEInfo = SearchEngine::getByUrl($referred);
-            if (is_array($SEInfo)) {
-
-                // If we're a known SE, check the query string
-                if ($SEInfo['tag'] != '') {
-                    $result = SearchEngine::getByQueryString($referred);
-
-                    // If there were no search words, let's add the page title
-                    if ($result == '' || $result == SearchEngine::$error_found) {
-                        $result = wp_title('', false);
-                        if ($result != '') {
-                            $referred = esc_url(add_query_arg($SEInfo['querykey'], urlencode('~"' . $result . '"'), $referred));
-                        }
-                    }
-                }
-            }
         }
 
         $referred = Helper::FilterQueryStringUrl($referred, Helper::get_query_params_allow_list());
@@ -116,17 +94,21 @@ class Referred
         $html_referrer = esc_url($html_referrer);
 
         // Parse Url
-        $base_url = @parse_url($html_referrer);
+        $base_url = @wp_parse_url($html_referrer);
 
         // Get Page title
         $title = (trim($title) == "" ? $html_referrer : $title);
 
-        if (isset($base_url['host'])) {
-            // Get Html Link
-            return "<a href='{$html_referrer}' title='{$title}'" . ($is_blank === true ? ' target="_blank"' : '') . ">{$base_url['host']}</a>";
+        // If referrer is the current site or empty, return empty string
+        if (empty($base_url['host']) || strpos($referrer, site_url()) !== false) {
+            return \WP_STATISTICS\Admin_Template::UnknownColumn();
         }
 
-        return '-';
+        // Remove Url prefixes
+        $host_name = Helper::get_domain_name($base_url['host']);
+
+        // Get Html Link
+        return "<a href='{$html_referrer}' title='{$title}'" . ($is_blank === true ? ' target="_blank"' : '') . ">{$host_name}</a>";
     }
 
     /**
@@ -177,10 +159,10 @@ class Referred
         if (count($time_rang) > 0 and !empty($time_rang)) {
             $time_sql = sprintf("AND `last_counter` BETWEEN '%s' AND '%s'", $time_rang[0], $time_rang[1]);
         }
-        $sql = $wpdb->prepare("SELECT " . ($type == 'number' ? 'COUNT(*)' : '*') . " FROM `" . DB::table('visitor') . "` WHERE `referred` REGEXP \"^(https?://|www\\.)[\.A-Za-z0-9\-]+\\.[a-zA-Z]{2,4}\" AND referred <> '' AND LENGTH(referred) >=12 AND (`referred` LIKE  %s OR `referred` LIKE %s OR `referred` LIKE %s OR `referred` LIKE %s) " . $time_sql . " ORDER BY `" . DB::table('visitor') . "`.`ID` DESC " . ($limit != null ? " LIMIT " . $limit : "") . "", 'https://www.' . $wpdb->esc_like($search_url) . '%', 'https://' . $wpdb->esc_like($search_url) . '%', 'http://www.' . $wpdb->esc_like($search_url) . '%', 'http://' . $wpdb->esc_like($search_url) . '%');
+        $sql = $wpdb->prepare("SELECT " . ($type == 'number' ? 'COUNT(*)' : '*') . ", CAST(`version` AS SIGNED) AS `casted_version` FROM `" . DB::table('visitor') . "` WHERE `referred` REGEXP \"^(https?://|www\\.)[\.A-Za-z0-9\-]+\\.[a-zA-Z]{2,4}\" AND referred <> '' AND LENGTH(referred) >=12 AND (`referred` LIKE  %s OR `referred` LIKE %s OR `referred` LIKE %s OR `referred` LIKE %s) " . $time_sql . " ORDER BY `" . DB::table('visitor') . "`.`ID` DESC " . ($limit != null ? " LIMIT " . $limit : "") . "", 'https://www.' . $wpdb->esc_like($search_url) . '%', 'https://' . $wpdb->esc_like($search_url) . '%', 'http://www.' . $wpdb->esc_like($search_url) . '%', 'http://' . $wpdb->esc_like($search_url) . '%'); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared	
 
         //Get Count
-        return ($type == 'number' ? $wpdb->get_var($sql) : Visitor::prepareData($wpdb->get_results($sql)));
+        return ($type == 'number' ? $wpdb->get_var($sql) : Visitor::prepareData($wpdb->get_results($sql))); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared	
     }
 
     /**
@@ -258,7 +240,7 @@ class Referred
 
             $sql = $wpdb->prepare("ORDER BY `number` DESC LIMIT %d", $number);
 
-            $result = $wpdb->get_results(self::generateReferSql($sql, ''));
+            $result = $wpdb->get_results(self::generateReferSql($sql, '')); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared	
             foreach ($result as $items) {
                 $get_urls[$items->domain] = self::get_referer_from_domain($items->domain);
             }
@@ -314,7 +296,7 @@ class Referred
 
             // Push to list
             $list[] = array(
-                'domain'    => $domain,
+                'domain'    => Helper::get_domain_name($domain),
                 'title'     => $referrer_list[$domain]['title'],
                 'ip'        => ($referrer_list[$domain]['ip'] != "" ? $referrer_list[$domain]['ip'] : '-'),
                 'country'   => ($referrer_list[$domain]['country'] != "" ? $ISOCountryCode[$referrer_list[$domain]['country']] : ''),
@@ -360,7 +342,7 @@ class Referred
         }
 
         // Return List
-        return $wpdb->get_results(self::generateReferSql($having . " ORDER BY `number` DESC " . $limit, $where));
+        return $wpdb->get_results(self::generateReferSql($having . " ORDER BY `number` DESC " . $limit, $where)); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
     }
 
     /**

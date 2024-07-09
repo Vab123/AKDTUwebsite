@@ -3,7 +3,7 @@
 Plugin Name: Hide Drafts in Menus
 Plugin URI: http://room34.com
 Description: Hide unpublished pages in your custom menus.
-Version: 1.5.0
+Version: 1.5.1
 Author: Room 34 Creative Services, LLC
 Author URI: http://room34.com
 License: GPL2
@@ -34,6 +34,8 @@ function r34hdm_get_item_ids($items) {
 	// Get IDs from item list
 	$ids = array();
 	foreach ((array)$items as $key => $item) {
+		// Skip objects that are not a post type
+		if ($item->type !== 'post_type') { continue; }
 		// Post IDs are stored in the object_id property of nav_menu_item posts
 		$ids[$key] = intval($item->object_id);
 	}
@@ -113,7 +115,7 @@ function r34hdm_flag_drafts_in_menu_admin() {
 						if (!empty($unpublished_items)) {
 							foreach ((array)$unpublished_items as $unpublished) {
 								$key = array_search($unpublished->ID, $ids);
-								echo	'	#menu-item-' . $items[$key]->ID . ' .menu-item-handle { background: rgba(204,51,51,0.25); border-color: rgba(0,0,0,0.125); opacity: 0.5; }' . "\n";
+								echo	'	#menu-item-' . $items[$key]->ID . ' .menu-item-handle { background: #fcf0f1; border-color: #d63638; opacity: 0.5; }' . "\n";
 							}
 						}
 					}

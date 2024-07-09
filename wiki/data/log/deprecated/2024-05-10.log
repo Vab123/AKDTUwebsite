@@ -1,0 +1,5 @@
+2024-05-10 18:13:25		dbglog() is deprecated. It was called from helper_plugin_davcal::__construct() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/davcal/helper.php:20 \dokuwiki\Logger should be used instead!
+2024-05-10 18:13:26		dbglog() is deprecated. It was called from helper_plugin_davcal::__construct() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/davcal/helper.php:20 \dokuwiki\Logger should be used instead!
+2024-05-10 18:13:26		dbglog() is deprecated. It was called from helper_plugin_davcal::__construct() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/davcal/helper.php:20 \dokuwiki\Logger should be used instead!
+2024-05-10 18:13:26		dbglog() is deprecated. It was called from helper_plugin_davcal::__construct() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/davcal/helper.php:20 \dokuwiki\Logger should be used instead!
+2024-05-10 18:13:26		dbglog() is deprecated. It was called from helper_plugin_davcal::__construct() in /var/www/akdtu.dk/public_html/wiki/lib/plugins/davcal/helper.php:20 \dokuwiki\Logger should be used instead!

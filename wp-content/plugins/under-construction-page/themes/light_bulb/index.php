@@ -53,7 +53,7 @@ if (!defined('ABSPATH')) {
 
     </div>
     [footer]
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="<?php echo includes_url('js/jquery/jquery.min.js'); ?>" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script type="text/javascript">
     jQuery(function($) {
       var std = $('.fadein').attr('src');
