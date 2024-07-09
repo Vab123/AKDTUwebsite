@@ -22,15 +22,7 @@ if (isset($_REQUEST['action'])) {
 function add_networkgroupmember($apartment_number, $user_type){
 	# Check if the apartment number is valid
 	if ($apartment_number > 0) {
-		global $wpdb;
-		global $KNET_USER_TYPES;
-
-		$user_type = $KNET_USER_TYPES[$user_type]['id'];
-
-		# Insert new networkgroupmember into the database
-		$inserted = $wpdb->insert($wpdb->prefix . 'AKDTU_networkgroupmembers',array('apartment_number' => $apartment_number, 'start_datetime' => (new DateTime('now',new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s'), 'end_datetime' => '9999-12-31 23:59:59', 'member_type' => $user_type));
-
-		if ($inserted) {
+		if (add_user_role(id_from_apartment_number($apartment_number), 'networkgroupmember', $user_type)) {
 			# Write success message to admin interface
 			new AKDTU_notice('success','Netgruppemedlemmet blev oprettet');
 

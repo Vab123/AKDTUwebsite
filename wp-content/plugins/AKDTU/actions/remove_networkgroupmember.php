@@ -21,13 +21,8 @@ if (isset($_REQUEST['action'])) {
 function remove_networkgroupmember($user_id){
 	# Check if the user id is valid
 	if ($user_id > 0) {
-		global $wpdb;
-
-		# Update old networkgroupmember in the database
-		$rows_changed = $wpdb->update($wpdb->prefix . 'AKDTU_networkgroupmembers', array('end_datetime' => (new DateTime('now - 1 minute', new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s')), array('apartment_number' => apartment_number_from_id($_REQUEST['user']), 'end_datetime' => '9999-12-31 23:59:59'));
-
 		# Write success message to admin interface
-		if ($rows_changed > 0) {
+		if (remove_user_role($user_id, 'networkgroupmember')) {
 			new AKDTU_notice('success','Netgruppemedlemmet blev fjernet');
 
 			return true;

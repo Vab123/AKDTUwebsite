@@ -1474,4 +1474,105 @@ function apartments_dropdown($display_apartment_numbers = true, $display_names =
 }
 ############################################################
 
+
+
+############################################################
+#
+# Toggle user roles
+#
+###
+/**
+ * Removes a specific role from a user and performs related actions
+ * 
+ * @param int $user_id ID of the user to remove a role from
+ * @param string $role String representation of the role to remove. Valid options: 'boardmember', 'networkgroupmember'
+ * 
+ * @return bool True if the role was removed successfully
+ */
+function remove_user_role($user_id, $role) {
+	global $wpdb;
+	
+	switch ($role) {
+		case 'boardmember':
+			global $AKDTU_USER_TYPES;
+
+			# Get all possible membership levels
+			$membership_levels = SwpmMembershipLevelUtils::get_all_membership_levels_in_array();
+				
+			# Find the index of the resident member level
+			$new_membership_level = array_search($AKDTU_USER_TYPES['none']['user_level'], $membership_levels);
+		
+			# Set the level of the user to the resident member level
+			SwpmMemberUtils::update_membership_level( $user_id, $new_membership_level );
+			
+			# Set the role of the Wordpress user to be a resident member
+			$wp_user = get_user_by('id', $user_id );
+			$wp_user->set_role($AKDTU_USER_TYPES['none']['user_role']);
+
+			# Update old boardmember in the database
+			return $wpdb->update($wpdb->prefix . 'AKDTU_boardmembers', array('end_datetime' => (new DateTime('now - 1 minute', new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s')), array('apartment_number' => apartment_number_from_id($_REQUEST['user']), 'end_datetime' => '9999-12-31 23:59:59')) > 0;
+		case 'networkgroupmember':
+			# Update old networkgroupmember in the database
+			return $wpdb->update($wpdb->prefix . 'AKDTU_networkgroupmembers', array('end_datetime' => (new DateTime('now - 1 minute', new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s')), array('apartment_number' => apartment_number_from_id($_REQUEST['user']), 'end_datetime' => '9999-12-31 23:59:59')) > 0;
+	}
+}
+#
+/**
+ * Adds a specific role from a user and performs related actions
+ * 
+ * @param int $user_id ID of the user to remove a role from
+ * @param string $role String representation of the role to add. Valid options: 'boardmember', 'networkgroupmember'
+ * 
+ * @return bool True if the role was added successfully
+ */
+function add_user_role($user_id, $role, $role_type) {
+	global $wpdb;
+	
+	switch ($role) {
+		case 'boardmember':
+			global $AKDTU_USER_TYPES;
+
+			$user_type = $AKDTU_USER_TYPES[$role_type]['id'];
+			$user_level = $AKDTU_USER_TYPES[$role_type]['user_level'];
+			$user_role = $AKDTU_USER_TYPES[$role_type]['user_role'];
+
+			# Get the SWPM member corresponding to the apartment
+			$swpm_user = SwpmMemberUtils::get_user_by_user_name( username_from_id($user_id) );
+
+			# Get the SWPM member id corresponding to the apartment
+			$swpm_user_memberid = $swpm_user->member_id;
+
+			# Get all possible membership levels
+			$membership_levels = SwpmMembershipLevelUtils::get_all_membership_levels_in_array();
+
+			# Find the index of the administrator level, which is used as a temporary level
+			$temp_membership_level = array_search("Administrator" , $membership_levels);
+
+			# Find the index of the board member level
+			$new_membership_level = array_search($user_level , $membership_levels);
+
+			# Set the level of the apartment user to the temporary level
+			SwpmMemberUtils::update_membership_level( $swpm_user_memberid, $temp_membership_level );
+
+			# Set the level of the apartment user to the board member level
+			SwpmMemberUtils::update_membership_level( $swpm_user_memberid, $new_membership_level );
+
+			# Get Wordpress user corresponding to the apartment
+			$wp_user = get_user_by('login', username_from_id($user_id) );
+
+			# Set the role of the Wordpress user to be a board member
+			$wp_user->set_role($user_role);
+
+			# Insert new boardmember into the database
+			return $wpdb->insert($wpdb->prefix . 'AKDTU_boardmembers',array('apartment_number' => apartment_number_from_id($user_id), 'start_datetime' => (new DateTime('now',new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s'), 'end_datetime' => '9999-12-31 23:59:59', 'member_type' => $user_type)) > 0;
+		case 'networkgroupmember':
+			global $KNET_USER_TYPES;
+			$user_type = $KNET_USER_TYPES[$role_type]['id'];
+
+			# Insert new networkgroupmember into the database
+			return $wpdb->insert($wpdb->prefix . 'AKDTU_networkgroupmembers',array('apartment_number' => apartment_number_from_id($user_id), 'start_datetime' => (new DateTime('now',new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s'), 'end_datetime' => '9999-12-31 23:59:59', 'member_type' => $user_type)) > 0;
+	}
+}
+############################################################
+
 ?>
