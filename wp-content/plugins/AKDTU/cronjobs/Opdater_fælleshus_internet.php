@@ -29,8 +29,6 @@ function send_opdater_fælleshus_internet($debug = false, $force_update = false)
 	$send_mail_to_renter = $password_struct['send_mail_to_renter'];
 	$rented_state = $password_struct['rented_state'];
 
-	wp_mail("victor2@akdtu.dk", "cronjob run", "");
-
 	# Check if this is a real run, and the password should be changed
 	if (!$debug && $password_should_be_changed) {
 		# This is a real run
