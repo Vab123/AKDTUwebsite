@@ -89,7 +89,7 @@ function default_password() {
  * 
  * @return array[string,string] Key-value array with information about the potential new password to the router, including if it should be changed at all
  */
-function generate_password_info($run_every_hours_amount = 24) {
+function generate_password_info() {
 	global $wpdb;
 
 	# Default password, set if the common house is not rented by an apartment
@@ -122,9 +122,6 @@ function generate_password_info($run_every_hours_amount = 24) {
 			$new_password = $default_pass;
 			$rented_state = 2;
 		}
-	
-		# Start date of current or last event
-		$event_date = new DateTime($event->event_start_date . " " . $event->event_start_time, new DateTimeZone('Europe/Copenhagen'));
 	} else {
 		## Common house is not currently rented. Set potential password to default value.
 
@@ -136,14 +133,10 @@ function generate_password_info($run_every_hours_amount = 24) {
 	
 		# Set potential password to default value.
 		$new_password = $default_pass;
-	
-		# Start date of current or last event
-		$event_date = new DateTime($event->event_end_date . " " . $event->event_end_time, new DateTimeZone('Europe/Copenhagen'));
 	}
 
-	# Check if the event started less than $run_every_hours_amount hours ago
-	$diff = $now->diff($event_date);
-	$password_should_be_changed = ($diff->m == 0 && $diff->y == 0 && ($diff->d * 24 + $diff->h < $run_every_hours_amount));
+	# Check if the current passcode is not the correct one
+	$password_should_be_changed = $new_password != get_fælleshus_password()['wl0_wpa_psk'];
 
 	# Return information about new password
 	return array(

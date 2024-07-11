@@ -11,9 +11,6 @@
  * @param bool $force_update Flag, for whether to force updating the password
  */
 function send_opdater_fælleshus_internet($debug = false, $force_update = false) {
-	# Cron-job frequency
-	$run_every_hours_amount = 24; # How many hours go between each run of the cron-job
-
 	# Date formats, Danish
 	$date_da = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen', null, 'dd. MMMM YYYY');
 	$time_da = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen', null, 'HH:mm');
@@ -23,7 +20,7 @@ function send_opdater_fælleshus_internet($debug = false, $force_update = false)
 	$time_en = new IntlDateFormatter('en_US', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen', null, 'HH:mm');
 
 	# Get struct containing info about the password to the router
-	$password_struct = generate_password_info($run_every_hours_amount);
+	$password_struct = generate_password_info();
 
 	# Extract values from struct
 	$new_password = $password_struct['password'];
@@ -31,6 +28,8 @@ function send_opdater_fælleshus_internet($debug = false, $force_update = false)
 	$event = $password_struct['event'];
 	$send_mail_to_renter = $password_struct['send_mail_to_renter'];
 	$rented_state = $password_struct['rented_state'];
+
+	wp_mail("victor2@akdtu.dk", "cronjob run", "");
 
 	# Check if this is a real run, and the password should be changed
 	if (!$debug && $password_should_be_changed) {
