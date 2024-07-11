@@ -86,7 +86,7 @@ class Cover_Header extends Base_View {
 			}
 		}
 
-		echo '<div class="nv-post-cover" ' . wp_kses_post( $cover_style ) . '>';
+		echo '<div class="nv-post-cover asd" ' . wp_kses_post( $cover_style ) . '>';
 		echo '<div class="nv-overlay"></div>';
 		echo $container_mode === 'contained' ? '<div class="container">' : '';
 		echo '<div class="' . esc_attr( implode( ' ', $title_meta_wrap_classes ) ) . '">';
