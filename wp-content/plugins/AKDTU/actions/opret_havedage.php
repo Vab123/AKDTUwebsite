@@ -184,6 +184,8 @@ function add_event_to_menu($menu, $menu_root_event_id, $event_info) {
 			return false;
 		}
 	}
+
+	return false;
 }
 
 /**
