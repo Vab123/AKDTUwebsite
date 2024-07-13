@@ -90,13 +90,8 @@ function default_password() {
  * @return array[string,string] Key-value array with information about the potential new password to the router, including if it should be changed at all
  */
 function generate_password_info() {
-	global $wpdb;
-
 	# Default password, set if the common house is not rented by an apartment
 	$default_pass = default_password();
-	
-	# Current time
-	$now = new DateTime('now', new DateTimeZone('Europe/Copenhagen'));
 
 	# Get id of an event currently going on
 	$event_id = get_current_common_house_event_ids(1);
