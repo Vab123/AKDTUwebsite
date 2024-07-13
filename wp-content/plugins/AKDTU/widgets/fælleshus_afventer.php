@@ -24,8 +24,8 @@ function fælleshus_afventer_dashboard_widget() {
 		<table class="widefat">
 			<colgroup>
 				<col span="1" style="width: 20%" />
-				<col span="1" style="width: 40%" />
-				<col span="1" style="width: 0%" />
+				<col span="1" style="width: 35%" />
+				<col span="1" style="width: 45%" />
 			</colgroup>
 			<thead>
 				<tr>
@@ -43,12 +43,10 @@ function fælleshus_afventer_dashboard_widget() {
 						$row++; ?>>
 						<td style="vertical-align:middle"><?php echo (is_apartment_from_id($event->event_owner) ? "Lejl. " . padded_apartment_number_from_id($event->event_owner) : "Bestyrelsen"); ?></td>
 						<td style="vertical-align:middle"><?php
-															$start_date = new DateTime($event->event_start_date . " " . $event->event_start_time, new DateTimeZone('UTC'));
-															$start_date = $start_date->format("d-m-y");
-															$end_date = new DateTime($event->event_end_date . " " . $event->event_end_time, new DateTimeZone('UTC'));
-															$end_date = $end_date->format("d-m-y");
-															echo $start_date . " - " . $end_date; ?></td>
-						<td style="vertical-align:middle">
+															$start_date = new DateTime($event->event_start_date . " " . $event->event_start_time, new DateTimeZone('Europe/Copenhagen'));
+															$end_date = new DateTime($event->event_end_date . " " . $event->event_end_time, new DateTimeZone('Europe/Copenhagen'));
+															echo "{$start_date->format("d-m-y H:i")} - {$end_date->format("d-m-y H:i")}"; ?></td>
+						<td style="vertical-align:middle; text-align:right;">
 							<form style="display: inline;" action="" method="post">
 								<input type="hidden" name="action" value="approve_leje" />
 								<input type="hidden" name="leje_event_id" value="<?php echo $event->event_id; ?>" />
