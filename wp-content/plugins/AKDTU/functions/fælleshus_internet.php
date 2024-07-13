@@ -131,7 +131,7 @@ function generate_password_info() {
 	}
 
 	# Check if the current passcode is not the correct one
-	$password_should_be_changed = $new_password != get_fælleshus_password()['wl0_wpa_psk'];
+	$password_should_be_changed = $new_password != get_fælleshus_password();
 
 	# Return information about new password
 	return array(
@@ -297,7 +297,21 @@ function set_fælleshus_password($new_password) {
  */
 function get_fælleshus_password() {
 	# Get router password
-	return get_fælleshus_info(array('wl0_ssid','wl0_wpa_psk'));
+	return get_fælleshus_info(array('wl0_ssid','wl0_wpa_psk'))['wl0_wpa_psk'];
+}
+
+/**
+ * Function for getting the current SSID and password of the router
+ * 
+ * Returns a key-value array with the following keys and values:
+ * 	- wl0_ssid: SSID of the router
+ * 	- wl0_wpa_psk: Password of the router
+ * 
+ * @return array[string,string]|false Key-value array with the SSID and password to the router, if values were successfully retrieved. False if authentication failed.
+ */
+function get_fælleshus_ssid() {
+	# Get router password
+	return get_fælleshus_info(array('wl0_ssid','wl0_wpa_psk'))['wl0_ssid'];
 }
 
 /**

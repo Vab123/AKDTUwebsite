@@ -38,7 +38,7 @@ function fælleshus_internet_set_dashboard_widget() {
 							Nuværende adgangskode
 						</td>
 						<td style="vertical-align:middle">
-							<b><?php echo get_fælleshus_password()['wl0_wpa_psk']; ?></b>
+							<b><?php echo get_fælleshus_password(); ?></b>
 						</td>
 					</tr>
 					<tr class="alternate">
