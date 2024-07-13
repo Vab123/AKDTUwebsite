@@ -126,8 +126,8 @@ function echo_AKDTU_email_as_table($TO, $FROM, $REPLYTO, $CC, $attachments, $mai
  * Performs replaces on the subject and content of the email before sending
  * 
  * @param bool $debug Flag, if the email should be sent (false) or echoed as a table (true)
- * @param string $subject_replaces Key-value array of replaces, where the keys should be replaced with the values in the subject of the email
- * @param string $content_replaces Key-value array of replaces, where the keys should be replaced with the values in the content of the email
+ * @param string[] $subject_replaces Key-value array of replaces, where the keys should be replaced with the values in the subject of the email
+ * @param string[] $content_replaces Key-value array of replaces, where the keys should be replaced with the values in the content of the email
  * @param string $CONSTANT_ROOT Root of the PHP constant, which contains info about the email. Defined in register_options.php and register_settings.php
  * @param bool|string $override_TO If not false, the recipient address of the email is overwritten with the value of this parameter
  */

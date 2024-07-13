@@ -10,16 +10,11 @@
  * @param bool $debug Flag, for whether the users should actually be deleted (false), or if this is a test run to show sample results (true)
  */
 function send_fjern_brugeradgang($debug = false) {
-	global $wpdb;
-
-	# Get current time
-	$current_time = new DateTime("now", new DateTimeZone('Europe/Copenhagen'));
-	$current_time = $current_time->format("Y-m-d H:i:s");
 
 	# Get apartments moving in earlier than now that are not already reset
-	$res = $wpdb->get_col('SELECT apartment_number FROM ' . $wpdb->prefix . 'swpm_allowed_membercreation WHERE initial_reset = 0 AND allow_creation_date <= "' . $current_time . '"');
+	$res = get_past_moves(['apartment_number'], null, null, 0);
 	if ($debug && count($res) == 0) {
-		$res = array(2);
+		$res = [2];
 	}
 
 	# Go through all moved residents
@@ -64,7 +59,7 @@ function send_fjern_brugeradgang($debug = false) {
 			reset_user_info($user_id, $new_pass, $new_first_name, $new_last_name, $new_email, $apartment_num, $debug);
 
 			# Update database to show that the user has been reset
-			$wpdb->update($wpdb->prefix . 'swpm_allowed_membercreation', array('initial_reset' => 1), array('apartment_number' => $apartment_num));
+			update_renter_permit($apartment_num, ['initial_reset' => 1]);
 		}
 
 		# Check if an email should be sent or echoed

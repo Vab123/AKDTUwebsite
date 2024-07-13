@@ -12,15 +12,12 @@
 function send_opkrævning_fælleshus($debug = false) {
 	# Check if an email should be sent or echoed
 	if (FÆLLESHUS_TO != '' || $debug) {
-		global $wpdb;
-
 		# Check if today is the first day of the month (Emails are only sent on the first day of the month)
 		if ((new DateTime('now', new DateTimeZone('Europe/Copenhagen')))->format('j') == '1' || $debug) {
 			$mention_moved_users_months_before = 1; # If tenant has moved in/out within this amount of months, a note is set on the name to specify if new or old tenant should pay
 			$mention_moved_users_date = new DateTime("first day of this month", new DateTimeZone('Europe/Copenhagen'));
 			$mention_moved_users_date->setTime(0, 0, 0);
 			$mention_moved_users_date->modify('-' . $mention_moved_users_months_before . ' month');
-			$mention_moved_users_date = $mention_moved_users_date->format('Y-m-d');
 
 			# First and last day of the previous month
 			$month_ini = new DateTime("first day of " . ($debug ? "this" : "last") . " month", new DateTimeZone('Europe/Copenhagen'));
@@ -42,7 +39,7 @@ function send_opkrævning_fælleshus($debug = false) {
 			$final_price = get_final_price($price_to_pay, $price_adjustments);
 
 			# Get moved users
-			$moved_users = $wpdb->get_col($wpdb->prepare('SELECT apartment_number FROM ' . $wpdb->prefix . 'swpm_allowed_membercreation WHERE allow_creation_date >= "' . $mention_moved_users_date . '" AND initial_reset = 1 ORDER BY allow_creation_date ASC, apartment_number ASC'));
+			$moved_users = get_moves(['apartment_number'], null, $mention_moved_users_date, null, null, 1, "allow_creation_date ASC, apartment_number ASC");
 
 			# Prepare string for payment info
 			$payment_info = '';

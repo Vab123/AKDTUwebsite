@@ -5,11 +5,8 @@
  */
 
 function allowed_renter_signups_widget() {
-	global $wpdb;
-
 	# Get all not-finished renters
-	$query = $wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'swpm_allowed_rentercreation WHERE end_time >= "' . (new DateTime('now'))->format('Y-m-d H:i:s') . '" ORDER BY start_time ASC, apartment_number ASC');
-	$allowed_users = $wpdb->get_results($query);
+	$allowed_users = get_current_renters();
 
 	if (count($allowed_users) > 0) : ?>
 		<table id='dbem-bookings-table' class='widefat post ' style="max-width:75em">

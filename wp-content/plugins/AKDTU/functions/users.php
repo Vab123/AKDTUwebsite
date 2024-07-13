@@ -432,6 +432,103 @@ function is_vicevært_from_id($id)
 
 ############################################################
 #
+# Vicevært user management
+#
+/**
+ * Creates a new user for a vicevært
+ * 
+ * @param string $first_name First name of the vicevært
+ * @param string $last_name Last name of the vicevært
+ * @param string $username Username of the vicevært
+ * @param string $email Email of the vicevært
+ * 
+ * @return bool True if the user was created correctly
+ */
+function create_vicevært($first_name, $last_name, $username, $email) {
+	global $AKDTU_USER_TYPES;
+
+	# Name of SWPM level for vicevært
+	$vicevært_level_name = $AKDTU_USER_TYPES['vicevært']['user_level'];
+	$vicevært_role = $AKDTU_USER_TYPES['vicevært']['user_role'];
+
+	$default_password = 'default_password';
+	
+	# Get SWPM role for new user
+	$all_membership_levels = SwpmMembershipLevelUtils::get_all_membership_levels_in_array();
+	$vicevært_level = array_search($vicevært_level_name , $all_membership_levels);
+
+	# Check if the user level was actually found
+	if ($vicevært_level === false) {
+		new AKDTU_notice('error', 'Viceværternes rolle blev ikke fundet. Viceværten er ikke oprettet.');
+
+		return false;
+	}
+	
+	# Wordpress user info
+	$wp_user_info = array(
+		'user_nicename' => implode('-', explode(' ', $username)),
+		'display_name' => $username,
+		'user_email' => $email,
+		'nickname' => $username,
+		'first_name' => $first_name,
+		'last_name' => $last_name,
+		'user_login' => $username,
+		'password' => $default_password,
+		'user_registered' => date('Y-m-d H:i:s'),
+	);
+
+	# Create wordpress user
+	$new_user_wp_id = SwpmUtils::create_wp_user($wp_user_info);
+	$wp_user = get_user_by("ID", $new_user_wp_id);
+
+	# Set the role of the new wordpress user
+	$wp_user->set_role($vicevært_role);
+
+	// # SWPM user info
+	$member_info = SwpmTransfer::$default_fields;
+	$member_info['first_name'] = $first_name;
+	$member_info['last_name'] = $last_name;
+	$member_info['user_name'] = $username;
+	$member_info['email'] = $email;
+	$member_info['membership_level'] = $vicevært_level;
+	$member_info['password'] = get_user_by('ID', $new_user_wp_id)->user_pass;
+	$member_info['last_accessed'] = date('Y-m-d H:i:s');
+
+	# Get member id of the new user
+	$swpm_user_memberid = SwpmMemberUtils::get_user_by_email($email)->member_id;
+
+	# Set the level of the apartment user to the vicevært level
+	SwpmMemberUtils::update_membership_level( $swpm_user_memberid, $vicevært_level );
+
+	return $new_user_wp_id != false;
+}
+#
+/**
+ * Delete a user for a vicevært
+ * 
+ * @param int $user_id Id of the user to delete
+ * 
+ * @return bool True if the user was deleted correctly
+ */
+function delete_vicevært($user_id) {
+	global $wpdb;
+	
+	$swpm_user = SwpmMemberUtils::get_user_by_user_name( username_from_id( $user_id ) );
+			
+	# Delete SWPM user-profile
+	$num_deleted = $wpdb->query( "DELETE FROM {$wpdb->prefix}swpm_members_tbl WHERE member_id = \"{$swpm_user->member_id}\"" );
+
+	# Delete Wordpress user
+	require_once dirname( WP_CONTENT_DIR ) . "/wp-admin/includes/user.php";
+
+	return $num_deleted > 0 && wp_delete_user( $user_id, 0 );
+}
+############################################################
+
+
+
+############################################################
+#
 # Check if user is currently a boardmember
 #
 /**

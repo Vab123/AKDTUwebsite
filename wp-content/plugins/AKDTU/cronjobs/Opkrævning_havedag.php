@@ -12,8 +12,6 @@
 function send_opkrævning_havedag($debug = false) {
 	# Check if an email should be sent
 	if (HAVEDAG_TO != '' || HAVEDAG_WARNING_TO != '' || $debug) {
-		global $wpdb;
-
 		# Date formatters
 		$year = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen', null, 'YYYY');
 		
@@ -74,22 +72,7 @@ function send_opkrævning_havedag($debug = false) {
 			}
 
 			# Get array of arrays of signups to each garden day
-			$res = $wpdb->get_col('SELECT showed_up FROM wp_em_tilmeldinger WHERE event_id = ' . $gardenday->event_id);
-			$res = array_map(function ($a) {
-				return json_decode($a);
-			}, $res);
-
-			# Go through each possible garden day
-			foreach ($res as $arr) {
-				# Go through the status of each user signed up to that garden day
-				foreach ($arr as $user_id => $stat) {
-					# If it is an apartment user
-					if (is_apartment_from_id($user_id)) { 
-						# Store if the apartment has showed up or not
-						$status[apartment_number_from_id($user_id)] = $stat || $status[apartment_number_from_id($user_id)];
-					}
-				}
-			}
+			$status = get_shown_up_status_for_gardenday($gardenday->event_id);
 
 			# Get the date for the last allowed signup date
 			$latest_signup_date = $gardenday->rsvp_date;

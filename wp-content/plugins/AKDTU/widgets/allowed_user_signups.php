@@ -5,10 +5,7 @@
  */
 
 function allowed_user_signups_widget() {
-	global $wpdb;
-
-	$query = $wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'swpm_allowed_membercreation WHERE initial_takeover = 0 ORDER BY allow_creation_date ASC, apartment_number ASC');
-	$allowed_users = $wpdb->get_results($query);
+	$allowed_users = get_moves(['*'], null, null, null, false, null);
 
 	if (count($allowed_users) > 0) : ?>
 		<table id='dbem-bookings-table' class='widefat post ' style="max-width:75em">

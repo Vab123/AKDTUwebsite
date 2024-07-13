@@ -56,7 +56,7 @@ function get_all_translations($events)
  * @param DateTime|null $endtime_before Timestamp of when the events has to end before, treated as time in timezone 'Europe/Copenhagen', or null if no such time is required. Default: null
  * @param DateTime|null $endtime_after Timestamp of when the events has to end after, treated as time in timezone 'Europe/Copenhagen', or null if no such time is required. Default: null
  * @param int|null $limit Limit on how many event ids to return, or null to return all found event ids. Default: null
- * @param int|null $status Required status code of the events found, or null to include any status codes. Default: 1
+ * @param int[]|int|null $status Required status code of the events found, or null to include any status codes. Default: 1
  * @param string|null $orderby Column (and optionally direction) to sort the event ids by, or null if no sorting is required. Default: null
  * @param string[] $columns Array of which columns to retrieve from the database. Default: array('event_id')
  * 
@@ -98,7 +98,7 @@ function get_common_house_events($starttime_before = null, $starttime_after = nu
 	}
 
 	if (!is_null($status)) {
-		$sql_where[] = "event_status = {$status}";
+		$sql_where[] = "event_status" . (is_array($status) ? " IN (" . join($status, ",") . ")" : " = {$status}");
 	}
 
 	if (!is_null($limit)) {

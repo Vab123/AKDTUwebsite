@@ -22,66 +22,11 @@ if (isset($_REQUEST['action'])) {
  * @return bool True if the vicevært was created successfully
  */
 function add_vicevært($first_name, $last_name, $username, $email){
-	global $AKDTU_USER_TYPES;
-
 	# Check if a user already exists with that email
 	if (email_exists( $email ) == false) {
-		# Name of SWPM level for vicevært
-		$vicevært_level_name = $AKDTU_USER_TYPES['vicevært']['user_level'];
-		$vicevært_role = $AKDTU_USER_TYPES['vicevært']['user_role'];
-
-		$default_password = 'default_password';
-		
-		# Get SWPM role for new user
-		$all_membership_levels = SwpmMembershipLevelUtils::get_all_membership_levels_in_array();
-		$vicevært_level = array_search($vicevært_level_name , $all_membership_levels);
-
-		# Check if the user level was actually found
-		if ($vicevært_level === false) {
-			new AKDTU_notice('error', 'Viceværternes rolle blev ikke fundet. Viceværten er ikke oprettet.');
-
-			return false;
-		}
-		
-		# Wordpress user info
-		$wp_user_info = array(
-			'user_nicename' => implode('-', explode(' ', $username)),
-			'display_name' => $username,
-			'user_email' => $email,
-			'nickname' => $username,
-			'first_name' => $first_name,
-			'last_name' => $last_name,
-			'user_login' => $username,
-			'password' => $default_password,
-			'user_registered' => date('Y-m-d H:i:s'),
-		);
-
-		# Create wordpress user
-		$new_user_wp_id = SwpmUtils::create_wp_user($wp_user_info);
-		$wp_user = get_user_by("ID", $new_user_wp_id);
-
-		# Set the role of the new wordpress user
-		$wp_user->set_role($vicevært_role);
-
-		// # SWPM user info
-		$member_info = SwpmTransfer::$default_fields;
-		$member_info['first_name'] = $first_name;
-		$member_info['last_name'] = $last_name;
-		$member_info['user_name'] = $username;
-		$member_info['email'] = $email;
-		$member_info['membership_level'] = $vicevært_level;
-		$member_info['password'] = get_user_by('ID', $new_user_wp_id)->user_pass;
-		$member_info['last_accessed'] = date('Y-m-d H:i:s');
-
-		# Get member id of the new user
-		$swpm_user_memberid = SwpmMemberUtils::get_user_by_email($email)->member_id;
-
-		# Set the level of the apartment user to the vicevært level
-		SwpmMemberUtils::update_membership_level( $swpm_user_memberid, $vicevært_level );
-
-		if ($new_user_wp_id != false) {
+		if (create_vicevært($first_name, $last_name, $username, $email)) {
 			# Success. Write success message to admin interface
-			new AKDTU_notice('success','Vicevært med brugernavn ' . $member_info['user_name'] . ' oprettet.');
+			new AKDTU_notice('success', "Vicevært med brugernavn {$username} oprettet.");
 
 			return true;
 		}
@@ -90,6 +35,6 @@ function add_vicevært($first_name, $last_name, $username, $email){
 
 		return false;
 	}
-}
 
-?>
+	return false;
+}

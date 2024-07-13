@@ -5,12 +5,9 @@
  */
 
 function moves_future_dashboard_widget() {
-	global $wpdb;
-
 	$limit = 10; # How many past moves to show
 
-	$query = $wpdb->prepare('SELECT apartment_number,allow_creation_date FROM ' . $wpdb->prefix . 'swpm_allowed_membercreation WHERE initial_reset = 0 ORDER BY allow_creation_date ASC, apartment_number ASC LIMIT ' . $limit . '');
-	$future_moves = $wpdb->get_results($query);
+	$future_moves = get_future_moves(['*'], $limit, null, null);
 
 	if (count($future_moves) > 0) : ?>
 		<table id='dbem-bookings-table' class='widefat post ' style="max-width:75em">

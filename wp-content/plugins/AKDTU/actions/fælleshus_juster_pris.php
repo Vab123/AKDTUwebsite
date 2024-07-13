@@ -21,8 +21,6 @@ if (isset($_REQUEST['action'])) {
  * @return bool True if the price-adjustment was successfully saved
  */
 function fælleshus_juster_pris($username, $is_archive, $price_change){
-	global $wpdb;
-
 	# Check if insertion was successful
 	if (add_common_house_booking_priceadjustment($username, $is_archive, $price_change)) {
 		# Insertion succeeded. Write success message to admin interface
@@ -31,7 +29,7 @@ function fælleshus_juster_pris($username, $is_archive, $price_change){
 		return true;
 	} else {
 		# Insertion failed. Write error message to admin interface
-		new AKDTU_notice('error', $wpdb->last_error);
+		new AKDTU_notice('error', "Ændringen i leje blev ikke gemt");
 
 		return false;
 	}

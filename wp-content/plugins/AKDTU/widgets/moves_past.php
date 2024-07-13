@@ -5,12 +5,9 @@
  */
 
 function moves_past_dashboard_widget() {
-	global $wpdb;
-
 	$limit = 10; # How many past moves to show
 
-	$query = $wpdb->prepare('SELECT apartment_number,allow_creation_date,initial_takeover FROM ' . $wpdb->prefix . 'swpm_allowed_membercreation WHERE initial_reset = 1 ORDER BY allow_creation_date DESC, apartment_number ASC LIMIT ' . $limit . '');
-	$past_moves = $wpdb->get_results($query);
+	$past_moves = get_past_moves(['apartment_number', 'allow_creation_date', 'initial_takeover'], $limit, null, null);
 
 	if (count($past_moves) > 0) : ?>
 		<table id='dbem-bookings-table' class='widefat post ' style="max-width:75em">
@@ -38,7 +35,7 @@ function moves_past_dashboard_widget() {
 						$row++; ?>>
 						<td style="vertical-align:middle"><?php echo padded_apartment_number_from_apartment_number($user->apartment_number); ?></td>
 						<td style="vertical-align:middle"><?php echo (new DateTime($user->allow_creation_date))->format('d-m-Y H:i'); ?></td>
-						<td style="vertical-align:middle"><?php echo ($user->initial_takeover ? 'Ja' : 'Nej'); ?></td>
+						<td style="vertical-align:middle"><?php echo $user->initial_takeover ? 'Ja' : 'Nej'; ?></td>
 					</tr>
 				<?php
 				}
