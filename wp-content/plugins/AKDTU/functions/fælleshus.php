@@ -48,6 +48,36 @@ function get_all_translations($events) {
 }
 
 /**
+ * Gets ids of events that have booked the common house at a specified time
+ * 
+ * @param DateTime $time Timestamp of when to find events for. Treated as time in timezone 'Europe/Copenhagen'
+ * @param int|null $limit Limit on how many event ids to return, or null to return all found event ids. Default: null
+ * @param int|null $status Required status code of the events found, or null to include any status codes. Default: 1
+ * 
+ * @return int[] Array of event ids for the events found
+ */
+function get_common_house_event_ids($time, $limit = null, $status = 1) {
+	global $wpdb;
+
+	$time_days = $time->format('Y-m-d');
+	$time_hours = $time->format('H:i:s');
+
+	return $wpdb->get_col('SELECT event_id FROM ' . EM_EVENTS_TABLE . ' WHERE (event_start_date < "' . $time_days . '" OR (event_start_date = "' . $time_days . '" AND event_start_time <= "' . $time_hours . '")) AND (event_end_date > "' . $time_days . '" OR (event_end_date = "' . $time_days . '" AND event_end_time >= "' . $time_hours . '"))' . (!is_null($status) ? ' AND event_status = ' . strval($status) : '') . (!is_null($limit) ? ' LIMIT ' . strval($limit) : ''));
+}
+
+/**
+ * Gets ids of current events that have booked the common house
+ * 
+ * @param int|null $limit Limit on how many event ids to return, or null to return all found event ids. Default: null
+ * @param int|null $status Required status code of the events found, or null to include any status codes. Default: 1
+ * 
+ * @return int[] Array of event ids for the current events found
+ */
+function get_current_common_house_event_ids($limit = null, $status = 1) {
+	return get_common_house_event_ids(new DateTime('now', new DateTimeZone('Europe/Copenhagen')), $limit, $status);
+}
+
+/**
  * Returns a formatted string for the owners of a set of events. Filters out duplicate events, such as when the board has a booking in Danish and in English.
  * 
  * @param int[] $event_ids Ids of the events to find the owners of
@@ -121,13 +151,7 @@ function get_common_house_renters($event_ids, $use_padded_apartment_numbers = tr
  * 		'rented' [bool]:     True if the common house is rented. False otherwise
  */
 function get_current_common_house_renters($use_padded_apartment_numbers = true, $apartment_text = 'lejlighed ', $board_text = 'bestyrelsen', $nobody_text = 'ingen', $and_text = ' og ') {
-	global $wpdb;
-
-	$now = (new DateTime('now', new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s');
-
-	$events = $wpdb->get_col('SELECT event_id FROM ' . EM_EVENTS_TABLE . ' WHERE event_start <= "' . $now . '" AND event_end >= "' . $now . '" AND event_status = 1');
-
-	return get_common_house_renters($events, $use_padded_apartment_numbers, $apartment_text, $board_text, $nobody_text, $and_text);
+	return get_common_house_renters(get_current_common_house_event_ids(), $use_padded_apartment_numbers, $apartment_text, $board_text, $nobody_text, $and_text);
 }
 
 /**

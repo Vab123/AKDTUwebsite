@@ -99,7 +99,7 @@ function generate_password_info() {
 	$now = new DateTime('now', new DateTimeZone('Europe/Copenhagen'));
 
 	# Get id of an event currently going on
-	$event_id = $wpdb->get_var('SELECT event_id FROM ' . EM_EVENTS_TABLE . ' WHERE event_start <= "' . $now->format('Y-m-d H:i:s') . '" AND event_end >= "' . $now->format('Y-m-d H:i:s') . '" AND event_status = 1 LIMIT 1');
+	$event_id = get_current_common_house_event_ids(1);
 
 	# Prepare variables for later
 	$password_should_be_changed = false; # Flag if password should be changed
