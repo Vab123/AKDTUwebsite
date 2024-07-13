@@ -64,38 +64,39 @@ function get_all_translations($events) {
 function get_common_house_events($starttime_before = null, $starttime_after = null, $endtime_before = null, $endtime_after = null, $limit = null, $status = 1, $orderby = null, $columns = array('event_id')) {
 	global $wpdb;
 
+	$sql_where = array();
 	$sql_options = array();
 
 	if (!is_null($starttime_before)) {
 		$starttime_before_days = $starttime_before->format('Y-m-d');
 		$starttime_before_hours = $starttime_before->format('H:i:s');
 
-		$sql_options[] = '(event_start_date < "' . $starttime_before_days . '" OR (event_start_date = "' . $starttime_before_days . '" AND event_start_time <= "' . $starttime_before_hours . '"))';
+		$sql_where[] = '(event_start_date < "' . $starttime_before_days . '" OR (event_start_date = "' . $starttime_before_days . '" AND event_start_time <= "' . $starttime_before_hours . '"))';
 	}
 
 	if (!is_null($starttime_after)) {
 		$starttime_after_days = $starttime_after->format('Y-m-d');
 		$starttime_after_hours = $starttime_after->format('H:i:s');
 
-		$sql_options[] = '(event_start_date > "' . $starttime_after_days . '" OR (event_start_date = "' . $starttime_after_days . '" AND event_start_time >= "' . $starttime_after_hours . '"))';
+		$sql_where[] = '(event_start_date > "' . $starttime_after_days . '" OR (event_start_date = "' . $starttime_after_days . '" AND event_start_time >= "' . $starttime_after_hours . '"))';
 	}
 
 	if (!is_null($endtime_before)) {
 		$endtime_before_days = $endtime_before->format('Y-m-d');
 		$endtime_before_hours = $endtime_before->format('H:i:s');
 
-		$sql_options[] = '(event_end_date < "' . $endtime_before_days . '" OR (event_end_date = "' . $endtime_before_days . '" AND event_end_time <= "' . $endtime_before_hours . '"))';
+		$sql_where[] = '(event_end_date < "' . $endtime_before_days . '" OR (event_end_date = "' . $endtime_before_days . '" AND event_end_time <= "' . $endtime_before_hours . '"))';
 	}
 
 	if (!is_null($endtime_after)) {
 		$endtime_after_days = $endtime_after->format('Y-m-d');
 		$endtime_after_hours = $endtime_after->format('H:i:s');
 
-		$sql_options[] = '(event_end_date > "' . $endtime_after_days . '" OR (event_end_date = "' . $endtime_after_days . '" AND event_end_time >= "' . $endtime_after_hours . '"))';
+		$sql_where[] = '(event_end_date > "' . $endtime_after_days . '" OR (event_end_date = "' . $endtime_after_days . '" AND event_end_time >= "' . $endtime_after_hours . '"))';
 	}
 
 	if (!is_null($status)) {
-		$sql_options[] = 'event_status = ' . strval($status);
+		$sql_where[] = 'event_status = ' . strval($status);
 	}
 
 	if (!is_null($limit)) {
@@ -107,13 +108,13 @@ function get_common_house_events($starttime_before = null, $starttime_after = nu
 	}
 
 	if ($limit == 1 && count($columns) == 1) {
-		return $wpdb->get_var('SELECT ' . $columns[0] . ' FROM ' . EM_EVENTS_TABLE . (count($sql_options) > 0 ? ' WHERE ' . join(' AND ', $sql_options) : ''));
+		return $wpdb->get_var('SELECT ' . $columns[0] . ' FROM ' . EM_EVENTS_TABLE . (count($sql_where) > 0 ? ' WHERE ' . join(' AND ', $sql_where) : '') . (count($sql_options) > 0 ? join(' ', $sql_options) : ''));
 	} else if ($limit != 1 && count($columns) == 1) {
-		return $wpdb->get_col('SELECT ' . $columns[0] . ' FROM ' . EM_EVENTS_TABLE . (count($sql_options) > 0 ? ' WHERE ' . join(' AND ', $sql_options) : ''));
+		return $wpdb->get_col('SELECT ' . $columns[0] . ' FROM ' . EM_EVENTS_TABLE . (count($sql_where) > 0 ? ' WHERE ' . join(' AND ', $sql_where) : '') . (count($sql_options) > 0 ? join(' ', $sql_options) : ''));
 	} else if ($limit == 1 && count($columns) > 1) {
-		return $wpdb->get_row('SELECT ' . join(',', $columns) . ' FROM ' . EM_EVENTS_TABLE . (count($sql_options) > 0 ? ' WHERE ' . join(' AND ', $sql_options) : ''));
+		return $wpdb->get_row('SELECT ' . join(',', $columns) . ' FROM ' . EM_EVENTS_TABLE . (count($sql_where) > 0 ? ' WHERE ' . join(' AND ', $sql_where) : '') . (count($sql_options) > 0 ? join(' ', $sql_options) : ''));
 	} else {
-		return $wpdb->get_results('SELECT ' . join(',', $columns) . ' FROM ' . EM_EVENTS_TABLE . (count($sql_options) > 0 ? ' WHERE ' . join(' AND ', $sql_options) : ''));
+		return $wpdb->get_results('SELECT ' . join(',', $columns) . ' FROM ' . EM_EVENTS_TABLE . (count($sql_where) > 0 ? ' WHERE ' . join(' AND ', $sql_where) : '') . (count($sql_options) > 0 ? join(' ', $sql_options) : ''));
 	}
 }
 
