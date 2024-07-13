@@ -74,10 +74,10 @@ function get_common_house_events($starttime_before = null, $starttime_after = nu
 	}
 
 	if (!is_null($starttime_after)) {
-		$starttime_before_days = $starttime_before->format('Y-m-d');
-		$starttime_before_hours = $starttime_before->format('H:i:s');
+		$starttime_after_days = $starttime_after->format('Y-m-d');
+		$starttime_after_hours = $starttime_after->format('H:i:s');
 
-		$sql_options[] = '(event_start_date > "' . $starttime_before_days . '" OR (event_start_date = "' . $starttime_before_days . '" AND event_start_time >= "' . $starttime_before_hours . '"))';
+		$sql_options[] = '(event_start_date > "' . $starttime_after_days . '" OR (event_start_date = "' . $starttime_after_days . '" AND event_start_time >= "' . $starttime_after_hours . '"))';
 	}
 
 	if (!is_null($endtime_before)) {
