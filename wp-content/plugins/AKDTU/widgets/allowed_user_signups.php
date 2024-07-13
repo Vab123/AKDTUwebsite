@@ -5,7 +5,7 @@
  */
 
 function allowed_user_signups_widget() {
-	$allowed_users = get_moves(['*'], null, null, null, false, null);
+	$allowed_users = get_moves(['apartment_number', 'phone_number', 'allow_creation_date', 'initial_reset'], null, null, null, false, null);
 
 	if (count($allowed_users) > 0) : ?>
 		<table id='dbem-bookings-table' class='widefat post ' style="max-width:75em">
