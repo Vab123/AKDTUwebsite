@@ -20,7 +20,7 @@ function fælleshus_internet_dashboard_widget() {
 			<thead>
 				<tr>
 					<th colspan="2" style="font-weight:bold;">
-					Bemærk: Internetforbindelsen i fælleshuset opdateres automatisk klokken 12:01 i starten og slutningen af lejeperioder. Nedenstående bør være de korrekte informationer.<br>
+					Bemærk: Internetforbindelsen i fælleshuset opdateres automatisk hver time. Nedenstående bør være de korrekte informationer.<br>
 					Hvis ikke, så kan informationerne gennemtvinges ved at trykke på knappen. Dette sender også en mail med login-informationer til lejeren!
 					</th>
 				</tr>
@@ -52,7 +52,7 @@ function fælleshus_internet_dashboard_widget() {
 				</tr>
 				<tr>
 					<td style="vertical-align:middle">
-						Mail sendes i dag
+						Mail sendes snart
 					</td>
 					<td style="vertical-align:middle">
 						<b><?php echo ($password_struct["should_be_changed"] ? "Ja" : "Nej"); ?></b>
