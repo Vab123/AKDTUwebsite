@@ -5,12 +5,12 @@
  */
 
 function fælleshus_vis_foreløbig_pris_widget() {
-	$months = array(
+	$months = [
 		// "last month",
 		"this month",
 		"next month",
 		// "+2 months"
-	);
+	];
 
 	$date = new IntlDateFormatter('da_DK', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Copenhagen', null, 'MMMM YYYY');
 
@@ -50,7 +50,7 @@ function fælleshus_vis_foreløbig_pris_widget() {
 
 					$return_string .= '<td>' . padded_apartment_number_from_username($username) . (is_archive_user_from_username($username) ? ' (TB)' : '') . '</td>';
 					$return_string .= '<td>' . number_format($price_to_pay[$username], 2, ",", ".") . ' kr.</td>';
-					$return_string .= '<td>' . number_format((isset($price_adjustments[apartment_number_from_username($username)]) ? $price_adjustments[apartment_number_from_username($username)] : 0), 2, ",", ".") . ' kr.</td>';
+					$return_string .= '<td>' . number_format($price_adjustments[apartment_number_from_username($username)] ?? 0, 2, ",", ".") . ' kr.</td>';
 					$return_string .= '<td>' . number_format($price, 2, ",", ".") . ' kr.</td>';
 				$return_string .= '</tr>';
 			}
@@ -58,7 +58,7 @@ function fælleshus_vis_foreløbig_pris_widget() {
 		$return_string .= '</table>';
 		}
 		else {
-			$return_string = "Der er indtil videre ingen udlejninger for " . $month->format($month_start) . " måned.";
+			$return_string = "Der er indtil videre ingen udlejninger for " . $date->format($month_start) . " måned.";
 		}
 
 		return $return_string;
