@@ -54,5 +54,3 @@ $bestyrelsesdocuments_document_types = [
 		'after-date-text' => ' Budget.pdf'
 	]
 ];
-
-?>

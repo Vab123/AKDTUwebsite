@@ -59,7 +59,7 @@ function get_router_settings()
 function hash_password($event)
 {
 	// Generate password in case the common house is rented for an apartment
-	$new_pass = "{$event->event_start_date}.{username_from_id($event->owner)}";
+	$new_pass = $event->event_start_date . "." . username_from_id($event->owner);
 
 	// MD5-hash password
 	$new_pass = md5($new_pass);
@@ -105,7 +105,7 @@ function generate_password_info()
 	$send_renter_mail = false; # Flag if an email should be sent to a renter
 	$rented_state = 0; # State of rental. 0: not rented; 1: rented by apartment; 2: rented, but not by apartment (Board, vicevært, etc.)
 
-	if ($event_id != null) {
+	if (!is_null($event_id)) {
 		## Common house is currently rented.
 		$event = em_get_event($event_id, 'event_id');
 

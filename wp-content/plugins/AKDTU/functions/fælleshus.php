@@ -66,8 +66,8 @@ function get_common_house_events($starttime_before = null, $starttime_after = nu
 {
 	global $wpdb;
 
-	$sql_where = array();
-	$sql_options = array();
+	$sql_where = [];
+	$sql_options = [];
 
 	if (!is_null($starttime_before)) {
 		$starttime_before_days = $starttime_before->format('Y-m-d');
@@ -98,11 +98,11 @@ function get_common_house_events($starttime_before = null, $starttime_after = nu
 	}
 
 	if (!is_null($status)) {
-		$sql_where[] = "event_status = {strval($status)}";
+		$sql_where[] = "event_status = {$status}";
 	}
 
 	if (!is_null($limit)) {
-		$sql_options[] = " LIMIT {strval($limit)}";
+		$sql_options[] = " LIMIT {$limit}";
 	}
 
 	if (!is_null($orderby)) {
@@ -454,7 +454,7 @@ function get_price_to_pay($period_start, $period_end)
 	global $wpdb;
 
 	# Get all rentals in the period
-	$event_ids = $wpdb->get_col("SELECT event_id FROM {EM_EVENTS_TABLE} WHERE event_end_date >= \"{$period_start->format('Y-m-d')}\" AND event_end_date <= \"{$period_end->format('Y-m-d')}\" AND event_status = 1");
+	$event_ids = get_common_house_events(null, null, $period_end, $period_start);
 
 	# Get array of events ending in this month
 	$events = array_map(function ($id) {

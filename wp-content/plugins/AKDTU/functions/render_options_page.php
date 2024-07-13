@@ -48,7 +48,7 @@ function render_options_page($option)
 
 	echo '<nav class="nav-tab-wrapper">';
 	foreach ($option['tabs'] as $tab => $tab_info) {
-		echo "<a href=\"?page={$option['menu-slug']}&tab={$tab}\" class=\"nav-tab{($current_tab == $tab ? ' nav-tab-active' : '')}\">{$option['tabs'][$tab]['tab-title']}</a>";
+		echo "<a href=\"?page={$option['menu-slug']}&tab={$tab}\" class=\"nav-tab" . ($current_tab == $tab ? ' nav-tab-active' : '') . "\">{$option['tabs'][$tab]['tab-title']}</a>";
 	}
 	echo '</nav>';
 
@@ -86,8 +86,8 @@ function render_settings_tab($tab)
 		$settings_group_as_string .= join("", array_map(function ($setting) {
 			return "<tr><th scope=\"row\">{$setting['headline']}</th>" .
 				"<td>" .
-				($setting['tag'] == "input" ? "<input type=\"{$setting['type']}\" name=\"{$setting['name']}\" style=\"{$setting['style']}\" {($setting->type == 'checkbox' ? (get_option('AKDTU_FÆLLESHUS_INTERNET_BRUGER_DA_TOGGLE') ? ' checked' : '') : ' value=\"' . stripcslashes(get_option($setting->name)) . '\"')}/>" : "") .
-				($setting['tag'] == "textarea" ? "<textarea type=\"{$setting['type']}\" name=\"{$setting->name}\" rows=\"{$setting->rows}\" cols=\"{$setting->cols}\" style=\"{$setting->style}\">{stripcslashes(get_option($setting->name))}</textarea>" : "") .
+				($setting['tag'] == "input" ? "<input type=\"{$setting["type"]}\" name=\"{$setting["name"]}\" style=\"{$setting["style"]}\" " . ($setting["type"] == 'checkbox' ? (get_option('AKDTU_FÆLLESHUS_INTERNET_BRUGER_DA_TOGGLE') ? ' checked' : '') : ' value="' . stripcslashes(get_option($setting["name"])) . '"') . "/>" : "") .
+				($setting['tag'] == "textarea" ? "<textarea type=\"{$setting["type"]}\" name=\"{$setting["name"]}\" rows=\"{$setting["rows"]}\" cols=\"{$setting["cols"]}\" style=\"{$setting["style"]}\">" . stripcslashes(get_option($setting["name"])) . "</textarea>" : "") .
 				join('', array_map(function ($comment) {
 					return "<p>{$comment}</p>";
 				}, $setting['comments'])) .

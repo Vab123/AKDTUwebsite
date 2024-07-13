@@ -51,6 +51,6 @@ class AKDTU_notice
 	 */
 	public function render()
 	{
-		echo "<div class=\"notice notice-{esc_html($this->type)} {($this->is_dismissible ? 'is-dismissible' : '')}\"><p>{esc_html($this->message)}</p></div>";
+		echo "<div class=\"notice notice-" . esc_html($this->type) . " " . ($this->is_dismissible ? 'is-dismissible' : '') . "\"><p>" . esc_html($this->message) . "</p></div>";
 	}
 }

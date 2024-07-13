@@ -215,15 +215,15 @@ function remove_apartment_from_gardenday($apartment_number, $gardenday_event_id,
 	$tickets = $bookings->get_tickets()->tickets;
 
 	# Get the bookings of the user to the garden day
-	$booking_ids = $wpdb->get_col("SELECT booking_id FROM " . EM_BOOKINGS_TABLE . " WHERE event_id=" . $gardenday_event_id . " AND person_id=" . $user_id);
+	$booking_ids = $wpdb->get_col("SELECT booking_id FROM {EM_BOOKINGS_TABLE} WHERE event_id = \"{$gardenday_event_id}\" AND person_id = \"{$user_id}\"");
 
 	# Check if the garden day is valid, and the user is currently signed up
 	if (isset($tickets[$gardenday_date]) && count($booking_ids) > 0) {
 		# Remove tickets from the booking
-		$result2 = $wpdb->delete(EM_TICKETS_BOOKINGS_TABLE, array('booking_id' => $booking_ids[0], 'ticket_id' => $gardenday_date));
+		$result2 = $wpdb->delete(EM_TICKETS_BOOKINGS_TABLE, ['booking_id' => $booking_ids[0], 'ticket_id' => $gardenday_date]);
 
 		# Remove the booking from the user
-		$result = $wpdb->delete(EM_BOOKINGS_TABLE, array('event_id' => $gardenday_event_id, 'person_id' => $user_id));
+		$result = $wpdb->delete(EM_BOOKINGS_TABLE, ['event_id' => $gardenday_event_id, 'person_id' => $user_id]);
 
 		# Write success message to admin interface
 		if ($result && $result2) {
@@ -236,5 +236,3 @@ function remove_apartment_from_gardenday($apartment_number, $gardenday_event_id,
 		return -1;
 	}
 }
-
-?>
