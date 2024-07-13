@@ -4,7 +4,7 @@
  * @file Functionality related to the manipulation of VLANS using the K-Net API (https://wiki.k-net.dk/api-instructions)
  */
 
-$AKDTU_VLANS = array(
+$AKDTU_VLANS = [
 	'001' => 550,
 	'002' => 551,
 	'003' => 552,
@@ -80,7 +80,7 @@ $AKDTU_VLANS = array(
 	'servers' => 622,
 	'fælleshus_adk' => 623,
 	'fælleshus' => 624,
-);
+];
 
 /**
  * Set the state of a VLAN
@@ -88,9 +88,10 @@ $AKDTU_VLANS = array(
  * @param int $vlan_id ID of the VLAN to change
  * @param int|bool $state Desired state of vlan
  * 
- * @return array[Any] json-decoded response from K-Net API
+ * @return mixed json-decoded response from K-Net API
  */
-function set_vlan($vlan_id, $state) {
+function set_vlan($vlan_id, $state)
+{
 	global $AKDTU_VLANS;
 
 	// Check if selected VLAN is of correct type
@@ -101,38 +102,38 @@ function set_vlan($vlan_id, $state) {
 
 	// Check if selected VLAN is valid
 	if (!in_array($vlan_id, array_keys($AKDTU_VLANS))) {
-		new AKDTU_notice('error', 'DEBUG: VLAN ' . $vlan_id . ' not found in list of valid VLANs');
+		new AKDTU_notice('error', "DEBUG: VLAN {$vlan_id} not found in list of valid VLANs");
 		return false;
 	}
 
 	// Translate state into integer
 	if (is_bool($state)) {
-		$state = ($state ? 1 : 0);
+		$state = $state ? 1 : 0;
 	} elseif (is_int($state)) {
 		if (!($state == 1 || $state == 0)) {
 			new AKDTU_notice('error', 'DEBUG: State was integer, but not 1 or 0');
 			return false;
 		}
 	} else {
-		new AKDTU_notice('error', 'DEBUG: state has to be an integer or boolean. Type was ' . gettype($state));
+		new AKDTU_notice('error', "DEBUG: state has to be an integer or boolean. Type was {gettype($state)}");
 		return false;
 	}
 
 	// Prepare data payload
 	$c['http']['method'] = 'PUT';
-	$c['http']['header'] = "Content-Type: application/json\r\nAuthorization: Basic " . base64_encode('api_akdnetgrp:Lit5dok4cah1Ohng');
-	$c['http']['content'] = '
+	$c['http']['header'] = "Content-Type: application/json\r\nAuthorization: Basic {base64_encode('api_akdnetgrp:Lit5dok4cah1Ohng')}";
+	$c['http']['content'] = "
 		{
-			"id": ' . $vlan_id . ', 
-			"dorm": "akd", 
-			"vlan_type": 0, 
-			"state": ' . $state . ',
-			"comment": "API change from akdtu.dk - netgruppen@akdtu.dk"
+			\"id\": {$vlan_id}, 
+			\"dorm\": \"akd\", 
+			\"vlan_type\": 0, 
+			\"state\": {$state},
+			\"comment\": \"API change from akdtu.dk - netgruppen@akdtu.dk\"
 		}
-		';
-	
+		";
+
 	// Send data payload
-	$r = @file_get_contents('https://api.k-net.dk/v2/network/vlan/' . $vlan_id . '/', false, stream_context_create($c));
+	$r = @file_get_contents("https://api.k-net.dk/v2/network/vlan/{$vlan_id}/", false, stream_context_create($c));
 
 	// Check if an error was recieved
 	if ($r === false) {
@@ -152,29 +153,30 @@ function set_vlan($vlan_id, $state) {
  * 
  * @param int $vlan_id ID of the VLAN to retrieve info
  * 
- * @return array[Any] json-decoded response from K-Net API
+ * @return mixed json-decoded response from K-Net API
  */
-function get_vlan($vlan_id) {
+function get_vlan($vlan_id)
+{
 	global $AKDTU_VLANS;
 
 	// Check if selected VLAN is of correct type
 	if (!is_int($vlan_id)) {
-		new AKDTU_notice('error', 'DEBUG: VLAN id empty or not integer');
+		new AKDTU_notice('error', "DEBUG: VLAN id empty or not integer");
 		return false;
 	}
 
 	// Check if selected VLAN is valid
 	if (!in_array($vlan_id, array_keys($AKDTU_VLANS))) {
-		new AKDTU_notice('error', 'DEBUG: VLAN ' . $vlan_id . ' not found in list of valid VLANs');
+		new AKDTU_notice('error', "DEBUG: VLAN {$vlan_id} not found in list of valid VLANs");
 		return false;
 	}
 
 	// Prepare payload
 	$c['http']['method'] = 'GET';
-	$c['http']['header'] = "Content-Type: application/json\r\nAuthorization: Basic " . base64_encode('api_akdnetgrp:Lit5dok4cah1Ohng');
+	$c['http']['header'] = "Content-Type: application/json\r\nAuthorization: Basic {base64_encode('api_akdnetgrp:Lit5dok4cah1Ohng')}";
 
 	// Send payload
-	$r = @file_get_contents('https://api.k-net.dk/v2/network/vlan/' . $vlan_id . '/', false, stream_context_create($c));
+	$r = @file_get_contents("https://api.k-net.dk/v2/network/vlan/{$vlan_id}/", false, stream_context_create($c));
 
 	// Check if an error was recieved
 	if ($r === false) {
@@ -194,9 +196,10 @@ function get_vlan($vlan_id) {
  * 
  * @param int|bool $state Desired state of vlan
  * 
- * @return array[Any] json-decoded response from K-Net API
+ * @return mixed json-decoded response from K-Net API
  */
-function set_fælleshus_vlan($state) {
+function set_fælleshus_vlan($state)
+{
 	global $AKDTU_VLANS;
 
 	# Set desired state and return
@@ -206,9 +209,10 @@ function set_fælleshus_vlan($state) {
 /**
  * Get info about the VLAN corresponding to the common house internet
  * 
- * @return array[Any] json-decoded response from K-Net API
+ * @return mixed json-decoded response from K-Net API
  */
-function get_fælleshus_vlan() {
+function get_fælleshus_vlan()
+{
 	global $AKDTU_VLANS;
 
 	# Get info and return

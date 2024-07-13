@@ -4,12 +4,13 @@
  * @file Functionality related to the sending of emails from the website to the board, residents, etc.
  */
 
- /**
+/**
  * Returns the global file-path to the root of the website document folder.
  * 
- * @return array[string] Global file-path
+ * @return string Global file-path
  */
-function website_root_folder() {
+function website_root_folder()
+{
 	return '/var/www/akdtu.dk/public_html';
 }
 
@@ -22,7 +23,8 @@ function website_root_folder() {
  * 
  * @return array[string] Key-value array, with the global path to each file
  */
-function prepend_attachments_string($ATTACHMENTS = '') {
+function prepend_attachments_string($ATTACHMENTS = '')
+{
 	# Check if the attachment string is empty or not
 	if (strlen($ATTACHMENTS) > 0) {
 		# Attachment string contains something. Split them up and prepend global path to each element
@@ -32,7 +34,7 @@ function prepend_attachments_string($ATTACHMENTS = '') {
 	}
 
 	# Attachment string was empty. Return empty array
-	return array();
+	return [];
 }
 
 /**
@@ -46,9 +48,10 @@ function prepend_attachments_string($ATTACHMENTS = '') {
  * @param string $mailsubject Subject of the email
  * @param string $mailcontent Content of the email
  * 
- * @return array[string] Key-value array, with the global path to each file
+ * @return void Echos table
  */
-function echo_AKDTU_email_as_table($TO, $FROM, $REPLYTO, $CC, $attachments, $mailsubject, $mailcontent) {
+function echo_AKDTU_email_as_table($TO, $FROM, $REPLYTO, $CC, $attachments, $mailsubject, $mailcontent)
+{
 	# Row counter, to make each other row a different color
 	$row = 0; ?>
 	<table class="widefat" style="margin-top:2em;">
@@ -64,52 +67,52 @@ function echo_AKDTU_email_as_table($TO, $FROM, $REPLYTO, $CC, $attachments, $mai
 		</thead>
 		<tbody>
 			<tr <?php
-				$row++;
-				echo ($row % 2 == 0 ? 'class="alternate"' : '');
-				?>>
+			$row++;
+			echo $row % 2 == 0 ? 'class="alternate"' : '';
+			?>>
 				<td><b>Til:</b></td>
-				<td><?php echo ($TO == "" ? "(Ingen)" : htmlentities($TO)); ?></td>
+				<td><?php echo $TO == "" ? "(Ingen)" : htmlentities($TO); ?></td>
 			</tr>
 			<tr <?php $row++;
-				echo ($row % 2 == 0 ? 'class="alternate"' : ''); ?>>
+			echo $row % 2 == 0 ? 'class="alternate"' : ''; ?>>
 				<td><b>Fra:</b></td>
 				<td><?php echo htmlentities($FROM); ?></td>
 			</tr>
-			<?php if ($REPLYTO != '') : ?>
+			<?php if ($REPLYTO != ''): ?>
 				<tr <?php $row++;
-					echo ($row % 2 == 0 ? 'class="alternate"' : ''); ?>>
+				echo $row % 2 == 0 ? 'class="alternate"' : ''; ?>>
 					<td><b>Svar-adresse:</b></td>
 					<td><?php echo htmlentities($REPLYTO); ?></td>
 				</tr>
 			<?php endif; ?>
-			<?php if ($CC != '') : ?>
+			<?php if ($CC != ''): ?>
 				<tr <?php $row++;
-					echo ($row % 2 == 0 ? 'class="alternate"' : ''); ?>>
+				echo $row % 2 == 0 ? 'class="alternate"' : ''; ?>>
 					<td><b>Cc:</b></td>
 					<td><?php echo htmlentities($CC); ?></td>
 				</tr>
 			<?php endif; ?>
 			<tr <?php $row++;
-				echo ($row % 2 == 0 ? 'class="alternate"' : ''); ?>>
+			echo $row % 2 == 0 ? 'class="alternate"' : ''; ?>>
 				<td><b>Vedhæftede filer:</b></td>
 				<td><?php
-					if (count($attachments) > 0) {
-						for ($i = 0; $i < count($attachments); $i++) {
-							echo $attachments[$i] . ' - Fil eksisterer' . (file_exists($attachments[$i]) ? "" : " ikke!") . ($i < count($attachments) - 1 ? "<br>" : "");
-						}
-					} else {
-						echo '(Ingen)';
+				if (count($attachments) > 0) {
+					for ($i = 0; $i < count($attachments); $i++) {
+						echo $attachments[$i] . ' - Fil eksisterer' . (file_exists($attachments[$i]) ? "" : " ikke!") . ($i < count($attachments) - 1 ? "<br>" : "");
 					}
-					?></td>
+				} else {
+					echo '(Ingen)';
+				}
+				?></td>
 			</tr>
 			<tr <?php $row++;
-				echo ($row % 2 == 0 ? 'class="alternate"' : '');
-				?>>
+			echo $row % 2 == 0 ? 'class="alternate"' : '';
+			?>>
 				<td><b>Emne:</b></td>
 				<td><?php echo $mailsubject; ?></td>
 			</tr>
 			<tr <?php $row++;
-				echo ($row % 2 == 0 ? 'class="alternate"' : ''); ?>>
+			echo $row % 2 == 0 ? 'class="alternate"' : ''; ?>>
 				<td><b>Indhold:</b></td>
 				<td><?php echo stripcslashes($mailcontent); ?></td>
 			</tr>
@@ -128,11 +131,12 @@ function echo_AKDTU_email_as_table($TO, $FROM, $REPLYTO, $CC, $attachments, $mai
  * @param string $CONSTANT_ROOT Root of the PHP constant, which contains info about the email. Defined in register_options.php and register_settings.php
  * @param bool|string $override_TO If not false, the recipient address of the email is overwritten with the value of this parameter
  */
-function send_AKDTU_email($debug = true, $subject_replaces = array(), $content_replaces = array(), $CONSTANT_ROOT = '', $override_TO = false) {
-	$REPLYTO = constant($CONSTANT_ROOT . '_REPLYTO'); # Reply-To address
-	$CC = constant($CONSTANT_ROOT . '_CC'); # CC address
-	$FROM = constant($CONSTANT_ROOT . '_FROM'); # From address
-	$TO = ($override_TO ? $override_TO : constant($CONSTANT_ROOT . '_TO')); # To address
+function send_AKDTU_email($debug = true, $subject_replaces = array(), $content_replaces = array(), $CONSTANT_ROOT = '', $override_TO = false)
+{
+	$REPLYTO = constant("{$CONSTANT_ROOT}_REPLYTO"); # Reply-To address
+	$CC = constant("{$CONSTANT_ROOT}_CC"); # CC address
+	$FROM = constant("{$CONSTANT_ROOT}_FROM"); # From address
+	$TO = $override_TO ?? constant("{$CONSTANT_ROOT}_TO"); # To address
 
 	# Perform replaces in the subject of the email
 	$mailsubject = AKDTU_email_subject($subject_replaces, $CONSTANT_ROOT);
@@ -154,15 +158,15 @@ function send_AKDTU_email($debug = true, $subject_replaces = array(), $content_r
 		$headers = array();
 		if ($REPLYTO != '') {
 			# Set Reply-to address
-			$headers[] = 'Reply-to: ' . $REPLYTO;
+			$headers[] = "Reply-to: {$REPLYTO}";
 		}
 		if ($CC != '') {
 			# Set CC address
-			$headers[] = 'Cc: ' . $CC;
+			$headers[] = "Cc: {$CC}";
 		}
 		if ($FROM != '') {
 			# Set From address
-			$headers[] = 'From: ' . $FROM;
+			$headers[] = "From: {$FROM}";
 		}
 
 		# Email should be sent as an html-email
@@ -178,29 +182,31 @@ function send_AKDTU_email($debug = true, $subject_replaces = array(), $content_r
 /**
  * Performs replaces on the subject of an email before sending
  * 
- * @param string $subject_replaces Key-value array of replaces, where the keys should be replaced with the values in the subject of the email
+ * @param string[] $subject_replaces Key-value array of replaces, where the keys should be replaced with the values in the subject of the email
  * @param string $CONSTANT_ROOT Root of the PHP constant, which contains info about the email. Defined in register_options.php and register_settings.php
  * 
  * @return string Formatted subject of the email
  */
-function AKDTU_email_subject($subject_replaces = array(), $CONSTANT_ROOT = '') {
-	$SUBJECT = constant($CONSTANT_ROOT . '_SUBJECT'); # Mail subject
+function AKDTU_email_subject($subject_replaces = [], $CONSTANT_ROOT = '')
+{
+	$SUBJECT = constant("{$CONSTANT_ROOT}_SUBJECT"); # Mail subject
 
-	return (count($subject_replaces) > 0 ? str_replace(array_keys($subject_replaces), $subject_replaces, nl2br($SUBJECT)) : nl2br($SUBJECT));
+	return count($subject_replaces) > 0 ? str_replace(array_keys($subject_replaces), $subject_replaces, nl2br($SUBJECT)) : nl2br($SUBJECT);
 }
 
 /**
  * Performs replaces on the content of the email before sending
  * 
- * @param string $content_replaces Key-value array of replaces, where the keys should be replaced with the values in the content of the email
+ * @param string[] $content_replaces Key-value array of replaces, where the keys should be replaced with the values in the content of the email
  * @param string $CONSTANT_ROOT Root of the PHP constant, which contains info about the email. Defined in register_options.php and register_settings.php
  * 
  * @return string Formatted content of the email
  */
-function AKDTU_email_content($content_replaces = array(), $CONSTANT_ROOT = '') {
-	$MAILCONTENT = stripcslashes(constant($CONSTANT_ROOT . '_MAILCONTENT')); # Mail content, strip slashes
+function AKDTU_email_content($content_replaces = [], $CONSTANT_ROOT = '')
+{
+	$MAILCONTENT = stripcslashes(constant("{$CONSTANT_ROOT}_MAILCONTENT")); # Mail content, strip slashes
 
-	return (count($content_replaces) > 0 ? str_replace(array_keys($content_replaces), $content_replaces, nl2br($MAILCONTENT)) : nl2br($MAILCONTENT));
+	return count($content_replaces) > 0 ? str_replace(array_keys($content_replaces), $content_replaces, nl2br($MAILCONTENT)) : nl2br($MAILCONTENT);
 }
 
 /**
@@ -210,8 +216,9 @@ function AKDTU_email_content($content_replaces = array(), $CONSTANT_ROOT = '') {
  * 
  * @return array[string] Array of paths to attachments for the email
  */
-function AKDTU_email_attachments($CONSTANT_ROOT = '') {
-	$ATTACHMENTS = constant($CONSTANT_ROOT . '_ATTACHMENTS'); # Attachment string
+function AKDTU_email_attachments($CONSTANT_ROOT = '')
+{
+	$ATTACHMENTS = constant("{$CONSTANT_ROOT}_ATTACHMENTS"); # Attachment string
 
 	return prepend_attachments_string($ATTACHMENTS);
 }

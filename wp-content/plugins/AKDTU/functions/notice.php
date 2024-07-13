@@ -5,7 +5,8 @@
  */
 
 # Class to write admin notices
-class AKDTU_notice {
+class AKDTU_notice
+{
 	/**
 	 * Message to be displayed in a warning.
 	 *
@@ -34,12 +35,13 @@ class AKDTU_notice {
 	 * @param string $message Message to be displayed in a warning.
 	 * @param bool $is_dismissible Flag, whether message should be dismissable.
 	 */
-	public function __construct(string $type, string $message, bool $is_dismissible = true) {
+	public function __construct(string $type, string $message, bool $is_dismissible = true)
+	{
 		$this->message = $message;
 		$this->type = $type;
 		$this->is_dismissible = $is_dismissible;
 
-		add_action('admin_notices', array($this, 'render'));
+		add_action('admin_notices', [$this, 'render']);
 	}
 
 	/**
@@ -47,7 +49,8 @@ class AKDTU_notice {
 	 *
 	 * @return void
 	 */
-	public function render() {
-		printf('<div class="notice notice-%s %s"><p>%s</p></div>', esc_html($this->type), ($this->is_dismissible ? 'is-dismissible' : ''), esc_html($this->message));
+	public function render()
+	{
+		echo "<div class=\"notice notice-{esc_html($this->type)} {($this->is_dismissible ? 'is-dismissible' : '')}\"><p>{esc_html($this->message)}</p></div>";
 	}
 }

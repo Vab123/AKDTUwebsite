@@ -15,10 +15,11 @@
  * 
  * @return bool True if a user-creation permit already exists for a specific apartment
  */
-function user_creation_permit_exists($apartment_number) {
+function user_creation_permit_exists($apartment_number)
+{
 	global $wpdb;
 
-	return $wpdb->query('SELECT apartment_number FROM ' . $wpdb->prefix . 'swpm_allowed_membercreation WHERE apartment_number="'. $apartment_number . '" AND allow_creation_date >= "' . (new DateTime('now', new DateTimeZone('Europe/Copenhagen')))->format("Y-m-d H:i:s") . '"') > 0;
+	return $wpdb->query("SELECT apartment_number FROM {$wpdb->prefix}swpm_allowed_membercreation WHERE apartment_number = \"{$apartment_number}\" AND allow_creation_date >= \"{(new DateTime('now', new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s')}\"") > 0;
 }
 #
 /**
@@ -30,20 +31,21 @@ function user_creation_permit_exists($apartment_number) {
  * 
  * @return int The number of permits created (0 on failure, 1 on success)
  */
-function create_user_creation_permit($apartment_number, $phone_number, $takeover_time) {
+function create_user_creation_permit($apartment_number, $phone_number, $takeover_time)
+{
 	global $wpdb;
 
 	# Data for new user
-	$data = array(
+	$data = [
 		'apartment_number' => $apartment_number,
 		'phone_number' => $phone_number,
 		'allow_creation_date' => $takeover_time,
 		'initial_reset' => false,
 		'initial_takeover' => false
-	);
+	];
 
 	# Insert permit into database
-	return $wpdb->insert($wpdb->prefix . 'swpm_allowed_membercreation', $data);
+	return $wpdb->insert("{$wpdb->prefix}swpm_allowed_membercreation", $data);
 }
 #
 /**
@@ -55,18 +57,19 @@ function create_user_creation_permit($apartment_number, $phone_number, $takeover
  * 
  * @return int The number of permits deleted (0 on failure, 1 on success)
  */
-function delete_user_creation_permit($apartment_number, $phone_number, $takeover_time) {
+function delete_user_creation_permit($apartment_number, $phone_number, $takeover_time)
+{
 	global $wpdb;
 
 	# Data for user
-	$data = array(
+	$data = [
 		'apartment_number' => $apartment_number,
 		'phone_number' => $phone_number,
 		'allow_creation_date' => $takeover_time,
-	);
+	];
 
 	# Delete renter permission
-	return $wpdb->delete($wpdb->prefix . 'swpm_allowed_membercreation',$data);
+	return $wpdb->delete("{$wpdb->prefix}swpm_allowed_membercreation", $data);
 }
 ############################################################
 
@@ -81,10 +84,11 @@ function delete_user_creation_permit($apartment_number, $phone_number, $takeover
  * 
  * @return bool True if a renter-creation permit already exists for a specific apartment
  */
-function renter_creation_permit_exists($apartment_number) {
+function renter_creation_permit_exists($apartment_number)
+{
 	global $wpdb;
 
-	return $wpdb->query('SELECT apartment_number FROM ' . $wpdb->prefix . 'swpm_allowed_rentercreation WHERE apartment_number="'. $apartment_number . '" AND allow_creation_date >= "' . (new DateTime('now', new DateTimeZone('Europe/Copenhagen')))->format("Y-m-d H:i:s") . '"') > 0;
+	return $wpdb->query("SELECT apartment_number FROM {$wpdb->prefix}swpm_allowed_rentercreation WHERE apartment_number = \"{$apartment_number}\" AND allow_creation_date >= \"{(new DateTime('now', new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s')}\"") > 0;
 }
 #
 /**
@@ -96,21 +100,22 @@ function renter_creation_permit_exists($apartment_number) {
  * 
  * @return int The number of permits created (0 on failure, 1 on success)
  */
-function create_renter_creation_permit($apartment_number, $phone_number, $start_time, $end_time) {
+function create_renter_creation_permit($apartment_number, $phone_number, $start_time, $end_time)
+{
 	global $wpdb;
 
 	# Data for user
-	$data = array(
+	$data = [
 		'apartment_number' => $apartment_number,
 		'phone_number' => $phone_number,
 		'start_time' => $start_time,
 		'end_time' => $end_time,
 		'initial_reset' => false,
 		'initial_takeover' => false
-	);
+	];
 
 	# Insert permit into database
-	return $wpdb->insert($wpdb->prefix . 'swpm_allowed_rentercreation', $data);
+	return $wpdb->insert("{$wpdb->prefix}swpm_allowed_rentercreation", $data);
 }
 #
 /**
@@ -122,18 +127,19 @@ function create_renter_creation_permit($apartment_number, $phone_number, $start_
  * 
  * @return int The number of permits deleted (0 on failure, 1 on success)
  */
-function delete_renter_creation_permit($apartment_number, $phone_number, $start_time, $end_time) {
+function delete_renter_creation_permit($apartment_number, $phone_number, $start_time, $end_time)
+{
 	global $wpdb;
 
 	# Data for user
-	$data = array(
+	$data = [
 		'apartment_number' => $apartment_number,
 		'phone_number' => $phone_number,
 		'start_time' => $start_time,
 		'end_time' => $end_time,
-	);
+	];
 
 	# Delete renter permission
-	return $wpdb->delete($wpdb->prefix . 'swpm_allowed_rentercreation', $data);
+	return $wpdb->delete("{$wpdb->prefix}swpm_allowed_rentercreation", $data);
 }
 ############################################################
