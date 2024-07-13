@@ -50,31 +50,113 @@ function get_all_translations($events) {
 /**
  * Gets ids of events that have booked the common house at a specified time
  * 
- * @param DateTime $time Timestamp of when to find events for. Treated as time in timezone 'Europe/Copenhagen'
+ * @param DateTime|null $starttime_before Timestamp of when the events has to start before. Treated as time in timezone 'Europe/Copenhagen'
+ * @param DateTime|null $starttime_after Timestamp of when the events has to start after. Treated as time in timezone 'Europe/Copenhagen'
+ * @param DateTime|null $endtime_before Timestamp of when the events has to end before. Treated as time in timezone 'Europe/Copenhagen'
+ * @param DateTime|null $endtime_after Timestamp of when the events has to end after. Treated as time in timezone 'Europe/Copenhagen'
  * @param int|null $limit Limit on how many event ids to return, or null to return all found event ids. Default: null
  * @param int|null $status Required status code of the events found, or null to include any status codes. Default: 1
+ * @param string $orderby Column (and optionally direction) to sort the event ids by
+ * @param string[] $columns Array of which columns to retrieve from the database
  * 
- * @return int[] Array of event ids for the events found
+ * @return string|string[]|object|object[] If $limit = 1 and only one column is selected, returns the value found as a string. If $limit != 1 and only one column is selected, returns an array of the values found as strings. If $limit = 1 and more than one column is selected, returns an object (->column = value) with the values found as strings. If $limit != 1 and more than one column is selected, returns an array of one object per row (->column = value) with the values found as strings
  */
-function get_common_house_event_ids($time, $limit = null, $status = 1) {
+function get_common_house_events($starttime_before = null, $starttime_after = null, $endtime_before = null, $endtime_after = null, $limit = null, $status = 1, $orderby = null, $columns = array('event_id')) {
 	global $wpdb;
 
-	$time_days = $time->format('Y-m-d');
-	$time_hours = $time->format('H:i:s');
+	$sql_options = array();
 
-	return $wpdb->get_col('SELECT event_id FROM ' . EM_EVENTS_TABLE . ' WHERE (event_start_date < "' . $time_days . '" OR (event_start_date = "' . $time_days . '" AND event_start_time <= "' . $time_hours . '")) AND (event_end_date > "' . $time_days . '" OR (event_end_date = "' . $time_days . '" AND event_end_time >= "' . $time_hours . '"))' . (!is_null($status) ? ' AND event_status = ' . strval($status) : '') . (!is_null($limit) ? ' LIMIT ' . strval($limit) : ''));
+	if (!is_null($starttime_before)) {
+		$starttime_before_days = $starttime_before->format('Y-m-d');
+		$starttime_before_hours = $starttime_before->format('H:i:s');
+
+		$sql_options[] = '(event_start_date < "' . $starttime_before_days . '" OR (event_start_date = "' . $starttime_before_days . '" AND event_start_time <= "' . $starttime_before_hours . '"))';
+	}
+
+	if (!is_null($starttime_after)) {
+		$starttime_before_days = $starttime_before->format('Y-m-d');
+		$starttime_before_hours = $starttime_before->format('H:i:s');
+
+		$sql_options[] = '(event_start_date > "' . $starttime_before_days . '" OR (event_start_date = "' . $starttime_before_days . '" AND event_start_time >= "' . $starttime_before_hours . '"))';
+	}
+
+	if (!is_null($endtime_before)) {
+		$endtime_before_days = $endtime_before->format('Y-m-d');
+		$endtime_before_hours = $endtime_before->format('H:i:s');
+
+		$sql_options[] = '(event_end_date < "' . $endtime_before_days . '" OR (event_end_date = "' . $endtime_before_days . '" AND event_end_time <= "' . $endtime_before_hours . '"))';
+	}
+
+	if (!is_null($endtime_after)) {
+		$endtime_after_days = $endtime_after->format('Y-m-d');
+		$endtime_after_hours = $endtime_after->format('H:i:s');
+
+		$sql_options[] = '(event_end_date > "' . $endtime_after_days . '" OR (event_end_date = "' . $endtime_after_days . '" AND event_end_time >= "' . $endtime_after_hours . '"))';
+	}
+
+	if (!is_null($status)) {
+		$sql_options[] = 'event_status = ' . strval($status);
+	}
+
+	if (!is_null($limit)) {
+		$sql_options[] = ' LIMIT ' . strval($limit);
+	}
+
+	if (!is_null($orderby)) {
+		$sql_options[] = ' ORDER BY ' . $orderby;
+	}
+
+	if ($limit == 1 && count($columns) == 1) {
+		return $wpdb->get_var('SELECT ' . $columns[0] . ' FROM ' . EM_EVENTS_TABLE . (count($sql_options) > 0 ? join(' AND ', $sql_options) : ''));
+	} else if ($limit > 1 && count($columns) == 1) {
+		return $wpdb->get_col('SELECT ' . $columns[0] . ' FROM ' . EM_EVENTS_TABLE . (count($sql_options) > 0 ? join(' AND ', $sql_options) : ''));
+	} else if ($limit == 1 && count($columns) > 1) {
+		return $wpdb->get_row('SELECT ' . join(',', $columns) . ' FROM ' . EM_EVENTS_TABLE . (count($sql_options) > 0 ? join(' AND ', $sql_options) : ''));
+	} else {
+		return $wpdb->get_results('SELECT ' . join(',', $columns) . ' FROM ' . EM_EVENTS_TABLE . (count($sql_options) > 0 ? join(' AND ', $sql_options) : ''));
+	}
 }
 
 /**
- * Gets ids of current events that have booked the common house
+ * Gets ids of the events that have booked the common house most recently
  * 
  * @param int|null $limit Limit on how many event ids to return, or null to return all found event ids. Default: null
  * @param int|null $status Required status code of the events found, or null to include any status codes. Default: 1
  * 
- * @return int[] Array of event ids for the current events found
+ * @return string|string[] If $limit = 1, returns the id of the event found. If $limit != 1, returns an array of event ids for the events found
+ */
+function get_recent_common_house_event_ids($limit = null, $status = 1) {
+	$now = new DateTime('now', new DateTimeZone('Europe/Copenhagen'));
+
+	return get_common_house_events($now, null, null, null, $limit, $status, 'event_end DESC', array('event_id'));
+}
+
+/**
+ * Gets ids of next events that have booked the common house
+ * 
+ * @param int|null $limit Limit on how many event ids to return, or null to return all found event ids. Default: null
+ * @param int|null $status Required status code of the events found, or null to include any status codes. Default: 1
+ * 
+ * @return string|string[] If $limit = 1, returns the id of the event found. If $limit != 1, returns an array of event ids for the events found
+ */
+function get_next_common_house_event_ids($limit = null, $status = 1) {
+	$now = new DateTime('now', new DateTimeZone('Europe/Copenhagen'));
+
+	return get_common_house_events(null, $now, null, null, $limit, $status, 'event_end ASC', array('event_id'));
+}
+
+/**
+ * Gets ids of current events that have booked the common house now
+ * 
+ * @param int|null $limit Limit on how many event ids to return, or null to return all found event ids. Default: null
+ * @param int|null $status Required status code of the events found, or null to include any status codes. Default: 1
+ * 
+ * @return string|string[] If $limit = 1, returns the id of the event found. If $limit != 1, returns an array of event ids for the events found
  */
 function get_current_common_house_event_ids($limit = null, $status = 1) {
-	return get_common_house_event_ids(new DateTime('now', new DateTimeZone('Europe/Copenhagen')), $limit, $status);
+	$now = new DateTime('now', new DateTimeZone('Europe/Copenhagen'));
+
+	return get_common_house_events($now, null, null, $now, $limit, $status, null, array('event_id'));
 }
 
 /**

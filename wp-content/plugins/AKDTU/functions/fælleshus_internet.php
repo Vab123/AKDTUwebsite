@@ -126,7 +126,7 @@ function generate_password_info() {
 		## Common house is not currently rented. Set potential password to default value.
 
 		# Get the ID of the last booking
-		$event_id = $wpdb->get_var('SELECT event_id FROM ' . EM_EVENTS_TABLE . ' WHERE event_end <= "' . $now->format('Y-m-d H:i:s') . '" AND event_status = 1 ORDER BY event_end DESC LIMIT 1');
+		$event_id = get_recent_common_house_event_ids(1);
 
 		# Get event
 		$event = em_get_event($event_id, 'event_id');
