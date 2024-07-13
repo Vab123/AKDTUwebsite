@@ -15,7 +15,7 @@ function remove_duplicate_events($events, $keep_single_events = true, $paired_ev
 	if ($keep_single_events) {
 		// Filter events to remove duplicates
 		return array_filter($events, function ($event) use($paired_event_language_slug) {
-			return count(pll_get_post_translations(em_get_event($event->post_id))) == 1 || pll_get_post_language($event->post_id, "slug") == $paired_event_language_slug;
+			return count(pll_get_post_translations($event->post_id)) == 1 || pll_get_post_language($event->post_id, "slug") == $paired_event_language_slug;
 		});
 	}
 	else {
