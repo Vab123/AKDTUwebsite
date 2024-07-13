@@ -14,8 +14,8 @@ function fælleshus_internet_dashboard_widget() {
 	$password_struct = generate_password_info(); ?>
 		<table width="100%" class="widefat">
 			<colgroup>
-				<col span="1" style="width: 40%">
 				<col span="1" style="width: 60%">
+				<col span="1" style="width: 40%">
 			</colgroup>
 			<thead>
 				<tr>
@@ -52,7 +52,7 @@ function fælleshus_internet_dashboard_widget() {
 				</tr>
 				<tr>
 					<td style="vertical-align:middle">
-						Mail sendes snart
+						Adgangskode skal opdateres
 					</td>
 					<td style="vertical-align:middle">
 						<b><?php echo ($password_struct["should_be_changed"] ? "Ja" : "Nej"); ?></b>
