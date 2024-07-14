@@ -136,7 +136,7 @@ function send_AKDTU_email($debug = true, $subject_replaces = array(), $content_r
 	$REPLYTO = constant("{$CONSTANT_ROOT}_REPLYTO"); # Reply-To address
 	$CC = constant("{$CONSTANT_ROOT}_CC"); # CC address
 	$FROM = constant("{$CONSTANT_ROOT}_FROM"); # From address
-	$TO = $override_TO ?? constant("{$CONSTANT_ROOT}_TO"); # To address
+	$TO = $override_TO !== false ? $override_TO : constant("{$CONSTANT_ROOT}_TO"); # To address
 
 	# Perform replaces in the subject of the email
 	$mailsubject = AKDTU_email_subject($subject_replaces, $CONSTANT_ROOT);
