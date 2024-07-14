@@ -129,14 +129,14 @@ function echo_AKDTU_email_as_table($TO, $FROM, $REPLYTO, $CC, $attachments, $mai
  * @param string[] $subject_replaces Key-value array of replaces, where the keys should be replaced with the values in the subject of the email
  * @param string[] $content_replaces Key-value array of replaces, where the keys should be replaced with the values in the content of the email
  * @param string $CONSTANT_ROOT Root of the PHP constant, which contains info about the email. Defined in register_options.php and register_settings.php
- * @param bool|string $override_TO If not false, the recipient address of the email is overwritten with the value of this parameter
+ * @param string|null $override_TO If not null, the recipient address of the email is overwritten with the value of this parameter
  */
-function send_AKDTU_email($debug = true, $subject_replaces = array(), $content_replaces = array(), $CONSTANT_ROOT = '', $override_TO = false)
+function send_AKDTU_email($debug = true, $subject_replaces = array(), $content_replaces = array(), $CONSTANT_ROOT = '', $override_TO = null)
 {
 	$REPLYTO = constant("{$CONSTANT_ROOT}_REPLYTO"); # Reply-To address
 	$CC = constant("{$CONSTANT_ROOT}_CC"); # CC address
 	$FROM = constant("{$CONSTANT_ROOT}_FROM"); # From address
-	$TO = $override_TO !== false ? $override_TO : constant("{$CONSTANT_ROOT}_TO"); # To address
+	$TO = $override_TO ?? constant("{$CONSTANT_ROOT}_TO"); # To address
 
 	# Perform replaces in the subject of the email
 	$mailsubject = AKDTU_email_subject($subject_replaces, $CONSTANT_ROOT);
