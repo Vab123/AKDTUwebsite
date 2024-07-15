@@ -59,7 +59,7 @@ function send_fjern_brugeradgang($debug = false) {
 			reset_user_info($user_id, $new_pass, $new_first_name, $new_last_name, $new_email, $apartment_num, $debug);
 
 			# Update database to show that the user has been reset
-			update_renter_permit($apartment_num, ['initial_reset' => 1]);
+			update_user_permit($apartment_num, ['initial_reset' => 1]);
 		}
 
 		# Check if an email should be sent or echoed
