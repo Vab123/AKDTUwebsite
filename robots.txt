@@ -2,6 +2,7 @@ User-agent: *
 
 # Fjern tilladelse fra alt
 Disallow: *
+Disallow: /
 
 # Tillad root akdtu.dk
 Allow: /$
@@ -17,3 +18,12 @@ Allow: /en/buy-waiting-list/
 # Tillad side med kontaktinfo
 Allow: /kontakt/
 Allow: /en/contact/
+
+# Block Baidu spider
+User-agent: Baiduspider
+User-agent: baiduspider
+User-agent: Baiduspider-video
+User-agent: Baiduspider-image
+User-agent: Baiduspider+
+User-agent: Yandex
+Disallow: /
