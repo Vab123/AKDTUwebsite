@@ -8,7 +8,6 @@
 #
 # User-creation permit
 #
-
 function user_creation_permit_exists_where($where)
 {
 	global $wpdb;
@@ -291,6 +290,18 @@ function update_renter_permit($apartment_num, $values) {
 }
 ############################################################
 
+############################################################
+#
+# User registration handling
+#
+/**
+ * Handles the creation of a new user on the website
+ * @param string $apartment Apartment number of the user to be created
+ * @param bool $is_temporary_renter True if the user is being created for a temporary renter
+ * @param string $phone Phone number of the new user
+ * @param string $email Email adress of the new user
+ * @return void
+ */
 function AKDTU_user_registration($apartment, $is_temporary_renter, $phone, $email) {
 	global $wpdb;
 
@@ -424,3 +435,4 @@ function AKDTU_user_registration($apartment, $is_temporary_renter, $phone, $emai
 	SwpmTransfer::get_instance()->set('status', $message);
 	return;
 }
+############################################################
