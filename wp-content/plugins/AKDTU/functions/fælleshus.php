@@ -563,6 +563,44 @@ function get_final_price($price_to_pay, $price_adjustments)
 }
 
 /**
+ * Finds and organizes the total amount to charge each apartment, grouped by current or previous owner, and divided into original price, adjustments, and total
+ * @param DateTime $month_start Start time to find prices for
+ * @param DateTime $month_end End time to find prices for
+ * @return array[string,array[string,int]] Key-value array, with keys being apartment numbers and values key-value arrays with keys "previous_owner" and "current_owner" and values being key-value arrays with keys being "original_price", "adjustments", and "total" and values being the original price paid, the value of any price adjustments made, and the final price paid. Only apartments that may need to be charged are included in the array. It may be true that only one of "current_owner" and "previous_owner" has a total price different from zero, but both are still included in the data-structure.
+ */
+function price_to_pay_per_apartment($month_start, $month_end)
+{
+	$price_to_pay = get_price_to_pay($month_start, $month_end);
+	$price_adjustments = get_price_adjustments($month_start, $month_end);
+	$final_price = get_final_price($price_to_pay, $price_adjustments);
+	
+	$price_to_pay_by_apartment = [];
+
+	foreach ($final_price as $username => $price) {
+		if (!isset($price_to_pay_by_apartment[apartment_number_from_username($username)])) {
+			$price_to_pay_by_apartment[apartment_number_from_username($username)] = [
+				"current_owner" => [
+					"original_price" => 0,
+					"adjustments" => 0,
+					"total" => 0,
+				],
+				"previous_owner" => [
+					"original_price" => 0,
+					"adjustments" => 0,
+					"total" => 0,
+				],
+			];
+		}
+
+		$price_to_pay_by_apartment[apartment_number_from_username($username)][is_archive_user_from_username($username) ? "previous_owner" : "current_owner"]["original_price"] += $price_to_pay[$username];
+		$price_to_pay_by_apartment[apartment_number_from_username($username)][is_archive_user_from_username($username) ? "previous_owner" : "current_owner"]["adjustments"] += $price_adjustments[$username];
+		$price_to_pay_by_apartment[apartment_number_from_username($username)][is_archive_user_from_username($username) ? "previous_owner" : "current_owner"]["total"] += $final_price[$username];
+	}
+
+	return $price_to_pay_by_apartment;
+}
+
+/**
  * Creates a new booking of the common house
  * 
  * @param array $params Array of arrays of options as key-value pairs. Keys are two-character language codes of the post. Values are key-value arrays with the followiung valid keys:

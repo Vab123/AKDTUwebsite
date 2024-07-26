@@ -136,27 +136,24 @@ function any_gardenday($language = 'all')
 /**
  * Adds an apartment to a gardenday
  * 
- * @param int $apartment_number Apartment number to add to the gardenday
+ * @param int $user_id User id to add to the gardenday
  * @param int $gardenday_event_id Id of the gardenday event to add the apartment to
  * @param int $gardenday_date Specific date of the garden day to add the apartment to
  * 
  * @return int -2 if the apartment number is not valid, -1 if gardenday date does not exist, 0 if user could not be signed up for the gardenday, 1 if user was added to the gardenday successfully
  */
-function add_apartment_to_gardenday($apartment_number, $gardenday_event_id, $gardenday_date)
+function add_apartment_to_gardenday($user_id, $gardenday_event_id, $gardenday_date)
 {
 	global $wpdb;
 
-	if (!is_valid_apartment_number($apartment_number)) {
+	if (get_userdata( $user_id ) === false) {
 		return -2;
 	}
-
-	# Get the id of the user corresponding to the apartment
-	$user_id = id_from_apartment_number($apartment_number);
 
 	# Check if the apartment is already signed up to any of the garden days
 	if ($wpdb->get_var("SELECT COUNT(*) FROM {EM_BOOKINGS_TABLE} WHERE event_id = {$gardenday_event_id} AND person_id = {$user_id} > 0 AND status = 1")) {
 		# Apartment is already signed up. Write warning message to admin interface
-		new AKDTU_notice('warning', "Lejlighed {$apartment_number} var allerede tilmeldt havedagen. Tilmelder igen.");
+		new AKDTU_notice('warning', "Bruger " . name_from_id($user_id) . " var allerede tilmeldt havedagen. Tilmelder igen.");
 	}
 
 	# Add booking to user
@@ -188,22 +185,19 @@ function add_apartment_to_gardenday($apartment_number, $gardenday_event_id, $gar
 /**
  * Removes an apartment from a gardenday
  * 
- * @param int $apartment_number Apartment number to remove from the gardenday
+ * @param int $user_id User id to remove from the gardenday
  * @param int $gardenday_event_id Id of the gardenday event to remove the apartment from
  * @param int $gardenday_date Specific date of the garden day to remove the apartment from
  * 
  * @return int -2 if the apartment number is not valid, -1 if gardenday date does not exist, 0 if user could not be removed from the gardenday, 1 if user was removed from the gardenday successfully
  */
-function remove_apartment_from_gardenday($apartment_number, $gardenday_event_id, $gardenday_date)
+function remove_apartment_from_gardenday($user_id, $gardenday_event_id, $gardenday_date)
 {
 	global $wpdb;
 
-	if (!is_valid_apartment_number($apartment_number)) {
+	if (get_userdata( $user_id ) === false) {
 		return -2;
 	}
-
-	# Get the id of the user corresponding to the apartment
-	$user_id = id_from_apartment_number($apartment_number);
 
 	# Get the garden day event
 	$event = em_get_event($gardenday_event_id, 'event_id');

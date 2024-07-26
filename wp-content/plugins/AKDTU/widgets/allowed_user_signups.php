@@ -5,23 +5,21 @@
  */
 
 function allowed_user_signups_widget() {
-	$allowed_users = get_moves(['apartment_number', 'phone_number', 'allow_creation_date', 'initial_reset'], null, null, null, false, null);
+	$allowed_users = get_current_user_permits(['email', 'apartment_number', 'allow_creation_date']);
 
 	if (count($allowed_users) > 0) : ?>
 		<table id='dbem-bookings-table' class='widefat post ' style="max-width:75em">
 			<colgroup>
 				<col span="1" style="width: 10%" />
-				<col span="1" style="width: 15%" />
-				<col span="1" style="width: 40%" />
-				<col span="1" style="width: 20%" />
+				<col span="1" style="width: 62%" />
+				<col span="1" style="width: 28%" />
 				<col span="1" style="width: 0%" />
 			</colgroup>
 			<thead>
 				<tr>
 					<th class='manage-column' scope='col'>Lejl.</th>
-					<th class='manage-column' scope='col'>Telefon</th>
+					<th class='manage-column' scope='col'>Email</th>
 					<th class='manage-column' scope='col'>Tilladt fra</th>
-					<th class='manage-column' scope='col'>Klargjort</th>
 					<th class='manage-column' scope='col'></th>
 				</tr>
 			</thead>
@@ -36,13 +34,12 @@ function allowed_user_signups_widget() {
 						};
 						$row++; ?>>
 						<td style="vertical-align:middle"><?php echo padded_apartment_number_from_apartment_number($user->apartment_number); ?></td>
-						<td style="vertical-align:middle"><?php echo $user->phone_number; ?></td>
+						<td style="vertical-align:middle; word-break: break-word;"><?php echo $user->email; ?></td>
 						<td style="vertical-align:middle"><?php echo (new DateTime($user->allow_creation_date))->format('d-m-Y H:i'); ?></td>
-						<td style="vertical-align:middle"><?php echo ($user->initial_reset == 1 ? "Ja" : "Nej"); ?></td>
 						<td style="vertical-align:middle;text-align:center">
 							<form action="" method="post">
 								<input type="hidden" name="user" value="<?php echo $user->apartment_number; ?>" />
-								<input type="hidden" name="phone" value="<?php echo $user->phone_number; ?>" />
+								<input type="hidden" name="email" value="<?php echo $user->email; ?>" />
 								<input type="hidden" name="takeover_time" value="<?php echo $user->allow_creation_date; ?>" />
 								<input type="hidden" name="action" value="delete_user_signup" />
 								<input type="submit" class="button-secondary" value="Slet">

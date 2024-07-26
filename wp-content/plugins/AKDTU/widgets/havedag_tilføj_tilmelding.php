@@ -50,7 +50,7 @@ function tilføj_til_havedag_dashboard_widget() {
 																															echo 'style="visibility:collapse"';
 																														}; ?>>
 								<td><label>Lejlighed:</label></td>
-								<td><?php echo apartments_dropdown(); ?></td>
+								<td><?php echo users_dropdown(); ?></td>
 							</tr>
 							<tr class="add_gardenday_options" id="add_gardenday_<?php echo $event->event_id ?>_signup" <?php if ($is_not_first) {
 																																echo 'style="visibility:collapse"';

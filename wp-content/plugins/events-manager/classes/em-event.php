@@ -2194,6 +2194,12 @@ class EM_Event extends EM_Object {
 				case '#_RENTERAPPROVEDMESSAGE':
 					$replace = $this->output(get_option('dbem_event_approved_email_body_' . pll_get_post_language($this->post_id, 'slug')), 'raw');
 					break;
+				case '#_APT':
+					$replace = is_apartment_from_id($this->event_owner) ? apartment_number_from_id($this->event_owner) : "";
+					break;
+				case '#_PADDEDAPT':
+					$replace = is_apartment_from_id($this->event_owner) ? padded_apartment_number_from_id($this->event_owner) : "";
+					break;
 				case '#_RENTERREAPPROVEDMESSAGE':
 					$replace = $this->output(get_option('dbem_event_reapproved_email_body_' . pll_get_post_language($this->post_id, 'slug')), 'raw');
 					break;

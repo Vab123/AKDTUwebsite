@@ -86,7 +86,7 @@ function render_settings_tab($tab)
 		$settings_group_as_string .= join("", array_map(function ($setting) {
 			return "<tr><th scope=\"row\">{$setting['headline']}</th>" .
 				"<td>" .
-				($setting['tag'] == "input" ? "<input type=\"{$setting["type"]}\" name=\"{$setting["name"]}\" style=\"{$setting["style"]}\" " . ($setting["type"] == 'checkbox' ? (get_option('AKDTU_FÆLLESHUS_INTERNET_BRUGER_DA_TOGGLE') ? ' checked' : '') : ' value="' . stripcslashes(get_option($setting["name"])) . '"') . "/>" : "") .
+				($setting['tag'] == "input" ? "<input type=\"{$setting["type"]}\" name=\"{$setting["name"]}\" style=\"{$setting["style"]}\" " . ($setting["type"] == 'checkbox' ? (get_option($setting["name"]) == "on" ? ' checked' : '') : ' value="' . stripcslashes(get_option($setting["name"])) . '"') . "/>" : "") .
 				($setting['tag'] == "textarea" ? "<textarea type=\"{$setting["type"]}\" name=\"{$setting["name"]}\" rows=\"{$setting["rows"]}\" cols=\"{$setting["cols"]}\" style=\"{$setting["style"]}\">" . stripcslashes(get_option($setting["name"])) . "</textarea>" : "") .
 				join('', array_map(function ($comment) {
 					return "<p>{$comment}</p>";

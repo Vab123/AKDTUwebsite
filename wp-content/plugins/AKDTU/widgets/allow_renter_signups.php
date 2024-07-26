@@ -16,11 +16,11 @@ function allow_renter_signup_widget() { ?>
 			<tbody>
 				<tr>
 					<td><label>Lejlighed</label></td>
-					<td><?php echo apartments_dropdown(true, false); ?></td>
+					<td><?php echo apartments_dropdown(true); ?></td>
 				</tr>
 				<tr>
-					<td><label>Telefonnummer</label></td>
-					<td><input type="text" name="phone" /></td>
+					<td><label>Email</label></td>
+					<td><input type="text" name="email" /></td>
 				</tr>
 				<tr>
 					<td><label>Starttidspunkt</label></td>

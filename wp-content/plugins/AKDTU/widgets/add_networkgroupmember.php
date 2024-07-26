@@ -18,7 +18,7 @@ function add_networkgroupmember_widget() {
 			<tbody>
 				<tr>
 					<td><label>Lejlighed:</label></td>
-					<td><?php echo apartments_dropdown(); ?></td>
+					<td><?php echo users_dropdown(); ?></td>
 				</tr>
 				<tr>
 					<td><label>Medlemstype:</label></td>

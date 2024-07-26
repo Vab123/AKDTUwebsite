@@ -89,8 +89,20 @@ $AKDTU_WIDGETS = array(
 			),
 		),
 		"actions" => array(
-			"allow_user_signup.php", 
-			"delete_user_signup.php",
+			"allow_user_signup.php",
+		),
+	),
+	"add_move" => array(
+		"require_admin" => false,
+		"widgets" => array(
+			"add_move.php" => array(
+				"id" => "add_move_widget",
+				"name" => "Opret overdragelse",
+				"callback" => "add_move_widget",
+			),
+		),
+		"actions" => array(
+			"add_move.php",
 		),
 	),
 	"allowed_renter_signups" => array(
@@ -116,7 +128,7 @@ $AKDTU_WIDGETS = array(
 			),
 		),
 		"actions" => array(
-
+			"delete_user_signup.php"
 		),
 	),
 	"book_fælleshus" => array(
@@ -331,7 +343,7 @@ $AKDTU_WIDGETS = array(
 			),
 		),
 		"actions" => array(
-			
+			"delete_move.php"
 		),
 	),
 	"moves_past" => array(

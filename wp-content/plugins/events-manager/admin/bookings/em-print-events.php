@@ -62,17 +62,7 @@ function em_bookings_print_event() {
 	}
 
 	$res = $wpdb->get_results('SELECT ticket_id,showed_up FROM wp_em_tilmeldinger WHERE event_id = ' . $_REQUEST['event_id'] . ' AND ticket_id = ' . $_REQUEST['event_ticket_id']);
-	$showed_up = (count($res) == 0 ? array() : json_decode($res[0]->showed_up));
-	for ($floor = 0; $floor <= 2; $floor++) {
-		for ($apartment = 1; $apartment <= 24; $apartment++) {
-			if (array_key_exists(get_user_by('login', username_from_apartment_number($apartment) . '_archive')->ID, $showed_up)) {
-				$showed_up[get_user_by('login', username_from_apartment_number($apartment))->ID] = $showed_up[get_user_by('login', username_from_apartment_number($apartment) . '_archive')->ID];
-			}
-			if (array_key_exists(get_user_by('login', username_from_apartment_number($apartment))->ID, $showed_up)) {
-				$showed_up[get_user_by('login', username_from_apartment_number($apartment) . '_archive')->ID] = $showed_up[get_user_by('login', username_from_apartment_number($apartment))->ID];
-			}
-		}
-	}
+	$showed_up = (count($res) == 0 ? array() : json_decode($res[0]->showed_up, true));
 	
 	$havedag_formatter = new IntlDateFormatter('da_DK', IntlDateFormatter::LONG, IntlDateFormatter::NONE, 'Europe/Copenhagen');
 
@@ -137,8 +127,7 @@ function em_bookings_print_event() {
 											<?php
 											foreach ($cols as $action => $header) {
 												if ($action == "checkbox") {
-													$id = $user->ID;
-													echo "<td width='" . $widths[$action] . "'><input data-userid='" . $id . "' onclick='update_arrivalstatus(this)' type='checkbox'" . (isset($showed_up->$id) && $showed_up->$id ? ' checked' : '') . " /></td>";
+													echo "<td width='" . $widths[$action] . "'><input data-userid='" . $booking->person_id . "' onclick='update_arrivalstatus(this)' type='checkbox'" . ($showed_up[$booking->person_id] == 1 ? ' checked' : '') . " /></td>";
 												} elseif ($action == "booking_spaces") {
 													echo "<td width='" . $widths[$action] . "'>" . $booking->get_spaces() . "</td>";
 												} elseif ($action == "booking_comment") {

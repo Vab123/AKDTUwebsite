@@ -27,11 +27,11 @@ function name_from_username($username)
  * 
  * @param int $apartment Apartment number to find the display name of
  * 
- * @return string Display name of the user
+ * @return string[] Display names of the users
  */
-function name_from_apartment_number($apartment)
+function names_from_apartment_number($apartment)
 {
-	return name_from_username(username_from_apartment_number($apartment));
+	return array_map('name_from_username', usernames_from_apartment_number($apartment));
 }
 #
 /**
@@ -39,11 +39,11 @@ function name_from_apartment_number($apartment)
  * 
  * @param int $apartment Apartment number to find the display name of, padded with zeroes if the number is less than 3 digits
  * 
- * @return string Display name of the user
+ * @return string[] Display names of the users
  */
-function name_from_padded_apartment_number($apartment)
+function names_from_padded_apartment_number($apartment)
 {
-	return name_from_apartment_number(unpadded_apartment_number_from_padded_apartment_number($apartment));
+	return names_from_apartment_number(unpadded_apartment_number_from_padded_apartment_number($apartment));
 }
 #
 /**
@@ -96,7 +96,7 @@ function unpadded_apartment_number_from_padded_apartment_number($apartment)
 
 ############################################################
 #
-# Apartment number from username
+# Apartment number from usernames
 #
 /**
  * Returns the apartment number from the username
@@ -108,33 +108,7 @@ function unpadded_apartment_number_from_padded_apartment_number($apartment)
 function apartment_number_from_username($username)
 {
 	# Finds the apartment number from a username for an apartment-, archive-, or renter user
-	return unpadded_apartment_number_from_padded_apartment_number(padded_apartment_number_from_username($username));
-}
-#
-/**
- * Returns the apartment number and type from the username
- * 
- * @param int $username Username
- * 
- * @return string Apartment number and type corresponding to the username
- */
-function apartment_number_and_type_from_username($username)
-{
-	# Finds the apartment number from a username for an apartment-, archive-, or renter user, including the suffix if it is an archive-, or renter user
-	return unpadded_apartment_number_from_padded_apartment_number(padded_apartment_number_and_type_from_username($username));
-}
-#
-/**
- * Returns the apartment number, padded with zeros if the number is less than 3 digits, from the username
- * 
- * @param int $username Username
- * 
- * @return string Apartment number, padded with zeros if the number is less than 3 digits
- */
-function padded_apartment_number_and_type_from_username($username)
-{
-	# Finds the apartment number from a username for an apartment-, archive-, or renter user
-	return substr($username, 4);
+	return apartment_number_from_id(id_from_username($username));
 }
 #
 /**
@@ -147,15 +121,8 @@ function padded_apartment_number_and_type_from_username($username)
 function padded_apartment_number_from_username($username)
 {
 	# Finds the apartment number from a username for an apartment-, archive-, or renter user
-	return substr($username, 4, 3);
+	return padded_apartment_number_from_id(id_from_username($username));
 }
-############################################################
-
-
-
-############################################################
-#
-# Apartment number from id
 #
 /**
  * Returns the apartment number from the user id
@@ -167,20 +134,7 @@ function padded_apartment_number_from_username($username)
 function apartment_number_from_id($id)
 {
 	# Finds the apartment number from an id for an apartment-, archive-, or renter user
-	return apartment_number_from_username(username_from_id($id));
-}
-#
-/**
- * Returns the apartment number and type from the user id
- * 
- * @param int $id User id
- * 
- * @return string Apartment number and type corresponding to the user id
- */
-function apartment_number_and_type_from_id($id)
-{
-	# Finds the apartment number from an id for an apartment-, archive-, or renter user, including the suffix if it is an archive-, or renter user
-	return apartment_number_and_type_from_username(username_from_id($id));
+	return get_user_meta( $id, 'apartment_number', true );
 }
 #
 /**
@@ -193,20 +147,7 @@ function apartment_number_and_type_from_id($id)
 function padded_apartment_number_from_id($id)
 {
 	# Finds the apartment number from an id for an apartment-, archive-, or renter user
-	return padded_apartment_number_from_apartment_number(apartment_number_from_id($id));
-}
-#
-/**
- * Returns the apartment number, padded with zeros if the number is less than 3 digits, from the user id
- * 
- * @param int $id User id
- * 
- * @return string Apartment number, padded with zeros if the number is less than 3 digits, corresponding to the user id
- */
-function padded_apartment_number_and_type_from_id($id)
-{
-	# Finds the apartment number from an id for an apartment-, archive-, or renter user
-	return padded_apartment_number_from_apartment_number(apartment_number_and_type_from_id($id));
+	return padded_apartment_number_from_apartment_number( apartment_number_from_id($id) );
 }
 ############################################################
 
@@ -221,12 +162,49 @@ function padded_apartment_number_and_type_from_id($id)
  * 
  * @param int $number Apartment number
  * 
- * @return string Username, corresponding to the apartment number.
+ * @return string[] Usernames, corresponding to the apartment number.
  */
-function username_from_apartment_number($number)
+function usernames_from_apartment_number($number)
 {
+	global $AKDTU_USER_TYPES;
+
+	$user_query = new WP_User_Query([
+		'meta_query' => [
+			[
+				'key' => 'apartment_number',
+				'value' => $number,
+				'compare' => '=='
+			],
+			[
+				'key' => 'user_type',
+				'value' => $AKDTU_USER_TYPES['vicevært']['id'],
+				'compare' => '!='
+			],
+			[
+				'key' => 'user_type',
+				'value' => $AKDTU_USER_TYPES['renter']['id'],
+				'compare' => '!='
+			],
+			[
+				'key' => 'user_type',
+				'value' => $AKDTU_USER_TYPES['archive']['id'],
+				'compare' => '!='
+			],
+			[
+				'key' => 'user_type',
+				'value' => $AKDTU_USER_TYPES['website-admin']['id'],
+				'compare' => '!='
+			],
+			[
+				'key' => 'is_active',
+				'value' => true,
+				'compare' => '=='
+			],
+		]
+	]);
+
 	# Finds the username from an apartment number for an apartment user
-	return 'lejl' . str_pad($number, 3, "0", STR_PAD_LEFT);
+	return array_map(function ($user) {return $user->user_login;}, $user_query->get_results());
 }
 #
 /**
@@ -234,12 +212,58 @@ function username_from_apartment_number($number)
  * 
  * @param int $number Apartment number
  * 
- * @return int User id, corresponding to the apartment number.
+ * @return int[] User ids, corresponding to the apartment number.
  */
-function id_from_apartment_number($number)
+function ids_from_apartment_number($number)
 {
 	# Finds the username from an apartment number for an apartment user
-	return id_from_username(username_from_apartment_number($number));
+	return array_map('id_from_username', usernames_from_apartment_number($number));
+}
+############################################################
+
+
+
+############################################################
+#
+# Username and id from apartment number
+#
+/**
+ * Returns the username of the archive user for an apartment number
+ * 
+ * @param int $number Apartment number
+ * 
+ * @return string Username, corresponding to the archive user for the apartment.
+ */
+function archive_username_from_apartment_number($number)
+{
+	# Finds the username from an apartment number for an apartment user
+	return "lejl{padded_apartment_number_from_apartment_number($number)}_archive";
+}
+#
+/**
+ * Returns the username of the archive user for a user by user id
+ * 
+ * @param int $id User id
+ * 
+ * @return string Username, corresponding to the archive user for the user.
+ */
+function archive_username_from_id($id)
+{
+	# Finds the username from an apartment number for an apartment user
+	return archive_username_from_apartment_number(apartment_number_from_id($id));
+}
+#
+/**
+ * Returns the username of the archive user for a user by username
+ * 
+ * @param string $username Username
+ * 
+ * @return string Username, corresponding to the archive user for the user.
+ */
+function archive_username_from_username($username)
+{
+	# Finds the username from an apartment number for an apartment user
+	return archive_username_from_apartment_number(apartment_number_from_username($username));
 }
 ############################################################
 
@@ -312,7 +336,7 @@ function is_valid_apartment_number($apartment_number)
 function is_apartment_from_username($username)
 {
 	# Checks if the username belongs to an apartment user
-	return substr($username, 0, 4) == "lejl";
+	return is_apartment_from_id( id_from_username($username) );
 }
 #
 /**
@@ -325,7 +349,7 @@ function is_apartment_from_username($username)
 function is_apartment_from_id($id)
 {
 	# Checks if the id belongs to an apartment user
-	return is_apartment_from_username(username_from_id($id));
+	return is_apartment_user_from_id($id) || is_archive_user_from_id($id);
 }
 #############################################################
 
@@ -345,7 +369,7 @@ function is_apartment_from_id($id)
 function is_apartment_user_from_username($username)
 {
 	# Checks if the username belongs to an apartment user
-	return strlen($username) == 7 && is_apartment_from_username($username);
+	return is_apartment_user_from_id( id_from_username($username) );
 }
 #
 /**
@@ -357,8 +381,10 @@ function is_apartment_user_from_username($username)
  */
 function is_apartment_user_from_id($id)
 {
+	global $AKDTU_USER_TYPES;
+
 	# Checks if the id belongs to an apartment user
-	return is_apartment_user_from_username(username_from_id($id));
+	return is_valid_apartment_number(get_user_meta( $id, 'apartment_number', true ));
 }
 ############################################################
 
@@ -378,7 +404,7 @@ function is_apartment_user_from_id($id)
 function is_archive_user_from_username($username)
 {
 	# Checks if the username belongs to an archive user
-	return substr($username, 7, 8) == '_archive' && is_apartment_from_username($username);
+	return is_archive_user_from_id( id_from_username($username) );
 }
 #
 /**
@@ -390,8 +416,10 @@ function is_archive_user_from_username($username)
  */
 function is_archive_user_from_id($id)
 {
+	global $AKDTU_USER_TYPES;
+
 	# Checks if the id belongs to an archive user
-	return is_archive_user_from_username(username_from_id($id));
+	return get_user_meta( $id, 'user_type', true ) == $AKDTU_USER_TYPES['archive']['id'];
 }
 ############################################################
 
@@ -411,7 +439,7 @@ function is_archive_user_from_id($id)
 function is_vicevært_from_username($username)
 {
 	# Checks if the username belongs to a vicevært user
-	return in_array('vicevaert', get_user_by('login', $username)->roles);
+	return is_vicevært_from_id( id_from_username($username) );
 }
 #
 /**
@@ -423,8 +451,10 @@ function is_vicevært_from_username($username)
  */
 function is_vicevært_from_id($id)
 {
+	global $AKDTU_USER_TYPES;
+
 	# Checks if the id belongs to a vicevært user
-	return is_vicevært_from_username(username_from_id($id));
+	return get_user_meta( $id, 'user_type', true ) == $AKDTU_USER_TYPES['vicevært']['id'];
 }
 ############################################################
 
@@ -483,16 +513,7 @@ function create_vicevært($first_name, $last_name, $username, $email) {
 
 	# Set the role of the new wordpress user
 	$wp_user->set_role($vicevært_role);
-
-	// # SWPM user info
-	$member_info = SwpmTransfer::$default_fields;
-	$member_info['first_name'] = $first_name;
-	$member_info['last_name'] = $last_name;
-	$member_info['user_name'] = $username;
-	$member_info['email'] = $email;
-	$member_info['membership_level'] = $vicevært_level;
-	$member_info['password'] = get_user_by('ID', $new_user_wp_id)->user_pass;
-	$member_info['last_accessed'] = date('Y-m-d H:i:s');
+	update_user_meta($new_user_wp_id, 'user_type', $AKDTU_USER_TYPES['vicevært']['id']);
 
 	# Get member id of the new user
 	$swpm_user_memberid = SwpmMemberUtils::get_user_by_email($email)->member_id;
@@ -554,7 +575,7 @@ function is_boardmember_from_username($username)
 function is_boardmember_from_apartment_number($number)
 {
 	# Checks if the apartment number belongs to a board member
-	return is_boardmember_from_username(username_from_apartment_number($number));
+	return in_array(true, array_map('is_boardmember_from_username', usernames_from_apartment_number($number)));
 }
 #
 /**
@@ -595,12 +616,12 @@ function is_board_deputy_from_username($username)
  * 
  * @param string $number Apartment number
  * 
- * @return bool True if the username belongs to a current board deputy
+ * @return bool True if the apartment number belongs to a current board deputy
  */
 function is_board_deputy_from_apartment_number($number)
 {
 	# Checks if the apartment number belongs to a board member
-	return is_board_deputy_from_username(username_from_apartment_number($number));
+	return in_array(true, array_map('is_board_deputy_from_username', usernames_from_apartment_number($number)));
 }
 #
 /**
@@ -630,13 +651,10 @@ function is_board_deputy_from_id($id)
  */
 function all_boardmember_apartments()
 {
-	global $wpdb;
-	global $AKDTU_USER_TYPES;
-
-	$now = new DateTime('now', new DateTimeZone("Europe/Copenhagen"));
-
-	// Find all board members
-	return $wpdb->get_col("SELECT apartment_number FROM {$wpdb->prefix}AKDTU_boardmembers WHERE start_datetime <= \"{$now->format('Y-m-d H:i:s')}\" AND end_datetime >= \"{$now->format('Y-m-d H:i:s')}\" AND member_type IN (\"{$AKDTU_USER_TYPES['chairman']['id']}\",\"{$AKDTU_USER_TYPES['deputy-chairman']['id']}\",\"{$AKDTU_USER_TYPES['default']['id']}\") ORDER BY apartment_number ASC");
+	# Lists the usernames of all board members
+	return array_map(function ($user_id) {
+		return apartment_number_from_id($user_id);
+	}, all_boardmember_ids());
 }
 #
 /**
@@ -647,9 +665,9 @@ function all_boardmember_apartments()
 function all_boardmember_usernames()
 {
 	# Lists the usernames of all board members
-	return array_map(function ($apartment_number) {
-		return username_from_apartment_number($apartment_number);
-	}, all_boardmember_apartments());
+	return array_map(function ($user_id) {
+		return username_from_id($user_id);
+	}, all_boardmember_ids());
 }
 #
 /**
@@ -659,10 +677,13 @@ function all_boardmember_usernames()
  */
 function all_boardmember_ids()
 {
-	# Lists the usernames of all board members
-	return array_map(function ($apartment_number) {
-		return id_from_apartment_number($apartment_number);
-	}, all_boardmember_apartments());
+	global $wpdb;
+	global $AKDTU_USER_TYPES;
+
+	$now = new DateTime('now', new DateTimeZone("Europe/Copenhagen"));
+
+	// Find all board members
+	return $wpdb->get_col("SELECT user_id FROM {$wpdb->prefix}AKDTU_boardmembers WHERE start_datetime <= \"{$now->format('Y-m-d H:i:s')}\" AND end_datetime >= \"{$now->format('Y-m-d H:i:s')}\" AND member_type IN (\"{$AKDTU_USER_TYPES['chairman']['id']}\",\"{$AKDTU_USER_TYPES['deputy-chairman']['id']}\",\"{$AKDTU_USER_TYPES['default']['id']}\") ORDER BY apartment_number ASC");
 }
 ############################################################
 
@@ -679,13 +700,10 @@ function all_boardmember_ids()
  */
 function all_board_deputies_apartments()
 {
-	$now = new DateTime('now', new DateTimeZone("Europe/Copenhagen"));
-
-	global $wpdb;
-	global $AKDTU_USER_TYPES;
-
-	// Find all board deputies
-	return $wpdb->get_col("SELECT DISTINCT apartment_number FROM {$wpdb->prefix}AKDTU_boardmembers WHERE start_datetime <= \"{$now->format('Y-m-d H:i:s')}\" AND end_datetime >= \"{$now->format('Y-m-d H:i:s')}\" AND member_type = \"{$AKDTU_USER_TYPES['deputy']['id']}\" ORDER BY apartment_number ASC");
+	# Lists the usernames of all board members
+	return array_map(function ($user_id) {
+		return apartment_number_from_id($user_id);
+	}, all_board_deputies_ids());
 }
 #
 /**
@@ -695,10 +713,10 @@ function all_board_deputies_apartments()
  */
 function all_board_deputies_usernames()
 {
-	# Lists the usernames of all board deputies
-	return array_map(function ($apartment_number) {
-		return username_from_apartment_number($apartment_number);
-	}, all_board_deputies_apartments());
+	# Lists the usernames of all board members
+	return array_map(function ($user_id) {
+		return username_from_id($user_id);
+	}, all_board_deputies_ids());
 }
 #
 /**
@@ -708,10 +726,13 @@ function all_board_deputies_usernames()
  */
 function all_board_deputies_ids()
 {
-	# Lists the usernames of all board deputies
-	return array_map(function ($apartment_number) {
-		return id_from_apartment_number($apartment_number);
-	}, all_board_deputies_apartments());
+	$now = new DateTime('now', new DateTimeZone("Europe/Copenhagen"));
+
+	global $wpdb;
+	global $AKDTU_USER_TYPES;
+
+	// Find all board deputies
+	return $wpdb->get_col("SELECT DISTINCT user_id FROM {$wpdb->prefix}AKDTU_boardmembers WHERE start_datetime <= \"{$now->format('Y-m-d H:i:s')}\" AND end_datetime >= \"{$now->format('Y-m-d H:i:s')}\" AND member_type = \"{$AKDTU_USER_TYPES['deputy']['id']}\" ORDER BY apartment_number ASC");
 }
 ############################################################
 
@@ -728,12 +749,10 @@ function all_board_deputies_ids()
  */
 function all_board_apartments()
 {
-	$now = new DateTime('now', new DateTimeZone("Europe/Copenhagen"));
-
-	global $wpdb;
-
-	// Find all board members and board deputies
-	return $wpdb->get_col("SELECT DISTINCT apartment_number FROM {$wpdb->prefix}AKDTU_boardmembers WHERE start_datetime <= \"{$now->format('Y-m-d H:i:s')}\" AND end_datetime >= \"{$now->format('Y-m-d H:i:s')}\" ORDER BY apartment_number ASC");
+	# Lists the usernames of all board members
+	return array_map(function ($user_id) {
+		return apartment_number_from_id($user_id);
+	}, all_board_ids());
 }
 #
 /**
@@ -743,10 +762,10 @@ function all_board_apartments()
  */
 function all_board_usernames()
 {
-	# Lists the usernames of all board members and deputies
-	return array_map(function ($apartment_number) {
-		return username_from_apartment_number($apartment_number);
-	}, all_board_apartments());
+	# Lists the usernames of all board members
+	return array_map(function ($user_id) {
+		return username_from_id($user_id);
+	}, all_board_ids());
 }
 #
 /**
@@ -756,10 +775,12 @@ function all_board_usernames()
  */
 function all_board_ids()
 {
-	# Lists the usernames of all board members and deputies
-	return array_map(function ($apartment_number) {
-		return id_from_apartment_number($apartment_number);
-	}, all_board_apartments());
+	global $wpdb;
+	
+	$now = new DateTime('now', new DateTimeZone("Europe/Copenhagen"));
+
+	// Find all board members and board deputies
+	return $wpdb->get_col("SELECT DISTINCT user_id FROM {$wpdb->prefix}AKDTU_boardmembers WHERE start_datetime <= \"{$now->format('Y-m-d H:i:s')}\" AND end_datetime >= \"{$now->format('Y-m-d H:i:s')}\" ORDER BY apartment_number ASC");
 }
 ############################################################
 
@@ -778,7 +799,7 @@ function all_board_ids()
  */
 function board_email_from_apartment_number($number)
 {
-	return board_email_from_id(id_from_apartment_number($number));
+	return array_map('board_email_from_id', ids_from_apartment_number($number));
 }
 #
 /**
@@ -823,7 +844,7 @@ function board_email_from_id($id)
 function was_boardmember_from_username($username, $datetime)
 {
 	# Checks if the username belonged to a board member at the time
-	return was_boardmember_from_apartment_number(apartment_number_from_username($username), $datetime);
+	return was_boardmember_from_id(id_from_username($username), $datetime);
 }
 #
 /**
@@ -836,11 +857,7 @@ function was_boardmember_from_username($username, $datetime)
  */
 function was_boardmember_from_apartment_number($number, $datetime)
 {
-	global $wpdb;
-	global $AKDTU_USER_TYPES;
-
-	# Checks if the apartment number belongs to a board member
-	return $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->prefix}AKDTU_boardmembers WHERE apartment_number = \"{$number}\" AND start_datetime <= \"{$datetime->format('Y-m-d H:i:s')}\" AND end_datetime >= \"{$datetime->format('Y-m-d H:i:s')}\" AND member_type IN (\"{$AKDTU_USER_TYPES['chairman']['id']}\",\"{$AKDTU_USER_TYPES['deputy-chairman']['id']}\",\"{$AKDTU_USER_TYPES['default']['id']}\")") > 0;
+	return in_array(true, array_map(function ($id) use($datetime) {return was_boardmember_from_id($id, $datetime);}, ids_from_apartment_number($number)));
 }
 #
 /**
@@ -854,7 +871,11 @@ function was_boardmember_from_apartment_number($number, $datetime)
 function was_boardmember_from_id($id, $datetime)
 {
 	# Checks if the user id belongs to a board member
-	return was_boardmember_from_apartment_number(apartment_number_from_id($id), $datetime);
+	global $wpdb;
+	global $AKDTU_USER_TYPES;
+
+	# Checks if the apartment number belongs to a board member
+	return $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->prefix}AKDTU_boardmembers WHERE user_id = \"{$id}\" AND start_datetime <= \"{$datetime->format('Y-m-d H:i:s')}\" AND end_datetime >= \"{$datetime->format('Y-m-d H:i:s')}\" AND member_type IN (\"{$AKDTU_USER_TYPES['chairman']['id']}\",\"{$AKDTU_USER_TYPES['deputy-chairman']['id']}\",\"{$AKDTU_USER_TYPES['default']['id']}\")") > 0;
 }
 #
 #
@@ -870,7 +891,7 @@ function was_boardmember_from_id($id, $datetime)
 function was_board_deputy_from_username($username, $datetime)
 {
 	# Checks if the username belonged to a board deputy at the time
-	return was_board_deputy_from_apartment_number(apartment_number_from_username($username), $datetime);
+	return was_board_deputy_from_id(id_from_username($username), $datetime);
 }
 #
 /**
@@ -883,11 +904,7 @@ function was_board_deputy_from_username($username, $datetime)
  */
 function was_board_deputy_from_apartment_number($number, $datetime)
 {
-	global $wpdb;
-	global $AKDTU_USER_TYPES;
-
-	# Checks if the apartment number belongs to a board member
-	return $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->prefix}AKDTU_boardmembers WHERE apartment_number = \"{$number}\" AND start_datetime <= \"{$datetime->format('Y-m-d H:i:s')}\" AND end_datetime >= \"{$datetime->format('Y-m-d H:i:s')}\" AND member_type = \"{$AKDTU_USER_TYPES['deputy']['id']}\"") > 0;
+	return in_array(true, array_map(function ($id) use($datetime) {return was_board_deputy_from_id($id, $datetime);}, ids_from_apartment_number($number)));
 }
 #
 /**
@@ -901,25 +918,14 @@ function was_board_deputy_from_apartment_number($number, $datetime)
 function was_board_deputy_from_id($id, $datetime)
 {
 	# Checks if the user id belongs to a board deputy
-	return was_board_deputy_from_apartment_number(apartment_number_from_id($id), $datetime);
-}
-#
-#
-#
-/**
- * Checks if a user was chairman of the board at a given time, by their apartment number
- * 
- * @param string $number Apartment number of the user
- * @param DateTime $datetime Time to check if the user was chairman of the board
- * 
- * @return bool True if the user was chairman of the board at the given time
- */
-function was_chairman_from_apartment_number($number, $datetime)
-{
+	global $wpdb;
 	global $AKDTU_USER_TYPES;
-	# Checks if the user was chairman at the given time
-	return user_type_from_apartment_number($number, $datetime) == $AKDTU_USER_TYPES['chairman']['id'];
+
+	# Checks if the apartment number belongs to a board member
+	return $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->prefix}AKDTU_boardmembers WHERE user_id = \"{$id}\" AND start_datetime <= \"{$datetime->format('Y-m-d H:i:s')}\" AND end_datetime >= \"{$datetime->format('Y-m-d H:i:s')}\" AND member_type = \"{$AKDTU_USER_TYPES['deputy']['id']}\"") > 0;
 }
+#
+#
 #
 /**
  * Checks if a user was chairman of the board at a given time, by their username
@@ -931,7 +937,20 @@ function was_chairman_from_apartment_number($number, $datetime)
  */
 function was_chairman_from_username($username, $datetime)
 {
-	return was_chairman_from_apartment_number(apartment_number_from_username($username), $datetime);
+	return was_chairman_from_id(id_from_username($username), $datetime);
+}
+#
+/**
+ * Checks if a user was chairman of the board at a given time, by their apartment number
+ * 
+ * @param string $number Apartment number of the user
+ * @param DateTime $datetime Time to check if the user was chairman of the board
+ * 
+ * @return bool True if the user was chairman of the board at the given time
+ */
+function was_chairman_from_apartment_number($number, $datetime)
+{
+	return in_array(true, array_map(function ($id) use($datetime) {return was_chairman_from_id($id, $datetime);}, ids_from_apartment_number($number)));
 }
 #
 /**
@@ -944,7 +963,9 @@ function was_chairman_from_username($username, $datetime)
  */
 function was_chairman_from_id($id, $datetime)
 {
-	return was_chairman_from_apartment_number(apartment_number_from_id($id), $datetime);
+	global $AKDTU_USER_TYPES;
+	# Checks if the user was chairman at the given time
+	return user_type_from_id($id, $datetime) == $AKDTU_USER_TYPES['chairman']['id'];
 }
 #
 #
@@ -959,9 +980,7 @@ function was_chairman_from_id($id, $datetime)
  */
 function was_deputy_chairman_from_apartment_number($number, $datetime)
 {
-	global $AKDTU_USER_TYPES;
-	# Checks if the user was chairman at the given time
-	return user_type_from_apartment_number($number, $datetime) == $AKDTU_USER_TYPES['deputy-chairman']['id'];
+	return in_array(true, array_map(function ($id) use($datetime) {return was_deputy_chairman_from_id($id, $datetime);}, ids_from_apartment_number($number)));
 }
 #
 /**
@@ -974,7 +993,7 @@ function was_deputy_chairman_from_apartment_number($number, $datetime)
  */
 function was_deputy_chairman_from_username($username, $datetime)
 {
-	return was_deputy_chairman_from_apartment_number(apartment_number_from_username($username), $datetime);
+	return was_deputy_chairman_from_id(id_from_username($username), $datetime);
 }
 #
 /**
@@ -987,7 +1006,9 @@ function was_deputy_chairman_from_username($username, $datetime)
  */
 function was_deputy_chairman_from_id($id, $datetime)
 {
-	return was_deputy_chairman_from_apartment_number(apartment_number_from_id($id), $datetime);
+	global $AKDTU_USER_TYPES;
+	# Checks if the user was deputy chairman at the given time
+	return user_type_from_id($id, $datetime) == $AKDTU_USER_TYPES['deputy-chairman']['id'];
 }
 #
 #
@@ -1002,9 +1023,7 @@ function was_deputy_chairman_from_id($id, $datetime)
  */
 function was_default_boardmember_from_apartment_number($number, $datetime)
 {
-	global $AKDTU_USER_TYPES;
-	# Checks if the user was chairman at the given time
-	return user_type_from_apartment_number($number, $datetime) == $AKDTU_USER_TYPES['default']['id'];
+	return in_array(true, array_map(function ($id) use ($datetime) {return was_default_boardmember_from_id($id, $datetime);}, ids_from_apartment_number($number)));
 }
 #
 /**
@@ -1017,7 +1036,7 @@ function was_default_boardmember_from_apartment_number($number, $datetime)
  */
 function was_default_boardmember_from_username($username, $datetime)
 {
-	return was_default_boardmember_from_apartment_number(apartment_number_from_username($username), $datetime);
+	return was_default_boardmember_from_id(id_from_username($username), $datetime);
 }
 #
 /**
@@ -1030,7 +1049,52 @@ function was_default_boardmember_from_username($username, $datetime)
  */
 function was_default_boardmember_from_id($id, $datetime)
 {
-	return was_default_boardmember_from_apartment_number(apartment_number_from_id($id), $datetime);
+	global $AKDTU_USER_TYPES;
+	# Checks if the user was a default boardmember at the given time
+	return user_type_from_id($id, $datetime) == $AKDTU_USER_TYPES['default']['id'];
+}
+#
+#
+#
+/**
+ * Checks if a user was a default member of the board at a given time, by their apartment number
+ * 
+ * @param string $number Apartment number of the user
+ * @param DateTime $datetime Time to check if the user was a default member of the board
+ * 
+ * @return bool True if the user was a default member of the board at the given time
+ */
+function was_website_admin_from_apartment_number($number, $datetime)
+{
+	return in_array(true, array_map(function ($id) use ($datetime) {return was_website_admin_from_id($id, $datetime);}, ids_from_apartment_number($number)));
+}
+#
+/**
+ * Checks if a user was a default member of the board at a given time, by their username
+ * 
+ * @param string $username Username of the user
+ * @param DateTime $datetime Time to check if the user was a default member of the board
+ * 
+ * @return bool True if the user was a default member of the board at the given time
+ */
+function was_website_admin_from_username($username, $datetime)
+{
+	return was_website_admin_from_id(id_from_username($username), $datetime);
+}
+#
+/**
+ * Checks if a user was a default member of the board at a given time, by their user id
+ * 
+ * @param string $id User id of the user
+ * @param DateTime $datetime Time to check if the user was a default member of the board
+ * 
+ * @return bool True if the user was a default member of the board at the given time
+ */
+function was_website_admin_from_id($id, $datetime)
+{
+	global $AKDTU_USER_TYPES;
+	# Checks if the user was a default boardmember at the given time
+	return user_type_from_id($id, $datetime) == $AKDTU_USER_TYPES['website-admin']['id'];
 }
 #
 #
@@ -1041,20 +1105,11 @@ function was_default_boardmember_from_id($id, $datetime)
  * @param string $number Apartment number of the user
  * @param DateTime $datetime Time to find the user type of the user
  * 
- * @return string User type of the user if they were a board member or deputy at the given time. 0 otherwise.
+ * @return string[] User type of the user if they were a board member or deputy at the given time. 0 otherwise.
  */
-function user_type_from_apartment_number($number, $datetime)
+function user_types_from_apartment_number($number, $datetime)
 {
-	global $wpdb;
-
-	$user_type = $wpdb->get_var("SELECT member_type FROM {$wpdb->prefix}AKDTU_boardmembers WHERE apartment_number = \"{$number}\" AND start_datetime <= \"{$datetime->format('Y-m-d H:i:s')}\" AND end_datetime >= \"{$datetime->format('Y-m-d H:i:s')}\"");
-
-	if (is_null($user_type)) {
-		global $AKDTU_USER_TYPES;
-		return $AKDTU_USER_TYPES['none']['id'];
-	}
-
-	return $user_type;
+	return array_map(function($id) use ($datetime) {return user_type_from_id($id, $datetime);}, ids_from_apartment_number($number));
 }
 #
 /**
@@ -1067,7 +1122,7 @@ function user_type_from_apartment_number($number, $datetime)
  */
 function user_type_from_username($username, $datetime)
 {
-	return user_type_from_apartment_number(apartment_number_from_username($username), $datetime);
+	return user_type_from_id(id_from_username($username), $datetime);
 }
 #
 /**
@@ -1080,7 +1135,16 @@ function user_type_from_username($username, $datetime)
  */
 function user_type_from_id($id, $datetime)
 {
-	return user_type_from_apartment_number(apartment_number_from_id($id), $datetime);
+	global $wpdb;
+
+	$user_type = $wpdb->get_var("SELECT member_type FROM {$wpdb->prefix}AKDTU_boardmembers WHERE user_id = \"{$id}\" AND start_datetime <= \"{$datetime->format('Y-m-d H:i:s')}\" AND end_datetime >= \"{$datetime->format('Y-m-d H:i:s')}\"");
+
+	if (is_null($user_type)) {
+		global $AKDTU_USER_TYPES;
+		return $AKDTU_USER_TYPES['none']['id'];
+	}
+
+	return $user_type;
 }
 #
 #
@@ -1095,17 +1159,7 @@ function user_type_from_id($id, $datetime)
  */
 function user_type_name_from_apartment_number($number, $datetime)
 {
-	global $AKDTU_USER_TYPES;
-	$user_type = user_type_from_apartment_number($number, $datetime);
-
-	return array_values(
-		array_filter(
-			$AKDTU_USER_TYPES,
-			function ($type) use ($user_type) {
-				return $type['id'] == $user_type;
-			}
-		)
-	)[0]['name'];
+	return array_map(function ($id) use ($datetime) { return user_type_name_from_id($id, $datetime); }, ids_from_apartment_number($number));
 }
 #
 /**
@@ -1118,7 +1172,7 @@ function user_type_name_from_apartment_number($number, $datetime)
  */
 function user_type_name_from_username($username, $datetime)
 {
-	return user_type_name_from_apartment_number(apartment_number_from_username($username), $datetime);
+	return user_type_name_from_id(id_from_username($username), $datetime);
 }
 #
 /**
@@ -1131,7 +1185,18 @@ function user_type_name_from_username($username, $datetime)
  */
 function user_type_name_from_id($id, $datetime)
 {
-	return user_type_name_from_apartment_number(apartment_number_from_id($id), $datetime);
+	global $AKDTU_USER_TYPES;
+
+	$user_type = user_type_from_id($id, $datetime);
+
+	return array_values(
+		array_filter(
+			$AKDTU_USER_TYPES,
+			function ($type) use ($user_type) {
+				return $type['id'] == $user_type;
+			}
+		)
+	)[0]['name'];
 }
 #
 #
@@ -1146,17 +1211,7 @@ function user_type_name_from_id($id, $datetime)
  */
 function user_type_key_from_apartment_number($number, $datetime)
 {
-	global $AKDTU_USER_TYPES;
-	$user_type = user_type_from_apartment_number($number, $datetime);
-
-	return array_keys(
-		array_filter(
-			$AKDTU_USER_TYPES,
-			function ($type) use ($user_type) {
-				return $type['id'] == $user_type;
-			}
-		)
-	)[0];
+	return array_map(function ($id) use ($datetime) { return user_type_key_from_id($id, $datetime); }, ids_from_apartment_number($number));
 }
 #
 /**
@@ -1169,7 +1224,7 @@ function user_type_key_from_apartment_number($number, $datetime)
  */
 function user_type_key_from_username($username, $datetime)
 {
-	return user_type_key_from_apartment_number(apartment_number_from_username($username), $datetime);
+	return user_type_key_from_id(id_from_username($username), $datetime);
 }
 #
 /**
@@ -1182,7 +1237,18 @@ function user_type_key_from_username($username, $datetime)
  */
 function user_type_key_from_id($id, $datetime)
 {
-	return user_type_key_from_apartment_number(apartment_number_from_id($id), $datetime);
+	global $AKDTU_USER_TYPES;
+
+	$user_type = user_type_from_id($id, $datetime);
+
+	return array_keys(
+		array_filter(
+			$AKDTU_USER_TYPES,
+			function ($type) use ($user_type) {
+				return $type['id'] == $user_type;
+			}
+		)
+	)[0];
 }
 ############################################################
 
@@ -1198,11 +1264,7 @@ function user_type_key_from_id($id, $datetime)
  */
 function all_networkgroup_apartment_numbers()
 {
-	global $wpdb;
-
-	$now = new DateTime('now', new DateTimeZone('Europe/Copenhagen'));
-
-	return $wpdb->get_col("SELECT apartment_number FROM {$wpdb->prefix}AKDTU_networkgroupmembers WHERE start_datetime <= \"{$now->format('Y-m-d H:i:s')}\" AND end_datetime >= \"{$now->format('Y-m-d H:i:s')}\" ORDER BY member_type ASC, apartment_number ASC");
+	return array_map('apartment_number_from_id', all_networkgroup_ids());
 }
 #
 /**
@@ -1212,9 +1274,7 @@ function all_networkgroup_apartment_numbers()
  */
 function all_networkgroup_usernames()
 {
-	return array_map(function ($apartment_number) {
-		return username_from_apartment_number($apartment_number);
-	}, all_networkgroup_apartment_numbers());
+	return array_map('username_from_id', all_networkgroup_ids());
 }
 #
 /**
@@ -1224,9 +1284,12 @@ function all_networkgroup_usernames()
  */
 function all_networkgroup_ids()
 {
-	return array_map(function ($apartment_number) {
-		return id_from_apartment_number($apartment_number);
-	}, all_networkgroup_apartment_numbers());
+	global $wpdb;
+	global $KNET_USER_TYPES;
+
+	$now = new DateTime('now', new DateTimeZone('Europe/Copenhagen'));
+
+	return $wpdb->get_col("SELECT user_id FROM {$wpdb->prefix}AKDTU_networkgroupmembers WHERE start_datetime <= \"{$now->format('Y-m-d H:i:s')}\" AND end_datetime >= \"{$now->format('Y-m-d H:i:s')}\" AND member_type IN ({$KNET_USER_TYPES['representative']['id']},{$KNET_USER_TYPES['deputy']['id']}) ORDER BY member_type ASC, apartment_number ASC");
 }
 #
 #
@@ -1281,9 +1344,7 @@ function is_KNet_representative_from_id($id)
  */
 function was_KNet_representative_from_apartment_number($number, $datetime)
 {
-	global $KNET_USER_TYPES;
-
-	return KNet_type_from_apartment_number($number, $datetime) == $KNET_USER_TYPES['representative']['id'];
+	return in_array(true, array_map(function ($id) use ($datetime) { return was_KNet_representative_from_id($id, $datetime);}, ids_from_apartment_number($number)));
 }
 #
 /**
@@ -1295,7 +1356,7 @@ function was_KNet_representative_from_apartment_number($number, $datetime)
  */
 function was_KNet_representative_from_username($username, $datetime)
 {
-	return was_KNet_representative_from_apartment_number(apartment_number_from_username($username), $datetime);
+	return was_KNet_representative_from_id(id_from_username($username), $datetime);
 }
 #
 /**
@@ -1307,7 +1368,9 @@ function was_KNet_representative_from_username($username, $datetime)
  */
 function was_KNet_representative_from_id($id, $datetime)
 {
-	return was_KNet_representative_from_apartment_number(apartment_number_from_id($id), $datetime);
+	global $KNET_USER_TYPES;
+
+	return KNet_type_from_id($id, $datetime) == $KNET_USER_TYPES['representative']['id'];
 }
 #
 #
@@ -1362,9 +1425,7 @@ function is_KNet_deputy_from_id($id)
  */
 function was_KNet_deputy_from_apartment_number($number, $datetime)
 {
-	global $KNET_USER_TYPES;
-
-	return KNet_type_from_apartment_number($number, $datetime) == $KNET_USER_TYPES['deputy']['id'];
+	return in_array(true, array_map(function ($id) use ($datetime) { return was_KNet_deputy_from_id($id, $datetime);}, ids_from_apartment_number($number)));
 }
 #
 /**
@@ -1376,7 +1437,7 @@ function was_KNet_deputy_from_apartment_number($number, $datetime)
  */
 function was_KNet_deputy_from_username($username, $datetime)
 {
-	return was_KNet_deputy_from_apartment_number(apartment_number_from_username($username), $datetime);
+	return was_KNet_deputy_from_id(id_from_username($username), $datetime);
 }
 #
 /**
@@ -1388,7 +1449,9 @@ function was_KNet_deputy_from_username($username, $datetime)
  */
 function was_KNet_deputy_from_id($id, $datetime)
 {
-	return was_KNet_deputy_from_apartment_number(apartment_number_from_id($id), $datetime);
+	global $KNET_USER_TYPES;
+
+	return KNet_type_from_id($id, $datetime) == $KNET_USER_TYPES['deputy']['id'];
 }
 #
 #
@@ -1401,18 +1464,10 @@ function was_KNet_deputy_from_id($id, $datetime)
  * 
  * @return string K-Net type of the user.
  */
-function KNet_type_from_apartment_number($number, $datetime)
+function KNet_types_from_apartment_number($number, $datetime)
 {
-	global $wpdb;
-
-	$user_type = $wpdb->get_var("SELECT member_type FROM {$wpdb->prefix}AKDTU_networkgroupmembers WHERE apartment_number = \"{$number}\" AND start_datetime <= \"{$datetime->format('Y-m-d H:i:s')}\" AND end_datetime >= \"{$datetime->format('Y-m-d H:i:s')}\"");
-
-	if (is_null($user_type)) {
-		global $KNET_USER_TYPES;
-		return $KNET_USER_TYPES['none']['id'];
-	}
-
-	return $user_type;
+	
+	return array_map(function($id) use ($datetime) {return KNet_type_from_id($id, $datetime);}, ids_from_apartment_number($number));
 }
 #
 /**
@@ -1425,7 +1480,7 @@ function KNet_type_from_apartment_number($number, $datetime)
  */
 function KNet_type_from_username($username, $datetime)
 {
-	return KNet_type_from_apartment_number(apartment_number_from_username($username), $datetime);
+	return KNet_type_from_id(id_from_username($username), $datetime);
 }
 #
 /**
@@ -1438,7 +1493,16 @@ function KNet_type_from_username($username, $datetime)
  */
 function KNet_type_from_id($id, $datetime)
 {
-	return KNet_type_from_apartment_number(apartment_number_from_id($id), $datetime);
+	global $wpdb;
+
+	$user_type = $wpdb->get_var("SELECT member_type FROM {$wpdb->prefix}AKDTU_networkgroupmembers WHERE user_id = \"{$id}\" AND start_datetime <= \"{$datetime->format('Y-m-d H:i:s')}\" AND end_datetime >= \"{$datetime->format('Y-m-d H:i:s')}\"");
+
+	if (is_null($user_type)) {
+		global $KNET_USER_TYPES;
+		return $KNET_USER_TYPES['none']['id'];
+	}
+
+	return $user_type;
 }
 #
 #
@@ -1451,19 +1515,9 @@ function KNet_type_from_id($id, $datetime)
  * 
  * @return string Name of the K-Net type of the user at the given time..
  */
-function KNet_type_name_from_apartment_number($number, $datetime)
+function KNet_type_names_from_apartment_number($number, $datetime)
 {
-	global $KNET_USER_TYPES;
-	$user_type = KNet_type_from_apartment_number($number, $datetime);
-
-	return array_values(
-		array_filter(
-			$KNET_USER_TYPES,
-			function ($type) use ($user_type) {
-				return $type['id'] == $user_type;
-			}
-		)
-	)[0]['name'];
+	return array_map(function ($id) use ($datetime) {return KNet_type_name_from_id($id, $datetime);}, ids_from_apartment_number($number));
 }
 #
 /**
@@ -1476,7 +1530,7 @@ function KNet_type_name_from_apartment_number($number, $datetime)
  */
 function KNet_type_name_from_username($username, $datetime)
 {
-	return KNet_type_name_from_apartment_number(apartment_number_from_username($username), $datetime);
+	return KNet_type_name_from_id(id_from_username($username), $datetime);
 }
 #
 /**
@@ -1489,7 +1543,17 @@ function KNet_type_name_from_username($username, $datetime)
  */
 function KNet_type_name_from_id($id, $datetime)
 {
-	return KNet_type_name_from_apartment_number(apartment_number_from_id($id), $datetime);
+	global $KNET_USER_TYPES;
+	$user_type = KNet_type_from_id($id, $datetime);
+
+	return array_values(
+		array_filter(
+			$KNET_USER_TYPES,
+			function ($type) use ($user_type) {
+				return $type['id'] == $user_type;
+			}
+		)
+	)[0]['name'];
 }
 #
 #
@@ -1502,19 +1566,9 @@ function KNet_type_name_from_id($id, $datetime)
  * 
  * @return string Id of the K-Net type of the user at the given time..
  */
-function KNet_type_key_from_apartment_number($number, $datetime)
+function KNet_type_keys_from_apartment_number($number, $datetime)
 {
-	global $KNET_USER_TYPES;
-	$user_type = KNet_type_from_apartment_number($number, $datetime);
-
-	return array_keys(
-		array_filter(
-			$KNET_USER_TYPES,
-			function ($type) use ($user_type) {
-				return $type['id'] == $user_type;
-			}
-		)
-	)[0];
+	return array_map(function ($id) use ($datetime) {return KNet_type_key_from_id($id, $datetime);}, ids_from_apartment_number($number));
 }
 #
 /**
@@ -1527,7 +1581,7 @@ function KNet_type_key_from_apartment_number($number, $datetime)
  */
 function KNet_type_key_from_username($username, $datetime)
 {
-	return KNet_type_key_from_apartment_number(apartment_number_from_username($username), $datetime);
+	return KNet_type_key_from_id(id_from_username($username), $datetime);
 }
 #
 /**
@@ -1540,7 +1594,17 @@ function KNet_type_key_from_username($username, $datetime)
  */
 function KNet_type_key_from_id($id, $datetime)
 {
-	return KNet_type_key_from_apartment_number(apartment_number_from_id($id), $datetime);
+	global $KNET_USER_TYPES;
+	$user_type = KNet_type_from_id($id, $datetime);
+
+	return array_keys(
+		array_filter(
+			$KNET_USER_TYPES,
+			function ($type) use ($user_type) {
+				return $type['id'] == $user_type;
+			}
+		)
+	)[0];
 }
 ############################################################
 
@@ -1560,7 +1624,7 @@ function KNet_type_key_from_id($id, $datetime)
  */
 function had_to_pay_rental_cost_from_apartment_number($apartment_number, $datetime)
 {
-	return had_to_pay_rental_cost_from_id(id_from_apartment_number($apartment_number), $datetime);
+	return !in_array(false, array_map(function ($id) use ($datetime) {return had_to_pay_rental_cost_from_id($id, $datetime);}, ids_from_apartment_number($apartment_number)));
 }
 #
 /**
@@ -1587,7 +1651,7 @@ function had_to_pay_rental_cost_from_username($username, $datetime)
 function had_to_pay_rental_cost_from_id($user_id, $datetime)
 {
 	# Check if the user is not an apartment user or was a board member at the given time. In these cases, the user should not pay any rental cost.
-	return !(!is_apartment_from_id($user_id) || was_boardmember_from_id($user_id, $datetime));
+	return !(!is_apartment_from_id($user_id) || was_boardmember_from_apartment_number(apartment_number_from_id($user_id), $datetime) || was_website_admin_from_id($user_id, $datetime));
 }
 ############################################################
 
@@ -1610,37 +1674,7 @@ function all_moved_after_apartment_numbers($moved_after_date)
 	global $wpdb;
 
 	# Find apartment numbers of all apartments where the resident has moved out since the given date
-	return $wpdb->get_col("SELECT apartment_number FROM {$wpdb->prefix}swpm_allowed_membercreation WHERE allow_creation_date >= \"{$moved_after_date}\" ORDER BY allow_creation_date ASC, apartment_number ASC");
-}
-#
-/**
- * Gets a list of the usernames of the apartments where residents have moved out after a given date
- * 
- * @param string $moved_after_date String representation of the date, after which the apartment owner should have moved out. Format: (YYYY-MM-DD)
- * 
- * @return array[string] Array of usernames for all apartments where residents have moved out after a given date
- */
-function all_moved_after_usernames($moved_after_date)
-{
-	# List of usernames of all apartments where the resident has moved out since the given date
-	return array_map(function ($apartment) {
-		return username_from_apartment_number($apartment);
-	}, all_moved_after_apartment_numbers($moved_after_date));
-}
-#
-/**
- * Gets a list of the user ids of the apartments where residents have moved out after a given date
- * 
- * @param string $moved_after_date String representation of the date, after which the apartment owner should have moved out. Format: (YYYY-MM-DD)
- * 
- * @return array[int] Array of user ids for all apartments where residents have moved out after a given date
- */
-function all_moved_after_ids($moved_after_date)
-{
-	# List of user ids of all apartments where the resident has moved out since the given date
-	return array_map(function ($apartment) {
-		return id_from_apartment_number($apartment);
-	}, all_moved_after_apartment_numbers($moved_after_date));
+	return $wpdb->get_col("SELECT apartment_number FROM {$wpdb->prefix}AKDTU_moves WHERE move_date >= \"{$moved_after_date}\" ORDER BY move_date ASC, apartment_number ASC");
 }
 ############################################################
 
@@ -1663,9 +1697,8 @@ function all_apartments()
 }
 #
 /**
- * Creates a html-dropdown element containing an element for each apartment. Values are always unpadded apartment numbers
+ * Creates a html-dropdown element containing an element for each apartment user. Values are always user ids
  * 
- * @param bool $display_apartment_numbers True if the dropdown should contain the apartment numbers of the apartment users. Default: true
  * @param bool $display_names True if the dropdown should contain the names of the apartment users. Default: true
  * @param bool $use_padded_apartment_numbers True if the apartment numbers should contain leading zeros if the number is less than three digits. Default: true
  * @param string $apartment_number_and_name_separator String separator placed between apartment number and name, if both `$display_apartment_numbers` and `$display_names` are true. Default: ' - '
@@ -1674,18 +1707,38 @@ function all_apartments()
  * @param string $class Class(es) of the dropdown. Multiple classes are space-separated. Default: ''
  * 
  * @return string Dropdown containing all apartment users
- * 
- * @throws InvalidArgumentException If `$display_apartment_numbers` and `$display_names` are both false
  */
-function apartments_dropdown($display_apartment_numbers = true, $display_names = true, $use_padded_apartment_numbers = true, $apartment_number_and_name_separator = ' - ', $name = "user", $id = "", $class = "")
+function users_dropdown($display_names = true, $use_padded_apartment_numbers = true, $apartment_number_and_name_separator = ' - ', $name = "user", $id = "", $class = "")
 {
-	if (!$display_apartment_numbers && !$display_names) {
-		throw new InvalidArgumentException("Both $display_apartment_numbers and $display_names cannot be false");
-	}
-
 	$dropdown = "<select" . ($name != "" ? " name=\"{$name}\"" : "") . ($class != "" ? " class=\"{$class}\"" : "") . ($id != "" ? " id=\"{$id}\"" : "") . ">";
-	$dropdown .= join("", array_map(function ($apartment) use ($display_apartment_numbers, $display_names, $use_padded_apartment_numbers, $apartment_number_and_name_separator) {
-		return "<option value=\"{$apartment}\">" . ($display_apartment_numbers ? ($use_padded_apartment_numbers ? padded_apartment_number_from_apartment_number($apartment) : $apartment) : '') . ($display_apartment_numbers && $display_names ? $apartment_number_and_name_separator : '') . ($display_names ? name_from_apartment_number($apartment) : '') . "</option>";
+
+	$dropdown .= join("", array_map(function ($apartment) use ($display_names, $use_padded_apartment_numbers, $apartment_number_and_name_separator) {
+		return join("", array_map(function ($id) use ($apartment, $display_names, $use_padded_apartment_numbers, $apartment_number_and_name_separator) {
+			return "<option value=\"{$id}\">" . ($use_padded_apartment_numbers ? padded_apartment_number_from_apartment_number($apartment) : $apartment) . ($display_names ? $apartment_number_and_name_separator : '') . ($display_names ? name_from_id($id) : '') . "</option>";
+		}, ids_from_apartment_number($apartment)));
+	}, all_apartments()));
+
+	$dropdown .= "</select>";
+
+	return $dropdown;
+}
+#
+/**
+ * Creates a html-dropdown element containing an element for each apartment. Values are always apartment number
+ * 
+ * @param bool $use_padded_apartment_numbers True if the apartment numbers should contain leading zeros if the number is less than three digits. Default: true
+ * @param string $name Name of the dropdown. Default: 'apartment_number'
+ * @param string $id ID of the dropdown. Default: ''
+ * @param string $class Class(es) of the dropdown. Multiple classes are space-separated. Default: ''
+ * 
+ * @return string Dropdown containing all apartment numbers
+ */
+function apartments_dropdown($use_padded_apartment_numbers = true, $name = "user", $id = "", $class = "")
+{
+	$dropdown = "<select" . ($name != "" ? " name=\"{$name}\"" : "") . ($class != "" ? " class=\"{$class}\"" : "") . ($id != "" ? " id=\"{$id}\"" : "") . ">";
+
+	$dropdown .= join("", array_map(function ($apartment) use ($use_padded_apartment_numbers) {
+		return "<option value=\"{$apartment}\">" . ($use_padded_apartment_numbers ? padded_apartment_number_from_apartment_number($apartment) : $apartment) . "</option>";
 	}, all_apartments()));
 
 	$dropdown .= "</select>";
@@ -1730,11 +1783,17 @@ function remove_user_role($user_id, $role)
 			$wp_user = get_user_by('id', $user_id);
 			$wp_user->set_role($AKDTU_USER_TYPES['none']['user_role']);
 
+			update_user_meta( $user_id, 'user_type', $AKDTU_USER_TYPES['none']['id'] );
+
 			# Update old boardmember in the database
-			return $wpdb->update("{$wpdb->prefix}AKDTU_boardmembers", ['end_datetime' => (new DateTime('now - 1 minute', new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s')], ['apartment_number' => apartment_number_from_id($_REQUEST['user']), 'end_datetime' => '9999-12-31 23:59:59']) > 0;
+			return $wpdb->update("{$wpdb->prefix}AKDTU_boardmembers", ['end_datetime' => (new DateTime('now - 1 minute', new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s')], ['user_id' => $user_id, 'end_datetime' => '9999-12-31 23:59:59']) > 0;
 		case 'networkgroupmember':
+			global $KNET_USER_TYPES;
+
+			update_user_meta( $user_id, 'knet_type', $KNET_USER_TYPES['none']['id'] );
+
 			# Update old networkgroupmember in the database
-			return $wpdb->update("{$wpdb->prefix}AKDTU_networkgroupmembers", ['end_datetime' => (new DateTime('now - 1 minute', new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s')], ['apartment_number' => apartment_number_from_id($_REQUEST['user']), 'end_datetime' => '9999-12-31 23:59:59']) > 0;
+			return $wpdb->update("{$wpdb->prefix}AKDTU_networkgroupmembers", ['end_datetime' => (new DateTime('now - 1 minute', new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s')], ['user_id' => $user_id, 'end_datetime' => '9999-12-31 23:59:59']) > 0;
 		default:
 			return false;
 	}
@@ -1787,14 +1846,18 @@ function add_user_role($user_id, $role, $role_type)
 			# Set the role of the Wordpress user to be a board member
 			$wp_user->set_role($user_role);
 
+			update_user_meta( $user_id, 'user_type', $user_type );
+
 			# Insert new boardmember into the database
-			return $wpdb->insert("{$wpdb->prefix}AKDTU_boardmembers", ['apartment_number' => apartment_number_from_id($user_id), 'start_datetime' => (new DateTime('now', new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s'), 'end_datetime' => '9999-12-31 23:59:59', 'member_type' => $user_type]) > 0;
+			return $wpdb->insert("{$wpdb->prefix}AKDTU_boardmembers", ['user_id' => $user_id, 'apartment_number' => apartment_number_from_id($user_id), 'start_datetime' => (new DateTime('now', new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s'), 'end_datetime' => '9999-12-31 23:59:59', 'member_type' => $user_type]) > 0;
 		case 'networkgroupmember':
 			global $KNET_USER_TYPES;
 			$user_type = $KNET_USER_TYPES[$role_type]['id'];
 
+			update_user_meta( $user_id, 'knet_type', $user_type );
+
 			# Insert new networkgroupmember into the database
-			return $wpdb->insert("{$wpdb->prefix}AKDTU_networkgroupmembers", ['apartment_number' => apartment_number_from_id($user_id), 'start_datetime' => (new DateTime('now', new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s'), 'end_datetime' => '9999-12-31 23:59:59', 'member_type' => $user_type]) > 0;
+			return $wpdb->insert("{$wpdb->prefix}AKDTU_networkgroupmembers", ['user_id' => $user_id, 'apartment_number' => apartment_number_from_id($user_id), 'start_datetime' => (new DateTime('now', new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s'), 'end_datetime' => '9999-12-31 23:59:59', 'member_type' => $user_type]) > 0;
 		default:
 			return false;
 	}

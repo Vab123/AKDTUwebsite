@@ -32,4 +32,6 @@ function remove_boardmember($user_id){
 
 		return false;
 	}
+
+	return false;
 }

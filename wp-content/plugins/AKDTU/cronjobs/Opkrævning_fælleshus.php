@@ -15,6 +15,7 @@ function send_opkrævning_fælleshus($debug = false) {
 		# Check if today is the first day of the month (Emails are only sent on the first day of the month)
 		if ((new DateTime('now', new DateTimeZone('Europe/Copenhagen')))->format('j') == '1' || $debug) {
 			$mention_moved_users_months_before = 1; # If tenant has moved in/out within this amount of months, a note is set on the name to specify if new or old tenant should pay
+
 			$mention_moved_users_date = new DateTime("first day of this month", new DateTimeZone('Europe/Copenhagen'));
 			$mention_moved_users_date->setTime(0, 0, 0);
 			$mention_moved_users_date->modify('-' . $mention_moved_users_months_before . ' month');
@@ -34,48 +35,55 @@ function send_opkrævning_fælleshus($debug = false) {
 			$month_year = $month->format($month_ini) . " " . $year->format($month_ini);
 
 			# Get prices, price adjustments, and final prices
-			$price_to_pay = get_price_to_pay($month_ini, $month_end);
-			$price_adjustments = get_price_adjustments($month_ini, $month_end);
-			$final_price = get_final_price($price_to_pay, $price_adjustments);
+			$price_to_pay_by_apartment = price_to_pay_per_apartment($month_ini, $month_end);
 
 			# Get moved users
 			$moved_users = get_moves(['apartment_number'], null, $mention_moved_users_date, null, null, 1, "allow_creation_date ASC, apartment_number ASC");
 
 			# Prepare string for payment info
 			$payment_info = '';
-			
-			# Calculate the amount of rentals
-			$amnt_rentals = count(array_keys($final_price));
 
 			# Check if there has been any rentals
-			if ($amnt_rentals > 0) {
+			if (count(array_keys($price_to_pay_by_apartment)) > 0) {
 				# There has been any rentals, so write info about the rentals
 
 				# Counter of rentals
-				$it = 1;
+				$payment_info .= join(
+					array_map(
+						function ($apartment, $prices) use ($moved_users) {
+							$apartment_payment_info = [];
 
-				# Go through all rentals
-				foreach ($final_price as $username => $price) {
-					# Check if the price is not zero
-					if ($price > 0) {
-						# Replacements for the format of the payment
-						$replaces = array(
-							'#APT' => padded_apartment_number_from_username($username) . (is_archive_user_from_username($username) ? ' (Tidligere beboer)' : (in_array(apartment_number_from_username($username), $moved_users) ? ' (Ny beboer)' : '')),
-							'#PRICE' => number_format($price, 2, ",", "."),
-						);
+							# Check if the price is not zero
+							if ($prices["current_owner"]["total"] != 0) {
+								# Replacements for the format of the payment
+								$replaces = array(
+									'#APT' => padded_apartment_number_from_apartment_number($apartment) . (in_array($apartment, $moved_users) ? ' (Ny beboer)' : ''),
+									'#PRICE' => number_format($prices["current_owner"]["total"], 2, ",", "."),
+								);
 
-						# Append payment info
-						$payment_info .= str_replace(array_keys($replaces), $replaces, nl2br(FÆLLESHUS_FORMAT));
+								# Append payment info
+								$apartment_payment_info[] = str_replace(array_keys($replaces), $replaces, nl2br(FÆLLESHUS_FORMAT));
+							}
+							
+							# Check if the price is not zero
+							if ($prices["previous_owner"]["total"] != 0) {
+								# Replacements for the format of the payment
+								$replaces = array(
+									'#APT' => padded_apartment_number_from_apartment_number($apartment) . ' (Tidligere beboer)',
+									'#PRICE' => number_format($prices["current_owner"]["total"], 2, ",", "."),
+								);
 
-						# If this is not the last rental, add a linebreak
-						if ($it < $amnt_rentals) {
-							$payment_info .= '<br>';
-						}
+								# Append payment info
+								$apartment_payment_info[] = str_replace(array_keys($replaces), $replaces, nl2br(FÆLLESHUS_FORMAT));
+							}
 
-						# Increment counter
-						$it++;
-					}
-				}
+							return join($apartment_payment_info, "<br>");
+						},
+						array_keys($price_to_pay_by_apartment),
+						array_values($price_to_pay_by_apartment)
+					),
+					"<br>"
+				);
 			} else {
 				# There were no rentals. Payment info reflects that there were no rentals
 

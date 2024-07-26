@@ -10,29 +10,26 @@
  * @param bool $debug Flag, for whether the users should actually be deleted (false), or if this is a test run to show sample results (true)
  */
 function send_fjern_lejeradgang($debug = false) {
+	global $wpdb;
+
 	# Get current time
 	$current_time = new DateTime("now", new DateTimeZone('Europe/Copenhagen'));
 	$current_time = $current_time->format("Y-m-d H:i:s");
 
 	# Get apartments moving in earlier than now that are not already reset
-	$res = ($debug ? [2] : get_expired_renters(['apartment_number']));
+	$res = ($debug ? [ [ "apartment_number" => 2, "start_time" => (new DateTime('now', new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s'), "end_time" => (new DateTime('now', new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s'), "initial_reset" => 0, "initial_takeover" => 0, ] ] : get_expired_renters(['apartment_number']));
 
 	# Go through all moved renters
-	foreach ($res as $apartment_num) {
+	foreach ($res as $renter_info) {
+		$apartment_num = $renter_info["apartment_number"];
+		
 		# Get user info
-		$realuser_login = username_from_apartment_number($apartment_num);
-		$user_login = $realuser_login . '_lejer';
+		$user_login = "lejl" . padded_apartment_number_from_apartment_number($apartment_num) . "_lejer";
 		$user = get_user_by('login', $user_login);
 		$user_id = $user->ID;
 
-		# New values
-		$new_pass = 'default_pass';
-		$new_first_name = 'Midlertidig lejer,';
-		$new_last_name = $realuser_login;
-		$new_email = $user_login . '@akdtu.dk';
-
 		# Get archive user info
-		$archive_user = get_user_by('login', $realuser_login . '_archive');
+		$archive_user = get_user_by("user_login", archive_username_from_apartment_number($apartment_num));
 		$archive_user_id = $archive_user->ID;
 
 		# Replacements for email subject
@@ -43,9 +40,6 @@ function send_fjern_lejeradgang($debug = false) {
 		# Replacements for email content
 		$content_replaces = [
 			'#APT' => $apartment_num,
-			'#NEWMAIL' => ($new_email == '' ? '(tomt)' : $new_email),
-			'#NEWFIRSTNAME' => ($new_first_name == '' ? '(tomt)' : $new_first_name),
-			'#NEWLASTNAME' => ($new_last_name == '' ? '(tomt)' : $new_last_name),
 			'#OLDMAIL' => $user->user_email,
 			'#OLDFIRSTNAME' => $user->user_firstname,
 			'#OLDLASTNAME' => $user->user_lastname,
@@ -56,11 +50,11 @@ function send_fjern_lejeradgang($debug = false) {
 
 		# Check if this is an actual run, where the user should be deleted
 		if (!$debug) {
-			# Reset info for user
-			reset_user_info($user_id, $new_pass, $new_first_name, $new_last_name, $new_email, $apartment_num, $debug);
-
 			# Update database to show that the user has been reset
-			update_renter_permit($apartment_num, ['initial_reset' => 1]);
+			$swpm_user = SwpmMemberUtils::get_user_by_user_name( username_from_id($user_id) );
+			wp_delete_user( $user_id, $archive_user_id );; //Deletes the WP User record
+
+			$wpdb->query( 'DELETE FROM ' . $wpdb->prefix . "swpm_members_tbl WHERE member_id = {$swpm_user->member_id}" );
 		}
 
 		# Check if an email should be sent or echoed

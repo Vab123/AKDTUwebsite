@@ -90,7 +90,7 @@ function default_password()
  * 
  * @param int $run_every_hours_amount How long before now, the password to the common house has not been updated. Usually set to the frequency of the cron-job used to update the password to the router. (Default: 24) 
  * 
- * @return array[string,string] Key-value array with information about the potential new password to the router, including if it should be changed at all
+ * @return array[string,string|EM_Event] Key-value array with information about the potential new password to the router, including if it should be changed at all
  */
 function generate_password_info()
 {

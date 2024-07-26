@@ -19,7 +19,7 @@ function allowed_renter_signups_widget() {
 			<thead>
 				<tr>
 					<th class='manage-column' scope='col'>Lejl.</th>
-					<th class='manage-column' scope='col'>Telefon</th>
+					<th class='manage-column' scope='col'>Email</th>
 					<th class='manage-column' scope='col'>Periode</th>
 					<th class='manage-column' scope='col'></th>
 				</tr>
@@ -35,12 +35,12 @@ function allowed_renter_signups_widget() {
 						};
 						$row++; ?>>
 						<td style="vertical-align:middle"><?php echo padded_apartment_number_from_apartment_number($user->apartment_number); ?></td>
-						<td style="vertical-align:middle"><?php echo $user->phone_number; ?></td>
+						<td style="vertical-align:middle"><?php echo $user->email; ?></td>
 						<td style="vertical-align:middle"><?php echo (new DateTime($user->start_time))->format('d-m-Y H:i') . ' - ' . (new DateTime($user->end_time))->format('d-m-Y H:i'); ?></td>
 						<td style="vertical-align:middle;text-align:center">
 							<form action="" method="post">
 								<input type="hidden" name="user" value="<?php echo $user->apartment_number; ?>" />
-								<input type="hidden" name="phone" value="<?php echo $user->phone_number; ?>" />
+								<input type="hidden" name="email" value="<?php echo $user->email; ?>" />
 								<input type="hidden" name="start_time" value="<?php echo $user->start_time; ?>" />
 								<input type="hidden" name="end_time" value="<?php echo $user->end_time; ?>" />
 								<input type="hidden" name="action" value="delete_renter_signup" />

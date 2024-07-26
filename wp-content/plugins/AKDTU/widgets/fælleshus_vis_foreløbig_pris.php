@@ -17,14 +17,12 @@ function fælleshus_vis_foreløbig_pris_widget() {
 	echo join("<br>", array_map(function ($month) use($date) {
 		$month_start = new DateTime("first day of " . $month, new DateTimeZone('Europe/Copenhagen'));
 		$month_end = new DateTime("last day of " . $month, new DateTimeZone('Europe/Copenhagen'));
-
-		$price_to_pay = get_price_to_pay($month_start, $month_end);
-		$price_adjustments = get_price_adjustments($month_start, $month_end);
-		$final_price = get_final_price($price_to_pay, $price_adjustments);
+			
+		$price_to_pay_by_apartment = price_to_pay_per_apartment($month_start, $month_end);
 
 		$return_string = "";
 
-		if (count(array_keys($final_price)) > 0) {
+		if (count(array_filter($price_to_pay_by_apartment, function($price) {return $price["current_owner"]["total"] != 0 || $price["previous_owner"]["total"] != 0;})) > 0) {
 			$return_string .= '<b>' . $date->format($month_start) . ':</b>';
 			$return_string .= '<table class="widefat">';
 			$return_string .= '<colgroup>';
@@ -44,18 +42,32 @@ function fælleshus_vis_foreløbig_pris_widget() {
 			$return_string .= '<tbody>';
 			
 			$row = 0;
-			foreach ($final_price as $username => $price) {
-				$return_string .= '<tr' . ($row % 2 == 0 ? ' class="alternate"' : '') . '>';
-				$row++;
 
-					$return_string .= '<td>' . padded_apartment_number_from_username($username) . (is_archive_user_from_username($username) ? ' (TB)' : '') . '</td>';
-					$return_string .= '<td>' . number_format($price_to_pay[$username], 2, ",", ".") . ' kr.</td>';
-					$return_string .= '<td>' . number_format($price_adjustments[apartment_number_from_username($username)] ?? 0, 2, ",", ".") . ' kr.</td>';
-					$return_string .= '<td>' . number_format($price, 2, ",", ".") . ' kr.</td>';
-				$return_string .= '</tr>';
+			foreach ($price_to_pay_by_apartment as $apartment => $prices) {
+				if ($prices["current_owner"]["total"] != 0) {
+					$return_string .= '<tr' . ($row % 2 == 0 ? ' class="alternate"' : '') . '>';
+					$row++;
+
+					$return_string .= '<td>' . padded_apartment_number_from_apartment_number($apartment) . '</td>';
+					$return_string .= '<td>' . number_format($prices["current_owner"]["original_price"], 2, ",", ".") . ' kr.</td>';
+					$return_string .= '<td>' . number_format($prices["current_owner"]["adjustments"] ?? 0, 2, ",", ".") . ' kr.</td>';
+					$return_string .= '<td>' . number_format($prices["current_owner"]["total"], 2, ",", ".") . ' kr.</td>';
+					$return_string .= '</tr>';
+				}
+				if ($prices["previous_owner"]["total"] != 0) {
+					$return_string .= '<tr' . ($row % 2 == 0 ? ' class="alternate"' : '') . '>';
+					$row++;
+
+					$return_string .= '<td>' . padded_apartment_number_from_apartment_number($apartment) . ' (TB)</td>';
+					$return_string .= '<td>' . number_format($prices["previous_owner"]["original_price"], 2, ",", ".") . ' kr.</td>';
+					$return_string .= '<td>' . number_format($prices["previous_owner"]["adjustments"] ?? 0, 2, ",", ".") . ' kr.</td>';
+					$return_string .= '<td>' . number_format($prices["previous_owner"]["total"], 2, ",", ".") . ' kr.</td>';
+					$return_string .= '</tr>';
+				}
 			}
+			
 			$return_string .= '</tbody>';
-		$return_string .= '</table>';
+			$return_string .= '</table>';
 		}
 		else {
 			$return_string = "Der er indtil videre ingen udlejninger for " . $date->format($month_start) . " måned.";

@@ -50,7 +50,7 @@ function fjern_tilmelding_til_havedag_dashboard_widget() {
 																															echo 'style="visibility:collapse"';
 																														}; ?>>
 								<td><label>Lejlighed:</label></td>
-								<td><?php echo apartments_dropdown(); ?></td>
+								<td><?php echo users_dropdown(); ?></td>
 							</tr>
 							<tr class="remove_gardenday_options" id="remove_gardenday_<?php echo $event->event_id ?>_signup" <?php if ($is_not_first) {
 																																echo 'style="visibility:collapse"';

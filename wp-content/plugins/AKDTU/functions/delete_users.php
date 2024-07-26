@@ -17,8 +17,6 @@
  */
 function delete_previous_gardendays($user_id, $archive_user_id, $debug = false)
 {
-	global $wpdb;
-
 	# Current time, formatted as string
 	$current_time = (new DateTime("now", new DateTimeZone('Europe/Copenhagen')))->format("Y-m-d H:i:s");
 
@@ -91,8 +89,6 @@ function delete_previous_gardendays($user_id, $archive_user_id, $debug = false)
  */
 function find_future_gardendays($user_id, $archive_user_id, $debug = false)
 {
-	global $wpdb;
-
 	# Current time, formatted as string
 	$current_time = (new DateTime("now", new DateTimeZone('Europe/Copenhagen')))->format("Y-m-d H:i:s");
 
@@ -210,35 +206,6 @@ function delete_rentals($user_id, $archive_user_id, $debug = false)
 	} else {
 		# There were no rentals to delete. Return string is information about the fact that no rentals was deleted
 		return '(Ingen udlejninger af fælleshuset blev fundet)';
-	}
-}
-
-/**
- * Changes information about the user, such as password, name, and email, used when a user is reset because the resident moves out.
- * 
- * @param int $user_id ID of the user to investigate
- * @param string $new_pass Plain-text version of the new password for the user
- * @param string $new_first_name Plain-text version of the new first name for the user
- * @param string $new_last_name Plain-text version of the new last name for the user
- * @param string $new_email Plain-text version of the new email address for the user
- * @param string $apartment_num Plain-text version of the apartment number for the user. Currently unused
- * @param bool $debug Flag, indicating if the function call is a real run, or just a test to output sample results
- */
-function reset_user_info($user_id, $new_pass, $new_first_name, $new_last_name, $new_email, $apartment_num, $debug = false)
-{
-	if (!$debug) {
-		# Update password of the user
-		wp_set_password($new_pass, $user_id);
-
-		# Update email, first name, and last name
-		$args = [
-			'ID' => $user_id,
-			'user_email' => $new_email,
-			'first_name' => $new_first_name,
-			'last_name' => $new_last_name,
-			'display_name' => "{$new_first_name} {$new_last_name}",
-		];
-		wp_update_user($args);
 	}
 }
 

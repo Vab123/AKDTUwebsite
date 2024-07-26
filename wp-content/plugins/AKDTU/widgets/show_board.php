@@ -32,8 +32,8 @@ function show_board_widget() {
 						};
 						$row++; ?>>
 						<td style="vertical-align:middle"><?php echo padded_apartment_number_from_username($board_member->user_name); ?></td>
-						<td style="vertical-align:middle"><?php echo $board_member->first_name . ' '  . $board_member->last_name; ?></td>
-						<td style="vertical-align:middle"><?php echo user_type_name_from_apartment_number(apartment_number_from_username($board_member->user_name), $now); ?></td>
+						<td style="vertical-align:middle"><?php echo name_from_username($board_member->user_name); ?></td>
+						<td style="vertical-align:middle"><?php echo user_type_name_from_username($board_member->user_name, $now); ?></td>
 						<td style="vertical-align:middle">
 							<form action="" method="post" style="text-align:center">
 								<input type="hidden" name="user" value="<?php echo $board_member->member_id; ?>" />

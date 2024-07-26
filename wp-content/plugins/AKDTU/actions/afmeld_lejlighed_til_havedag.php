@@ -14,28 +14,30 @@ if (isset($_REQUEST['action'])) {
 /**
  * Delete a registration for an apartment to a garden day
  * 
- * @param int $apartment_number Apartment number
+ * @param int $user_id User id of the user to remove from the garden day
  * @param int $havedag_event_id Event id of the garden day
  * @param string $havedag_dato Date of the garden day, where the apartment should no longer be signed up
  * 
  * @return bool True if the registration was deleted successfully
  */
-function remove_signup_to_gardenday_for_apartment($apartment_number, $gardenday_event_id, $gardenday_date){
+function remove_signup_to_gardenday_for_apartment($user_id, $gardenday_event_id, $gardenday_date){
 	# Check if the apartment number is valid
-	if ($apartment_number > 0) {
-		switch (remove_apartment_from_gardenday($apartment_number, $gardenday_event_id, $gardenday_date)) {
+	if (is_apartment_from_id($user_id)) {
+		switch (remove_apartment_from_gardenday($user_id, $gardenday_event_id, $gardenday_date)) {
 			case -2:
-				new AKDTU_notice('error', 'Lejlighed ' . $apartment_number . ' findes ikke.');
+				new AKDTU_notice('error', 'Bruger ' . name_from_id($user_id) . ' findes ikke.');
 				return false;
 			case -1:
-				new AKDTU_notice('error', 'Lejlighed ' . $apartment_number . ' var i forvejen ikke tilmeldt havedagen.');
+				new AKDTU_notice('error', 'Bruger ' . name_from_id($user_id) . ' var i forvejen ikke tilmeldt havedagen.');
 				return false;
 			case 0:
-				new AKDTU_notice('error', 'Lejlighed ' . $apartment_number . ' kunne ikke fjernes fra havedagen.');
+				new AKDTU_notice('error', 'Bruger ' . name_from_id($user_id) . ' kunne ikke fjernes fra havedagen.');
 				return false;
 			case 1:
-				new AKDTU_notice('success', 'Lejlighed ' . $apartment_number . ' er nu ikke længere tilmeldt havedagen.');
+				new AKDTU_notice('success', 'Bruger ' . name_from_id($user_id) . ' er nu ikke længere tilmeldt havedagen.');
 				return true;
 		}
 	}
+
+	return false;
 }

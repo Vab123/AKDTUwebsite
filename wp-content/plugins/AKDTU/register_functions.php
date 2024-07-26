@@ -32,13 +32,13 @@ $AKDTU_USER_TYPES = array(
 	),
 	'default' => array(
 		'id' => 1,													# ID of the user type, used in database
-		'name' => 'Medlem',											# Human readable name of the user type
+		'name' => 'Bestyrelsesmedlem',								# Human readable name of the user type
 		'user_level' => 'Beboerprofil til bestyrelsesmedlem',		# User level of the user type, as defined in the simple-membership plugin
 		'user_role' => 'board_member',								# User role of the user type, as defined in wordpress (potentially through functions.php)
 	),
 	'deputy' => array(
 		'id' => 2,													# ID of the user type, used in database
-		'name' => 'Suppleant',										# Human readable name of the user type
+		'name' => 'Bestyrelsessuppleant',							# Human readable name of the user type
 		'user_level' => 'Beboerprofil til bestyrelsessuppleant',	# User level of the user type, as defined in the simple-membership plugin
 		'user_role' => 'deputy',									# User role of the user type, as defined in wordpress (potentially through functions.php)
 	),
@@ -53,6 +53,24 @@ $AKDTU_USER_TYPES = array(
 		'name' => 'Næstformand',									# Human readable name of the user type
 		'user_level' => 'Beboerprofil til bestyrelsesmedlem',		# User level of the user type, as defined in the simple-membership plugin
 		'user_role' => 'board_member',								# User role of the user type, as defined in wordpress (potentially through functions.php)
+	),
+	'renter' => array(
+		'id' => 5,													# ID of the user type, used in database
+		'name' => 'Midlertidig lejer',								# Human readable name of the user type
+		'user_level' => 'Midlertidig lejer',						# User level of the user type, as defined in the simple-membership plugin
+		'user_role' => 'subscriber',								# User role of the user type, as defined in wordpress (potentially through functions.php)
+	),
+	'archive' => array(
+		'id' => 6,													# ID of the user type, used in database
+		'name' => 'Archive bruger',									# Human readable name of the user type
+		'user_level' => 'Archive bruger',							# User level of the user type, as defined in the simple-membership plugin
+		'user_role' => 'subscriber',								# User role of the user type, as defined in wordpress (potentially through functions.php)
+	),
+	'website-admin' => array(
+		'id' => 7,													# ID of the user type, used in database
+		'name' => 'Website administrator',							# Human readable name of the user type
+		'user_level' => 'Administrator',							# User level of the user type, as defined in the simple-membership plugin
+		'user_role' => 'administrator',								# User role of the user type, as defined in wordpress (potentially through functions.php)
 	),
 );
 

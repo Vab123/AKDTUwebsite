@@ -791,9 +791,6 @@ $AKDTU_OPTIONS = array(
 								"style" => "width: 600px;",
 								"comments" => array(
 									"<code>#APT</code> erstattes med lejlighedsnummeret.",
-									"<code>#NEWMAIL</code> erstattes med brugerens nye emailadresse.",
-									"<code>#NEWFIRSTNAME</code> erstattes med brugerens nye fornavn.",
-									"<code>#NEWLASTNAME</code> erstattes med brugerens nye efternavn.",
 									"<code>#OLDMAIL</code> erstattes med brugerens gamle emailadresse.",
 									"<code>#OLDFIRSTNAME</code> erstattes med brugerens gamle fornavn.",
 									"<code>#OLDLASTNAME</code> erstattes med brugerens gamle efternavn.",
@@ -975,9 +972,6 @@ $AKDTU_OPTIONS = array(
 								"style" => "width: 600px;",
 								"comments" => array(
 									"<code>#APT</code> erstattes med lejlighedsnummeret.",
-									"<code>#NEWMAIL</code> erstattes med lejerens nye emailadresse.",
-									"<code>#NEWFIRSTNAME</code> erstattes med lejerens nye fornavn.",
-									"<code>#NEWLASTNAME</code> erstattes med lejerens nye efternavn.",
 									"<code>#OLDMAIL</code> erstattes med lejerens gamle emailadresse.",
 									"<code>#OLDFIRSTNAME</code> erstattes med lejerens gamle fornavn.",
 									"<code>#OLDLASTNAME</code> erstattes med lejerens gamle efternavn.",
@@ -1940,6 +1934,8 @@ $AKDTU_OPTIONS = array(
 								"style" => "width: 600px",
 								"comments" => array(
 									"Understøtter <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#booking-placeholders' target='_blank'>Tilmeldingsrelaterede pladsholdere</a>, <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#event-placeholders' target='_blank'>Event relateret pladsholdere</a> og <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#location-placeholders' target='_blank'>Lokationsrelateret pladsholdere</a>.",
+									"<code>#_APT</code> erstattes med lejlighedsnummeret.",
+									"<code>#_PADDEDAPT</code> erstattes med lejlighedsnummeret, med 0'er for lejligheder i stueetagen.",
 								),
 							),
 							array(
@@ -1979,6 +1975,8 @@ $AKDTU_OPTIONS = array(
 								"style" => "width: 600px",
 								"comments" => array(
 									"Understøtter <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#booking-placeholders' target='_blank'>Tilmeldingsrelaterede pladsholdere</a>, <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#event-placeholders' target='_blank'>Event relateret pladsholdere</a> og <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#location-placeholders' target='_blank'>Lokationsrelateret pladsholdere</a>.",
+									"<code>#_APT</code> erstattes med lejlighedsnummeret.",
+									"<code>#_PADDEDAPT</code> erstattes med lejlighedsnummeret, med 0'er for lejligheder i stueetagen.",
 								),
 							),
 							array(
@@ -2018,6 +2016,8 @@ $AKDTU_OPTIONS = array(
 								"style" => "width: 600px",
 								"comments" => array(
 									"Understøtter <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#booking-placeholders' target='_blank'>Tilmeldingsrelaterede pladsholdere</a>, <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#event-placeholders' target='_blank'>Event relateret pladsholdere</a> og <a href='/wp-admin/edit.php?post_type=event&page=events-manager-help#location-placeholders' target='_blank'>Lokationsrelateret pladsholdere</a>.",
+									"<code>#_APT</code> erstattes med lejlighedsnummeret.",
+									"<code>#_PADDEDAPT</code> erstattes med lejlighedsnummeret, med 0'er for lejligheder i stueetagen.",
 								),
 							),
 							array(
@@ -2315,26 +2315,26 @@ $AKDTU_OPTIONS = array(
 			),
 		),
 	),
-	// "test.php" => array(
-	// 	"page-title" => "Test",
-	// 	"menu-title" => "Test",
-	// 	"menu-slug" => "akdtu-plugin-test",
-	// 	"function" => "test_page",
-	// 	"default-tab" => "test",
-	// 	"h1" => "Test",
-	// 	"tabs" => array(
-	// 		"test" => array(
-	// 			"tab-title" => "Afprøv",
-	// 			"tab-type" => "test",
-	// 			"includes" => array(
+	"test.php" => array(
+		"page-title" => "Test",
+		"menu-title" => "Test",
+		"menu-slug" => "akdtu-plugin-test",
+		"function" => "test_page",
+		"default-tab" => "test",
+		"h1" => "Test",
+		"tabs" => array(
+			"test" => array(
+				"tab-title" => "Afprøv",
+				"tab-type" => "test",
+				"includes" => array(
 					
-	// 			),
-	// 			"function-calls" => array(
-	// 				"test();",
-	// 			)
-	// 		),
-	// 	),
-	// ),
+				),
+				"function-calls" => array(
+					"test();",
+				)
+			),
+		),
+	),
 );
 
 add_action('admin_menu', 'AKDTU_menu');

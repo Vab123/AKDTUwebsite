@@ -32,4 +32,6 @@ function remove_networkgroupmember($user_id){
 
 		return false;
 	}
+
+	return false;
 }

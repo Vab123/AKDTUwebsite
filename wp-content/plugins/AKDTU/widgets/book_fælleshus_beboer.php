@@ -25,7 +25,7 @@ function book_fælleshus_beboer_dashboard_widget() { ?>
 				</tr>
 				<tr>
 					<td><label>Lejlighed</label></td>
-					<td><?php echo apartments_dropdown(); ?></td>
+					<td><?php echo users_dropdown(); ?></td>
 				</tr>
 				<tr>
 					<td></td>

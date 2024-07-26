@@ -92,9 +92,13 @@ class SwpmFrontRegistration extends SwpmRegistration {
 		$apartment = sanitize_text_field($_POST['apartment_number']);
 		$temporary_renter = isset($_POST['temporary_renter']) && $_POST['temporary_renter'] == 'is_renter';
 		$phone = sanitize_text_field($_POST['phone']);
-		$email = $_POST['email'];
+		$email = sanitize_text_field($_POST['email']);
+		$username = sanitize_text_field($_POST['user_name']);
+		$first_name = sanitize_text_field($_POST['first_name']);
+		$last_name = sanitize_text_field($_POST['last_name']);
+		$password = sanitize_text_field($_POST['password']);
 
-		return AKDTU_user_registration($apartment, $temporary_renter, $phone, $email);
+		return AKDTU_user_registration($username, $apartment, $temporary_renter, $phone, $email, $first_name, $last_name, $password);
 	}
 
 	public function register_front_end_original() {

@@ -18,16 +18,16 @@ require_once WP_PLUGIN_DIR . '/AKDTU/register_functions.php';
         <input type ="hidden" name="level_identifier" value="<?php echo $level_identifier ?>" />
         <table>
             <tr class="swpm-registration-username-row" <?php apply_filters('swpm_registration_form_username_tr_attributes', ''); ?>>
-                <td><label for="user_name"><?php pll_e('Apartment number','simple-membership'); ?></label></td>
-                <td><?php echo apartments_dropdown(true, false, true, '', 'apartment_number', 'apartment_number', 'validate[required]') ?></td>
+                <td><label for="apartment_number"><?php pll_e('Apartment number','simple-membership'); ?></label></td>
+                <td><?php echo apartments_dropdown(true, 'apartment_number', 'apartment_number', 'validate[required]') ?></td>
+            </tr>
+            <tr class="swpm-registration-username-row" <?php apply_filters('swpm_registration_form_username_tr_attributes', ''); ?>>
+                <td><label for="user_name"><?php _e('Username', 'simple-membership') ?></label></td>
+                <td><input type="text" id="user_name" class="validate[required,custom[noapostrophe],custom[SWPMUserName],minSize[4],ajax[ajaxUserCall]]" value="<?php echo esc_attr($user_name); ?>" size="50" name="user_name" <?php apply_filters('swpm_registration_form_username_input_attributes', ''); ?>/></td>
             </tr>
             <tr class="swpm-registration-confirmation-row">
                 <td><label for="temporary_renter"><?php pll_e('Are you a temporary renter?','simple-membership') ?></label></td>
                 <td><input type="checkbox" name="temporary_renter" value="is_renter" id="temporary_renter" /></td>
-            </tr>
-            <tr class="swpm-registration-confirmation-row">
-                <td><label for="email"><?php echo SwpmUtils::_('Phone') ?></label> <small><?php pll_e(' - Only used for confirmation','simple-membership'); ?></small></td>
-                <td><input type="text" autocomplete="off" id="phone" class="" value="<?php echo esc_attr($phone); ?>" size="50" name="phone" /></td>
             </tr>
             <tr class="swpm-registration-email-row">
                 <td><label for="email"><?php echo SwpmUtils::_('Email') ?></label></td>

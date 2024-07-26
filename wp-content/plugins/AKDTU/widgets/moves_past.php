@@ -7,20 +7,18 @@
 function moves_past_dashboard_widget() {
 	$limit = 10; # How many past moves to show
 
-	$past_moves = get_past_moves(['apartment_number', 'allow_creation_date', 'initial_takeover'], $limit, null, null);
+	$past_moves = get_past_moves(['apartment_number', 'move_date'], $limit);
 
 	if (count($past_moves) > 0) : ?>
 		<table id='dbem-bookings-table' class='widefat post ' style="max-width:75em">
 			<colgroup>
 				<col span="1" style="width: 15%" />
-				<col span="1" style="width: 50%" />
-				<col span="1" style="width: 35%" />
+				<col span="1" style="width: 85%" />
 			</colgroup>
 			<thead>
 				<tr>
 					<th class='manage-column' scope='col'>Lejl.</th>
 					<th class='manage-column' scope='col'>Overdragelsesdato</th>
-					<th class='manage-column' scope='col'>Profil overtaget</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -34,8 +32,7 @@ function moves_past_dashboard_widget() {
 						};
 						$row++; ?>>
 						<td style="vertical-align:middle"><?php echo padded_apartment_number_from_apartment_number($user->apartment_number); ?></td>
-						<td style="vertical-align:middle"><?php echo (new DateTime($user->allow_creation_date))->format('d-m-Y H:i'); ?></td>
-						<td style="vertical-align:middle"><?php echo $user->initial_takeover ? 'Ja' : 'Nej'; ?></td>
+						<td style="vertical-align:middle"><?php echo (new DateTime($user->move_date, new DateTimeZone("Europe/Copenhagen")))->format('d-m-Y H:i'); ?></td>
 					</tr>
 				<?php
 				}
