@@ -1,25 +1,24 @@
 <?php
 
 /**
- * @file Functionality related to the manipulation of user-info, such as apartment numbers, ids, usernames, as well as getting info about the types of users
+ * @file Functionality related to the creation of new users on the website
  */
 
 ############################################################
 #
 # User-creation permit
 #
-/**
- * Checks if a user-creation permit already exists for a specific apartment
- * 
- * @param int $apartment_number Apartment number to check
- * 
- * @return bool True if a user-creation permit already exists for a specific apartment
- */
-function user_creation_permit_exists($apartment_number)
+
+function user_creation_permit_exists_where($where)
 {
 	global $wpdb;
 
-	return $wpdb->query("SELECT apartment_number FROM {$wpdb->prefix}swpm_allowed_membercreation WHERE apartment_number = \"{$apartment_number}\" AND allow_creation_date >= \"{(new DateTime('now', new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s')}\"") > 0;
+	$where_string = "";
+	foreach ($where as $key => $value) {
+		$where_string .= " AND {$key} = \"{$value}\"";
+	}
+
+	return $wpdb->query("SELECT apartment_number FROM {$wpdb->prefix}swpm_allowed_membercreation WHERE allow_creation_date >= \"{(new DateTime('now', new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s')}\"" . $where_string) > 0;
 }
 #
 /**
@@ -169,11 +168,16 @@ function update_user_permit($apartment_num, $values) {
  * 
  * @return bool True if a renter-creation permit already exists for a specific apartment
  */
-function renter_creation_permit_exists($apartment_number)
+function renter_creation_permit_exists_where($where)
 {
 	global $wpdb;
+	
+	$where_string = "";
+	foreach ($where as $key => $value) {
+		$where_string .= " AND {$key} = \"{$value}\"";
+	}
 
-	return $wpdb->query("SELECT apartment_number FROM {$wpdb->prefix}swpm_allowed_rentercreation WHERE apartment_number = \"{$apartment_number}\" AND allow_creation_date >= \"{(new DateTime('now', new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s')}\"") > 0;
+	return $wpdb->query("SELECT apartment_number FROM {$wpdb->prefix}swpm_allowed_rentercreation WHERE allow_creation_date >= \"{(new DateTime('now', new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s')}\"" . $where_string) > 0;
 }
 #
 /**
@@ -286,3 +290,137 @@ function update_renter_permit($apartment_num, $values) {
 	return $wpdb->update($wpdb->prefix . 'swpm_allowed_rentercreation', $values, ['apartment_number' => $apartment_num]);
 }
 ############################################################
+
+function AKDTU_user_registration($apartment, $is_temporary_renter, $phone, $email) {
+	global $wpdb;
+
+	$current_time = new DateTime("now", new DateTimeZone('Europe/Copenhagen'));
+	$current_time->setTimezone(new DateTimeZone('UTC'));
+	$current_time = $current_time->format("Y-m-d H:i:s");
+
+	$user_permit_settings = [
+		"apartment_number" => $apartment,
+		"phone_number" => $phone,
+	];
+
+	$user_creation_is_permitted = !($is_temporary_renter ? renter_creation_permit_exists_where($user_permit_settings) : user_creation_permit_exists_where($user_permit_settings));
+
+	if (!$user_creation_is_permitted) {
+		$message = array(
+			'succeeded' => false,
+			'message'   => pll__('Creating a user for this apartment is currently not permitted.', 'simple-membership'),
+		);
+		SwpmTransfer::get_instance()->set('status', $message);
+		return;
+	}
+
+	//If captcha is present and validation failed, it returns an error string. If validation succeeds, it returns an empty string.
+	$captcha_validation_output = apply_filters('swpm_validate_registration_form_submission', '');
+	if (!empty($captcha_validation_output)) {
+		$message = array(
+			'succeeded' => false,
+			'message'   => SwpmUtils::_('Security check: captcha validation failed.'),
+		);
+		SwpmTransfer::get_instance()->set('status', $message);
+		return;
+	}
+
+	## Check if email already exists
+	if (email_exists($email)) {
+		$message = array(
+			'succeeded' => false,
+			'message'   => pll__('Email already exists.', 'simple-membership'),
+		);
+		SwpmTransfer::get_instance()->set('status', $message);
+		return;
+	}
+
+	## Verify that apartment number is valid
+	$user_login = 'lejl' . str_pad($_POST['apartment_number'], 3, "0", STR_PAD_LEFT) . ($is_temporary_renter ? '_lejer' : '');
+	$user = get_user_by('login', $user_login);
+	if (!$user) {
+		$message = array(
+			'succeeded' => false,
+			'message'   => pll__('Wrong apartment number recieved.', 'simple-membership'),
+		);
+		SwpmTransfer::get_instance()->set('status', $message);
+		return;
+	}
+	$user_id = $user->ID;
+
+	// Update password
+	wp_set_password($_POST['password'], $user_id);
+	$args = [
+		'ID'         => $user_id,
+		'user_email' => $_POST['email'],
+		'first_name' => $_POST['first_name'],
+		'last_name' => $_POST['last_name'],
+		'display_name' => $_POST['first_name'] . ' ' . $_POST['last_name']
+	];
+	wp_update_user($args);
+
+	if ($is_temporary_renter) {
+		update_renter_permit($apartment, ['initial_takeover' => 1]);
+	} else {
+		update_user_permit($apartment, ['initial_takeover' => 1]);
+	}
+
+	$login_page_url = SwpmSettings::get_instance()->get_value('login-page-url');
+
+	// Allow hooks to change the value of login_page_url
+	$login_page_url = apply_filters('swpm_register_front_end_login_page_url', $login_page_url);
+
+	$after_rego_msg = '<div class="swpm-registration-success-msg">' . sprintf(pll__('Registration completed message', 'simple-membership'), $user_login, $login_page_url) . (NYBRUGER_BRUGER_TOGGLE ? " " . pll__('Confirmation email sent', 'simple-membership') : '') . '</div>';
+	$after_rego_msg = apply_filters('swpm_registration_success_msg', $after_rego_msg);
+	$message        = [
+		'succeeded' => true,
+		'message'   => $after_rego_msg,
+	];
+
+	########################
+	## Mail to new user
+	########################
+	if (NYBRUGER_BRUGER_TOGGLE) {
+		$content_replaces = [
+			'#APT' => $_POST['apartment_number'],
+			'#NEWLOGIN' => $user_login,
+			'#NEWEMAIL' => $_POST['email'],
+			'#NEWFIRSTNAME' => $_POST['first_name'],
+			'#NEWLASTNAME' => $_POST['last_name']
+		];
+
+		$subject_replaces = [
+			'#APT' => $_POST['apartment_number'],
+			'#NEWLOGIN' => $user_login,
+			'#NEWEMAIL' => $_POST['email'],
+			'#NEWFIRSTNAME' => $_POST['first_name'],
+			'#NEWLASTNAME' => $_POST['last_name']
+		];
+
+		send_AKDTU_email(false, $subject_replaces, $content_replaces, 'NYBRUGER_BRUGER' . (pll_current_language() == "da" ? '_DA' : '_EN'), $_POST['email']);
+	}
+
+	########################
+	## Mail to admins
+	########################
+	$content_replaces = array(
+		'#APT' => $_POST['apartment_number'],
+		'#NEWLOGIN' => $user_login,
+		'#NEWEMAIL' => $_POST['email'],
+		'#NEWFIRSTNAME' => $_POST['first_name'],
+		'#NEWLASTNAME' => $_POST['last_name']
+	);
+
+	$subject_replaces = array(
+		'#APT' => $_POST['apartment_number'],
+		'#NEWLOGIN' => $user_login,
+		'#NEWEMAIL' => $_POST['email'],
+		'#NEWFIRSTNAME' => $_POST['first_name'],
+		'#NEWLASTNAME' => $_POST['last_name']
+	);
+
+	send_AKDTU_email(false, $subject_replaces, $content_replaces, 'NYBRUGER_BESTYRELSE');
+
+	SwpmTransfer::get_instance()->set('status', $message);
+	return;
+}

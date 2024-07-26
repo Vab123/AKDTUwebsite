@@ -22,7 +22,7 @@ if (isset($_REQUEST['action'])) {
  */
 function allow_user_signup($apartment_number, $phone_number, $takeover_time) {
 	# Check if there already exists a permit for user creation already exists
-	if (user_creation_permit_exists($apartment_number)) {
+	if (user_creation_permit_exists_where(["apartment_number" => $apartment_number])) {
 		# A permit already exists. Output error message and return
 		new AKDTU_notice('error', 'Tilladelsen til brugeroprettelse kunne ikke oprettes. Check om der allerede findes en tilladelse til brugeren.');
 

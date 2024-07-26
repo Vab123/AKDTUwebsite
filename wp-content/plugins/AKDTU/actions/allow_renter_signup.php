@@ -23,7 +23,7 @@ if (isset($_REQUEST['action'])) {
  */
 function allow_renter_signup($apartment_number, $phone_number, $start_time, $end_time) {
 	# Check if there already exists a permit for user creation already exists
-	if (renter_creation_permit_exists($apartment_number)) {
+	if (renter_creation_permit_exists_where(["apartment_number" => $apartment_number])) {
 		# A permit already exists. Output error message and return
 		new AKDTU_notice('error', 'Den midlertidige lejer kunne ikke oprettes. Check om der allerede findes en midlertidig lejer i den samme lejlighed.');
 

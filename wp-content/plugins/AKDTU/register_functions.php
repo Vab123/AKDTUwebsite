@@ -12,7 +12,7 @@ $AKDTU_FUNCTIONS = array(
 	"notice.php",
 	"render_options_page.php",
 	"send_mail.php",
-	"user_permits.php",
+	"user_registration.php",
 	"users.php",
 	"vlan.php",
 );
