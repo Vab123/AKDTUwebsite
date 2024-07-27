@@ -117,11 +117,6 @@ td.eventless {
 	pointer-events: none;
 }
 
-/* Set padding on dropdowns in menus */
-.nav-ul .sub-menu li>div.wrap {
-	padding: 5px 20px;
-}
-
 /* Keep long dropdowns in header in front of footer */
 header.header {
 	z-index: 100;
@@ -139,6 +134,25 @@ header.header {
 #nv-primary-navigation-main ul.sub-menu ul.sub-menu{
 	max-height: 249.2px; /* x * 35.6px */
 	overflow-y: auto;
+}
+#nv-primary-navigation-main ul.sub-menu li {
+	padding: 5px 20px;
+}
+#nv-primary-navigation-main li.unclickable {
+	cursor: default;
+}
+#nv-primary-navigation-main li:hover>a {
+	color: var(--nv-primary-accent);
+}
+.nav-ul .sub-menu li {
+	padding: 5px 20px;
+}
+.nav-ul .sub-menu {
+	min-width: 200px;
+}
+body.is-menu-sidebar #header-menu-sidebar {
+	visibility: initial;
+    transform: translateX(0%);
 }
 
 .nv-index-posts.search.col {
@@ -163,21 +177,21 @@ header.header {
 	z-index: 1;
 }
 .nv-content-wrap p a:hover, .nv-content-wrap li>a:hover, a.AKDTU_link:hover {
-  opacity: 1;
+	opacity: 1;
 }
 .widget-area a:hover::before, .nv-content-wrap p a:hover::before, .nv-content-wrap li>a:hover::before, a.AKDTU_link:hover::before {
-  bottom: 0;
-  height: 100%;
+	bottom: 0;
+	height: 100%;
 }
 .widget-area a::before, .nv-content-wrap p a::before, .nv-content-wrap li>a::before, a.AKDTU_link::before {
-  content: '';
-  background-color: #c04c32;
-  position: absolute;
-  left: 0;
-  bottom: 5px;
-  width: 100%;
-  height: 4px;
-  z-index: -1;
+	content: '';
+	background-color: #c04c32;
+	position: absolute;
+	left: 0;
+	bottom: 5px;
+	width: 100%;
+	height: 4px;
+	z-index: -1;
 	transition: all .3s ease-in-out;
 }
 
@@ -187,11 +201,34 @@ code {
 
 html[data-wp-dark-mode-active="true"] nav.header-main, html.wp-dark-mode-active nav.header-main {
 	--rowbwidth: 0px;
-  --rowbcolor: var(--nv-dark-bg);
-  --color: var(--nv-text-dark-bg);
-  --bgcolor: var(--nv-dark-bg);
+	--rowbcolor: var(--nv-dark-bg);
+	--color: var(--nv-text-dark-bg);
+	--bgcolor: var(--nv-dark-bg);
 }
 
 body#neve_body .container {
 	max-width: var(--container) !important;
+}
+
+.nv-overlay {
+	--opacity: 25;
+	--blendmode: normal;
+}
+body.admin-bar #header-menu-sidebar .navbar-toggle-wrapper {
+	margin-top: var(--wp-header-height);
+}
+#header-menu-sidebar-inner {
+	padding: 0;
+}
+#nv-primary-navigation-sidebar li>.wrap {
+	padding: 5px 0;
+}
+.header-menu-sidebar .nav-ul li:not([class*=block])>a {
+    padding: 5px 0 !important;
+}
+.header-menu-sidebar .nav-ul li:not([class*=block])>.wrap>a {
+	padding: 0 !important;
+}
+.header-menu-sidebar li {
+	padding: 5px 20px;
 }

@@ -32,9 +32,6 @@ class Cover_Header extends Base_View {
 	 */
 	public function render_cover_header() {
 		list( $context, $allowed_context ) = $this->get_cpt_context();
-		if ($context === 'event') {
-			$context = 'page'; // Allows for cover images on events
-		}
 		if ( ! in_array( $context, $allowed_context, true ) || ! $this->is_valid_context( $context ) ) {
 			return;
 		}
