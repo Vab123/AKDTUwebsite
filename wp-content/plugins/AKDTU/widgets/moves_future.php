@@ -10,7 +10,7 @@ function moves_future_dashboard_widget() {
 	$future_moves = get_future_moves(['*'], $limit);
 
 	if (count($future_moves) > 0) : ?>
-		<table id='dbem-bookings-table' class='widefat post ' style="max-width:75em">
+		<table id='dbem-bookings-table' class='widefat post' style="max-width:75em">
 			<colgroup>
 				<col span="1" style="width: 15%" />
 				<col span="1" style="width: 85%" />

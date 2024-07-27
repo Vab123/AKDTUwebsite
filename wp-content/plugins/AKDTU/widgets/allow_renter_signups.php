@@ -7,32 +7,32 @@
 function allow_renter_signup_widget() { ?>
 	<form action="" method="post">
 		<input type="hidden" name="action" value="allow_renter_signup" />
-		<table>
+		<table class="widefat">
 			<colgroup>
 				<col span="1" style="width: 40%">
 				<col span="1" style="width: 60%">
 			</colgroup>
 			<thead></thead>
 			<tbody>
-				<tr>
-					<td><label>Lejlighed</label></td>
-					<td><?php echo apartments_dropdown(true); ?></td>
+				<tr class="alternate">
+					<td style="vertical-align:middle"><label>Lejlighed</label></td>
+					<td style="vertical-align:middle"><?php echo apartments_dropdown(true); ?></td>
 				</tr>
 				<tr>
-					<td><label>Email</label></td>
-					<td><input type="text" name="email" /></td>
+					<td style="vertical-align:middle"><label>Email</label></td>
+					<td style="vertical-align:middle"><input type="text" name="email" /></td>
+				</tr>
+				<tr class="alternate">
+					<td style="vertical-align:middle"><label>Starttidspunkt</label></td>
+					<td style="vertical-align:middle"><input type="datetime-local" name="start_time" /></td>
 				</tr>
 				<tr>
-					<td><label>Starttidspunkt</label></td>
-					<td><input type="datetime-local" name="start_time" /></td>
+					<td style="vertical-align:middle"><label>Sluttidspunkt</label></td>
+					<td style="vertical-align:middle"><input type="datetime-local" name="end_time" /></td>
 				</tr>
-				<tr>
-					<td><label>Sluttidspunkt</label></td>
-					<td><input type="datetime-local" name="end_time" /></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td><input type="submit" class="button-secondary" value="Gem" /></td>
+				<tr class="alternate">
+					<td style="vertical-align:middle"></td>
+					<td style="vertical-align:middle"><input type="submit" class="button-secondary" value="Gem" /></td>
 				</tr>
 			</tbody>
 		</table>

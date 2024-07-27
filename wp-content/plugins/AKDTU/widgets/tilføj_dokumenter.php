@@ -7,15 +7,15 @@
 function tilføj_dokument_dashboard_widget() {
 	global $bestyrelsesdocuments_document_types;
 ?>
-	<table id="tilføj_dokument_widget_table" width="100%">
+	<table id="tilføj_dokument_widget_table" width="100%" class="widefat">
 		<colgroup>
 			<col span="1" style="width: 30%" />
 			<col span="1" style="width: 70%" />
 		</colgroup>
 		<thead>
 			<tr>
-				<td><label>Dokument type:</label></td>
-				<td><select name="document_type" onchange="update_upload_document_display(this.value)">
+				<th style="vertical-align:middle;"><label>Dokument type:</label></td>
+				<th style="vertical-align:middle;"><select name="document_type" onchange="update_upload_document_display(this.value)">
 						<?php echo join('', array_map(function ($type) {
 							return '<option value="' . $type['short'] . '">' . $type['name'] . '</option>';
 						}, $bestyrelsesdocuments_document_types)); ?>
@@ -24,41 +24,34 @@ function tilføj_dokument_dashboard_widget() {
 		</thead>
 		<tbody>
 			<?php $is_not_first = false;
-			foreach ($bestyrelsesdocuments_document_types as $short => $type_def) : ?>
+			foreach ($bestyrelsesdocuments_document_types as $short => $type_def) :
+				$row = 0; ?>
 				<form action="" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="action" value="upload_dokument" />
 					<input type="hidden" name="document_type" value="<?php echo $short; ?>" />
-					<tr class="dokument_upload_options" id="document_<?php echo $short; ?>_date" <?php if ($is_not_first) {
-																												echo 'style="visibility:collapse"';
-																											}; ?>>
-						<td><label>Dokument dato:</label></td>
-						<td><input type="date" name="document_date" /></td>
+					<tr class="dokument_upload_options<?php echo $row % 2 == 0 ? ' alternate' : ''; $row++; ?>" id="document_<?php echo $short; ?>_date" <?php echo $is_not_first ? 'style="visibility:collapse"' : ''; ?>>
+						<td style="vertical-align:middle;"><label>Dokument dato:</label></td>
+						<td style="vertical-align:middle;"><input type="date" name="document_date" /></td>
 					</tr>
 					<?php if ($type_def['has_type']) : ?>
-						<tr class="dokument_upload_options" id="document_<?php echo $short; ?>_typetype" <?php if ($is_not_first) {
-																														echo 'style="visibility:collapse"';
-																													}; ?>>
-							<td><label>Type:</label></td>
-							<td><select name="document_typetype">
-									<?php
-									foreach ($type_def['type_options'] as $short_type => $long_type) {
-										echo '<option value="' . $short_type . '">' . $long_type . '</option>';
-									}
-									?>
-								</select></td>
+					<tr class="dokument_upload_options<?php echo $row % 2 == 0 ? ' alternate' : ''; $row++; ?>" id="document_<?php echo $short; ?>_typetype" <?php echo $is_not_first ? 'style="visibility:collapse"' : ''; ?>>
+						<td style="vertical-align:middle;"><label>Type:</label></td>
+						<td style="vertical-align:middle;"><select name="document_typetype">
+								<?php
+								foreach ($type_def['type_options'] as $short_type => $long_type) {
+									echo '<option value="' . $short_type . '">' . $long_type . '</option>';
+								}
+								?>
+							</select></td>
 						</tr>
 					<?php endif; ?>
-					<tr class="dokument_upload_options" id="document_<?php echo $short; ?>_file" <?php if ($is_not_first) {
-																												echo 'style="visibility:collapse"';
-																											}; ?>>
-						<td><label>Fil:</label></td>
-						<td><input type="file" name="file" accept="application/pdf" /></td>
+					<tr class="dokument_upload_options<?php echo $row % 2 == 0 ? ' alternate' : ''; $row++; ?>" id="document_<?php echo $short; ?>_file" <?php echo $is_not_first ? 'style="visibility:collapse"' : ''; ?>>
+						<td style="vertical-align:middle;"><label>Fil:</label></td>
+						<td style="vertical-align:middle;"><input type="file" name="file" accept="application/pdf" /></td>
 					</tr>
-					<tr class="dokument_upload_options" id="document_<?php echo $short; ?>_submit" <?php if ($is_not_first) {
-																												echo 'style="visibility:collapse"';
-																											}; ?>>
-						<td></td>
-						<td><input type="submit" class="button-secondary" value="Upload"></td>
+					<tr class="dokument_upload_options<?php echo $row % 2 == 0 ? ' alternate' : ''; $row++; ?>" id="document_<?php echo $short; ?>_submit" <?php echo $is_not_first ? 'style="visibility:collapse"' : ''; ?>>
+						<td style="vertical-align:middle;"></td>
+						<td style="vertical-align:middle;"><input type="submit" class="button-secondary" value="Upload"></td>
 					</tr>
 				</form>
 			<?php $is_not_first = true;

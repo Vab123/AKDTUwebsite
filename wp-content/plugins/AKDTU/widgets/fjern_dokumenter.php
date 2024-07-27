@@ -14,8 +14,8 @@ function fjern_dokument_dashboard_widget() {
 		</colgroup>
 		<thead>
 			<tr>
-				<td><label>Dokument type:</label></td>
-				<td><select name="document_type" onchange="update_remove_document_display(this.value)">
+				<td style="vertical-align:middle;"><label>Dokument type:</label></td>
+				<td style="vertical-align:middle;"><select name="document_type" onchange="update_remove_document_display(this.value)">
 						<?php echo join('', array_map(function ($type) {
 							return '<option value="' . $type['short'] . '">' . $type['name'] . '</option>';
 						}, $bestyrelsesdocuments_document_types));

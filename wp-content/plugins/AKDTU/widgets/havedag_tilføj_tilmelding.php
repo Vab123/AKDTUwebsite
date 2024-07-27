@@ -10,15 +10,15 @@ function tilføj_til_havedag_dashboard_widget() {
 	$havedag_formatter = new IntlDateFormatter('da_DK', IntlDateFormatter::LONG, IntlDateFormatter::NONE, 'Europe/Copenhagen');
 
 	if (!is_null($gardendays)) : ?>
-		<table id="tilføj_til_havedag_widget_table" width="100%">
+		<table id="tilføj_til_havedag_widget_table" width="100%" class="widefat">
 			<colgroup>
 				<col span="1" style="width: 30%" />
 				<col span="1" style="width: 70%" />
 			</colgroup>
 			<thead>
 				<tr>
-					<td><label>Begivenhed:</label></td>
-					<td><select name="havedag_event" onchange="update_add_gardenday_display(this.value)">
+					<th style="vertical-align:middle;"><label>Begivenhed:</label></th>
+					<th style="vertical-align:middle;"><select name="havedag_event" onchange="update_add_gardenday_display(this.value)">
 							<?php
 							foreach ($gardendays as $gardenday) {
 								foreach ($gardenday as $language => $event) {
@@ -26,7 +26,7 @@ function tilføj_til_havedag_dashboard_widget() {
 								}
 							};
 							?>
-						</select></td>
+						</select></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -36,11 +36,11 @@ function tilføj_til_havedag_dashboard_widget() {
 						<form action="" method="post" id="add_gardenday_form_<?php echo $event->event_id; ?>">
 							<input type="hidden" name="havedag_event_id" value="<?php echo $event->event_id; ?>" />
 							<input type="hidden" name="action" value="tilmeld_havedag" />
-							<tr class="add_gardenday_options" id="add_gardenday_<?php echo $event->event_id ?>_date" <?php if ($is_not_first) {
+							<tr class="add_gardenday_options alternate" id="add_gardenday_<?php echo $event->event_id ?>_date" <?php if ($is_not_first) {
 																															echo 'style="visibility:collapse"';
 																														}; ?>>
-								<td><label>Dato:</label></td>
-								<td><select name="havedag_dato">
+								<td style="vertical-align:middle;"><label>Dato:</label></td>
+								<td style="vertical-align:middle;"><select name="havedag_dato">
 										<?php foreach ($event->get_bookings()->get_tickets() as $ticket) : ?>
 											<option value="<?php echo $ticket->ticket_id; ?>"><?php echo ((bool)strtotime($ticket->ticket_name) ? $havedag_formatter->format(new DateTime($ticket->ticket_name, new DateTimeZone('Europe/Copenhagen'))) : $ticket->ticket_name); ?></option>
 										<?php endforeach; ?>
@@ -49,14 +49,14 @@ function tilføj_til_havedag_dashboard_widget() {
 							<tr class="add_gardenday_options" id="add_gardenday_<?php echo $event->event_id ?>_user" <?php if ($is_not_first) {
 																															echo 'style="visibility:collapse"';
 																														}; ?>>
-								<td><label>Lejlighed:</label></td>
-								<td><?php echo users_dropdown(); ?></td>
+								<td style="vertical-align:middle;"><label>Lejlighed:</label></td>
+								<td style="vertical-align:middle;"><?php echo users_dropdown(); ?></td>
 							</tr>
-							<tr class="add_gardenday_options" id="add_gardenday_<?php echo $event->event_id ?>_signup" <?php if ($is_not_first) {
+							<tr class="add_gardenday_options alternate" id="add_gardenday_<?php echo $event->event_id ?>_signup" <?php if ($is_not_first) {
 																																echo 'style="visibility:collapse"';
 																															}; ?>>
-								<td></td>
-								<td><input type="submit" class="button-secondary" value="Tilmeld"></td>
+								<td style="vertical-align:middle;"></td>
+								<td style="vertical-align:middle;"><input type="submit" class="button-secondary" value="Tilmeld"></td>
 							</tr>
 						</form>
 					<?php $is_not_first = true;

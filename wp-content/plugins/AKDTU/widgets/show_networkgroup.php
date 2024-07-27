@@ -17,10 +17,10 @@ function show_networkgroup_widget() {
 			</colgroup>
 			<thead>
 				<tr>
-					<th>Lejl.</th>
-					<th>Navn</th>
-					<th>Type</th>
-					<th></th>
+					<th style="vertical-align:middle;">Lejl.</th>
+					<th style="vertical-align:middle;">Navn</th>
+					<th style="vertical-align:middle;">Type</th>
+					<th style="vertical-align:middle;"></th>
 				</tr>
 			</thead>
 			<tbody>

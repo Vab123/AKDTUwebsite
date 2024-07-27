@@ -18,9 +18,9 @@ function show_vicevært_widget() {
 			</colgroup>
 			<thead>
 				<tr>
-					<th>Navn</th>
-					<th>Email</th>
-					<th></th>
+					<th style="vertical-align:middle;">Navn</th>
+					<th style="vertical-align:middle;">Email</th>
+					<th style="vertical-align:middle;"></th>
 				</tr>
 			</thead>
 			<tbody>

@@ -19,9 +19,9 @@ function havedag_past_dashboard_widget() {
 				$returnstring .= '</colgroup>';
 				$returnstring .= '<thead>';
 					$returnstring .= '<tr>';
-						$returnstring .= '<th>Dato</th>';
-						$returnstring .= '<th>Tilmeldte</th>';
-						$returnstring .= '<th></th>';
+						$returnstring .= '<th style="vertical-align:middle;">Dato</th>';
+						$returnstring .= '<th style="vertical-align:middle;">Tilmeldte</th>';
+						$returnstring .= '<th style="vertical-align:middle;"></th>';
 					$returnstring .= '</tr>';
 				$returnstring .= '</thead>';
 				$returnstring .= '<tbody>';
@@ -35,18 +35,18 @@ function havedag_past_dashboard_widget() {
 					foreach ($gardenday->get_tickets() as $ticket) {
 						$returnstring .= '<tr' . ($row % 2 == 0 ? ' class="alternate"' : '') . '>';
 						$row++;
-							$returnstring .= '<td>' . ((bool)strtotime($ticket->ticket_name) ? $havedag_formatter->format(new DateTime($ticket->ticket_name, new DateTimeZone('Europe/Copenhagen'))) : $ticket->ticket_name) . '</td>';
-							$returnstring .= '<td>' . $ticket->get_booked_spaces() . "/" . $ticket->get_spaces();
+							$returnstring .= '<td style="vertical-align:middle;">' . ((bool)strtotime($ticket->ticket_name) ? $havedag_formatter->format(new DateTime($ticket->ticket_name, new DateTimeZone('Europe/Copenhagen'))) : $ticket->ticket_name) . '</td>';
+							$returnstring .= '<td style="vertical-align:middle;">' . $ticket->get_booked_spaces() . "/" . $ticket->get_spaces();
 								$total_booked += $ticket->get_booked_spaces();
 								$total_spaces += $ticket->get_spaces();
 							$returnstring .= '</td>';
-							$returnstring .= '<td>' . ($ticket->get_booked_spaces() > 0 ? '<b><a href="' . get_site_url(null, "wp-admin/edit.php?post_type=event&page=events-manager-print-bookings&event_id=" . $gardenday->event_id . "&event_ticket_id=" . $ticket->ticket_id) . '">Tilmeldingsliste</a></b>' : '') . '</td>';
+							$returnstring .= '<td style="vertical-align:middle;">' . ($ticket->get_booked_spaces() > 0 ? '<b><a href="' . get_site_url(null, "wp-admin/edit.php?post_type=event&page=events-manager-print-bookings&event_id=" . $gardenday->event_id . "&event_ticket_id=" . $ticket->ticket_id) . '">Tilmeldingsliste</a></b>' : '') . '</td>';
 						$returnstring .= '</tr>';
 					}
 					$returnstring .= '<tr' . ($row % 2 == 0 ? ' class="alternate"' : '') . '>';
-						$returnstring .= '<td><b>Total:</b></td>';
-						$returnstring .= '<td><b>' . $total_booked . "/" . $total_spaces . '</b></td>';
-						$returnstring .= '<td><b>' . ($total_booked > 0 ? '<a href="' . get_site_url(null, "wp-admin/edit.php?post_type=event&page=events-manager-print-bookings&event_id=" . $gardenday->event_id . "&event_ticket_id=total") . '">Samlet liste</a>' : '') . '</b></td>';
+						$returnstring .= '<td style="vertical-align:middle;"><b>Total:</b></td>';
+						$returnstring .= '<td style="vertical-align:middle;"><b>' . $total_booked . "/" . $total_spaces . '</b></td>';
+						$returnstring .= '<td style="vertical-align:middle;"><b>' . ($total_booked > 0 ? '<a href="' . get_site_url(null, "wp-admin/edit.php?post_type=event&page=events-manager-print-bookings&event_id=" . $gardenday->event_id . "&event_ticket_id=total") . '">Samlet liste</a>' : '') . '</b></td>';
 					$returnstring .= '</tr>';
 				$returnstring .= '</tbody>';
 			$returnstring .= '</table>';
