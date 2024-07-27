@@ -30,7 +30,7 @@ $havedag_formatter = new IntlDateFormatter(pll_current_language('locale'), IntlD
 					switch($type){
 						case 'type':
 							?>
-							<td class="em-bookings-ticket-table-type"><?php echo ((bool)strtotime($EM_Ticket->ticket_name) ? $havedag_formatter->format(new DateTime($EM_Ticket->ticket_name), new DateTimeZone('Europe/Copenhagen')) : $EM_Ticket->ticket_name); ?><?php if(!empty($EM_Ticket->ticket_description)) :?><br><span class="ticket-desc"><?php echo wp_kses($EM_Ticket->ticket_description,$allowedposttags); ?></span><?php endif; ?></td>
+							<td class="em-bookings-ticket-table-type"><?php echo ((bool)strtotime($EM_Ticket->ticket_name) ? $havedag_formatter->format(new DateTime($EM_Ticket->ticket_name)) : $EM_Ticket->ticket_name); ?><?php if(!empty($EM_Ticket->ticket_description)) :?><br><span class="ticket-desc"><?php echo wp_kses($EM_Ticket->ticket_description,$allowedposttags); ?></span><?php endif; ?></td>
 							<?php
 							break;
 						case 'price':
