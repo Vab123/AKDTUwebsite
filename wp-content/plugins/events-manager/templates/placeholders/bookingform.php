@@ -30,10 +30,7 @@ if( !$is_open && !is_user_logged_in() && $EM_Event->get_bookings()->is_open(true
 		// We are firstly checking if the user has already booked a ticket at this event, if so offer a link to view their bookings.
 		$EM_Booking = $EM_Event->get_bookings()->has_booking();
 		do_action('em_booking_form_top', $EM_Event);
-		$has_booking = false;
-		foreach (pll_get_post_translations($EM_Event->post_id) as $value) {
-			$has_booking = $has_booking || is_object(em_get_event($value, 'post_id')->get_bookings()->has_booking());
-		}
+		$has_booking = is_signed_up_to_gardenday($EM_Event, get_current_user_id());
 	?>
 	<?php if( $has_booking && !get_option('dbem_bookings_double') ): //Double bookings not allowed ?>
 		<p>

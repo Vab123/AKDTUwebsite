@@ -546,3 +546,25 @@ function create_gardenday_events($args)
 	# Return info about all created garden days
 	return $events_info;
 }
+
+/**
+ * Checks if a user is currently signed up to a gardenday, by considering all translations of the gardenday event and all users in the same apartment as the user
+ * @param EM_Event $EM_Event Gardenday event
+ * @param int $user_id Id of the user to check
+ * @return bool True if the user is currently signed up to the gardenday
+ */
+function is_signed_up_to_gardenday($EM_Event, $user_id) {
+	$user_ids = is_apartment_from_id($user_id) ? ids_from_apartment_number(apartment_number_from_id(get_current_user_id())) : [$user_id];
+
+	foreach (pll_get_post_translations($EM_Event->post_id) as $post_id) {
+		$single_event_bookings = em_get_event($post_id, 'post_id')->get_bookings();
+
+		foreach ($user_ids as $user_id) {
+			if (is_object($single_event_bookings->has_booking($user_id))) {
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
