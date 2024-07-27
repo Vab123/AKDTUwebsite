@@ -29,7 +29,7 @@ function AKDTU_export_mailbox_label() {
 			'margin_bottom'	=> 11,				# Margin on the bottom of the pages created
 			'margin_right'	=> 11,				# Margin on the right side of the pages created
 			'margin_top'	=> 11,				# Margin on the top of the pages created
-		)
+		);
 
 		$mpdf = new \AKDTUpdf($params);
 
