@@ -9,14 +9,15 @@ function AKDTU_enqueue_styles() {
 	);
 }
 
-// Change the context of event-pages to page, such that event-pages get a cover-photo as well.
-add_filter( 'neve_context_filter', function ($context) { return $context === 'event' ? 'page' : $context; }, 1, 1 );
 
 
 
 require_once "translations/contact-form-7.php";
 require_once "translations/events-manager.php";
 require_once "translations/simple-membership.php";
+require_once "translations/Wordpress.php";
+
+require_once "cover-changes.php";
 
 require_once "mail_filters.php";
 
