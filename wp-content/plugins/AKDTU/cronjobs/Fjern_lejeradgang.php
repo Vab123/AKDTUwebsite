@@ -17,7 +17,7 @@ function send_fjern_lejeradgang($debug = false) {
 	$current_time = $current_time->format("Y-m-d H:i:s");
 
 	# Get apartments moving in earlier than now that are not already reset
-	$res = ($debug ? [ [ "apartment_number" => 2, "start_time" => (new DateTime('now', new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s'), "end_time" => (new DateTime('now', new DateTimeZone('Europe/Copenhagen')))->format('Y-m-d H:i:s'), "initial_reset" => 0, "initial_takeover" => 0, ] ] : get_expired_renters(['apartment_number']));
+	$res = ($debug ? [ [ "apartment_number" => 2, "start_time" => $current_time, "end_time" => $current_time, "initial_reset" => 0, "initial_takeover" => 0, ] ] : get_expired_renters(['apartment_number']));
 
 	# Go through all moved renters
 	foreach ($res as $renter_info) {
