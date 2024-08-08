@@ -92,7 +92,7 @@ function get_current_user_permits($columns = ['*'], $limit = null) {
 
 	$query = "SELECT " . join(",", $columns) . " FROM {$wpdb->prefix}swpm_allowed_membercreation WHERE takeover=0 ORDER BY allow_creation_date ASC, apartment_number ASC" . (!is_null($limit) ? " LIMIT {$limit}" : "");
 
-	if (count($columns) > 1) {
+	if (count($columns) > 1 || $columns[0] == '*') {
 		return $wpdb->get_results($query);
 	}
 	else {
@@ -111,7 +111,7 @@ function get_expired_user_permits($columns = ['*'], $limit = null) {
 
 	$query = "SELECT " . join(",", $columns) . " FROM {$wpdb->prefix}swpm_allowed_membercreation WHERE takeover=1 ORDER BY allow_creation_date ASC, apartment_number ASC" . (!is_null($limit) ? " LIMIT {$limit}" : "");
 
-	if (count($columns) > 1) {
+	if (count($columns) > 1 || $columns[0] == '*') {
 		return $wpdb->get_results($query);
 	}
 	else {
@@ -330,7 +330,7 @@ function get_current_renters($columns = ['*'], $limit = null) {
 
 	$query = "SELECT " . join(",", $columns) . " FROM {$wpdb->prefix}swpm_allowed_rentercreation WHERE end_time >= \"{$now->format('Y-m-d H:i:s')}\" ORDER BY start_time ASC, apartment_number ASC" . (!is_null($limit) ? " LIMIT {$limit}" : "");
 
-	if (count($columns) > 1) {
+	if (count($columns) > 1 || $columns[0] == '*') {
 		return $wpdb->get_results($query);
 	}
 	else {
@@ -350,9 +350,9 @@ function get_expired_renters($columns = ['*']) {
 
 	$now = new DateTime('now', new DateTimeZone('Europe/Copenhagen'));
 
-	$query = "SELECT " . join(",", $columns) . " FROM {$wpdb->prefix}swpm_allowed_rentercreation WHERE initial_reset = 0 AND end_time <= \"{$now->format('Y-m-d H:i:s')}\"";
+	$query = "SELECT " . join(",", $columns) . " FROM {$wpdb->prefix}swpm_allowed_rentercreation WHERE end_time <= \"{$now->format('Y-m-d H:i:s')}\"";
 
-	if (count($columns) > 1) {
+	if (count($columns) > 1 || $columns[0] == '*') {
 		return $wpdb->get_results($query);
 	}
 	else {
